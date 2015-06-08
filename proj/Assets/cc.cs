@@ -3,31 +3,35 @@ using System.Collections;
 
 public class cc : MonoBehaviour {
 	
-	Rigidbody2D rb;
-	Vector3 fv;
-	Vector3 rfv;
-	float maxSpeed;
-	Vector2 velocity;
-	Vector2 impulse;
-	float jumpImpulse = 5.0f; //690.0f;
-	float gravityForce = -10.0f;//-1035.0f;
+	//Rigidbody2D rb;
+	BoxCollider2D coll;
+	//Vector3 fv;
+	//Vector3 rfv;
+	//float maxSpeed;
+	public Vector2 velocity;
+	public Vector2 impulse;
 	bool jump;
-	float MAX_PLAYER_SPEED_Y = 2.0f;
 
-	enum CharacterState
+	public float jumpImpulse = 7.5f; //690.0f;
+	public float gravityForce = -12.0f;//-1035.0f;
+	public float MAX_SPEED_Y = 11.0f;
+	public float MAX_SPEED_X_GROUND = 5.0f;
+	public float MAX_SPEED_X_AIR = 5.0f;
+
+	public enum State
 	{
-		STATE_ON_GROUND = 0,
-		STATE_IN_AIR,
-		STATE_STRUCKED,
-		STATE_DIE,
-		STATE_ATTACK,
-		STATE_OTHER
+		ON_GROUND = 0,
+		IN_AIR,
+		//STATE_STRUCKED,
+		//STATE_DIE,
+		//STATE_ATTACK,
+		OTHER
 	};
 
-	CharacterState state;
+	public State state;
 
-	CharacterState getState() { return state; }
-	bool setState(CharacterState newState){
+	State getState() { return state; }
+	bool setState(State newState){
 		if (state == newState)
 			return false;
 
@@ -38,17 +42,17 @@ public class cc : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		jump = false;
-		rb = GetComponent<Rigidbody2D>();
+		//rb = GetComponent<Rigidbody2D>();
+		coll = GetComponent<BoxCollider2D> ();
 
-		maxSpeed = 2;
-
-		fv = new Vector3 (maxSpeed, 0, 0);
-		rfv = new Vector3 (-maxSpeed, 0, 0);
+		//maxSpeed = 2;
+		//fv = new Vector3 (maxSpeed, 0, 0);
+		//rfv = new Vector3 (-maxSpeed, 0, 0);
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
 
-		setState (CharacterState.STATE_OTHER);
+		setState (State.IN_AIR);
 	}
 
 
@@ -56,23 +60,52 @@ public class cc : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		//if (coll.gameObject.tag == "Enemy")
 		//	coll.gameObject.SendMessage("ApplyDamage", 10);
-
 		print( "colisionEnter" );
 
-		for (int i = 0; i < coll.contacts.Length; ++i) {
-			print ( coll.contacts[i].normal ); 
-		}
+//		for (int i = 0; i < coll.contacts.Length; ++i) {
+//			Vector2 n = coll.contacts[i].normal;
+//			float atn = Mathf.Atan2( n.y, n.x );
+//			//print ( "atn : " +  atn * Mathf.Rad2Deg );
+//			float atnd = atn * Mathf.Rad2Deg;
+//			if( atnd > 45 && atnd < 135 ) 
+//			{
+//				setState (State.ON_GROUND);
+//				velocity.y = 0.0f;
+//				return;
+//			}
+//		}
+	}
 
-		//IEnumerator i = coll.contacts.GetEnumerator ();
-		//while (i.MoveNext()) {
-		//	i.Current.
-		//}
+	void OnCollisionExit2D(Collision2D coll) {
+//		print( "colisionExit" );
+//		//if (coll.gameObject.tag == "DodgemCar")
+//		//	bumpCount++;
+//
+//
+//		for (int i = 0; i < coll.contacts.Length; ++i) {
+//			Vector2 n = coll.contacts[i].normal;
+//			float atn = Mathf.Atan2( n.y, n.x );
+//			print ( "atn : " +  atn * Mathf.Rad2Deg );
+//		}
+//
+//		//dsetState (State.IN_AIR);
+	}
 
-		print( "=========================" );
+	void OnCollisionStay2D(Collision2D coll) {
+		//print( "colisionStay" );
+		//if (coll.gameObject.tag == "RechargePoint")
+		//	batteryLevel = Mathwwf.Min(batteryLevel + rechargeRate * Time.deltaTime, 100.0F);
 
-		setState (CharacterState.STATE_ON_GROUND);
+//		for (int i = 0; i < coll.contacts.Length; ++i) {
+//			Vector2 n = coll.contacts[i].normal;
+//			float atn = Mathf.Atan2( n.y, n.x );
+//			//print ( "atn : " +  atn * Mathf.Rad2Deg );
+//			float atnd = atn * Mathf.Rad2Deg;
+//			if( atnd > 45 && atnd < 135 ) return;
+//
+//		}
 
-		velocity.y = 0.0f;
+		//setState (State.IN_AIR);
 	}
 
 	//void FixedUpdate(){
@@ -82,108 +115,77 @@ public class cc : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//print( GetComponent<Rigidbody2D>().velocity );da
-		//print (transform.forward);
-		//print( Time.deltaTime );
 
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
+		StayOnGround();
+
 		if (Input.GetKey("a")) {
-			//print ("a is held down");
-			//rb.velocity = new Vector2(-2,0);
-
-			//Vector2 vect = new Vector2(0,0);
-			//vect.Set(-10,0);
-			//GetComponent<Rigidbody2D>().AddForce(vect);
-			//GetComponent<Rigidbody2D>().velocity.Set(vect);
-
-			//rb.MovePosition(transform.position + rfv * Time.deltaTime);
-
-			//transform.position = transform.position + rfv * Time.deltaTime;
-
-			//velocity.x = -1;
-			addImpulse(new Vector2(-1.0f,0.0f))
+			addImpulse(new Vector2(-MAX_SPEED_X_GROUND,0.0f));
 		}
 		else if (Input.GetKey("d")) {
-			//print ("d is held down");
-			//rb.velocity = new Vector2(2,0);
-			//GetComponent<Rigidbody2D>().velocity.x = 10;
-			//GetComponent<Rigidbody2D>().AddForce(Vector2(10,0));
-
-			//Vector2 vect;
-			//vect.Set(10,0);
-			//GetComponent<Rigidbody2D>().AddForce(vect);
-
-			//Vector2 vect = new Vector2(0,0);
-			//vect.Set(10,0);
-			//GetComponent<Rigidbody2D>().AddForce(vect);
-			//GetComponent<Rigidbody2D>().veclocity.Set(vect);
-
-			//rb.MovePosition(transform.position + fv * Time.deltaTime);
-			//transform.position = transform.position + fv * Time.deltaTime;
-
-			//velocity.x = 1;
-			addImpulse(new Vector2(1.0f,0.0f))
+			addImpulse(new Vector2(MAX_SPEED_X_GROUND,0.0f));
 		}
-		else if (Input.GetKeyDown("w")) {
-			print ("w is held down");
-			//GetComponent<Rigidbody2D>().velocity.Set(10,0);
-			//GetComponent<Rigidbody2D>().velocity.x = 10;
-			//GetComponent<Rigidbody2D>().AddForce(Vector2(10,0));
-			
-			//Vector2 vect;
-			//vect.Set(10,0);
-			//GetComponent<Rigidbody2D>().AddForce(vect);
-			
-			//Vector2 vect = new Vector2(0,0);
-			//vect.Set(0,550);
-			//rb.AddForce(vect);
-
+		if (Input.GetKeyDown("w")) {
 			velocity.y = 0.0f;
 			addImpulse(new Vector2(0.0f, jumpImpulse));
-			setState(CharacterState.STATE_IN_AIR);
+			setState(State.IN_AIR);
 		}
 
-		if( state == CharacterState.STATE_IN_AIR )
+		if( state == State.IN_AIR )
 		{
+			//StayOnGround();
 			//print ("ia");
-			addImpulse(new Vector2(0.0f, gravityForce * Time.deltaTime));
+			//addImpulse(new Vector2(0.0f, gravityForce * Time.deltaTime));
 		}
 
 
 		// Ustalanie prędkości gracza na podstawie impulse
+		velocity.x = 0.0f;
 		velocity.x += impulse.x;
 		
-		//float maxSpeed = state == STATE_ON_GROUND ? MAX_PLAYER_SPEED_X_GROUND : MAX_PLAYER_SPEED_X_AIR;
-		//if(velocity.x > maxSpeed)
-		//	velocity.x = maxSpeed;
-		//if(velocity.x < -maxSpeed)
-		//	velocity.x = -maxSpeed;
+		float maxSpeed = state == State.ON_GROUND ? MAX_SPEED_X_GROUND : MAX_SPEED_X_AIR;
+		if(velocity.x > maxSpeed)
+			velocity.x = maxSpeed;
+		if(velocity.x < -maxSpeed)
+			velocity.x = -maxSpeed;
 		
 		//if(state == STATE_ON_GROUND && !onGroundUp && velocity.y < minVelocityOnGround)
 		//	velocity.y = minVelocityOnGround;
 		//else
-		if( state == CharacterState.STATE_IN_AIR )
+		if( state == State.IN_AIR )
 		{
 			velocity.y += impulse.y;
-			if(velocity.y > MAX_PLAYER_SPEED_Y)
-				velocity.y = MAX_PLAYER_SPEED_Y;
-			if(velocity.y < -MAX_PLAYER_SPEED_Y)
-				velocity.y = -MAX_PLAYER_SPEED_Y;
+			if(velocity.y > MAX_SPEED_Y)
+				velocity.y = MAX_SPEED_Y;
+			if(velocity.y < -MAX_SPEED_Y)
+				velocity.y = -MAX_SPEED_Y;
 		}
 
 		//velocity += impulse;
 
-		print (velocity);
-		print (impulse);
+		//print (velocity);
+		//print (impulse);
 		Vector3 v = new Vector3 (velocity.x, velocity.y, 0);
 		Vector3 oldPos = transform.position;
 		transform.position = transform.position + v * Time.deltaTime;
-
-
 	}
 
 	void SetImpulse(Vector2 imp) { impulse = imp; }
 	Vector2 getImpulse() { return impulse; }
 	void addImpulse(Vector2 imp) { impulse += imp; }
+
+	bool StayOnGround(){
+		//public static RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float distance = Mathf.Infinity, int layerMask = DefaultRaycastLayers, float minDepth = -Mathf.Infinity, float maxDepth = Mathf.Infinity); 
+		Vector2 rayOrigin = new Vector2( transform.position.x, transform.position.y - coll.size.y * 0.5f);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 2.0f);
+		if (hit.collider != null) {
+			float distance = Mathf.Abs(hit.point.y - transform.position.y);
+			//print( hit.collider.gameObject.name );
+			//print ( distance );
+			if( distance < 0.001f )
+				return true;
+		}
+		return false;
+	}
 }
