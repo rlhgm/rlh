@@ -14,7 +14,7 @@ public class Player2Controller : MonoBehaviour {
 	public float jumpImpulse = 4.0f; 
 	public float jumpLongImpulse = 4.5f; 
 	public float gravityForce = -1.0f;
-	public float flySlowDown = 1.0f;
+	//public float flySlowDown = 1.0f;
 	public float MAX_SPEED_Y = 15.0f;
 
 	public float WALK_SPEED = 1.0f;
@@ -22,7 +22,16 @@ public class Player2Controller : MonoBehaviour {
 	public float JUMP_SPEED = 1.0f;
 	public float JUMP_LONG_SPEED = 2.0f;
 	public float CLIMB_DURATION = 1.5f;
-	
+
+	public float MountSpeed = 2.0f; // ile na sek.
+	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
+		//[2015-06-18 17:58:40] Rafał Sankowski: i jeśli nadal trzymasz spacje
+		//[2015-06-18 17:59:02] Rafał Sankowski: to po przeskoczeniu ustalonej wartości (mowilismy o tym) się lapie
+	Vector3 mountJumpStartPos;
+
+	public float flyControlParam = 2.0f; // ile przyspiesza na sekunde lecac
+	public float flySlowDownParam = 1.0f; // ile hamuje na sekunde lecac
+
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
 	public KeyCode keyRun = KeyCode.LeftShift;
@@ -103,7 +112,7 @@ public class Player2Controller : MonoBehaviour {
 		
 		WALK_SPEED = 3.0f;
 		RUN_SPEED = 5.0f;
-		flySlowDown = 1.5f;
+		//flySlowDown = 1.5f;
 		JUMP_SPEED = 3.5f;
 		JUMP_LONG_SPEED = 4.1f;
 		
@@ -113,7 +122,13 @@ public class Player2Controller : MonoBehaviour {
 		MAX_SPEED_Y = 15.0f;
 		
 		CLIMB_DURATION = 1.5f;
-		
+
+		MountSpeed = 2.0f; // ile na sek.
+		MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
+
+		flyControlParam = 8.0f; // ile przyspiesza na sekunde lecac
+		flySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
+
 		myWidth = coll.size.x;
 		myHalfWidth = myWidth * 0.5f;
 		myHeight = coll.size.y;
@@ -140,6 +155,8 @@ public class Player2Controller : MonoBehaviour {
 		catchedClimbHandle = null;
 		canPullUp = false;
 		toNextHandleDuration = 0.1f;
+
+		jumpFromMount = false;
 	}
 
 	void turnLeft(){
@@ -184,19 +201,24 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void keyLeftDown(){
-		if (isInAction (Action.IDLE) && isInState(State.ON_GROUND) ) {
-			if( checkLeft (0.1f) >= 0.0f ) {
+		if (isInAction (Action.IDLE) && isInState (State.ON_GROUND)) {
+			if (checkLeft (0.1f) >= 0.0f) {
 				print ("cant move left");
 				return;
 			}
-			turnLeft();
-			if( Input.GetKey(keyRun) ){
+			turnLeft ();
+			if (Input.GetKey (keyRun)) {
 				velocity.x = -RUN_SPEED;
-				setAction(Action.RUN_LEFT);
-			}else{
+				setAction (Action.RUN_LEFT);
+			} else {
 				velocity.x = -WALK_SPEED;
-				setAction(Action.WALK_LEFT);
+				setAction (Action.WALK_LEFT);
 			}
+		} else if (isInState (State.MOUNT)) {
+			turnLeft();
+			velocity.x = -MountSpeed;
+			velocity.y = 0.0f;
+			setAction(Action.MOUNT_LEFT);
 		}
 	}
 	void keyRightDown(){
@@ -213,6 +235,11 @@ public class Player2Controller : MonoBehaviour {
 				velocity.x = WALK_SPEED;
 				setAction(Action.WALK_RIGHT);
 			}
+		} else if (isInState (State.MOUNT)) {
+			turnRight();
+			velocity.x = MountSpeed;
+			velocity.y = 0.0f;
+			setAction(Action.MOUNT_RIGHT);
 		}
 	}
 
@@ -237,14 +264,18 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void keyLeftUp(){
-		if( isInState(State.ON_GROUND) )
-			setAction (Action.IDLE);
-		resetActionAndState ();
+		if ( !setMountIdle() ) {
+			if (isInState (State.ON_GROUND))
+				setAction (Action.IDLE);
+			resetActionAndState ();
+		}
 	}
 	void keyRightUp(){
-		if( isInState(State.ON_GROUND) )
-			setAction (Action.IDLE);
-		resetActionAndState ();
+		if ( !setMountIdle() ) {
+			if (isInState (State.ON_GROUND))
+				setAction (Action.IDLE);
+			resetActionAndState ();
+		}
 	}
 
 	void jump(){
@@ -270,7 +301,7 @@ public class Player2Controller : MonoBehaviour {
 		velocity.y = 0.0f;
 		addImpulse(new Vector2(0.0f, jumpImpulse));
 		setState(State.IN_AIR);
-		setAction (Action.JUMP_LEFT);
+		setAction (Action.JUMP_RIGHT);
 		//jumpStartX = transform.position.x;
 	}
 	
@@ -293,7 +324,9 @@ public class Player2Controller : MonoBehaviour {
 		setAction (Action.JUMP_RIGHT_LONG);
 		//jumpStartX = transform.position.x;
 	}
-	
+
+	bool jumpFromMount = false;
+
 	void keyJumpDown(){
 		//string s;
 		switch (action) {
@@ -316,10 +349,72 @@ public class Player2Controller : MonoBehaviour {
 		case Action.RUN_RIGHT:
 			jumpLongRight();
 			break;
+
+		case Action.MOUNT_IDLE:
+		case Action.MOUNT_UP:
+		case Action.MOUNT_DOWN:
+			velocity.x = 0.0f;
+			velocity.y = 0.0f;
+			setAction(Action.JUMP);
+			setState (State.IN_AIR);
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+			break;
+
+		case Action.MOUNT_LEFT:
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+			jumpLeft();
+			break;
+
+		case Action.MOUNT_RIGHT:
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+			jumpRight();
+			break;
 		};
 	}
 	
 	void keyJumpUp(){
+		jumpFromMount = false;
+	}
+
+	void keyUpDown(){
+		if (isInState (State.MOUNT)) {
+			velocity.x = 0.0f;
+			velocity.y = MountSpeed;
+			setAction (Action.MOUNT_UP);
+		} else if (isInState (State.ON_GROUND)) {
+			if( onMount() ){
+				velocity.x = 0.0f;
+				velocity.y = MountSpeed;
+				setAction (Action.MOUNT_UP);
+				setState(State.MOUNT);
+			}
+		}
+	}
+	void keyUpUp(){
+		setMountIdle ();
+	}
+	void keyDownDown(){
+		if (isInState (State.MOUNT)) {
+			velocity.x = 0.0f;
+			velocity.y = -MountSpeed;
+			setAction(Action.MOUNT_DOWN);
+		}
+	}
+	void keyDownUp(){
+		setMountIdle ();
+	}
+
+	bool setMountIdle(){
+		if (isInState (State.MOUNT)) {
+			velocity.x = 0.0f;
+			velocity.y = 0.0f;
+			setAction (Action.MOUNT_IDLE);
+			return true;
+		}
+		return false;
 	}
 
 	private float climbDistFromWall;
@@ -344,11 +439,35 @@ public class Player2Controller : MonoBehaviour {
 	public float toNextHandleDuration = 0.5f;
 	float justLetGoHandle = 0.0f;
 
+	bool gamePaused = false;
+
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
-		
+	
+		if (Input.GetKeyDown (KeyCode.P)) {
+			gamePaused = !gamePaused;
+		}
+
+		if( gamePaused ){
+
+			if (Input.GetKey("f")) {
+				transform.position = transform.position + new Vector3(-0.1f,0.0f,0.0f);
+			}
+			else if (Input.GetKey("h")) {
+				transform.position = transform.position + new Vector3(0.1f,0.0f,0.0f);
+			}
+			else if (Input.GetKey("t")) {
+				transform.position = transform.position + new Vector3(0.0f,0.1f,0.0f);
+			}
+			else if (Input.GetKey("g")) {
+				transform.position = transform.position + new Vector3(0.0f,-0.1f,0.0f);
+			}
+
+			return;
+		}
+
 		SetImpulse(new Vector2(0.0f, 0.0f));
 		//justLetGoHandle = false;
 
@@ -374,6 +493,17 @@ public class Player2Controller : MonoBehaviour {
 			keyRunDown();
 		} else if (Input.GetKeyUp (keyRun)) {
 			keyRunUp();
+		}
+
+		if (Input.GetKeyDown (keyUp)) {
+			keyUpDown();
+		} else if (Input.GetKeyUp (keyUp)) {
+			keyUpUp();
+		}
+		if (Input.GetKeyDown (keyDown)) {
+			keyDownDown();
+		} else if (Input.GetKeyUp (keyDown)) {
+			keyDownUp();
 		}
 
 		Vector3 oldPos = transform.position;
@@ -540,13 +670,41 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-//			bool shouldStop = (checkLeft (0.1f) >= 0.0f) || (checkRight (0.1f) >= 0.0f);
-//			if (shouldStop){
-//				print ("shouldWalkStop2");
-//				velocity.x = 0.0f;
-//				setAction (Action.IDLE);
-//				transform.position = oldPos;
-//			}
+			break;
+
+		case Action.MOUNT_IDLE:
+			break;
+
+		case Action.MOUNT_LEFT:
+		case Action.MOUNT_RIGHT:
+		case Action.MOUNT_UP:
+			Vector3 newPos3 = transform.position;
+			Vector3 distToMount = velocity * Time.deltaTime;
+			newPos3 += distToMount;
+			transform.position = newPos3;
+			break;
+
+		case Action.MOUNT_DOWN:
+
+			newPos3 = transform.position;
+			distToMount = velocity * Time.deltaTime;
+			newPos3 += distToMount;
+			//transform.position = newPos3;
+
+			if( distToMount.y < 0.0f ) { // schodzi
+				groundUnderFeet = checkDown( distToMount.y + 1.0f);
+				if( groundUnderFeet >= 0.0f ){
+					if( groundUnderFeet < Mathf.Abs(distToMount.y) ){
+						distToMount.y = -groundUnderFeet;
+						velocity.x = 0.0f;
+						velocity.y = 0.0f;
+						setState(State.ON_GROUND);
+						setAction (Action.IDLE);
+						//resetActionAndState();
+					}
+				}
+				transform.position = transform.position + distToMount;
+			}
 
 			break;
 
@@ -563,7 +721,37 @@ public class Player2Controller : MonoBehaviour {
 		
 
 		switch (state) {
+
+		case State.MOUNT:
+			if( !onMount() ){
+				setAction(Action.JUMP);
+				setState(State.IN_AIR);
+			}
+			break;
+
 		case State.IN_AIR:
+			if( Input.GetKeyDown(keyJump) ){
+				if( onMount() ){
+					if( jumpFromMount ){
+
+					}else{
+						velocity.x = 0.0f;
+						velocity.y = 0.0f;
+						setAction(Action.MOUNT_IDLE);
+						setState(State.MOUNT);
+					}
+				}
+			}
+			if( jumpFromMount && Input.GetKey(keyJump) ){
+				Vector3 flyDist = transform.position - mountJumpStartPos;
+				if( flyDist.magnitude >= MountJumpDist ){
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					setAction(Action.MOUNT_IDLE);
+					setState(State.MOUNT);
+					jumpFromMount = false;
+				}
+			}
 
 			justLetGoHandle += Time.deltaTime;
 
@@ -644,9 +832,51 @@ public class Player2Controller : MonoBehaviour {
 
 			addImpulse(new Vector2(0.0f, gravityForce * Time.deltaTime));
 			
+
+			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
+				
+				if( Input.GetKey(keyLeft) ){
+					velocity.x -= (flyControlParam * Time.deltaTime);
+					//if( velocity.x > 0.0f ) velocity.x = 0.0f;
+				}else if ( Input.GetKey(keyRight) ){
+					velocity.x += (flyControlParam * Time.deltaTime);
+					if( velocity.x > 0.0f ) velocity.x = 0.0f;
+				}else{
+					velocity.x += (flySlowDownParam * Time.deltaTime);
+					if( velocity.x > 0.0f ) velocity.x = 0.0f;
+				}
+				
+			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
+
+				if( Input.GetKey(keyRight) ){
+					velocity.x += (flyControlParam * Time.deltaTime);
+				}else if( Input.GetKey(keyLeft) ) {
+					velocity.x -= (flyControlParam * Time.deltaTime);
+					if( velocity.x < 0.0f ) velocity.x = 0.0f;
+				}else{
+					velocity.x -= (flySlowDownParam * Time.deltaTime);
+					if( velocity.x < 0.0f ) velocity.x = 0.0f;
+				}
+				
+			}else if( isInAction(Action.JUMP) ){
+
+				if( velocity.x > 0.0f ){
+
+					velocity.x -= (flySlowDownParam * Time.deltaTime);
+					if( velocity.x < 0.0f ) velocity.x = 0.0f;
+
+				}else if(velocity.x < 0.0f) {
+
+					velocity.x += (flySlowDownParam * Time.deltaTime);
+					if( velocity.x > 0.0f ) velocity.x = 0.0f;
+
+				}
+			}
+
+
 			Vector3 distToFall = new Vector3();
 			distToFall.x = velocity.x * Time.deltaTime;
-			
+
 			if( distToFall.x > 0.0f )
 			{
 				float obstacleOnRoad = checkRight( distToFall.x + 1.0f);
@@ -676,7 +906,27 @@ public class Player2Controller : MonoBehaviour {
 					}
 				}
 			}
-			
+
+
+
+
+//			if( velocity.x > 0.0f ){
+//
+//				if( Input.GetKeyDown(keyRight) ){
+//
+
+//				}else{
+//					velocity.x -= (flySlowDownParam * Time.deltaTime);
+//					if( velocity.x < 0.0f ) velocity.x = 0.0f;
+//				}
+//
+//			}else if(velocity.x < 0.0f) {
+//
+//				if( Input.GetKeyDown(keyLeft)
+//				velocity.x += (flySlowDownParam * Time.deltaTime);
+//				if( velocity.x > 0.0f ) velocity.x = 0.0f;
+//			}
+
 			velocity.y += impulse.y;
 			if(velocity.y > MAX_SPEED_Y)
 				velocity.y = MAX_SPEED_Y;
@@ -685,9 +935,9 @@ public class Player2Controller : MonoBehaviour {
 			
 			distToFall.y = velocity.y * Time.deltaTime;
 			
-			if( velocity.y > 0.0f ) { // leci w gore
+			if( distToFall.y > 0.0f ) { // leci w gore
 				transform.position = transform.position + distToFall;
-			} else if( velocity.y < 0.0f ) { // spada
+			} else if( distToFall.y < 0.0f ) { // spada
 				groundUnderFeet = checkDown( distToFall.y + 1.0f);
 				if( groundUnderFeet >= 0.0f ){
 					if( groundUnderFeet < Mathf.Abs(distToFall.y) ){
@@ -845,6 +1095,7 @@ public class Player2Controller : MonoBehaviour {
 		CLIMB_CATCH,
 		CLIMB_CLIMB,
 		CLIMB_PULLDOWN,
+		MOUNT_IDLE,
 		MOUNT_LEFT,
 		MOUNT_RIGHT,
 		MOUNT_UP,
