@@ -1542,8 +1542,8 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool setState(State newState){
 		
-		print ("setState oldState : " + state);
-		print ("setState newState : " + newState);
+		//print ("setState oldState : " + state);
+		//print ("setState newState : " + newState);
 		
 		if (state == newState)
 			return false;
@@ -1571,13 +1571,13 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool setAction(Action newAction){
 		
-		print ("setAction try : " + newAction);
+		//print ("setAction try : " + newAction);
 		
 		if (action == newAction)
 			return false;
 
-		print ("setAction oldAction : " + action);
-		print ("setAction newAction : " + newAction);
+		//print ("setAction oldAction : " + action);
+		//print ("setAction newAction : " + newAction);
 
 		//print ("setAction : " + newAction + " ustawiona");
 		//print ("============================");
