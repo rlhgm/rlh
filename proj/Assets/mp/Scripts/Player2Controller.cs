@@ -35,7 +35,7 @@ public class Player2Controller : MonoBehaviour {
 	/// <summary>
 	/// ile jednosek predkosci hamuje na sekunde
 	/// </summary>
-	public float speedUpParam = 4.0f; // ile jednosek predkosci hamuje na sekunde
+	public float speedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekunde
 	public float breakParam = 4.0f; // ile jednosek predkosci hamuje na sekunde
 	public float desiredSpeedX = 0.0f;
 	//public float stopToWalkDuration = 0.5f; // ile sekund zajmuje przejscie ze stania do chodu
@@ -173,7 +173,7 @@ public class Player2Controller : MonoBehaviour {
 		flyControlParam = 8.0f; // ile przyspiesza na sekunde lecac
 		flySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
 
-		speedUpParam = 5.0f; //WALK_SPEED; // ile jednosek predkosci przyspiesza na sekunde - teraz do pelnej predkosci chodu w 1.s
+		speedUpParam = 7.0f; //WALK_SPEED; // ile jednosek predkosci przyspiesza na sekunde - teraz do pelnej predkosci chodu w 1.s
 		breakParam = WALK_SPEED * 2.0f; // ile jednosek predkosci hamuje na sekunde - teraz z automatu w 0.5 sek.
 		desiredSpeedX = 0.0f;
 
