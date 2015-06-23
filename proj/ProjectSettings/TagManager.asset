@@ -74,3 +74,6 @@ TagManager:
   - name: Player
     uniqueID: 952726619
     locked: 0
+  - name: WaterFront
+    uniqueID: 3650801075
+    locked: 0
