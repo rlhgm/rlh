@@ -1550,6 +1550,18 @@ public class Player2Controller : MonoBehaviour {
 		case Action.CLIMB_PULLDOWN:
 			animator.SetTrigger("climb_pulldown");
 			break;
+
+		case Action.MOUNT_IDLE:
+			animator.SetTrigger("mount_idle");
+			break;
+
+		case Action.MOUNT_LEFT:
+		case Action.MOUNT_RIGHT:
+		case Action.MOUNT_UP:
+		case Action.MOUNT_DOWN:
+			animator.SetTrigger("mount_move");
+			break;
+
 		};
 
 		return true;
