@@ -963,11 +963,15 @@ public class Player2Controller : MonoBehaviour {
 				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
-			turnLeft();
-			velocity.x = -MountSpeed;
-			velocity.y = 0.0f;
-			setAction(Action.MOUNT_LEFT);
-			return true;
+			Vector3 playerPos = transform.position;
+			playerPos.x -= 0.1f;
+			if( onMount(playerPos) ){
+				turnLeft();
+				velocity.x = -MountSpeed;
+				velocity.y = 0.0f;
+				setAction(Action.MOUNT_LEFT);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -990,11 +994,15 @@ public class Player2Controller : MonoBehaviour {
 				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
-			turnRight();
-			velocity.x = MountSpeed;
-			velocity.y = 0.0f;
-			setAction(Action.MOUNT_RIGHT);
-			return true;
+			Vector3 playerPos = transform.position;
+			playerPos.x += 0.1f;
+			if( onMount(playerPos) ){
+				turnRight();
+				velocity.x = MountSpeed;
+				velocity.y = 0.0f;
+				setAction(Action.MOUNT_RIGHT);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -1134,9 +1142,13 @@ public class Player2Controller : MonoBehaviour {
 	
 	void keyUpDown(){
 		if (isInState (State.MOUNT)) {
-			velocity.x = 0.0f;
-			velocity.y = MountSpeed;
-			setAction (Action.MOUNT_UP);
+			Vector3 playerPos = transform.position;
+			playerPos.y += 0.1f;
+			if( onMount(playerPos) ){
+				velocity.x = 0.0f;
+				velocity.y = MountSpeed;
+				setAction (Action.MOUNT_UP);
+			}
 		} else if (isInState (State.ON_GROUND)) {
 			if( onMount() ){
 				velocity.x = 0.0f;
@@ -1151,9 +1163,13 @@ public class Player2Controller : MonoBehaviour {
 	}
 	void keyDownDown(){
 		if (isInState (State.MOUNT)) {
-			velocity.x = 0.0f;
-			velocity.y = -MountSpeed;
-			setAction(Action.MOUNT_DOWN);
+			Vector3 playerPos = transform.position;
+			playerPos.y -= 0.1f;
+			if( onMount(playerPos) ){
+				velocity.x = 0.0f;
+				velocity.y = -MountSpeed;
+				setAction(Action.MOUNT_DOWN);
+			}
 		}
 	}
 	void keyDownUp(){
