@@ -67,12 +67,12 @@
      <Compile Include="Assets\Scripts\ScoreShadow.cs" />
      <Compile Include="Assets\Scripts\SetParticleSortingLayer.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
-     <Compile Include="Assets\mp\Player2Controller.cs" />
-     <Compile Include="Assets\mp\Rope.cs" />
-     <Compile Include="Assets\mp\ncc.cs" />
-     <Compile Include="Assets\mp\ncc2.cs" />
-     <Compile Include="Assets\mp\ncc2_2.cs" />
-     <Compile Include="Assets\mp\ncc3.cs" />
+     <Compile Include="Assets\mp\Scripts\Player2Controller.cs" />
+     <Compile Include="Assets\mp\Scripts\Rope.cs" />
+     <Compile Include="Assets\mp\Scripts\ncc.cs" />
+     <Compile Include="Assets\mp\Scripts\ncc2.cs" />
+     <Compile Include="Assets\mp\Scripts\ncc2_2.cs" />
+     <Compile Include="Assets\mp\Scripts\ncc3.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
