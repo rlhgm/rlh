@@ -304,7 +304,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.PREPARE_TO_JUMP:
-			if( currentActionTime >= 0.65f ){
+			if( currentActionTime >= 0.2f ){
 				//print( currentActionTime );
 				jump();
 			}
