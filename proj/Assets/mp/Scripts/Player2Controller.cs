@@ -603,6 +603,7 @@ public class Player2Controller : MonoBehaviour {
 						velocity.y = 0.0f;
 						setState(State.ON_GROUND);
 						//setAction (Action.IDLE);
+						//asdf
 						resetActionAndState();
 					}
 				}
@@ -829,8 +830,7 @@ public class Player2Controller : MonoBehaviour {
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
-			velocity.x = 0.0f;
-			setAction (Action.IDLE);
+			setActionIdle();
 		}
 		//print (distToObstacle);
 
@@ -853,8 +853,7 @@ public class Player2Controller : MonoBehaviour {
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
-			velocity.x = 0.0f;
-			setAction (Action.IDLE);
+			setActionIdle();
 		}
 		
 		newPosX += distToMove;		
@@ -906,51 +905,59 @@ public class Player2Controller : MonoBehaviour {
 //		}
 	}
 
-	void keyLeftDown(){
+	bool keyLeftDown(){
 		if ( (isInAction (Action.IDLE) || moving(-1) || jumping() ) && isInState (State.ON_GROUND)) {
 			if (checkLeft (0.1f) >= 0.0f) {
-				print ("cant move left");
-				return;
+				//print ("cant move left");
+				return false;
 			}
 			turnLeft ();
 			if (Input.GetKey (keyRun)) {
 				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
 				desiredSpeedX = RUN_SPEED;
 				setAction (Action.RUN_LEFT);
+				return true;
 			} else {
 				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
 				desiredSpeedX = WALK_SPEED;
 				setAction (Action.WALK_LEFT);
+				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
 			turnLeft();
 			velocity.x = -MountSpeed;
 			velocity.y = 0.0f;
 			setAction(Action.MOUNT_LEFT);
+			return true;
 		}
+		return false;
 	}
-	void keyRightDown(){
+	bool keyRightDown(){
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
 			if( checkRight (0.1f) >= 0.0f ) {
-				print ("cant move right");
-				return;
+				//print ("cant move right");
+				return false;
 			}
 			turnRight();
 			if( Input.GetKey(keyRun) ){
 				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
 				desiredSpeedX = RUN_SPEED;
 				setAction(Action.RUN_RIGHT);
+				return true;
 			}else{
 				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
 				desiredSpeedX = WALK_SPEED;
 				setAction(Action.WALK_RIGHT);
+				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
 			turnRight();
 			velocity.x = MountSpeed;
 			velocity.y = 0.0f;
 			setAction(Action.MOUNT_RIGHT);
+			return true;
 		}
+		return false;
 	}
 	
 	void keyLeftUp(){
@@ -1213,19 +1220,23 @@ public class Player2Controller : MonoBehaviour {
 	Vector2 dir(){
 		return gfx.localScale.x > 0.0f ? Vector2.right : -Vector2.right;
 	}
-	
+
+	void setActionIdle(){
+		velocity.x = 0.0f;
+		setAction (Action.IDLE);
+	}
+
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
 			if (Input.GetKey (keyLeft)) {
-				keyLeftDown ();
+				if( !keyLeftDown () )
+					setActionIdle();
 			} else if (Input.GetKey (keyRight)) {
-				keyRightDown ();
+				if( !keyRightDown () )
+					setActionIdle();
 			} else {
 				if (isInState (State.ON_GROUND)) {
-					//if( isNotInAction(Action.BREAK) ){
-					velocity.x = 0.0f;
-					setAction (Action.IDLE);
-					//}
+					setActionIdle();
 				}
 			}
 		}
