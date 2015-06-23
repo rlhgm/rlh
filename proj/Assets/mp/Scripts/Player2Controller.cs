@@ -986,15 +986,19 @@ public class Player2Controller : MonoBehaviour {
 		switch (action) {
 			
 		case Action.WALK_LEFT:
-			//startWalkOrRun(RUN_SPEED,walkToRunDuration);
-			desiredSpeedX = RUN_SPEED;
-			setAction(Action.RUN_LEFT);
+			if( Input.GetKey(keyLeft) ){
+				//startWalkOrRun(RUN_SPEED,walkToRunDuration);
+				desiredSpeedX = RUN_SPEED;
+				setAction(Action.RUN_LEFT);
+			}
 			break;
 			
 		case Action.WALK_RIGHT:
-			//startWalkOrRun(RUN_SPEED,walkToRunDuration);
-			desiredSpeedX = RUN_SPEED;
-			setAction(Action.RUN_RIGHT);
+			if( Input.GetKey(keyRight) ){
+				//startWalkOrRun(RUN_SPEED,walkToRunDuration);
+				desiredSpeedX = RUN_SPEED;
+				setAction(Action.RUN_RIGHT);
+			}
 			break;
 		};
 	}
