@@ -379,7 +379,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case State.IN_AIR:
-			if( Input.GetKeyDown(keyJump) ){
+			if( Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
 				if( onMount() ){
 					if( jumpFromMount ){
 
@@ -389,7 +389,7 @@ public class Player2Controller : MonoBehaviour {
 						setAction(Action.MOUNT_IDLE);
 						setState(State.MOUNT);
 					}
-				}
+				}//aaa
 			}
 			if( jumpFromMount && Input.GetKey(keyJump) ){
 				Vector3 flyDist = transform.position - mountJumpStartPos;
