@@ -963,14 +963,16 @@ public class Player2Controller : MonoBehaviour {
 				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
-			Vector3 playerPos = transform.position;
-			playerPos.x -= 0.1f;
-			if( onMount(playerPos) ){
-				turnLeft();
-				velocity.x = -MountSpeed;
-				velocity.y = 0.0f;
-				setAction(Action.MOUNT_LEFT);
-				return true;
+			if( !mounting() ){
+				Vector3 playerPos = transform.position;
+				playerPos.x -= 0.1f;
+				if( onMount(playerPos) ){
+					turnLeft();
+					velocity.x = -MountSpeed;
+					velocity.y = 0.0f;
+					setAction(Action.MOUNT_LEFT);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -994,20 +996,23 @@ public class Player2Controller : MonoBehaviour {
 				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
-			Vector3 playerPos = transform.position;
-			playerPos.x += 0.1f;
-			if( onMount(playerPos) ){
-				turnRight();
-				velocity.x = MountSpeed;
-				velocity.y = 0.0f;
-				setAction(Action.MOUNT_RIGHT);
-				return true;
+			if( !mounting() ){
+				Vector3 playerPos = transform.position;
+				playerPos.x += 0.1f;
+				if( onMount(playerPos) ){
+					turnRight();
+					velocity.x = MountSpeed;
+					velocity.y = 0.0f;
+					setAction(Action.MOUNT_RIGHT);
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 	
 	void keyLeftUp(){
+
 		if ( !setMountIdle() ) {
 			if (isInState (State.ON_GROUND)){
 				
@@ -1019,11 +1024,20 @@ public class Player2Controller : MonoBehaviour {
 				desiredSpeedX = 0.0f;
 			}
 			//resetActionAndState ();
+		} else {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(keyUp) )
+					keyUpDown();
+				else if(Input.GetKey(keyDown) )
+					keyDownDown();
+			}
 		}
 	}
 	void keyRightUp(){
-		if ( !setMountIdle() ) {
-			if (isInState (State.ON_GROUND)){
+		if (!setMountIdle ()) {
+			if (isInState (State.ON_GROUND)) {
 				
 				//if( walking() != 0 || running() != 0 )
 				//	setAction (Action.BREAK);
@@ -1033,6 +1047,15 @@ public class Player2Controller : MonoBehaviour {
 				desiredSpeedX = 0.0f;
 			}
 			//resetActionAndState ();
+		} else {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyLeft) )
+					keyLeftDown();
+				else if(Input.GetKey(keyUp) )
+					keyUpDown();
+				else if(Input.GetKey(keyDown) )
+					keyDownDown();
+			}
 		}
 	}
 	
@@ -1142,12 +1165,14 @@ public class Player2Controller : MonoBehaviour {
 	
 	void keyUpDown(){
 		if (isInState (State.MOUNT)) {
-			Vector3 playerPos = transform.position;
-			playerPos.y += 0.1f;
-			if( onMount(playerPos) ){
-				velocity.x = 0.0f;
-				velocity.y = MountSpeed;
-				setAction (Action.MOUNT_UP);
+			if( !mounting () ){
+				Vector3 playerPos = transform.position;
+				playerPos.y += 0.1f;
+				if( onMount(playerPos) ){
+					velocity.x = 0.0f;
+					velocity.y = MountSpeed;
+					setAction (Action.MOUNT_UP);
+				}
 			}
 		} else if (isInState (State.ON_GROUND)) {
 			if( onMount() ){
@@ -1159,21 +1184,41 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 	void keyUpUp(){
-		setMountIdle ();
+		if ( setMountIdle ()) {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyLeft) )
+					keyLeftDown();
+				else if(Input.GetKey(keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(keyDown) )
+					keyDownDown();
+			}
+		}
 	}
 	void keyDownDown(){
 		if (isInState (State.MOUNT)) {
-			Vector3 playerPos = transform.position;
-			playerPos.y -= 0.1f;
-			if( onMount(playerPos) ){
-				velocity.x = 0.0f;
-				velocity.y = -MountSpeed;
-				setAction(Action.MOUNT_DOWN);
+			if( !mounting () ){
+				Vector3 playerPos = transform.position;
+				playerPos.y -= 0.1f;
+				if( onMount(playerPos) ){
+					velocity.x = 0.0f;
+					velocity.y = -MountSpeed;
+					setAction(Action.MOUNT_DOWN);
+				}
 			}
 		}
 	}
 	void keyDownUp(){
-		setMountIdle ();
+		if ( setMountIdle ()) {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyLeft) )
+					keyLeftDown();
+				else if(Input.GetKey(keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(keyUp) )
+					keyUpDown();
+			}
+		}
 	}
 	
 	
@@ -1327,6 +1372,9 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool jumping(){
 		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
+	}
+	bool mounting(){
+		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
 	}
 
 	float checkLeft(float checkingDist){
