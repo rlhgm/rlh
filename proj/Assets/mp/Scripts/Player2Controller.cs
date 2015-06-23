@@ -896,7 +896,11 @@ public class Player2Controller : MonoBehaviour {
 		Vector3 newPos3 = transform.position;
 		Vector3 distToMount = velocity * Time.deltaTime;
 		newPos3 += distToMount;
-		transform.position = newPos3;
+		if (onMount (newPos3)) {
+			transform.position = newPos3;
+		} else {
+			setMountIdle();
+		}
 		return 0;
 	}
 	
@@ -907,7 +911,7 @@ public class Player2Controller : MonoBehaviour {
 		//transform.position = newPos3;
 		
 		if (distToMount.y < 0.0f) { // schodzi
-			groundUnderFeet = checkDown (distToMount.y + 1.0f);
+			groundUnderFeet = checkDown ( Mathf.Abs(distToMount.y) + 1.0f);
 			if (groundUnderFeet >= 0.0f) {
 				if (groundUnderFeet < Mathf.Abs (distToMount.y)) {
 					distToMount.y = -groundUnderFeet;
@@ -916,9 +920,14 @@ public class Player2Controller : MonoBehaviour {
 					setState (State.ON_GROUND);
 					setAction (Action.IDLE);
 					//resetActionAndState();
+					transform.position = transform.position + distToMount;
 				}
+			}else{
+				if( onMount(newPos3) )
+					transform.position = newPos3;
+				else
+					setMountIdle();
 			}
-			transform.position = transform.position + distToMount;
 		}
 		return 0;
 	}
@@ -1399,6 +1408,12 @@ public class Player2Controller : MonoBehaviour {
 
 	bool onMount(){
 		Vector2 rayOrigin = transform.position;
+		rayOrigin.y += 1.0f;
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.0f, layerIdMountMask);
+		return hit.collider;
+	}
+	bool onMount(Vector3 posToCheck){
+		Vector2 rayOrigin = posToCheck;
 		rayOrigin.y += 1.0f;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.0f, layerIdMountMask);
 		return hit.collider;
