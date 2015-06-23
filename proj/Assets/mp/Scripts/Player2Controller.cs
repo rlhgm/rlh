@@ -623,6 +623,9 @@ public class Player2Controller : MonoBehaviour {
 				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 1.0f);
 				if( groundUnderFeet >= 0.0f ){
 					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
+
+						lastCatchedClimbHandle = null;
+
 						distToFall.y = -groundUnderFeet;
 						velocity.x = 0.0f;
 						velocity.y = 0.0f;
