@@ -37,7 +37,7 @@ public class Player2Controller : MonoBehaviour {
 	/// </summary>
 	public float speedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekunde
 	public float breakParam = 4.0f; // ile jednosek predkosci hamuje na sekunde
-	public float desiredSpeedX = 0.0f;
+	float desiredSpeedX = 0.0f;
 	//public float stopToWalkDuration = 0.5f; // ile sekund zajmuje przejscie ze stania do chodu
 	//public float stopToRunDuration = 0.5f; // ile sekund zajmuje przejscie ze stania do chodu
 	//public float walkToRunDuration = 1.5f; // ile sekund zajmuje przejscie z chodu do biegu
