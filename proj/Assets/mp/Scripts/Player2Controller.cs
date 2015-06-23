@@ -697,7 +697,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	int Act_CLIMB_CATCH(){
-		if (Input.GetKeyDown (keyUp) && canPullUp) {
+		if ( (Input.GetKeyDown (keyUp) || Input.GetKey(keyUp)) && canPullUp) {
 			
 			climbAfterPos.x = catchedClimbHandle.transform.position.x;
 			climbAfterPos.y = catchedClimbHandle.transform.position.y;
