@@ -234,6 +234,8 @@ public class Player2Controller : MonoBehaviour {
 		transform.position = respawnPoint.position;
 	}
 
+	//public Transform birdPrefab;
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -242,6 +244,13 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.P)) {
 			gamePaused = !gamePaused;
 		}
+
+//		if (Input.GetKeyDown (KeyCode.B)) {
+//			//Bird newBird = new Bird();
+//			//newBird.transform.position = transform.position;
+//			//Instantiate<Bird>(
+//			Instantiate(birdPrefab,transform.position,Quaternion.identity);
+//		}
 
 		if( gamePaused ){
 

@@ -69,6 +69,8 @@
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\cc.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
+     <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
+     <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\Player2Controller.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
