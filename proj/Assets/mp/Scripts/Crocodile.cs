@@ -16,8 +16,8 @@ public class Crocodile : MonoBehaviour {
 	public Vector2 swingTargetLimits;
 	public bool swingToTarget;
 
-	public float CalmSpeed = 0.75f; // jednostek na sek.
-	public float HuntSpeed = 1.25f; // jednostek na sek.
+	public float CalmSpeed = 1.75f; // jednostek na sek.
+	public float HuntSpeed = 2.25f; // jednostek na sek.
 	public float AttackSpeed = 3.75f; // jednostek na sek.
 
 	void Awake(){
@@ -48,6 +48,8 @@ public class Crocodile : MonoBehaviour {
 		startPos.x = water.transform.position.x + water.getWidth () * 0.5f;
 		startPos.y = water.transform.position.y - water.getDepth () * 0.5f;
 
+		//startPos = water.transform.TransformPoint(new Vector3(0,-1,0));
+
 		transform.position = startPos;
 
 		swingStartPos = transform.position;
@@ -67,7 +69,7 @@ public class Crocodile : MonoBehaviour {
 		print (water.transform.TransformPoint(new Vector3(1,1,0)) );
 		print ("==============================================");
 
-		//setCalmSwingTarget ();
+		setCalmSwingTarget ();
 	}
 
 	enum State{
@@ -81,6 +83,17 @@ public class Crocodile : MonoBehaviour {
 		if (swingToTarget) {
 			swingTime += Time.deltaTime;
 			float swingRatio = swingTime / swingDuration;
+
+			float _t = swingRatio * Mathf.PI;
+			_t -= (Mathf.PI * 0.5f);
+			_t = Mathf.Sin( _t );
+			_t += 1.0f;
+			swingRatio = (_t * 0.5f);
+//			if( swingRatio < 0.5f ){
+//				swingRatio = Mathf.Pow(swingRatio,2);
+//			}else{
+//				s
+//			}
 			transform.position = swingStartPos + distToSwing * swingRatio;
 			if( swingTime >= swingDuration ){
 				setCalmSwingTarget();
@@ -91,15 +104,27 @@ public class Crocodile : MonoBehaviour {
 	void setCalmSwingTarget(){
 		swingStartPos = transform.position;
 
-		swingFinalPos.x = Random.Range (0.0f, swingTargetLimits.x);
-		swingFinalPos.y = Random.Range (0.0f, swingTargetLimits.y);
+		//swingFinalPos.x = Random.Range (0.0f, swingTargetLimits.x);
+		//swingFinalPos.y = Random.Range (-swingTargetLimits.y, 0.0f);
 
-		swingFinalPos = water.transform.TransformVector (swingFinalPos);
+		swingFinalPos.x = Random.Range (0.1f, 0.7f);
+		swingFinalPos.y = Random.Range (-0.4f,-0.01f);
+
+		swingFinalPos = water.transform.TransformPoint (swingFinalPos);
 
 		distToSwing = swingFinalPos - swingStartPos;
 
 		swingTime = 0.0f;
 		swingDuration = distToSwing.magnitude / CalmSpeed;
+
+//		Vector3 scl = transform.localScale;
+//		if (distToSwing.x > 0.0f) {
+//			scl.x = Mathf.Abs(scl.x) * -1.0f;
+//		} else {
+//			scl.x = Mathf.Abs(scl.x);
+//		}
+//		transform.localScale = scl;
+
 
 		swingToTarget = true;
 	}
