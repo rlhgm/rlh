@@ -17,7 +17,7 @@ public class Crocodile : MonoBehaviour {
 	//bool swingToTarget;
 
 	public float CalmSpeed = 1.75f; // jednostek na sek.
-	public float HuntSpeed = 2.25f; // jednostek na sek.
+	public float SneakSpeed = 2.25f; // jednostek na sek.
 	public float AttackSpeed = 3.75f; // jednostek na sek.
 
 	public Vector3 T1 = new Vector3();
@@ -60,8 +60,8 @@ public class Crocodile : MonoBehaviour {
 		//swingToTarget = false;
 
 		CalmSpeed = 0.75f; // jednostek na sek.
-		HuntSpeed = 1.25f; // jednostek na sek.
-		AttackSpeed = 4.75f; // jednostek na sek.
+		SneakSpeed = 1.75f; // jednostek na sek.
+		AttackSpeed = 6.25f; // jednostek na sek.
 
 		print ("==============================================");
 		print (water.transform.position);
@@ -92,20 +92,38 @@ public class Crocodile : MonoBehaviour {
 		switch( state ){
 
 		case State.SNEAK:
-			if( !targetOnShore() ){
-				setCalmSwingTarget();
-				break;
-			}
 			if( targetInWater() ){
 				state = State.ATTACK;
 				break;
 			}
+
+			float tos = targetOnShore();
+			if( tos == 0.0f ){
+				setCalmSwingTarget();
+				break;
+			}
+
+			Vector3 attackStartPos = new Vector3();
+			if( tos < 0.0f ){
+				attackStartPos = water.transform.TransformPoint(new Vector3(0,0,0));
+			}else{
+				attackStartPos = water.transform.TransformPoint(new Vector3(0.8f,0,0));
+			}
+
+			distToSwing = attackStartPos - transform.position;
+			Vector3 distToMove =  distToSwing.normalized * SneakSpeed * Time.deltaTime;
+			if( distToMove.magnitude < distToSwing.magnitude ){
+				transform.position = transform.position + distToMove;
+			}else{
+				state = State.ATTACK;
+			}
+
 			break;
 
 		case State.ATTACK:
 			Vector3 playerBauch = new Vector3(0.0f,player.myHalfHeight,0.0f);
 			distToSwing = (player.transform.position+playerBauch) - transform.position;
-			Vector3 distToMove =  distToSwing.normalized * AttackSpeed * Time.deltaTime;
+			distToMove = distToSwing.normalized * AttackSpeed * Time.deltaTime;
 			if( distToMove.magnitude < distToSwing.magnitude ){
 				transform.position = transform.position + distToMove;
 			}else{
@@ -118,7 +136,7 @@ public class Crocodile : MonoBehaviour {
 				state = State.ATTACK;
 				break;
 			}
-			if( targetOnShore() ){
+			if( targetOnShore() != 0.0f ){
 				state = State.SNEAK;
 				break;
 			}
@@ -176,18 +194,18 @@ public class Crocodile : MonoBehaviour {
 		return T1.x > 0.0f && T1.x < 1.0f && T1.y >= -1.0f && T1.y < 0.0f;
 	}
 
-	bool targetOnShore(){
+	float targetOnShore(){
 		T2 = water.transform.InverseTransformPoint (player.transform.position);
 
 		if (T2.y < 0.0f)
-			return false;
+			return 0.0f;
 
-		if( Mathf.Abs(T2.y) > 0.1f ) return false;
+		if( Mathf.Abs(T2.y) > 0.1f ) return 0.0f;
 
-		if (T2.x < -0.15f || T2.x > 1.15f)
-			return false;
+		if (T2.x < -0.175f || T2.x > 1.175f)
+			return 0.0f;
 
-		return true;
+		return T2.x;
 	}
 
 	public State state;

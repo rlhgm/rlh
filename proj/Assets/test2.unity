@@ -383,16 +383,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   water: {fileID: 1147666084}
   player: {fileID: 1857342441}
-  swingStartPos: {x: 0, y: 0, z: 0}
-  swingFinalPos: {x: 0, y: 0, z: 0}
-  distToSwing: {x: 0, y: 0, z: 0}
-  swingTime: 0
-  swingDuration: 0
-  swingTargetLimits: {x: 0, y: 0}
-  swingToTarget: 0
   CalmSpeed: .75
-  HuntSpeed: 1.25
+  SneakSpeed: 2.25
   AttackSpeed: 3.75
+  T1: {x: 0, y: 0, z: 0}
+  T2: {x: 0, y: 0, z: 0}
+  state: 0
 --- !u!61 &271932083
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2695,7 +2691,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1857342439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.4799995, y: 2, z: 0}
+  m_LocalPosition: {x: 28.4799995, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1669188180}
@@ -2750,6 +2746,7 @@ MonoBehaviour:
   keyUp: 273
   keyDown: 274
   keyJump: 32
+  myHalfHeight: 0
   lastCatchedClimbHandle: {fileID: 0}
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
