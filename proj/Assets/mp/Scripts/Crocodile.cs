@@ -60,8 +60,8 @@ public class Crocodile : MonoBehaviour {
 		//swingToTarget = false;
 
 		CalmSpeed = 0.75f; // jednostek na sek.
-		SneakSpeed = 1.75f; // jednostek na sek.
-		AttackSpeed = 6.25f; // jednostek na sek.
+		SneakSpeed = 2.5f; // jednostek na sek.
+		AttackSpeed = 6.5f; // jednostek na sek.
 
 		print ("==============================================");
 		print (water.transform.position);
@@ -87,7 +87,14 @@ public class Crocodile : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//targetInWater ();
+
+		//if( coll.IsTouching( player.coll ) ){
+		Vector3 playerBauch2 = player.transform.position + new Vector3(0.0f,player.myHalfHeight,0.0f);
+
+		if( coll.OverlapPoint(playerBauch2) ){
+			player.die ();
+			state = State.CALM;
+		}
 
 		switch( state ){
 
@@ -128,6 +135,7 @@ public class Crocodile : MonoBehaviour {
 				transform.position = transform.position + distToMove;
 			}else{
 				transform.position = transform.position + distToSwing;
+				//player.die();
 			}
 			break;
 

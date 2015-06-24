@@ -31,15 +31,13 @@ public class Water : MonoBehaviour {
 		Vector3 oldPos = front1.localPosition;
 
 		oldPos.x = front1StartPos.x + Mathf.Cos (tm) * 0.025f;
-		oldPos.y = front1StartPos.y + Mathf.Sin (tm * 2.0f) * 0.05f;
+		oldPos.y = front1StartPos.y + Mathf.Sin (tm * 10.0f) * 0.05f;
 
 		front1.localPosition = oldPos;
 
 		oldPos = front2.localPosition;
-		
 		oldPos.x = front2StartPos.x + Mathf.Cos (tm * 2.3f) * 0.025f;
-		oldPos.y = front2StartPos.y + Mathf.Sin (tm * 2.6f) * 0.05f;
-		
+		oldPos.y = front2StartPos.y + Mathf.Sin (tm * 14f) * 0.05f;		
 		front2.localPosition = oldPos;
 	}
 

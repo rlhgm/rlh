@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player2Controller : MonoBehaviour {
 
-	BoxCollider2D coll;
+	public BoxCollider2D coll;
 
 	BoxCollider2D handerLeft;
 	BoxCollider2D handerRight;
@@ -49,6 +49,8 @@ public class Player2Controller : MonoBehaviour {
 	//bool walkRunSlowDown = false;
 	//float timeToSpeedUp;
 	//float speedDiff;
+
+	public Transform respawnPoint;
 
 	float currentActionTime = 0.0f;
 	float currentStateTime = 0.0f;
@@ -224,6 +226,13 @@ public class Player2Controller : MonoBehaviour {
 //		print (jjj);
 	}
 
+	public void die(){
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		setAction (Action.IDLE);
+		setState (State.ON_GROUND);
+		transform.position = respawnPoint.position;
+	}
 
 	// Update is called once per frame
 	void Update () {
