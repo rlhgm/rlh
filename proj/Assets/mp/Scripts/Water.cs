@@ -24,7 +24,6 @@ public class Water : MonoBehaviour {
 		front2StartPos = front2.localPosition;
 	}
 
-
 	// Update is called once per frame
 	void Update () {
 		tm += Time.deltaTime;
@@ -42,5 +41,15 @@ public class Water : MonoBehaviour {
 		oldPos.y = front2StartPos.y + Mathf.Sin (tm * 2.6f) * 0.05f;
 		
 		front2.localPosition = oldPos;
+	}
+
+	public float getWidth(){
+		return coll.size.x * transform.localScale.x;
+	}
+	public float getDepth(){
+		return coll.size.y * transform.localScale.y;
+	}
+	public Vector2 getSize(){
+		return new Vector2 (getWidth (), getDepth ());;
 	}
 }
