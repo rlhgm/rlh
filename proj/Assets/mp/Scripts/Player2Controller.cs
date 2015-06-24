@@ -77,10 +77,10 @@ public class Player2Controller : MonoBehaviour {
 
 	private Transform gfx;
 	
-	private float myWidth;
-	private float myHalfWidth;
-	private float myHeight;
-	private float myHalfHeight;
+	float myWidth;
+	float myHalfWidth;
+	float myHeight;
+	public float myHalfHeight;
 
 	private int layerIdGroundMask;
 	private int layerIdGroundHandlesMask;
