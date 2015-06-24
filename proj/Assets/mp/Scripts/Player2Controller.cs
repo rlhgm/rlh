@@ -84,10 +84,13 @@ public class Player2Controller : MonoBehaviour {
 	float myHeight;
 	public float myHalfHeight;
 
-	private int layerIdGroundMask;
-	private int layerIdGroundHandlesMask;
-	private int layerIdGroundFarMask;
-	private int layerIdGroundFarHandlesMask;
+	private int _layerIdGroundMask;
+	private int _layerIdGroundHandlesMask;
+	private int _layerIdGroundFarMask;
+	private int _layerIdGroundFarHandlesMask;
+	private int currentLayerIdGroundMask;
+	private int currentLayerIdGroundHandlesMask;
+
 	private int layerIdMountMask;
 
 	GameObject catchedClimbHandle;
@@ -205,11 +208,30 @@ public class Player2Controller : MonoBehaviour {
 //		return true;
 //	}
 
+	void setCurrentPlayerLayer(int newCurrentLayer){
+
+		playerCurrentLayer = newCurrentLayer;
+
+		switch (newCurrentLayer) {
+
+		case 0:
+			currentLayerIdGroundMask = _layerIdGroundMask;
+			currentLayerIdGroundHandlesMask = _layerIdGroundHandlesMask;
+			break;
+
+		case 1:
+			currentLayerIdGroundMask = _layerIdGroundFarMask;
+			currentLayerIdGroundHandlesMask = _layerIdGroundFarHandlesMask;
+			break;
+
+		}
+	}
+
 	void Start () {
-		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
-		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
-		layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
-		layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
+		_layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
+		_layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
+		_layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
+		_layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
 
 		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 
@@ -227,7 +249,7 @@ public class Player2Controller : MonoBehaviour {
 
 		jumpFromMount = false;
 
-		playerCurrentLayer = 1;
+		setCurrentPlayerLayer (1);
 
 //		int jjj = 10;
 //		print (jjj);
@@ -451,9 +473,9 @@ public class Player2Controller : MonoBehaviour {
 					//RaycastHit2D hit = Physics2D.Linecast(sensorHandleR1.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
 					RaycastHit2D hit; 
 					if( lastFrameHande )
-						hit = Physics2D.Linecast(lastHandlePos, sensorHandleR2.position, layerIdGroundHandlesMask); 
+						hit = Physics2D.Linecast(lastHandlePos, sensorHandleR2.position, currentLayerIdGroundHandlesMask); 
 					else
-						hit = Physics2D.Linecast(sensorHandleR2.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
+						hit = Physics2D.Linecast(sensorHandleR2.position, sensorHandleR2.position, currentLayerIdGroundHandlesMask); 
 
 //					// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 //					bool _canCatch = true;
@@ -510,9 +532,9 @@ public class Player2Controller : MonoBehaviour {
 					//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
 					RaycastHit2D hit; 
 					if( lastFrameHande )
-						hit = Physics2D.Linecast(lastHandlePos, sensorHandleL2.position, layerIdGroundHandlesMask); 
+						hit = Physics2D.Linecast(lastHandlePos, sensorHandleL2.position, currentLayerIdGroundHandlesMask); 
 					else
-						hit = Physics2D.Linecast(sensorHandleL2.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
+						hit = Physics2D.Linecast(sensorHandleL2.position, sensorHandleL2.position, currentLayerIdGroundHandlesMask); 
 
 
 					if( hit.collider != null ){
@@ -1422,17 +1444,17 @@ public class Player2Controller : MonoBehaviour {
 
 	float checkLeft(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
 		if (hit.collider != null) {
 			return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
 		} else {
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
 			if (hit.collider != null){
 				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
 			} else {
 				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
 				if (hit.collider != null){
 					return Mathf.Abs (hit.point.x - sensorLeft3.position.x);
 				} else {
@@ -1444,17 +1466,17 @@ public class Player2Controller : MonoBehaviour {
 	
 	float checkRight(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorRight1.position.x, sensorRight1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
 		if (hit.collider != null) {
 			return Mathf.Abs (hit.point.x - sensorRight1.position.x);
 		} else {
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
 			if (hit.collider != null){
 				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
 			} else {
 				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
 				if (hit.collider != null){
 					return Mathf.Abs (hit.point.x - sensorRight3.position.x);
 				} else {
@@ -1466,20 +1488,18 @@ public class Player2Controller : MonoBehaviour {
 	
 	float checkDown(float checkingDist){
 
-		int currentLayerIDMask = playerCurrentLayer == 0 ? layerIdGroundMask : layerIdGroundFarMask;
-
 		Vector2 rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIDMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
 		if (hit.collider != null) {
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIDMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
 			if (hit.collider != null){
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIDMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
 				if (hit.collider != null){
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
 				} else {
@@ -1497,7 +1517,7 @@ public class Player2Controller : MonoBehaviour {
 		Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
 		rayOrigin.x += 0.5f;
 		rayOrigin.y += 0.5f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.0f, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.0f, currentLayerIdGroundMask);
 		//print ( "canClimbPullUp : " + hit);
 		return !hit.collider;
 	}
@@ -1508,7 +1528,7 @@ public class Player2Controller : MonoBehaviour {
 
 		Vector2 rayOrigin = transform.position;
 		Vector2 rayDir = (dir () == Vector2.right ? -Vector2.right : Vector2.right);
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, rayDir, 0.5f, layerIdGroundHandlesMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, rayDir, 0.5f, currentLayerIdGroundHandlesMask);
 		//print ( "canClimbPullDown : " + hit.collider.gameObject);
 		if (hit.collider)
 			return hit.collider.gameObject;
