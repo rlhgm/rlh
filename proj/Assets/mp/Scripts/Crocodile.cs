@@ -63,18 +63,18 @@ public class Crocodile : MonoBehaviour {
 		SneakSpeed = 2.5f; // jednostek na sek.
 		AttackSpeed = 6.5f; // jednostek na sek.
 
-		print ("==============================================");
-		print (water.transform.position);
-		print (water.getSize());
-		print (water.transform.TransformVector(new Vector3(0,0,0)) );
-		print (water.transform.TransformVector(new Vector3(1,0,0)) );
-		print (water.transform.TransformVector(new Vector3(0,1,0)) );
-		print (water.transform.TransformVector(new Vector3(1,1,0)) );
-		print (water.transform.TransformPoint(new Vector3(0,0,0)) );
-		print (water.transform.TransformPoint(new Vector3(1,0,0)) );
-		print (water.transform.TransformPoint(new Vector3(0,1,0)) );
-		print (water.transform.TransformPoint(new Vector3(1,1,0)) );
-		print ("==============================================");
+//		print ("==============================================");
+//		print (water.transform.position);
+//		print (water.getSize());
+//		print (water.transform.TransformVector(new Vector3(0,0,0)) );
+//		print (water.transform.TransformVector(new Vector3(1,0,0)) );
+//		print (water.transform.TransformVector(new Vector3(0,1,0)) );
+//		print (water.transform.TransformVector(new Vector3(1,1,0)) );
+//		print (water.transform.TransformPoint(new Vector3(0,0,0)) );
+//		print (water.transform.TransformPoint(new Vector3(1,0,0)) );
+//		print (water.transform.TransformPoint(new Vector3(0,1,0)) );
+//		print (water.transform.TransformPoint(new Vector3(1,1,0)) );
+//		print ("==============================================");
 
 		setCalmSwingTarget ();
 	}

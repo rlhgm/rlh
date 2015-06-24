@@ -41,7 +41,10 @@ public class BirdEmiter : MonoBehaviour {
 			return;
 
 		Bird newBird = Instantiate<Bird> (birdPrefab);
-		newBird.transform.position = transform.position;
+		Vector3 startPos = transform.position;
+		float szy = coll.size.y * 0.5f;
+		startPos.y += Random.Range (-szy, szy);
+		newBird.transform.position = startPos;
 		newBird.setDir (dir);
 		newBird.setSpeed( Random.Range(birdsSpeedMinMax.x,birdsSpeedMinMax.y) );
 

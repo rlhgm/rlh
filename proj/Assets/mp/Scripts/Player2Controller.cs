@@ -236,6 +236,18 @@ public class Player2Controller : MonoBehaviour {
 
 	//public Transform birdPrefab;
 
+	void OnTriggerEnter2D(Collider2D other) {
+		//print( "PLAYER OnTriggerEnter" );
+		if (other.gameObject.tag == "Bird") {
+			if( isInState(State.MOUNT) ){
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setAction(Action.JUMP);
+				setState(State.IN_AIR);
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
