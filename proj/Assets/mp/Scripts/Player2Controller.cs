@@ -86,6 +86,8 @@ public class Player2Controller : MonoBehaviour {
 
 	private int layerIdGroundMask;
 	private int layerIdGroundHandlesMask;
+	private int layerIdGroundFarMask;
+	private int layerIdGroundFarHandlesMask;
 	private int layerIdMountMask;
 
 	GameObject catchedClimbHandle;
@@ -124,6 +126,8 @@ public class Player2Controller : MonoBehaviour {
 
 	Vector3 lastHandlePos;
 	bool lastFrameHande;
+
+	public int playerCurrentLayer;
 
 	void Awake(){
 		coll = GetComponent<BoxCollider2D> ();
@@ -204,6 +208,9 @@ public class Player2Controller : MonoBehaviour {
 	void Start () {
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
 		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
+		layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
+		layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
+
 		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 
 		velocity = new Vector3 (0, 0, 0);
@@ -219,6 +226,8 @@ public class Player2Controller : MonoBehaviour {
 		//toNextHandleDuration = 0.4f;
 
 		jumpFromMount = false;
+
+		playerCurrentLayer = 1;
 
 //		int jjj = 10;
 //		print (jjj);
@@ -247,6 +256,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 	}
+	//aa
 
 	// Update is called once per frame
 	void Update () {
@@ -1455,18 +1465,21 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	float checkDown(float checkingDist){
+
+		int currentLayerIDMask = playerCurrentLayer == 0 ? layerIdGroundMask : layerIdGroundFarMask;
+
 		Vector2 rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIDMask);
 		if (hit.collider != null) {
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIDMask);
 			if (hit.collider != null){
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIDMask);
 				if (hit.collider != null){
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
 				} else {
