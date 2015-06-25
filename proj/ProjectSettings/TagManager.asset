@@ -72,6 +72,9 @@ TagManager:
   - name: GroundFar
     uniqueID: 2324740603
     locked: 0
+  - name: PlayerFar
+    uniqueID: 2850176481
+    locked: 0
   - name: Ground
     uniqueID: 2103364729
     locked: 0

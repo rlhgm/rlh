@@ -217,11 +217,13 @@ public class Player2Controller : MonoBehaviour {
 		case 0:
 			currentLayerIdGroundMask = _layerIdGroundMask;
 			currentLayerIdGroundHandlesMask = _layerIdGroundHandlesMask;
+			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
 			break;
 
 		case 1:
 			currentLayerIdGroundMask = _layerIdGroundFarMask;
 			currentLayerIdGroundHandlesMask = _layerIdGroundFarHandlesMask;
+			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "PlayerFar";
 			break;
 
 		}
@@ -249,7 +251,7 @@ public class Player2Controller : MonoBehaviour {
 
 		jumpFromMount = false;
 
-		setCurrentPlayerLayer (1);
+		setCurrentPlayerLayer (0);
 
 //		int jjj = 10;
 //		print (jjj);
