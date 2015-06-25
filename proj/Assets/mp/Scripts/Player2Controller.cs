@@ -319,6 +319,26 @@ public class Player2Controller : MonoBehaviour {
 		//justLetGoHandle = false;
 
 		if (Input.GetKeyDown (keyJump)) {
+			Vector3 newPlayerPos = new Vector3();
+			if( Input.GetKey(keyUp) ){
+				if( canJumpToLayer(1,ref newPlayerPos) ){
+					setCurrentPlayerLayer(1);
+					transform.position = newPlayerPos;
+					return;
+				}
+			}
+			if( Input.GetKey (keyDown)){
+				if( canJumpToLayer(0,ref newPlayerPos) ){
+					setCurrentPlayerLayer(0);
+					//transform.position = newPlayerPos;
+					setState(State.IN_AIR);
+					setAction(Action.JUMP);
+					return;
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (keyJump)) {
 			keyJumpDown ();
 		} else if (Input.GetKeyUp (keyJump)) {
 			keyJumpUp ();
@@ -1507,6 +1527,56 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 		}  
+	}
+
+	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
+		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
+			return false;
+
+		switch( playerCurrentLayer ){
+
+		case 0:
+			if( testLayerID == 0 ) return false;
+
+			Vector2 rayOrigin = transform.position;
+			rayOrigin.y += 0.1f;
+			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.5f, _layerIdGroundFarMask);
+			if( !hit.collider ) return false;
+
+			float distToFarPlatform = Mathf.Abs (hit.point.y - rayOrigin.y);
+			if( distToFarPlatform == 0.0f ) { // jezeli platforma far sasiaduje bezposrednio z near
+
+				rayOrigin.y += 1.0f;
+				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
+				if( hit.collider ) return false;
+				else{
+					onLayerPlace = transform.position;
+					onLayerPlace.y += 1.0f;
+					return true;
+				}
+
+			}else if( Mathf.Abs((distToFarPlatform+0.1f)-1.0f) < 0.01f ){ // jezeli platforma far jest o 1.0 od near
+
+				rayOrigin.y += 2.0f;
+				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
+				if( hit.collider ) return false;
+				else{
+					onLayerPlace = transform.position;
+					onLayerPlace.y += 2.0f;
+					return true;
+				}
+
+			}else{ // na inne nie mozemy skoczyc
+				return false;
+			}
+			break;
+
+		case 1:
+			return testLayerID == 0;
+			break;
+		}
+
+		return false;
 	}
 
 	bool canClimbPullUp(){
