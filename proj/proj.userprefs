@@ -2,13 +2,15 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="109" Column="24" />
       <File FileName="Assets\Scripts\PlayerControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Standard Assets\2D\Scripts\PlatformerCharacter2D.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BackgroundParallax.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Water.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="253" Column="6" />
-      <File FileName="Assets\mp\Scripts\Bird.cs" Line="8" Column="2" />
+      <File FileName="Assets\mp\Scripts\Water.cs" Line="25" Column="3" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="254" Column="27" />
+      <File FileName="Assets\mp\Scripts\Bird.cs" Line="11" Column="16" />
+      <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="22" Column="35" />
+      <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="23" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

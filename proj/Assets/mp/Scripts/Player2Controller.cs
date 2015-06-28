@@ -704,11 +704,11 @@ public class Player2Controller : MonoBehaviour {
 			if( distToFall.y > 0.0f ) { // leci w gore
 				//transform.position = transform.position + distToFall;
 			} else if( distToFall.y < 0.0f ) { // spada
-				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 1.0f);
+				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 0.01f);
 				if( groundUnderFeet >= 0.0f ){
 					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
 
-						lastCatchedClimbHandle = null;
+ 						lastCatchedClimbHandle = null;
 
 						distToFall.y = -groundUnderFeet;
 						velocity.x = 0.0f;
