@@ -723,6 +723,19 @@ public class Player2Controller : MonoBehaviour {
 				//setAction(Action.FALL);
 				setAction(Action.JUMP);
 			}
+
+//			float distToGround = 0.0f;
+//			bool groundUnderFeet2 = checkGround (ref distToGround);
+//			if (groundUnderFeet2) {
+//				Vector3 pos = transform.position;
+//				pos.y += distToGround;
+//				transform.position = pos;
+//			}else{
+//				setState(State.IN_AIR);
+//				//setAction(Action.FALL);
+//				setAction(Action.JUMP);
+//			}
+
 			break;
 		};
 		
@@ -936,6 +949,7 @@ public class Player2Controller : MonoBehaviour {
 
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			//print ("STOP STOP STOP");
 			distToMove = distToObstacle;
 			setActionIdle();
 		}
@@ -944,11 +958,11 @@ public class Player2Controller : MonoBehaviour {
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 
-		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
-		}
+//		float distToGround = 0.0f;
+//		bool groundUnderFeet = checkGround (ref distToGround);
+//		if (groundUnderFeet) {
+//			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
+//		}
 
 		return 0;
 	}
@@ -972,11 +986,11 @@ public class Player2Controller : MonoBehaviour {
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 
-		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
-		}
+//		float distToGround = 0.0f;
+//		bool groundUnderFeet = checkGround (ref distToGround);
+//		if (groundUnderFeet) {
+//			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
+//		}
 
 		return 0;
 	}
@@ -1475,7 +1489,7 @@ public class Player2Controller : MonoBehaviour {
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
 			//print (angle);
 			//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
-			if( angle > 45.0f ) 
+			if( angle <= 0.0f || angle > 45.0f ) 
 				return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
 			else 
 				return -1.0f;
@@ -1510,7 +1524,7 @@ public class Player2Controller : MonoBehaviour {
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
 			//print (angle);
 			//return Mathf.Abs (hit.point.x - sensorRight1.position.x);
-			if( angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
+			if( angle <= 0.0f || angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
 			else return -1.0f;
 		} else {
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
