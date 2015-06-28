@@ -442,16 +442,6 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		};
-		
-		if (isNotInState (State.CLIMB)) {
-//			bool shouldStop = (checkLeft (0.1f) >= 0.0f) || (checkRight (0.1f) >= 0.0f);
-//			if (shouldStop){
-//				print ("shouldStop");
-//				velocity.x = 0.0f;
-//				setAction (Action.IDLE);
-//			}
-		}
-		
 
 		switch (state) {
 
@@ -665,7 +655,7 @@ public class Player2Controller : MonoBehaviour {
 
 			if( distToFall.x > 0.0f )
 			{
-				float obstacleOnRoad = checkRight( distToFall.x + 1.0f);
+				float obstacleOnRoad = checkRight(distToFall.x + 0.01f);
 				if( obstacleOnRoad >= 0.0f ){
 					//print("distToFall.x = " + distToFall.x + " obstacleOnRoad = " + obstacleOnRoad );
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
@@ -680,7 +670,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 			else if( distToFall.x < 0.0f )
 			{
-				float obstacleOnRoad = checkLeft( distToFall.x + 1.0f);
+				float obstacleOnRoad = checkLeft( distToFall.x + 0.01f);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
@@ -877,7 +867,7 @@ public class Player2Controller : MonoBehaviour {
 
 	bool checkObstacle(int dir, float distToCheck, ref float distToObstacle){
 		if (dir == 1) {
-			distToObstacle = checkRight (Mathf.Abs (distToCheck) + 1.0f);
+			distToObstacle = checkRight (Mathf.Abs (distToCheck) + 0.01f);
 			if (distToObstacle < 0.0f)
 				return false;
 			if (distToObstacle < distToCheck) {
@@ -885,7 +875,7 @@ public class Player2Controller : MonoBehaviour {
 			} else
 				return false;
 		} else if (dir == -1) {
-			distToObstacle = checkLeft (Mathf.Abs (distToCheck) + 1.0f);
+			distToObstacle = checkLeft (Mathf.Abs (distToCheck) + 0.01f);
 			if (distToObstacle < 0.0f)
 				return false;
 			if (distToObstacle < Mathf.Abs(distToCheck)) {
@@ -954,6 +944,12 @@ public class Player2Controller : MonoBehaviour {
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
+		}
+
 		return 0;
 	}
 
@@ -975,7 +971,13 @@ public class Player2Controller : MonoBehaviour {
 		
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-		
+
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
+		}
+
 		return 0;
 	}
 
@@ -998,7 +1000,7 @@ public class Player2Controller : MonoBehaviour {
 		//transform.position = newPos3;
 		
 		if (distToMount.y < 0.0f) { // schodzi
-			groundUnderFeet = checkDown ( Mathf.Abs(distToMount.y) + 1.0f);
+			groundUnderFeet = checkDown ( Mathf.Abs(distToMount.y) + 0.01f);
 			if (groundUnderFeet >= 0.0f) {
 				if (groundUnderFeet < Mathf.Abs (distToMount.y)) {
 					distToMount.y = -groundUnderFeet;
@@ -1066,7 +1068,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool keyRightDown(){
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
-			if( checkRight (0.1f) >= 0.0f ) {
+			if( checkRight (0.01f) >= 0.0f ) {
 				//print ("cant move right");
 				return false;
 			}
@@ -1468,16 +1470,30 @@ public class Player2Controller : MonoBehaviour {
 		Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
 		if (hit.collider != null) {
-			return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+			//print( hit.collider.gameObject.transform.rotation.to );
+			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+			//print (angle);
+			//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+			if( angle > 45.0f ) 
+				return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+			else 
+				return -1.0f;
 		} else {
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
 			if (hit.collider != null){
+				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
 			} else {
 				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
 				if (hit.collider != null){
+					//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+					//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+					//print (angle);
 					return Mathf.Abs (hit.point.x - sensorLeft3.position.x);
 				} else {
 					return -1.0f;
@@ -1490,16 +1506,27 @@ public class Player2Controller : MonoBehaviour {
 		Vector2 rayOrigin = new Vector2( sensorRight1.position.x, sensorRight1.position.y );
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
 		if (hit.collider != null) {
-			return Mathf.Abs (hit.point.x - sensorRight1.position.x);
+			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+			//print (angle);
+			//return Mathf.Abs (hit.point.x - sensorRight1.position.x);
+			if( angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
+			else return -1.0f;
 		} else {
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
 			if (hit.collider != null){
+				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
 			} else {
 				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
 				if (hit.collider != null){
+					//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+					//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+					//print (angle);
 					return Mathf.Abs (hit.point.x - sensorRight3.position.x);
 				} else {
 					return -1.0f;
@@ -1529,6 +1556,98 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 		}  
+	}
+
+	bool checkGround (ref float distToGround){
+		bool groundUnderFeet = false;
+
+		//bool groundUnderFeet1 = false;
+		//bool groundUnderFeet2 = false;
+		//bool groundUnderFeet3 = false;
+
+		float checkingDist = myHeight + 0.75f;
+
+		Vector2 rayOrigin1 = sensorDown1.position;
+		rayOrigin1.y += myHeight;
+		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+
+		Vector2 rayOrigin2 = sensorDown2.position;
+		rayOrigin2.y += myHeight;
+		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+
+		Vector2 rayOrigin3 = sensorDown3.position;
+		rayOrigin3.y += myHeight;
+		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+
+		float dist1;
+		float dist2;
+		float dist3;
+
+		if (hit1.collider != null) {
+			//dist1 = myHeight - Mathf.Abs (hit1.point.y - sensorDown1.position.y);
+			dist1 = rayOrigin1.y - hit1.point.y;
+			groundUnderFeet = true;
+			distToGround = dist1;
+		}
+		if (hit2.collider != null) {
+			//dist2 = myHeight - Mathf.Abs (hit2.point.y - sensorDown2.position.y);
+			dist2 = rayOrigin2.y - hit2.point.y;
+			if( groundUnderFeet ){
+				if( distToGround > dist2) distToGround = dist2;
+			}else{
+				groundUnderFeet = true;
+				distToGround = dist2;
+			}
+		}
+		if (hit3.collider != null) {
+			//dist3 = myHeight - Mathf.Abs (hit3.point.y - sensorDown3.position.y);
+			dist3 = rayOrigin3.y - hit3.point.y;
+			if( groundUnderFeet ){
+				if( distToGround > dist3) distToGround = dist3;
+			}else{
+				groundUnderFeet = true;
+				distToGround = dist3;
+			}
+		}
+
+		if (groundUnderFeet) {
+			distToGround = myHeight - distToGround;
+		}
+
+		return groundUnderFeet;
+
+//		if (groundUnderFeet) {
+//			if (dist1 < 0.0f && dist2 < 0.0f && dist3 < 0.0f) { // w całości odleciał
+//
+//				distToGround = dist1;
+//				if( distToGround > dist2 ) distToGround = dist2;
+//				if( distToGround > dist3 ) distToGround = dist3;
+//
+//			} else { // czymś się wbija
+//
+//
+//
+//			}
+//		}
+
+
+//		if (hit.collider != null) {
+//			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
+//		} else {
+//			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
+//			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+//			if (hit.collider != null){
+//				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
+//			} else {
+//				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
+//				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+//				if (hit.collider != null){
+//					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
+//				} else {
+//					return -1.0f;
+//				}
+//			}
+//		}  
 	}
 
 	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
