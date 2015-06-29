@@ -480,118 +480,8 @@ public class Player2Controller : MonoBehaviour {
 
 			if( Input.GetKey(keyJump) ) { //&& justLetGoHandle>toNextHandleDuration){
 
-				if( dir () == Vector2.right ){
-
-					//RaycastHit2D hit = Physics2D.Linecast(sensorHandleR1.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
-					RaycastHit2D hit; 
-					if( lastFrameHande )
-						hit = Physics2D.Linecast(lastHandlePos, sensorHandleR2.position, currentLayerIdGroundHandlesMask); 
-					else
-						hit = Physics2D.Linecast(sensorHandleR2.position, sensorHandleR2.position, currentLayerIdGroundHandlesMask); 
-
-//					// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-//					bool _canCatch = true;
-//					if( lastCatchedClimbHandle && velocity.y > 0 ){
-//						_canCatch = false;
-//					}
-
-					if( hit.collider != null ){
-						//print ( hit.collider.gameObject.transform.position );
-
-						// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-						bool _canCatch = true;
-						if( (lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f ){
-							_canCatch = false;
-						}
-
-						if( _canCatch ){
-							catchedClimbHandle = hit.collider.gameObject;
-
-      						Vector3 handlePos = catchedClimbHandle.transform.position;
-							Vector3 newPos = new Vector3();
-							newPos.x = handlePos.x - myHalfWidth;
-							newPos.y = handlePos.y - 2.4f; //myHeight;
-							//transform.position = newPos;
-
-							canPullUp = canClimbPullUp();
-
-							if( canPullUp ){
-								//climbAfterPos.x = catchedClimbHandle.transform.position.x;
-								//climbAfterPos.y = catchedClimbHandle.transform.position.y;
-							}
-
-							velocity.x = 0.0f;
-							velocity.y = 0.0f;
-							//impulse.y = 0.0f;
-
-							climbBeforePos = transform.position;
-							climbAfterPos = newPos;
-							climbDistToClimb = climbAfterPos - climbBeforePos;
-							climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
-
-							setState(State.CLIMB); 
-							setAction(Action.CLIMB_JUMP_TO_CATCH);
-							climbDuration = 0.0f;
-
-							return;
-						}
-					}
-
-					lastHandlePos = sensorHandleR2.position;
-
-				}else{
-
-					//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
-					RaycastHit2D hit; 
-					if( lastFrameHande )
-						hit = Physics2D.Linecast(lastHandlePos, sensorHandleL2.position, currentLayerIdGroundHandlesMask); 
-					else
-						hit = Physics2D.Linecast(sensorHandleL2.position, sensorHandleL2.position, currentLayerIdGroundHandlesMask); 
-
-
-					if( hit.collider != null ){
-
-						// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-						bool _canCatch = true;
-						if( (lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f ){
-							_canCatch = false;
-						}
-
-						if( _canCatch ){
-							catchedClimbHandle = hit.collider.gameObject;
-
-							Vector3 handlePos = catchedClimbHandle.transform.position;
-							Vector3 newPos = new Vector3();
-							newPos.x = handlePos.x + myHalfWidth;
-							newPos.y = handlePos.y - 2.4f; //myHeight;
-							//transform.position = newPos;
-
-							canPullUp = canClimbPullUp();
-
-							if( canPullUp ){
-								//climbAfterPos.x = catchedClimbHandle.transform.position.x;
-								//climbAfterPos.y = catchedClimbHandle.transform.position.y;
-							}
-
-							velocity.x = 0.0f;
-							velocity.y = 0.0f;
-							
-							climbBeforePos = transform.position;
-							climbAfterPos = newPos;
-							climbDistToClimb = climbAfterPos - climbBeforePos;
-							climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
-							
-							setState(State.CLIMB); 
-							setAction(Action.CLIMB_JUMP_TO_CATCH);
-							climbDuration = 0.0f;
-
-							return;
-						}
-					}
-
-					lastHandlePos = sensorHandleL2.position;
-
-				}
+				if( tryCatchHandle() )
+					return;
 			}
 
 			if( Input.GetKeyDown(keyJump) ){
@@ -1662,6 +1552,122 @@ public class Player2Controller : MonoBehaviour {
 //				}
 //			}
 //		}  
+	}
+
+	bool tryCatchHandle(){
+		if (dir () == Vector2.right) {
+		
+			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleR1.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
+			RaycastHit2D hit; 
+			if (lastFrameHande)
+				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, currentLayerIdGroundHandlesMask);
+			else
+				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, currentLayerIdGroundHandlesMask); 
+		
+			//					// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
+			//					bool _canCatch = true;
+			//					if( lastCatchedClimbHandle && velocity.y > 0 ){
+			//						_canCatch = false;
+			//					}
+		
+			if (hit.collider != null) {
+				//print ( hit.collider.gameObject.transform.position );
+			
+				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
+				bool _canCatch = true;
+				if ((lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f) {
+					_canCatch = false;
+				}
+			
+				if (_canCatch) {
+					catchedClimbHandle = hit.collider.gameObject;
+				
+					Vector3 handlePos = catchedClimbHandle.transform.position;
+					Vector3 newPos = new Vector3 ();
+					newPos.x = handlePos.x - myHalfWidth;
+					newPos.y = handlePos.y - 2.4f; //myHeight;
+					//transform.position = newPos;
+				
+					canPullUp = canClimbPullUp ();
+				
+					if (canPullUp) {
+						//climbAfterPos.x = catchedClimbHandle.transform.position.x;
+						//climbAfterPos.y = catchedClimbHandle.transform.position.y;
+					}
+				
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					//impulse.y = 0.0f;
+				
+					climbBeforePos = transform.position;
+					climbAfterPos = newPos;
+					climbDistToClimb = climbAfterPos - climbBeforePos;
+					climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
+				
+					setState (State.CLIMB); 
+					setAction (Action.CLIMB_JUMP_TO_CATCH);
+					climbDuration = 0.0f;
+				
+					return true;
+				}
+			}
+		
+			lastHandlePos = sensorHandleR2.position;
+			return false;
+		
+		} else {
+		
+			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
+			RaycastHit2D hit; 
+			if (lastFrameHande)
+				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, currentLayerIdGroundHandlesMask);
+			else
+				hit = Physics2D.Linecast (sensorHandleL2.position, sensorHandleL2.position, currentLayerIdGroundHandlesMask); 
+		
+		
+			if (hit.collider != null) {
+			
+				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
+				bool _canCatch = true;
+				if ((lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f) {
+					_canCatch = false;
+				}
+			
+				if (_canCatch) {
+					catchedClimbHandle = hit.collider.gameObject;
+				
+					Vector3 handlePos = catchedClimbHandle.transform.position;
+					Vector3 newPos = new Vector3 ();
+					newPos.x = handlePos.x + myHalfWidth;
+					newPos.y = handlePos.y - 2.4f; //myHeight;
+					//transform.position = newPos;
+				
+					canPullUp = canClimbPullUp ();
+				
+					if (canPullUp) {
+						//climbAfterPos.x = catchedClimbHandle.transform.position.x;
+						//climbAfterPos.y = catchedClimbHandle.transform.position.y;
+					}
+				
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+				
+					climbBeforePos = transform.position;
+					climbAfterPos = newPos;
+					climbDistToClimb = climbAfterPos - climbBeforePos;
+					climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
+				
+					setState (State.CLIMB); 
+					setAction (Action.CLIMB_JUMP_TO_CATCH);
+					climbDuration = 0.0f;
+				
+					return true;
+				}
+			}
+		
+			lastHandlePos = sensorHandleL2.position;
+			return false;
+		}
 	}
 
 	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
