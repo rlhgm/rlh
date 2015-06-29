@@ -10,6 +10,7 @@ public class Player2Controller : MonoBehaviour {
 	Animator animator;
 
 	public Vector3 velocity;
+	private Vector3 lastVelocity;
 	public Vector3 impulse;
 	
 	public float jumpImpulse = 4.0f; 
@@ -489,8 +490,10 @@ public class Player2Controller : MonoBehaviour {
 
 			if( Input.GetKey(keyJump) ) { //&& justLetGoHandle>toNextHandleDuration){
 
-				if( tryCatchHandle() )
+				if( tryCatchHandle() ){
+					lastVelocity = velocity;
 					return;
+				}
 			}
 
 			if( Input.GetKeyDown(keyJump) ){
@@ -593,6 +596,9 @@ public class Player2Controller : MonoBehaviour {
 			if( distToFall.y > 0.0f ) { // leci w gore
 				//transform.position = transform.position + distToFall;
 			} else if( distToFall.y < 0.0f ) { // spada
+				if( lastVelocity.y >= 0.0f ) { // zaczyna spadac
+					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
+				}
 				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 0.01f);
 				if( groundUnderFeet >= 0.0f ){
 					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
@@ -637,7 +643,8 @@ public class Player2Controller : MonoBehaviour {
 
 			break;
 		};
-		
+
+		lastVelocity = velocity;
 	}
 
 	int Act_IDLE(){
@@ -1467,9 +1474,14 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	float checkDown(float checkingDist){
+		Vector3 rayOrigin = sensorDown1.position;
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundPermeableMask);
+		if (hit.collider) {// jesetem wewnatrz wskakiwalnej platformy ... nie moge sie zatrzymac..
+			return -1.0f;
+		}
 
-		Vector2 rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
+		rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
 			layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
