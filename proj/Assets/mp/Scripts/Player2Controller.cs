@@ -560,7 +560,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 			else if( distToFall.x < 0.0f )
 			{
-				float obstacleOnRoad = checkLeft( distToFall.x + 0.01f);
+				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
