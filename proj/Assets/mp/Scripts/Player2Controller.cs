@@ -866,17 +866,6 @@ public class Player2Controller : MonoBehaviour {
 			if( groundUnderFeet ){
 				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 			} else {
-				//			float distToGround = 0.0f;
-				//			bool groundUnderFeet2 = checkGround (true, layerIdGroundAllMask, ref distToGround);
-				//			if (groundUnderFeet2) {
-				//				//Vector3 pos = transform.position;
-				//				//pos.y += distToGround;
-				//				//transform.position = pos;
-				//			}else{
-				//				setState(State.IN_AIR);
-				//				//setAction(Action.FALL);
-				//				setAction(Action.JUMP);
-				//			}
 				setState(State.IN_AIR);
 				setAction(Action.JUMP);
 			}
@@ -905,9 +894,17 @@ public class Player2Controller : MonoBehaviour {
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 
 		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (false, layerIdGroundMask, ref distToGround);
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
 		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		} else {
+			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
+			if( groundUnderFeet ){
+				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+			} else {
+				setState(State.IN_AIR);
+				setAction(Action.JUMP);
+			}
 		}
 
 		return 0;
@@ -1501,24 +1498,24 @@ public class Player2Controller : MonoBehaviour {
 		//bool groundUnderFeet1 = false;
 		//bool groundUnderFeet2 = false;
 		//bool groundUnderFeet3 = false;
-
-		float checkingDist = myHalfHeight + 0.5f;
+		float th = 0.9f;
+		float checkingDist = th + 0.5f;
 		if (fromFeet)
 			checkingDist = 0.5f;
 
 		Vector2 rayOrigin1 = sensorDown1.position;
 		if( !fromFeet )
-			rayOrigin1.y += myHalfHeight;
+			rayOrigin1.y += th;
 		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdMask);
 
 		Vector2 rayOrigin2 = sensorDown2.position;
 		if( !fromFeet )
-			rayOrigin2.y += myHalfHeight;
+			rayOrigin2.y += th;
 		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdMask);
 
 		Vector2 rayOrigin3 = sensorDown3.position;
 		if( !fromFeet )
-			rayOrigin3.y += myHalfHeight;
+			rayOrigin3.y += th;
 		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdMask);
 
 		float dist1;
@@ -1558,7 +1555,7 @@ public class Player2Controller : MonoBehaviour {
 
 		if (groundUnderFeet) {
 			if( !fromFeet )
-				distToGround = myHalfHeight - distToGround;
+				distToGround = th - distToGround;
 		}
 
 		return groundUnderFeet;
