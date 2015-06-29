@@ -87,6 +87,7 @@ public class Player2Controller : MonoBehaviour {
 	private int layerIdGroundMask;
 	private int layerIdGroundPermeableMask;
 	private int layerIdGroundAllMask;
+	private int layerIdLastGroundTypeTouchedMask;
 	private int layerIdGroundHandlesMask;
 
 	//private int _layerIdGroundFarMask;
@@ -236,6 +237,7 @@ public class Player2Controller : MonoBehaviour {
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
 		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
 		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask;
+		layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
 
 		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
 
@@ -614,19 +616,19 @@ public class Player2Controller : MonoBehaviour {
 			break;
 			
 		case State.ON_GROUND:
-			groundUnderFeet = checkDown(0.1f);
-			if( groundUnderFeet < 0.0f ) {
-				setState(State.IN_AIR);
-				//setAction(Action.FALL);
-				setAction(Action.JUMP);
-			}
+//			groundUnderFeet = checkDown(0.1f);
+//			if( groundUnderFeet < 0.0f ) {
+//				setState(State.IN_AIR);
+//				//setAction(Action.FALL);
+//				setAction(Action.JUMP);
+//			}
 
 //			float distToGround = 0.0f;
-//			bool groundUnderFeet2 = checkGround (layerIdGroundAllMask, ref distToGround);
+//			bool groundUnderFeet2 = checkGround (true, layerIdGroundAllMask, ref distToGround);
 //			if (groundUnderFeet2) {
-//				Vector3 pos = transform.position;
-//				pos.y += distToGround;
-//				transform.position = pos;
+//				//Vector3 pos = transform.position;
+//				//pos.y += distToGround;
+//				//transform.position = pos;
 //			}else{
 //				setState(State.IN_AIR);
 //				//setAction(Action.FALL);
@@ -856,9 +858,28 @@ public class Player2Controller : MonoBehaviour {
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 
 		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (layerIdGroundMask, ref distToGround);
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
 		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		} else {
+			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
+			if( groundUnderFeet ){
+				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+			} else {
+				//			float distToGround = 0.0f;
+				//			bool groundUnderFeet2 = checkGround (true, layerIdGroundAllMask, ref distToGround);
+				//			if (groundUnderFeet2) {
+				//				//Vector3 pos = transform.position;
+				//				//pos.y += distToGround;
+				//				//transform.position = pos;
+				//			}else{
+				//				setState(State.IN_AIR);
+				//				//setAction(Action.FALL);
+				//				setAction(Action.JUMP);
+				//			}
+				setState(State.IN_AIR);
+				setAction(Action.JUMP);
+			}
 		}
 
 		return 0;
@@ -884,7 +905,7 @@ public class Player2Controller : MonoBehaviour {
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 
 		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (layerIdGroundMask, ref distToGround);
+		bool groundUnderFeet = checkGround (false, layerIdGroundMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y+distToGround, 0.0f);
 		}
@@ -1379,7 +1400,8 @@ public class Player2Controller : MonoBehaviour {
 
 	float checkLeft(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
+		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
 			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 			//print( hit.collider.gameObject.transform.rotation.to );
@@ -1415,7 +1437,8 @@ public class Player2Controller : MonoBehaviour {
 	
 	float checkRight(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorRight1.position.x, sensorRight1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
+		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
 			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
@@ -1451,16 +1474,19 @@ public class Player2Controller : MonoBehaviour {
 		Vector2 rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
+			layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 			if (hit.collider != null){
+				layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 				if (hit.collider != null){
+					layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
 				} else {
 					return -1.0f;
@@ -1469,25 +1495,30 @@ public class Player2Controller : MonoBehaviour {
 		}  
 	}
 
-	bool checkGround (int layerIdMask, ref float distToGround){
+	bool checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
 		bool groundUnderFeet = false;
 
 		//bool groundUnderFeet1 = false;
 		//bool groundUnderFeet2 = false;
 		//bool groundUnderFeet3 = false;
 
-		float checkingDist = myHeight + 0.75f;
+		float checkingDist = myHalfHeight + 0.5f;
+		if (fromFeet)
+			checkingDist = 0.5f;
 
 		Vector2 rayOrigin1 = sensorDown1.position;
-		rayOrigin1.y += myHeight;
+		if( !fromFeet )
+			rayOrigin1.y += myHalfHeight;
 		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdMask);
 
 		Vector2 rayOrigin2 = sensorDown2.position;
-		rayOrigin2.y += myHeight;
+		if( !fromFeet )
+			rayOrigin2.y += myHalfHeight;
 		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdMask);
 
 		Vector2 rayOrigin3 = sensorDown3.position;
-		rayOrigin3.y += myHeight;
+		if( !fromFeet )
+			rayOrigin3.y += myHalfHeight;
 		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdMask);
 
 		float dist1;
@@ -1499,15 +1530,18 @@ public class Player2Controller : MonoBehaviour {
 			dist1 = rayOrigin1.y - hit1.point.y;
 			groundUnderFeet = true;
 			distToGround = dist1;
+			layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
 		}
 		if (hit2.collider != null) {
 			//dist2 = myHeight - Mathf.Abs (hit2.point.y - sensorDown2.position.y);
+			//hit1.collider.transform.gameObject.layer
 			dist2 = rayOrigin2.y - hit2.point.y;
 			if( groundUnderFeet ){
 				if( distToGround > dist2) distToGround = dist2;
 			}else{
 				groundUnderFeet = true;
 				distToGround = dist2;
+				layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
 			}
 		}
 		if (hit3.collider != null) {
@@ -1518,11 +1552,13 @@ public class Player2Controller : MonoBehaviour {
 			}else{
 				groundUnderFeet = true;
 				distToGround = dist3;
+				layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
 			}
 		}
 
 		if (groundUnderFeet) {
-			distToGround = myHeight - distToGround;
+			if( !fromFeet )
+				distToGround = myHalfHeight - distToGround;
 		}
 
 		return groundUnderFeet;
