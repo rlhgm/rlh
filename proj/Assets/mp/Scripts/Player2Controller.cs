@@ -572,7 +572,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 			else if( distToFall.x < 0.0f )
 			{
-				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f);
+				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f );
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
@@ -1415,7 +1415,14 @@ public class Player2Controller : MonoBehaviour {
 			if( angle <= 0.0f || angle > 45.0f ) 
 				return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
 			else 
-				return -1.0f;
+			{
+				//if( isInState(State.IN_AIR) ){
+				//	return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+				//}
+				//else{
+					return -1.0f;
+				//}
+			}
 		} else {
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
@@ -1438,7 +1445,52 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 	}
-	
+
+//	float checkLeftInFlight(float checkingDist){
+//		//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+//		//print( hit.collider.gameObject.transform.rotation.to );
+//
+//		//Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
+//		Vector2 rayOrigin = transform.position;
+//		rayOrigin.x -= myHalfWidth;
+//		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
+//		if (hit.collider != null) {
+//			float angle = Quaternion.Angle (transform.rotation, hit.collider.transform.rotation);
+//			//print (angle);
+//			//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+//			int collLayer = hit.collider.gameObject.layer;
+//			if (angle <= 0.0f || angle > 45.0f) {
+//				if (collLayer & layerIdGroundPermeableMask) { // przez takie cos powienien przelatywac - plaskie lub stojace{
+//				} else {
+//					// to jest jakas zwykla przeszkoda zatrzymujemy sie na niej...
+//					//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+//				}
+//			} else {
+//				return -1.0f;
+//			}
+//		}
+//
+//		rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
+//		hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
+//		if (hit.collider != null){
+//			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+//			//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+//			//print (angle);
+//			return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
+//		} else {
+//			rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
+//			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
+//			if (hit.collider != null){
+//				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
+//				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+//				//print (angle);
+//				return Mathf.Abs (hit.point.x - sensorLeft3.position.x);
+//			} else {
+//				return -1.0f;
+//			}
+//		}
+//	}
+
 	float checkRight(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorRight1.position.x, sensorRight1.position.y );
 		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
@@ -1474,26 +1526,29 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	float checkDown(float checkingDist){
+
+		int layerIdMask = layerIdGroundAllMask;
 		Vector3 rayOrigin = sensorDown1.position;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundPermeableMask);
 		if (hit.collider) {// jesetem wewnatrz wskakiwalnej platformy ... nie moge sie zatrzymac..
-			return -1.0f;
+			//return -1.0f;
+			layerIdMask = layerIdGroundMask;
 		}
 
 		rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdMask);
 		if (hit.collider != null) {
 			layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdMask);
 			if (hit.collider != null){
 				layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdMask);
 				if (hit.collider != null){
 					layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
@@ -1983,333 +2038,3 @@ public class Player2Controller : MonoBehaviour {
 	
 	/*////////////////////////////////////////////////////////////*/
 }
-
-//// Update is called once per frame
-//void Update () {
-//	if (Input.GetKey(KeyCode.Escape))
-//		Application.Quit();
-//	
-//	SetImpulse(new Vector2(0.0f, 0.0f));
-//	
-//	//		if (Input.GetKeyDown (keyJump)) {
-//	//			keyJumpDown ();
-//	//		} else if (Input.GetKeyUp (keyJump)) {
-//	//			keyJumpUp ();
-//	//		}
-//	
-//	if (Input.GetKeyDown (keyLeft)) {
-//		keyLeftDown();
-//	} else if (Input.GetKeyDown (keyRight)) {
-//		keyRightDown();
-//	}
-//	
-//	if (Input.GetKeyUp (keyLeft)) {
-//		keyLeftUp();
-//	} else if (Input.GetKeyUp (keyRight)) {
-//		keyRightUp();
-//	}
-//	
-//	Vector3 oldPos = transform.position;
-//	//float oldPosX = oldPos.x;
-//	float newPosX = oldPos.x;
-//	float distToMove;
-//	
-//	switch (action) {
-//	case Action.IDLE:
-//		velocity.x = 0.0f;
-//		break;
-//		
-//	case Action.CLIMB_PREPARE_TO_JUMP:
-//		climbDuration += Time.deltaTime;
-//		if( climbDuration >= CLIMBDUR_PREPARE_TO_JUMP ){
-//			setAction(Action.CLIMB_JUMP_TO_CATCH);
-//			climbDuration = 0.0f;
-//		}
-//		break;
-//	case Action.CLIMB_JUMP_TO_CATCH:
-//		climbDuration += Time.deltaTime;
-//		
-//		if( climbDuration >= CLIMBDUR_JUMP_TO_CATCH ){
-//			setAction(Action.CLIMB_CATCH);
-//			climbDuration = 0.0f;
-//			//transform.position = climbAfterPos;
-//			transform.position = climbJumpPos;
-//			
-//			climbDistToClimb = climbAfterPos - climbJumpPos;
-//		} else {
-//			float ratio = climbDuration / CLIMBDUR_JUMP_TO_CATCH;
-//			transform.position = climbBeforePos + climbDistToJump*ratio;
-//		}
-//		
-//		break;
-//	case Action.CLIMB_CATCH:
-//		//			climbDuration += Time.deltaTime;
-//		//			if( climbDuration >= CLIMBDUR_CATCH ){
-//		//				setAction(Action.CLIMB_CLIMB);
-//		//				climbDuration = 0.0f;
-//		//			}
-//		if( Input.GetKeyDown(keyUp) ){
-//			setAction(Action.CLIMB_CLIMB);
-//			climbDuration = 0.0f;
-//		}
-//		break;
-//		
-//	case Action.CLIMB_CLIMB:
-//		//			climbDuration += Time.deltaTime;
-//		//			if( climbDuration >= CLIMBDUR_CLIMB ){
-//		//				setAction(Action.IDLE);
-//		//				setState(State.ON_GROUND);
-//		//				climbDuration = 0.0f;
-//		//				transform.position = climbAfterPos;
-//		//			}
-//		
-//		climbDuration += Time.deltaTime;
-//		
-//		if( climbDuration >= CLIMBDUR_CLIMB ){
-//			setAction(Action.IDLE);
-//			setState(State.ON_GROUND);
-//			climbDuration = 0.0f;
-//			transform.position = climbAfterPos;
-//			//transform.position = climbJumpPos;
-//		} else {
-//			float ratio = climbDuration / CLIMBDUR_CLIMB;
-//			transform.position = climbJumpPos + climbDistToClimb*ratio;
-//		}
-//		break;
-//		
-//	case Action.WALK_LEFT:
-//		distToMove = -WALK_SPEED * Time.deltaTime;
-//		newPosX += distToMove;
-//		if( newPosX < moveTarget.x ){
-//			newPosX = moveTarget.x;
-//			setAction(Action.IDLE);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//			//if( Input.GetKey(keyLeft) ) { keyLeftDown(); }
-//			if( wantJump ){
-//				jumpLeft();	
-//			}else if( Input.GetKey(keyLeft) ) { 
-//				keyLeftDown(); 
-//			}
-//		}else{
-//			//transform.position.Set(newPosX,oldPos.y,0.0f);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//		}
-//		break;
-//		
-//	case Action.WALK_RIGHT:
-//		distToMove = WALK_SPEED * Time.deltaTime;
-//		newPosX += distToMove;
-//		if( newPosX > moveTarget.x ){
-//			newPosX = moveTarget.x;
-//			setAction(Action.IDLE);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//			//if( Input.GetKey(keyRight) ) { keyRightDown(); }
-//			if( wantJump ){
-//				jumpRight();	
-//			}else if( Input.GetKey(keyRight) ) { 
-//				keyRightDown(); 
-//			}
-//		}else{
-//			//transform.position.Set(newPosX,oldPos.y,0.0f);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//		}
-//		break;
-//		
-//	case Action.RUN_LEFT:
-//		distToMove = -RUN_SPEED * Time.deltaTime;
-//		newPosX += distToMove;
-//		if( newPosX < moveTarget.x ){
-//			newPosX = moveTarget.x;
-//			setAction(Action.IDLE);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//			if( wantJumpLong ){
-//				jumpLongLeft();
-//			}else if( Input.GetKey(keyLeft) ) { 
-//				keyLeftDown(); 
-//			}
-//		}else{
-//			//transform.position.Set(newPosX,oldPos.y,0.0f);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//		}
-//		break;
-//		
-//	case Action.RUN_RIGHT:
-//		distToMove = RUN_SPEED * Time.deltaTime;
-//		newPosX += distToMove;
-//		if( newPosX > moveTarget.x ){
-//			newPosX = moveTarget.x;
-//			setAction(Action.IDLE);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//			//if( Input.GetKey(keyRight) ) { keyRightDown(); }
-//			if( wantJumpLong ){
-//				jumpLongRight();
-//			}else if( Input.GetKey(keyRight) ) { 
-//				keyRightDown(); 
-//			}
-//		}else{
-//			//transform.position.Set(newPosX,oldPos.y,0.0f);
-//			transform.position = new Vector3(newPosX,oldPos.y,0.0f);
-//		}
-//		break;
-//	};
-//	
-//	if (isNotInState (State.CLIMB)) {
-//		bool shouldStop = (checkLeft (0.1f) >= 0.0f) || (checkRight (0.1f) >= 0.0f);
-//		if (shouldStop)
-//			setAction (Action.IDLE);
-//	}
-//	
-//	float groundUnderFeet;
-//	switch (state) {
-//	case State.IN_AIR:
-//		
-//		addImpulse(new Vector2(0.0f, gravityForce * Time.deltaTime));
-//		
-//		//velocity.x = 0.0f;
-//		if( isInAction(Action.FALL) ){
-//			if( velocity.x > 0.0f ){
-//				velocity.x -= (flySlowDown * Time.deltaTime);
-//				if( velocity.x < 0.0f ) velocity.x = 0.0f;
-//			}else if(velocity.x < 0.0f) {
-//				velocity.x += (flySlowDown * Time.deltaTime);
-//				if( velocity.x > 0.0f ) velocity.x = 0.0f;
-//			}
-//		} else {
-//			float flyDist;
-//			switch( action ){
-//			case Action.JUMP:
-//				break;
-//				
-//			case Action.JUMP_LEFT:
-//			case Action.JUMP_RIGHT:
-//				flyDist = Mathf.Abs( wantJumpStartX - transform.position.x );
-//				if( flyDist >= 1.0f ){
-//					setAction(Action.FALL);
-//				}
-//				break;
-//			case Action.JUMP_LEFT_LONG:
-//			case Action.JUMP_RIGHT_LONG:
-//				flyDist = Mathf.Abs( wantJumpStartX - transform.position.x );
-//				if( flyDist >= 2.0f ){
-//					setAction(Action.FALL);
-//				}
-//				break;
-//				
-//			default:
-//				break;
-//			};
-//		}
-//		
-//		Vector3 distToFall = new Vector3();
-//		distToFall.x = velocity.x * Time.deltaTime;
-//		
-//		if( distToFall.x > 0.0f )
-//		{
-//			float obstacleOnRoad = checkRight( distToFall.x + 1.0f);
-//			if( obstacleOnRoad >= 0.0f ){
-//				if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
-//					distToFall.x = obstacleOnRoad;
-//					velocity.x = 0.0f;
-//					setAction(Action.FALL);
-//				}
-//			}
-//		}
-//		else if( distToFall.x < 0.0f )
-//		{
-//			float obstacleOnRoad = checkLeft( distToFall.x - 1.0f);
-//			if( obstacleOnRoad >= 0.0f ){
-//				if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
-//					distToFall.x = -obstacleOnRoad;
-//					velocity.x = 0.0f;
-//					setAction(Action.FALL);
-//				}
-//			}
-//		}
-//		
-//		velocity.y += impulse.y;
-//		if(velocity.y > MAX_SPEED_Y)
-//			velocity.y = MAX_SPEED_Y;
-//		if(velocity.y < -MAX_SPEED_Y)
-//			velocity.y = -MAX_SPEED_Y;
-//		
-//		distToFall.y = velocity.y * Time.deltaTime;
-//		
-//		if( velocity.y > 0.0f ) { // leci w gore
-//			transform.position = transform.position + distToFall;
-//		} else if( velocity.y < 0.0f ) { // spada
-//			groundUnderFeet = checkDown( distToFall.y + 1.0f);
-//			if( groundUnderFeet >= 0.0f ){
-//				if( groundUnderFeet < Mathf.Abs(distToFall.y) ){
-//					distToFall.y = -groundUnderFeet;
-//					velocity.x = 0.0f;
-//					velocity.y = 0.0f;
-//					setState(State.ON_GROUND);
-//					setAction (Action.IDLE);
-//				}
-//			}
-//			transform.position = transform.position + distToFall;
-//		}
-//		break;
-//		
-//	case State.ON_GROUND:
-//		//			if (Input.GetKeyDown("f")) {
-//		//				//transform.position = transform.position + distToFall;
-//		//			}
-//		//			else if (Input.GetKeyDown("h")) {
-//		//				//addImpulse(new Vector2(MAX_SPEED_X_GROUND,0.0f));
-//		//			}
-//		//			else if (Input.GetKeyDown("t")) {
-//		//				transform.position = transform.position + new Vector3(0.0f,0.1f,0.0f);
-//		//			}
-//		//			else if (Input.GetKeyDown("g")) {
-//		//				transform.position = transform.position + new Vector3(0.0f,-0.1f,0.0f);
-//		//			}
-//		
-//		
-//		groundUnderFeet = checkDown(0.1f);
-//		if( groundUnderFeet < 0.0f ) {
-//			setState(State.IN_AIR);
-//			setAction(Action.FALL);
-//		}
-//		break;
-//	};
-//	
-//}
-
-//void climb(Vector2 clmbdir, float distFromWall){
-//	if (isNotInState (State.ON_GROUND))
-//		return;
-//	if( isNotInAction(Action.IDLE))
-//		return;
-//	
-//	climbDuration = 0.0f;
-//	climbDistFromWall = distFromWall;
-//	climbDir = clmbdir;
-//	
-//	climbBeforePos = transform.position;
-//	climbJumpPos = transform.position;
-//	climbAfterPos = transform.position;
-//	if( climbDir == Vector2.right ){
-//		climbAfterPos.x = Mathf.Floor( transform.position.x ) + 0.5f + 1.0f;
-//		climbJumpPos.x = climbAfterPos.x - 0.75f; 
-//		//string s3 = string.Format ( "right => {0} {1}", climbBeforePos, climbAfterPos);
-//		//print (s3);
-//	}else{
-//		climbAfterPos.x = Mathf.Ceil( transform.position.x ) - 0.5f - 1.0f;
-//		climbJumpPos.x = climbAfterPos.x + 0.75f;
-//		//string s3 = string.Format ( "right <= {0} {1}", climbBeforePos, climbAfterPos);
-//		//print (s3);
-//	}
-//	climbAfterPos.y += 2;
-//	climbJumpPos.y += 0.5f;
-//	//climbDistToJump = climbAfterPos - climbBeforePos;
-//	climbDistToJump = climbJumpPos - climbBeforePos;
-//	
-//	//string s2 = string.Format ("{0} {1} {2}", climbBeforePos, climbAfterPos, climbDistToJump);
-//	//print (s2);
-//	
-//	
-//	setState (State.CLIMB);
-//	setAction (Action.CLIMB_PREPARE_TO_JUMP);
-//}
-
