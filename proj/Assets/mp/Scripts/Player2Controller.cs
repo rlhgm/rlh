@@ -84,12 +84,12 @@ public class Player2Controller : MonoBehaviour {
 	float myHeight;
 	public float myHalfHeight;
 
-	private int _layerIdGroundMask;
-	private int _layerIdGroundHandlesMask;
-	private int _layerIdGroundFarMask;
-	private int _layerIdGroundFarHandlesMask;
-	private int currentLayerIdGroundMask;
-	private int currentLayerIdGroundHandlesMask;
+	private int layerIdGroundMask;
+	private int layerIdGroundHandlesMask;
+	//private int _layerIdGroundFarMask;
+	//private int _layerIdGroundFarHandlesMask;
+	//private int currentLayerIdGroundMask;
+	//private int currentLayerIdGroundHandlesMask;
 
 	private int layerIdMountMask;
 
@@ -208,32 +208,32 @@ public class Player2Controller : MonoBehaviour {
 //		return true;
 //	}
 
-	void setCurrentPlayerLayer(int newCurrentLayer){
-
-		playerCurrentLayer = newCurrentLayer;
-
-		switch (newCurrentLayer) {
-
-		case 0:
-			currentLayerIdGroundMask = _layerIdGroundMask;
-			currentLayerIdGroundHandlesMask = _layerIdGroundHandlesMask;
-			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-			break;
-
-		case 1:
-			currentLayerIdGroundMask = _layerIdGroundFarMask;
-			currentLayerIdGroundHandlesMask = _layerIdGroundFarHandlesMask;
-			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "PlayerFar";
-			break;
-
-		}
-	}
+//	void setCurrentPlayerLayer(int newCurrentLayer){
+//
+//		playerCurrentLayer = newCurrentLayer;
+//
+//		switch (newCurrentLayer) {
+//
+//		case 0:
+//			currentLayerIdGroundMask = _layerIdGroundMask;
+//			currentLayerIdGroundHandlesMask = _layerIdGroundHandlesMask;
+//			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+//			break;
+//
+//		case 1:
+//			currentLayerIdGroundMask = _layerIdGroundFarMask;
+//			currentLayerIdGroundHandlesMask = _layerIdGroundFarHandlesMask;
+//			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "PlayerFar";
+//			break;
+//
+//		}
+//	}
 
 	void Start () {
-		_layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
-		_layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
-		_layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
-		_layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
+		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
+		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
+		//_layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
+		//_layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
 
 		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 
@@ -251,7 +251,7 @@ public class Player2Controller : MonoBehaviour {
 
 		jumpFromMount = false;
 
-		setCurrentPlayerLayer (0);
+		//setCurrentPlayerLayer (0);
 
 //		int jjj = 10;
 //		print (jjj);
@@ -323,20 +323,20 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetKeyDown (keyJump)) {
 			Vector3 newPlayerPos = new Vector3();
 			if( Input.GetKey(keyUp) ){
-				if( canJumpToLayer(1,ref newPlayerPos) ){
-					setCurrentPlayerLayer(1);
-					transform.position = newPlayerPos;
-					return;
-				}
+//				if( canJumpToLayer(1,ref newPlayerPos) ){
+//					setCurrentPlayerLayer(1);
+//					transform.position = newPlayerPos;
+//					return;
+//				}
 			}
 			if( Input.GetKey (keyDown)){
-				if( canJumpToLayer(0,ref newPlayerPos) ){
-					setCurrentPlayerLayer(0);
-					//transform.position = newPlayerPos;
-					setState(State.IN_AIR);
-					setAction(Action.JUMP);
-					return;
-				}
+//				if( canJumpToLayer(0,ref newPlayerPos) ){
+//					setCurrentPlayerLayer(0);
+//					//transform.position = newPlayerPos;
+//					setState(State.IN_AIR);
+//					setAction(Action.JUMP);
+//					return;
+//				}
 			}
 		}
 
@@ -1372,7 +1372,7 @@ public class Player2Controller : MonoBehaviour {
 
 	float checkLeft(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 		if (hit.collider != null) {
 			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 			//print( hit.collider.gameObject.transform.rotation.to );
@@ -1385,7 +1385,7 @@ public class Player2Controller : MonoBehaviour {
 				return -1.0f;
 		} else {
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
 				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
@@ -1393,7 +1393,7 @@ public class Player2Controller : MonoBehaviour {
 				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
 			} else {
 				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, currentLayerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
 					//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 					//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
@@ -1408,7 +1408,7 @@ public class Player2Controller : MonoBehaviour {
 	
 	float checkRight(float checkingDist){
 		Vector2 rayOrigin = new Vector2( sensorRight1.position.x, sensorRight1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 		if (hit.collider != null) {
 			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
@@ -1418,7 +1418,7 @@ public class Player2Controller : MonoBehaviour {
 			else return -1.0f;
 		} else {
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
 				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
@@ -1426,7 +1426,7 @@ public class Player2Controller : MonoBehaviour {
 				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
 			} else {
 				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, currentLayerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
 					//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 					//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
@@ -1442,17 +1442,17 @@ public class Player2Controller : MonoBehaviour {
 	float checkDown(float checkingDist){
 
 		Vector2 rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
 		if (hit.collider != null) {
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
 				} else {
@@ -1473,15 +1473,15 @@ public class Player2Controller : MonoBehaviour {
 
 		Vector2 rayOrigin1 = sensorDown1.position;
 		rayOrigin1.y += myHeight;
-		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdGroundMask);
 
 		Vector2 rayOrigin2 = sensorDown2.position;
 		rayOrigin2.y += myHeight;
-		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdGroundMask);
 
 		Vector2 rayOrigin3 = sensorDown3.position;
 		rayOrigin3.y += myHeight;
-		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, currentLayerIdGroundMask);
+		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdGroundMask);
 
 		float dist1;
 		float dist2;
@@ -1560,9 +1560,9 @@ public class Player2Controller : MonoBehaviour {
 			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleR1.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
 			RaycastHit2D hit; 
 			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, currentLayerIdGroundHandlesMask);
+				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, layerIdGroundHandlesMask);
 			else
-				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, currentLayerIdGroundHandlesMask); 
+				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
 		
 			//					// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 			//					bool _canCatch = true;
@@ -1620,9 +1620,9 @@ public class Player2Controller : MonoBehaviour {
 			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
 			RaycastHit2D hit; 
 			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, currentLayerIdGroundHandlesMask);
+				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, layerIdGroundHandlesMask);
 			else
-				hit = Physics2D.Linecast (sensorHandleL2.position, sensorHandleL2.position, currentLayerIdGroundHandlesMask); 
+				hit = Physics2D.Linecast (sensorHandleL2.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
 		
 		
 			if (hit.collider != null) {
@@ -1670,55 +1670,55 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
-	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
-		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
-			return false;
-
-		switch( playerCurrentLayer ){
-
-		case 0:
-			if( testLayerID == 0 ) return false;
-
-			Vector2 rayOrigin = transform.position;
-			rayOrigin.y += 0.1f;
-			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.5f, _layerIdGroundFarMask);
-			if( !hit.collider ) return false;
-
-			float distToFarPlatform = Mathf.Abs (hit.point.y - rayOrigin.y);
-			if( distToFarPlatform == 0.0f ) { // jezeli platforma far sasiaduje bezposrednio z near
-
-				rayOrigin.y += 1.0f;
-				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
-				if( hit.collider ) return false;
-				else{
-					onLayerPlace = transform.position;
-					onLayerPlace.y += 1.0f;
-					return true;
-				}
-
-			}else if( Mathf.Abs((distToFarPlatform+0.1f)-1.0f) < 0.01f ){ // jezeli platforma far jest o 1.0 od near
-
-				rayOrigin.y += 2.0f;
-				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
-				if( hit.collider ) return false;
-				else{
-					onLayerPlace = transform.position;
-					onLayerPlace.y += 2.0f;
-					return true;
-				}
-
-			}else{ // na inne nie mozemy skoczyc
-				return false;
-			}
-			break;
-
-		case 1:
-			return testLayerID == 0;
-			break;
-		}
-
-		return false;
-	}
+//	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
+//		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
+//			return false;
+//
+//		switch( playerCurrentLayer ){
+//
+//		case 0:
+//			if( testLayerID == 0 ) return false;
+//
+//			Vector2 rayOrigin = transform.position;
+//			rayOrigin.y += 0.1f;
+//			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.5f, _layerIdGroundFarMask);
+//			if( !hit.collider ) return false;
+//
+//			float distToFarPlatform = Mathf.Abs (hit.point.y - rayOrigin.y);
+//			if( distToFarPlatform == 0.0f ) { // jezeli platforma far sasiaduje bezposrednio z near
+//
+//				rayOrigin.y += 1.0f;
+//				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
+//				if( hit.collider ) return false;
+//				else{
+//					onLayerPlace = transform.position;
+//					onLayerPlace.y += 1.0f;
+//					return true;
+//				}
+//
+//			}else if( Mathf.Abs((distToFarPlatform+0.1f)-1.0f) < 0.01f ){ // jezeli platforma far jest o 1.0 od near
+//
+//				rayOrigin.y += 2.0f;
+//				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
+//				if( hit.collider ) return false;
+//				else{
+//					onLayerPlace = transform.position;
+//					onLayerPlace.y += 2.0f;
+//					return true;
+//				}
+//
+//			}else{ // na inne nie mozemy skoczyc
+//				return false;
+//			}
+//			break;
+//
+//		case 1:
+//			return testLayerID == 0;
+//			break;
+//		}
+//
+//		return false;
+//	}
 
 	bool canClimbPullUp(){
 
@@ -1728,7 +1728,7 @@ public class Player2Controller : MonoBehaviour {
 		Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
 		rayOrigin.x += 0.5f;
 		rayOrigin.y += 0.5f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.0f, currentLayerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.0f, layerIdGroundMask);
 		//print ( "canClimbPullUp : " + hit);
 		return !hit.collider;
 	}
@@ -1739,7 +1739,7 @@ public class Player2Controller : MonoBehaviour {
 
 		Vector2 rayOrigin = transform.position;
 		Vector2 rayDir = (dir () == Vector2.right ? -Vector2.right : Vector2.right);
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, rayDir, 0.5f, currentLayerIdGroundHandlesMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, rayDir, 0.5f, layerIdGroundHandlesMask);
 		//print ( "canClimbPullDown : " + hit.collider.gameObject);
 		if (hit.collider)
 			return hit.collider.gameObject;
