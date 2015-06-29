@@ -85,7 +85,10 @@ public class Player2Controller : MonoBehaviour {
 	public float myHalfHeight;
 
 	private int layerIdGroundMask;
+	private int layerIdGroundPermeableMask;
+	private int layerIdGroundAllMask;
 	private int layerIdGroundHandlesMask;
+
 	//private int _layerIdGroundFarMask;
 	//private int _layerIdGroundFarHandlesMask;
 	//private int currentLayerIdGroundMask;
@@ -231,7 +234,11 @@ public class Player2Controller : MonoBehaviour {
 
 	void Start () {
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
+		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
+		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask;
+
 		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
+
 		//_layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
 		//_layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
 
@@ -607,24 +614,24 @@ public class Player2Controller : MonoBehaviour {
 			break;
 			
 		case State.ON_GROUND:
-			groundUnderFeet = checkDown(0.1f);
-			if( groundUnderFeet < 0.0f ) {
-				setState(State.IN_AIR);
-				//setAction(Action.FALL);
-				setAction(Action.JUMP);
-			}
-
-//			float distToGround = 0.0f;
-//			bool groundUnderFeet2 = checkGround (ref distToGround);
-//			if (groundUnderFeet2) {
-//				Vector3 pos = transform.position;
-//				pos.y += distToGround;
-//				transform.position = pos;
-//			}else{
+//			groundUnderFeet = checkDown(0.1f);
+//			if( groundUnderFeet < 0.0f ) {
 //				setState(State.IN_AIR);
 //				//setAction(Action.FALL);
 //				setAction(Action.JUMP);
 //			}
+
+			float distToGround = 0.0f;
+			bool groundUnderFeet2 = checkGround (ref distToGround);
+			if (groundUnderFeet2) {
+				Vector3 pos = transform.position;
+				pos.y += distToGround;
+				transform.position = pos;
+			}else{
+				setState(State.IN_AIR);
+				//setAction(Action.FALL);
+				setAction(Action.JUMP);
+			}
 
 			break;
 		};
@@ -1442,17 +1449,17 @@ public class Player2Controller : MonoBehaviour {
 	float checkDown(float checkingDist){
 
 		Vector2 rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 			if (hit.collider != null){
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 				if (hit.collider != null){
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
 				} else {
@@ -1473,15 +1480,15 @@ public class Player2Controller : MonoBehaviour {
 
 		Vector2 rayOrigin1 = sensorDown1.position;
 		rayOrigin1.y += myHeight;
-		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
 		Vector2 rayOrigin2 = sensorDown2.position;
 		rayOrigin2.y += myHeight;
-		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
 		Vector2 rayOrigin3 = sensorDown3.position;
 		rayOrigin3.y += myHeight;
-		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdGroundMask);
+		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
 		float dist1;
 		float dist2;
