@@ -671,35 +671,41 @@ public class Player2Controller : MonoBehaviour {
 		lastVelocity = velocity;
 	}
 
+	bool tryStartClimbPullDown(){
+		GameObject potCatchedClimbHandle = canClimbPullDown();
+		//print(potCatchedClimbHandle);
+		if( potCatchedClimbHandle ){
+			
+			catchedClimbHandle = potCatchedClimbHandle;
+			
+			velocity.x = 0.0f;
+			velocity.y = 0.0f;
+			climbDuration = 0.0f;
+			
+			Vector3 handlePos = potCatchedClimbHandle.transform.position;
+			
+			//climbAfterPos
+			climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
+			if( dir() == Vector2.right ){
+				climbAfterPos.x = handlePos.x - myHalfWidth;
+			}else{
+				climbAfterPos.x = handlePos.x + myHalfWidth;
+			}
+			
+			climbBeforePos = transform.position;
+			climbDistToClimb = climbAfterPos - climbBeforePos;
+			
+			setAction(Action.CLIMB_PULLDOWN);
+			setState(State.CLIMB);
+
+			return true;
+		}
+		return false;
+	}
 	int Act_IDLE(){
 		//velocity.x = 0.0f;
 		if( Input.GetKeyDown(keyDown) ){
-			GameObject potCatchedClimbHandle = canClimbPullDown();
-			//print(potCatchedClimbHandle);
-			if( potCatchedClimbHandle ){
-				
-				catchedClimbHandle = potCatchedClimbHandle;
-				
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
-				climbDuration = 0.0f;
-				
-				Vector3 handlePos = potCatchedClimbHandle.transform.position;
-				
-				//climbAfterPos
-				climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
-				if( dir() == Vector2.right ){
-					climbAfterPos.x = handlePos.x - myHalfWidth;
-				}else{
-					climbAfterPos.x = handlePos.x + myHalfWidth;
-				}
-				
-				climbBeforePos = transform.position;
-				climbDistToClimb = climbAfterPos - climbBeforePos;
-				
-				setAction(Action.CLIMB_PULLDOWN);
-				setState(State.CLIMB);
-			}
+			tryStartClimbPullDown();
 		}
 		return 0;
 	}
@@ -957,6 +963,9 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	int Act_CROUCH_IDLE(){
+		if( Input.GetKey(keyDown) ){
+			tryStartClimbPullDown();
+		}
 		return 0;
 	}
 
@@ -2057,7 +2066,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	GameObject canClimbPullDown(){
-		if (!isInState (State.ON_GROUND) || !isInAction (Action.IDLE))
+		if (!isInState (State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
 			return null;
 
 		Vector2 rayOrigin = transform.position;
