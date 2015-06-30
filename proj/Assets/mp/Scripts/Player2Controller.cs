@@ -792,11 +792,24 @@ public class Player2Controller : MonoBehaviour {
 		climbDuration += Time.deltaTime;
 		
 		if (climbDuration >= CLIMBDUR_CLIMB) {
-			setAction (Action.IDLE);
 			setState (State.ON_GROUND);
 			climbDuration = 0.0f;
 			transform.position = climbAfterPos;
-			resetActionAndState ();
+
+			if( canGetUp() ){
+				setAction (Action.IDLE);
+				resetActionAndState ();
+			}else{
+				setAction (Action.CROUCH_IDLE);
+				wantGetUp = !Input.GetKey(keyDown);
+				
+				if( Input.GetKey(keyLeft) ) {
+					keyLeftDown();
+				} else if( Input.GetKey(keyRight) ){
+					keyRightDown();
+				}
+			}
+
 		} else {
 			float ratio = climbDuration / CLIMBDUR_CLIMB;
 			transform.position = climbBeforePos + climbDistToClimb * ratio;
