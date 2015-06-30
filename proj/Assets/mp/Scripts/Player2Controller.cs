@@ -1516,6 +1516,9 @@ public class Player2Controller : MonoBehaviour {
 				//}
 			}
 		} else {
+			if( crouching() ) 
+				return -1.0f;
+
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
@@ -1524,8 +1527,6 @@ public class Player2Controller : MonoBehaviour {
 				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
 			} else {
-				if( crouching() ) 
-					return -1.0f;
 
 				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
@@ -1598,6 +1599,9 @@ public class Player2Controller : MonoBehaviour {
 			if( angle <= 0.0f || angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
 			else return -1.0f;
 		} else {
+			if (crouching())
+				return -1.0f;
+
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
@@ -1606,8 +1610,6 @@ public class Player2Controller : MonoBehaviour {
 				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
 			} else {
-				if (crouching())
-					return -1.0f;
 
 				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
