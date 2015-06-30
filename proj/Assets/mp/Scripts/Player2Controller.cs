@@ -650,17 +650,17 @@ public class Player2Controller : MonoBehaviour {
 //				setAction(Action.JUMP);
 //			}
 
-//			float distToGround = 0.0f;
-//			bool groundUnderFeet2 = checkGround (true, layerIdGroundAllMask, ref distToGround);
-//			if (groundUnderFeet2) {
-//				//Vector3 pos = transform.position;
-//				//pos.y += distToGround;
-//				//transform.position = pos;
-//			}else{
-//				setState(State.IN_AIR);
-//				//setAction(Action.FALL);
-//				setAction(Action.JUMP);
-//			}
+			float distToGround = 0.0f;
+			bool groundUnderFeet2 = checkGround (true, layerIdGroundAllMask, ref distToGround);
+			if (groundUnderFeet2) {
+				//Vector3 pos = transform.position;
+				//pos.y += distToGround;
+				//transform.position = pos;
+			}else{
+				setState(State.IN_AIR);
+				//setAction(Action.FALL);
+				setAction(Action.JUMP);
+			}
 
 			break;
 		};
@@ -889,15 +889,16 @@ public class Player2Controller : MonoBehaviour {
 		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		} else {
-			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
-			if( groundUnderFeet ){
-				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-			} else {
-				setState(State.IN_AIR);
-				setAction(Action.JUMP);
-			}
 		}
+//		} else {
+//			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
+//			if( groundUnderFeet ){
+//				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+//			} else {
+//				setState(State.IN_AIR);
+//				setAction(Action.JUMP);
+//			}
+//		}
 
 		return 0;
 	}
@@ -925,15 +926,16 @@ public class Player2Controller : MonoBehaviour {
 		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		} else {
-			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
-			if( groundUnderFeet ){
-				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-			} else {
-				setState(State.IN_AIR);
-				setAction(Action.JUMP);
-			}
 		}
+//		} else {
+//			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
+//			if( groundUnderFeet ){
+//				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+//			} else {
+//				setState(State.IN_AIR);
+//				setAction(Action.JUMP);
+//			}
+//		}
 
 		return 0;
 	}
