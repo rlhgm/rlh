@@ -1368,9 +1368,18 @@ public class Player2Controller : MonoBehaviour {
 			
 			case Action.IDLE:
 			case Action.JUMP:
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
+				//velocity.x = 0.0f;
+				//velocity.y = 0.0f;
 				setAction (Action.CROUCH_IDLE);
+				if( Input.GetKey(keyLeft) ){
+					keyLeftDown();
+				} else if( Input.GetKey(keyRight) ){
+					keyRightDown();
+				}else{
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					//setAction (Action.CROUCH_IDLE);
+				}
 				break;
 			//aaa
 			case Action.WALK_LEFT:
