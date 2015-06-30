@@ -16,15 +16,24 @@ namespace UnityStandardAssets._2D
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
 
+		public Transform backgroundNearNode;
+		public Transform backgroundFarNode;
+
+		public Vector2 backgroundNearRatio = new Vector2(0.1f,0.05f);
+		public Vector2 backgroundFarRatio = new Vector2(0.3f,0.15f);
+
+		private Vector3 lastPos;
+
         // Use this for initialization
         private void Start()
         {
-            //m_LastTargetPosition = target.position;
+			//m_LastTargetPosition = target.position;
             //m_OffsetZ = (transform.position - target.position).z;
 
 			transform.position = new Vector3( target.position.x, target.position.y, transform.position.z );
-
             transform.parent = null;
+
+			lastPos = transform.position;
         }
 
 
@@ -32,6 +41,20 @@ namespace UnityStandardAssets._2D
         private void Update()
         {
 			transform.position = new Vector3( target.position.x, target.position.y, transform.position.z );
+
+			if( backgroundNearNode ){
+				Vector3 pos = backgroundNearNode.position;
+				pos.x = transform.position.x * backgroundNearRatio.x;
+				pos.y = transform.position.y * backgroundNearRatio.y;
+				backgroundNearNode.position = pos;
+			}
+
+			if( backgroundFarNode ){
+				Vector3 pos = backgroundFarNode.position;
+				pos.x = transform.position.x * backgroundFarRatio.x;
+				pos.y = transform.position.y * backgroundFarRatio.y;
+				backgroundFarNode.position = pos;
+			}
 
 //            // only update lookahead pos if accelerating or changed direction
 //            float xMoveDelta = (target.position - m_LastTargetPosition).x;

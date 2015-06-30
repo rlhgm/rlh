@@ -35,8 +35,8 @@ TagManager:
   - GroundFar
   - GroundFarHandles
   - GroundPermeable
-  - 
-  - 
+  - BackgroundsNear
+  - BackgroundsFar
   - 
   - 
   - 
@@ -53,6 +53,12 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 3363470833
+    locked: 0
+  - name: BackgroundFar
+    uniqueID: 4118076675
+    locked: 0
+  - name: BackroundNear
+    uniqueID: 1848037697
     locked: 0
   - name: Background
     uniqueID: 1535931219
