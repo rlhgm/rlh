@@ -329,12 +329,7 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 
-		if (wantGetUp) {
-			if( canGetUp() ){
-				getUp();
-				wantGetUp = false;
-			}
-		}
+
 
 		SetImpulse(new Vector2(0.0f, 0.0f));
 		//justLetGoHandle = false;
@@ -473,6 +468,13 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		};
+
+		if (wantGetUp) {
+			if( canGetUp() ){
+				getUp();
+				wantGetUp = false;
+			}
+		}
 
 		switch (state) {
 
@@ -660,6 +662,7 @@ public class Player2Controller : MonoBehaviour {
 				setState(State.IN_AIR);
 				//setAction(Action.FALL);
 				setAction(Action.JUMP);
+				wantGetUp = false;
 			}
 
 			break;
@@ -990,15 +993,16 @@ public class Player2Controller : MonoBehaviour {
 		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		} else {
-			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
-			if( groundUnderFeet ){
-				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-			} else {
-				setState(State.IN_AIR);
-				setAction(Action.JUMP);
-			}
 		}
+//		} else {
+//			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
+//			if( groundUnderFeet ){
+//				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+//			} else {
+//				setState(State.IN_AIR);
+//				setAction(Action.JUMP);
+//			}
+//		}
 		
 		return 0;
 	}
