@@ -1286,8 +1286,10 @@ public class Player2Controller : MonoBehaviour {
 				velocity.y = MountSpeed;
 				setAction (Action.MOUNT_UP);
 				setState(State.MOUNT);
+
 			}
 		}
+
 	}
 	void keyUpUp(){
 		if ( setMountIdle ()) {
@@ -1301,7 +1303,8 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 	}
-	void keyDownDown(){
+
+	bool keyDownDown(){
 		if (isInState (State.MOUNT)) {
 			if (!mounting ()) {
 				Vector3 playerPos = transform.position;
@@ -1310,13 +1313,16 @@ public class Player2Controller : MonoBehaviour {
 					velocity.x = 0.0f;
 					velocity.y = -MountSpeed;
 					setAction (Action.MOUNT_DOWN);
+					return true;
 				}
 			}
 		} else if (isInState (State.ON_GROUND)) {
 
 			crouch();
-
+			return true;
 		}
+
+		return false;
 	}
 	void keyDownUp(){
 		if ( setMountIdle ()) {
@@ -1353,22 +1359,39 @@ public class Player2Controller : MonoBehaviour {
 			switch (action) {
 			
 			case Action.IDLE:
+			case Action.JUMP:
 				velocity.x = 0.0f;
 				velocity.y = 0.0f;
 				setAction (Action.CROUCH_IDLE);
 				break;
 			//aaa
 			case Action.WALK_LEFT:
-				desiredSpeedX = CROUCH_SPEED;
-				setAction (Action.CROUCH_LEFT);
+			case Action.JUMP_LEFT:
+			case Action.JUMP_LEFT_LONG:
+				if( Input.GetKey(keyLeft)){
+					desiredSpeedX = CROUCH_SPEED;
+					setAction (Action.CROUCH_LEFT);
+				}else{
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					setAction (Action.CROUCH_IDLE);
+				}
 				break;
 			
 			case Action.WALK_RIGHT:
-				desiredSpeedX = CROUCH_SPEED;
-				setAction (Action.CROUCH_RIGHT);
+			case Action.JUMP_RIGHT:
+			case Action.JUMP_RIGHT_LONG:
+				if( Input.GetKey(keyRight)){
+					desiredSpeedX = CROUCH_SPEED;
+					setAction (Action.CROUCH_RIGHT);
+				}else{
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					setAction (Action.CROUCH_IDLE);
+				}
 				break;
 			}
-			;
+
 		}
 	}
 
@@ -1482,7 +1505,10 @@ public class Player2Controller : MonoBehaviour {
 
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
-			if (Input.GetKey (keyLeft)) {
+			if( Input.GetKey(keyDown)){
+				if( !keyDownDown() )
+					setActionIdle();
+			} else if (Input.GetKey (keyLeft)) {
 				if( !keyLeftDown () )
 					setActionIdle();
 			} else if (Input.GetKey (keyRight)) {
