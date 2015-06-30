@@ -25,6 +25,8 @@ public class Player2Controller : MonoBehaviour {
 	public float JUMP_LONG_SPEED = 2.0f;
 	public float CLIMB_DURATION = 1.5f;
 
+	public float CROUCH_SPEED = 1.0f;
+
 	public float MountSpeed = 2.0f; // ile na sek.
 	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
 		//[2015-06-18 17:58:40] Rafał Sankowski: i jeśli nadal trzymasz spacje
@@ -174,7 +176,8 @@ public class Player2Controller : MonoBehaviour {
 		//flySlowDown = 1.5f;
 		JUMP_SPEED = 3.5f;
 		JUMP_LONG_SPEED = 4.1f;
-		
+		CROUCH_SPEED = WALK_SPEED * 0.5f;
+
 		jumpImpulse = 7.0f;
 		jumpLongImpulse = 7.15f;
 		gravityForce = -20.0f;
@@ -436,6 +439,18 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case Action.RUN_RIGHT:
 			Act_RUN(1);
+			break;
+
+		case Action.CROUCH_IDLE:
+			Act_CROUCH_IDLE();
+			break;
+
+		case Action.CROUCH_LEFT:
+			Act_CROUCH_LEFTRIGHT(-1);
+			break;
+
+		case Action.CROUCH_RIGHT:
+			Act_CROUCH_LEFTRIGHT(1);
 			break;
 
 		case Action.MOUNT_IDLE:
@@ -917,6 +932,48 @@ public class Player2Controller : MonoBehaviour {
 		return 0;
 	}
 
+	int Act_CROUCH_IDLE(){
+		return 0;
+	}
+
+	int Act_CROUCH_LEFTRIGHT(int dir){
+		
+		bool speedReached = checkSpeed (dir);
+		if (speedReached && desiredSpeedX == 0.0f) {
+			setAction(Action.CROUCH_IDLE);
+			//resetActionAndState ();
+			setActionCrouchIdle();
+		}
+		
+		distToMove = velocity.x * Time.deltaTime;
+		
+		float distToObstacle = 0.0f;
+		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			//setActionIdle();
+			setActionCrouchIdle();
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		} else {
+			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
+			if( groundUnderFeet ){
+				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+			} else {
+				setState(State.IN_AIR);
+				setAction(Action.JUMP);
+			}
+		}
+		
+		return 0;
+	}
+
 	int Act_MOUNTING(){
 		Vector3 newPos3 = transform.position;
 		Vector3 distToMount = velocity * Time.deltaTime;
@@ -970,7 +1027,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	bool keyLeftDown(){
-		if ( (isInAction (Action.IDLE) || moving(-1) || jumping() ) && isInState (State.ON_GROUND)) {
+		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (State.ON_GROUND)) {
 			if (checkLeft (0.1f) >= 0.0f) {
 				//print ("cant move left");
 				return false;
@@ -988,23 +1045,31 @@ public class Player2Controller : MonoBehaviour {
 				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
-			if( !mounting() ){
+			if (!mounting ()) {
 				Vector3 playerPos = transform.position;
 				playerPos.x -= 0.1f;
-				if( onMount(playerPos) ){
-					turnLeft();
+				if (onMount (playerPos)) {
+					turnLeft ();
 					velocity.x = -MountSpeed;
 					velocity.y = 0.0f;
-					setAction(Action.MOUNT_LEFT);
+					setAction (Action.MOUNT_LEFT);
 					return true;
 				}
 			}
+		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
+			if( checkLeft(0.1f) >= 0.0f ){
+				return false;
+			}
+			turnLeft();
+			desiredSpeedX = CROUCH_SPEED;
+			setAction(Action.CROUCH_LEFT);
+			return true;
 		}
 		return false;
 	}
 	bool keyRightDown(){
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
-			if( checkRight (0.01f) >= 0.0f ) {
+			if( checkRight (0.1f) >= 0.0f ) {
 				//print ("cant move right");
 				return false;
 			}
@@ -1032,6 +1097,14 @@ public class Player2Controller : MonoBehaviour {
 					return true;
 				}
 			}
+		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
+			if( checkRight(0.1f) >= 0.0f ){
+				return false;
+			}
+			turnRight();
+			desiredSpeedX = CROUCH_SPEED;
+			setAction(Action.CROUCH_RIGHT);
+			return true;
 		}
 		return false;
 	}
@@ -1361,6 +1434,10 @@ public class Player2Controller : MonoBehaviour {
 	void setActionIdle(){
 		velocity.x = 0.0f;
 		setAction (Action.IDLE);
+	}
+	void setActionCrouchIdle(){
+		velocity.x = 0.0f;
+		setAction (Action.CROUCH_IDLE);
 	}
 
 	void resetActionAndState(){
