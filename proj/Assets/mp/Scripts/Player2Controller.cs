@@ -694,7 +694,8 @@ public class Player2Controller : MonoBehaviour {
 			
 			climbBeforePos = transform.position;
 			climbDistToClimb = climbAfterPos - climbBeforePos;
-			
+
+			wantGetUp = false;
 			setAction(Action.CLIMB_PULLDOWN);
 			setState(State.CLIMB);
 
