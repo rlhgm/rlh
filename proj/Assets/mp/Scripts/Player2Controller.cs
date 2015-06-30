@@ -1222,14 +1222,20 @@ public class Player2Controller : MonoBehaviour {
 	}
 	void keyDownDown(){
 		if (isInState (State.MOUNT)) {
-			if( !mounting () ){
+			if (!mounting ()) {
 				Vector3 playerPos = transform.position;
 				playerPos.y -= 0.1f;
-				if( onMount(playerPos) ){
+				if (onMount (playerPos)) {
 					velocity.x = 0.0f;
 					velocity.y = -MountSpeed;
-					setAction(Action.MOUNT_DOWN);
+					setAction (Action.MOUNT_DOWN);
 				}
+			}
+		} else if (isInState (State.ON_GROUND)) {
+			if( isInAction(Action.IDLE)){
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setAction(Action.CROUCH_IDLE);
 			}
 		}
 	}
@@ -1242,6 +1248,12 @@ public class Player2Controller : MonoBehaviour {
 					keyRightDown();
 				else if(Input.GetKey(keyUp) )
 					keyUpDown();
+			}
+		} else if (isInState (State.ON_GROUND)) {
+			if( crouching() ){
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setAction(Action.IDLE);
 			}
 		}
 	}
@@ -1400,6 +1412,9 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool mounting(){
 		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
+	}
+	bool crouching(){
+		return isInAction(Action.CROUCH_IDLE) || isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_RIGHT);
 	}
 
 	float checkLeft(float checkingDist){
@@ -2028,6 +2043,14 @@ public class Player2Controller : MonoBehaviour {
 			animator.SetTrigger("mount_move");
 			break;
 
+		case Action.CROUCH_IDLE:
+			animator.SetTrigger("crouchleftright");
+			break;
+
+		case Action.CROUCH_LEFT:
+		case Action.CROUCH_RIGHT:
+			animator.SetTrigger("crouchleftright");
+			break;
 		};
 
 		return true;
