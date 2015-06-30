@@ -4812,6 +4812,7 @@ MonoBehaviour:
   JUMP_SPEED: 1
   JUMP_LONG_SPEED: 2
   CLIMB_DURATION: 1.5
+  CROUCH_SPEED: 1
   MountSpeed: 2
   MountJumpDist: 1
   flyControlParam: 0

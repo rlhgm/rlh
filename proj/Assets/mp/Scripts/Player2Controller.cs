@@ -1524,6 +1524,9 @@ public class Player2Controller : MonoBehaviour {
 				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
 			} else {
+				if( crouching() ) 
+					return -1.0f;
+
 				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
@@ -1603,6 +1606,9 @@ public class Player2Controller : MonoBehaviour {
 				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
 			} else {
+				if (crouching())
+					return -1.0f;
+
 				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
@@ -2121,7 +2127,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_IDLE:
-			animator.SetTrigger("crouchleftright");
+			animator.SetTrigger("crouchidle");
 			break;
 
 		case Action.CROUCH_LEFT:
