@@ -2033,8 +2033,8 @@ public class Player2Controller : MonoBehaviour {
 
 		Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
 		rayOrigin.x += 0.5f;
-		rayOrigin.y += 0.5f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.0f, layerIdGroundMask);
+		rayOrigin.y += 0.25f;
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 0.5f, layerIdGroundMask);
 		//print ( "canClimbPullUp : " + hit);
 		return !hit.collider;
 	}
