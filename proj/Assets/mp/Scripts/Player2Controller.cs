@@ -329,6 +329,12 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 
+		if (wantStandUp) {
+			if( canStandUp() ){
+				standUp();
+				wantStandUp = false;
+			}
+		}
 
 		SetImpulse(new Vector2(0.0f, 0.0f));
 		//justLetGoHandle = false;
@@ -1324,14 +1330,21 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInState (State.ON_GROUND)) {
 			if( crouching() ){
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
-				setAction(Action.IDLE);
+				if( canStandUp() ){
+					standUp();
+				}else{
+					wantStandUp = true;
+				}
 			}
 		}
 	}
 	
-	
+	void standUp(){
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		setAction(Action.IDLE);
+	}
+
 	void preparetojump(){
 		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
 			return;
@@ -1624,7 +1637,19 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} 
 	}
-	
+
+	private bool wantStandUp = false;
+
+	bool canStandUp(){
+
+		Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
+		if (Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider != null)
+			return false;
+
+		rayOrigin.y += 1;
+		return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
+	}
+
 	float checkDown(float checkingDist){
 
 		int layerIdMask = layerIdGroundAllMask;
