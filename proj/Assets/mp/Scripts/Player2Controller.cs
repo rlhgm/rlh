@@ -948,9 +948,17 @@ public class Player2Controller : MonoBehaviour {
 		
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
-			setAction(Action.CROUCH_IDLE);
-			//resetActionAndState ();
+			//setAction(Action.CROUCH_IDLE);
 			setActionCrouchIdle();
+			//resetActionAndState ();
+			//setActionCrouchIdle();
+			if( crouching() ) { // Input.GetKey(keyDown) ){ - raczej zbedne
+				if( Input.GetKey(keyLeft) ) {
+					keyLeftDown();
+				} else if( Input.GetKey(keyRight) ){
+					keyRightDown();
+				}
+			}
 		}
 		
 		distToMove = velocity.x * Time.deltaTime;
@@ -1505,15 +1513,19 @@ public class Player2Controller : MonoBehaviour {
 
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
-			if( Input.GetKey(keyDown)){
+			if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
 				if( !keyDownDown() )
 					setActionIdle();
 			} else if (Input.GetKey (keyLeft)) {
+			//if (Input.GetKey (keyLeft)) {
 				if( !keyLeftDown () )
 					setActionIdle();
 			} else if (Input.GetKey (keyRight)) {
 				if( !keyRightDown () )
 					setActionIdle();
+			//} else if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+			//		if( !keyDownDown() )
+			//			setActionIdle();
 			} else {
 				if (isInState (State.ON_GROUND)) {
 					setActionIdle();
