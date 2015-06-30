@@ -329,10 +329,10 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 
-		if (wantStandUp) {
-			if( canStandUp() ){
-				standUp();
-				wantStandUp = false;
+		if (wantGetUp) {
+			if( canGetUp() ){
+				getUp();
+				wantGetUp = false;
 			}
 		}
 
@@ -1313,11 +1313,9 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 		} else if (isInState (State.ON_GROUND)) {
-			if( isInAction(Action.IDLE)){
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
-				setAction(Action.CROUCH_IDLE);
-			}
+
+			crouch();
+
 		}
 	}
 	void keyDownUp(){
@@ -1332,19 +1330,46 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInState (State.ON_GROUND)) {
 			if( crouching() ){
-				if( canStandUp() ){
-					standUp();
+				if( canGetUp() ){
+					getUp();
 				}else{
-					wantStandUp = true;
+					wantGetUp = true;
 				}
 			}
 		}
 	}
 	
-	void standUp(){
-		velocity.x = 0.0f;
-		velocity.y = 0.0f;
+	void getUp(){
+		//velocity.x = 0.0f;
+		//velocity.y = 0.0f;
 		setAction(Action.IDLE);
+		//action = Action.IDLE;
+		resetActionAndState ();
+	}
+
+	void crouch(){
+		if (isInState (State.ON_GROUND)) {
+		
+			switch (action) {
+			
+			case Action.IDLE:
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setAction (Action.CROUCH_IDLE);
+				break;
+			//aaa
+			case Action.WALK_LEFT:
+				desiredSpeedX = CROUCH_SPEED;
+				setAction (Action.CROUCH_LEFT);
+				break;
+			
+			case Action.WALK_RIGHT:
+				desiredSpeedX = CROUCH_SPEED;
+				setAction (Action.CROUCH_RIGHT);
+				break;
+			}
+			;
+		}
 	}
 
 	void preparetojump(){
@@ -1640,9 +1665,9 @@ public class Player2Controller : MonoBehaviour {
 		} 
 	}
 
-	private bool wantStandUp = false;
+	private bool wantGetUp = false;
 
-	bool canStandUp(){
+	bool canGetUp(){
 
 		Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
 		if (Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider != null)
