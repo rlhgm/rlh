@@ -2136,7 +2136,11 @@ public class Player2Controller : MonoBehaviour {
 		case Action.JUMP_RIGHT_LONG:
 			animator.SetTrigger("jumpleftright");
 			break;
-			
+
+		case Action.LANDING_HARD:
+			animator.SetTrigger("landing_hard");
+			break;
+
 		case Action.CLIMB_PREPARE_TO_JUMP:
 			//animator.SetTrigger("climb_preparetojump");
 			break;
