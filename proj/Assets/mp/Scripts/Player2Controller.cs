@@ -977,6 +977,7 @@ public class Player2Controller : MonoBehaviour {
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (State.ON_GROUND)) {
 			if (checkLeft (0.1f) >= 0.0f) {
 				//print ("cant move left");
+				turnLeft();
 				return false;
 			}
 			turnLeft ();
@@ -997,8 +998,9 @@ public class Player2Controller : MonoBehaviour {
 			if (!mounting ()) {
 				Vector3 playerPos = transform.position;
 				playerPos.x -= 0.1f;
+				turnLeft();
 				if (onMount (playerPos)) {
-					turnLeft ();
+					//turnLeft ();
 					velocity.x = -MountSpeed;
 					velocity.y = 0.0f;
 					setAction (Action.MOUNT_LEFT);
@@ -1007,6 +1009,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
 			if( checkLeft(0.1f) >= 0.0f ){
+				turnLeft();
 				return false;
 			}
 			turnLeft();
@@ -1020,6 +1023,7 @@ public class Player2Controller : MonoBehaviour {
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
 			if( checkRight (0.1f) >= 0.0f ) {
 				//print ("cant move right");
+				turnRight();
 				return false;
 			}
 			turnRight();
@@ -1040,8 +1044,9 @@ public class Player2Controller : MonoBehaviour {
 			if( !mounting() ){
 				Vector3 playerPos = transform.position;
 				playerPos.x += 0.1f;
+				turnRight();
 				if( onMount(playerPos) ){
-					turnRight();
+					//turnRight();
 					velocity.x = MountSpeed;
 					velocity.y = 0.0f;
 					setAction(Action.MOUNT_RIGHT);
@@ -1050,6 +1055,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
 			if( checkRight(0.1f) >= 0.0f ){
+				turnRight();
 				return false;
 			}
 			turnRight();
