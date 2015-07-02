@@ -3,35 +3,23 @@ using System.Collections;
 
 public class Player2Controller : MonoBehaviour {
 
-	public BoxCollider2D coll;
-
-	BoxCollider2D handerLeft;
-	BoxCollider2D handerRight;
-	Animator animator;
-
-	public Vector3 velocity;
-	private Vector3 lastVelocity;
-	public Vector3 impulse;
-	
 	public float jumpImpulse = 4.0f; 
 	public float jumpLongImpulse = 4.5f; 
 	public float gravityForce = -1.0f;
-	//public float flySlowDown = 1.0f;
 	public float MAX_SPEED_Y = 15.0f;
-
+	
 	public float WALK_SPEED = 1.0f;
 	public float RUN_SPEED = 2.0f;
 	public float JUMP_SPEED = 1.0f;
 	public float JUMP_LONG_SPEED = 2.0f;
 	public float CLIMB_DURATION = 1.5f;
-
+	
 	public float CROUCH_SPEED = 1.0f;
 
 	public float MountSpeed = 2.0f; // ile na sek.
 	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-		//[2015-06-18 17:58:40] Rafał Sankowski: i jeśli nadal trzymasz spacje
-		//[2015-06-18 17:59:02] Rafał Sankowski: to po przeskoczeniu ustalonej wartości (mowilismy o tym) się lapie
-	Vector3 mountJumpStartPos;
+	//[2015-06-18 17:58:40] Rafał Sankowski: i jeśli nadal trzymasz spacje
+	//[2015-06-18 17:59:02] Rafał Sankowski: to po przeskoczeniu ustalonej wartości (mowilismy o tym) się lapie
 
 	public float flyControlParam = 2.0f; // ile przyspiesza na sekunde lecac
 	public float flySlowDownParam = 1.0f; // ile hamuje na sekunde lecac
@@ -40,23 +28,12 @@ public class Player2Controller : MonoBehaviour {
 	/// </summary>
 	public float speedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekunde
 	public float breakParam = 4.0f; // ile jednosek predkosci hamuje na sekunde
-	float desiredSpeedX = 0.0f;
-	//public float stopToWalkDuration = 0.5f; // ile sekund zajmuje przejscie ze stania do chodu
-	//public float stopToRunDuration = 0.5f; // ile sekund zajmuje przejscie ze stania do chodu
-	//public float walkToRunDuration = 1.5f; // ile sekund zajmuje przejscie z chodu do biegu
 
-	//float timeFromStartWalkRun = 0.0f;
-	//float walkRunStartSpeedX = 0.0f;
-	//float currentWalkRunDuration = 0.0f;
-	//bool walkRunSpeedUp = false;
-	//bool walkRunSlowDown = false;
-	//float timeToSpeedUp;
-	//float speedDiff;
+	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
+	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
+	public float CLIMBDUR_CATCH = 0.5f;
+	public float CLIMBDUR_CLIMB = 0.75f;
 
-	public Transform respawnPoint;
-
-	float currentActionTime = 0.0f;
-	float currentStateTime = 0.0f;
 
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
@@ -65,79 +42,7 @@ public class Player2Controller : MonoBehaviour {
 	public KeyCode keyDown = KeyCode.DownArrow;
 	public KeyCode keyJump = KeyCode.Space;
 
-	private Transform sensorLeft1;
-	private Transform sensorLeft2;
-	private Transform sensorLeft3;
-	private Transform sensorRight1;
-	private Transform sensorRight2;
-	private Transform sensorRight3;
-	private Transform sensorDown1;
-	private Transform sensorDown2;
-	private Transform sensorDown3;
-
-	//private Transform sensorHandleL1;
-	private Transform sensorHandleL2;
-	//private Transform sensorHandleR1;
-	private Transform sensorHandleR2;
-
-	private Transform gfx;
-	
-	float myWidth;
-	float myHalfWidth;
-	float myHeight;
-	public float myHalfHeight;
-
-	private int layerIdGroundMask;
-	private int layerIdGroundPermeableMask;
-	private int layerIdGroundAllMask;
-	private int layerIdLastGroundTypeTouchedMask;
-	private int layerIdGroundHandlesMask;
-
-	//private int _layerIdGroundFarMask;
-	//private int _layerIdGroundFarHandlesMask;
-	//private int currentLayerIdGroundMask;
-	//private int currentLayerIdGroundHandlesMask;
-
-	private int layerIdMountMask;
-
-	GameObject catchedClimbHandle;
-	public GameObject lastCatchedClimbHandle;
-	bool canPullUp;
-
-
-
-	bool jumpFromMount = false;
-	private float climbDistFromWall;
-	private float climbDuration;
-	private Vector2 climbDir;
-	
-	private Vector3 climbBeforePos;
-	private Vector3 climbAfterPos;
-	private Vector3 climbDistToClimb;
-	private float climbToJumpDuration;
-	//private Vector3 climbJumpPos;
-	//private Vector3 climbDistToJump;
-	
-	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
-	//public float CLIMBDUR_JUMP_TO_CATCH_SPEED = 0.2f; // jednostka w 0.2f
-	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
-	public float CLIMBDUR_CATCH = 0.5f;
-	public float CLIMBDUR_CLIMB = 0.75f;
-	
-	public float groundUnderFeet;
-	//public float toNextHandleDuration = 0.5f;
-	//float justLetGoHandle = 0.0f;
-
-
-	bool gamePaused = false;
-	float distToMove;
-	Vector3 oldPos;
-	float newPosX;
-
-	Vector3 lastHandlePos;
-	bool lastFrameHande;
-
-	public int playerCurrentLayer;
+	public Transform respawnPoint;
 
 	void Awake(){
 		coll = GetComponent<BoxCollider2D> ();
@@ -146,8 +51,6 @@ public class Player2Controller : MonoBehaviour {
 
 		handerLeft = transform.Find("handlerL").GetComponent<BoxCollider2D>();
 		handerRight = transform.Find("handlerR").GetComponent<BoxCollider2D>();
-
-		//print (handerLeft + " " + handerRight);
 
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
 		sensorLeft2 = transform.Find("sensorLeft2").transform;
@@ -159,12 +62,8 @@ public class Player2Controller : MonoBehaviour {
 		sensorDown2 = transform.Find("sensorDown2").transform;
 		sensorDown3 = transform.Find("sensorDown3").transform;
 
-		//sensorHandleL1 = transform.Find("handlerL1").transform;
 		sensorHandleL2 = transform.Find("handlerL2").transform;
-		//sensorHandleR1 = transform.Find("handlerR1").transform;
 		sensorHandleR2 = transform.Find("handlerR2").transform;
-
-		//print (sensorHandleL1 + " " + sensorHandleL2 + " " + sensorHandleR1 + " " + sensorHandleR2);
 
 		CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
 		CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
@@ -173,7 +72,6 @@ public class Player2Controller : MonoBehaviour {
 		
 		WALK_SPEED = 3.0f;
 		RUN_SPEED = 5.0f;
-		//flySlowDown = 1.5f;
 		JUMP_SPEED = 3.5f;
 		JUMP_LONG_SPEED = 4.1f;
 		CROUCH_SPEED = WALK_SPEED * 0.5f;
@@ -195,13 +93,6 @@ public class Player2Controller : MonoBehaviour {
 		breakParam = WALK_SPEED * 2.0f; // ile jednosek predkosci hamuje na sekunde - teraz z automatu w 0.5 sek.
 		desiredSpeedX = 0.0f;
 
-		//stopToWalkDuration = 0.5f; // ile sekund zajmuje przejscie ze stania do chodu
-		//stopToRunDuration = 0.5f; // ile sekund zajmuje przejscie z chodu do biegu
-		//walkToRunDuration = 1.5f; // ile sekund zajmuje przejscie z chodu do biegu
-		//timeFromStartWalkRun = 0.0f;
-		//walkRunStartSpeedX = 0.0f;
-		//walkRunSpeedUp = false;
-
 		myWidth = coll.size.x;
 		myHalfWidth = myWidth * 0.5f;
 		myHeight = coll.size.y;
@@ -210,33 +101,7 @@ public class Player2Controller : MonoBehaviour {
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
-
-//	bool fff(ref int i){
-//		i += 5;
-//		return true;
-//	}
-
-//	void setCurrentPlayerLayer(int newCurrentLayer){
-//
-//		playerCurrentLayer = newCurrentLayer;
-//
-//		switch (newCurrentLayer) {
-//
-//		case 0:
-//			currentLayerIdGroundMask = _layerIdGroundMask;
-//			currentLayerIdGroundHandlesMask = _layerIdGroundHandlesMask;
-//			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-//			break;
-//
-//		case 1:
-//			currentLayerIdGroundMask = _layerIdGroundFarMask;
-//			currentLayerIdGroundHandlesMask = _layerIdGroundFarHandlesMask;
-//			gfx.GetComponent<SpriteRenderer>().sortingLayerName = "PlayerFar";
-//			break;
-//
-//		}
-//	}
-
+	
 	void Start () {
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
 		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
@@ -244,9 +109,6 @@ public class Player2Controller : MonoBehaviour {
 		layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
 
 		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
-
-		//_layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
-		//_layerIdGroundFarHandlesMask = 1 << LayerMask.NameToLayer("GroundFarHandles");
 
 		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 
@@ -260,16 +122,8 @@ public class Player2Controller : MonoBehaviour {
 		climbDuration = 0.0f;
 		catchedClimbHandle = null;
 		canPullUp = false;
-		//toNextHandleDuration = 0.4f;
 
 		jumpFromMount = false;
-
-		//setCurrentPlayerLayer (0);
-
-//		int jjj = 10;
-//		print (jjj);
-//		fff (ref jjj);
-//		print (jjj);
 	}
 
 	public void die(){
@@ -279,8 +133,6 @@ public class Player2Controller : MonoBehaviour {
 		setState (State.ON_GROUND);
 		transform.position = respawnPoint.position;
 	}
-
-	//public Transform birdPrefab;
 
 	void OnTriggerEnter2D(Collider2D other) {
 		//print( "PLAYER OnTriggerEnter" );
@@ -293,7 +145,6 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 	}
-	//aa
 
 	// Update is called once per frame
 	void Update () {
@@ -303,13 +154,6 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.P)) {
 			gamePaused = !gamePaused;
 		}
-
-//		if (Input.GetKeyDown (KeyCode.B)) {
-//			//Bird newBird = new Bird();
-//			//newBird.transform.position = transform.position;
-//			//Instantiate<Bird>(
-//			Instantiate(birdPrefab,transform.position,Quaternion.identity);
-//		}
 
 		if( gamePaused ){
 
@@ -329,30 +173,7 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 
-
-
 		SetImpulse(new Vector2(0.0f, 0.0f));
-		//justLetGoHandle = false;
-
-		if (Input.GetKeyDown (keyJump)) {
-			Vector3 newPlayerPos = new Vector3();
-			if( Input.GetKey(keyUp) ){
-//				if( canJumpToLayer(1,ref newPlayerPos) ){
-//					setCurrentPlayerLayer(1);
-//					transform.position = newPlayerPos;
-//					return;
-//				}
-			}
-			if( Input.GetKey (keyDown)){
-//				if( canJumpToLayer(0,ref newPlayerPos) ){
-//					setCurrentPlayerLayer(0);
-//					//transform.position = newPlayerPos;
-//					setState(State.IN_AIR);
-//					setAction(Action.JUMP);
-//					return;
-//				}
-			}
-		}
 
 		if (Input.GetKeyDown (keyJump)) {
 			keyJumpDown ();
@@ -393,7 +214,6 @@ public class Player2Controller : MonoBehaviour {
 		currentStateTime += Time.deltaTime;
 
 		oldPos = transform.position;
-		//float oldPosX = oldPos.x;
 		newPosX = oldPos.x;
 		distToMove = 0.0f;
 
@@ -404,7 +224,6 @@ public class Player2Controller : MonoBehaviour {
 
 		case Action.PREPARE_TO_JUMP:
 			if( currentActionTime >= 0.2f ){
-				//print( currentActionTime );
 				jump();
 			}
 			break;
@@ -1739,8 +1558,6 @@ public class Player2Controller : MonoBehaviour {
 		} 
 	}
 
-	private bool wantGetUp = false;
-
 	bool canGetUp(){
 
 		Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
@@ -2143,10 +1960,7 @@ public class Player2Controller : MonoBehaviour {
 		MOUNT,
 		OTHER
 	};
-	
-	public State state;
-	public Action action;
-	
+
 	State getState() { 
 		return state; 
 	}
@@ -2274,4 +2088,84 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	/*////////////////////////////////////////////////////////////*/
+
+	BoxCollider2D coll;
+	
+	BoxCollider2D handerLeft;
+	BoxCollider2D handerRight;
+	Animator animator;
+	
+	Vector3 velocity;
+	Vector3 lastVelocity;
+	Vector3 impulse;
+	
+	Vector3 mountJumpStartPos;
+	
+	
+	float desiredSpeedX = 0.0f;
+	
+	
+	
+	float currentActionTime = 0.0f;
+	float currentStateTime = 0.0f;
+	
+	
+	
+	Transform sensorLeft1;
+	Transform sensorLeft2;
+	Transform sensorLeft3;
+	Transform sensorRight1;
+	Transform sensorRight2;
+	Transform sensorRight3;
+	Transform sensorDown1;
+	Transform sensorDown2;
+	Transform sensorDown3;
+	
+	Transform sensorHandleL2;
+	Transform sensorHandleR2;
+	
+	Transform gfx;
+	
+	float myWidth;
+	float myHalfWidth;
+	float myHeight;
+	float myHalfHeight;
+	
+	int layerIdGroundMask;
+	int layerIdGroundPermeableMask;
+	int layerIdGroundAllMask;
+	int layerIdLastGroundTypeTouchedMask;
+	int layerIdGroundHandlesMask;
+	
+	int layerIdMountMask;
+	
+	GameObject catchedClimbHandle;
+	GameObject lastCatchedClimbHandle;
+	bool canPullUp;
+	
+	bool jumpFromMount = false;
+	float climbDistFromWall;
+	float climbDuration;
+	Vector2 climbDir;
+	
+	Vector3 climbBeforePos;
+	Vector3 climbAfterPos;
+	Vector3 climbDistToClimb;
+	float climbToJumpDuration;
+	
+	float groundUnderFeet;
+	
+	bool gamePaused = false;
+	float distToMove;
+	Vector3 oldPos;
+	float newPosX;
+	
+	Vector3 lastHandlePos;
+	bool lastFrameHande;
+	
+	int playerCurrentLayer;
+	bool wantGetUp = false;
+
+	private State state;
+	private Action action;
 }
