@@ -483,14 +483,6 @@ public class Player2Controller : MonoBehaviour {
 						distToFall.y = -groundUnderFeet;
 
 						justLanding = true;
-
-						velocity.x = 0.0f;
-						velocity.y = 0.0f;
-						setState(State.ON_GROUND);
-						//setAction (Action.IDLE);
-						//asdf
-
-						resetActionAndState();
 					}
 				}
 
@@ -500,6 +492,13 @@ public class Player2Controller : MonoBehaviour {
 
 			if( justLanding ){
 
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setState(State.ON_GROUND);
+				//setAction (Action.IDLE);
+				//asdf
+				
+				resetActionAndState();
 
 			}
 
