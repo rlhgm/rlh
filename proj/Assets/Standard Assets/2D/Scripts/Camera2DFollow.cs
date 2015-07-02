@@ -24,9 +24,18 @@ namespace UnityStandardAssets._2D
 
 		private Vector3 lastPos;
 
+		Camera camera;
         // Use this for initialization
         private void Start()
         {
+			camera = GetComponent<Camera> ();
+
+			print ("---------------------------------------");
+			print (camera.orthographicSize);
+			float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+			print (horzExtent);
+
+			print ("---------------------------------------");
 			//m_LastTargetPosition = target.position;
             //m_OffsetZ = (transform.position - target.position).z;
 
@@ -40,6 +49,15 @@ namespace UnityStandardAssets._2D
         // Update is called once per frame
         private void Update()
         {
+//			print ("---------------------------------------");
+//			//print (camera.orthographicSize);
+//			float asp = (float)Screen.width / (float)Screen.height;
+//			float aspInv = (float)Screen.height / (float)Screen.width;
+//			float horzExtent = camera.orthographicSize * asp;
+//			print ( Screen.width + " x " +  Screen.height + " aspect: " + asp + " " + aspInv + " " + horzExtent);
+//			
+//			print ("---------------------------------------");
+
 			transform.position = new Vector3( target.position.x, target.position.y, transform.position.z );
 
 			if( backgroundNearNode ){
