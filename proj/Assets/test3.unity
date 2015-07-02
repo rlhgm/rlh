@@ -633,47 +633,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &110930782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 110930783}
-  - 61: {fileID: 110930784}
-  m_Layer: 15
-  m_Name: handlerL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &110930783
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 110930782}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.349999994, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1857342440}
-  m_RootOrder: 10
---- !u!61 &110930784
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 110930782}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: .5, y: 1}
 --- !u!1001 &113096306
 Prefab:
   m_ObjectHideFlags: 0
@@ -2003,7 +1962,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857342440}
-  m_RootOrder: 14
+  m_RootOrder: 12
 --- !u!1001 &483016195
 Prefab:
   m_ObjectHideFlags: 0
@@ -3768,7 +3727,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857342440}
-  m_RootOrder: 13
+  m_RootOrder: 11
 --- !u!1001 &1017235811
 Prefab:
   m_ObjectHideFlags: 0
@@ -4610,47 +4569,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1206257889
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1206257890}
-  - 61: {fileID: 1206257891}
-  m_Layer: 15
-  m_Name: handlerR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1206257890
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1206257889}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .349999994, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1857342440}
-  m_RootOrder: 11
---- !u!61 &1206257891
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1206257889}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: .5, y: 1}
 --- !u!1001 &1209457393
 Prefab:
   m_ObjectHideFlags: 0
@@ -6887,8 +6805,6 @@ Transform:
   - {fileID: 1434979821}
   - {fileID: 1281264656}
   - {fileID: 924702406}
-  - {fileID: 110930783}
-  - {fileID: 1206257890}
   - {fileID: 1977915207}
   - {fileID: 1016419966}
   - {fileID: 476743741}
@@ -6906,22 +6822,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae328598ce58c58409133125c114a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpImpulse: 4
-  jumpLongImpulse: 4.5
-  gravityForce: -1
-  MAX_SPEED_Y: 15
-  WALK_SPEED: 1
-  RUN_SPEED: 2
-  JUMP_SPEED: 1
-  JUMP_LONG_SPEED: 2
-  CLIMB_DURATION: 1.5
-  CROUCH_SPEED: 1
+  WalkSpeed: 3
+  RunSpeed: 4
+  JumpSpeed: 3.5
+  JumpLongSpeed: 4.0999999
+  CrouchSpeed: 1.5
   MountSpeed: 2
-  MountJumpDist: 1
-  flyControlParam: 0
-  flySlowDownParam: 0
-  speedUpParam: 4
-  breakParam: 2
+  MountJumpDist: 4
+  SpeedUpParam: 7
+  SlowDownParam: 6
+  FlyUserControlParam: 8
+  FlySlowDownParam: 5
+  JumpImpulse: 7
+  JumpLongImpulse: 7.1500001
+  GravityForce: -20
+  MaxSpeedY: 15
+  CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
   CLIMBDUR_CATCH: .5
@@ -7473,7 +7389,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857342440}
-  m_RootOrder: 12
+  m_RootOrder: 10
 --- !u!1001 &1981430133
 Prefab:
   m_ObjectHideFlags: 0
@@ -7769,7 +7685,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857342440}
-  m_RootOrder: 15
+  m_RootOrder: 13
 --- !u!1001 &2072872075
 Prefab:
   m_ObjectHideFlags: 0
