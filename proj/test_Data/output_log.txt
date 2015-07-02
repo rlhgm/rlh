@@ -15,7 +15,7 @@ Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this messa
 Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.465 seconds
+- Completed reload, in  0.417 seconds
 desktop: 1920x1080 60Hz; virtual: 3360x1220 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -41,22 +41,6 @@ player2 (Player2Controller)
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
 (1.0, 1.0) (2.5, 0.8, 1.0)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
----------------------------------------
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-7
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-12.44444
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
----------------------------------------
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
