@@ -1655,12 +1655,49 @@ public class Player2Controller : MonoBehaviour {
 
 	bool canGetUp(){
 
-		Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
-		if (Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider != null)
-			return false;
+		if (dir () == Vector2.right) {
 
-		rayOrigin.y += 1;
-		return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
+			Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
+			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null)
+			{
+				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
+					return false;
+			}
+			rayOrigin.y += 1;
+
+			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
+			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null)
+			{
+				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
+					return false;
+			}
+
+			return true;
+
+		} else {
+
+			Vector2 rayOrigin = new Vector2(transform.position.x+myHalfWidth,transform.position.y+1.0f);
+			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null)
+			{
+				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
+					return false;
+			}
+			rayOrigin.y += 1;
+			
+			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
+			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null)
+			{
+				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
+					return false;
+			}
+			
+			return true;
+		}
+
 	}
 
 	float checkDown(float checkingDist){
