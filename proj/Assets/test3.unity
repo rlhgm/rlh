@@ -4762,7 +4762,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1001 &1234371853
 Prefab:
   m_ObjectHideFlags: 0
@@ -8170,10 +8170,12 @@ MonoBehaviour:
   lookAheadFactor: 3
   lookAheadReturnSpeed: .5
   lookAheadMoveThreshold: .100000001
-  backgroundNearNode: {fileID: 635847036}
-  backgroundFarNode: {fileID: 374853178}
-  backgroundNearRatio: {x: .100000001, y: .0500000007}
-  backgroundFarRatio: {x: .300000012, y: .150000006}
+  backgroundsNodes:
+  - {fileID: 635847036}
+  - {fileID: 374853178}
+  backgroundsRatios:
+  - {x: .100000001, y: .0500000007}
+  - {x: .300000012, y: .150000006}
 --- !u!1001 &2146883018
 Prefab:
   m_ObjectHideFlags: 0
