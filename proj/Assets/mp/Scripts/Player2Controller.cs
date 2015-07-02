@@ -50,6 +50,7 @@ public class Player2Controller : MonoBehaviour {
 	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
 	public float CLIMBDUR_CATCH = 0.5f;
 	public float CLIMBDUR_CLIMB = 0.75f;
+	public float LANDING_HARD_DURATION = 0.5f;
 	
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
@@ -250,6 +251,10 @@ public class Player2Controller : MonoBehaviour {
 		switch (action) {
 		case Action.IDLE:
 			Act_IDLE();
+			break;
+
+		case Action.LANDING_HARD:
+			Act_LANDING_HARD();
 			break;
 
 		case Action.PREPARE_TO_JUMP:
@@ -492,13 +497,27 @@ public class Player2Controller : MonoBehaviour {
 
 			if( justLanding ){
 
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
 				setState(State.ON_GROUND);
-				//setAction (Action.IDLE);
-				//asdf
-				
-				resetActionAndState();
+				velocity.y = 0.0f;
+
+				Vector3 fallDist = startFallPos - transform.position;
+
+				if( fallDist.y >= VeryHardLandingHeight ){
+					die();
+				} else if( fallDist.y >= HardLandingHeight ){
+
+					velocity.x = 0.0f;
+					setAction (Action.LANDING_HARD);
+					//resetActionAndState();
+
+				}else{
+
+					//velocity.x = 0.0f;
+					//setAction (Action.IDLE);
+					resetActionAndState();
+
+				}
+
 
 			}
 
@@ -570,7 +589,16 @@ public class Player2Controller : MonoBehaviour {
 		}
 		return 0;
 	}
-	
+
+	int Act_LANDING_HARD(){
+		if (currentActionTime >= LANDING_HARD_DURATION) {
+			setAction(Action.IDLE);
+			resetActionAndState();
+		}
+
+		return 0;
+	}
+
 	int Act_CLIMB_PULLDOWN(){
 		climbDuration += Time.deltaTime;
 		
@@ -742,6 +770,22 @@ public class Player2Controller : MonoBehaviour {
 			return false;
 		}
 		return true;
+	}
+
+	bool speedLimiter(int dir, float absMaxSpeed){
+		if( dir == -1 ){
+			if( velocity.x < 0.0f && Mathf.Abs(velocity.x) > absMaxSpeed ){
+				velocity.x = -absMaxSpeed;
+				return true;
+			}
+		}else if( dir == 1 ){
+			if( velocity.x > 0.0f && Mathf.Abs(velocity.x) > absMaxSpeed ){
+				velocity.x = absMaxSpeed;
+				return true;
+			}
+		}
+		//aa
+		return false;
 	}
 
 	int Act_WALK(int dir){
@@ -939,11 +983,13 @@ public class Player2Controller : MonoBehaviour {
 			if (Input.GetKey (keyRun)) {
 				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
 				desiredSpeedX = RunSpeed;
+				speedLimiter(-1,desiredSpeedX+1.0f);
 				setAction (Action.RUN_LEFT);
 				return true;
 			} else {
 				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
 				desiredSpeedX = WalkSpeed;
+				speedLimiter(-1,desiredSpeedX+1.0f);
 				setAction (Action.WALK_LEFT);
 				return true;
 			}
@@ -980,11 +1026,13 @@ public class Player2Controller : MonoBehaviour {
 			if( Input.GetKey(keyRun) ){
 				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
 				desiredSpeedX = RunSpeed;
+				speedLimiter(1,desiredSpeedX+1.0f);
 				setAction(Action.RUN_RIGHT);
 				return true;
 			}else{
 				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
 				desiredSpeedX = WalkSpeed;
+				speedLimiter(1,desiredSpeedX+1.0f);
 				setAction(Action.WALK_RIGHT);
 				return true;
 			}
@@ -1978,6 +2026,7 @@ public class Player2Controller : MonoBehaviour {
 		CROUCH_IDLE,
 		CROUCH_LEFT,
 		CROUCH_RIGHT,
+		LANDING_HARD,
 		FALL,
 		STOP_WALK,
 		STOP_RUN,
@@ -2018,14 +2067,14 @@ public class Player2Controller : MonoBehaviour {
 		//print ("setState : " + newState + " ustawiona");
 		//print ("============================");
 
+		state = newState;
+
 		switch (state) {
 		case State.IN_AIR:
-			startFallPos = transform.position;
+ 			startFallPos = transform.position;
 			break;
 		};
 
-
-		state = newState;
 		return true;
 	}
 	bool isInState(State test) {
@@ -2153,7 +2202,8 @@ public class Player2Controller : MonoBehaviour {
 	Transform sensorHandleR2;
 	
 	Transform gfx;
-
+	//aa
+	[SerializeField]
 	Vector3 velocity;
 	Vector3 lastVelocity;
 	Vector3 impulse;
