@@ -3,38 +3,34 @@ using System.Collections;
 
 public class Player2Controller : MonoBehaviour {
 
-	public float jumpImpulse = 4.0f; 
-	public float jumpLongImpulse = 4.5f; 
-	public float gravityForce = -1.0f;
-	public float MAX_SPEED_Y = 15.0f;
-	
-	public float WALK_SPEED = 1.0f;
-	public float RUN_SPEED = 2.0f;
-	public float JUMP_SPEED = 1.0f;
-	public float JUMP_LONG_SPEED = 2.0f;
-	public float CLIMB_DURATION = 1.5f;
-	
-	public float CROUCH_SPEED = 1.0f;
-
+	public float WalkSpeed = 1.0f;
+	public float RunSpeed = 2.0f;
+	public float JumpSpeed = 1.0f;
+	public float JumpLongSpeed = 2.0f;
+	public float CrouchSpeed = 1.0f;
 	public float MountSpeed = 2.0f; // ile na sek.
 	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
 	//[2015-06-18 17:58:40] Rafał Sankowski: i jeśli nadal trzymasz spacje
 	//[2015-06-18 17:59:02] Rafał Sankowski: to po przeskoczeniu ustalonej wartości (mowilismy o tym) się lapie
-
-	public float flyControlParam = 2.0f; // ile przyspiesza na sekunde lecac
-	public float flySlowDownParam = 1.0f; // ile hamuje na sekunde lecac
+	public float SpeedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekund
 	/// <summary>
 	/// ile jednosek predkosci hamuje na sekunde
 	/// </summary>
-	public float speedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekunde
-	public float breakParam = 4.0f; // ile jednosek predkosci hamuje na sekunde
+	public float SlowDownParam = 4.0f; // ile jednosek predkosci hamuje na sekunde
+	public float FlyUserControlParam = 2.0f; // ile przyspiesza na sekunde lecac
+	public float FlySlowDownParam = 1.0f; // ile hamuje na sekunde lecac
 
+	public float JumpImpulse = 4.0f; 
+	public float JumpLongImpulse = 4.5f; 
+	public float GravityForce = -1.0f;
+	public float MaxSpeedY = 15.0f;
+
+	public float CLIMB_DURATION = 1.5f;
 	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
 	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
 	public float CLIMBDUR_CATCH = 0.5f;
 	public float CLIMBDUR_CLIMB = 0.75f;
-
-
+	
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
 	public KeyCode keyRun = KeyCode.LeftShift;
@@ -49,9 +45,6 @@ public class Player2Controller : MonoBehaviour {
 		gfx  = transform.Find("gfx").transform;
 		animator = transform.Find("gfx").GetComponent<Animator>();
 
-		handerLeft = transform.Find("handlerL").GetComponent<BoxCollider2D>();
-		handerRight = transform.Find("handlerR").GetComponent<BoxCollider2D>();
-
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
 		sensorLeft2 = transform.Find("sensorLeft2").transform;
 		sensorLeft3 = transform.Find("sensorLeft3").transform;
@@ -65,56 +58,55 @@ public class Player2Controller : MonoBehaviour {
 		sensorHandleL2 = transform.Find("handlerL2").transform;
 		sensorHandleR2 = transform.Find("handlerR2").transform;
 
+		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
+		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
+		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask;
+		layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
+		
+		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
+		
+		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
+
+		CLIMB_DURATION = 1.5f;
 		CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
 		CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
 		CLIMBDUR_CATCH = 0.5f;
 		CLIMBDUR_CLIMB = 0.5f;
 		
-		WALK_SPEED = 3.0f;
-		RUN_SPEED = 5.0f;
-		JUMP_SPEED = 3.5f;
-		JUMP_LONG_SPEED = 4.1f;
-		CROUCH_SPEED = WALK_SPEED * 0.5f;
+		WalkSpeed = 3.0f;
+		RunSpeed = 5.0f;
+		JumpSpeed = 3.5f;
+		JumpLongSpeed = 4.1f;
+		CrouchSpeed = WalkSpeed * 0.5f;
 
-		jumpImpulse = 7.0f;
-		jumpLongImpulse = 7.15f;
-		gravityForce = -20.0f;
-		MAX_SPEED_Y = 15.0f;
-		
-		CLIMB_DURATION = 1.5f;
+		JumpImpulse = 7.0f;
+		JumpLongImpulse = 7.15f;
+		GravityForce = -20.0f;
+		MaxSpeedY = 15.0f;
 
 		MountSpeed = 2.0f; // ile na sek.
 		MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-
-		flyControlParam = 8.0f; // ile przyspiesza na sekunde lecac
-		flySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
-
-		speedUpParam = 7.0f; //WALK_SPEED; // ile jednosek predkosci przyspiesza na sekunde - teraz do pelnej predkosci chodu w 1.s
-		breakParam = WALK_SPEED * 2.0f; // ile jednosek predkosci hamuje na sekunde - teraz z automatu w 0.5 sek.
-		desiredSpeedX = 0.0f;
+		FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
+		FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
+		SpeedUpParam = 7.0f; //WALK_SPEED; // ile jednosek predkosci przyspiesza na sekunde - teraz do pelnej predkosci chodu w 1.s
+		SlowDownParam = WalkSpeed * 2.0f; // ile jednosek predkosci hamuje na sekunde - teraz z automatu w 0.5 sek.
 
 		myWidth = coll.size.x;
 		myHalfWidth = myWidth * 0.5f;
 		myHeight = coll.size.y;
 		myHalfHeight = myHeight * 0.5f;
+		desiredSpeedX = 0.0f;
 
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
 	
 	void Start () {
-		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
-		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
-		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask;
-		layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
-
-		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
-
-		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
-		
+		desiredSpeedX = 0.0f;
+
 		setState (State.ON_GROUND);
 		//setAction (Action.IDLE);
 		action = Action.IDLE;
@@ -350,31 +342,31 @@ public class Player2Controller : MonoBehaviour {
 				lastFrameHande = false;
 			}
 
-			addImpulse(new Vector2(0.0f, gravityForce * Time.deltaTime));
+			addImpulse(new Vector2(0.0f, GravityForce * Time.deltaTime));
 			
 
 			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
 				
 				if( Input.GetKey(keyLeft) ){
-					velocity.x -= (flyControlParam * Time.deltaTime);
+					velocity.x -= (FlyUserControlParam * Time.deltaTime);
 					//if( velocity.x > 0.0f ) velocity.x = 0.0f;
 				}else if ( Input.GetKey(keyRight) ){
-					velocity.x += (flyControlParam * Time.deltaTime);
+					velocity.x += (FlyUserControlParam * Time.deltaTime);
 					if( velocity.x > 0.0f ) velocity.x = 0.0f;
 				}else{
-					velocity.x += (flySlowDownParam * Time.deltaTime);
+					velocity.x += (FlySlowDownParam * Time.deltaTime);
 					if( velocity.x > 0.0f ) velocity.x = 0.0f;
 				}
 				
 			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
 
 				if( Input.GetKey(keyRight) ){
-					velocity.x += (flyControlParam * Time.deltaTime);
+					velocity.x += (FlyUserControlParam * Time.deltaTime);
 				}else if( Input.GetKey(keyLeft) ) {
-					velocity.x -= (flyControlParam * Time.deltaTime);
+					velocity.x -= (FlyUserControlParam * Time.deltaTime);
 					if( velocity.x < 0.0f ) velocity.x = 0.0f;
 				}else{
-					velocity.x -= (flySlowDownParam * Time.deltaTime);
+					velocity.x -= (FlySlowDownParam * Time.deltaTime);
 					if( velocity.x < 0.0f ) velocity.x = 0.0f;
 				}
 				
@@ -382,12 +374,12 @@ public class Player2Controller : MonoBehaviour {
 
 				if( velocity.x > 0.0f ){
 
-					velocity.x -= (flySlowDownParam * Time.deltaTime);
+					velocity.x -= (FlySlowDownParam * Time.deltaTime);
 					if( velocity.x < 0.0f ) velocity.x = 0.0f;
 
 				}else if(velocity.x < 0.0f) {
 
-					velocity.x += (flySlowDownParam * Time.deltaTime);
+					velocity.x += (FlySlowDownParam * Time.deltaTime);
 					if( velocity.x > 0.0f ) velocity.x = 0.0f;
 
 				}
@@ -428,10 +420,10 @@ public class Player2Controller : MonoBehaviour {
 			}
 
 			velocity.y += impulse.y;
-			if(velocity.y > MAX_SPEED_Y)
-				velocity.y = MAX_SPEED_Y;
-			if(velocity.y < -MAX_SPEED_Y)
-				velocity.y = -MAX_SPEED_Y;
+			if(velocity.y > MaxSpeedY)
+				velocity.y = MaxSpeedY;
+			if(velocity.y < -MaxSpeedY)
+				velocity.y = -MaxSpeedY;
 			
 			distToFall.y = velocity.y * Time.deltaTime;
 			
@@ -678,7 +670,7 @@ public class Player2Controller : MonoBehaviour {
 		float speedX = Mathf.Abs (velocity.x);
 		if (speedX < desiredSpeedX) { // trzeba przyspieszyc
 
-			float velocityDamp = speedUpParam * Time.deltaTime;
+			float velocityDamp = SpeedUpParam * Time.deltaTime;
 			//print ( velocityDamp + " " + speedX + " " + desiredSpeedX );
 			speedX += velocityDamp;
 			if( speedX > desiredSpeedX ){
@@ -690,7 +682,7 @@ public class Player2Controller : MonoBehaviour {
 			return false;
 
 		} else if (speedX > desiredSpeedX) { // trzeba zwolnic
-			float velocityDamp = breakParam * Time.deltaTime;
+			float velocityDamp = SlowDownParam * Time.deltaTime;
 			speedX -= velocityDamp;
 			if( speedX < desiredSpeedX ){
 				speedX = desiredSpeedX;
@@ -897,12 +889,12 @@ public class Player2Controller : MonoBehaviour {
 			turnLeft ();
 			if (Input.GetKey (keyRun)) {
 				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
-				desiredSpeedX = RUN_SPEED;
+				desiredSpeedX = RunSpeed;
 				setAction (Action.RUN_LEFT);
 				return true;
 			} else {
 				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
-				desiredSpeedX = WALK_SPEED;
+				desiredSpeedX = WalkSpeed;
 				setAction (Action.WALK_LEFT);
 				return true;
 			}
@@ -923,7 +915,7 @@ public class Player2Controller : MonoBehaviour {
 				return false;
 			}
 			turnLeft();
-			desiredSpeedX = CROUCH_SPEED;
+			desiredSpeedX = CrouchSpeed;
 			setAction(Action.CROUCH_LEFT);
 			return true;
 		}
@@ -938,12 +930,12 @@ public class Player2Controller : MonoBehaviour {
 			turnRight();
 			if( Input.GetKey(keyRun) ){
 				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
-				desiredSpeedX = RUN_SPEED;
+				desiredSpeedX = RunSpeed;
 				setAction(Action.RUN_RIGHT);
 				return true;
 			}else{
 				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
-				desiredSpeedX = WALK_SPEED;
+				desiredSpeedX = WalkSpeed;
 				setAction(Action.WALK_RIGHT);
 				return true;
 			}
@@ -964,7 +956,7 @@ public class Player2Controller : MonoBehaviour {
 				return false;
 			}
 			turnRight();
-			desiredSpeedX = CROUCH_SPEED;
+			desiredSpeedX = CrouchSpeed;
 			setAction(Action.CROUCH_RIGHT);
 			return true;
 		}
@@ -1025,7 +1017,7 @@ public class Player2Controller : MonoBehaviour {
 		case Action.WALK_LEFT:
 			if( Input.GetKey(keyLeft) ){
 				//startWalkOrRun(RUN_SPEED,walkToRunDuration);
-				desiredSpeedX = RUN_SPEED;
+				desiredSpeedX = RunSpeed;
 				setAction(Action.RUN_LEFT);
 			}
 			break;
@@ -1033,7 +1025,7 @@ public class Player2Controller : MonoBehaviour {
 		case Action.WALK_RIGHT:
 			if( Input.GetKey(keyRight) ){
 				//startWalkOrRun(RUN_SPEED,walkToRunDuration);
-				desiredSpeedX = RUN_SPEED;
+				desiredSpeedX = RunSpeed;
 				setAction(Action.RUN_RIGHT);
 			}
 			break;
@@ -1046,7 +1038,7 @@ public class Player2Controller : MonoBehaviour {
 		case Action.RUN_LEFT:
 			//startWalkOrRun(WALK_SPEED,walkToRunDuration);
 			if( Input.GetKey(keyLeft) ){
-				desiredSpeedX = WALK_SPEED;
+				desiredSpeedX = WalkSpeed;
 				setAction(Action.WALK_LEFT);
 			}else{
 				desiredSpeedX = 0.0f;
@@ -1056,7 +1048,7 @@ public class Player2Controller : MonoBehaviour {
 		case Action.RUN_RIGHT:
 			//startWalkOrRun(WALK_SPEED,walkToRunDuration);
 			if( Input.GetKey(keyRight) ) {
-				desiredSpeedX = WALK_SPEED;
+				desiredSpeedX = WalkSpeed;
 				setAction(Action.WALK_RIGHT);
 			}else{
 				desiredSpeedX = 0.0f;
@@ -1232,7 +1224,7 @@ public class Player2Controller : MonoBehaviour {
 			case Action.JUMP_LEFT:
 			case Action.JUMP_LEFT_LONG:
 				if( Input.GetKey(keyLeft)){
-					desiredSpeedX = CROUCH_SPEED;
+					desiredSpeedX = CrouchSpeed;
 					setAction (Action.CROUCH_LEFT);
 				}else{
 					velocity.x = 0.0f;
@@ -1245,7 +1237,7 @@ public class Player2Controller : MonoBehaviour {
 			case Action.JUMP_RIGHT:
 			case Action.JUMP_RIGHT_LONG:
 				if( Input.GetKey(keyRight)){
-					desiredSpeedX = CROUCH_SPEED;
+					desiredSpeedX = CrouchSpeed;
 					setAction (Action.CROUCH_RIGHT);
 				}else{
 					velocity.x = 0.0f;
@@ -1268,7 +1260,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void jump(){
-		addImpulse(new Vector2(0.0f, jumpImpulse));
+		addImpulse(new Vector2(0.0f, JumpImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP);
 
@@ -1278,9 +1270,9 @@ public class Player2Controller : MonoBehaviour {
 
 	void jumpLeft(){
 		//print ("jumpLeft");
-		velocity.x = -JUMP_SPEED;
+		velocity.x = -JumpSpeed;
 		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, jumpImpulse));
+		addImpulse(new Vector2(0.0f, JumpImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_LEFT);
 		//jumpStartX = transform.position.x;
@@ -1291,9 +1283,9 @@ public class Player2Controller : MonoBehaviour {
 	
 	void jumpRight(){
 		//print ("jumpRight");
-		velocity.x = JUMP_SPEED;
+		velocity.x = JumpSpeed;
 		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, jumpImpulse));
+		addImpulse(new Vector2(0.0f, JumpImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_RIGHT);
 		//jumpStartX = transform.position.x;
@@ -1304,9 +1296,9 @@ public class Player2Controller : MonoBehaviour {
 	
 	void jumpLongLeft(){
 		//print ("jumpLongLeft");
-		velocity.x = -JUMP_LONG_SPEED;
+		velocity.x = -JumpLongSpeed;
 		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, jumpLongImpulse));
+		addImpulse(new Vector2(0.0f, JumpLongImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_LEFT_LONG);
 		//jumpStartX = transform.position.x;
@@ -1317,9 +1309,9 @@ public class Player2Controller : MonoBehaviour {
 	
 	void jumpLongRight(){
 		//print ("jumpLongRight");
-		velocity.x = JUMP_LONG_SPEED;
+		velocity.x = JumpLongSpeed;
 		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, jumpLongImpulse));
+		addImpulse(new Vector2(0.0f, JumpLongImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_RIGHT_LONG);
 		//jumpStartX = transform.position.x;
@@ -1633,7 +1625,7 @@ public class Player2Controller : MonoBehaviour {
 		float dist3;
 
 		if (hit1.collider != null) {
-			//dist1 = myHeight - Mathf.Abs (hit1.point.y - sensorDown1.position.y);
+			//dist1 = myHeight - Mathf.Abs (hit1.point.y - sensorDown1.position.y);aa
 			dist1 = rayOrigin1.y - hit1.point.y;
 			groundUnderFeet = true;
 			distToGround = dist1;
@@ -2090,27 +2082,7 @@ public class Player2Controller : MonoBehaviour {
 	/*////////////////////////////////////////////////////////////*/
 
 	BoxCollider2D coll;
-	
-	BoxCollider2D handerLeft;
-	BoxCollider2D handerRight;
 	Animator animator;
-	
-	Vector3 velocity;
-	Vector3 lastVelocity;
-	Vector3 impulse;
-	
-	Vector3 mountJumpStartPos;
-	
-	
-	float desiredSpeedX = 0.0f;
-	
-	
-	
-	float currentActionTime = 0.0f;
-	float currentStateTime = 0.0f;
-	
-	
-	
 	Transform sensorLeft1;
 	Transform sensorLeft2;
 	Transform sensorLeft3;
@@ -2125,7 +2097,18 @@ public class Player2Controller : MonoBehaviour {
 	Transform sensorHandleR2;
 	
 	Transform gfx;
+
+	Vector3 velocity;
+	Vector3 lastVelocity;
+	Vector3 impulse;
 	
+	Vector3 mountJumpStartPos;
+
+	float desiredSpeedX = 0.0f;
+
+	float currentActionTime = 0.0f;
+	float currentStateTime = 0.0f;
+
 	float myWidth;
 	float myHalfWidth;
 	float myHeight;
@@ -2166,6 +2149,8 @@ public class Player2Controller : MonoBehaviour {
 	int playerCurrentLayer;
 	bool wantGetUp = false;
 
+	[SerializeField]
 	private State state;
+	[SerializeField]
 	private Action action;
 }

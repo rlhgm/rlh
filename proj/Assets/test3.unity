@@ -6906,9 +6906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae328598ce58c58409133125c114a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  impulse: {x: 0, y: 0, z: 0}
   jumpImpulse: 4
   jumpLongImpulse: 4.5
   gravityForce: -1
@@ -6925,21 +6922,17 @@ MonoBehaviour:
   flySlowDownParam: 0
   speedUpParam: 4
   breakParam: 2
-  respawnPoint: {fileID: 397091552}
+  CLIMBDUR_PREPARE_TO_JUMP: .5
+  CLIMBDUR_JUMP_TO_CATCH: .200000003
+  CLIMBDUR_CATCH: .5
+  CLIMBDUR_CLIMB: .75
   keyLeft: 276
   keyRight: 275
   keyRun: 304
   keyUp: 273
   keyDown: 274
   keyJump: 32
-  myHalfHeight: 0
-  lastCatchedClimbHandle: {fileID: 0}
-  CLIMBDUR_PREPARE_TO_JUMP: .5
-  CLIMBDUR_JUMP_TO_CATCH: .200000003
-  CLIMBDUR_CATCH: .5
-  CLIMBDUR_CLIMB: .75
-  groundUnderFeet: 0
-  playerCurrentLayer: 0
+  respawnPoint: {fileID: 397091552}
   state: 0
   action: 0
 --- !u!61 &1857342442
