@@ -1904,8 +1904,9 @@ public class Player2Controller : MonoBehaviour {
 					setState (State.CLIMB); 
 					setAction (Action.CLIMB_JUMP_TO_CATCH);
 					climbDuration = 0.0f;
-				
-					return true;
+					lastFrameHande = false;
+
+ 					return true;
 				}
 			}
 		
@@ -1957,7 +1958,8 @@ public class Player2Controller : MonoBehaviour {
 					setState (State.CLIMB); 
 					setAction (Action.CLIMB_JUMP_TO_CATCH);
 					climbDuration = 0.0f;
-				
+					lastFrameHande = false;
+
 					return true;
 				}
 			}
