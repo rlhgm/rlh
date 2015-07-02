@@ -1193,14 +1193,26 @@ public class Player2Controller : MonoBehaviour {
 		case Action.MOUNT_IDLE:
 		case Action.MOUNT_UP:
 		case Action.MOUNT_DOWN:
+
+			lastFrameHande = false;
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+
+			if( Input.GetKey(keyLeft)){
+				jumpLeft();
+				return;
+			}
+
+			if( Input.GetKey(keyRight)){
+				jumpRight();
+				return;
+			}
+
 			velocity.x = 0.0f;
 			velocity.y = 0.0f;
 			setAction(Action.JUMP);
 			setState (State.IN_AIR);
-			mountJumpStartPos = transform.position;
-			jumpFromMount = true;
-			//lastHandlePos = new Vector3();
-			lastFrameHande = false;
+
 			break;
 			
 		case Action.MOUNT_LEFT:
