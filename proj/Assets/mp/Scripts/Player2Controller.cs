@@ -42,6 +42,9 @@ public class Player2Controller : MonoBehaviour {
 	public float GravityForce = -20.0f;
 	public float MaxSpeedY = 15.0f;
 
+	public float HardLandingHeight = 3.0f;
+	public float VeryHardLandingHeight = 6.0f;
+
 	public float CLIMB_DURATION = 1.5f;
 	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
 	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
@@ -84,11 +87,11 @@ public class Player2Controller : MonoBehaviour {
 		
 		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 
-		CLIMB_DURATION = 1.5f;
-		CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
-		CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
-		CLIMBDUR_CATCH = 0.5f;
-		CLIMBDUR_CLIMB = 0.75f;
+//		CLIMB_DURATION = 1.5f;
+//		CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
+//		CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
+//		CLIMBDUR_CATCH = 0.5f;
+//		CLIMBDUR_CLIMB = 0.75f;
 		
 //		WalkSpeed = 3.0f;
 //		RunSpeed = 5.0f;
@@ -140,6 +143,7 @@ public class Player2Controller : MonoBehaviour {
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
 		desiredSpeedX = 0.0f;
+		startFallPos = transform.position;
 
 		setState (State.ON_GROUND);
 		//setAction (Action.IDLE);
@@ -460,12 +464,15 @@ public class Player2Controller : MonoBehaviour {
 				velocity.y = -MaxSpeedY;
 			
 			distToFall.y = velocity.y * Time.deltaTime;
-			
+
+			bool justLanding = false;
+
 			if( distToFall.y > 0.0f ) { // leci w gore
 				//transform.position = transform.position + distToFall;
 			} else if( distToFall.y < 0.0f ) { // spada
 				if( lastVelocity.y >= 0.0f ) { // zaczyna spadac
 					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
+					startFallPos = transform.position;
 				}
 				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 0.01f);
 				if( groundUnderFeet >= 0.0f ){
@@ -474,11 +481,15 @@ public class Player2Controller : MonoBehaviour {
  						lastCatchedClimbHandle = null;
 
 						distToFall.y = -groundUnderFeet;
+
+						justLanding = true;
+
 						velocity.x = 0.0f;
 						velocity.y = 0.0f;
 						setState(State.ON_GROUND);
 						//setAction (Action.IDLE);
 						//asdf
+
 						resetActionAndState();
 					}
 				}
@@ -486,6 +497,11 @@ public class Player2Controller : MonoBehaviour {
 			}
 
 			transform.position = transform.position + distToFall;
+
+			if( justLanding ){
+
+
+			}
 
 			break;
 			
@@ -2002,7 +2018,14 @@ public class Player2Controller : MonoBehaviour {
 
 		//print ("setState : " + newState + " ustawiona");
 		//print ("============================");
-		
+
+		switch (state) {
+		case State.IN_AIR:
+			startFallPos = transform.position;
+			break;
+		};
+
+
 		state = newState;
 		return true;
 	}
@@ -2135,7 +2158,8 @@ public class Player2Controller : MonoBehaviour {
 	Vector3 velocity;
 	Vector3 lastVelocity;
 	Vector3 impulse;
-	
+	Vector3 startFallPos;
+
 	Vector3 mountJumpStartPos;
 
 	float desiredSpeedX = 0.0f;

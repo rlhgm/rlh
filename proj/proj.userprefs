@@ -4,13 +4,13 @@
     <Files>
       <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\2D\Scripts\PlatformerCharacter2D.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BackgroundParallax.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\Water.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\2D\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\cc.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
