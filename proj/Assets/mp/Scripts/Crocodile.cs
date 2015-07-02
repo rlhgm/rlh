@@ -89,7 +89,7 @@ public class Crocodile : MonoBehaviour {
 	void Update () {
 
 		//if( coll.IsTouching( player.coll ) ){
-		Vector3 playerBauch2 = player.transform.position + new Vector3(0.0f,player.myHalfHeight,0.0f);
+		Vector3 playerBauch2 = player.transform.position + new Vector3(0.0f,1.0f,0.0f);
 
 		if( coll.OverlapPoint(playerBauch2) ){
 			player.die ();
@@ -128,7 +128,7 @@ public class Crocodile : MonoBehaviour {
 			break;
 
 		case State.ATTACK:
-			Vector3 playerBauch = new Vector3(0.0f,player.myHalfHeight,0.0f);
+			Vector3 playerBauch = new Vector3(0.0f,1.0f,0.0f);
 			distToSwing = (player.transform.position+playerBauch) - transform.position;
 			distToMove = distToSwing.normalized * AttackSpeed * Time.deltaTime;
 			if( distToMove.magnitude < distToSwing.magnitude ){
