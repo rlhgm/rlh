@@ -71,9 +71,12 @@
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
+     <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
+     <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\Player2Controller.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
+     <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
      <Compile Include="Assets\mp\Scripts\Water.cs" />
      <Compile Include="Assets\mp\Scripts\ncc.cs" />
      <Compile Include="Assets\mp\Scripts\ncc2.cs" />
