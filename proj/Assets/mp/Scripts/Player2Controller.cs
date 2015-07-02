@@ -350,7 +350,10 @@ public class Player2Controller : MonoBehaviour {
 						setAction(Action.MOUNT_IDLE);
 						setState(State.MOUNT);
 					}
-				}//aaa
+				} else {
+					jumpFromMount = false;
+				}
+
 			}
 			if( jumpFromMount && Input.GetKey(keyJump) ){
 				Vector3 flyDist = transform.position - mountJumpStartPos;
