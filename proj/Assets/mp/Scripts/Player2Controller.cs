@@ -46,6 +46,8 @@ public class Player2Controller : MonoBehaviour {
 	public float VeryHardLandingHeight = 6.0f;
 
 	public float RopeSwingForce = 500f;
+	public float RopeClimbSpeed = 1.0f;
+
 	public float CLIMB_DURATION = 1.5f;
 	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
 	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
@@ -574,7 +576,12 @@ public class Player2Controller : MonoBehaviour {
 
 			swingVelocity = posDiff / Time.deltaTime;
 
-			transform.position = catchedRopeLink.transform.position;
+			//transform.position = catchedRopeLink.transform.position;
+			//Vector3 linkPos = catchedRopeLink.transform.position;
+			//linkPos.y -= 0.5f;
+
+			Vector3 linkPos = catchedRopeLink.transform.TransformPoint( new Vector3(0.0f, ropeLinkCatchOffset, 0.0f) );
+			transform.position = linkPos;
 			transform.rotation = catchedRopeLink.transform.rotation;
 
 			break;
@@ -1052,6 +1059,18 @@ public class Player2Controller : MonoBehaviour {
 			quat.eulerAngles = new Vector3(0f,0f,0f);
 			transform.rotation = quat;
 			setState(State.IN_AIR);
+
+			return 0;
+		}
+
+		if (Input.GetKey (keyUp)) { 
+
+			setAction(Action.ROPECLIMB_UP);
+
+		} else if (Input.GetKey (keyDown)) {
+
+			setAction(Action.ROPECLIMB_DOWN);
+
 		}
 
 		return 0;
@@ -1059,10 +1078,72 @@ public class Player2Controller : MonoBehaviour {
 
 	int Act_ROPECLIMB_UP(){
 
+		if (!catchedRope)
+			return 0;
+
+		if (Input.GetKeyUp (keyUp)) { 
+			setAction(Action.ROPECLIMB_IDLE);
+			return 0;
+		} 
+
+		float climbDist = RopeClimbSpeed * Time.deltaTime;
+
+		float newRopeLinkCatchOffset = ropeLinkCatchOffset + climbDist;
+		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
+
+		if( newRopeLinkCatchOffset > 0.0f ) // przekroczyłem ogniwo w gore...
+		{
+			if( catchedRopeLink.transform.parent ) { // jak ogniwo ma rodzica to przechodze wyzej 
+
+				catchedRopeLink = catchedRopeLink.transform.parent.GetComponent<RopeLink>();
+				catchedRope.chooseDriver(catchedRopeLink.transform);
+				ropeLinkCatchOffset = -0.5f - newRopeLinkCatchOffset;
+
+			}else {
+				ropeLinkCatchOffset = 0.0f;
+			}
+
+		} else {
+
+			ropeLinkCatchOffset = newRopeLinkCatchOffset;
+		}
+
+
 		return 0;
 	}
 
 	int Act_ROPECLIMB_DOWN(){
+
+		if (!catchedRope)
+			return 0;
+
+		if (Input.GetKeyUp (keyDown)) {
+			setAction(Action.ROPECLIMB_IDLE);
+			return 0;
+		}
+
+		float climbDist = RopeClimbSpeed * Time.deltaTime;
+		
+		float newRopeLinkCatchOffset = ropeLinkCatchOffset - climbDist;
+		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
+		
+		if( newRopeLinkCatchOffset <= -0.5f ) // przekroczyłem ogniwo w gore...
+		{
+			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma rodzica to przechodze wyzej 
+				
+				catchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
+				catchedRope.chooseDriver(catchedRopeLink.transform);
+				ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
+				
+			}else {
+				ropeLinkCatchOffset = -0.5f;
+			}
+			
+		} else {
+			
+			ropeLinkCatchOffset = newRopeLinkCatchOffset;
+		}
+
 
 		return 0;
 	}
@@ -2135,6 +2216,8 @@ public class Player2Controller : MonoBehaviour {
 					transform.position = catchedRopeLink.transform.position;
 					transform.rotation = catchedRopeLink.transform.rotation;
 
+					ropeLinkCatchOffset = 0.0f;
+
 					return true;
 				}
 			}
@@ -2202,6 +2285,7 @@ public class Player2Controller : MonoBehaviour {
 					transform.position = catchedRopeLink.transform.position;
 					transform.rotation = catchedRopeLink.transform.rotation;
 
+					ropeLinkCatchOffset = 0.0f;
 					return true;
 				}
 			}
@@ -2211,6 +2295,7 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
+	float ropeLinkCatchOffset = 0.0f;
 //	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
 //		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
 //			return false;
