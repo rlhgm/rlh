@@ -1991,7 +1991,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 119
+  m_RootOrder: 120
 --- !u!1001 &398890167
 Prefab:
   m_ObjectHideFlags: 0
@@ -3268,7 +3268,7 @@ Transform:
   - {fileID: 1341302171}
   - {fileID: 87341738}
   m_Father: {fileID: 0}
-  m_RootOrder: 120
+  m_RootOrder: 121
 --- !u!1001 &660801523
 Prefab:
   m_ObjectHideFlags: 0
@@ -6009,7 +6009,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 115
 --- !u!1001 &1234371853
 Prefab:
   m_ObjectHideFlags: 0
@@ -8833,7 +8833,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1857342439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.5, y: 3, z: 0}
+  m_LocalPosition: {x: -51, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1669188180}
@@ -8880,6 +8880,7 @@ MonoBehaviour:
   MaxSpeedY: 15
   HardLandingHeight: 3
   VeryHardLandingHeight: 6
+  RopeSwingForce: 500
   CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
@@ -8894,6 +8895,9 @@ MonoBehaviour:
   keyJump: 32
   respawnPoint: {fileID: 397091552}
   velocity: {x: 0, y: 0, z: 0}
+  swingVelocity: {x: 0, y: 0}
+  catchedRope: {fileID: 0}
+  catchedRopeLink: {fileID: 0}
   state: 0
   action: 0
 --- !u!61 &1857342442
@@ -9472,7 +9476,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448168, guid: 70c08393d79177945927b725b4b06ab1, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 23380544, guid: 70c08393d79177945927b725b4b06ab1, type: 2}
       propertyPath: m_ConnectedAnchor.y

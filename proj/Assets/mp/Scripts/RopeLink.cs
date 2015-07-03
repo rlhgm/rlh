@@ -3,6 +3,8 @@ using System.Collections;
 
 public class RopeLink : MonoBehaviour {
 
+	public NewRope rope;
+
 	// Use this for initialization
 	void Start () {
 	

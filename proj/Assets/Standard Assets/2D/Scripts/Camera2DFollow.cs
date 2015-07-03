@@ -32,6 +32,7 @@ namespace UnityStandardAssets._2D
         // Use this for initialization
         private void Start()
         {
+			///aaa
 			camera = GetComponent<Camera> ();
 
 			hms.x = camera.orthographicSize * camera.aspect;

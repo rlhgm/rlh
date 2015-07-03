@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 180fb37a34201524f838176e0e824481
+timeCreated: 1435926801
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Zap_climb_rope_2_0
+    21300002: Zap_climb_rope_2_1
+    21300004: Zap_climb_rope_2_2
+    21300006: Zap_climb_rope_2_3
+    21300008: Zap_climb_rope_2_4
+    21300010: Zap_climb_rope_2_5
+    21300012: Zap_climb_rope_2_6
+    21300014: Zap_climb_rope_2_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 16
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Zap_climb_rope_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 64
+        height: 53
+      alignment: 9
+      pivot: {x: .628824413, y: .610670149}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climb_rope_2_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .616743326, y: .672042966}
+      border: {x: 0, y: 12, z: 0, w: 0}
+    - name: Zap_climb_rope_2_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .641320705, y: .6658988}
+      border: {x: 0, y: 15, z: 0, w: 0}
+    - name: Zap_climb_rope_2_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .629032135, y: .641321063}
+      border: {x: 0, y: 17, z: 0, w: 0}
+    - name: Zap_climb_rope_2_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 14
+        width: 64
+        height: 50
+      alignment: 9
+      pivot: {x: .647465229, y: .555053771}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climb_rope_2_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .629032135, y: .647465467}
+      border: {x: 0, y: 13, z: 0, w: 0}
+    - name: Zap_climb_rope_2_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .647464752, y: .647465467}
+      border: {x: 0, y: 11, z: 0, w: 0}
+    - name: Zap_climb_rope_2_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .610598564, y: .659754217}
+      border: {x: 0, y: 10, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
