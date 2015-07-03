@@ -1017,8 +1017,8 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (keyJump)) {
-			catchedRope = null;
-			catchedRopeLink = null;
+			//catchedRope = null;
+			//catchedRopeLink = null;
 
 			if( swingVelocity.x > 0 ){
 
@@ -1031,6 +1031,8 @@ public class Player2Controller : MonoBehaviour {
 				}
 				velocity = swingVelocity;
 
+				//catchedRope.resetDiver();
+
 			}else if (swingVelocity.x < 0){
 
 				turnLeft();
@@ -1042,17 +1044,24 @@ public class Player2Controller : MonoBehaviour {
 				}
 				velocity = swingVelocity;
 
+				//catchedRope.resetDiver();
+
 			}else{
 
 				setAction(Action.JUMP);
 				velocity.x = 0.0f;
 				velocity.y = 0.0f;
 
+				//catchedRope.resetDiver();
 			}
 
 			Vector3 oldPos = transform.position;
 			oldPos.y -= 0.75f;
 			transform.position = oldPos;
+
+			catchedRope.resetDiver();
+			catchedRope = null;
+			catchedRopeLink = null;
 
 			//transform.rotation.eulerAngles = new Vector3(0f,0f,0f);
 			Quaternion quat = new Quaternion();

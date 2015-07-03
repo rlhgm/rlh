@@ -50,7 +50,7 @@ public class NewRope : MonoBehaviour {
 			links[i] = newLink;
 		}
 
-		chooseDriver (currentLink);
+		//chooseDriver (currentLink);
 	}
 	
 	// Use this for initialization
@@ -60,26 +60,26 @@ public class NewRope : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Z)) {
-			//joint.connectedAnchor
-			//print(driverRigidBody.velocity);
-			//driverRigidBody.AddForce( new Vector2(-500,0) );
-			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(-500,0) );
-		}
-		
-		if (Input.GetKeyDown (KeyCode.X)) {
-			//print(driverRigidBody.velocity);
-			//driverRigidBody.AddForce( new Vector2(500,0) );
-			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(500,0) );
-		}//aaa
-
-		if (Input.GetKeyDown (KeyCode.C)) {
-			if( currentLink.parent ) chooseDriver(currentLink.parent);
-		}
-		
-		if (Input.GetKeyDown (KeyCode.V)) {
-			if( currentLink.childCount > 0 ) chooseDriver(currentLink.GetChild(0));
-		}
+//		if (Input.GetKeyDown (KeyCode.Z)) {
+//			//joint.connectedAnchor
+//			//print(driverRigidBody.velocity);
+//			//driverRigidBody.AddForce( new Vector2(-500,0) );
+//			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(-500,0) );
+//		}
+//		
+//		if (Input.GetKeyDown (KeyCode.X)) {
+//			//print(driverRigidBody.velocity);
+//			//driverRigidBody.AddForce( new Vector2(500,0) );
+//			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(500,0) );
+//		}//aaa
+//
+//		if (Input.GetKeyDown (KeyCode.C)) {
+//			if( currentLink.parent ) chooseDriver(currentLink.parent);
+//		}
+//		
+//		if (Input.GetKeyDown (KeyCode.V)) {
+//			if( currentLink.childCount > 0 ) chooseDriver(currentLink.GetChild(0));
+//		}
 
 	}
 
@@ -122,5 +122,20 @@ public class NewRope : MonoBehaviour {
 			nextLink.GetComponent<SpriteRenderer> ().color = Color.red;
 			nextLink.GetComponent<Rigidbody2D> ().mass = 4.0f;
 		}
+	}
+
+	public void resetDiver(){
+		if (currentLink) {
+			currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
+			currentLink.GetComponent<Rigidbody2D> ().mass = 1.0f;
+			
+			if( currentLink.transform.childCount > 0 ) {
+				Transform nextLink = currentLink.transform.GetChild(0);
+				nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
+				nextLink.GetComponent<Rigidbody2D> ().mass = 1.0f;
+			}
+		}
+		
+		currentLink = null;
 	}
 }
