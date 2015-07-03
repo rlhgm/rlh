@@ -22,6 +22,7 @@ public class NewRope : MonoBehaviour {
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
 			RopeLink newLink = Instantiate<RopeLink>(ropeLinkPrefab);
+			newLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
 
 			HingeJoint2D hingeJoint = newLink.GetComponent<HingeJoint2D>();
 
@@ -88,6 +89,6 @@ public class NewRope : MonoBehaviour {
 		currentLink = newLink;
 
 		newLink.GetComponent<SpriteRenderer> ().color = Color.red;
-		newLink.GetComponent<Rigidbody2D> ().mass = 8.0f;
+		newLink.GetComponent<Rigidbody2D> ().mass = 12.0f;
 	}
 }

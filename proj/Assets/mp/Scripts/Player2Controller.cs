@@ -2099,7 +2099,10 @@ public class Player2Controller : MonoBehaviour {
 		MOUNT_LEFT,
 		MOUNT_RIGHT,
 		MOUNT_UP,
-		MOUNT_DOWN
+		MOUNT_DOWN,
+		ROPECLIMB_IDLE,
+		ROPECLIMB_UP,
+		ROPECLIMB_DOWN
 	};
 	
 	public enum State
