@@ -182,6 +182,9 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
+	bool jumpKeyPressed = false;
+	float timeFromJumpKeyPressed = 0.0f;
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -211,12 +214,31 @@ public class Player2Controller : MonoBehaviour {
 
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
-		if (Input.GetKeyDown (keyJump)) {
-			keyJumpDown ();
-		} else if (Input.GetKeyUp (keyJump)) {
+		if (!jumpKeyPressed) {
+			if (Input.GetKeyDown (keyJump)) {
+				timeFromJumpKeyPressed = 0.0f;
+				jumpKeyPressed = true;
+			}
+		} else {
+			timeFromJumpKeyPressed += Time.deltaTime;
+			if( timeFromJumpKeyPressed >= 0.06f ){
+				timeFromJumpKeyPressed = 0.0f;
+				jumpKeyPressed = false;
+
+				keyJumpDown();
+			}
+		}
+
+//		if (Input.GetKeyDown (keyJump)) {
+//			keyJumpDown ();
+//		} else if (Input.GetKeyUp (keyJump)) {
+//			keyJumpUp ();
+//		}
+
+		if (Input.GetKeyUp (keyJump)) {
 			keyJumpUp ();
 		}
-		
+
 		if (Input.GetKeyDown (keyLeft)) {
 			keyLeftDown();
 		} else if (Input.GetKeyDown (keyRight)) {
