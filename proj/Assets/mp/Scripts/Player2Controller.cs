@@ -1155,7 +1155,7 @@ public class Player2Controller : MonoBehaviour {
 //			}
 
 			Vector3 oldPos = transform.position;
-			oldPos.y -= 0.75f;
+			oldPos.y -= 1.5f;
 			transform.position = oldPos;
 
 			catchedRope.resetDiver();
