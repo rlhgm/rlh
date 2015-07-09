@@ -31,16 +31,18 @@ public class Crocodile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		print (water);
-		if( water )
-			print (water.getSize ());
+		//print (water);
+		if (water) {
+			//print (water.getSize ());
+		}
 
-		print (player);
-		if (player)
-			print (player.transform.position);
+		//print (player);
+		if (player) {
+			//print (player.transform.position);
+		}
 
-		print (mySize);
-		print(coll.size + " " + transform.localScale);
+		//print (mySize);
+		//print(coll.size + " " + transform.localScale);
 
 		swingTargetLimits.x = water.getWidth () - mySize.x;
 		swingTargetLimits.y = water.getDepth () - mySize.y;

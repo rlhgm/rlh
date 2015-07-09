@@ -235,6 +235,17 @@ public class Player2Controller : MonoBehaviour {
 //			keyJumpUp ();
 //		}
 
+		if (Input.GetKeyDown (keyUp)) {
+			keyUpDown();
+		} else if (Input.GetKeyUp (keyUp)) {
+			keyUpUp();
+		}
+		if (Input.GetKeyDown (keyDown)) {
+			keyDownDown();
+		} else if (Input.GetKeyUp (keyDown)) {
+			keyDownUp();
+		}
+
 		if (Input.GetKeyUp (keyJump)) {
 			keyJumpUp ();
 		}
@@ -257,16 +268,7 @@ public class Player2Controller : MonoBehaviour {
 			keyRunUp();
 		}
 
-		if (Input.GetKeyDown (keyUp)) {
-			keyUpDown();
-		} else if (Input.GetKeyUp (keyUp)) {
-			keyUpUp();
-		}
-		if (Input.GetKeyDown (keyDown)) {
-			keyDownDown();
-		} else if (Input.GetKeyUp (keyDown)) {
-			keyDownUp();
-		}
+
 
 		currentActionTime += Time.deltaTime;
 		currentStateTime += Time.deltaTime;
@@ -379,9 +381,12 @@ public class Player2Controller : MonoBehaviour {
 
 		case State.IN_AIR:
 			if( Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
-				if( onMount() ){
+	    		if( onMount() ){
 					if( jumpFromMount ){
-
+	//						velocity.x = 0.0f;
+	//						velocity.y = 0.0f;
+	//						setAction(Action.MOUNT_IDLE);
+	//						setState(State.MOUNT);
 					}else{
 						velocity.x = 0.0f;
 						velocity.y = 0.0f;
@@ -2622,7 +2627,6 @@ public class Player2Controller : MonoBehaviour {
 
 		//print ("setAction oldAction : " + action);
 		//print ("setAction newAction : " + newAction);
-
 		//print ("setAction : " + newAction + " ustawiona");
 		//print ("============================");
 		
