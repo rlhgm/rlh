@@ -23,33 +23,9 @@ Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (thi
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.205 seconds
+- Completed reload, in  0.224 seconds
 desktop: 1920x1080 60Hz; virtual: 3360x1491 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
-water (Water)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-(10.0, 3.0)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-player2 (Player2Controller)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-(-51.0, 3.0, 0.0)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-(2.5, 0.8)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-(1.0, 1.0) (2.5, 0.8, 1.0)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
