@@ -125,23 +125,27 @@ public class NewRope : MonoBehaviour {
 		if (currentLink) {
 			currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
 			currentLink.GetComponent<Rigidbody2D> ().mass = 1.0f;
+			//currentLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
 
 			if( currentLink.transform.childCount > 0 ) {
 				Transform nextLink = currentLink.transform.GetChild(0);
 				nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
 				nextLink.GetComponent<Rigidbody2D> ().mass = 1.0f;
+				//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
 			}
 		}
 
 		currentLink = newLink;
 
 		newLink.GetComponent<SpriteRenderer> ().color = Color.red;
-		newLink.GetComponent<Rigidbody2D> ().mass = 8.0f;
+		newLink.GetComponent<Rigidbody2D> ().mass = 9.0f;
+		//newLink.GetComponent<Rigidbody2D> ().gravityScale = 1.5f;
 
 		if( currentLink.transform.childCount > 0 ) {
 			Transform nextLink = currentLink.transform.GetChild(0);
 			nextLink.GetComponent<SpriteRenderer> ().color = Color.red;
-			nextLink.GetComponent<Rigidbody2D> ().mass = 4.0f;
+			nextLink.GetComponent<Rigidbody2D> ().mass = 5.0f;
+			//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.25f;
 		}
 	}
 
