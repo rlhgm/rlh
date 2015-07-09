@@ -35,6 +35,7 @@ public class Player2Controller : MonoBehaviour {
 	/// </summary>
 	public float SlowDownParam = 6.0f; // ile jednosek predkosci hamuje na sekunde
 	public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
+	public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
 	public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
 
 	public float JumpImpulse = 7.0f; 
@@ -450,20 +451,31 @@ public class Player2Controller : MonoBehaviour {
 				}else{
 					//velocity.x -= (FlySlowDownParam * Time.deltaTime);
 					//if( velocity.x < 0.0f ) velocity.x = 0.0f;
-				}
+				} 
 				
 			}else if( isInAction(Action.JUMP) ){
 
+				if( Input.GetKey(keyLeft) ){
+					velocity.x -= (FlyUpUserControlParam * Time.deltaTime);
+					
+					if( Mathf.Abs( velocity.x ) > JumpSpeed )
+						velocity.x = -JumpSpeed;
+				}
+				if( Input.GetKey(keyRight) ){
+					velocity.x += (FlyUpUserControlParam * Time.deltaTime);
+					
+					if( Mathf.Abs( velocity.x ) > JumpSpeed )
+						velocity.x = JumpSpeed;
+				}
+
+
 				if( velocity.x > 0.0f ){
 
-					velocity.x -= (FlySlowDownParam * Time.deltaTime);
-					if( velocity.x < 0.0f ) velocity.x = 0.0f;
+					turnRight();
 
 				}else if(velocity.x < 0.0f) {
 
-					velocity.x += (FlySlowDownParam * Time.deltaTime);
-					if( velocity.x > 0.0f ) velocity.x = 0.0f;
-
+					turnLeft();
 				}
 			}
 
