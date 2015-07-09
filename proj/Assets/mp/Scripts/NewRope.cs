@@ -5,9 +5,12 @@ public class NewRope : MonoBehaviour {
 
 	public RopeLink ropeLinkPrefab;
 	//Rigidbody2D driverRigidBody;
-	Transform currentLink;
+	public Transform currentLink;
 
 	RopeLink[] links;
+
+	public float firstLinkSpeed;
+	public float firstLinkAngle;
 
 	void Awake(){
 		//joint = GetComponent<DistanceJoint2D> ();
@@ -25,6 +28,7 @@ public class NewRope : MonoBehaviour {
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
 			RopeLink newLink = Instantiate<RopeLink>(ropeLinkPrefab);
+			newLink.idn = i+1;
 			newLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
 			newLink.rope = this;
 
@@ -80,7 +84,24 @@ public class NewRope : MonoBehaviour {
 //		if (Input.GetKeyDown (KeyCode.V)) {
 //			if( currentLink.childCount > 0 ) chooseDriver(currentLink.GetChild(0));
 //		}
+		if (links.Length == 0)
+			return;
 
+		HingeJoint2D hingeJoint = links [0].GetComponent<HingeJoint2D> ();
+		firstLinkSpeed = hingeJoint.jointSpeed;
+		firstLinkAngle = hingeJoint.jointAngle;
+
+//		//string s = new string("");
+//		for (int i = 0; i < links.Length; ++i) {
+//			//HingeJoint2D hingeJoint = links [i].GetComponent<HingeJoint2D> ();
+//		
+//			//s += ( i + " : " + hingeJoint.jointSpeed + " " + hingeJoint.jointAngle );
+//			//print ( i + " : " + hingeJoint.jointSpeed + " " + hingeJoint.jointAngle );
+//
+//			firstLinkSpeed = hingeJoint.jointSpeed;
+//		}
+
+		//print (s);
 	}
 
 	public void swing (Vector2 dir, float force){

@@ -3,11 +3,11 @@ using System.Collections;
 
 public class ChainLink : MonoBehaviour {
 
-	DistanceJoint2D joint;
+	//DistanceJoint2D joint;
 	Rigidbody2D body;
 
 	void Awake(){
-		joint = GetComponent<DistanceJoint2D> ();
+		//joint = GetComponent<DistanceJoint2D> ();
 		body = GetComponent<Rigidbody2D> ();
 
 		//print (joint);

@@ -1071,40 +1071,88 @@ public class Player2Controller : MonoBehaviour {
 			//catchedRope = null;
 			//catchedRopeLink = null;
 
-			if( swingVelocity.x > 0 ){
+			float ropeSpeed = catchedRope.firstLinkSpeed;
 
-				turnRight();
+			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
 
-				if( Mathf.Abs( swingVelocity.x) >= JumpLongSpeed ){
+			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
+
+			float ps = ropeSpeedRad * crl_idn * 0.5f;
+
+			float ropeAngle = Mathf.Abs( catchedRope.firstLinkAngle );
+
+			//Quaternion.
+
+			if( ps < 0f ){
+
+      				turnRight();
+				
+				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
 					setAction(Action.JUMP_RIGHT_LONG);
 				}else{
 					setAction(Action.JUMP_RIGHT);
 				}
-				velocity = swingVelocity;
+				//velocity = swingVelocity;
+				velocity.x = -ps;
+				velocity.y = (ropeAngle/45.0f) * JumpLongImpulse;
 
-				//catchedRope.resetDiver();
 
-			}else if (swingVelocity.x < 0){
-
+			}else if (ps > 0f){
+			
 				turnLeft();
-
-				if( Mathf.Abs( swingVelocity.x) >= JumpLongSpeed ){
+			
+				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
 					setAction(Action.JUMP_LEFT_LONG);
 				}else{
 					setAction(Action.JUMP_LEFT);
 				}
-				velocity = swingVelocity;
-
-				//catchedRope.resetDiver();
-
+				//velocity = swingVelocity;
+				velocity.x = -ps;
+				velocity.y = (ropeAngle/45.0f) * JumpLongImpulse;
+			
 			}else{
-
+				
 				setAction(Action.JUMP);
 				velocity.x = 0.0f;
 				velocity.y = 0.0f;
-
-				//catchedRope.resetDiver();
+				
 			}
+
+
+//			if( swingVelocity.x > 0 ){
+//
+//				turnRight();
+//
+//				if( Mathf.Abs( swingVelocity.x) >= JumpLongSpeed ){
+//					setAction(Action.JUMP_RIGHT_LONG);
+//				}else{
+//					setAction(Action.JUMP_RIGHT);
+//				}
+//				velocity = swingVelocity;
+//
+//				//catchedRope.resetDiver();
+//
+//			}else if (swingVelocity.x < 0){
+//
+//				turnLeft();
+//
+//				if( Mathf.Abs( swingVelocity.x) >= JumpLongSpeed ){
+//					setAction(Action.JUMP_LEFT_LONG);
+//				}else{
+//					setAction(Action.JUMP_LEFT);
+//				}
+//				velocity = swingVelocity;
+//
+//				//catchedRope.resetDiver();
+//
+//			}else{
+//
+//				setAction(Action.JUMP);
+//				velocity.x = 0.0f;
+//				velocity.y = 0.0f;
+//
+//				//catchedRope.resetDiver();
+//			}
 
 			Vector3 oldPos = transform.position;
 			oldPos.y -= 0.75f;
