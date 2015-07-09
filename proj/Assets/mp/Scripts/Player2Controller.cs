@@ -1077,7 +1077,7 @@ public class Player2Controller : MonoBehaviour {
 
 			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
 
-			float ps = ropeSpeedRad * crl_idn * 0.5f;
+			float ps = ropeSpeedRad * (crl_idn+1) * 0.5f;
 
 			float ropeAngle = Mathf.Abs( catchedRope.firstLinkAngle );
 
@@ -1094,7 +1094,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 				//velocity = swingVelocity;
 				velocity.x = -ps;
-				velocity.y = (ropeAngle/45.0f) * JumpLongImpulse;
+				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
 
 
 			}else if (ps > 0f){
@@ -1108,7 +1108,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 				//velocity = swingVelocity;
 				velocity.x = -ps;
-				velocity.y = (ropeAngle/45.0f) * JumpLongImpulse;
+				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
 			
 			}else{
 				
@@ -1154,8 +1154,10 @@ public class Player2Controller : MonoBehaviour {
 //				//catchedRope.resetDiver();
 //			}
 
+			//Vector3 posInWorld = transform.TransformPoint( 0f,-1.65f,0f );
+			//transform.position = posInWorld;
 			Vector3 oldPos = transform.position;
-			oldPos.y -= 1.5f;
+			oldPos.y -= 1.65f;
 			transform.position = oldPos;
 
 			catchedRope.resetDiver();
