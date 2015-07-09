@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 180fb37a34201524f838176e0e824481
-timeCreated: 1435926801
+timeCreated: 1436453525
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -65,7 +65,7 @@ TextureImporter:
         width: 64
         height: 53
       alignment: 9
-      pivot: {x: .628824413, y: .610670149}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climb_rope_2_1
       rect:
@@ -75,7 +75,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .616743326, y: .672042966}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 12, z: 0, w: 0}
     - name: Zap_climb_rope_2_2
       rect:
@@ -85,7 +85,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .641320705, y: .6658988}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 15, z: 0, w: 0}
     - name: Zap_climb_rope_2_3
       rect:
@@ -95,7 +95,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .629032135, y: .641321063}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 17, z: 0, w: 0}
     - name: Zap_climb_rope_2_4
       rect:
@@ -105,7 +105,7 @@ TextureImporter:
         width: 64
         height: 50
       alignment: 9
-      pivot: {x: .647465229, y: .555053771}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climb_rope_2_5
       rect:
@@ -115,7 +115,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .629032135, y: .647465467}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 13, z: 0, w: 0}
     - name: Zap_climb_rope_2_6
       rect:
@@ -125,7 +125,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .647464752, y: .647465467}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 11, z: 0, w: 0}
     - name: Zap_climb_rope_2_7
       rect:
@@ -135,7 +135,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .610598564, y: .659754217}
+      pivot: {x: .600000024, y: .800000012}
       border: {x: 0, y: 10, z: 0, w: 0}
   spritePackingTag: 
   userData: 
