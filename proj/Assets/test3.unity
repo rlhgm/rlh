@@ -254,6 +254,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 0
 --- !u!50 &11587658
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -262,11 +263,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &11587659
 Transform:
   m_ObjectHideFlags: 0
@@ -709,6 +710,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 0
 --- !u!50 &97028155
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -717,11 +719,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &97028156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1287,6 +1289,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 1
 --- !u!50 &225276238
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1295,11 +1298,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &225276239
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1590,6 +1593,7 @@ Transform:
   m_RootOrder: 123
 --- !u!50 &271932086
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1598,11 +1602,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &287655444 stripped
 Transform:
   m_PrefabParentObject: {fileID: 420086, guid: c324a579cf992f043b83d77f80612652, type: 2}
@@ -2562,6 +2566,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 1
 --- !u!50 &492751104
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2570,11 +2575,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &492751105
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2961,6 +2966,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 0
 --- !u!50 &568473128
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2969,11 +2975,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &568473129
 Transform:
   m_ObjectHideFlags: 0
@@ -3336,6 +3342,7 @@ GameObject:
   m_IsActive: 1
 --- !u!50 &662455461
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -3344,11 +3351,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &662455462
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5563,6 +5570,7 @@ GameObject:
   m_IsActive: 1
 --- !u!50 &1164138166
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -5571,11 +5579,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &1164138167
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5780,6 +5788,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 1
 --- !u!50 &1180838214
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -5788,11 +5797,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &1180838215
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6127,6 +6136,7 @@ DistanceJoint2D:
   m_MaxDistanceOnly: 0
 --- !u!50 &1235288970
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -6135,11 +6145,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &1235288971
 Transform:
   m_ObjectHideFlags: 0
@@ -7477,6 +7487,7 @@ GameObject:
   m_IsActive: 1
 --- !u!50 &1539399067
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -7485,11 +7496,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &1539399068
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8339,6 +8350,7 @@ Transform:
   m_RootOrder: 126
 --- !u!50 &1750316595
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -8347,11 +8359,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &1752167453
 Prefab:
   m_ObjectHideFlags: 0
@@ -8642,6 +8654,7 @@ GameObject:
   m_IsActive: 1
 --- !u!50 &1821078409
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -8650,11 +8663,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!233 &1821078410
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -8832,7 +8845,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1857342439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51, y: 3, z: 0}
+  m_LocalPosition: {x: 5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1669188180}
@@ -8850,7 +8863,7 @@ Transform:
   - {fileID: 476743741}
   - {fileID: 2071301498}
   m_Father: {fileID: 0}
-  m_RootOrder: 117
+  m_RootOrder: 119
 --- !u!114 &1857342441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8872,6 +8885,7 @@ MonoBehaviour:
   SpeedUpParam: 7
   SlowDownParam: 6
   FlyUserControlParam: 8
+  FlyUpUserControlParam: 9
   FlySlowDownParam: 5
   JumpImpulse: 7
   JumpLongImpulse: 7.1500001
@@ -9450,7 +9464,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448168, guid: 70c08393d79177945927b725b4b06ab1, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 23380544, guid: 70c08393d79177945927b725b4b06ab1, type: 2}
       propertyPath: m_ConnectedAnchor.y
@@ -10206,6 +10220,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &2143118007
 Transform:
   m_ObjectHideFlags: 0
