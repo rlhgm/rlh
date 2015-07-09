@@ -15,7 +15,7 @@ Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this messa
 Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.363 seconds
+- Completed reload, in  0.628 seconds
 desktop: 1920x1080 60Hz; virtual: 3360x1220 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
