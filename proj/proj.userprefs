@@ -1,18 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NewRope.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="1899" Column="42" />
-      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="123" Column="58" />
-      <File FileName="Assets\mp\Scripts\Water.cs" Line="54" Column="1" />
-      <File FileName="Assets\mp\Scripts\Bird.cs" Line="38" Column="1" />
-      <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="56" Column="1" />
-      <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="63" Column="1" />
-      <File FileName="Assets\Scripts\CameraFollow.cs" Line="68" Column="1" />
-      <File FileName="Assets\Standard Assets\2D\Scripts\Camera2DFollow.cs" Line="90" Column="41" />
-      <File FileName="Assets\cc.cs" Line="192" Column="1" />
-      <File FileName="Assets\mp\Scripts\ChainLink.cs" Line="36" Column="3" />
-      <File FileName="Assets\NewRope.cs" Line="23" Column="3" />
+      <File FileName="proj.sln" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="226" Column="28" />
+      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Water.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\2D\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\cc.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\ChainLink.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
