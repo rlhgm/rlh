@@ -1564,6 +1564,7 @@ public class Player2Controller : MonoBehaviour {
 			case Action.JUMP_LEFT:
 			case Action.JUMP_LEFT_LONG:
 				if( Input.GetKey(keyLeft)){
+					velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
 					setAction (Action.CROUCH_LEFT);
 				}else{
@@ -1577,6 +1578,7 @@ public class Player2Controller : MonoBehaviour {
 			case Action.JUMP_RIGHT:
 			case Action.JUMP_RIGHT_LONG:
 				if( Input.GetKey(keyRight)){
+					velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
 					setAction (Action.CROUCH_RIGHT);
 				}else{
