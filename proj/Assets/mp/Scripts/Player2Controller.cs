@@ -427,8 +427,8 @@ public class Player2Controller : MonoBehaviour {
 					velocity.x += (FlyUserControlParam * Time.deltaTime);
 					if( velocity.x > 0.0f ) velocity.x = 0.0f;
 				}else{
-					velocity.x += (FlySlowDownParam * Time.deltaTime);
-					if( velocity.x > 0.0f ) velocity.x = 0.0f;
+					//velocity.x += (FlySlowDownParam * Time.deltaTime);
+					//if( velocity.x > 0.0f ) velocity.x = 0.0f;
 				}
 				
 			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
@@ -448,8 +448,8 @@ public class Player2Controller : MonoBehaviour {
 					velocity.x -= (FlyUserControlParam * Time.deltaTime);
 					if( velocity.x < 0.0f ) velocity.x = 0.0f;
 				}else{
-					velocity.x -= (FlySlowDownParam * Time.deltaTime);
-					if( velocity.x < 0.0f ) velocity.x = 0.0f;
+					//velocity.x -= (FlySlowDownParam * Time.deltaTime);
+					//if( velocity.x < 0.0f ) velocity.x = 0.0f;
 				}
 				
 			}else if( isInAction(Action.JUMP) ){
