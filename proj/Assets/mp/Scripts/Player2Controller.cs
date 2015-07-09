@@ -1642,6 +1642,7 @@ public class Player2Controller : MonoBehaviour {
 				break;
 			//aaa
 			case Action.WALK_LEFT:
+			case Action.RUN_LEFT:
 			case Action.JUMP_LEFT:
 			case Action.JUMP_LEFT_LONG:
 				if( Input.GetKey(keyLeft)){
@@ -1656,6 +1657,7 @@ public class Player2Controller : MonoBehaviour {
 				break;
 			
 			case Action.WALK_RIGHT:
+			case Action.RUN_RIGHT:
 			case Action.JUMP_RIGHT:
 			case Action.JUMP_RIGHT_LONG:
 				if( Input.GetKey(keyRight)){
