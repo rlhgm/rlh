@@ -8818,7 +8818,6 @@ GameObject:
   - 4: {fileID: 1857342440}
   - 114: {fileID: 1857342441}
   - 61: {fileID: 1857342442}
-  - 212: {fileID: 1857342444}
   m_Layer: 15
   m_Name: player2
   m_TagString: Untagged
@@ -8851,7 +8850,7 @@ Transform:
   - {fileID: 476743741}
   - {fileID: 2071301498}
   m_Father: {fileID: 0}
-  m_RootOrder: 116
+  m_RootOrder: 117
 --- !u!114 &1857342441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8881,6 +8880,7 @@ MonoBehaviour:
   HardLandingHeight: 3
   VeryHardLandingHeight: 6
   RopeSwingForce: 500
+  RopeClimbSpeed: 1
   CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
@@ -8913,32 +8913,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.10000002}
   serializedVersion: 2
   m_Size: {x: 1, y: 2.20000005}
---- !u!212 &1857342444
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1857342439}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1869407281
 Prefab:
   m_ObjectHideFlags: 0

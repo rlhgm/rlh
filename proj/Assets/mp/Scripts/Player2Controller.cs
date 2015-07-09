@@ -414,7 +414,15 @@ public class Player2Controller : MonoBehaviour {
 				
 				if( Input.GetKey(keyLeft) ){
 					velocity.x -= (FlyUserControlParam * Time.deltaTime);
-					//if( velocity.x > 0.0f ) velocity.x = 0.0f;
+
+					if( isInAction(Action.JUMP_LEFT) ){
+						if( Mathf.Abs( velocity.x ) > JumpSpeed )
+							velocity.x = -JumpSpeed;
+					}else{
+						if( Mathf.Abs( velocity.x ) > JumpLongSpeed )
+							velocity.x = -JumpLongSpeed;
+					}
+					
 				}else if ( Input.GetKey(keyRight) ){
 					velocity.x += (FlyUserControlParam * Time.deltaTime);
 					if( velocity.x > 0.0f ) velocity.x = 0.0f;
@@ -427,6 +435,15 @@ public class Player2Controller : MonoBehaviour {
 
 				if( Input.GetKey(keyRight) ){
 					velocity.x += (FlyUserControlParam * Time.deltaTime);
+
+					if( isInAction(Action.JUMP_RIGHT) ){
+						if( Mathf.Abs( velocity.x ) > JumpSpeed )
+							velocity.x = JumpSpeed;
+					}else{
+						if( Mathf.Abs( velocity.x ) > JumpLongSpeed )
+							velocity.x = JumpLongSpeed;
+					}
+
 				}else if( Input.GetKey(keyLeft) ) {
 					velocity.x -= (FlyUserControlParam * Time.deltaTime);
 					if( velocity.x < 0.0f ) velocity.x = 0.0f;
