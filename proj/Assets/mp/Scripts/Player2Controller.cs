@@ -2401,14 +2401,43 @@ public class Player2Controller : MonoBehaviour {
 		if (!isInState (State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
 			return null;
 
-		Vector2 rayOrigin = transform.position;
-		Vector2 rayDir = (dir () == Vector2.right ? -Vector2.right : Vector2.right);
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, rayDir, 0.5f, layerIdGroundHandlesMask);
+//		// najpierw badam czy stoje na krawedzi odpowiednio zwrocony
+//		if (dir () == Vector2.right) { //
+//
+//		} else {
+//
+//		}
+
+		//Vector2 rayOrigin = sensorDown1.position; // transform.position;
+		//RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask);
+
+		Vector2 rayOrigin = sensorDown1.position; // transform.position;
+		//Vector2 rayDir = (dir () == Vector2.right ? -Vector2.right : Vector2.right);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right , myWidth, layerIdGroundHandlesMask);
 		//print ( "canClimbPullDown : " + hit.collider.gameObject);
-		if (hit.collider)
-			return hit.collider.gameObject;
-		else 
+
+		if (hit.collider) { 
+			//return hit.collider.gameObject;
+			// badam czy stoje na krawedzi odpowiednio zwrocony
+			if (dir () == Vector2.right) { //
+
+				// pod lewa noga musi byc przepasc
+				rayOrigin = sensorDown1.position;
+				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask).collider ) return null;
+				else return hit.collider.gameObject;
+
+			} else {
+
+				// pod prawa noga musi byc przepasc
+				rayOrigin = sensorDown3.position;
+				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask).collider ) return null;
+				else return hit.collider.gameObject;
+
+			}
+
+		} else {
 			return null;
+		}
 	}
 
 	bool onMount(){
