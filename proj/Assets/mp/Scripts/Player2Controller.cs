@@ -1243,11 +1243,15 @@ public class Player2Controller : MonoBehaviour {
 		
 		if( newRopeLinkCatchOffset <= -0.5f ) // przekroczyłem ogniwo w gore...
 		{
-			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma rodzica to przechodze wyzej 
-				
-				catchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
-				catchedRope.chooseDriver(catchedRopeLink.transform);
-				ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
+			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma dzicko to przechodze niżej 
+
+				if( catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
+					catchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
+					catchedRope.chooseDriver(catchedRopeLink.transform);
+					ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
+				}else{
+					ropeLinkCatchOffset = -0.5f;
+				}
 				
 			}else {
 				ropeLinkCatchOffset = -0.5f;
