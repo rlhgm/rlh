@@ -9,8 +9,6 @@ Direct3D:
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
@@ -23,7 +21,7 @@ Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (thi
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.224 seconds
+- Completed reload, in  0.574 seconds
 desktop: 1920x1080 60Hz; virtual: 3360x1491 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
