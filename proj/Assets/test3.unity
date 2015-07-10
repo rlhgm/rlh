@@ -1929,7 +1929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &374853178
 Transform:
   m_ObjectHideFlags: 0
@@ -3352,7 +3352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &635847036
 Transform:
   m_ObjectHideFlags: 0
@@ -6269,7 +6269,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 133
+  m_RootOrder: 134
 --- !u!4 &1240608505 stripped
 Transform:
   m_PrefabParentObject: {fileID: 420086, guid: c324a579cf992f043b83d77f80612652, type: 2}
@@ -10513,7 +10513,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2143118002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8238cc53530b64fbb7828c3d3bb591, type: 3}
+  m_Script: {fileID: 11500000, guid: 065df028721233545b0408125d692822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1857342440}
@@ -10521,11 +10521,11 @@ MonoBehaviour:
   - {fileID: 635847036}
   - {fileID: 374853178}
   backgroundsRatios:
-  - {x: .100000001, y: .0500000007}
-  - {x: .300000012, y: .150000006}
-  stageSize: {x: 30, y: 10}
-  stagesOffset: {x: 1, y: 0}
-  targetStage: {x: 0, y: 0}
+  - {x: .100000001, y: .00999999978}
+  - {x: .5, y: .0500000007}
+  stageSize: {x: 35, y: 10}
+  stagesOffset: {x: 0, y: 0}
+  targetStage: {x: -1, y: 0}
 --- !u!1001 &2146883018
 Prefab:
   m_ObjectHideFlags: 0

@@ -46,31 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BackgroundParallax.cs" />
-     <Compile Include="Assets\Scripts\BackgroundPropSpawner.cs" />
-     <Compile Include="Assets\Scripts\Bomb.cs" />
-     <Compile Include="Assets\Scripts\BombPickup.cs" />
-     <Compile Include="Assets\Scripts\CameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Destroyer.cs" />
-     <Compile Include="Assets\Scripts\Enemy.cs" />
-     <Compile Include="Assets\Scripts\FollowPlayer.cs" />
-     <Compile Include="Assets\Scripts\Gun.cs" />
-     <Compile Include="Assets\Scripts\HealthPickup.cs" />
-     <Compile Include="Assets\Scripts\LayBombs.cs" />
-     <Compile Include="Assets\Scripts\Pauser.cs" />
-     <Compile Include="Assets\Scripts\PickupSpawner.cs" />
-     <Compile Include="Assets\Scripts\PlayerControl.cs" />
-     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
-     <Compile Include="Assets\Scripts\Remover.cs" />
-     <Compile Include="Assets\Scripts\Rocket.cs" />
-     <Compile Include="Assets\Scripts\Score.cs" />
-     <Compile Include="Assets\Scripts\ScoreShadow.cs" />
-     <Compile Include="Assets\Scripts\SetParticleSortingLayer.cs" />
-     <Compile Include="Assets\Scripts\Spawner.cs" />
-     <Compile Include="Assets\cc.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
+     <Compile Include="Assets\mp\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
@@ -79,11 +58,6 @@
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
      <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
      <Compile Include="Assets\mp\Scripts\Water.cs" />
-     <Compile Include="Assets\mp\Scripts\ncc.cs" />
-     <Compile Include="Assets\mp\Scripts\ncc2.cs" />
-     <Compile Include="Assets\mp\Scripts\ncc2_2.cs" />
-     <Compile Include="Assets\mp\Scripts\ncc3.cs" />
-     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -96,10 +70,6 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{328DE943-05AB-11E0-E35A-D22C588BA384}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
