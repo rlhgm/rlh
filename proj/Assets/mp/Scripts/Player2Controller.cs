@@ -1982,48 +1982,56 @@ public class Player2Controller : MonoBehaviour {
 
 	bool canGetUp(){
 
-		if (dir () == Vector2.right) {
-
-			Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
-			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
-			if (hit.collider != null)
-			{
-				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
-					return false;
-			}
-			rayOrigin.y += 1;
-
-			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
-			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
-			if (hit.collider != null)
-			{
-				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
-					return false;
-			}
-
-			return true;
-
-		} else {
-
-			Vector2 rayOrigin = new Vector2(transform.position.x+myHalfWidth,transform.position.y+1.0f);
-			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, myWidth, layerIdGroundMask);
-			if (hit.collider != null)
-			{
-				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
-					return false;
-			}
-			rayOrigin.y += 1;
-			
-			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
-			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
-			if (hit.collider != null)
-			{
-				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
-					return false;
-			}
-			
-			return true;
+		RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
+		if (hit.collider != null)
+		{
+			if( Mathf.Abs (sensorLeft3.position.x+myWidth - hit.point.x) > 0.0001f )
+				return false;
 		}
+		return true;
+
+//		if (dir () == Vector2.right) {
+//
+//			Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
+//			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
+//			if (hit.collider != null)
+//			{
+//				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
+//					return false;
+//			}
+//			rayOrigin.y += 1;
+//
+//			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
+//			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
+//			if (hit.collider != null)
+//			{
+//				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
+//					return false;
+//			}
+//
+//			return true;
+//
+//		} else {
+//
+//			Vector2 rayOrigin = new Vector2(transform.position.x+myHalfWidth,transform.position.y+1.0f);
+//			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, myWidth, layerIdGroundMask);
+//			if (hit.collider != null)
+//			{
+//				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
+//					return false;
+//			}
+//			rayOrigin.y += 1;
+//			
+//			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
+//			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
+//			if (hit.collider != null)
+//			{
+//				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
+//					return false;
+//			}
+//			
+//			return true;
+//		}
 
 	}
 
