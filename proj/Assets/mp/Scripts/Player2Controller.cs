@@ -898,6 +898,9 @@ public class Player2Controller : MonoBehaviour {
 
 		distToMove = velocity.x * Time.deltaTime;
 
+		//animator.speed = 0.25f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.75f;
+		//print (animator.speed);
+
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			//print ("STOP STOP STOP");
@@ -2641,6 +2644,8 @@ public class Player2Controller : MonoBehaviour {
 		action = newAction;
 		currentActionTime = 0.0f;
 
+		animator.speed = 1.0f;
+
 		switch (newAction) {
 			
 		case Action.IDLE:
@@ -2694,14 +2699,26 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.MOUNT_IDLE:
-			animator.SetTrigger("mount_idle");
+			//animator.SetTrigger("mount_idle");
+			//animator.StopPlayback();
+			animator.speed = 0.0f;
 			break;
 
 		case Action.MOUNT_LEFT:
+			//animator.SetTrigger("mount_left");
+			animator.Play("mount_left");
+			break;
 		case Action.MOUNT_RIGHT:
+			//animator.SetTrigger("mount_right");
+			animator.Play("mount_right");
+			break;
 		case Action.MOUNT_UP:
+			//animator.SetTrigger("mount_up");
+			animator.Play("mount_up");
+			break;
 		case Action.MOUNT_DOWN:
-			animator.SetTrigger("mount_move");
+			//animator.SetTrigger("mount_down");
+			animator.Play("mount_down");
 			break;
 
 		case Action.CROUCH_IDLE:
