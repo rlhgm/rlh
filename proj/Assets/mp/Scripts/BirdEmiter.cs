@@ -7,13 +7,15 @@ public class BirdEmiter : MonoBehaviour {
 	float timeToNext;
 	float timeFromLast;
 
-	public Vector2 dir;
+	//public Vector2 dir;
 	//public Vector2 timeToNextMinMax;
 	//public Vector2 birdsSpeedMinMax;
 	public float EmitFrequency;
 	public float BirdsSpeed;
 
 	public Bird birdPrefab;
+
+	public bool onOff = false;
 
 	void Awake(){
 		//coll = GetComponent<BoxCollider2D> ();
@@ -32,22 +34,29 @@ public class BirdEmiter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		timeFromLast += Time.deltaTime;
-		if (timeFromLast >= timeToNext) {
-			emit ();
+		if (onOff) {
+			timeFromLast += Time.deltaTime;
+			if (timeFromLast >= timeToNext) {
+				emit ();
+			}
 		}
 	}
 
 	void emit(){
 		if (!birdPrefab)
 			return;
+		if (!onOff)
+			return;
+
+		//print (transform.right);
 
 		Bird newBird = Instantiate<Bird> (birdPrefab);
 		Vector3 startPos = transform.position;
 		//float szy = coll.size.y * 0.5f;
 		//startPos.y += Random.Range (-szy, szy);
 		newBird.transform.position = startPos;
-		newBird.setDir (dir);
+		//newBird.setDir (dir);
+		newBird.setDir (transform.right);
 		//newBird.setSpeed( Random.Range(birdsSpeedMinMax.x,birdsSpeedMinMax.y) );
 		newBird.setSpeed (BirdsSpeed);
 
