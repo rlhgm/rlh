@@ -30,8 +30,23 @@ public class Bird : MonoBehaviour {
 	public void setDir(Vector2 newDir){
 		Vector2 dir2n = newDir.normalized;
 		dir = dir2n;
+		if (dir.x < 0.0)
+			turnLeft ();
+		else 
+			turnRight ();
 	}
 	public void setSpeed(float newSpeed){
 		speed = newSpeed;
+	}
+
+	void turnLeft(){
+		Vector3 scl = transform.localScale;
+		scl.x = Mathf.Abs(scl.x) * -1.0f;
+		transform.localScale = scl;
+	}
+	void turnRight(){
+		Vector3 scl = transform.localScale;
+		scl.x = Mathf.Abs(scl.x) * 1.0f;
+		transform.localScale = scl;
 	}
 }
