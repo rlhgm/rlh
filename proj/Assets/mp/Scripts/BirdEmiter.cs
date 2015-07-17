@@ -3,24 +3,26 @@ using System.Collections;
 
 public class BirdEmiter : MonoBehaviour {
 
-	BoxCollider2D coll;
+	//BoxCollider2D coll;
 	float timeToNext;
 	float timeFromLast;
 
 	public Vector2 dir;
-	public Vector2 timeToNextMinMax;
-	public Vector2 birdsSpeedMinMax;
+	//public Vector2 timeToNextMinMax;
+	//public Vector2 birdsSpeedMinMax;
+	public float EmitFrequency;
+	public float BirdsSpeed;
 
 	public Bird birdPrefab;
 
 	void Awake(){
-		coll = GetComponent<BoxCollider2D> ();
-		dir = -Vector2.right;
-		timeToNextMinMax = new Vector2 (1, 3);
-		birdsSpeedMinMax = new Vector3 (2, 5);
+		//coll = GetComponent<BoxCollider2D> ();
+		//dir = -Vector2.right;
+		//timeToNextMinMax = new Vector2 (1, 3);
+		//birdsSpeedMinMax = new Vector3 (2, 5);
 
-		timeToNext = timeToNextMinMax.x;
-		timeFromLast = 0.0f;
+		timeToNext = 0f; //EmitFrequency; //timeToNextMinMax.x;
+		timeFromLast = 0f;
 	}
 
 	// Use this for initialization
@@ -42,13 +44,15 @@ public class BirdEmiter : MonoBehaviour {
 
 		Bird newBird = Instantiate<Bird> (birdPrefab);
 		Vector3 startPos = transform.position;
-		float szy = coll.size.y * 0.5f;
-		startPos.y += Random.Range (-szy, szy);
+		//float szy = coll.size.y * 0.5f;
+		//startPos.y += Random.Range (-szy, szy);
 		newBird.transform.position = startPos;
 		newBird.setDir (dir);
-		newBird.setSpeed( Random.Range(birdsSpeedMinMax.x,birdsSpeedMinMax.y) );
+		//newBird.setSpeed( Random.Range(birdsSpeedMinMax.x,birdsSpeedMinMax.y) );
+		newBird.setSpeed (BirdsSpeed);
 
-		timeToNext = Random.Range (timeToNextMinMax.x, timeToNextMinMax.y);
+		//timeToNext = Random.Range (timeToNextMinMax.x, timeToNextMinMax.y);
+		timeToNext = EmitFrequency;
 		timeFromLast = 0.0f;
 	}
 
