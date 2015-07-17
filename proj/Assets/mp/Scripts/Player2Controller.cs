@@ -171,7 +171,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		//print( "PLAYER OnTriggerEnter" );
+		//print( "PLAYER OnTriggerEnter" + other.gameObject.tag);
 		if (other.gameObject.tag == "Bird") {
 			if( isInState(State.MOUNT) ){
 				velocity.x = 0.0f;

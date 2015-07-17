@@ -49,6 +49,7 @@
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
+     <Compile Include="Assets\mp\Scripts\BirdEmiterActivator.cs" />
      <Compile Include="Assets\mp\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />

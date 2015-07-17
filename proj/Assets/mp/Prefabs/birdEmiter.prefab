@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 446264}
   - 114: {fileID: 11477582}
   m_Layer: 16
-  m_Name: birdEmiter
+  m_Name: BirdEmiter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.1000004, y: 8.02999973, z: 0}
+  m_LocalPosition: {x: 30.1000004, y: 8.32999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,10 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaa2802b7bf71c4d9af521062f1076e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dir: {x: -1, y: 0}
   EmitFrequency: 1
   BirdsSpeed: 2
   birdPrefab: {fileID: 11489996, guid: c6ab363f2c48c2c4182ec560e49b895c, type: 2}
+  onOff: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
