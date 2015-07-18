@@ -1068,11 +1068,11 @@ public class Player2Controller : MonoBehaviour {
 		if (!catchedRope)
 			return 0;
 
-		if (Input.GetKeyDown (keyLeft)) {
+		if (Input.GetKey (keyLeft)) {
 			turnLeft();
 			catchedRope.swing(-Vector2.right,RopeSwingForce);
 		}
-		if (Input.GetKeyDown (keyRight)) {
+		if (Input.GetKey (keyRight)) {
 			turnRight();
 			catchedRope.swing(Vector2.right,RopeSwingForce);
 		}
