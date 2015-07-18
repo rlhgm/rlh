@@ -106,6 +106,15 @@ public class NewRope : MonoBehaviour {
 			firstLinkMaxSpeed = Mathf.Abs (firstLinkSpeed);
 		}
 
+		if (swingMotor) {
+
+			swing( swingMotorDir, swingMotorForce * Time.deltaTime );
+
+			swingMotorDuration += Time.deltaTime;
+			if( swingMotorDuration >= swingMotorTime) 
+				swingMotor = false;
+		}
+
 //		//string s = new string("");
 //		for (int i = 0; i < links.Length; ++i) {
 //			//HingeJoint2D hingeJoint = links [i].GetComponent<HingeJoint2D> ();
@@ -131,7 +140,21 @@ public class NewRope : MonoBehaviour {
 			nextLink.GetComponent<Rigidbody2D>().AddForce( dirForce );
 		}
 	}
-	
+
+	bool swingMotor = false;
+	Vector2 swingMotorDir;
+	float swingMotorForce;
+	float swingMotorTime;
+	float swingMotorDuration;
+
+	public void setSwingMotor(Vector2 dir, float force, float time){
+		swingMotor = true;
+		swingMotorDir = dir;
+		swingMotorForce = force;
+		swingMotorTime = time;
+		swingMotorDuration = 0f;
+	}
+
 	void FixedUpdate(){
 		
 	}

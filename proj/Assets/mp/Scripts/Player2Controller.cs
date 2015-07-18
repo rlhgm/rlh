@@ -2345,12 +2345,14 @@ public class Player2Controller : MonoBehaviour {
 					catchedRope.chooseDriver(catchedRopeLink.transform);
 
 					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
-					float force = RopeSwingForce * forceRatio;
+					float force = RopeSwingForce * forceRatio;// * Time.deltaTime;
 
 					if( velocity.x < 0f ){
-						catchedRope.swing(-Vector2.right, force);
-					}else if (velocity.x > 0){
-						catchedRope.swing(Vector2.right, force);
+						//catchedRope.swing(-Vector2.right, force);
+						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
+					}else if (velocity.x > 0){ 
+						//catchedRope.swing(Vector2.right, force);
+						catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
 					}
 
 					velocity.x = 0.0f;
@@ -2426,7 +2428,18 @@ public class Player2Controller : MonoBehaviour {
 					catchedRope = catchedRopeLink.rope;
 					
 					catchedRope.chooseDriver(catchedRopeLink.transform);
-					
+
+					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
+					float force = RopeSwingForce * forceRatio;// * Time.deltaTime;
+
+					if( velocity.x < 0f ){
+						//catchedRope.swing(-Vector2.right, force);
+						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
+					}else if (velocity.x > 0){ 
+						//catchedRope.swing(Vector2.right, force);
+						catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
+					}
+
 					velocity.x = 0.0f;
 					velocity.y = 0.0f;
 					
