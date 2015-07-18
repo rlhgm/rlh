@@ -8245,7 +8245,7 @@ MonoBehaviour:
   MaxSpeedY: 15
   HardLandingHeight: 3
   VeryHardLandingHeight: 6
-  RopeSwingForce: 500
+  RopeSwingForce: 4250
   RopeClimbSpeed: 1
   CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5

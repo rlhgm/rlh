@@ -10,6 +10,7 @@ public class NewRope : MonoBehaviour {
 	RopeLink[] links;
 
 	public float firstLinkSpeed;
+	public float firstLinkMaxSpeed;
 	public float firstLinkAngle;
 
 	void Awake(){
@@ -24,6 +25,8 @@ public class NewRope : MonoBehaviour {
 		transform.localScale = new Vector3 (1, 1, 1);
 		//print( "SCALE : " + transform.localScale );
 		links = new RopeLink[numberOfLinks];
+
+		float linkLimitRest = 15.0f / numberOfLinks;
 
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
@@ -46,7 +49,15 @@ public class NewRope : MonoBehaviour {
 				//newLink.transform.SetParent( transform );
 				hingeJoint.connectedAnchor = transform.position;
 				newLink.transform.position = transform.position;
+
+
 			}
+
+//			hingeJoint.useLimits = true;
+//			JointAngleLimits2D limits = new JointAngleLimits2D();
+//			limits.min = -10 - linkLimitRest * i;
+//			limits.max = 10 + linkLimitRest * i;
+//			hingeJoint.limits = limits; 
 
 			lastLink = newLink;
 			currentLink = newLink.transform;
@@ -90,6 +101,10 @@ public class NewRope : MonoBehaviour {
 		HingeJoint2D hingeJoint = links [0].GetComponent<HingeJoint2D> ();
 		firstLinkSpeed = hingeJoint.jointSpeed;
 		firstLinkAngle = hingeJoint.jointAngle;
+
+		if (firstLinkMaxSpeed < Mathf.Abs (firstLinkSpeed)) {
+			firstLinkMaxSpeed = Mathf.Abs (firstLinkSpeed);
+		}
 
 //		//string s = new string("");
 //		for (int i = 0; i < links.Length; ++i) {

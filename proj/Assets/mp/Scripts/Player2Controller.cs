@@ -1070,11 +1070,34 @@ public class Player2Controller : MonoBehaviour {
 
 		if (Input.GetKey (keyLeft)) {
 			turnLeft();
-			catchedRope.swing(-Vector2.right,RopeSwingForce);
+
+			float fla = catchedRope.firstLinkAngle;
+			//float fls = catchedRope.firstLinkSpeed;
+
+			if( fla < 10f && fla > -15f){
+				//catchedRope.swing(-Vector2.right,RopeSwingForce * (fla/50f) );
+				//print( "swing left : fla " + fla );
+				catchedRope.swing(-Vector2.right, RopeSwingForce * Time.deltaTime );
+			}
+//			}else if( fla == 0f && fls == 0f){
+//				catchedRope.swing(-Vector2.right,RopeSwingForce);
+//			}
 		}
 		if (Input.GetKey (keyRight)) {
+
 			turnRight();
-			catchedRope.swing(Vector2.right,RopeSwingForce);
+
+			float fla = catchedRope.firstLinkAngle;
+			//float fls = catchedRope.firstLinkSpeed;
+
+			if( fla > -10f && fla < 15f){
+				//catchedRope.swing(Vector2.right, RopeSwingForce * (-fla/50f) );
+				//print( "swing right : fla " + fla );
+				catchedRope.swing(Vector2.right, RopeSwingForce * Time.deltaTime );
+			}
+//			}else if( fla == 0f && fls == 0f ){
+//				catchedRope.swing(Vector2.right, RopeSwingForce );
+//			}
 		}
 
 		if (Input.GetKeyDown (keyJump)) {
@@ -1095,7 +1118,7 @@ public class Player2Controller : MonoBehaviour {
 
 			if( ps < 0f ){
 
-      				turnRight();
+      			turnRight();
 				
 				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
 					setAction(Action.JUMP_RIGHT_LONG);
@@ -2320,6 +2343,15 @@ public class Player2Controller : MonoBehaviour {
 					catchedRope = catchedRopeLink.rope;
 
 					catchedRope.chooseDriver(catchedRopeLink.transform);
+
+					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
+					float force = RopeSwingForce * forceRatio;
+
+					if( velocity.x < 0f ){
+						catchedRope.swing(-Vector2.right, force);
+					}else if (velocity.x > 0){
+						catchedRope.swing(Vector2.right, force);
+					}
 
 					velocity.x = 0.0f;
 					velocity.y = 0.0f;

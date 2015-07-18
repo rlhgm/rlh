@@ -17,17 +17,9 @@ Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (thi
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.204 seconds
+- Completed reload, in  0.172 seconds
 desktop: 1920x1080 60Hz; virtual: 3360x1220 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
-The AnimationClip 'mount_up' used by the Animation component 'boxtest (1)' must be marked as Legacy.
- 
-(Filename:  Line: 1901)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 400)
-

@@ -40,7 +40,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191386}
   m_Mass: 1
-  m_LinearDrag: .25
+  m_LinearDrag: .400000006
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_IsKinematic: 0
@@ -128,7 +128,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_LinearDrag
-      value: .25
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AngularDrag
