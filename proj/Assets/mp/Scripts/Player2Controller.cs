@@ -1110,46 +1110,78 @@ public class Player2Controller : MonoBehaviour {
 
 			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
 
-			float ps = ropeSpeedRad * (crl_idn+1) * 0.5f;
+			float ps =  ropeSpeedRad * (crl_idn+1) * 0.5f;
 
 			float ropeAngle = Mathf.Abs( catchedRope.firstLinkAngle );
 
 			//Quaternion.
 
-			if( ps < 0f ){
+			if( Input.GetKey(keyLeft) ){ //skacze w lewo
 
-      			turnRight();
-				
-				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
-					setAction(Action.JUMP_RIGHT_LONG);
-				}else{
-					setAction(Action.JUMP_RIGHT);
-				}
-				//velocity = swingVelocity;
-				velocity.x = -ps;
-				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
-
-
-			}else if (ps > 0f){
-			
 				turnLeft();
-			
-				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
-					setAction(Action.JUMP_LEFT_LONG);
+
+				if( ropeSpeed > 0f ){ // lina tez leci w lewo
+					//setAction(Action.JUMP_LEFT_LONG);
+					jumpLongLeft();
+					velocity.x -= ps;
 				}else{
-					setAction(Action.JUMP_LEFT);
+					//setAction(Action.JUMP_LEFT);
+					jumpLeft();
 				}
-				//velocity = swingVelocity;
+
+			} else if( Input.GetKey(keyRight) ) { //skacze w prawo
+
+				turnRight();
+
+				if( ropeSpeed < 0f ){ // lina tez leci w prawo
+					jumpLongRight();
+					velocity.y += ps;
+				}else{
+					jumpRight();
+				}
+
+			}else{
+
+				//jump();
 				velocity.x = -ps;
 				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
-			
-			}else{
-				
 				setAction(Action.JUMP);
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
-				
 			}
+
+//			if( ps < 0f ){
+//
+//      			turnRight();
+//				
+//				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
+//					setAction(Action.JUMP_RIGHT_LONG);
+//				}else{
+//					setAction(Action.JUMP_RIGHT);
+//				}
+//				//velocity = swingVelocity;
+//				velocity.x = -ps;
+//				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
+//
+//
+//			}else if (ps > 0f){
+//			
+//				turnLeft();
+//			
+//				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
+//					setAction(Action.JUMP_LEFT_LONG);
+//				}else{
+//					setAction(Action.JUMP_LEFT);
+//				}
+//				//velocity = swingVelocity;
+//				velocity.x = -ps;
+//				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
+//			
+//			}else{
+//				
+//				setAction(Action.JUMP);
+//				velocity.x = 0.0f;
+//				velocity.y = 0.0f;
+//				
+//			}
 
 
 //			if( swingVelocity.x > 0 ){
