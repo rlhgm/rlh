@@ -237,12 +237,14 @@ public class Player2Controller : MonoBehaviour {
 
 		if (Input.GetKeyDown (keyUp)) {
 			keyUpDown();
-		} else if (Input.GetKeyUp (keyUp)) {
+		} 
+		if (Input.GetKeyUp (keyUp)) {
 			keyUpUp();
 		}
 		if (Input.GetKeyDown (keyDown)) {
 			keyDownDown();
-		} else if (Input.GetKeyUp (keyDown)) {
+		} 
+		if (Input.GetKeyUp (keyDown)) {
 			keyDownUp();
 		}
 
@@ -252,13 +254,15 @@ public class Player2Controller : MonoBehaviour {
 
 		if (Input.GetKeyDown (keyLeft)) {
 			keyLeftDown();
-		} else if (Input.GetKeyDown (keyRight)) {
+		} 
+		if (Input.GetKeyDown (keyRight)) {
 			keyRightDown();
 		}
 		
 		if (Input.GetKeyUp (keyLeft)) {
 			keyLeftUp();
-		} else if (Input.GetKeyUp (keyRight)) {
+		} 
+		if (Input.GetKeyUp (keyRight)) {
 			keyRightUp();
 		}
 
@@ -326,14 +330,14 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			if( currentActionTime >= 0.1f ){
+			if( currentActionTime >= 0.2f ){
 				turnLeft();
 				turnLeftFinish();
 			}
 			break;
 
 		case Action.TURN_STAND_RIGHT:
-			if( currentActionTime >= 0.1f ){
+			if( currentActionTime >= 0.2f ){
 				turnRight();
 				turnRightFinish();
 			}
@@ -1380,6 +1384,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			} else {
 				turnLeftStart();
+				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
 			if (!mounting ()) {
@@ -1410,21 +1415,26 @@ public class Player2Controller : MonoBehaviour {
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
 			if( checkRight (0.1f) >= 0.0f ) {
 				//print ("cant move right");
-				turnRight();
+				turnRightStart();
 				return false;
 			}
-			turnRight();
-			if( Input.GetKey(keyRun) ){
-				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
-				desiredSpeedX = RunSpeed;
-				speedLimiter(1,desiredSpeedX+1.0f);
-				setAction(Action.RUN_RIGHT);
-				return true;
+			//turnRight();
+			if( dir() == Vector2.right ){
+				if( Input.GetKey(keyRun) ){
+					//startWalkOrRun(RUN_SPEED,stopToRunDuration);
+					desiredSpeedX = RunSpeed;
+					speedLimiter(1,desiredSpeedX+1.0f);
+					setAction(Action.RUN_RIGHT);
+					return true;
+				}else{
+					//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
+					desiredSpeedX = WalkSpeed;
+					speedLimiter(1,desiredSpeedX+1.0f);
+					setAction(Action.WALK_RIGHT);
+					return true;
+				}
 			}else{
-				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
-				desiredSpeedX = WalkSpeed;
-				speedLimiter(1,desiredSpeedX+1.0f);
-				setAction(Action.WALK_RIGHT);
+				turnRightStart();
 				return true;
 			}
 		} else if (isInState (State.MOUNT)) {
@@ -1847,10 +1857,14 @@ public class Player2Controller : MonoBehaviour {
 
 	void turnLeftFinish(){
 		setAction (Action.IDLE);
+		//action = Action.IDLE;
+		resetActionAndState ();
 	}
 	
 	void turnRightFinish(){
 		setAction (Action.IDLE);
+		//action = Action.IDLE;
+		resetActionAndState ();
 	}
 
 	void turnLeft(){
