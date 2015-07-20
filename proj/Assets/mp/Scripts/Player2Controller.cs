@@ -2799,16 +2799,22 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_IDLE:
-			animator.SetTrigger("crouchidle");
+			//animator.SetTrigger("crouchidle");
+			animator.Play("crouch_leftright");
+			animator.speed = 0f;
 			break;
 
 		case Action.CROUCH_LEFT:
+			animator.Play("crouch_leftright");
+			break;
 		case Action.CROUCH_RIGHT:
-			animator.SetTrigger("crouchleftright");
+			animator.Play("crouch_leftright");
+			//animator.SetTrigger("crouchleftright");
 			break;
 
 		case Action.ROPECLIMB_IDLE:
 			animator.SetTrigger("climbrope_idle");
+			//animator.speed = 0f;
 			break;
 
 		case Action.ROPECLIMB_UP:
