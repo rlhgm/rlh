@@ -325,6 +325,20 @@ public class Player2Controller : MonoBehaviour {
 			Act_RUN(1);
 			break;
 
+		case Action.TURN_STAND_LEFT:
+			if( currentActionTime >= 0.1f ){
+				turnLeft();
+				turnLeftFinish();
+			}
+			break;
+
+		case Action.TURN_STAND_RIGHT:
+			if( currentActionTime >= 0.1f ){
+				turnRight();
+				turnRightFinish();
+			}
+			break;
+
 		case Action.CROUCH_IDLE:
 			Act_CROUCH_IDLE();
 			break;
@@ -1345,22 +1359,27 @@ public class Player2Controller : MonoBehaviour {
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (State.ON_GROUND)) {
 			if (checkLeft (0.1f) >= 0.0f) {
 				//print ("cant move left");
-				turnLeft();
+				turnLeftStart();
 				return false;
 			}
-			turnLeft ();
-			if (Input.GetKey (keyRun)) {
-				//startWalkOrRun(RUN_SPEED,stopToRunDuration);
-				desiredSpeedX = RunSpeed;
-				speedLimiter(-1,desiredSpeedX+1.0f);
-				setAction (Action.RUN_LEFT);
-				return true;
+
+			if( dir() == -Vector2.right )
+			{
+				if (Input.GetKey (keyRun)) {
+					//startWalkOrRun(RUN_SPEED,stopToRunDuration);
+					desiredSpeedX = RunSpeed;
+					speedLimiter(-1,desiredSpeedX+1.0f);
+					setAction (Action.RUN_LEFT);
+					return true;
+				} else {
+					//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
+					desiredSpeedX = WalkSpeed;
+					speedLimiter(-1,desiredSpeedX+1.0f);
+					setAction (Action.WALK_LEFT);
+					return true;
+				}
 			} else {
-				//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
-				desiredSpeedX = WalkSpeed;
-				speedLimiter(-1,desiredSpeedX+1.0f);
-				setAction (Action.WALK_LEFT);
-				return true;
+				turnLeftStart();
 			}
 		} else if (isInState (State.MOUNT)) {
 			if (!mounting ()) {
@@ -1818,10 +1837,27 @@ public class Player2Controller : MonoBehaviour {
 		return false;
 	}
 
+	void turnLeftStart(){
+		setAction (Action.TURN_STAND_LEFT);
+	}
+
+	void turnRightStart(){
+		setAction (Action.TURN_STAND_RIGHT);
+	}
+
+	void turnLeftFinish(){
+		setAction (Action.IDLE);
+	}
+	
+	void turnRightFinish(){
+		setAction (Action.IDLE);
+	}
+
 	void turnLeft(){
 		Vector3 scl = gfx.localScale;
 		scl.x = Mathf.Abs(scl.x) * -1.0f;
 		gfx.localScale = scl;
+
 	}
 	void turnRight(){
 		Vector3 scl = gfx.localScale;
@@ -2628,6 +2664,10 @@ public class Player2Controller : MonoBehaviour {
 		WALK_RIGHT,
 		RUN_LEFT,
 		RUN_RIGHT,
+		TURN_STAND_LEFT,
+		TURN_STAND_RIGHT,
+		TURN_RUN_LEFT,
+		TURN_RUN_RIGHT,
 		//BREAK,
 		PREPARE_TO_JUMP,
 		JUMP,
@@ -2737,6 +2777,14 @@ public class Player2Controller : MonoBehaviour {
 		case Action.RUN_LEFT:
 		case Action.RUN_RIGHT:
 			animator.SetTrigger("run");
+			break;
+
+		case Action.TURN_STAND_LEFT:
+			animator.Play("stand_turn_left");
+			break;
+
+		case Action.TURN_STAND_RIGHT:
+			animator.Play("stand_turn_right");
 			break;
 
 		case Action.PREPARE_TO_JUMP:
