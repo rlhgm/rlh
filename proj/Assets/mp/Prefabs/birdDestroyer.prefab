@@ -11,7 +11,7 @@ GameObject:
   - 61: {fileID: 6186070}
   - 114: {fileID: 11476396}
   m_Layer: 16
-  m_Name: BirdDestroyer
+  m_Name: birdDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
