@@ -1732,7 +1732,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 139
+  m_RootOrder: 142
 --- !u!1001 &398890167
 Prefab:
   m_ObjectHideFlags: 0
@@ -2834,6 +2834,18 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1857342441}
+    - target: {fileID: 21242876, guid: ed7663b75c34d814188745db0b321f45, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21242876, guid: ed7663b75c34d814188745db0b321f45, type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21242876, guid: ed7663b75c34d814188745db0b321f45, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed7663b75c34d814188745db0b321f45, type: 2}
   m_IsPrefabParent: 0
@@ -3123,7 +3135,7 @@ Transform:
   - {fileID: 1341302171}
   - {fileID: 87341738}
   m_Father: {fileID: 0}
-  m_RootOrder: 140
+  m_RootOrder: 143
 --- !u!1001 &660801523
 Prefab:
   m_ObjectHideFlags: 0

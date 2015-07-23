@@ -28,7 +28,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: crocodille_
-  m_Speed: .300000012
+  m_Speed: -.300000012
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
