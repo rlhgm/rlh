@@ -17,8 +17,8 @@ Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (thi
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.262 seconds
-desktop: 1920x1080 60Hz; virtual: 3360x1220 at 0,0
+- Completed reload, in  0.199 seconds
+desktop: 1440x900 60Hz; virtual: 1440x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)

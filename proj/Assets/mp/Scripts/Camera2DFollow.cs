@@ -37,6 +37,7 @@ namespace UnityStandardAssets._2D
 		void Awake(){
 			//public GameObject[] backgroundsBackgrounds;
 			for (int i = 0; i < backgroundsNodes.Length; ++i) {
+				if( backgroundsNodes[i] == null ) continue;
 				if( backgroundsBackgrounds[i] == null) continue;
 
 				GameObject bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
@@ -50,10 +51,10 @@ namespace UnityStandardAssets._2D
 				Vector3 bckgItemSize = bckgSpriteRend.bounds.extents;
 
 				float bckgDist = bckgItemSize.x;
-				int c = 0;
+				int c = 1;
 
 				while( bckgDist < backgroundLimits.y ){
-					c = 1;
+					//c = 1;
 					bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
 					bckg.transform.position = new Vector3(bckgDist + bckgItemSize.x ,0f,0f);
 					bckg.transform.parent = backgroundsNodes[i];
@@ -62,10 +63,10 @@ namespace UnityStandardAssets._2D
 				}
 
 				bckgDist = -bckgItemSize.x;
-				c = 0;
+				c = 1;
 
 				while( bckgDist > backgroundLimits.x ){
-					c = 1;
+					//c = 1;
 					bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
 					bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x ,0f,0f);
 					bckg.transform.parent = backgroundsNodes[i];
