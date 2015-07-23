@@ -29785,9 +29785,9 @@ MonoBehaviour:
   - {fileID: 1294452589}
   - {fileID: 678269468}
   backgroundsRatios:
-  - {x: .100000001, y: .899999976}
-  - {x: .300000012, y: .930000007}
-  - {x: .5, y: .959999979}
+  - {x: .100000001, y: .975000024}
+  - {x: .300000012, y: .980000019}
+  - {x: .5, y: .985000014}
   - {x: .699999988, y: .99000001}
   - {x: 1, y: 1}
   backgroundsBackgrounds:
@@ -29798,7 +29798,7 @@ MonoBehaviour:
   - {fileID: 175764, guid: 161fc99aa2436a9448c7213f22381502, type: 2}
   stageSize: {x: 500, y: 100}
   stagesOffset: {x: 0, y: 0}
-  targetStage: {x: -1, y: 0}
+  targetStage: {x: -1, y: -1}
   backgroundLimits: {x: -200, y: 200}
 --- !u!1001 &2146883018
 Prefab:
