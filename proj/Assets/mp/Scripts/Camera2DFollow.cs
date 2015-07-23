@@ -19,6 +19,8 @@ namespace UnityStandardAssets._2D
 		public Transform[] backgroundsNodes;
 		public Vector2[] backgroundsRatios;
 
+		public GameObject[] backgroundsBackgrounds;
+
 		private Vector3 lastPos;
 
 		public Vector2 stageSize = new Vector2 (20f, 10f);
@@ -28,7 +30,51 @@ namespace UnityStandardAssets._2D
 
 		public Vector2 targetStage = new Vector2 ();
 
+		public Vector2 backgroundLimits = new Vector2 (-30, 30);
+
 		Camera camera;
+
+		void Awake(){
+			//public GameObject[] backgroundsBackgrounds;
+			for (int i = 0; i < backgroundsNodes.Length; ++i) {
+				if( backgroundsBackgrounds[i] == null) continue;
+
+				GameObject bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
+				bckg.transform.position = new Vector3(0f,0f,0f);
+				bckg.transform.parent = backgroundsNodes[i];
+
+				SpriteRenderer bckgSpriteRend = bckg.GetComponent<SpriteRenderer>();
+				//print(bckgSpriteRend.bounds);
+				//print(bckgSpriteRend.sprite.border);
+
+				Vector3 bckgItemSize = bckgSpriteRend.bounds.extents;
+
+				float bckgDist = bckgItemSize.x;
+				int c = 0;
+
+				while( bckgDist < backgroundLimits.y ){
+					c = 1;
+					bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
+					bckg.transform.position = new Vector3(bckgDist + bckgItemSize.x ,0f,0f);
+					bckg.transform.parent = backgroundsNodes[i];
+					bckgDist = bckgItemSize.x + c * (bckgItemSize.x*2);
+					c += 1;
+				}
+
+				bckgDist = -bckgItemSize.x;
+				c = 0;
+
+				while( bckgDist > backgroundLimits.x ){
+					c = 1;
+					bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
+					bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x ,0f,0f);
+					bckg.transform.parent = backgroundsNodes[i];
+					bckgDist = -bckgItemSize.x - c * (bckgItemSize.x*2);
+					c+=1;
+				}
+			}
+		}
+
         // Use this for initialization
         private void Start()
         {
