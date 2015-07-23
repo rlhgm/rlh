@@ -4,6 +4,7 @@ using System.Collections;
 public class Crocodile : MonoBehaviour {
 
 	BoxCollider2D coll;
+	Animator animator;
 	public Water water;
 	public Player2Controller player;
 	Vector2 mySize;
@@ -26,6 +27,10 @@ public class Crocodile : MonoBehaviour {
 	void Awake(){
 		coll = GetComponent<BoxCollider2D> ();
 		mySize = new Vector2 (coll.size.x * transform.localScale.x, coll.size.y * transform.localScale.y);
+		animator = GetComponent<Animator> ();
+
+		//animator.ResetTrigger ();
+		animator.speed = 0f;
 	}
 
 	// Use this for initialization
@@ -78,6 +83,19 @@ public class Crocodile : MonoBehaviour {
 //		print (water.transform.TransformPoint(new Vector3(1,1,0)) );
 //		print ("==============================================");
 
+		leftLimit = water.transform.TransformPoint ( new Vector3(0.3f,-0.25f,0f) );
+		rightLimit = water.transform.TransformPoint ( new Vector3(0.7f,-0.25f,0f) );
+
+		//swingFinalPos.x = Random.Range (0.1f, 0.7f);
+		//if( 
+		//swingFinalPos.y = Random.Range (-0.4f,-0.01f);
+		//swingFinalPos.y = -0.25f;
+		//swingFinalPos = water.transform.TransformPoint (swingFinalPos);
+		//distToSwing = swingFinalPos - swingStartPos;
+
+		transform.position = rightLimit;
+		calmGoToRight = true;
+
 		setCalmSwingTarget ();
 	}
 
@@ -89,6 +107,8 @@ public class Crocodile : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		//return;
 
 		//if( coll.IsTouching( player.coll ) ){
 		Vector3 playerBauch2 = player.transform.position + new Vector3(0.0f,1.0f,0.0f);
@@ -142,14 +162,14 @@ public class Crocodile : MonoBehaviour {
 			break;
 
 		case State.CALM:
-			if( targetInWater() ){
-				state = State.ATTACK;
-				break;
-			}
-			if( targetOnShore() != 0.0f ){
-				state = State.SNEAK;
-				break;
-			}
+			//if( targetInWater() ){
+			//	state = State.ATTACK;
+			//	break;
+			//}
+			//if( targetOnShore() != 0.0f ){
+			//	state = State.SNEAK;
+			//	break;
+			//}
 
 			swingTime += Time.deltaTime;
 			float swingRatio = swingTime / swingDuration;
@@ -168,6 +188,10 @@ public class Crocodile : MonoBehaviour {
 
 	}
 
+	Vector3 leftLimit = new Vector3();
+	Vector3 rightLimit = new Vector3();
+	bool calmGoToRight = false;
+
 	void setCalmSwingTarget(){
 		state = State.CALM;
 
@@ -176,10 +200,21 @@ public class Crocodile : MonoBehaviour {
 		//swingFinalPos.x = Random.Range (0.0f, swingTargetLimits.x);
 		//swingFinalPos.y = Random.Range (-swingTargetLimits.y, 0.0f);
 
-		swingFinalPos.x = Random.Range (0.1f, 0.7f);
-		swingFinalPos.y = Random.Range (-0.4f,-0.01f);
+		//swingFinalPos.x = Random.Range (0.1f, 0.7f);
+		//if( 
+		//swingFinalPos.y = Random.Range (-0.4f,-0.01f);
+		//swingFinalPos.y = -0.25f;
 
-		swingFinalPos = water.transform.TransformPoint (swingFinalPos);
+		if (calmGoToRight) { //jezeli szedl w prawo
+			swingFinalPos = leftLimit;
+			calmGoToRight = false;
+
+		} else {
+			swingFinalPos = rightLimit;
+			calmGoToRight = true;
+		}
+
+		//swingFinalPos = water.transform.TransformPoint (swingFinalPos);
 
 		distToSwing = swingFinalPos - swingStartPos;
 
