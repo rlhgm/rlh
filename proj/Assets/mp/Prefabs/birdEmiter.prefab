@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 446264}
   - 114: {fileID: 11477582}
   m_Layer: 16
-  m_Name: BirdEmiter
+  m_Name: birdEmiter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
