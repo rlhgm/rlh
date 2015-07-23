@@ -15,6 +15,7 @@ TagManager:
   - HealthBar
   - Bird
   - CheckPoint
+  - KillerPhysic
   layers:
   - Default
   - TransparentFX

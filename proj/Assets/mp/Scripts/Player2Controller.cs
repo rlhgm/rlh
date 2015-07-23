@@ -192,6 +192,9 @@ public class Player2Controller : MonoBehaviour {
 			//print( "checkpoint : " + other.gameObject.name );
 			lastTouchedCheckPoint = other.gameObject;
 		}
+		if (other.gameObject.tag == "KillerPhysic") {
+			die();
+		}
 	}
 
 	bool jumpKeyPressed = false;
