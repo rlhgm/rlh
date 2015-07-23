@@ -14,6 +14,7 @@ public class Crocodile : MonoBehaviour {
 	Vector3 distToSwing;
 	float swingTime;
 	float swingDuration;
+	float swingRatio;
 	Vector2 swingTargetLimits;
 	//bool swingToTarget;
 
@@ -86,6 +87,9 @@ public class Crocodile : MonoBehaviour {
 		leftLimit = water.transform.TransformPoint ( new Vector3(0.3f,-0.25f,0f) );
 		rightLimit = water.transform.TransformPoint ( new Vector3(0.7f,-0.25f,0f) );
 
+		waterLeftLimit = water.transform.TransformPoint ( new Vector3(0f,0f,0f) );
+		waterRightLimit = water.transform.TransformPoint ( new Vector3(1f,0f,0f) );
+
 		//swingFinalPos.x = Random.Range (0.1f, 0.7f);
 		//if( 
 		//swingFinalPos.y = Random.Range (-0.4f,-0.01f);
@@ -105,10 +109,22 @@ public class Crocodile : MonoBehaviour {
 		ATTACK
 	};
 
+	void turnLeft(){
+		Vector3 scl = transform.localScale;
+		scl.x = Mathf.Abs(scl.x) * 1.0f;
+		transform.localScale = scl;
+		
+	}
+	void turnRight(){
+		Vector3 scl = transform.localScale;
+		scl.x = Mathf.Abs(scl.x) * -1.0f;
+		transform.localScale = scl;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
-		//return;
+
 
 		//if( coll.IsTouching( player.coll ) ){
 		Vector3 playerBauch2 = player.transform.position + new Vector3(0.0f,1.0f,0.0f);
@@ -121,44 +137,40 @@ public class Crocodile : MonoBehaviour {
 		switch( state ){
 
 		case State.SNEAK:
-			if( targetInWater() ){
-				state = State.ATTACK;
-				break;
-			}
-
-			float tos = targetOnShore();
-			if( tos == 0.0f ){
+			if( !targetAboveWater() ){
+				state = State.CALM;
 				setCalmSwingTarget();
 				break;
 			}
 
-			Vector3 attackStartPos = new Vector3();
-			if( tos < 0.0f ){
-				attackStartPos = water.transform.TransformPoint(new Vector3(0,0,0));
-			}else{
-				attackStartPos = water.transform.TransformPoint(new Vector3(0.8f,0,0));
+			if( player.transform.position != lastPlayerPos ){
+				setSneakSwingTarget();
 			}
 
-			distToSwing = attackStartPos - transform.position;
-			Vector3 distToMove =  distToSwing.normalized * SneakSpeed * Time.deltaTime;
-			if( distToMove.magnitude < distToSwing.magnitude ){
-				transform.position = transform.position + distToMove;
-			}else{
-				state = State.ATTACK;
-			}
+			lastPlayerPos = player.transform.position;
+
+			swingTime += Time.deltaTime;
+			swingRatio = swingTime / swingDuration;
+			
+			float _t = swingRatio * Mathf.PI;
+			_t -= (Mathf.PI * 0.5f);
+			_t = Mathf.Sin( _t );
+			_t += 1.0f;
+			swingRatio = (_t * 0.5f);
+			transform.position = swingStartPos + distToSwing * swingRatio;
 
 			break;
 
 		case State.ATTACK:
-			Vector3 playerBauch = new Vector3(0.0f,1.0f,0.0f);
-			distToSwing = (player.transform.position+playerBauch) - transform.position;
-			distToMove = distToSwing.normalized * AttackSpeed * Time.deltaTime;
-			if( distToMove.magnitude < distToSwing.magnitude ){
-				transform.position = transform.position + distToMove;
-			}else{
-				transform.position = transform.position + distToSwing;
-				//player.die();
-			}
+//			Vector3 playerBauch = new Vector3(0.0f,1.0f,0.0f);
+//			distToSwing = (player.transform.position+playerBauch) - transform.position;
+//			distToMove = distToSwing.normalized * AttackSpeed * Time.deltaTime;
+//			if( distToMove.magnitude < distToSwing.magnitude ){
+//				transform.position = transform.position + distToMove;
+//			}else{
+//				transform.position = transform.position + distToSwing;
+//				//player.die();
+//			}
 			break;
 
 		case State.CALM:
@@ -171,14 +183,21 @@ public class Crocodile : MonoBehaviour {
 			//	break;
 			//}
 
-			swingTime += Time.deltaTime;
-			float swingRatio = swingTime / swingDuration;
+			if( targetAboveWater() ){
+				state = State.SNEAK;
+				lastPlayerPos = player.transform.position;
+				setSneakSwingTarget();
+				break;
+			}
 
-			float _t = swingRatio * Mathf.PI;
-			_t -= (Mathf.PI * 0.5f);
-			_t = Mathf.Sin( _t );
-			_t += 1.0f;
-			swingRatio = (_t * 0.5f);
+			swingTime += Time.deltaTime;
+			swingRatio = swingTime / swingDuration;
+
+			float _t2 = swingRatio * Mathf.PI;
+			_t2 -= (Mathf.PI * 0.5f);
+			_t2 = Mathf.Sin( _t2 );
+			_t2 += 1.0f;
+			swingRatio = (_t2 * 0.5f);
 			transform.position = swingStartPos + distToSwing * swingRatio;
 			if( swingTime >= swingDuration ){
 				setCalmSwingTarget();
@@ -186,11 +205,24 @@ public class Crocodile : MonoBehaviour {
 			break;
 		}
 
+		if (lastPos.x > transform.position.x) {
+			turnLeft();
+		} else {
+			turnRight();
+		}
+
+		lastPos = transform.position;
 	}
+
+	Vector3 lastPos = new Vector3 ();
+	Vector3 lastPlayerPos = new Vector3 ();
 
 	Vector3 leftLimit = new Vector3();
 	Vector3 rightLimit = new Vector3();
 	bool calmGoToRight = false;
+
+	public Vector3 waterLeftLimit = new Vector3();
+	public Vector3 waterRightLimit = new Vector3();
 
 	void setCalmSwingTarget(){
 		state = State.CALM;
@@ -232,11 +264,33 @@ public class Crocodile : MonoBehaviour {
 		//swingToTarget = true;
 	}
 
+	void setSneakSwingTarget(){
+
+		swingStartPos = transform.position;
+
+		swingFinalPos = leftLimit;
+		swingFinalPos.x = player.transform.position.x;
+
+		distToSwing = swingFinalPos - swingStartPos;
+		
+		swingTime = 0.0f;
+		swingDuration = distToSwing.magnitude / CalmSpeed;
+	}
+
 	bool targetInWater(){
 		T1 = water.transform.InverseTransformPoint (player.transform.position);
 		//T2 = water.transform.InverseTransformVector (player.transform.position);
 
 		return T1.x > 0.0f && T1.x < 1.0f && T1.y >= -1.0f && T1.y < 0.0f;
+	}
+
+	bool targetAboveWater(){
+		Vector3 playerPos = player.transform.position;
+
+		if (playerPos.y <= waterLeftLimit.y)
+			return false;
+
+		return waterLeftLimit.x < playerPos.x && waterRightLimit.x > playerPos.x;
 	}
 
 	float targetOnShore(){
