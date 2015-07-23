@@ -330,14 +330,14 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			if( currentActionTime >= 0.2f ){
+			if( currentActionTime >= 1.25f ){
 				turnLeft();
 				turnLeftFinish();
 			}
 			break;
 
 		case Action.TURN_STAND_RIGHT:
-			if( currentActionTime >= 0.2f ){
+			if( currentActionTime >= 1.25f ){
 				turnRight();
 				turnRightFinish();
 			}
@@ -911,6 +911,7 @@ public class Player2Controller : MonoBehaviour {
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f ) {
 			setAction(Action.IDLE);
+			//action = Action.IDLE;
 			resetActionAndState();
 		}
 
@@ -2762,15 +2763,15 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool setAction(Action newAction){
 		
-		//print ("setAction try : " + newAction);
+		print ("setAction try : " + newAction);
 		
 		if (action == newAction)
 			return false;
 
-		//print ("setAction oldAction : " + action);
-		//print ("setAction newAction : " + newAction);
-		//print ("setAction : " + newAction + " ustawiona");
-		//print ("============================");
+		print ("setAction oldAction : " + action);
+		print ("setAction newAction : " + newAction);
+		print ("setAction : " + newAction + " ustawiona");
+		print ("============================");
 		
 		action = newAction;
 		currentActionTime = 0.0f;
