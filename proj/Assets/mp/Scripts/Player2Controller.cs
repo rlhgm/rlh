@@ -342,14 +342,14 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			if( currentActionTime >= 1.25f ){
+			if( currentActionTime >= 0.2f ){
 				turnLeft();
 				turnLeftFinish();
 			}
 			break;
 
 		case Action.TURN_STAND_RIGHT:
-			if( currentActionTime >= 1.25f ){
+			if( currentActionTime >= 0.2f ){
 				turnRight();
 				turnRightFinish();
 			}
