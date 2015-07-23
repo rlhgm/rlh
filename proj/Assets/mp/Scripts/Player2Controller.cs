@@ -160,6 +160,8 @@ public class Player2Controller : MonoBehaviour {
 		canPullUp = false;
 
 		jumpFromMount = false;
+
+		lastTouchedCheckPoint = null;
 	}
 
 	public void die(){
@@ -167,8 +169,14 @@ public class Player2Controller : MonoBehaviour {
 		velocity.y = 0.0f;
 		setAction (Action.IDLE);
 		setState (State.ON_GROUND);
-		transform.position = respawnPoint.position;
+
+		if (lastTouchedCheckPoint) {
+			transform.position = lastTouchedCheckPoint.transform.position;
+		} else {
+			transform.position = respawnPoint.position;
+		}
 	}
+	GameObject lastTouchedCheckPoint;
 
 	void OnTriggerEnter2D(Collider2D other) {
 		//print( "PLAYER OnTriggerEnter" + other.gameObject.tag);
@@ -179,6 +187,10 @@ public class Player2Controller : MonoBehaviour {
 				setAction(Action.JUMP);
 				setState(State.IN_AIR);
 			}
+		}
+		if (other.gameObject.tag == "CheckPoint") {
+			//print( "checkpoint : " + other.gameObject.name );
+			lastTouchedCheckPoint = other.gameObject;
 		}
 	}
 
@@ -2763,15 +2775,15 @@ public class Player2Controller : MonoBehaviour {
 	}
 	bool setAction(Action newAction){
 		
-		print ("setAction try : " + newAction);
+		//print ("setAction try : " + newAction);
 		
 		if (action == newAction)
 			return false;
 
-		print ("setAction oldAction : " + action);
-		print ("setAction newAction : " + newAction);
-		print ("setAction : " + newAction + " ustawiona");
-		print ("============================");
+		//print ("setAction oldAction : " + action);
+		//print ("setAction newAction : " + newAction);
+		//print ("setAction : " + newAction + " ustawiona");
+		//print ("============================");
 		
 		action = newAction;
 		currentActionTime = 0.0f;
