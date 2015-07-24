@@ -1633,7 +1633,7 @@ public class Player2Controller : MonoBehaviour {
 		justJumpedRope = null;
 	}
 	
-	void keyUpDown(){
+	bool keyUpDown(){
 		if (isInState (State.MOUNT)) {
 			if( !mounting () ){
 				Vector3 playerPos = transform.position;
@@ -1642,6 +1642,7 @@ public class Player2Controller : MonoBehaviour {
 					velocity.x = 0.0f;
 					velocity.y = MountSpeed;
 					setAction (Action.MOUNT_UP);
+					return true;
 				}
 			}
 		} else if (isInState (State.ON_GROUND)) {
@@ -1650,10 +1651,10 @@ public class Player2Controller : MonoBehaviour {
 				velocity.y = MountSpeed;
 				setAction (Action.MOUNT_UP);
 				setState(State.MOUNT);
-
+				return true;
 			}
 		}
-
+		return false;
 	}
 	void keyUpUp(){
 		if ( setMountIdle ()) {
@@ -1841,16 +1842,6 @@ public class Player2Controller : MonoBehaviour {
 		//lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
-	
-	bool setMountIdle(){
-		if (isInState (State.MOUNT)) {
-			velocity.x = 0.0f;
-			velocity.y = 0.0f;
-			setAction (Action.MOUNT_IDLE);
-			return true;
-		}
-		return false;
-	}
 
 	void turnLeftStart(){
 		setAction (Action.TURN_STAND_LEFT);
@@ -1905,26 +1896,60 @@ public class Player2Controller : MonoBehaviour {
 		velocity.y = 0.0f;
 		setState(State.MOUNT);
 		setAction(Action.MOUNT_IDLE);
+		resetActionAndState ();
 	}
-	
+	bool setMountIdle(){
+		if (isInState (State.MOUNT)) {
+			velocity.x = 0.0f;
+			velocity.y = 0.0f;
+			setAction (Action.MOUNT_IDLE);
+			resetActionAndState();
+			return true;
+		}
+		return false;
+	}
+
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
-			if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-				if( !keyDownDown() )
-					setActionIdle();
+			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				if (!keyDownDown ())
+					setActionIdle ();
 			} else if (Input.GetKey (keyLeft)) {
-			//if (Input.GetKey (keyLeft)) {
-				if( !keyLeftDown () )
-					setActionIdle();
+				//if (Input.GetKey (keyLeft)) {
+				if (!keyLeftDown ())
+					setActionIdle ();
 			} else if (Input.GetKey (keyRight)) {
-				if( !keyRightDown () )
-					setActionIdle();
-			//} else if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-			//		if( !keyDownDown() )
-			//			setActionIdle();
+				if (!keyRightDown ())
+					setActionIdle ();
+				//} else if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				//		if( !keyDownDown() )
+				//			setActionIdle();
 			} else {
 				if (isInState (State.ON_GROUND)) {
-					setActionIdle();
+					setActionIdle ();
+				}
+			}
+		} else if (isInState (State.MOUNT)) {
+
+			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				if (!keyDownDown ())
+					setMountIdle ();
+			}else if( Input.GetKey (keyUp)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				if (!keyUpDown ())
+					setMountIdle ();
+			} else if (Input.GetKey (keyLeft)) {
+				//if (Input.GetKey (keyLeft)) {
+				if (!keyLeftDown ())
+					setMountIdle ();
+			} else if (Input.GetKey (keyRight)) {
+				if (!keyRightDown ())
+					setMountIdle ();
+				//} else if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				//		if( !keyDownDown() )
+				//			setActionIdle();
+			} else {
+				if (isInState (State.ON_GROUND)) {
+					setActionIdle ();
 				}
 			}
 		}
