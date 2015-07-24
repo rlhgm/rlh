@@ -1903,7 +1903,7 @@ public class Player2Controller : MonoBehaviour {
 			velocity.x = 0.0f;
 			velocity.y = 0.0f;
 			setAction (Action.MOUNT_IDLE);
-			resetActionAndState();
+			//resetActionAndState();
 			return true;
 		}
 		return false;
