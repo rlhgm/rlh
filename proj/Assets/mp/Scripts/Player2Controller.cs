@@ -421,6 +421,26 @@ public class Player2Controller : MonoBehaviour {
 			}
 			break;
 
+		case Action.TURN_RUN_LEFT:
+			if( currentActionTime >= 0.85f ){
+				turnLeft();
+				setActionIdle();
+				resetActionAndState();
+			}else{
+				Act_TURN_RUN(1);
+			}
+			break;
+
+		case Action.TURN_RUN_RIGHT:
+			if( currentActionTime >= 0.85f ){
+				turnRight();
+				setActionIdle();
+				resetActionAndState();
+			}else{
+				Act_TURN_RUN(-1);
+			}
+			break;
+
 		case Action.CROUCH_IDLE:
 			Act_CROUCH_IDLE();
 			break;
@@ -1049,6 +1069,18 @@ public class Player2Controller : MonoBehaviour {
 			resetActionAndState ();
 		}
 
+		if (dir == 1) {
+			if (Input.GetKeyUp (keyRight) && Input.GetKey (keyLeft)) {
+				//animator.Play("run_turn_right");
+				setAction (Action.TURN_RUN_LEFT);
+			}
+		} else if (dir == -1) {
+			if (Input.GetKeyUp (keyLeft) && Input.GetKey (keyRight)) {
+				//animator.Play("run_turn_right");
+				setAction (Action.TURN_RUN_RIGHT);
+			}
+		}
+
 		distToMove = velocity.x * Time.deltaTime;
 
 		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
@@ -1077,6 +1109,36 @@ public class Player2Controller : MonoBehaviour {
 //			}
 //		}
 
+		return 0;
+	}
+
+	int Act_TURN_RUN(int dir){
+		
+		bool speedReached = checkSpeed (dir);
+		if (speedReached && desiredSpeedX == 0.0f) {
+			//setAction(Action.IDLE);
+			//resetActionAndState ();
+		}
+
+		distToMove = velocity.x * Time.deltaTime;
+		
+		//animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
+		
+		float distToObstacle = 0.0f;
+		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			setActionIdle();
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
+		
 		return 0;
 	}
 
