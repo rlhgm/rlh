@@ -9206,7 +9206,7 @@ MonoBehaviour:
   keyDown: 274
   keyJump: 32
   respawnPoint: {fileID: 397091552}
-  cameraTargetRopeDiffY: 2.95000005
+  cameraTargetRopeDiffY: 1
   cameraTargetNormalDiffY: 1.89999998
   velocity: {x: 0, y: 0, z: 0}
   swingVelocity: {x: 0, y: 0}

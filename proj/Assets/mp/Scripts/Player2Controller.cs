@@ -1144,7 +1144,7 @@ public class Player2Controller : MonoBehaviour {
 		return 0;
 	}
 
-	bool justJumpFromRope = false;
+	NewRope justJumpedRope = null;
 
 	int Act_ROPECLIMB_IDLE(){
 
@@ -1231,82 +1231,14 @@ public class Player2Controller : MonoBehaviour {
 				setAction(Action.JUMP);
 			}
 
-//			if( ps < 0f ){
-//
-//      			turnRight();
-//				
-//				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
-//					setAction(Action.JUMP_RIGHT_LONG);
-//				}else{
-//					setAction(Action.JUMP_RIGHT);
-//				}
-//				//velocity = swingVelocity;
-//				velocity.x = -ps;
-//				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
-//
-//
-//			}else if (ps > 0f){
-//			
-//				turnLeft();
-//			
-//				if( Mathf.Abs( ropeSpeed ) >= JumpLongSpeed ){
-//					setAction(Action.JUMP_LEFT_LONG);
-//				}else{
-//					setAction(Action.JUMP_LEFT);
-//				}
-//				//velocity = swingVelocity;
-//				velocity.x = -ps;
-//				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
-//			
-//			}else{
-//				
-//				setAction(Action.JUMP);
-//				velocity.x = 0.0f;
-//				velocity.y = 0.0f;
-//				
-//			}
-
-
-//			if( swingVelocity.x > 0 ){
-//
-//				turnRight();
-//
-//				if( Mathf.Abs( swingVelocity.x) >= JumpLongSpeed ){
-//					setAction(Action.JUMP_RIGHT_LONG);
-//				}else{
-//					setAction(Action.JUMP_RIGHT);
-//				}
-//				velocity = swingVelocity;
-//
-//				//catchedRope.resetDiver();
-//
-//			}else if (swingVelocity.x < 0){
-//
-//				turnLeft();
-//
-//				if( Mathf.Abs( swingVelocity.x) >= JumpLongSpeed ){
-//					setAction(Action.JUMP_LEFT_LONG);
-//				}else{
-//					setAction(Action.JUMP_LEFT);
-//				}
-//				velocity = swingVelocity;
-//
-//				//catchedRope.resetDiver();
-//
-//			}else{
-//
-//				setAction(Action.JUMP);
-//				velocity.x = 0.0f;
-//				velocity.y = 0.0f;
-//
-//				//catchedRope.resetDiver();
-//			}
 
 			//Vector3 posInWorld = transform.TransformPoint( 0f,-1.65f,0f );
 			//transform.position = posInWorld;
 			Vector3 oldPos = transform.position;
 			oldPos.y -= 1.65f;
 			transform.position = oldPos;
+
+			justJumpedRope = catchedRope;
 
 			catchedRope.resetDiver();
 			catchedRope = null;
@@ -1318,7 +1250,7 @@ public class Player2Controller : MonoBehaviour {
 			transform.rotation = quat;
 			setState(State.IN_AIR);
 
-			justJumpFromRope = true;
+
 
 			return 0;
 		}
@@ -1690,7 +1622,7 @@ public class Player2Controller : MonoBehaviour {
 	
 	void keyJumpUp(){
 		jumpFromMount = false;
-		justJumpFromRope = false;
+		justJumpedRope = null;
 	}
 	
 	void keyUpDown(){
@@ -2469,11 +2401,7 @@ public class Player2Controller : MonoBehaviour {
 
 		if (dir () == Vector2.right) {
 
-			if (justJumpFromRope){
-				lastHandlePos = sensorHandleR2.position;
-				return false;
-			}
-
+		
 			RaycastHit2D hit; 
 			if (lastFrameHande)
 				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, layerIdRopesMask);
@@ -2490,6 +2418,13 @@ public class Player2Controller : MonoBehaviour {
 				if (_canCatch) {
 
 					catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
+
+					if( justJumpedRope == catchedRopeLink.rope ){
+						catchedRopeLink = null;
+						lastHandlePos = sensorHandleR2.position;
+						return false;
+					}
+
 					catchedRope = catchedRopeLink.rope;
 
 					catchedRope.chooseDriver(catchedRopeLink.transform);
@@ -2527,11 +2462,6 @@ public class Player2Controller : MonoBehaviour {
 			
 		} else {
 
-			if (justJumpFromRope){
-				lastHandlePos = sensorHandleL2.position;
-				return false;
-			}
-
 			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
 			RaycastHit2D hit; 
 			if (lastFrameHande)
@@ -2548,35 +2478,15 @@ public class Player2Controller : MonoBehaviour {
 //					_canCatch = false;
 //				}				
 				if (_canCatch) {
-//					catchedClimbHandle = hit.collider.gameObject;
-//					
-//					Vector3 handlePos = catchedClimbHandle.transform.position;
-//					Vector3 newPos = new Vector3 ();
-//					newPos.x = handlePos.x + myHalfWidth;
-//					newPos.y = handlePos.y - 2.4f; //myHeight;
-//					//transform.position = newPos;
-//					
-//					canPullUp = canClimbPullUp ();
-//					
-//					if (canPullUp) {
-//						//climbAfterPos.x = catchedClimbHandle.transform.position.x;
-//						//climbAfterPos.y = catchedClimbHandle.transform.position.y;
-//					}
-//					
-//					velocity.x = 0.0f;
-//					velocity.y = 0.0f;
-//					
-//					climbBeforePos = transform.position;
-//					climbAfterPos = newPos;
-//					climbDistToClimb = climbAfterPos - climbBeforePos;
-//					climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
-//					
-//					setState (State.CLIMB); 
-//					setAction (Action.CLIMB_JUMP_TO_CATCH);
-//					climbDuration = 0.0f;
-//					lastFrameHande = false;
 
 					catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
+					
+					if( justJumpedRope == catchedRopeLink.rope ){
+						catchedRopeLink = null;
+						lastHandlePos = sensorHandleL2.position;
+						return false;
+					}
+
 					catchedRope = catchedRopeLink.rope;
 					
 					catchedRope.chooseDriver(catchedRopeLink.transform);

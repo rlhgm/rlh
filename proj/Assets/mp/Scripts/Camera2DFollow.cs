@@ -118,9 +118,10 @@ namespace UnityStandardAssets._2D
 
 			Vector3 res = fitToStage (targetStage, newPos);
 
-			//print (newPos + " " + res);
-			transform.position = res;
+			//Vector3 posDiff = res - transform.position;
+			//if( posDiff.magnitude > 1.0f ) res
 
+			transform.position = res;
 
 			int numberOfBackgrounds = backgroundsNodes.Length;
 
