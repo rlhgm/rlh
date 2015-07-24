@@ -2763,6 +2763,9 @@ public class Player2Controller : MonoBehaviour {
 		case State.CLIMB_ROPE:
 			cameraTarget.localPosition = new Vector3(0f, cameraTargetRopeDiffY, 0f);
 			break;
+		case State.MOUNT:
+			animator.Play("mount_up");
+			break;
 		};
 
 		return true;
