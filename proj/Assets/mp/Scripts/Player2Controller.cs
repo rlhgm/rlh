@@ -427,7 +427,12 @@ public class Player2Controller : MonoBehaviour {
 				setActionIdle();
 				resetActionAndState();
 			}else{
-				Act_TURN_RUN(1);
+				int res = Act_TURN_RUN(1);
+				if( res == 1 ){
+					turnLeft();
+					setActionIdle();
+					resetActionAndState();
+				}
 			}
 			break;
 
@@ -437,7 +442,12 @@ public class Player2Controller : MonoBehaviour {
 				setActionIdle();
 				resetActionAndState();
 			}else{
-				Act_TURN_RUN(-1);
+				int res = Act_TURN_RUN(-1);
+				if( res == 1 ){
+					turnRight();
+					setActionIdle();
+					resetActionAndState();
+				}
 			}
 			break;
 
@@ -1061,6 +1071,8 @@ public class Player2Controller : MonoBehaviour {
 		return 0;
 	}
 
+	float fromStartRunBack = 0.0f;
+
 	int Act_RUN(int dir){
 
 		bool speedReached = checkSpeed (dir);
@@ -1069,16 +1081,37 @@ public class Player2Controller : MonoBehaviour {
 			resetActionAndState ();
 		}
 
-		if (dir == 1) {
-			if (Input.GetKeyUp (keyRight) && Input.GetKey (keyLeft)) {
-				//animator.Play("run_turn_right");
-				setAction (Action.TURN_RUN_LEFT);
+		float speedRatio = (Mathf.Abs (velocity.x) / RunSpeed);
+		bool turnBackHard = speedRatio > 0.5f;
+
+		if (turnBackHard) {
+
+			if (dir == 1) {
+//				if (Input.GetKeyUp (keyRight) && Input.GetKey (keyLeft)) {
+//					setAction (Action.TURN_RUN_LEFT);
+//				}
+
+				if( (Input.GetKeyDown(keyLeft) || Input.GetKey(keyLeft)) &&
+				   (Input.GetKeyUp(keyRight) || !Input.GetKey(keyRight))
+				   )
+				{
+					setAction (Action.TURN_RUN_LEFT);
+				}
+
+			} else if (dir == -1) {
+//				if (Input.GetKeyUp (keyLeft) && Input.GetKey (keyRight)) {
+//					setAction (Action.TURN_RUN_RIGHT);
+//				}
+
+				if( (Input.GetKeyDown(keyRight) || Input.GetKey(keyRight)) &&
+				   (Input.GetKeyUp(keyLeft) || !Input.GetKey(keyLeft))
+				   )
+				{
+					setAction (Action.TURN_RUN_RIGHT);
+				}
+
 			}
-		} else if (dir == -1) {
-			if (Input.GetKeyUp (keyLeft) && Input.GetKey (keyRight)) {
-				//animator.Play("run_turn_right");
-				setAction (Action.TURN_RUN_RIGHT);
-			}
+
 		}
 
 		distToMove = velocity.x * Time.deltaTime;
@@ -1113,7 +1146,9 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	int Act_TURN_RUN(int dir){
-		
+
+		int retVal = 0;
+
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
 			//setAction(Action.IDLE);
@@ -1127,7 +1162,8 @@ public class Player2Controller : MonoBehaviour {
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
-			setActionIdle();
+			//setActionIdle();
+			retVal = 1;
 		}
 		
 		newPosX += distToMove;		
@@ -1139,7 +1175,7 @@ public class Player2Controller : MonoBehaviour {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
 		
-		return 0;
+		return retVal;
 	}
 
 	int Act_CROUCH_IDLE(){
@@ -2943,8 +2979,8 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.DIE:
-			//animator.Play ("zap_die");
-			animator.Play("run_turn_left");
+			animator.Play ("zap_die");
+			//animator.Play("run_turn_left");
 			//animator.Play("run_turn_right");
 			break;
 
