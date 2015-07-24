@@ -94,6 +94,8 @@ public class Player2Controller : MonoBehaviour {
 		sensorHandleL2 = transform.Find("handlerL2").transform;
 		sensorHandleR2 = transform.Find("handlerR2").transform;
 
+		cameraTarget = transform.Find("cameraTarget").transform;
+
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
 		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
 		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask;
@@ -2460,6 +2462,9 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
+	public float cameraTargetRopeDiffY = 1f;
+	public float cameraTargetNormalDiffY = 1.9f;
+
 	bool tryCatchRope(){
 
 		if (dir () == Vector2.right) {
@@ -2505,6 +2510,8 @@ public class Player2Controller : MonoBehaviour {
 
 					setState(State.CLIMB_ROPE);
 					setAction(Action.ROPECLIMB_IDLE);
+
+					//cameraTarget.position.y = cameraTargetRopeDiffY;
 
 					transform.position = catchedRopeLink.transform.position;
 					transform.rotation = catchedRopeLink.transform.rotation;
@@ -2593,6 +2600,8 @@ public class Player2Controller : MonoBehaviour {
 					
 					transform.position = catchedRopeLink.transform.position;
 					transform.rotation = catchedRopeLink.transform.rotation;
+
+
 
 					ropeLinkCatchOffset = 0.0f;
 					return true;
@@ -2802,18 +2811,23 @@ public class Player2Controller : MonoBehaviour {
 
 		state = newState;
 
+		cameraTarget.localPosition = new Vector3(0f,0f,0f);
+
 		switch (state) {
 		case State.IN_AIR:
  			startFallPos = transform.position;
+			break;
+		case State.CLIMB_ROPE:
+			cameraTarget.localPosition = new Vector3(0f, cameraTargetRopeDiffY, 0f);
 			break;
 		};
 
 		return true;
 	}
-	bool isInState(State test) {
+	public bool isInState(State test) {
 		return state == test;
 	}
-	bool isNotInState(State test) {
+	public bool isNotInState(State test) {
 		return state != test;
 	}
 	
@@ -2973,7 +2987,9 @@ public class Player2Controller : MonoBehaviour {
 	
 	Transform sensorHandleL2;
 	Transform sensorHandleR2;
-	
+
+	Transform cameraTarget;
+
 	Transform gfx;
 
 
