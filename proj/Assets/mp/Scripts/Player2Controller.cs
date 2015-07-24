@@ -73,9 +73,11 @@ public class Player2Controller : MonoBehaviour {
 		guiCanvas = FindObjectOfType<Canvas> ();
 		//print (guiCanvas);
 		//guiText = guiCanvas.transform.Find ("Text").ga;
-		infoLabel = FindObjectOfType<Text> ();
-		//infoLabel.text = "hello world";
-		infoLabel.text = "";
+		if (guiCanvas) {
+			infoLabel = FindObjectOfType<Text> ();
+			//infoLabel.text = "hello world";
+			infoLabel.text = "";
+		}
 
 		coll = GetComponent<BoxCollider2D> ();
 		gfx  = transform.Find("gfx").transform;
@@ -717,10 +719,12 @@ public class Player2Controller : MonoBehaviour {
 	bool infoLabelSet = false;
 
 	public void showInfo(string newInfo, float duration){
-		infoLabel.text = newInfo;
-		infoLabelShowTime = 0;
-		infoLabelShowDuration = duration;
-		infoLabelSet = true;
+		if (infoLabel) {
+			infoLabel.text = newInfo;
+			infoLabelShowTime = 0;
+			infoLabelShowDuration = duration;
+			infoLabelSet = true;
+		}
 	}
 
 	bool tryStartClimbPullDown(){
@@ -831,7 +835,7 @@ public class Player2Controller : MonoBehaviour {
 			catchedClimbHandle = null;
 			lastCatchedClimbHandle = null;
 			//justLetGoHandle = 0.0f;
-		} else if ( jumpKeyPressed ) { // Input.GetKeyDown (keyJump)) {
+		} else if ( Input.GetKeyDown (keyJump)) {
 			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
 				//print("try jump left");
 				turnLeft ();
@@ -1180,7 +1184,7 @@ public class Player2Controller : MonoBehaviour {
 //			}
 		}
 
-		if ( jumpKeyPressed ) { //Input.GetKeyDown (keyJump)) {
+		if ( Input.GetKeyDown (keyJump)) {
 			//catchedRope = null;
 			//catchedRopeLink = null;
 
@@ -2889,7 +2893,7 @@ public class Player2Controller : MonoBehaviour {
 		case Action.MOUNT_IDLE:
 			//animator.SetTrigger("mount_idle");
 			//animator.StopPlayback();
-			animator.Play("mount_up");
+			//animator.Play("mount_up");
 			animator.speed = 0.0f;
 			sprRend.sprite = mountIdleSprite;
 			break;
