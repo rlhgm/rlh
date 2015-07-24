@@ -2814,61 +2814,74 @@ public class Player2Controller : MonoBehaviour {
 		switch (newAction) {
 			
 		case Action.IDLE:
-			animator.SetTrigger("idle");
+			//animator.SetTrigger("idle");
+			animator.Play("zapidle");
 			break;
 			
 		case Action.WALK_LEFT:
 		case Action.WALK_RIGHT:
-			animator.SetTrigger("walk");
+			//animator.SetTrigger("walk");
+			animator.Play ("zapwalk");
 			break;
 			
 		case Action.RUN_LEFT:
 		case Action.RUN_RIGHT:
-			animator.SetTrigger("run");
+			//animator.SetTrigger("run");
+			animator.Play("zaprun");
 			break;
 
 		case Action.TURN_STAND_LEFT:
+			//animator.Play("stand_turn_left");
 			animator.Play("stand_turn_left");
 			break;
 
 		case Action.TURN_STAND_RIGHT:
+			//animator.Play("stand_turn_right");
 			animator.Play("stand_turn_right");
 			break;
 
 		case Action.PREPARE_TO_JUMP:
-			animator.SetTrigger("preparetojump");
+			//animator.SetTrigger("preparetojump");
+			animator.Play("preparetojump");
 			break;
 
 		case Action.JUMP:
-			animator.SetTrigger("jump");
+			//animator.SetTrigger("jump");
+			animator.Play("jump");
 			break;
 
 		case Action.JUMP_LEFT:
 		case Action.JUMP_LEFT_LONG:
 		case Action.JUMP_RIGHT:
 		case Action.JUMP_RIGHT_LONG:
-			animator.SetTrigger("jumpleftright");
+			//animator.SetTrigger("jumpleftright");
+			animator.Play("zapjump");
 			break;
 
 		case Action.LANDING_HARD:
-			animator.SetTrigger("landing_hard");
+			//animator.SetTrigger("landing_hard");
+			animator.Play("landing_hard");
 			break;
 
 		case Action.CLIMB_PREPARE_TO_JUMP:
 			//animator.SetTrigger("climb_preparetojump");
 			break;
 		case Action.CLIMB_JUMP_TO_CATCH:
-			animator.SetTrigger("climb_jump");
+			//animator.SetTrigger("climb_jump");
+			animator.Play("zapclimbjump");
 			break;
 		case Action.CLIMB_CATCH:
-			animator.SetTrigger("climb_catch");
+			//animator.SetTrigger("climb_catch");
+			animator.Play("zapclimbcatch");
 			break;
 		case Action.CLIMB_CLIMB:
-			animator.SetTrigger("climb_climb");
+			//animator.SetTrigger("climb_climb");
+			animator.Play("zapclimbclimb");
 			break;
 
 		case Action.CLIMB_PULLDOWN:
-			animator.SetTrigger("climb_pulldown");
+			//animator.SetTrigger("climb_pulldown");
+			animator.Play("zappulldown");
 			break;
 
 		case Action.MOUNT_IDLE:
@@ -2911,13 +2924,15 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.ROPECLIMB_IDLE:
-			animator.SetTrigger("climbrope_idle");
+			//animator.SetTrigger("climbrope_idle");
+			animator.Play("newclimbrope_idle");
 			//animator.speed = 0f;
 			break;
 
 		case Action.ROPECLIMB_UP:
 		case Action.ROPECLIMB_DOWN:
-			animator.SetTrigger("climbrope");
+			//animator.SetTrigger("climbrope");
+			animator.Play("newclimbrope_updown");
 			break;
 		};
 
