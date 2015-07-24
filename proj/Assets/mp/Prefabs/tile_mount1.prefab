@@ -95,14 +95,18 @@ SpriteRenderer:
   m_SortingLayerID: 750122625
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fa4ab134578b1f14ea19bd9c3d034b62, type: 3}
-  m_Color: {r: .348075241, g: .816176474, b: .409412712, a: .150000006}
+  m_Color: {r: .348075241, g: .816176474, b: .409412712, a: .0379999988}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Color.a
+      value: .0379999988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 138890}

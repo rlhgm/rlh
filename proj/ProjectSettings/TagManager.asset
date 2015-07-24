@@ -90,6 +90,9 @@ TagManager:
   - name: LA-GROUND
     uniqueID: 886306719
     locked: 0
+  - name: Climbers
+    uniqueID: 719274669
+    locked: 0
   - name: Player
     uniqueID: 952726619
     locked: 0
