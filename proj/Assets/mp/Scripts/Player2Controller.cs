@@ -224,8 +224,9 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
-	bool jumpKeyPressed = false;
+	bool userJumpKeyPressed = false;
 	float timeFromJumpKeyPressed = 0.0f;
+	bool jumpKeyPressed = false;
 
 	// Update is called once per frame
 	void Update () {
@@ -267,26 +268,23 @@ public class Player2Controller : MonoBehaviour {
 
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
-		if (!jumpKeyPressed) {
+		justJumpedMount = false;
+
+
+		if (!userJumpKeyPressed) {
 			if (Input.GetKeyDown (keyJump)) {
 				timeFromJumpKeyPressed = 0.0f;
-				jumpKeyPressed = true;
+				userJumpKeyPressed = true;
 			}
 		} else {
 			timeFromJumpKeyPressed += Time.deltaTime;
-			if( timeFromJumpKeyPressed >= 0.06f ){
+			if (timeFromJumpKeyPressed >= 0.06f) {
 				timeFromJumpKeyPressed = 0.0f;
-				jumpKeyPressed = false;
+				userJumpKeyPressed = false;
 
-				keyJumpDown();
+				keyJumpDown ();
 			}
 		}
-
-//		if (Input.GetKeyDown (keyJump)) {
-//			keyJumpDown ();
-//		} else if (Input.GetKeyUp (keyJump)) {
-//			keyJumpUp ();
-//		}
 
 		if (Input.GetKeyDown (keyUp)) {
 			keyUpDown();
@@ -451,13 +449,15 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case State.IN_AIR:
-			if( Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
+			if( jumpKeyPressed ) { //Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
 	    		if( onMount() ){
 					if( jumpFromMount ){
-	//						velocity.x = 0.0f;
-	//						velocity.y = 0.0f;
-	//						setAction(Action.MOUNT_IDLE);
-	//						setState(State.MOUNT);
+						if( !justJumpedMount ){
+//							velocity.x = 0.0f;
+//							velocity.y = 0.0f;
+//							setAction(Action.MOUNT_IDLE);
+//							setState(State.MOUNT);
+						}
 					}else{
 						velocity.x = 0.0f;
 						velocity.y = 0.0f;
@@ -837,7 +837,7 @@ public class Player2Controller : MonoBehaviour {
 			catchedClimbHandle = null;
 			lastCatchedClimbHandle = null;
 			//justLetGoHandle = 0.0f;
-		} else if (Input.GetKeyDown (keyJump)) {
+		} else if ( jumpKeyPressed ) { // Input.GetKeyDown (keyJump)) {
 			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
 				//print("try jump left");
 				turnLeft ();
@@ -1145,6 +1145,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	NewRope justJumpedRope = null;
+	bool justJumpedMount = false;
 
 	int Act_ROPECLIMB_IDLE(){
 
@@ -1183,7 +1184,7 @@ public class Player2Controller : MonoBehaviour {
 //			}
 		}
 
-		if (Input.GetKeyDown (keyJump)) {
+		if ( jumpKeyPressed ) { //Input.GetKeyDown (keyJump)) {
 			//catchedRope = null;
 			//catchedRopeLink = null;
 
@@ -1559,6 +1560,9 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	void keyJumpDown(){
+
+		jumpKeyPressed = true;
+
 		//string s;
 		switch (action) {
 		case Action.IDLE:
@@ -1588,6 +1592,7 @@ public class Player2Controller : MonoBehaviour {
 			lastFrameHande = false;
 			mountJumpStartPos = transform.position;
 			jumpFromMount = true;
+			justJumpedMount = true;
 
 			if( Input.GetKey(keyLeft)){
 				jumpLeft();
@@ -1609,18 +1614,21 @@ public class Player2Controller : MonoBehaviour {
 		case Action.MOUNT_LEFT:
 			mountJumpStartPos = transform.position;
 			jumpFromMount = true;
+			justJumpedMount = true;
 			jumpLeft();
 			break;
 			
 		case Action.MOUNT_RIGHT:
 			mountJumpStartPos = transform.position;
 			jumpFromMount = true;
+			justJumpedMount = true;
 			jumpRight();
 			break;
 		};
 	}
 	
 	void keyJumpUp(){
+		jumpKeyPressed = false;
 		jumpFromMount = false;
 		justJumpedRope = null;
 	}
