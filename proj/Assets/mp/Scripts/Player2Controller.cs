@@ -197,14 +197,28 @@ public class Player2Controller : MonoBehaviour {
 				velocity.y = 0.0f;
 				setAction(Action.JUMP);
 				setState(State.IN_AIR);
+
 			}
+			return;
 		}
 		if (other.gameObject.tag == "CheckPoint") {
 			//print( "checkpoint : " + other.gameObject.name );
 			lastTouchedCheckPoint = other.gameObject;
+			return;
 		}
 		if (other.gameObject.tag == "KillerPhysic") {
 			die();
+			return;
+		}
+		if (other.gameObject.tag == "ShowInfoTrigger") {
+			print("ShowInfoTrigger");
+			ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
+			if( !sit.used ){
+
+				showInfo(sit.Info,sit.ShowDuration);
+				if(sit.OnlyFirstTime) sit.used = true;
+			}
+			return;
 		}
 	}
 
@@ -706,7 +720,7 @@ public class Player2Controller : MonoBehaviour {
 	float infoLabelShowTime = 0f;
 	bool infoLabelSet = false;
 
-	void showInfo(string newInfo, float duration){
+	public void showInfo(string newInfo, float duration){
 		infoLabel.text = newInfo;
 		infoLabelShowTime = 0;
 		infoLabelShowDuration = duration;

@@ -16,6 +16,7 @@ TagManager:
   - Bird
   - CheckPoint
   - KillerPhysic
+  - ShowInfoTrigger
   layers:
   - Default
   - TransparentFX

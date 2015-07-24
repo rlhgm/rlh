@@ -58,6 +58,7 @@
      <Compile Include="Assets\mp\Scripts\Player2Controller.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
+     <Compile Include="Assets\mp\Scripts\ShowInfoTrigger.cs" />
      <Compile Include="Assets\mp\Scripts\Snake.cs" />
      <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
      <Compile Include="Assets\mp\Scripts\Water.cs" />
