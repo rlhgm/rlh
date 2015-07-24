@@ -2631,16 +2631,49 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	bool onMount(){
-		Vector2 rayOrigin = transform.position;
-		rayOrigin.y += 1.0f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.0f, layerIdMountMask);
+		Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
+		rayOrigin.y += 0.3f;
+		//rayOrigin.y += 1.0f;
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
+		//return hit.collider;
+//		if (hit.collider) {
+//			return hit.distance 
+//		}
+//		return false;
+
+		if (!hit.collider)
+			return false;
+
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+		if (!hit.collider)
+			return false;
+
+		rayOrigin.x += myWidth;
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
 		return hit.collider;
 	}
+
 	bool onMount(Vector3 posToCheck){
-		Vector2 rayOrigin = posToCheck;
-		rayOrigin.y += 1.0f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.0f, layerIdMountMask);
+		Vector3 sensorDiff = sensorLeft3.transform.position - transform.position; // transform.position;
+
+		Vector2 rayOrigin = posToCheck + sensorDiff;//aaa
+		rayOrigin.y += 0.3f;
+
+		//rayOrigin.y += 1.0f;
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
+		//return hit.collider;
+
+		if (!hit.collider)
+			return false;
+
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+		if (!hit.collider)
+			return false;
+
+		rayOrigin.x += myWidth;
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
 		return hit.collider;
+
 	}
 
 	void SetImpulse(Vector2 imp) { impulse = imp; }
