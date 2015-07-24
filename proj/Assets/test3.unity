@@ -9204,7 +9204,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1857342439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -52, y: 3, z: 0}
+  m_LocalPosition: {x: -38, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1669188180}
@@ -10803,7 +10803,7 @@ MonoBehaviour:
   stageSize: {x: 500, y: 500}
   stagesOffset: {x: -250, y: -250}
   targetStage: {x: -1, y: 0}
-  backgroundLimits: {x: -30, y: 30}
+  backgroundLimits: {x: -90, y: 90}
 --- !u!132 &2143118009
 GUIText:
   m_ObjectHideFlags: 0

@@ -429,9 +429,9 @@ public class Player2Controller : MonoBehaviour {
 			}else{
 				int res = Act_TURN_RUN(1);
 				if( res == 1 ){
-					turnLeft();
-					setActionIdle();
-					resetActionAndState();
+					//turnLeft();
+					//setActionIdle();
+					//resetActionAndState();
 				}
 			}
 			break;
@@ -444,9 +444,9 @@ public class Player2Controller : MonoBehaviour {
 			}else{
 				int res = Act_TURN_RUN(-1);
 				if( res == 1 ){
-					turnRight();
-					setActionIdle();
-					resetActionAndState();
+					//turnRight();
+					//setActionIdle();
+					//resetActionAndState();
 				}
 			}
 			break;

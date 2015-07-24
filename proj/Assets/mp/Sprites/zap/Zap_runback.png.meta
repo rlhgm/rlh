@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 412615a5bc00669498ff351ea43da92f
-timeCreated: 1437740406
+timeCreated: 1437745458
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -69,7 +69,7 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
+      alignment: 9
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_1
@@ -79,8 +79,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .550000012, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_2
       rect:
@@ -89,8 +89,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_3
       rect:
@@ -99,8 +99,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_4
       rect:
@@ -109,8 +109,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_5
       rect:
@@ -119,8 +119,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_6
       rect:
@@ -129,8 +129,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_7
       rect:
@@ -139,8 +139,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_8
       rect:
@@ -149,8 +149,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_9
       rect:
@@ -159,8 +159,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_10
       rect:
@@ -169,8 +169,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_11
       rect:
@@ -179,8 +179,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_runback_12
       rect:
@@ -189,8 +189,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
