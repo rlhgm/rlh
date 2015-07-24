@@ -975,7 +975,7 @@ public class Player2Controller : MonoBehaviour {
 
 		distToMove = velocity.x * Time.deltaTime;
 
-		//animator.speed = 0.25f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.75f;
+		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.5f;
 		//print (animator.speed);
 
 		float distToObstacle = 0.0f;
@@ -1016,7 +1016,9 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		distToMove = velocity.x * Time.deltaTime;
-		
+
+		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
+
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
