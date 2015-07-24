@@ -80,6 +80,7 @@ public class Player2Controller : MonoBehaviour {
 		coll = GetComponent<BoxCollider2D> ();
 		gfx  = transform.Find("gfx").transform;
 		animator = transform.Find("gfx").GetComponent<Animator>();
+		sprRend = gfx.GetComponent<SpriteRenderer> ();
 
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
 		sensorLeft2 = transform.Find("sensorLeft2").transform;
@@ -175,6 +176,8 @@ public class Player2Controller : MonoBehaviour {
 		jumpFromMount = false;
 
 		lastTouchedCheckPoint = null;
+
+		showInfo ("hello world", 10);
 	}
 
 	public void die(){
@@ -442,27 +445,21 @@ public class Player2Controller : MonoBehaviour {
 		switch (state) {
 
 		case State.MOUNT:
-			if( !onMount() ){
-				setAction(Action.JUMP);
-				setState(State.IN_AIR);
-			}
+//			if( !onMount() ){
+//				setAction(Action.JUMP);
+//				setState(State.IN_AIR);
+//			}
 			break;
 
 		case State.IN_AIR:
+
 			if( jumpKeyPressed ) { //Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
 	    		if( onMount() ){
 					if( jumpFromMount ){
 						if( !justJumpedMount ){
-//							velocity.x = 0.0f;
-//							velocity.y = 0.0f;
-//							setAction(Action.MOUNT_IDLE);
-//							setState(State.MOUNT);
 						}
 					}else{
-						velocity.x = 0.0f;
-						velocity.y = 0.0f;
-						setAction(Action.MOUNT_IDLE);
-						setState(State.MOUNT);
+						setActionMountIdle();
 					}
 				} else {
 					jumpFromMount = false;
@@ -472,10 +469,7 @@ public class Player2Controller : MonoBehaviour {
 			if( jumpFromMount && Input.GetKey(keyJump) ){
 				Vector3 flyDist = transform.position - mountJumpStartPos;
 				if( flyDist.magnitude >= MountJumpDist ){
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-					setAction(Action.MOUNT_IDLE);
-					setState(State.MOUNT);
+					setActionMountIdle();
 					jumpFromMount = false;
 				}
 			}
@@ -1900,7 +1894,13 @@ public class Player2Controller : MonoBehaviour {
 		velocity.x = 0.0f;
 		setAction (Action.CROUCH_IDLE);
 	}
-
+	void setActionMountIdle(){
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		setState(State.MOUNT);
+		setAction(Action.MOUNT_IDLE);
+	}
+	
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
 			if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
@@ -2773,6 +2773,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case State.MOUNT:
 			animator.Play("mount_up");
+			//gfx.GetComponent<SpriteRenderer>().sprite
 			break;
 		};
 
@@ -2786,8 +2787,10 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	/*////////////////////////////////////////////////////////////*/
-	
-	
+
+	SpriteRenderer sprRend = null;
+	public Sprite mountIdleSprite = null;
+
 	Action getAction(){
 		return action;
 	}
@@ -2871,7 +2874,9 @@ public class Player2Controller : MonoBehaviour {
 		case Action.MOUNT_IDLE:
 			//animator.SetTrigger("mount_idle");
 			//animator.StopPlayback();
+			animator.Play("mount_up");
 			animator.speed = 0.0f;
+			sprRend.sprite = mountIdleSprite;
 			break;
 
 		case Action.MOUNT_LEFT:
@@ -2985,6 +2990,7 @@ public class Player2Controller : MonoBehaviour {
 	public RopeLink catchedRopeLink;
 
 	bool jumpFromMount = false;
+	bool jumpFromGround = false;
 	float climbDistFromWall;
 	float climbDuration;
 	Vector2 climbDir;
