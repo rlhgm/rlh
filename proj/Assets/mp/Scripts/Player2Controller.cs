@@ -187,7 +187,7 @@ public class Player2Controller : MonoBehaviour {
 	public void die(){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
-		setAction (Action.DEAD);
+		setAction (Action.DIE);
 		setState (State.OTHER);
 
 		showInfo ("PRESS SPACE", -1);
@@ -286,7 +286,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 
-		if (isInAction (Action.DEAD)) {
+		if (isInAction (Action.DIE)) {
 			if( Input.GetKeyDown(KeyCode.Space) ){
 				reborn();
 				return;
@@ -2793,7 +2793,7 @@ public class Player2Controller : MonoBehaviour {
 		ROPECLIMB_IDLE,
 		ROPECLIMB_UP,
 		ROPECLIMB_DOWN,
-		DEAD
+		DIE
 	};
 	
 	public enum State
@@ -2879,7 +2879,11 @@ public class Player2Controller : MonoBehaviour {
 			//animator.SetTrigger("idle");
 			animator.Play("zapidle");
 			break;
-			
+
+		case Action.DIE:
+			animator.Play ("zap_die");
+			break;
+
 		case Action.WALK_LEFT:
 		case Action.WALK_RIGHT:
 			//animator.SetTrigger("walk");
