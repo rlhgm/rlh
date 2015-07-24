@@ -2881,7 +2881,9 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.DIE:
-			animator.Play ("zap_die");
+			//animator.Play ("zap_die");
+			animator.Play("run_turn_left");
+			//animator.Play("run_turn_right");
 			break;
 
 		case Action.WALK_LEFT:
@@ -2906,6 +2908,15 @@ public class Player2Controller : MonoBehaviour {
 			animator.Play("stand_turn_right");
 			break;
 
+		case Action.TURN_RUN_LEFT:
+			//animator.Play("stand_turn_left");
+			animator.Play("run_turn_left");
+			break;
+			
+		case Action.TURN_RUN_RIGHT:
+			//animator.Play("stand_turn_right");
+			animator.Play("run_turn_right");
+			break;
 		case Action.PREPARE_TO_JUMP:
 			//animator.SetTrigger("preparetojump");
 			animator.Play("preparetojump");
