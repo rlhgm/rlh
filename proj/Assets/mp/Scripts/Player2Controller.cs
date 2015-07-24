@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour {
 
@@ -19,6 +20,9 @@ public class Player2Controller : MonoBehaviour {
 //	public float JumpLongImpulse = 7.15f; 
 //	public float GravityForce = -20.0f;
 //	public float MaxSpeedY = 15.0f;
+
+	Canvas guiCanvas = null;
+	Text infoLabel = null;
 
 	public float WalkSpeed = 3.0f;
 	public float RunSpeed = 4.0f;
@@ -66,6 +70,13 @@ public class Player2Controller : MonoBehaviour {
 	public Transform respawnPoint;
 
 	void Awake(){
+		guiCanvas = FindObjectOfType<Canvas> ();
+		//print (guiCanvas);
+		//guiText = guiCanvas.transform.Find ("Text").ga;
+		infoLabel = FindObjectOfType<Text> ();
+		//infoLabel.text = "hello world";
+		infoLabel.text = "";
+
 		coll = GetComponent<BoxCollider2D> ();
 		gfx  = transform.Find("gfx").transform;
 		animator = transform.Find("gfx").GetComponent<Animator>();
@@ -213,18 +224,29 @@ public class Player2Controller : MonoBehaviour {
 
 			if (Input.GetKey("f")) {
 				transform.position = transform.position + new Vector3(-0.1f,0.0f,0.0f);
+				//showInfo("You press f",1f);
 			}
 			else if (Input.GetKey("h")) {
 				transform.position = transform.position + new Vector3(0.1f,0.0f,0.0f);
+				//showInfo("You press h",2f);
 			}
 			else if (Input.GetKey("t")) {
 				transform.position = transform.position + new Vector3(0.0f,0.1f,0.0f);
+				///showInfo("You press t",3f);
 			}
 			else if (Input.GetKey("g")) {
 				transform.position = transform.position + new Vector3(0.0f,-0.1f,0.0f);
+				//showInfo("You press g",4f);
 			}
 
 			return;
+		}
+
+		if (infoLabelSet) {
+			if( (infoLabelShowTime+=Time.deltaTime) > infoLabelShowDuration ){
+				infoLabelSet = false;
+				infoLabel.text = "";
+			}
 		}
 
 		SetImpulse(new Vector2(0.0f, 0.0f));
@@ -678,6 +700,17 @@ public class Player2Controller : MonoBehaviour {
 		};
 
 		lastVelocity = velocity;
+	}
+
+	float infoLabelShowDuration = 0f;
+	float infoLabelShowTime = 0f;
+	bool infoLabelSet = false;
+
+	void showInfo(string newInfo, float duration){
+		infoLabel.text = newInfo;
+		infoLabelShowTime = 0;
+		infoLabelShowDuration = duration;
+		infoLabelSet = true;
 	}
 
 	bool tryStartClimbPullDown(){
@@ -2928,6 +2961,8 @@ public class Player2Controller : MonoBehaviour {
 	Transform sensorHandleR2;
 	
 	Transform gfx;
+
+
 	//aa
 	[SerializeField]
 	Vector3 velocity;
