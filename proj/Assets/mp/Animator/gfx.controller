@@ -877,7 +877,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: stand_turn_left
-  m_Speed: -.75
+  m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -900,7 +900,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: stand_turn_right
-  m_Speed: -.75
+  m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1598,7 +1598,7 @@ AnimatorStateMachine:
     m_Position: {x: 1055, y: -55, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110209964}
-    m_Position: {x: 1090, y: 10, z: 0}
+    m_Position: {x: 1092, y: 12, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110220950}
     m_Position: {x: 1125, y: 75, z: 0}
