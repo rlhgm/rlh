@@ -179,10 +179,21 @@ public class Player2Controller : MonoBehaviour {
 
 		lastTouchedCheckPoint = null;
 
-		showInfo ("hello world", 10);
+		//showInfo ("hello world", 10);
 	}
 
+	//bool isDead = false;
+
 	public void die(){
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		setAction (Action.DEAD);
+		setState (State.OTHER);
+
+		showInfo ("PRESS SPACE", -1);
+	}
+
+	public void reborn(){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
 		setAction (Action.IDLE);
@@ -193,6 +204,8 @@ public class Player2Controller : MonoBehaviour {
 		} else {
 			transform.position = respawnPoint.position;
 		}
+
+		resetInfo ();
 	}
 	GameObject lastTouchedCheckPoint;
 
@@ -265,9 +278,18 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		if (infoLabelSet) {
-			if( (infoLabelShowTime+=Time.deltaTime) > infoLabelShowDuration ){
-				infoLabelSet = false;
-				infoLabel.text = "";
+			if( infoLabelShowDuration > 0 ){
+				if( (infoLabelShowTime+=Time.deltaTime) > infoLabelShowDuration ){
+					infoLabelSet = false;
+					infoLabel.text = "";
+				}
+			}
+		}
+
+		if (isInAction (Action.DEAD)) {
+			if( Input.GetKeyDown(KeyCode.Space) ){
+				reborn();
+				return;
 			}
 		}
 
@@ -721,8 +743,16 @@ public class Player2Controller : MonoBehaviour {
 	public void showInfo(string newInfo, float duration){
 		if (infoLabel) {
 			infoLabel.text = newInfo;
-			infoLabelShowTime = 0;
+			infoLabelShowTime = 0f;
 			infoLabelShowDuration = duration;
+			infoLabelSet = true;
+		}
+	}
+	public void resetInfo(){
+		if (infoLabel) {
+			infoLabel.text = "";
+			infoLabelShowTime = 0f;
+			infoLabelShowDuration = 1f;
 			infoLabelSet = true;
 		}
 	}
@@ -2762,7 +2792,8 @@ public class Player2Controller : MonoBehaviour {
 		MOUNT_DOWN,
 		ROPECLIMB_IDLE,
 		ROPECLIMB_UP,
-		ROPECLIMB_DOWN
+		ROPECLIMB_DOWN,
+		DEAD
 	};
 	
 	public enum State
