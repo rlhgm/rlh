@@ -3022,9 +3022,9 @@ public class Player2Controller : MonoBehaviour {
 
 		case Action.JUMP:
 			//animator.SetTrigger("jump");
-			animator.Play("jump");
+			animator.Play("jump");;
 			break;
-
+			
 		case Action.JUMP_LEFT:
 		case Action.JUMP_LEFT_LONG:
 		case Action.JUMP_RIGHT:
