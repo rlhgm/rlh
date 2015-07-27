@@ -1501,7 +1501,8 @@ public class Player2Controller : MonoBehaviour {
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (State.ON_GROUND)) {
 			if (checkLeft (0.1f) >= 0.0f) {
 				//print ("cant move left");
-				turnLeftStart();
+				if( dir() == Vector2.right )
+					turnLeftStart();
 				return false;
 			}
 
@@ -1553,7 +1554,8 @@ public class Player2Controller : MonoBehaviour {
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
 			if( checkRight (0.1f) >= 0.0f ) {
 				//print ("cant move right");
-				turnRightStart();
+				if( dir () == -Vector2.right)
+					turnRightStart();
 				return false;
 			}
 			//turnRight();
