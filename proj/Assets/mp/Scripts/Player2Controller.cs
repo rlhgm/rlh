@@ -1985,23 +1985,35 @@ public class Player2Controller : MonoBehaviour {
 		lastFrameHande = false;
 	}
 
+	bool jumpAfterTurn = false;
+
 	void turnLeftStart(){
 		setAction (Action.TURN_STAND_LEFT);
+
+		jumpAfterTurn = false;
+		if (Input.GetKeyDown (keyJump) || Input.GetKey (keyJump))
+			jumpAfterTurn = true;
 	}
 
 	void turnRightStart(){
 		setAction (Action.TURN_STAND_RIGHT);
+
+		jumpAfterTurn = false;
+		if (Input.GetKeyDown (keyJump) || Input.GetKey (keyJump))
+			jumpAfterTurn = true;
 	}
 
 	void turnLeftFinish(){
 		setAction (Action.IDLE);
 		//action = Action.IDLE;
 		//keyJumpDown ();
-		if (jumpKeyPressed) {
+		if (jumpKeyPressed || jumpAfterTurn) {
 
-			if( Input.GetKey(keyLeft) ){
-				jumpLeft();
-			}
+			jumpLeft();
+
+//			if( Input.GetKey(keyLeft) ){
+//				jumpLeft();
+//			}
 
 		} else {
 			resetActionAndState ();
@@ -2013,11 +2025,13 @@ public class Player2Controller : MonoBehaviour {
 		//action = Action.IDLE;
 		//resetActionAndState ();
 
-		if (jumpKeyPressed) {
-			
-			if( Input.GetKey(keyRight) ){
-				jumpRight();
-			}
+		if (jumpKeyPressed || jumpAfterTurn) {
+
+			jumpRight();
+
+//			if( Input.GetKey(keyRight) ){
+//				jumpRight();
+//			}
 			
 		} else {
 			resetActionAndState ();
