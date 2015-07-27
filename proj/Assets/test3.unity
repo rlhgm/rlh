@@ -8256,6 +8256,11 @@ MonoBehaviour:
   keyDown: 274
   keyJump: 32
   respawnPoint: {fileID: 397091552}
+  jumpSounds: []
+  landingSounds: []
+  turnRunSounds: []
+  catchSounds: []
+  dieSounds: []
   cameraTargetRopeDiffY: 1
   cameraTargetNormalDiffY: 1.89999998
   mountIdleSprite: {fileID: 21300004, guid: e062a2ed4270a0f4e9fc3023a3b538df, type: 3}

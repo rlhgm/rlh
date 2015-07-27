@@ -69,6 +69,14 @@ public class Player2Controller : MonoBehaviour {
 
 	public Transform respawnPoint;
 
+
+	public AudioClip[] jumpSounds;
+	public AudioClip[] landingSounds;
+	public AudioClip[] turnRunSounds;
+	public AudioClip[] catchSounds;
+	public AudioClip[] dieSounds;
+	AudioSource audio;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 		//print (guiCanvas);
@@ -3038,19 +3046,17 @@ public class Player2Controller : MonoBehaviour {
 		switch (newAction) {
 			
 		case Action.IDLE:
-			//animator.SetTrigger("idle");
 			animator.Play("zapidle");
 			break;
 
 		case Action.DIE:
 			animator.Play ("zap_die");
-			//animator.Play("run_turn_left");
-			//animator.Play("run_turn_right");
+			if( dieSounds.Length != 0 )
+				audio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
 			break;
 
 		case Action.WALK_LEFT:
 		case Action.WALK_RIGHT:
-			//animator.SetTrigger("walk");
 			animator.Play ("zapwalk");
 			break;
 			
@@ -3076,30 +3082,35 @@ public class Player2Controller : MonoBehaviour {
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
-			//animator.Play("stand_turn_right");
 			animator.Play("run_turn_right");
+			if( turnRunSounds.Length != 0 )
+				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 		case Action.PREPARE_TO_JUMP:
-			//animator.SetTrigger("preparetojump");
 			animator.Play("preparetojump");
+			if( turnRunSounds.Length != 0 )
+				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 
 		case Action.JUMP:
-			//animator.SetTrigger("jump");
-			animator.Play("jump");;
+			animator.Play("jump");
+			if( jumpSounds.Length != 0 )
+				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
 			
 		case Action.JUMP_LEFT:
 		case Action.JUMP_LEFT_LONG:
 		case Action.JUMP_RIGHT:
 		case Action.JUMP_RIGHT_LONG:
-			//animator.SetTrigger("jumpleftright");
 			animator.Play("zapjump");
+			if( jumpSounds.Length != 0 )
+				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
 
 		case Action.LANDING_HARD:
-			//animator.SetTrigger("landing_hard");
 			animator.Play("landing_hard");
+			if( landingSounds.Length != 0 )
+				audio.PlayOneShot(landingSounds[Random.Range(0,landingSounds.Length)], 0.15F);
 			break;
 
 		case Action.CLIMB_PREPARE_TO_JUMP:
@@ -3112,6 +3123,8 @@ public class Player2Controller : MonoBehaviour {
 		case Action.CLIMB_CATCH:
 			//animator.SetTrigger("climb_catch");
 			animator.Play("zapclimbcatch");
+			if( catchSounds.Length != 0)
+				audio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);
 			break;
 		case Action.CLIMB_CLIMB:
 			//animator.SetTrigger("climb_climb");
@@ -3140,8 +3153,9 @@ public class Player2Controller : MonoBehaviour {
 			animator.Play("mount_left");
 			break;
 		case Action.MOUNT_UP:
-			//animator.SetTrigger("mount_up");
 			animator.Play("mount_up");
+			if( jumpSounds.Length != 0 )
+				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
 		case Action.MOUNT_DOWN:
 			//animator.SetTrigger("mount_down");
