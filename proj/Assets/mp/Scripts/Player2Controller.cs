@@ -2531,7 +2531,7 @@ public class Player2Controller : MonoBehaviour {
 			
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 				bool _canCatch = true;
-				if ((lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f) {
+				if ((lastCatchedClimbHandle == hit.collider.gameObject) ) { // && velocity.y >= 0.0f) {
 					_canCatch = false;
 				}
 			
