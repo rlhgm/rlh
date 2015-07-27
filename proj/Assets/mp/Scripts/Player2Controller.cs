@@ -637,8 +637,8 @@ public class Player2Controller : MonoBehaviour {
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = obstacleOnRoad;
 						velocity.x = 0.0f;
-						if( velocity.y > 0.0f )
-							velocity.y *=  0.5f;
+						//if( velocity.y > 0.0f )
+						//	velocity.y *=  0.5f;
 						//setAction(Action.FALL);
 						//setAction(Action.JUMP);
 					}
@@ -651,8 +651,8 @@ public class Player2Controller : MonoBehaviour {
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
 						velocity.x = 0.0f;
-						if( velocity.y > 0.0f )
-							velocity.y *=  0.5f;
+						//if( velocity.y > 0.0f )
+						//	velocity.y *=  0.5f;
 						//setAction(Action.FALL);
 						//setAction(Action.JUMP);
 					}
@@ -2000,7 +2000,7 @@ public class Player2Controller : MonoBehaviour {
 
 		jumpAfterTurn = false;
 		if (Input.GetKeyDown (keyJump) || Input.GetKey (keyJump))
-			jumpAfterTurn = true;
+			jumpAfterTurn = true	;
 	}
 
 	void turnLeftFinish(){
