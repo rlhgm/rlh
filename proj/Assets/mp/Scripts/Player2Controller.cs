@@ -1996,13 +1996,32 @@ public class Player2Controller : MonoBehaviour {
 	void turnLeftFinish(){
 		setAction (Action.IDLE);
 		//action = Action.IDLE;
-		resetActionAndState ();
+		//keyJumpDown ();
+		if (jumpKeyPressed) {
+
+			if( Input.GetKey(keyLeft) ){
+				jumpLeft();
+			}
+
+		} else {
+			resetActionAndState ();
+		}
 	}
 	
 	void turnRightFinish(){
 		setAction (Action.IDLE);
 		//action = Action.IDLE;
-		resetActionAndState ();
+		//resetActionAndState ();
+
+		if (jumpKeyPressed) {
+			
+			if( Input.GetKey(keyRight) ){
+				jumpRight();
+			}
+			
+		} else {
+			resetActionAndState ();
+		}
 	}
 
 	void turnLeft(){
@@ -2053,6 +2072,9 @@ public class Player2Controller : MonoBehaviour {
 
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
+//			if( jumpKeyPressed ){
+//
+//			}
 			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
 				if (!keyDownDown ())
 					setActionIdle ();
