@@ -514,6 +514,7 @@ public class Player2Controller : MonoBehaviour {
 						}
 					}else{
 						setActionMountIdle();
+						return;
 					}
 				} else {
 					jumpFromMount = false;
@@ -525,6 +526,7 @@ public class Player2Controller : MonoBehaviour {
 				if( flyDist.magnitude >= MountJumpDist ){
 					setActionMountIdle();
 					jumpFromMount = false;
+					return;
 				}
 			}
 
