@@ -2266,13 +2266,25 @@ public class Player2Controller : MonoBehaviour {
 
 	bool canGetUp(){
 
-		RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
-		if (hit.collider != null)
-		{
-			if( Mathf.Abs (sensorLeft3.position.x+myWidth - hit.point.x) > 0.0001f )
-				return false;
+		if (dir () == Vector2.right) {
+			RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null) {
+				float hpx = hit.point.x;  
+				float _d = Mathf.Abs (sensorLeft3.position.x + myWidth - hpx);
+				if (_d > 0.0001f)
+					return false;
+			}
+			return true;
+		} else {
+			RaycastHit2D hit = Physics2D.Raycast (sensorRight3.position, -Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null) {
+				float hpx = hit.point.x;  
+				float _d = Mathf.Abs (sensorRight3.position.x - myWidth - hpx);
+				if (_d > 0.0001f)
+					return false;
+			}
+			return true;
 		}
-		return true;
 
 //		if (dir () == Vector2.right) {
 //
