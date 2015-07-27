@@ -675,6 +675,9 @@ public class Player2Controller : MonoBehaviour {
 				if( lastVelocity.y >= 0.0f ) { // zaczyna spadac
 					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
 					startFallPos = transform.position;
+					if( lastVelocity.y > 0.0f ){
+						lastCatchedClimbHandle = null;
+					}
 				}
 				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 0.01f);
 				if( groundUnderFeet >= 0.0f ){
@@ -887,13 +890,13 @@ public class Player2Controller : MonoBehaviour {
 			
 			catchedClimbHandle = null;
 			lastCatchedClimbHandle = null;
-		} else if (Input.GetKeyDown (keyDown)) {
-			velocity.x = 0.0f;
-			velocity.y = 0.0f;
-			setState (State.IN_AIR);
-			setAction (Action.JUMP);
-			catchedClimbHandle = null;
-			lastCatchedClimbHandle = null;
+		//} else if (Input.GetKeyDown (keyDown)) {
+		//	velocity.x = 0.0f;
+		//	velocity.y = 0.0f;
+		//	setState (State.IN_AIR);
+		//	setAction (Action.JUMP);
+		//	catchedClimbHandle = null;
+		//	lastCatchedClimbHandle = null;
 			//justLetGoHandle = 0.0f;
 		} else if ( Input.GetKeyDown (keyJump)) {
 			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
@@ -910,6 +913,15 @@ public class Player2Controller : MonoBehaviour {
 				catchedClimbHandle = null;
 				lastCatchedClimbHandle = null;
 				//justLetGoHandle = 0.0f;
+			} else if( Input.GetKey(keyDown) ){
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setState (State.IN_AIR);
+				setAction (Action.JUMP);
+
+				//lastCatchedClimbHandle = null;
+				lastCatchedClimbHandle = catchedClimbHandle;
+				catchedClimbHandle = null;
 			} else {
 				//print("try jump up");
 				jump ();
@@ -2464,12 +2476,12 @@ public class Player2Controller : MonoBehaviour {
 			
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 				bool _canCatch = true;
-				if ((lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f) {
+				if ((lastCatchedClimbHandle == hit.collider.gameObject) ) { //{ && velocity.y >= 0.0f) {
 					_canCatch = false;
 				}
 			
 				if (_canCatch) {
-					catchedClimbHandle = hit.collider.gameObject;
+   					catchedClimbHandle = hit.collider.gameObject;
 				
 					Vector3 handlePos = catchedClimbHandle.transform.position;
 					Vector3 newPos = new Vector3 ();
