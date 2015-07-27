@@ -4,7 +4,7 @@
     <Files>
       <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="291" Column="44" />
       <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="529" Column="13" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="3126" Column="31" />
       <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="122" Column="4" />
       <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\ShowInfoTrigger.cs" Line="1" Column="1" />
