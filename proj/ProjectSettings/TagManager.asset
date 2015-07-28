@@ -89,9 +89,12 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2103364729
-    locked: 0
+    locked: 1
   - name: LA-GROUND
     uniqueID: 886306719
+    locked: 0
+  - name: LA_GROUND_new
+    uniqueID: 1991621873
     locked: 0
   - name: Climbers
     uniqueID: 719274669
