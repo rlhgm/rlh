@@ -69,6 +69,9 @@ TagManager:
   - name: Character
     uniqueID: 2511236001
     locked: 0
+  - name: Mount
+    uniqueID: 750122625
+    locked: 0
   - name: Trees
     uniqueID: 1753939559
     locked: 0
@@ -77,9 +80,6 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 149272721
-    locked: 0
-  - name: Mount
-    uniqueID: 750122625
     locked: 0
   - name: GroundFar
     uniqueID: 2324740603
@@ -90,10 +90,7 @@ TagManager:
   - name: Ground
     uniqueID: 2103364729
     locked: 1
-  - name: LA-GROUND
-    uniqueID: 886306719
-    locked: 0
-  - name: LA_GROUND_new
+  - name: LA_GROUND
     uniqueID: 1991621873
     locked: 0
   - name: Climbers
