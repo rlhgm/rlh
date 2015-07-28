@@ -92,6 +92,12 @@ public class Player2Controller : MonoBehaviour {
 		animator = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
 
+		zap_idle1_beh[] behs = animator.GetBehaviours<zap_idle1_beh>();
+		for( int b = 0 ; b < behs.Length ; ++b )
+		{
+			behs[b].playerController = this;
+		}
+
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
 		sensorLeft2 = transform.Find("sensorLeft2").transform;
 		sensorLeft3 = transform.Find("sensorLeft3").transform;
@@ -178,8 +184,8 @@ public class Player2Controller : MonoBehaviour {
 		startFallPos = transform.position;
 
 		setState (State.ON_GROUND);
-		//setAction (Action.IDLE);
-		action = Action.IDLE;
+		setAction (Action.IDLE);
+		//action = Action.IDLE;
 
 		climbDuration = 0.0f;
 		catchedClimbHandle = null;
@@ -193,6 +199,43 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	//bool isDead = false;
+
+	public void StateIdleExit(){
+		print("StateIdleExit");
+	}
+	public void StateIdleUpdate(float normTime){
+		print("StateIdleUpdate " + normTime);
+
+		if (normTime < 1.0f)
+			return;
+
+		int r = Random.Range(0,20);
+		print (r);
+
+		if (r < 18) {
+			animator.Play("zapidle");
+		} else if (r < 19) {
+			animator.Play ("zapidle_var1");
+		} else {
+			animator.Play ("zapidle_var2");
+		}
+
+//		switch( r ){
+//		case 0:
+//			animator.Play("zapidle");
+//			break;
+//		case 1:
+//			animator.Play ("zapidle_var1");
+//			break;
+//		case 2:
+//			animator.Play ("zapidle_var2");
+//			break;
+//		}
+	}
+
+	public void StateIdleFinish(int stateIdleNum){
+
+	}
 
 	public void die(){
 		velocity.x = 0.0f;
@@ -3049,6 +3092,8 @@ public class Player2Controller : MonoBehaviour {
 			
 		case Action.IDLE:
 			animator.Play("zapidle");
+			//animator.Play ("zapidle_var1");
+			//animator.Play ("zapidle_var2");
 			break;
 
 		case Action.DIE:
