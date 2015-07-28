@@ -41,6 +41,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ropeLinkPrefab: {fileID: 11413356, guid: 70c08393d79177945927b725b4b06ab1, type: 2}
+  currentLink: {fileID: 0}
+  firstLinkSpeed: 0
+  firstLinkMaxSpeed: 0
+  firstLinkAngle: 0
 --- !u!212 &21287850
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -63,7 +67,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1991621873
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 626ca737e9bc77c4985332e6c366962b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -73,7 +77,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: 1991621873
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 145792}

@@ -89,7 +89,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2103364729
-    locked: 1
+    locked: 0
   - name: LA_GROUND
     uniqueID: 1991621873
     locked: 0

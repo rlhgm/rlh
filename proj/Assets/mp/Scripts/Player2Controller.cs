@@ -170,6 +170,8 @@ public class Player2Controller : MonoBehaviour {
 	
 	void Start () {
 
+		audio = GetComponent<AudioSource>();
+
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
 		desiredSpeedX = 0.0f;
@@ -3079,6 +3081,8 @@ public class Player2Controller : MonoBehaviour {
 		case Action.TURN_RUN_LEFT:
 			//animator.Play("stand_turn_left");
 			animator.Play("run_turn_left");
+			if( turnRunSounds.Length != 0 )
+				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
@@ -3088,8 +3092,6 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case Action.PREPARE_TO_JUMP:
 			animator.Play("preparetojump");
-			if( turnRunSounds.Length != 0 )
-				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 
 		case Action.JUMP:
