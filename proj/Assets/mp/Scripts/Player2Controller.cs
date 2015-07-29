@@ -213,7 +213,7 @@ public class Player2Controller : MonoBehaviour {
 	//bool isDead = false;
 
 	public void StateIdleExit(){
-		print("StateIdleExit");
+		//print("StateIdleExit");
 	}
 	public void StateIdleUpdate(float normTime){
 		//print("StateIdleUpdate " + normTime);
@@ -221,8 +221,8 @@ public class Player2Controller : MonoBehaviour {
 		//if (normTime < 1.0f)
 		//	return;
 
-		print("StateIdleUpdate " + normTime);
-		print ("currentActionTime : " + currentActionTime);
+		//print("StateIdleUpdate " + normTime);
+		//print ("currentActionTime : " + currentActionTime);
 
 //		AnimatorClipInfo[] acis = animator.GetCurrentAnimatorClipInfo(0);
 //		if (acis.Length > 0) {
@@ -260,20 +260,24 @@ public class Player2Controller : MonoBehaviour {
 //		}
 	}
 
+	public int IdleAnimFreq = 10;
+
 	public void StateIdleFinish(int stateIdleNum){
-		print ("StateIdleFinish");
+		//print ("StateIdleFinish");
 		switch( stateIdleNum ){
 		case 1:
 		case 2:
 			animator.Play("zapidle");
 			break;
 		case 0:
-			//animator.Play ("zapidle");
-			int r = Random.Range(0,10);
-			if( r == 8 ){
-				animator.Play ("zapidle_var1");
-			}else if( r == 9 ){
-				animator.Play ("zapidle_var2");
+			if( IdleAnimFreq >= 3 ){
+				//animator.Play ("zapidle");
+				int r = Random.Range(0,IdleAnimFreq);
+				if( r == 0 ){
+					animator.Play ("zapidle_var1");
+				}else if( r == 1 ){
+					animator.Play ("zapidle_var2");
+				}
 			}
 			//		print (r);
 			//
