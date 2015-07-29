@@ -131,7 +131,7 @@ public class Crocodile : MonoBehaviour {
 		Vector3 playerBauch2 = player.transform.position + new Vector3(0.0f,1.0f,0.0f);
 
 		if( coll.OverlapPoint(playerBauch2) ){
-			player.die ();
+			player.die (2);
 			state = State.CALM;
 		}
 

@@ -308,10 +308,10 @@ public class Player2Controller : MonoBehaviour {
 //		}
 	}
 
-	public void die(){
+	public void die(int deathType){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
-		setAction (Action.DIE);
+		setAction (Action.DIE, deathType);
 		setState (State.OTHER);
 
 		showInfo ("PRESS SPACE", -1);
@@ -351,7 +351,7 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 		if (other.gameObject.tag == "KillerPhysic") {
-			die();
+			die(3);
 			return;
 		}
 		if (other.gameObject.tag == "ShowInfoTrigger") {
@@ -829,7 +829,7 @@ public class Player2Controller : MonoBehaviour {
 				Vector3 fallDist = startFallPos - transform.position;
 
 				if( fallDist.y >= VeryHardLandingHeight ){
-					die();
+					die(1);
 				} else if( fallDist.y >= HardLandingHeight ){
 
 					velocity.x = 0.0f;
@@ -3144,7 +3144,7 @@ public class Player2Controller : MonoBehaviour {
 	Action getAction(){
 		return action;
 	}
-	bool setAction(Action newAction){
+	bool setAction(Action newAction, int param = 0){
 		
 		//print ("setAction try : " + newAction);
 		
@@ -3170,7 +3170,11 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.DIE:
-			animator.Play ("zap_die");
+			if( param == 1 ){
+				animator.Play ("death_hitground");
+			}else{ //if( param == 0 ){
+				animator.Play ("zap_die");
+			}
 			if( dieSounds.Length != 0 )
 				audio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
 			break;
