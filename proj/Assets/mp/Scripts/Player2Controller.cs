@@ -315,6 +315,15 @@ public class Player2Controller : MonoBehaviour {
 		setState (State.OTHER);
 
 		showInfo ("PRESS SPACE", -1);
+
+		NewRope[] ropes = FindObjectsOfType(typeof(NewRope)) as NewRope[];
+		foreach (NewRope rope in ropes) {
+			rope.reset();
+		}
+	}
+
+	public bool isDead(){
+		return action == Action.DIE && state == State.OTHER;
 	}
 
 	public void reborn(){

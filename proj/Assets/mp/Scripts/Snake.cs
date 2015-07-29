@@ -45,16 +45,22 @@ public class Snake : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			biteStart();
+			Player2Controller playerController = target.GetComponent<Player2Controller> ();
+			if( !playerController.isDead() ){
+				biteStart();
+			}
 		}
 	}
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			if( !bitting ){
-				if( (fromLastBite += Time.deltaTime) > toNextBite )
-					biteStart();
-				else if( lastBiteTargetPos != target.transform.position)
-					biteStart();
+				Player2Controller playerController = target.GetComponent<Player2Controller> ();
+				if( !playerController.isDead() ){
+					if( (fromLastBite += Time.deltaTime) > toNextBite )
+						biteStart();
+					else if( lastBiteTargetPos != target.transform.position)
+						biteStart();
+				}
 			}
 		}
 	}
@@ -75,6 +81,8 @@ public class Snake : MonoBehaviour {
 
 	void bite(){
 		lastBiteTargetPos = target.transform.position;
+		biteTime = 0f;
+		bitting = false;
 
 		Vector3 attackDir = attackPoint.position - transform.position;
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, attackDir, attackDir.magnitude, layerIdPlayerMask);
@@ -82,9 +90,6 @@ public class Snake : MonoBehaviour {
 			Player2Controller playerController = target.GetComponent<Player2Controller> ();
 			playerController.die (666);
 		}
-
-		biteTime = 0f;
-		bitting = false;
 		//fromLastBite = 0f;
 	}
 

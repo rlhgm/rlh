@@ -14,31 +14,30 @@ public class NewRope : MonoBehaviour {
 	public float firstLinkAngle;
 
 	void Awake(){
-		//joint = GetComponent<DistanceJoint2D> ();
-		//body = GetComponent<Rigidbody2D> ();
-		
-		//print (joint);
-
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
 		Destroy (spriteRenderer);
 		int numberOfLinks = (int)Mathf.Floor(transform.localScale.y) * 2;
 		transform.localScale = new Vector3 (1, 1, 1);
-		//print( "SCALE : " + transform.localScale );
 		links = new RopeLink[numberOfLinks];
 
-		float linkLimitRest = 15.0f / numberOfLinks;
+		//float linkLimitRest = 15.0f / numberOfLinks;
 
+		createLinks ();
+	}
+
+	void createLinks(){
+		int numberOfLinks = links.Length;
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
 			RopeLink newLink = Instantiate<RopeLink>(ropeLinkPrefab);
 			newLink.idn = i+1;
 			newLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
 			newLink.rope = this;
-
+			
 			HingeJoint2D hingeJoint = newLink.GetComponent<HingeJoint2D>();
-
+			
 			hingeJoint.anchor = new Vector2(0f,0f);
-
+			
 			if( lastLink ){
 				Rigidbody2D lastRigidBody = lastLink.GetComponent<Rigidbody2D>();
 				hingeJoint.connectedBody = lastRigidBody;
@@ -49,25 +48,14 @@ public class NewRope : MonoBehaviour {
 				//newLink.transform.SetParent( transform );
 				hingeJoint.connectedAnchor = transform.position;
 				newLink.transform.position = transform.position;
-
-
 			}
-
-//			hingeJoint.useLimits = true;
-//			JointAngleLimits2D limits = new JointAngleLimits2D();
-//			limits.min = -10 - linkLimitRest * i;
-//			limits.max = 10 + linkLimitRest * i;
-//			hingeJoint.limits = limits; 
-
+			
 			lastLink = newLink;
 			currentLink = newLink.transform;
-
+			
 			links[i] = newLink;
 		}
-
-		//chooseDriver (currentLink);
 	}
-	
 	// Use this for initialization
 	void Start () {
 		
@@ -201,4 +189,19 @@ public class NewRope : MonoBehaviour {
 		
 		currentLink = null;
 	}
+
+	public void reset(){
+
+		for (int i = 0; i < links.Length; ++i) {
+			Destroy(links[i]);
+//			HingeJoint2D hingeJoint = links [i].GetComponent<HingeJoint2D> ();
+//			if(hingeJoint.connectedBody){
+//				hingeJoint.connectedBody.velocity = new Vector2(0f,0f);
+//				hingeJoint.connectedBody.angularVelocity = 0f;
+//			}
+		}
+
+		createLinks ();
+	}
+
 }
