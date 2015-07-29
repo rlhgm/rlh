@@ -4,6 +4,8 @@ using System.Collections;
 public class zap_idle1_beh : StateMachineBehaviour {
 
 	public Player2Controller playerController = null;
+	public AudioClip[] dieSounds;
+	public int stateIdleNum = 0;
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -42,7 +44,8 @@ public class zap_idle1_beh : StateMachineBehaviour {
 		if (playerController) {
 			//playerController.StateIdleExit();
 			if( stateInfo.normalizedTime >= 1.0f )
-				playerController.StateIdleFinish(0);
+				playerController.StateIdleFinish(stateIdleNum);
+			//playerController.StateIdleUpdate(stateInfo.normalizedTime);
 		}
 	}
 }

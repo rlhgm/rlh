@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  dieSounds: []
+  stateIdleNum: 1
 --- !u!114 &11437180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  dieSounds:
+  - {fileID: 8300000, guid: bcf57ff80b9569f44ae9c09aa1f450ef, type: 3}
+  stateIdleNum: 0
 --- !u!114 &11446598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,6 +194,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  dieSounds: []
+  stateIdleNum: 2
 --- !u!1101 &110103834
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1744,7 +1751,7 @@ AnimatorStateMachine:
     m_Position: {x: 1224, y: 264, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110259316}
-    m_Position: {x: 84, y: -744, z: 0}
+    m_Position: {x: -168, y: -684, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110289596}
     m_Position: {x: 108, y: -684, z: 0}

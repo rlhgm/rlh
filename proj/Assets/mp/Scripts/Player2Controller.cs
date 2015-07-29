@@ -204,21 +204,36 @@ public class Player2Controller : MonoBehaviour {
 		print("StateIdleExit");
 	}
 	public void StateIdleUpdate(float normTime){
+		//print("StateIdleUpdate " + normTime);
+
+		//if (normTime < 1.0f)
+		//	return;
+
 		print("StateIdleUpdate " + normTime);
+		print ("currentActionTime : " + currentActionTime);
 
-		if (normTime < 1.0f)
-			return;
+//		AnimatorClipInfo[] acis = animator.GetCurrentAnimatorClipInfo(0);
+//		if (acis.Length > 0) {
+//			AnimatorClipInfo aci = acis[0];
+//
+//			print( "aci.clip.length : " + aci.clip.length );
+//		}
+		//print (animator.playbackTime);
 
-		int r = Random.Range(0,20);
-		print (r);
+		//AnimatorStateInfo asi = animator.GetCurrentAnimatorStateInfo (0);
+		//print (asi.length + " " + asi.normalizedTime);
 
-		if (r < 18) {
-			animator.Play("zapidle");
-		} else if (r < 19) {
-			animator.Play ("zapidle_var1");
-		} else {
-			animator.Play ("zapidle_var2");
-		}
+		//animator.
+//		int r = Random.Range(0,20);
+//		print (r);
+//
+//		if (r < 18) {
+//			animator.Play("zapidle");
+//		} else if (r < 19) {
+//			animator.Play ("zapidle_var1");
+//		} else {
+//			animator.Play ("zapidle_var2");
+//		}
 
 //		switch( r ){
 //		case 0:
@@ -234,7 +249,18 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	public void StateIdleFinish(int stateIdleNum){
-
+		print ("StateIdleFinish");
+		switch( stateIdleNum ){
+		case 2:
+			animator.Play("zapidle");
+			break;
+		case 0:
+			animator.Play ("zapidle_var1");
+			break;
+		case 1:
+			animator.Play ("zapidle_var2");
+			break;
+		}
 	}
 
 	public void die(){
@@ -1102,6 +1128,7 @@ public class Player2Controller : MonoBehaviour {
 			setAction(Action.IDLE);
 			//action = Action.IDLE;
 			resetActionAndState();
+			return 0;
 		}
 
 		distToMove = velocity.x * Time.deltaTime;
@@ -1146,6 +1173,7 @@ public class Player2Controller : MonoBehaviour {
 		if (speedReached && desiredSpeedX == 0.0f) {
 			setAction(Action.IDLE);
 			resetActionAndState ();
+			return 0;
 		}
 
 		float speedRatio = (Mathf.Abs (velocity.x) / RunSpeed);
