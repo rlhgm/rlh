@@ -39,13 +39,23 @@ public class zap_idle1_beh : StateMachineBehaviour {
 //		}
 //	}
 
+	float lastNormTime = 0.0f;
+
+	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		lastNormTime = 0.0f;
+	}
+
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		if (playerController) {
 			//playerController.StateIdleExit();
-			if( stateInfo.normalizedTime >= 1.0f )
+			//if( stateInfo.normalizedTime >= 1.0f )
+			if( Mathf.Floor( stateInfo.normalizedTime ) != Mathf.Floor(lastNormTime) ){
 				playerController.StateIdleFinish(stateIdleNum);
-			//playerController.StateIdleUpdate(stateInfo.normalizedTime);
+				//playerController.StateIdleUpdate(stateInfo.normalizedTime);
+			}
+			lastNormTime = stateInfo.normalizedTime;
 		}
 	}
 }

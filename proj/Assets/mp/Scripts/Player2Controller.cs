@@ -251,16 +251,45 @@ public class Player2Controller : MonoBehaviour {
 	public void StateIdleFinish(int stateIdleNum){
 		print ("StateIdleFinish");
 		switch( stateIdleNum ){
+		case 1:
 		case 2:
 			animator.Play("zapidle");
 			break;
 		case 0:
-			animator.Play ("zapidle_var1");
+			//animator.Play ("zapidle");
+			int r = Random.Range(0,10);
+			if( r == 8 ){
+				animator.Play ("zapidle_var1");
+			}else if( r == 9 ){
+				animator.Play ("zapidle_var2");
+			}
+			//		print (r);
+			//
+			//		if (r < 18) {
+			//			animator.Play("zapidle");
+			//		} else if (r < 19) {
+			//			animator.Play ("zapidle_var1");
+			//		} else {
+			//			animator.Play ("zapidle_var2");
+			//		}
 			break;
-		case 1:
-			animator.Play ("zapidle_var2");
-			break;
+//		case 1:
+//		case 2:
+//			animator.Play ("zapidle_var2");
+//			break;
 		}
+
+//		switch( stateIdleNum ){
+//		case 2:
+//			animator.Play("zapidle");
+//			break;
+//		case 0:
+//			animator.Play ("zapidle_var1");
+//			break;
+//		case 1:
+//			animator.Play ("zapidle_var2");
+//			break;
+//		}
 	}
 
 	public void die(){
