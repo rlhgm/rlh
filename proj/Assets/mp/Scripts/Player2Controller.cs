@@ -98,6 +98,8 @@ public class Player2Controller : MonoBehaviour {
 			behs[b].playerController = this;
 		}
 
+		audio = GetComponent<AudioSource>();
+
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
 		sensorLeft2 = transform.Find("sensorLeft2").transform;
 		sensorLeft3 = transform.Find("sensorLeft3").transform;

@@ -4,7 +4,7 @@ using System.Collections;
 public class zap_idle1_beh : StateMachineBehaviour {
 
 	public Player2Controller playerController = null;
-	public AudioClip[] dieSounds;
+	//public AudioClip[] dieSounds;
 	public int stateIdleNum = 0;
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
