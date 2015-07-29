@@ -72,6 +72,9 @@ TagManager:
   - name: Mount
     uniqueID: 750122625
     locked: 0
+  - name: Mount_walk
+    uniqueID: 3735367181
+    locked: 0
   - name: Trees
     uniqueID: 1753939559
     locked: 0

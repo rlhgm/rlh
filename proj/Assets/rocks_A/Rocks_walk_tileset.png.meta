@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ff35aaeca296d3742a69b9e8a6c4d776
-timeCreated: 1438111250
+timeCreated: 1438166531
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -32,6 +32,14 @@ TextureImporter:
     21300050: Rocks_walk_tileset_25
     21300052: Rocks_walk_tileset_26
     21300054: Rocks_walk_tileset_27
+    21300056: Rocks_walk_tileset_28
+    21300058: Rocks_walk_tileset_29
+    21300060: Rocks_walk_tileset_30
+    21300062: Rocks_walk_tileset_31
+    21300064: Rocks_walk_tileset_32
+    21300066: Rocks_walk_tileset_33
+    21300068: Rocks_walk_tileset_34
+    21300070: Rocks_walk_tileset_35
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -81,7 +89,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -91,7 +99,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -101,7 +109,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -111,7 +119,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -121,7 +129,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -131,7 +139,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -141,7 +149,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -151,7 +159,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -161,7 +169,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -171,7 +179,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -181,7 +189,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -191,7 +199,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -201,7 +209,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -211,7 +219,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -221,7 +229,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -231,7 +239,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -241,7 +249,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -251,7 +259,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -261,7 +269,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -271,7 +279,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -281,7 +289,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -291,7 +299,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -300,7 +308,7 @@ TextureImporter:
     - name: Rocks_walk_tileset_22
       rect:
         serializedVersion: 2
-        x: 0
+        x: 96
         y: 32
         width: 16
         height: 16
@@ -310,7 +318,7 @@ TextureImporter:
     - name: Rocks_walk_tileset_23
       rect:
         serializedVersion: 2
-        x: 16
+        x: 112
         y: 32
         width: 16
         height: 16
@@ -320,8 +328,8 @@ TextureImporter:
     - name: Rocks_walk_tileset_24
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 0
+        y: 16
         width: 16
         height: 16
       alignment: 1
@@ -330,8 +338,8 @@ TextureImporter:
     - name: Rocks_walk_tileset_25
       rect:
         serializedVersion: 2
-        x: 48
-        y: 32
+        x: 16
+        y: 16
         width: 16
         height: 16
       alignment: 1
@@ -340,8 +348,8 @@ TextureImporter:
     - name: Rocks_walk_tileset_26
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 1
@@ -350,8 +358,88 @@ TextureImporter:
     - name: Rocks_walk_tileset_27
       rect:
         serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_28
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_29
+      rect:
+        serializedVersion: 2
         x: 80
-        y: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_31
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_33
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_34
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocks_walk_tileset_35
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
         width: 16
         height: 16
       alignment: 1
