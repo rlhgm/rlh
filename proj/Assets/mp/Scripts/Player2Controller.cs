@@ -100,6 +100,12 @@ public class Player2Controller : MonoBehaviour {
 
 		audio = GetComponent<AudioSource>();
 
+		PlaySounds[] pss = animator.GetBehaviours<PlaySounds>();
+		for( int b = 0 ; b < pss.Length ; ++b )
+		{
+			pss[b].playerController = this;
+		}
+
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
 		sensorLeft2 = transform.Find("sensorLeft2").transform;
 		sensorLeft3 = transform.Find("sensorLeft3").transform;
@@ -175,10 +181,14 @@ public class Player2Controller : MonoBehaviour {
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
-	
+
+	public AudioSource getAudioSource(){
+		return audio;
+	}
+
 	void Start () {
 
-		audio = GetComponent<AudioSource>();
+		//audio = GetComponent<AudioSource>();
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);

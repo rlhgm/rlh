@@ -28,8 +28,10 @@ public class PlaySounds : StateMachineBehaviour {
 	//
 	//}
 
+	public Player2Controller playerController = null;
 	public float[] NormTimes;
 	public AudioClip[] sounds;
+	//public AudioSource audio;
 
 	float lastNormTime = 0.0f;
 	bool[] played;
@@ -42,9 +44,17 @@ public class PlaySounds : StateMachineBehaviour {
 		if (NormTimes.Length != sounds.Length)
 			return;
 
-		for (int s = 0 ; s < sounds.Length; ++s) {
-			played[s] = false;
+		if (sounds.Length > 0) {
+			played = new bool[sounds.Length];
+			for (int s = 0; s < sounds.Length; ++s) {
+				played [s] = false;
+			}
 		}
+
+		//if (!audio)
+		//	return;
+
+		settingsOK = true;
 	}
 	
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -52,9 +62,19 @@ public class PlaySounds : StateMachineBehaviour {
 		if (!settingsOK)
 			return;
 
-		float animNormTime = Mathf.Floor (stateInfo.normalizedTime);
+		float normTime = Mathf.Floor (stateInfo.normalizedTime);
+		float animNormTime = stateInfo.normalizedTime - normTime;
 
-		if( animNormTime != Mathf.Floor(lastNormTime) ){
+		for (int s = 0 ; s < sounds.Length; ++s) {
+			if( played[s] ) continue;
+
+			if( NormTimes[s] <= animNormTime ) { //gramy dzwiek
+				playerController.getAudioSource().PlayOneShot( sounds[s] );
+				played[s] = true;
+			}
+		}
+
+		if( normTime != Mathf.Floor(lastNormTime) ){
 			restartAnim();
 		}
 
