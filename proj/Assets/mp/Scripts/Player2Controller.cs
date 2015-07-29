@@ -316,10 +316,7 @@ public class Player2Controller : MonoBehaviour {
 
 		showInfo ("PRESS SPACE", -1);
 
-		NewRope[] ropes = FindObjectsOfType(typeof(NewRope)) as NewRope[];
-		foreach (NewRope rope in ropes) {
-			rope.reset();
-		}
+
 	}
 
 	public bool isDead(){
@@ -339,6 +336,11 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		resetInfo ();
+
+		NewRope[] ropes = FindObjectsOfType(typeof(NewRope)) as NewRope[];
+		foreach (NewRope rope in ropes) {
+			rope.reset();
+		}
 	}
 	GameObject lastTouchedCheckPoint;
 

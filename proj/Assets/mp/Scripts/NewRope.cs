@@ -86,6 +86,9 @@ public class NewRope : MonoBehaviour {
 		if (links.Length == 0)
 			return;
 
+		if (links [0] == null)
+			return;
+
 		HingeJoint2D hingeJoint = links [0].GetComponent<HingeJoint2D> ();
 		firstLinkSpeed = hingeJoint.jointSpeed;
 		firstLinkAngle = hingeJoint.jointAngle;
@@ -193,7 +196,8 @@ public class NewRope : MonoBehaviour {
 	public void reset(){
 
 		for (int i = 0; i < links.Length; ++i) {
-			Destroy(links[i]);
+			Destroy(links[i].gameObject);
+			links[i] = null;
 //			HingeJoint2D hingeJoint = links [i].GetComponent<HingeJoint2D> ();
 //			if(hingeJoint.connectedBody){
 //				hingeJoint.connectedBody.velocity = new Vector2(0f,0f);
