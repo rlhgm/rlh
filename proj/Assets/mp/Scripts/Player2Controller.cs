@@ -543,6 +543,9 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
+			if (Input.GetKeyDown (keyJump)) {
+				wantJumpAfter = true;
+			}
 			if( currentActionTime >= 0.2f ){
 				turnLeft();
 				turnLeftFinish();
@@ -550,6 +553,9 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_RIGHT:
+			if (Input.GetKeyDown (keyJump)) {
+				wantJumpAfter = true;
+			}
 			if( currentActionTime >= 0.2f ){
 				turnRight();
 				turnRightFinish();
@@ -1929,6 +1935,7 @@ public class Player2Controller : MonoBehaviour {
 		jumpKeyPressed = false;
 		jumpFromMount = false;
 		justJumpedRope = null;
+		canJumpAfter = true;
 	}
 	
 	bool keyUpDown(){
@@ -2141,31 +2148,36 @@ public class Player2Controller : MonoBehaviour {
 		lastFrameHande = false;
 	}
 
-	bool jumpAfterTurn = false;
+	//bool jumpAfterTurn = false;
 
 	void turnLeftStart(){
 		setAction (Action.TURN_STAND_LEFT);
 
-		jumpAfterTurn = false;
-		if (Input.GetKeyDown (keyJump) || Input.GetKey (keyJump))
-			jumpAfterTurn = true;
+		//jumpAfterTurn = false;
+		//wantJumpAfter = false;
+		if (Input.GetKeyDown (keyJump) || ( Input.GetKey (keyJump) && canJumpAfter) )
+			wantJumpAfter = true;
 	}
 
 	void turnRightStart(){
 		setAction (Action.TURN_STAND_RIGHT);
 
-		jumpAfterTurn = false;
-		if (Input.GetKeyDown (keyJump) || Input.GetKey (keyJump))
-			jumpAfterTurn = true	;
+		//wantJumpAfter = false;
+		if (Input.GetKeyDown (keyJump) || (Input.GetKey (keyJump) && canJumpAfter) )
+			wantJumpAfter = true;
 	}
 
 	void turnLeftFinish(){
 		setAction (Action.IDLE);
 		//action = Action.IDLE;
 		//keyJumpDown ();
-		if (jumpKeyPressed || jumpAfterTurn) {
 
+		//if (jumpKeyPressed || jumpAfterTurn) {
+		if( wantJumpAfter ) {
 			jumpLeft();
+
+			if( Input.GetKey(keyJump) )
+				canJumpAfter = false;
 
 //			if( Input.GetKey(keyLeft) ){
 //				jumpLeft();
@@ -2181,9 +2193,13 @@ public class Player2Controller : MonoBehaviour {
 		//action = Action.IDLE;
 		//resetActionAndState ();
 
-		if (jumpKeyPressed || jumpAfterTurn) {
+		//if (jumpKeyPressed || jumpAfterTurn) {
 
+		if( wantJumpAfter) {
 			jumpRight();
+
+			if( Input.GetKey(keyJump) )
+				canJumpAfter = false;
 
 //			if( Input.GetKey(keyRight) ){
 //				jumpRight();
@@ -3246,11 +3262,13 @@ public class Player2Controller : MonoBehaviour {
 		case Action.TURN_STAND_LEFT:
 			//animator.Play("stand_turn_left");
 			animator.Play("stand_turn_left");
+			wantJumpAfter = false;
 			break;
 
 		case Action.TURN_STAND_RIGHT:
 			//animator.Play("stand_turn_right");
 			animator.Play("stand_turn_right");
+			wantJumpAfter = false;
 			break;
 
 		case Action.TURN_RUN_LEFT:
@@ -3460,6 +3478,7 @@ public class Player2Controller : MonoBehaviour {
 	int playerCurrentLayer;
 	bool wantGetUp = false;
 	bool wantJumpAfter = false;
+	bool canJumpAfter = true;
 
 	[SerializeField]
 	private State state;
