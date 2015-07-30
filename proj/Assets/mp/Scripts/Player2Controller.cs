@@ -51,7 +51,8 @@ public class Player2Controller : MonoBehaviour {
 	public float VeryHardLandingHeight = 6.0f;
 
 	public float RopeSwingForce = 500f;
-	public float RopeClimbSpeed = 1.0f;
+	public float RopeClimbSpeedUp = 1.0f;
+	public float RopeClimbSpeedDown = 3.0f;
 
 	public float CLIMB_DURATION = 1.5f;
 	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
@@ -1592,7 +1593,7 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 		} 
 
-		float climbDist = RopeClimbSpeed * Time.deltaTime;
+		float climbDist = RopeClimbSpeedUp * Time.deltaTime;
 
 		float newRopeLinkCatchOffset = ropeLinkCatchOffset + climbDist;
 		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
@@ -1628,7 +1629,7 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 		}
 
-		float climbDist = RopeClimbSpeed * Time.deltaTime;
+		float climbDist = RopeClimbSpeedDown * Time.deltaTime;
 		
 		float newRopeLinkCatchOffset = ropeLinkCatchOffset - climbDist;
 		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
@@ -3391,10 +3392,13 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.ROPECLIMB_UP:
-		case Action.ROPECLIMB_DOWN:
-			//animator.SetTrigger("climbrope");
 			animator.Play("newclimbrope_updown");
 			break;
+
+		case Action.ROPECLIMB_DOWN:
+			animator.Play("Zap_liana_slide");
+			break;
+
 		};
 
 		return true;
