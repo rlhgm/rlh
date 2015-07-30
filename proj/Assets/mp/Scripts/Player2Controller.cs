@@ -1651,11 +1651,15 @@ public class Player2Controller : MonoBehaviour {
 				} else {
 					jumpRight ();
 				}
-			} else {
+			} else if( Input.GetKeyDown (keyDown) || Input.GetKey (keyDown) ) {
 				//jump();
-				velocity.x = -ps;
-				velocity.y = (ropeAngle / 30.0f) * JumpLongImpulse;
+				//velocity.x = -ps;
+				//velocity.y = (ropeAngle / 30.0f) * JumpLongImpulse;
+				velocity.x = 0f;
+				velocity.y = 0f;
 				setAction (Action.JUMP);
+			}else{
+				return 0;
 			}
 			
 			//Vector3 posInWorld = transform.TransformPoint( 0f,-1.65f,0f );
