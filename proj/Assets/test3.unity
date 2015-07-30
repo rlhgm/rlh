@@ -448,11 +448,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 50.3647652
+      value: 59.3600006
       objectReference: {fileID: 0}
     - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.18435764
+      value: -1.82000005
       objectReference: {fileID: 0}
     - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1425,11 +1425,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 439214, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -50
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 439214, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 439214, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2616,6 +2616,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 800463091}
+    - target: {fileID: 105502, guid: ed7663b75c34d814188745db0b321f45, type: 2}
+      propertyPath: m_TagString
+      value: KillerPhysic
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed7663b75c34d814188745db0b321f45, type: 2}
   m_IsPrefabParent: 0
