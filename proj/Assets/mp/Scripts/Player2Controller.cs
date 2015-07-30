@@ -559,8 +559,12 @@ public class Player2Controller : MonoBehaviour {
 		case Action.TURN_RUN_LEFT:
 			if( currentActionTime >= 0.85f ){
 				turnLeft();
-				setActionIdle();
-				resetActionAndState();
+				if( wantJumpAfter ){
+					jumpLeft();
+				}else{
+					setActionIdle();
+					resetActionAndState();
+				}
 			}else{
 				int res = Act_TURN_RUN(1);
 				if( res == 1 ){
@@ -574,8 +578,12 @@ public class Player2Controller : MonoBehaviour {
 		case Action.TURN_RUN_RIGHT:
 			if( currentActionTime >= 0.85f ){
 				turnRight();
-				setActionIdle();
-				resetActionAndState();
+				if( wantJumpAfter ){
+					jumpRight();
+				}else{
+					setActionIdle();
+					resetActionAndState();
+				}
 			}else{
 				int res = Act_TURN_RUN(-1);
 				if( res == 1 ){
@@ -1304,6 +1312,10 @@ public class Player2Controller : MonoBehaviour {
 	int Act_TURN_RUN(int dir){
 
 		int retVal = 0;
+
+		if (Input.GetKeyDown (keyJump)) {
+			wantJumpAfter = true;
+		}
 
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
@@ -3244,12 +3256,14 @@ public class Player2Controller : MonoBehaviour {
 		case Action.TURN_RUN_LEFT:
 			//animator.Play("stand_turn_left");
 			animator.Play("run_turn_left");
+			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
 				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
 			animator.Play("run_turn_right");
+			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
 				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
@@ -3445,6 +3459,7 @@ public class Player2Controller : MonoBehaviour {
 	
 	int playerCurrentLayer;
 	bool wantGetUp = false;
+	bool wantJumpAfter = false;
 
 	[SerializeField]
 	private State state;
