@@ -431,7 +431,7 @@ public class Player2Controller : MonoBehaviour {
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
 		justJumpedMount = false;
-
+		firstFrameInState = false;
 
 		if (!userJumpKeyPressed) {
 			if (Input.GetKeyDown (keyJump)) {
@@ -768,7 +768,7 @@ public class Player2Controller : MonoBehaviour {
 
 			if( distToFall.x > 0.0f )
 			{
-				float obstacleOnRoad = checkRight(distToFall.x + 0.01f);
+				float obstacleOnRoad = checkRight(distToFall.x + 0.01f,!firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
 					//print("distToFall.x = " + distToFall.x + " obstacleOnRoad = " + obstacleOnRoad );
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
@@ -783,10 +783,12 @@ public class Player2Controller : MonoBehaviour {
 			}
 			else if( distToFall.x < 0.0f )
 			{
-				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f );
+				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
+					//print( "jest obstacle" );
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
+						//print (distToFall);
 						velocity.x = 0.0f;
 						//if( velocity.y > 0.0f )
 						//	velocity.y *=  0.5f;
@@ -795,6 +797,9 @@ public class Player2Controller : MonoBehaviour {
 					}
 				}
 			}
+
+			transform.position = transform.position + distToFall;
+			distToFall.x = 0f;
 
 			velocity.y += impulse.y;
 			if(velocity.y > MaxSpeedY)
@@ -2310,10 +2315,19 @@ public class Player2Controller : MonoBehaviour {
 		return isInAction(Action.CROUCH_IDLE) || isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_RIGHT);
 	}
 
-	float checkLeft(float checkingDist){
-		Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
+	float checkLeft(float checkingDist, bool flying = false){
+		Vector2 rayOrigin;
+		if (flying) {
+ 			rayOrigin = transform.position;
+			rayOrigin.x -= myHalfWidth;
+		} else {
+			rayOrigin = sensorLeft1.position; // new Vector2( sensorRight1.position.x, sensorRight1.position.y );
+		}
+
+		//Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
+
 		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
+ 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
 			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 			//print( hit.collider.gameObject.transform.rotation.to );
@@ -2403,8 +2417,14 @@ public class Player2Controller : MonoBehaviour {
 //		}
 //	}
 
-	float checkRight(float checkingDist){
-		Vector2 rayOrigin = new Vector2( sensorRight1.position.x, sensorRight1.position.y );
+	float checkRight(float checkingDist, bool flying = false){
+		Vector2 rayOrigin;
+		if (flying) {
+			rayOrigin = transform.position;
+			rayOrigin.x += myHalfWidth;
+		} else {
+			rayOrigin = sensorRight1.position; // new Vector2( sensorRight1.position.x, sensorRight1.position.y );
+		}
 		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
@@ -3108,6 +3128,9 @@ public class Player2Controller : MonoBehaviour {
 	State getState() { 
 		return state; 
 	}
+
+	bool firstFrameInState = false;
+
 	bool setState(State newState){
 		
 		//print ("setState oldState : " + state);
@@ -3117,7 +3140,7 @@ public class Player2Controller : MonoBehaviour {
 			return false;
 
 		currentStateTime = 0.0f;
-
+		firstFrameInState = true;
 		//print ("setState : " + newState + " ustawiona");
 		//print ("============================");
 
