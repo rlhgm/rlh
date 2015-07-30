@@ -1455,35 +1455,21 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 
 		if (Input.GetKey (keyLeft)) {
-			turnLeft();
+			//turnLeft();
 
 			float fla = catchedRope.firstLinkAngle;
-			//float fls = catchedRope.firstLinkSpeed;
-
 			if( fla < 10f && fla > -15f){
-				//catchedRope.swing(-Vector2.right,RopeSwingForce * (fla/50f) );
-				//print( "swing left : fla " + fla );
 				catchedRope.swing(-Vector2.right, RopeSwingForce * Time.deltaTime );
 			}
-//			}else if( fla == 0f && fls == 0f){
-//				catchedRope.swing(-Vector2.right,RopeSwingForce);
-//			}
 		}
-		if (Input.GetKey (keyRight)) {
-
-			turnRight();
+		else if (Input.GetKey (keyRight)) {
+			//turnRight();
 
 			float fla = catchedRope.firstLinkAngle;
-			//float fls = catchedRope.firstLinkSpeed;
 
 			if( fla > -10f && fla < 15f){
-				//catchedRope.swing(Vector2.right, RopeSwingForce * (-fla/50f) );
-				//print( "swing right : fla " + fla );
 				catchedRope.swing(Vector2.right, RopeSwingForce * Time.deltaTime );
 			}
-//			}else if( fla == 0f && fls == 0f ){
-//				catchedRope.swing(Vector2.right, RopeSwingForce );
-//			}
 		}
 
 		if ( Input.GetKeyDown (keyJump)) {
