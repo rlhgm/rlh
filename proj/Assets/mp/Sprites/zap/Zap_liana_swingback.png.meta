@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e95e7e0bb5768fa489a66c365f0ac2fd
-timeCreated: 1438220242
+timeCreated: 1438221391
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -59,7 +59,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .663742721, y: .671539903}
+      pivot: {x: .661143601, y: .702728987}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_swingback_1
       rect:
@@ -69,7 +69,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .666341782, y: .674138963}
+      pivot: {x: .663742661, y: .710526109}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

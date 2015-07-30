@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ce039b7152eebaf4fad8b7aa865cd0cd
-timeCreated: 1438220266
+timeCreated: 1438221405
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -59,7 +59,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .609161794, y: .684535384}
+      pivot: {x: .611760914, y: .713125348}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_swingfront_1
       rect:
@@ -69,7 +69,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .609161854, y: .676738083}
+      pivot: {x: .614359975, y: .713125348}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

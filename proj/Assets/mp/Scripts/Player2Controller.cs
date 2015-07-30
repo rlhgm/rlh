@@ -1461,6 +1461,17 @@ public class Player2Controller : MonoBehaviour {
 			if( fla < 10f && fla > -15f){
 				catchedRope.swing(-Vector2.right, RopeSwingForce * Time.deltaTime );
 			}
+
+			if( dir () == Vector2.right ){
+				animator.Play("Zap_liana_swingback");
+			}else{
+				animator.Play("Zap_liana_swingfront");
+			}
+
+//			} else {
+//				animator.Play("newclimbrope_idle");
+//			}
+
 		}
 		else if (Input.GetKey (keyRight)) {
 			//turnRight();
@@ -1470,6 +1481,20 @@ public class Player2Controller : MonoBehaviour {
 			if( fla > -10f && fla < 15f){
 				catchedRope.swing(Vector2.right, RopeSwingForce * Time.deltaTime );
 			}
+				
+			if( dir () == Vector2.right ){
+				animator.Play("Zap_liana_swingfront");
+			}else{
+				animator.Play("Zap_liana_swingback");
+			}
+
+//			} else {
+//				animator.Play("newclimbrope_idle");
+//			}
+		}
+
+		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) ) {
+			animator.Play("newclimbrope_idle");
 		}
 
 		if ( Input.GetKeyDown (keyJump)) {
