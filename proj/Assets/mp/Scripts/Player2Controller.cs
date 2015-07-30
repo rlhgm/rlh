@@ -1572,15 +1572,40 @@ public class Player2Controller : MonoBehaviour {
 
 		if (Input.GetKey (keyUp)) { 
 
-			setAction(Action.ROPECLIMB_UP);
+			if( canRopeClimbUp() ){
+				setAction(Action.ROPECLIMB_UP);
+			}
 
 		} else if (Input.GetKey (keyDown)) {
 
-			setAction(Action.ROPECLIMB_DOWN);
-
+			if( canRopeClimbDown() ) {
+				setAction(Action.ROPECLIMB_DOWN);
+			}
 		}
 
 		return 0;
+	}
+
+	bool canRopeClimbUp(){
+		if (ropeLinkCatchOffset == 0f) {
+			return catchedRopeLink.transform.parent;
+		}
+		return true; 
+	}
+	bool canRopeClimbDown(){
+		if (ropeLinkCatchOffset == -0.5f) {
+
+			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma dzicko to przechodze niżej 
+
+				if( catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
+					return true;
+				}
+
+			}
+
+			return false;
+		}
+		return true;
 	}
 
 	int Act_ROPECLIMB_UP(){
@@ -1608,6 +1633,7 @@ public class Player2Controller : MonoBehaviour {
 
 			}else {
 				ropeLinkCatchOffset = 0.0f;
+				setAction(Action.ROPECLIMB_IDLE);
 			}
 
 		} else {
@@ -1644,10 +1670,12 @@ public class Player2Controller : MonoBehaviour {
 					ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
 				}else{
 					ropeLinkCatchOffset = -0.5f;
+					setAction(Action.ROPECLIMB_IDLE);
 				}
 				
 			}else {
 				ropeLinkCatchOffset = -0.5f;
+				setAction(Action.ROPECLIMB_IDLE);
 			}
 			
 		} else {
