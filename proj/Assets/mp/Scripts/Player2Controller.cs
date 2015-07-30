@@ -3382,11 +3382,11 @@ public class Player2Controller : MonoBehaviour {
 
 		case Action.MOUNT_LEFT:
 			//animator.SetTrigger("mount_left");
-			animator.Play("mount_right");
+			animator.Play("mount_left");
 			break;
 		case Action.MOUNT_RIGHT:
 			//animator.SetTrigger("mount_right");
-			animator.Play("mount_left");
+			animator.Play("mount_right");
 			break;
 		case Action.MOUNT_UP:
 			animator.Play("mount_up");
