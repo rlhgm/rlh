@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: e95e7e0bb5768fa489a66c365f0ac2fd
-timeCreated: 1438207701
+timeCreated: 1438220242
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Zap_liana_swingback_0
+    21300002: Zap_liana_swingback_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +50,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Zap_liana_swingback_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .663742721, y: .671539903}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_liana_swingback_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .666341782, y: .674138963}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
