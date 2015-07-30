@@ -7,6 +7,7 @@ namespace UnityStandardAssets._2D
     {
         //public Transform target;
 		public Player2Controller target;
+		Transform camTarget;
         //public float damping = 1;
         //public float lookAheadFactor = 3;
         //public float lookAheadReturnSpeed = 0.5f;
@@ -80,6 +81,9 @@ namespace UnityStandardAssets._2D
         // Use this for initialization
         private void Start()
         {
+			if (target) {
+				camTarget = target.getCameraTarget();
+			}
 			///aaa
 			camera = GetComponent<Camera> ();
 
@@ -108,20 +112,25 @@ namespace UnityStandardAssets._2D
 
 			targetStage = getTargetStage ();
 
-			Vector3 newPos = new Vector3( target.transform.position.x, target.transform.position.y, transform.position.z );
+			//Vector3 newPos = new Vector3( target.transform.position.x, target.transform.position.y, transform.position.z );
+			Vector3 newPos = new Vector3( camTarget.position.x, camTarget.position.y, transform.position.z );
 
 			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
-				newPos.y -= target.cameraTargetRopeDiffY;
-			} else {
-				newPos.y += target.cameraTargetNormalDiffY;
-			}
+				newPos.y -= camTarget.localPosition.y;
+			} //else {
+			//	newPos.y += target.cameraTargetNormalDiffY;
+			//}
 
 			Vector3 res = fitToStage (targetStage, newPos);
 
-			//Vector3 posDiff = res - transform.position;
-			//if( posDiff.magnitude > 1.0f ) res
+			Vector3 posDiff = res - transform.position;
+			float pdm = posDiff.magnitude;
 
-			transform.position = res;
+			if (pdm > 0.25f)
+				pdm = 0.25f;
+			pdm = (pdm * pdm);
+
+			transform.position = transform.position + posDiff * pdm;
 
 			int numberOfBackgrounds = backgroundsNodes.Length;
 
@@ -143,12 +152,17 @@ namespace UnityStandardAssets._2D
 		Vector2 getTargetStage(){
 			Vector2 targetStage = new Vector2 ();
 
-			Vector3 targetPos = target.transform.position;
+//			Vector3 targetPos = target.transform.position;
+//			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
+//				targetPos.y -= target.cameraTargetRopeDiffY;
+//			} else {
+//				targetPos.y += target.cameraTargetNormalDiffY;
+//			}
+			Vector3 targetPos = camTarget.position;
+
 			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
-				targetPos.y -= target.cameraTargetRopeDiffY;
-			} else {
-				targetPos.y += target.cameraTargetNormalDiffY;
-			}
+				targetPos.y -= camTarget.localPosition.y;
+			} //else {
 
 			targetStage.x =  (targetPos.x - stagesOffset.x) / stageSize.x;
 			targetStage.y =  (targetPos.y - stagesOffset.y) / stageSize.y;
