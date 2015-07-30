@@ -7,7 +7,7 @@ namespace UnityStandardAssets._2D
     {
         //public Transform target;
 		public Player2Controller target;
-		Transform camTarget;
+		//Transform camTarget;
         //public float damping = 1;
         //public float lookAheadFactor = 3;
         //public float lookAheadReturnSpeed = 0.5f;
@@ -81,9 +81,9 @@ namespace UnityStandardAssets._2D
         // Use this for initialization
         private void Start()
         {
-			if (target) {
-				camTarget = target.getCameraTarget();
-			}
+			//if (target) {
+			//Transform camTarget = target.getCameraTarget();
+			//}
 			///aaa
 			camera = GetComponent<Camera> ();
 
@@ -111,6 +111,8 @@ namespace UnityStandardAssets._2D
 			//Vector3 oldPos = transform.position;
 
 			targetStage = getTargetStage ();
+
+			Transform camTarget = target.getCameraTarget();
 
 			//Vector3 newPos = new Vector3( target.transform.position.x, target.transform.position.y, transform.position.z );
 			Vector3 newPos = new Vector3( camTarget.position.x, camTarget.position.y, transform.position.z );
@@ -158,6 +160,7 @@ namespace UnityStandardAssets._2D
 //			} else {
 //				targetPos.y += target.cameraTargetNormalDiffY;
 //			}
+			Transform camTarget = target.getCameraTarget();
 			Vector3 targetPos = camTarget.position;
 
 			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
