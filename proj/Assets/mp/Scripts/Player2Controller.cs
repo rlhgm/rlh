@@ -3405,11 +3405,12 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_LEFT:
-			animator.Play("crouch_leftright");
+			//animator.Play("crouch_leftright");
+			animator.Play("Zap_Crouch_walking_left");
 			break;
 		case Action.CROUCH_RIGHT:
-			animator.Play("crouch_leftright");
-			//animator.SetTrigger("crouchleftright");
+			//animator.Play("crouch_leftright");
+			animator.Play("Zap_Crouch_walking_right");
 			break;
 
 		case Action.ROPECLIMB_IDLE:
