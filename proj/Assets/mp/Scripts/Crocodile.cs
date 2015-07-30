@@ -71,12 +71,12 @@ public class Crocodile : MonoBehaviour {
 		transform.position = rightLimit;
 	}
 
-	public enum State{
-		CALM,
-		SNEAK,
-		ATTACK,
-		WAIT
-	};
+//	public enum State{
+//		CALM,
+//		SNEAK,
+//		ATTACK,
+//		WAIT
+//	};
 
 	void turnLeft(){
 		Vector3 scl = transform.localScale;
@@ -99,17 +99,22 @@ public class Crocodile : MonoBehaviour {
 
 		switch (wit){
 		case -1:
-			pos.x = leftLimit.x;
+			pos.x = waterLeftLimit.x+mySize.x*0.5f;
 			transform.position = pos;
 			break;
 		case 0:
 			pos.x = player.transform.position.x;
-			if (pos.x < leftLimit.x) pos.x = leftLimit.x;
-			if (pos.x > rightLimit.x) pos.x = rightLimit.x;
+			//if (pos.x < leftLimit.x) pos.x = leftLimit.x;
+			//if (pos.x > rightLimit.x) pos.x = rightLimit.x;
+
+			if( pos.x < waterLeftLimit.x+mySize.x*0.5f ) pos.x = waterLeftLimit.x+mySize.x*0.5f;
+			if( pos.x > waterRightLimit.x-mySize.x*0.5f ) pos.x = waterRightLimit.x-mySize.x*0.5f;
+
 			transform.position = pos;
 			break;
 		case 1:
-			pos.x = rightLimit.x;
+			//pos.x = rightLimit.x;
+			pos.x = waterRightLimit.x-mySize.x*0.5f;
 			transform.position = pos;
 			break;
 		}
@@ -147,5 +152,5 @@ public class Crocodile : MonoBehaviour {
 		return 0;
 	}
 
-	public State state;
+	//public State state;
 }
