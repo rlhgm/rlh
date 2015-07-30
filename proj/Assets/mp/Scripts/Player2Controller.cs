@@ -3357,6 +3357,8 @@ public class Player2Controller : MonoBehaviour {
 		case Action.CLIMB_CATCH:
 			//animator.SetTrigger("climb_catch");
 			animator.Play("zapclimbcatch");
+			animator.speed = 0f;
+
 			if( catchSounds.Length != 0)
 				audio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);
 			break;
