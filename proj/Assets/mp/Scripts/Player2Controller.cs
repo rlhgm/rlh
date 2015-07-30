@@ -2796,6 +2796,10 @@ public class Player2Controller : MonoBehaviour {
 			else
 				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, layerIdRopesMask); 
 
+			if( hit.collider == null ){
+				hit = Physics2D.Linecast( sensorHandleL2.position, sensorHandleR2.position, layerIdRopesMask); 
+			}
+
 			if (hit.collider != null) {
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 				bool _canCatch = true;
@@ -2857,7 +2861,10 @@ public class Player2Controller : MonoBehaviour {
 			else
 				hit = Physics2D.Linecast (sensorHandleL2.position, sensorHandleL2.position, layerIdRopesMask); 
 			
-			
+			if( hit.collider == null ){
+				hit = Physics2D.Linecast( sensorHandleL2.position, sensorHandleR2.position, layerIdRopesMask); 
+			}
+
 			if (hit.collider != null) {
 				
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
