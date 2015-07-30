@@ -1498,75 +1498,7 @@ public class Player2Controller : MonoBehaviour {
 			animator.Play("newclimbrope_idle");
 		}
 
-		if ( Input.GetKeyDown (keyJump)) {
-			//catchedRope = null;
-			//catchedRopeLink = null;
-
-			float ropeSpeed = catchedRope.firstLinkSpeed;
-
-			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
-
-			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
-
-			float ps =  ropeSpeedRad * (crl_idn+1) * 0.5f;
-
-			float ropeAngle = Mathf.Abs( catchedRope.firstLinkAngle );
-
-			//Quaternion.
-
-			if( Input.GetKey(keyLeft) ){ //skacze w lewo
-
-				turnLeft();
-
-				if( ropeSpeed > 0f ){ // lina tez leci w lewo
-					//setAction(Action.JUMP_LEFT_LONG);
-					jumpLongLeft();
-					velocity.x -= ps;
-				}else{
-					//setAction(Action.JUMP_LEFT);
-					jumpLeft();
-				}
-
-			} else if( Input.GetKey(keyRight) ) { //skacze w prawo
-
-				turnRight();
-
-				if( ropeSpeed < 0f ){ // lina tez leci w prawo
-					jumpLongRight();
-					velocity.y += ps;
-				}else{
-					jumpRight();
-				}
-
-			}else{
-
-				//jump();
-				velocity.x = -ps;
-				velocity.y = (ropeAngle/30.0f) * JumpLongImpulse;
-				setAction(Action.JUMP);
-			}
-
-
-			//Vector3 posInWorld = transform.TransformPoint( 0f,-1.65f,0f );
-			//transform.position = posInWorld;
-			Vector3 oldPos = transform.position;
-			oldPos.y -= 1.65f;
-			transform.position = oldPos;
-
-			justJumpedRope = catchedRope;
-
-			catchedRope.resetDiver();
-			catchedRope = null;
-			catchedRopeLink = null;
-
-			//transform.rotation.eulerAngles = new Vector3(0f,0f,0f);
-			Quaternion quat = new Quaternion();
-			quat.eulerAngles = new Vector3(0f,0f,0f);
-			transform.rotation = quat;
-			setState(State.IN_AIR);
-
-
-
+		if (tryJumpFromRope () != 0) {
 			return 0;
 		}
 
@@ -1655,6 +1587,10 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 		}
 
+		if (tryJumpFromRope () != 0) {
+			return 0;
+		}
+
 		float climbDist = RopeClimbSpeedDown * Time.deltaTime;
 		
 		float newRopeLinkCatchOffset = ropeLinkCatchOffset - climbDist;
@@ -1687,6 +1623,63 @@ public class Player2Controller : MonoBehaviour {
 		return 0;
 	}
 
+	int tryJumpFromRope(){
+
+		if (Input.GetKeyDown (keyJump)) {
+			
+			float ropeSpeed = catchedRope.firstLinkSpeed;
+			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
+			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink> ().idn;
+			float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
+			float ropeAngle = Mathf.Abs (catchedRope.firstLinkAngle);
+			
+			if (Input.GetKey (keyLeft)) { //skacze w lewo
+				turnLeft ();
+				
+				if (ropeSpeed > 0f) { // lina tez leci w lewo
+					jumpLongLeft ();
+					velocity.x -= ps;
+				} else {
+					jumpLeft ();
+				}
+			} else if (Input.GetKey (keyRight)) { //skacze w prawo
+				turnRight ();
+				
+				if (ropeSpeed < 0f) { // lina tez leci w prawo
+					jumpLongRight ();
+					velocity.y += ps;
+				} else {
+					jumpRight ();
+				}
+			} else {
+				//jump();
+				velocity.x = -ps;
+				velocity.y = (ropeAngle / 30.0f) * JumpLongImpulse;
+				setAction (Action.JUMP);
+			}
+			
+			//Vector3 posInWorld = transform.TransformPoint( 0f,-1.65f,0f );
+			//transform.position = posInWorld;
+			Vector3 oldPos = transform.position;
+			oldPos.y -= 1.65f;
+			transform.position = oldPos;
+			
+			justJumpedRope = catchedRope;
+			
+			catchedRope.resetDiver ();
+			catchedRope = null;
+			catchedRopeLink = null;
+			
+			Quaternion quat = new Quaternion ();
+			quat.eulerAngles = new Vector3 (0f, 0f, 0f);
+			transform.rotation = quat;
+			setState (State.IN_AIR);
+			
+			return 1;
+		}
+
+		return 0;
+	}
 	
 	void startWalkOrRun(float desiredSpeed, float accTime){
 //		timeFromStartWalkRun = 0.0f;
