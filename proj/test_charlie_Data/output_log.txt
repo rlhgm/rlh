@@ -1,10 +1,10 @@
 Initialize engine version: 5.1.2f1 (afd2369b692a)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1247]
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1404]
     Renderer: AMD Radeon HD 5700 Series
     Vendor:   ATI
-    VRAM:     1009 MB (via DXGI)
+    VRAM:     1010 MB (via DXGI)
     Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 NULL=1 RESZ=1 SlowINTZ=1
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.dll (this message is harmless)
@@ -17,7 +17,7 @@ Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Ma
 Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.052 seconds
+- Completed reload, in  0.083 seconds
 desktop: 1920x1080 50Hz; virtual: 3840x1080 at -1920,0
 <RI> Initializing input.
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
