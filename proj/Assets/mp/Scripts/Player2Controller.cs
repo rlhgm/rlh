@@ -312,10 +312,18 @@ public class Player2Controller : MonoBehaviour {
 //		}
 	}
 
-	public void die(int deathType){
+	public enum DeathType{
+		VERY_HARD_LANDING = 1,
+		SNAKE,
+		CROCODILE,
+		POISON
+	};
+
+	//public void die(int deathType){
+	public void die(DeathType deathType){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
-		setAction (Action.DIE, deathType);
+		setAction (Action.DIE, (int)deathType);
 		setState (State.OTHER);
 
 		showInfo ("PRESS SPACE", -1);
@@ -366,7 +374,7 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 		if (other.gameObject.tag == "KillerPhysic") {
-			die(3);
+			die(DeathType.POISON);
 			return;
 		}
 		if (other.gameObject.tag == "ShowInfoTrigger") {
@@ -865,7 +873,7 @@ public class Player2Controller : MonoBehaviour {
 				Vector3 fallDist = startFallPos - transform.position;
 
 				if( fallDist.y >= VeryHardLandingHeight ){
-					die(1);
+					die(DeathType.VERY_HARD_LANDING);
 				} else if( fallDist.y >= HardLandingHeight ){
 
 					velocity.x = 0.0f;
@@ -3292,11 +3300,28 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.DIE:
-			if( param == 1 ){
+			DeathType dt = (DeathType)param;
+			switch( dt ){
+			case DeathType.VERY_HARD_LANDING:
 				animator.Play ("death_hitground");
-			}else{ //if( param == 0 ){
+				break;
+			case DeathType.SNAKE:
+			case DeathType.POISON:
+				animator.Play ("Zap_death_poison");
+				break;
+			case DeathType.CROCODILE:
 				animator.Play ("zap_die");
-			}
+				break;
+			default:
+				animator.Play ("zap_die");
+				break;
+			};
+			//if( param == (int)DeathType.VERY_HARD_LANDING ){
+			//	animator.Play ("death_hitground");
+			//}else{ //if( param == 0 ){
+			//	animator.Play ("zap_die");
+			//}
+
 			if( dieSounds.Length != 0 )
 				audio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
 			break;

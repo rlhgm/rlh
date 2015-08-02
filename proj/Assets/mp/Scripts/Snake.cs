@@ -88,7 +88,7 @@ public class Snake : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, attackDir, attackDir.magnitude, layerIdPlayerMask);
 		if (hit.collider != null) {
 			Player2Controller playerController = target.GetComponent<Player2Controller> ();
-			playerController.die (666);
+			playerController.die (Player2Controller.DeathType.SNAKE);
 		}
 		//fromLastBite = 0f;
 	}
