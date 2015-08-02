@@ -609,10 +609,12 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_LEFT:
+		case Action.CROUCH_LEFT_BACK:
 			Act_CROUCH_LEFTRIGHT(-1);
 			break;
 
 		case Action.CROUCH_RIGHT:
+		case Action.CROUCH_RIGHT_BACK:
 			Act_CROUCH_LEFTRIGHT(1);
 			break;
 
@@ -1738,7 +1740,11 @@ public class Player2Controller : MonoBehaviour {
 			}
 			//turnLeft();
 			desiredSpeedX = CrouchSpeed;
-			setAction(Action.CROUCH_LEFT);
+			if( dir () == -Vector2.right ){
+				setAction(Action.CROUCH_LEFT);
+			}else{
+				setAction(Action.CROUCH_LEFT_BACK);
+			}
 			return true;
 		}
 		return false;
@@ -1790,7 +1796,12 @@ public class Player2Controller : MonoBehaviour {
 			}
 			//turnRight();
 			desiredSpeedX = CrouchSpeed;
-			setAction(Action.CROUCH_RIGHT);
+			//setAction(Action.CROUCH_RIGHT);
+			if( dir () == Vector2.right ){
+				setAction(Action.CROUCH_RIGHT);
+			}else{
+				setAction(Action.CROUCH_RIGHT_BACK);
+			}
 			return true;
 		}
 		return false;
@@ -2082,7 +2093,12 @@ public class Player2Controller : MonoBehaviour {
 				if( Input.GetKey(keyLeft)){
 					velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
-					setAction (Action.CROUCH_LEFT);
+					//setAction (Action.CROUCH_LEFT);
+					if( dir () == -Vector2.right ){
+						setAction(Action.CROUCH_LEFT);
+					}else{
+						setAction(Action.CROUCH_LEFT_BACK);
+					}
 				}else{
 					velocity.x = 0.0f;
 					velocity.y = 0.0f;
@@ -2097,7 +2113,12 @@ public class Player2Controller : MonoBehaviour {
 				if( Input.GetKey(keyRight)){
 					velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
-					setAction (Action.CROUCH_RIGHT);
+					//setAction (Action.CROUCH_RIGHT);
+					if( dir () == Vector2.right ){
+						setAction(Action.CROUCH_RIGHT);
+					}else{
+						setAction(Action.CROUCH_RIGHT_BACK);
+					}
 				}else{
 					velocity.x = 0.0f;
 					velocity.y = 0.0f;
@@ -2371,7 +2392,9 @@ public class Player2Controller : MonoBehaviour {
 		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
 	}
 	bool crouching(){
-		return isInAction(Action.CROUCH_IDLE) || isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_RIGHT);
+		return isInAction(Action.CROUCH_IDLE) || 
+			isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_LEFT_BACK) ||
+			isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
 	}
 
 	float checkLeft(float checkingDist, bool flying = false){
