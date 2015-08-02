@@ -128,8 +128,8 @@ namespace UnityStandardAssets._2D
 			Vector3 posDiff = res - transform.position;
 			float pdm = posDiff.magnitude;
 
-			if (pdm > 0.25f)
-				pdm = 0.25f;
+			if (pdm > 0.15f)
+				pdm = 0.15f;
 			pdm = (pdm * pdm);
 
 			transform.position = transform.position + posDiff * pdm;
