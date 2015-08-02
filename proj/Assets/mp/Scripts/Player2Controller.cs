@@ -1397,16 +1397,7 @@ public class Player2Controller : MonoBehaviour {
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
-//		} else {
-//			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
-//			if( groundUnderFeet ){
-//				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//			} else {
-//				setState(State.IN_AIR);
-//				setAction(Action.JUMP);
-//			}
-//		}
-		
+	
 		return 0;
 	}
 
@@ -1742,10 +1733,10 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
 			if( checkLeft(0.1f) >= 0.0f ){
-				turnLeft();
+				//turnLeft();
 				return false;
 			}
-			turnLeft();
+			//turnLeft();
 			desiredSpeedX = CrouchSpeed;
 			setAction(Action.CROUCH_LEFT);
 			return true;
@@ -1794,10 +1785,10 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
 			if( checkRight(0.1f) >= 0.0f ){
-				turnRight();
+				//turnRight();
 				return false;
 			}
-			turnRight();
+			//turnRight();
 			desiredSpeedX = CrouchSpeed;
 			setAction(Action.CROUCH_RIGHT);
 			return true;
@@ -3167,6 +3158,8 @@ public class Player2Controller : MonoBehaviour {
 		CROUCH_IDLE,
 		CROUCH_LEFT,
 		CROUCH_RIGHT,
+		CROUCH_LEFT_BACK,
+		CROUCH_RIGHT_BACK,
 		LANDING_HARD,
 		FALL,
 		STOP_WALK,
@@ -3398,17 +3391,33 @@ public class Player2Controller : MonoBehaviour {
 
 		case Action.CROUCH_IDLE:
 			//animator.SetTrigger("crouchidle");
-			animator.Play("crouch_leftright");
+			//animator.Play("crouch_leftright");
+			animator.Play("Zap_Crouch_walking_left");
 			animator.speed = 0f;
 			break;
 
 		case Action.CROUCH_LEFT:
 			//animator.Play("crouch_leftright");
 			animator.Play("Zap_Crouch_walking_left");
+			//animator.GetCurrentAnimatorClipInfo().
+			//if( dir () != -Vector2.right ){
+			//	animator.speed = -1.0f;
+			//}
 			break;
 		case Action.CROUCH_RIGHT:
 			//animator.Play("crouch_leftright");
 			animator.Play("Zap_Crouch_walking_right");
+			//if( dir () != Vector2.right ){
+			//	animator.speed = -1.0f;
+			//}
+			break;
+
+		case Action.CROUCH_LEFT_BACK:
+			animator.Play("Zap_Crouch_walking_left_back");
+			break;
+
+		case Action.CROUCH_RIGHT_BACK:
+			animator.Play("Zap_Crouch_walking_right_back");
 			break;
 
 		case Action.ROPECLIMB_IDLE:
