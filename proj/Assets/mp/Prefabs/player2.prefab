@@ -324,7 +324,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103.760002, y: -47, z: 0}
+  m_LocalPosition: {x: -30.3999996, y: -32.0999985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447238}
@@ -566,7 +566,7 @@ MonoBehaviour:
   RunSpeed: 5.69999981
   JumpSpeed: 3.79999995
   JumpLongSpeed: 4.9000001
-  CrouchSpeed: 2.29999995
+  CrouchSpeed: 1.79999995
   MountSpeed: 2
   MountJumpDist: 10
   SpeedUpParam: 10
@@ -581,7 +581,8 @@ MonoBehaviour:
   HardLandingHeight: 2
   VeryHardLandingHeight: 6
   RopeSwingForce: 4250
-  RopeClimbSpeed: 1
+  RopeClimbSpeedUp: 1
+  RopeClimbSpeedDown: 3
   CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
@@ -606,8 +607,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
   dieSounds:
   - {fileID: 8300000, guid: 420182c3f3d22e64c83a441b914ffdd2, type: 3}
-  cameraTargetRopeDiffY: 1
-  cameraTargetNormalDiffY: 1.89999998
+  IdleAnimFreq: 10
   mountIdleSprite: {fileID: 21300002, guid: 251a067bf40f8ca428f1d4c947c953cf, type: 3}
   velocity: {x: 0, y: 0, z: 0}
   swingVelocity: {x: 2.7752471, y: -.896844625}

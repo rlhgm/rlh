@@ -3390,8 +3390,6 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case Action.MOUNT_UP:
 			animator.Play("mount_up");
-			if( jumpSounds.Length != 0 )
-				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
 		case Action.MOUNT_DOWN:
 			//animator.SetTrigger("mount_down");

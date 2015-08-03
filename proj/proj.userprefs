@@ -1,17 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Crocodile.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\PlaySounds.cs">
     <Files>
+      <File FileName="Assets\particle.js" Line="13" Column="22" />
       <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="108" Column="43" />
       <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="190" Column="23" />
-      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="130" Column="14" />
+      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\ShowInfoTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\zap_idle1_beh.cs" Line="6" Column="51" />
+      <File FileName="Assets\mp\Scripts\zap_idle1_beh.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\PlaySounds.cs" Line="72" Column="1" />
-      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="199" Column="11" />
-      <File FileName="Assets\mp\Scripts\Snake.cs" Line="58" Column="1" />
+      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Snake.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
