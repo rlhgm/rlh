@@ -211,6 +211,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   NormTimes:
   - .25
+  - .75
   sounds:
   - {fileID: 8300000, guid: aa27b84bc6f8d754a925a1f25f1e1b82, type: 3}
   - {fileID: 8300000, guid: aa27b84bc6f8d754a925a1f25f1e1b82, type: 3}
