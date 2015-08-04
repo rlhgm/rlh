@@ -660,6 +660,14 @@ public class Player2Controller : MonoBehaviour {
 			}
 			break;
 
+		case Action.CROUCH_IN:
+			Act_CROUCH_IN();
+			break;
+
+		case Action.GET_UP:
+			Act_GET_UP();
+			break;
+
 		case Action.CROUCH_IDLE:
 			Act_CROUCH_IDLE();
 			break;
@@ -702,7 +710,8 @@ public class Player2Controller : MonoBehaviour {
 
 		if (wantGetUp) {
 			if( canGetUp() ){
-				getUp();
+				//getUp();
+				setAction(Action.GET_UP);
 				wantGetUp = false;
 			}
 		}
@@ -1433,6 +1442,25 @@ public class Player2Controller : MonoBehaviour {
 		return retVal;
 	}
 
+	public float CrouchInOutDuration = 0.2f;
+
+	int Act_CROUCH_IN(){
+
+		if (currentActionTime >= CrouchInOutDuration) {
+			crouch();
+		}
+		return 0;
+	}
+
+	int Act_GET_UP(){
+
+		if (currentActionTime >= CrouchInOutDuration) {
+			getUp();			
+		}
+
+		return 0;
+	}
+
 	int Act_CROUCH_IDLE(){
 		if( Input.GetKey(keyDown) ){
 			tryStartClimbPullDown();
@@ -2105,7 +2133,8 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInState (State.ON_GROUND)) {
 
-			crouch();
+			//crouch();
+			setAction(Action.CROUCH_IN);
 			return true;
 		}
 
@@ -2124,7 +2153,8 @@ public class Player2Controller : MonoBehaviour {
 		} else if (isInState (State.ON_GROUND)) {
 			if( crouching() ){
 				if( canGetUp() ){
-					getUp();
+					//getUp();
+					setAction(Action.GET_UP);
 				}else{
 					wantGetUp = true;
 				}
@@ -2147,6 +2177,7 @@ public class Player2Controller : MonoBehaviour {
 			
 			case Action.IDLE:
 			case Action.JUMP:
+			case Action.CROUCH_IN:
 				//velocity.x = 0.0f;
 				//velocity.y = 0.0f;
 				setAction (Action.CROUCH_IDLE);
@@ -3273,6 +3304,8 @@ public class Player2Controller : MonoBehaviour {
 		JUMP_LEFT_LONG,
 		JUMP_RIGHT,
 		JUMP_RIGHT_LONG,
+		CROUCH_IN,
+		GET_UP,
 		CROUCH_IDLE,
 		CROUCH_LEFT,
 		CROUCH_RIGHT,
@@ -3556,6 +3589,14 @@ public class Player2Controller : MonoBehaviour {
 		case Action.MOUNT_DOWN:
 			//animator.SetTrigger("mount_down");
 			animator.Play("mount_down");
+			break;
+
+		case Action.CROUCH_IN:
+			animator.Play("zapcrouchin");
+			break;
+			
+		case Action.GET_UP:
+			animator.Play("zapgetup");
 			break;
 
 		case Action.CROUCH_IDLE:
