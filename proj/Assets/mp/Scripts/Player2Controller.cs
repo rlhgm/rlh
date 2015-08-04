@@ -344,6 +344,12 @@ public class Player2Controller : MonoBehaviour {
 		POISON
 	};
 
+	public string DeathByVeryHardLandingText = "rozjeb... sie o skale. press space";
+	public string DeathBySnakeText = "pokasal cie waz. press space";
+	public string DeathByCrocodileText = "zjadl cie krokodyl. press space";
+	public string DeathByPoisonText = "zatrules sie. press space";
+	public string DeathByDefaultText = "zginales defaultowa smiercia. press space";
+
 	//public void die(int deathType){
 	public void die(DeathType deathType){
 		velocity.x = 0.0f;
@@ -351,9 +357,7 @@ public class Player2Controller : MonoBehaviour {
 		setAction (Action.DIE, (int)deathType);
 		setState (State.OTHER);
 
-		showInfo ("PRESS SPACE", -1);
-
-
+		//showInfo ("PRESS SPACE", -1);
 	}
 
 	public bool isDead(){
@@ -3350,26 +3354,48 @@ public class Player2Controller : MonoBehaviour {
 
 		case Action.DIE:
 			DeathType dt = (DeathType)param;
+			string msgInfo = "";
+
+			//public string DeathByVeryHardLandingText = "rozjeb... sie o skale. press space";
+			//public string DeathBySnakeText = "pokasal cie waz. press space";
+			//public string DeathByCrocodileText = "zjadl cie krokodyl. press space";
+			//public string DeathByPoisonText = "zatrules sie. press space";
+			//public string DeathByDefaultText = ....
 			switch( dt ){
+
 			case DeathType.VERY_HARD_LANDING:
 				animator.Play ("death_hitground");
+				msgInfo = DeathByVeryHardLandingText;
 				break;
+
 			case DeathType.SNAKE:
+				animator.Play ("Zap_death_poison");
+				msgInfo = DeathBySnakeText;
+				break;
+
 			case DeathType.POISON:
 				animator.Play ("Zap_death_poison");
+				msgInfo = DeathByPoisonText;
 				break;
+
 			case DeathType.CROCODILE:
 				animator.Play ("zap_die");
+				msgInfo = DeathByCrocodileText;
 				break;
+
 			default:
 				animator.Play ("zap_die");
+				msgInfo = DeathByDefaultText;
 				break;
+
 			};
 			//if( param == (int)DeathType.VERY_HARD_LANDING ){
 			//	animator.Play ("death_hitground");
 			//}else{ //if( param == 0 ){
 			//	animator.Play ("zap_die");
 			//}
+
+			showInfo (msgInfo, -1);
 
 			if( dieSounds.Length != 0 )
 				audio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
