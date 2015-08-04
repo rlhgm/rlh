@@ -3136,23 +3136,36 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	GameObject canClimbPullDown(){
+
 		if (!isInState (State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
 			return null;
 
-//		// najpierw badam czy stoje na krawedzi odpowiednio zwrocony
-//		if (dir () == Vector2.right) { //
-//
-//		} else {
-//
-//		}
+		// 1: sytuacja gdy zap jest swoim srodkiem nad tilem
+		// 2: sytuacja gdy zap jest swoim srodkiem juz poza tilem
 
-		//Vector2 rayOrigin = sensorDown1.position; // transform.position;
-		//RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask);
+		RaycastHit2D hit;
 
-		Vector2 rayOrigin = sensorDown1.position; // transform.position;
-		//Vector2 rayDir = (dir () == Vector2.right ? -Vector2.right : Vector2.right);
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right , myWidth, layerIdGroundHandlesMask);
-		//print ( "canClimbPullDown : " + hit.collider.gameObject);
+		if (dir () == Vector2.right) { //
+			
+			hit = Physics2D.Raycast (sensorDown2.position, -Vector2.right , 0.511f, layerIdGroundHandlesMask);
+			if( hit.collider )
+				return hit.collider.gameObject;
+			
+		} else {
+			
+			hit = Physics2D.Raycast (sensorDown2.position, Vector2.right , 0.511f, layerIdGroundHandlesMask);
+			if( hit.collider )
+				return hit.collider.gameObject;
+			
+		}
+//
+//		return null;
+
+
+		// to jest ta druga sytuacja ...
+
+		Vector2 rayOrigin = sensorDown1.position; 
+	 	hit = Physics2D.Raycast (rayOrigin, Vector2.right , myWidth, layerIdGroundHandlesMask);
 
 		if (hit.collider) { 
 			//return hit.collider.gameObject;
