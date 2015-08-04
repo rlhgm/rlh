@@ -1013,16 +1013,15 @@ public class Player2Controller : MonoBehaviour {
 		climbDuration += Time.deltaTime;
 		
 		if( climbDuration >= CLIMBDUR_CLIMB ){
-			setAction(Action.CLIMB_CATCH);
+			setAction(Action.CLIMB_CATCH,1);
 			setState(State.CLIMB);
 			climbDuration = 0.0f;
 			canPullUp = true;
 			transform.position = climbAfterPos;
 		} else {
-			float ratio = climbDuration / CLIMBDUR_CLIMB;
-			//transform.position = climbBeforePos + climbDistToClimb*ratio;
-			if( ratio > 0.5f )
-				transform.position = climbBeforePos + climbDistToClimb*((ratio-0.5f) * 2.0f);
+			//float ratio = climbDuration / CLIMBDUR_CLIMB;
+			//if( ratio > 0.5f )
+			//	transform.position = climbBeforePos + climbDistToClimb*((ratio-0.5f) * 2.0f);
 		}
 		
 		return 0;
@@ -3277,6 +3276,7 @@ public class Player2Controller : MonoBehaviour {
 
 	SpriteRenderer sprRend = null;
 	public Sprite mountIdleSprite = null;
+	public Sprite catchIdleSprite = null;
 
 	Action getAction(){
 		return action;
@@ -3408,7 +3408,14 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case Action.CLIMB_CATCH:
 			//animator.SetTrigger("climb_catch");
-			animator.Play("zapclimbcatch");
+			if( param == 0 ){
+				animator.Play("zapclimbcatch");
+			}else if( param == 1 ){
+				// tu juz jest we wlasciwej klatce
+				animator.Play("zapclimbcatch_rev");
+				animator.speed = 0.0f;
+				//sprRend.sprite = catchIdleSprite;
+			}
 			//animator.speed = 0f;
 
 			if( catchSounds.Length != 0)
@@ -3420,8 +3427,8 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CLIMB_PULLDOWN:
-			//animator.SetTrigger("climb_pulldown");
-			animator.Play("zappulldown");
+			//animator.Play("zappulldown");
+			animator.Play("zapdrop");
 			break;
 
 		case Action.MOUNT_IDLE:
