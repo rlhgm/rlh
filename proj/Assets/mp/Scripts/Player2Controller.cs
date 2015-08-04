@@ -51,6 +51,7 @@ public class Player2Controller : MonoBehaviour {
 
 	public float HardLandingHeight = 3.0f;
 	public float VeryHardLandingHeight = 6.0f;
+	public float MaxFallDistToCatch = 3.0f;
 
 	public float RopeSwingForce = 500f;
 	public float RopeClimbSpeedUp = 1.0f;
@@ -710,25 +711,32 @@ public class Player2Controller : MonoBehaviour {
 		case State.IN_AIR:
 
 			if( jumpKeyPressed ) { //Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
-	    		if( onMount() ){
-					if( jumpFromMount ){
-						if( !justJumpedMount ){
+				Vector3 fallDist = startFallPos - transform.position;
+				if( fallDist.y < MaxFallDistToCatch )
+				{
+		    		if( onMount() ){
+						if( jumpFromMount ){
+							if( !justJumpedMount ){
+							}
+						}else{
+							setActionMountIdle();
+							return;
 						}
-					}else{
-						setActionMountIdle();
-						return;
+					} else {
+						jumpFromMount = false;
 					}
-				} else {
-					jumpFromMount = false;
 				}
-
 			}
 			if( jumpFromMount && Input.GetKey(keyJump) ){
-				Vector3 flyDist = transform.position - mountJumpStartPos;
-				if( flyDist.magnitude >= MountJumpDist ){
-					setActionMountIdle();
-					jumpFromMount = false;
-					return;
+				Vector3 fallDist = startFallPos - transform.position;
+				if( fallDist.y < MaxFallDistToCatch )
+				{
+					Vector3 flyDist = transform.position - mountJumpStartPos;
+					if( flyDist.magnitude >= MountJumpDist ){
+						setActionMountIdle();
+						jumpFromMount = false;
+						return;
+					}
 				}
 			}
 
@@ -736,17 +744,21 @@ public class Player2Controller : MonoBehaviour {
 
 			if( Input.GetKey(keyJump) ) { //&& justLetGoHandle>toNextHandleDuration){
 
-				if( tryCatchHandle() ){
-					lastVelocity = velocity;
+				if( tryCatchRope() ){
+					
+					if( ropeCatchSound )
+						audio.PlayOneShot( ropeCatchSound );
+					
 					return;
 				}
 
-				if( tryCatchRope() ){
-
-					if( ropeCatchSound )
-						audio.PlayOneShot( ropeCatchSound );
-
-					return;
+				Vector3 fallDist = startFallPos - transform.position;
+				if( fallDist.y < MaxFallDistToCatch )
+				{
+					if( tryCatchHandle() ){
+						lastVelocity = velocity;
+						return;
+					}
 				}
 			}
 
