@@ -18,6 +18,7 @@ TagManager:
   - KillerPhysic
   - ShowInfoTrigger
   - ComicPage
+  - ComicPagePart
   layers:
   - Default
   - TransparentFX

@@ -23,6 +23,8 @@ public class Player2Controller : MonoBehaviour {
 
 	Canvas guiCanvas = null;
 	Text infoLabel = null;
+	Image mapBackgroundImage = null;
+	Image[] mapPartImages = new Image[3];
 
 	public float WalkSpeed = 3.0f;
 	public float RunSpeed = 4.0f;
@@ -86,6 +88,26 @@ public class Player2Controller : MonoBehaviour {
 			infoLabel = FindObjectOfType<Text> ();
 			//infoLabel.text = "hello world";
 			infoLabel.text = "";
+
+			//guiCanvas = FindObjectOfType<
+			Image[] allImages = FindObjectsOfType<Image>();
+			for( int i = 0 ; i < allImages.Length ; ++i ){
+				Image img = allImages[i];
+				if( img.gameObject.name == "mapBackgroundImage" ){
+					mapBackgroundImage = img;
+					//print ( "jest mapBackgroundImage");
+					continue;
+				}
+
+				ComicPagePart cpp = img.GetComponent<ComicPagePart>();
+				if( cpp ){
+					mapPartImages[cpp.partID] = img;
+					//print ( "jest mapPart " + cpp.partID);
+					//Color32 newColor = new Color(;
+					Color newColor = new Color(1f,1f,1f,0f);
+					img.color = newColor;
+				}
+			}
 		}
 
 		coll = GetComponent<BoxCollider2D> ();
@@ -387,6 +409,15 @@ public class Player2Controller : MonoBehaviour {
 			}
 			return;
 		}
+		if (other.gameObject.tag == "ComicPage") {
+			collectMapPart(other.gameObject);
+			return;
+		}
+	}
+
+	void collectMapPart(GameObject mapPart){
+		int mapPartID = mapPart.GetComponent<ComicPage>().partID;
+		Destroy (mapPart);
 	}
 
 	bool userJumpKeyPressed = false;
