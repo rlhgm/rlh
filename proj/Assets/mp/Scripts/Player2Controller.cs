@@ -58,7 +58,7 @@ public class Player2Controller : MonoBehaviour {
 	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
 	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
 	public float CLIMBDUR_CATCH = 0.5f;
-	public float CLIMBDUR_CLIMB = 0.75f;
+	/*public*/ float CLIMBDUR_CLIMB = 0.65f;
 	public float LANDING_HARD_DURATION = 0.5f;
 	
 	public KeyCode keyLeft = KeyCode.LeftArrow;
@@ -3398,7 +3398,7 @@ public class Player2Controller : MonoBehaviour {
 		case Action.CLIMB_CATCH:
 			//animator.SetTrigger("climb_catch");
 			animator.Play("zapclimbcatch");
-			animator.speed = 0f;
+			//animator.speed = 0f;
 
 			if( catchSounds.Length != 0)
 				audio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);

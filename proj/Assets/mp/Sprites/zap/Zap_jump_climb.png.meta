@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c8292a8eacded8b4e993a69937e48ac5
-timeCreated: 1438680871
+timeCreated: 1438684240
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -62,11 +62,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
+        y: 8
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        height: 52
+      alignment: 9
+      pivot: {x: .49000001, y: -.180000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_1
       rect:
@@ -74,9 +74,9 @@ TextureImporter:
         x: 64
         y: 9
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        height: 55
+      alignment: 9
+      pivot: {x: .5, y: -.100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_2
       rect:
@@ -85,8 +85,8 @@ TextureImporter:
         y: 10
         width: 64
         height: 54
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: -.150000006}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_3
       rect:
@@ -95,8 +95,8 @@ TextureImporter:
         y: 11
         width: 64
         height: 53
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: -.150000006}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_4
       rect:
@@ -105,8 +105,8 @@ TextureImporter:
         y: 12
         width: 64
         height: 52
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: -.100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_5
       rect:
