@@ -151,9 +151,9 @@ public class NewRope : MonoBehaviour {
 		
 	}
 
-	float linkMass = 0.85f;
-	float firstDriverLinkMass = 5f;
-	float secondDriverLinkMass = 3f;
+	float linkMass = 1f;
+	float firstDriverLinkMass = 9f;
+	float secondDriverLinkMass = 5f;
 
 	public void chooseDriver(Transform newLink){
 		if (currentLink) {
