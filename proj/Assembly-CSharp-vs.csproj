@@ -53,6 +53,7 @@
      <Compile Include="Assets\mp\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
      <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
+     <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />

@@ -17,6 +17,7 @@ TagManager:
   - CheckPoint
   - KillerPhysic
   - ShowInfoTrigger
+  - ComicPage
   layers:
   - Default
   - TransparentFX
