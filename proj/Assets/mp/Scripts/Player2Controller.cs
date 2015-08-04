@@ -63,6 +63,8 @@ public class Player2Controller : MonoBehaviour {
 	public float CLIMBDUR_CATCH = 0.5f;
 	/*public*/ float CLIMBDUR_CLIMB = 0.65f;
 	public float LANDING_HARD_DURATION = 0.5f;
+
+	public float TURN_LEFTRIGHT_DURATION = 0.2f;
 	
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
@@ -598,7 +600,7 @@ public class Player2Controller : MonoBehaviour {
 			if (Input.GetKeyDown (keyJump)) {
 				wantJumpAfter = true;
 			}
-			if( currentActionTime >= 0.2f ){
+			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
 				turnLeft();
 				turnLeftFinish();
 			}
@@ -608,7 +610,7 @@ public class Player2Controller : MonoBehaviour {
 			if (Input.GetKeyDown (keyJump)) {
 				wantJumpAfter = true;
 			}
-			if( currentActionTime >= 0.2f ){
+			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
 				turnRight();
 				turnRightFinish();
 			}
