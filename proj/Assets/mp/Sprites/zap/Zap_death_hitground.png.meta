@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 377d0e176fe4a0a4897447babbef5d06
-timeCreated: 1438697272
+timeCreated: 1438697428
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -74,8 +74,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 57
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_death_hitground_2
       rect:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 56
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_death_hitground_3
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 56
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_death_hitground_4
       rect:
@@ -104,8 +104,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 56
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_death_hitground_5
       rect:
@@ -114,8 +114,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 56
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_death_hitground_6
       rect:
@@ -124,8 +124,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 56
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_death_hitground_7
       rect:
@@ -134,8 +134,8 @@ TextureImporter:
         y: 7
         width: 64
         height: 57
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
