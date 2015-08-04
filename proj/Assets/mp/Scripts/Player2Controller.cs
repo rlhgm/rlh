@@ -2151,7 +2151,7 @@ public class Player2Controller : MonoBehaviour {
 					keyUpDown();
 			}
 		} else if (isInState (State.ON_GROUND)) {
-			if( crouching() ){
+			if( crouching() || isInAction(Action.CROUCH_IN) ){
 				if( canGetUp() ){
 					//getUp();
 					setAction(Action.GET_UP);
