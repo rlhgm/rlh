@@ -43,7 +43,7 @@ namespace UnityStandardAssets._2D
 				if( backgroundsBackgrounds[i] == null) continue;
 
 				GameObject bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
-				bckg.transform.position = new Vector3(0f,0f,0f);
+				bckg.transform.position = new Vector3(0f,1f,0f);
 				bckg.transform.parent = backgroundsNodes[i];
 
 				SpriteRenderer bckgSpriteRend = bckg.GetComponent<SpriteRenderer>();
@@ -58,7 +58,7 @@ namespace UnityStandardAssets._2D
 				while( bckgDist < backgroundLimits.y ){
 					//c = 1;
 					bckg = Instantiate<GameObject> (backgroundsBackgrounds[i]);
-					bckg.transform.position = new Vector3(bckgDist + bckgItemSize.x ,0f,0f);
+					bckg.transform.position = new Vector3(bckgDist + bckgItemSize.x ,1f,0f);
 					bckg.transform.parent = backgroundsNodes[i];
 					bckgDist = bckgItemSize.x + c * (bckgItemSize.x*2);
 					c += 1;
@@ -144,7 +144,7 @@ namespace UnityStandardAssets._2D
 			for( int i = 0 ; i < numberOfBackgrounds ; ++i ){
 				Vector3 pos = backgroundsNodes[i].position;
 				pos.x = transform.position.x * backgroundsRatios[i].x;
-				pos.y = transform.position.y * backgroundsRatios[i].y;
+				pos.y = 1.0f + transform.position.y * backgroundsRatios[i].y;
 				backgroundsNodes[i].position = pos;
 			}
 
