@@ -21,43 +21,89 @@ public class ComicPagePart : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (flashing) {
 
-			float flashRatio = (flashTime+=Time.deltaTime) / flashDuration;
+		if (fadeIn) {
 
-			if( flashRatio >= 1f ){
+		}
+		if (fadeOut) {
 
-				Color newColor = new Color(1f,1f,1f,1f);
-				img.color = newColor;
-				flashing = false;
+		}
 
-			}else{
+//		if (flashing) {
+//
+//			float flashRatio = (flashTime+=Time.deltaTime) / flashDuration;
+//
+//			if( flashRatio >= 1f ){
+//
+//				Color newColor = new Color(1f,1f,1f,1f);
+//				img.color = newColor;
+//				flashing = false;
+//
+//			}else{
+//
+//				if( flashRatio < 0.5f ){
+//
+//					Color newColor = new Color(1f,1f,1f-flashRatio,1f);
+//					img.color = newColor;
+//
+//				}else{
+//
+//					Color newColor = new Color(1f,1f,0.5f+flashRatio,1f);
+//					img.color = newColor;
+//
+//				}
+//
+//			}
+//		}
+	}
 
-				if( flashRatio < 0.5f ){
+	//float flashTime = 0f;
+	//float flashDuration = 0.5f;
+	//bool flashing = false;
+	//bool collected = false;
 
-					Color newColor = new Color(1f,1f,1f-flashRatio,1f);
-					img.color = newColor;
+	bool fadeIn = false;
+	bool fadeOut = false;
+	float fadeDuration = 0.0f;
 
-				}else{
+	public void collect(){
+		if (collected)
+			return;
 
-					Color newColor = new Color(1f,1f,0.5f+flashRatio,1f);
-					img.color = newColor;
+		//flashTime = 0;
+		//flashing = true;
+		collected = true;
+		//Color newColor = new Color(1f,1f,1f,1f);
+		//img.color = newColor;
+		show (1.0f);
+	}
 
-				}
+	public void show(float duration){
 
-			}
+
+		if (collected) {
+			Color newColor = new Color(1f,1f,1f,0f);
+			img.color = newColor;
+
+			fadeDuration = duration;
+			fadeIn = true;
+		} else {
+
 		}
 	}
 
-	float flashTime = 0f;
-	float flashDuration = 0.5f;
-	bool flashing = false;
+	public void hide(float duration){
+		//Color newColor = new Color(1f,1f,1f,0f);
+		//img.color = newColor;
+		
+		if (collected) {
+			Color newColor = new Color(1f,1f,1f,0f);
+			img.color = newColor;
 
-	public void collect(){
-		flashTime = 0;
-		flashing = true;
-		Color newColor = new Color(1f,1f,1f,1f);
-		img.color = newColor;
+			fadeDuration = duration;
+			fadeOut = true;
+		} else {
+			
+		}
 	}
-
 }
