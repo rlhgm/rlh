@@ -1094,7 +1094,7 @@ public class Player2Controller : MonoBehaviour {
 				catchedClimbHandle = null;
 			} else {
 				//print("try jump up");
-				jump ();
+				jumpFromClimb ();
 				lastCatchedClimbHandle = catchedClimbHandle;
 				catchedClimbHandle = null;
 				//justLetGoHandle = 0.0f;
@@ -2153,6 +2153,13 @@ public class Player2Controller : MonoBehaviour {
 		setAction (Action.JUMP);
 
 		//lastHandlePos = new Vector3();
+		lastFrameHande = false;
+	}
+
+	void jumpFromClimb(){
+		addImpulse(new Vector2(0.0f, JumpImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP,1);
 		lastFrameHande = false;
 	}
 
@@ -3368,7 +3375,11 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.JUMP:
-			animator.Play("jump");
+			if( param == 0 ){
+				animator.Play("jump");
+			}else if (param == 1) {
+				animator.Play("zap_jump_from_climb");
+			}
 			if( jumpSounds.Length != 0 )
 				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
@@ -3393,7 +3404,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case Action.CLIMB_JUMP_TO_CATCH:
 			//animator.SetTrigger("climb_jump");
-			animator.Play("zapclimbjump");
+			//animator.Play("zapclimbjump");
 			break;
 		case Action.CLIMB_CATCH:
 			//animator.SetTrigger("climb_catch");
