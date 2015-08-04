@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 432a9d44d9e00cd45a32209eec53b4a3
-timeCreated: 1438164497
+timeCreated: 1438688302
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,6 +64,8 @@ TextureImporter:
     21300114: tileset_Rocks_background_1_57
     21300116: tileset_Rocks_background_1_58
     21300118: tileset_Rocks_background_1_59
+    21300120: tileset_Rocks_background_1_60
+    21300122: tileset_Rocks_background_1_61
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -113,7 +115,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -123,7 +125,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -133,7 +135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -143,7 +145,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -153,7 +155,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -163,7 +165,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 160
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -173,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -183,7 +185,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 224
-        y: 288
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -192,8 +194,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 256
+        y: 192
         width: 32
         height: 32
       alignment: 1
@@ -202,8 +204,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_9
       rect:
         serializedVersion: 2
-        x: 32
-        y: 256
+        x: 0
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -212,8 +214,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_10
       rect:
         serializedVersion: 2
-        x: 64
-        y: 256
+        x: 32
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -222,8 +224,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_11
       rect:
         serializedVersion: 2
-        x: 96
-        y: 256
+        x: 64
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -232,8 +234,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_12
       rect:
         serializedVersion: 2
-        x: 128
-        y: 256
+        x: 96
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -242,8 +244,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_13
       rect:
         serializedVersion: 2
-        x: 160
-        y: 256
+        x: 128
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -252,8 +254,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_14
       rect:
         serializedVersion: 2
-        x: 192
-        y: 256
+        x: 160
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -262,8 +264,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_15
       rect:
         serializedVersion: 2
-        x: 224
-        y: 256
+        x: 192
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -272,8 +274,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_16
       rect:
         serializedVersion: 2
-        x: 0
-        y: 224
+        x: 224
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -282,8 +284,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_17
       rect:
         serializedVersion: 2
-        x: 32
-        y: 224
+        x: 256
+        y: 160
         width: 32
         height: 32
       alignment: 1
@@ -292,8 +294,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_18
       rect:
         serializedVersion: 2
-        x: 64
-        y: 224
+        x: 0
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -302,8 +304,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_19
       rect:
         serializedVersion: 2
-        x: 96
-        y: 224
+        x: 32
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -312,8 +314,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_20
       rect:
         serializedVersion: 2
-        x: 128
-        y: 224
+        x: 64
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -322,8 +324,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_21
       rect:
         serializedVersion: 2
-        x: 160
-        y: 224
+        x: 96
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -332,8 +334,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_22
       rect:
         serializedVersion: 2
-        x: 192
-        y: 224
+        x: 128
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -342,8 +344,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_23
       rect:
         serializedVersion: 2
-        x: 224
-        y: 224
+        x: 160
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -352,8 +354,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
+        x: 192
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -362,8 +364,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_25
       rect:
         serializedVersion: 2
-        x: 32
-        y: 192
+        x: 224
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -372,8 +374,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_26
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
+        x: 256
+        y: 128
         width: 32
         height: 32
       alignment: 1
@@ -382,8 +384,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_27
       rect:
         serializedVersion: 2
-        x: 96
-        y: 192
+        x: 0
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -392,8 +394,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_28
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
+        x: 32
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -402,8 +404,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_29
       rect:
         serializedVersion: 2
-        x: 160
-        y: 192
+        x: 64
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -412,8 +414,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_30
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
+        x: 96
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -422,8 +424,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_31
       rect:
         serializedVersion: 2
-        x: 224
-        y: 192
+        x: 128
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -432,8 +434,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_32
       rect:
         serializedVersion: 2
-        x: 256
-        y: 192
+        x: 160
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -442,8 +444,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_33
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
+        x: 192
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -452,8 +454,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_34
       rect:
         serializedVersion: 2
-        x: 32
-        y: 160
+        x: 224
+        y: 96
         width: 32
         height: 32
       alignment: 1
@@ -462,8 +464,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_35
       rect:
         serializedVersion: 2
-        x: 64
-        y: 160
+        x: 0
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -472,8 +474,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_36
       rect:
         serializedVersion: 2
-        x: 96
-        y: 160
+        x: 32
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -482,8 +484,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_37
       rect:
         serializedVersion: 2
-        x: 128
-        y: 160
+        x: 64
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -492,8 +494,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_38
       rect:
         serializedVersion: 2
-        x: 160
-        y: 160
+        x: 96
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -502,8 +504,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_39
       rect:
         serializedVersion: 2
-        x: 192
-        y: 160
+        x: 128
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -512,8 +514,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_40
       rect:
         serializedVersion: 2
-        x: 224
-        y: 160
+        x: 160
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -522,8 +524,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_41
       rect:
         serializedVersion: 2
-        x: 256
-        y: 160
+        x: 192
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -532,8 +534,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_42
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 224
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -542,8 +544,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_43
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
+        x: 256
+        y: 64
         width: 32
         height: 32
       alignment: 1
@@ -552,8 +554,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_44
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 0
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -562,8 +564,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_45
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
+        x: 32
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -572,8 +574,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_46
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 64
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -582,8 +584,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_47
       rect:
         serializedVersion: 2
-        x: 160
-        y: 128
+        x: 96
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -592,8 +594,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_48
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
+        x: 128
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -602,8 +604,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_49
       rect:
         serializedVersion: 2
-        x: 224
-        y: 128
+        x: 160
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -612,8 +614,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_50
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
+        x: 192
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -622,8 +624,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_51
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 224
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -632,8 +634,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_52
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
+        x: 256
+        y: 32
         width: 32
         height: 32
       alignment: 1
@@ -642,8 +644,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_53
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
+        x: 0
+        y: 0
         width: 32
         height: 32
       alignment: 1
@@ -652,8 +654,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_54
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 32
+        y: 0
         width: 32
         height: 32
       alignment: 1
@@ -662,8 +664,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_55
       rect:
         serializedVersion: 2
-        x: 128
-        y: 96
+        x: 64
+        y: 0
         width: 32
         height: 32
       alignment: 1
@@ -672,8 +674,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_56
       rect:
         serializedVersion: 2
-        x: 160
-        y: 96
+        x: 96
+        y: 0
         width: 32
         height: 32
       alignment: 1
@@ -682,8 +684,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_57
       rect:
         serializedVersion: 2
-        x: 192
-        y: 96
+        x: 128
+        y: 0
         width: 32
         height: 32
       alignment: 1
@@ -692,8 +694,8 @@ TextureImporter:
     - name: tileset_Rocks_background_1_58
       rect:
         serializedVersion: 2
-        x: 224
-        y: 96
+        x: 160
+        y: 0
         width: 32
         height: 32
       alignment: 1
@@ -702,8 +704,28 @@ TextureImporter:
     - name: tileset_Rocks_background_1_59
       rect:
         serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tileset_Rocks_background_1_60
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tileset_Rocks_background_1_61
+      rect:
+        serializedVersion: 2
         x: 256
-        y: 96
+        y: 0
         width: 32
         height: 32
       alignment: 1
