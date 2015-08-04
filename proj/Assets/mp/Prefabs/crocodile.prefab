@@ -15,7 +15,7 @@ GameObject:
   - 95: {fileID: 9567080}
   m_Layer: 0
   m_Name: crocodile
-  m_TagString: Untagged
+  m_TagString: KillerPhysic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.75, y: 1.25, z: 0}
+  m_LocalPosition: {x: 18.7299995, y: 1.03999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,9 +58,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .75}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 5.5, y: 1.5}
+  m_Size: {x: 2, y: 1}
 --- !u!95 &9567080
 Animator:
   serializedVersion: 3
@@ -98,7 +98,6 @@ MonoBehaviour:
   T2: {x: 0, y: 0, z: 0}
   waterLeftLimit: {x: 0, y: 0, z: 0}
   waterRightLimit: {x: 0, y: 0, z: 0}
-  state: 0
 --- !u!212 &21242876
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -123,7 +122,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 952726619
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 03a698b8bd48fd14c9d3a95b9db4263d, type: 3}
+  m_Sprite: {fileID: 21300024, guid: 04963f2071d4d194cbff39131a7f7dc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

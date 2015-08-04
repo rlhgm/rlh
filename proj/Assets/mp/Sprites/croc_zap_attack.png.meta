@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f7da3d694283cca4796807a34151b46e
-timeCreated: 1438601684
+timeCreated: 1438673491
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -70,8 +70,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_1
       rect:
@@ -80,8 +80,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_2
       rect:
@@ -90,8 +90,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_3
       rect:
@@ -100,8 +100,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_4
       rect:
@@ -110,8 +110,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_5
       rect:
@@ -120,8 +120,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_6
       rect:
@@ -130,8 +130,8 @@ TextureImporter:
         y: 45
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_7
       rect:
@@ -140,8 +140,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_8
       rect:
@@ -150,8 +150,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_9
       rect:
@@ -160,8 +160,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_10
       rect:
@@ -170,8 +170,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_11
       rect:
@@ -180,8 +180,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_12
       rect:
@@ -190,8 +190,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_13
       rect:
@@ -200,8 +200,8 @@ TextureImporter:
         y: 0
         width: 161
         height: 45
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -31,7 +31,7 @@ public class Crocodile : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 
 		//animator.ResetTrigger ();
-		animator.speed = 0f;
+		//animator.speed = 0f;
 	}
 
 	// Use this for initialization
@@ -62,8 +62,8 @@ public class Crocodile : MonoBehaviour {
 		SneakSpeed = 2.5f; // jednostek na sek.
 		AttackSpeed = 6.5f; // jednostek na sek.
 
-		leftLimit = water.transform.TransformPoint ( new Vector3(0.3f,-0.25f,0f) );
-		rightLimit = water.transform.TransformPoint ( new Vector3(0.7f,-0.25f,0f) );
+		leftLimit = water.transform.TransformPoint ( new Vector3(0.3f,-0.05f,0f) );
+		rightLimit = water.transform.TransformPoint ( new Vector3(0.7f,-0.05f,0f) );
 
 		waterLeftLimit = water.transform.TransformPoint ( new Vector3(0f,0f,0f) );
 		waterRightLimit = water.transform.TransformPoint ( new Vector3(1f,0f,0f) );
