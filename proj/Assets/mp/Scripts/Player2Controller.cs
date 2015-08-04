@@ -78,6 +78,10 @@ public class Player2Controller : MonoBehaviour {
 	public AudioClip[] turnRunSounds;
 	public AudioClip[] catchSounds;
 	public AudioClip[] dieSounds;
+
+	public AudioClip landingSound;
+	public AudioClip ropeCatchSound;
+
 	AudioSource audio;
 
 	void Awake(){
@@ -734,6 +738,10 @@ public class Player2Controller : MonoBehaviour {
 				}
 
 				if( tryCatchRope() ){
+
+					if( ropeCatchSound )
+						audio.PlayOneShot( ropeCatchSound );
+
 					return;
 				}
 			}
@@ -897,6 +905,9 @@ public class Player2Controller : MonoBehaviour {
 			transform.position = transform.position + distToFall;
 
 			if( justLanding ){
+
+				if( landingSound )
+					audio.PlayOneShot( landingSound );
 
 				setState(State.ON_GROUND);
 				velocity.y = 0.0f;
