@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partID: 0
+  collected: 0
 --- !u!1001 &34211236
 Prefab:
   m_ObjectHideFlags: 0
@@ -2117,6 +2118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partID: 1
+  collected: 0
 --- !u!1001 &413867010
 Prefab:
   m_ObjectHideFlags: 0
@@ -3648,6 +3650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partID: 2
+  collected: 0
 --- !u!1001 &690476779
 Prefab:
   m_ObjectHideFlags: 0
