@@ -388,6 +388,9 @@ public class Player2Controller : MonoBehaviour {
 	}
 	GameObject lastTouchedCheckPoint;
 
+	public bool canBeFuddleFromBird = true;
+	bool fuddledFromBrid = false;
+
 	void OnTriggerEnter2D(Collider2D other) {
 		//print( "PLAYER OnTriggerEnter" + other.gameObject.tag);
 		if (other.gameObject.tag == "Bird") {
@@ -396,6 +399,9 @@ public class Player2Controller : MonoBehaviour {
 				velocity.y = 0.0f;
 				setAction(Action.JUMP);
 				setState(State.IN_AIR);
+
+				if( canBeFuddleFromBird )
+					fuddledFromBrid = true;
 
 			}
 			return;
@@ -714,7 +720,7 @@ public class Player2Controller : MonoBehaviour {
 
 			if( jumpKeyPressed ) { //Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
 				Vector3 fallDist = startFallPos - transform.position;
-				if( fallDist.y < MaxFallDistToCatch )
+				if( !fuddledFromBrid && (fallDist.y < MaxFallDistToCatch) )
 				{
 		    		if( onMount() ){
 						if( jumpFromMount ){
@@ -731,7 +737,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 			if( jumpFromMount && Input.GetKey(keyJump) ){
 				Vector3 fallDist = startFallPos - transform.position;
-				if( fallDist.y < MaxFallDistToCatch )
+				if( !fuddledFromBrid && (fallDist.y < MaxFallDistToCatch) )
 				{
 					Vector3 flyDist = transform.position - mountJumpStartPos;
 					if( flyDist.magnitude >= MountJumpDist ){
@@ -746,7 +752,7 @@ public class Player2Controller : MonoBehaviour {
 
 			if( Input.GetKey(keyJump) ) { //&& justLetGoHandle>toNextHandleDuration){
 
-				if( tryCatchRope() ){
+				if( !fuddledFromBrid && tryCatchRope() ){
 					
 					if( ropeCatchSound )
 						audio.PlayOneShot( ropeCatchSound );
@@ -755,7 +761,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 
 				Vector3 fallDist = startFallPos - transform.position;
-				if( fallDist.y < MaxFallDistToCatch )
+				if( !fuddledFromBrid && fallDist.y < MaxFallDistToCatch )
 				{
 					if( tryCatchHandle() ){
 						lastVelocity = velocity;
@@ -926,6 +932,8 @@ public class Player2Controller : MonoBehaviour {
 
 				if( landingSound )
 					audio.PlayOneShot( landingSound );
+
+				fuddledFromBrid = false;
 
 				setState(State.ON_GROUND);
 				velocity.y = 0.0f;
