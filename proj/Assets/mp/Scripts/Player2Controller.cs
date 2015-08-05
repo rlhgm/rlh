@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour {
@@ -362,6 +363,19 @@ public class Player2Controller : MonoBehaviour {
 		setAction (Action.DIE, (int)deathType);
 		setState (State.OTHER);
 
+		//collectedMapParts
+		foreach(GameObject mapPart in collectedMapParts){
+
+			ComicPage comicPart = mapPart.GetComponent<ComicPage>();
+			int mapPartID = comicPart.partID;
+			
+			mapPartParts [mapPartID].collected = false;
+			
+			mapPart.GetComponent<SpriteRenderer> ().enabled = true;
+		}
+
+		collectedMapParts.Clear ();
+
 		//showInfo ("PRESS SPACE", -1);
 	}
 
@@ -413,6 +427,9 @@ public class Player2Controller : MonoBehaviour {
 		if (other.gameObject.tag == "CheckPoint") {
 			//print( "checkpoint : " + other.gameObject.name );
 			lastTouchedCheckPoint = other.gameObject;
+
+			// zatwierdzam wszystkie zdobyte kawalki mapy...
+			collectedMapParts.Clear ();
 			return;
 		}
 		if (other.gameObject.tag == "KillerPhysic") {
@@ -440,10 +457,21 @@ public class Player2Controller : MonoBehaviour {
 	int puzzleShowingPhase = 0;
 	int newPuzzleCollectedID = 0;
 
+	List<GameObject> collectedMapParts = new List<GameObject>();
+
 	void collectMapPart(GameObject mapPart){
-		int mapPartID = mapPart.GetComponent<ComicPage>().partID;
+
+		ComicPage comicPart = mapPart.GetComponent<ComicPage>();
+		int mapPartID = comicPart.partID;
+
+		if (mapPartParts [mapPartID].collected)
+			return;
+
 		mapPartParts [mapPartID].collect ();
-		Destroy (mapPart);
+
+		//Destroy (mapPart);
+		mapPart.GetComponent<SpriteRenderer> ().enabled = false;
+		collectedMapParts.Add (mapPart);
 
 		newPuzzleCollectedID = mapPartID;
 		showPuzzleMap ();
