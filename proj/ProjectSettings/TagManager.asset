@@ -19,6 +19,7 @@ TagManager:
   - ShowInfoTrigger
   - ComicPage
   - ComicPagePart
+  - Crocodile
   layers:
   - Default
   - TransparentFX

@@ -438,6 +438,10 @@ public class Player2Controller : MonoBehaviour {
 			die(DeathType.POISON);
 			return;
 		}
+		if (other.gameObject.tag == "Crocodile") {
+			die (DeathType.CROCODILE);
+			return;
+		}
 		if (other.gameObject.tag == "ShowInfoTrigger") {
 			print("ShowInfoTrigger");
 			ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
@@ -3290,6 +3294,8 @@ public class Player2Controller : MonoBehaviour {
 		return !hit.collider;
 	}
 
+	public float ClimbPullDownRange = 0.511f;
+
 	GameObject canClimbPullDown(){
 
 		if (!isInState (State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
@@ -3302,13 +3308,13 @@ public class Player2Controller : MonoBehaviour {
 
 		if (dir () == Vector2.right) { //
 			
-			hit = Physics2D.Raycast (sensorDown2.position, -Vector2.right , 0.511f, layerIdGroundHandlesMask);
+			hit = Physics2D.Raycast (sensorDown2.position, -Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
 			if( hit.collider )
 				return hit.collider.gameObject;
 			
 		} else {
 			
-			hit = Physics2D.Raycast (sensorDown2.position, Vector2.right , 0.511f, layerIdGroundHandlesMask);
+			hit = Physics2D.Raycast (sensorDown2.position, Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
 			if( hit.collider )
 				return hit.collider.gameObject;
 			
