@@ -3315,15 +3315,24 @@ public class Player2Controller : MonoBehaviour {
 		if (dir () == Vector2.right) { //
 			
 			hit = Physics2D.Raycast (sensorDown2.position, -Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
-			if( hit.collider )
-				return hit.collider.gameObject;
-			
+			if( hit.collider ){
+
+				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, -Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
+					return hit.collider.gameObject;
+				}
+
+			}
+
 		} else {
 			
 			hit = Physics2D.Raycast (sensorDown2.position, Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
-			if( hit.collider )
-				return hit.collider.gameObject;
-			
+			if( hit.collider ){
+
+				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
+					return hit.collider.gameObject;
+				}
+
+			}
 		}
 //
 //		return null;
