@@ -1,11 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Crocodile.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="66" Column="71" />
+      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="169" Column="1" />
       <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="91" Column="6" />
-      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="445" Column="58" />
+      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="147" Column="20" />
       <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\ShowInfoTrigger.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\zap_idle1_beh.cs" Line="1" Column="1" />
@@ -14,14 +14,12 @@
       <File FileName="Assets\mp\Scripts\Snake.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\RopeLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\ComicPage.cs" Line="18" Column="2" />
+      <File FileName="Assets\mp\Scripts\ComicPage.cs" Line="7" Column="24" />
+      <File FileName="Assets\mp\Scripts\ComicPagePart.cs" Line="60" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\Player2Controller.cs" line="124" />
-      <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\Player2Controller.cs" line="126" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

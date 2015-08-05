@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f7da3d694283cca4796807a34151b46e
-timeCreated: 1438673491
+timeCreated: 1438766479
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -71,7 +71,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_1
       rect:
@@ -81,7 +81,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_2
       rect:
@@ -91,7 +91,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_3
       rect:
@@ -101,7 +101,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_4
       rect:
@@ -111,7 +111,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_5
       rect:
@@ -121,7 +121,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_6
       rect:
@@ -131,17 +131,17 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_7
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_8
       rect:
@@ -151,7 +151,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_9
       rect:
@@ -161,7 +161,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_10
       rect:
@@ -171,7 +171,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_11
       rect:
@@ -181,7 +181,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_12
       rect:
@@ -191,7 +191,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_zap_attack_13
       rect:
@@ -201,7 +201,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .300000012}
+      pivot: {x: .25, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
