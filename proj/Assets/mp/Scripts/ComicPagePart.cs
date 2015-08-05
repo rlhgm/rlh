@@ -24,68 +24,55 @@ public class ComicPagePart : MonoBehaviour {
 
 		if (fadeIn) {
 
+			float fadeRatio = (fadeTime+=Time.deltaTime) / fadeDuration;
+
+			if( fadeRatio >= 1f ){
+				Color newColor = new Color(1f,1f,1f,1f);
+				img.color = newColor;
+				fadeIn = false;
+			}else{
+				Color newColor = new Color(1f,1f,1f,fadeRatio);
+				img.color = newColor;
+			}
+
 		}
 		if (fadeOut) {
 
+			float fadeRatio = (fadeTime+=Time.deltaTime) / fadeDuration;
+			
+			if( fadeRatio >= 1f ){
+				Color newColor = new Color(1f,1f,1f,0f);
+				img.color = newColor;
+				fadeOut = false;
+			}else{
+				Color newColor = new Color(1f,1f,1f,1f-fadeRatio);
+				img.color = newColor;
+			}
+
 		}
-
-//		if (flashing) {
-//
-//			float flashRatio = (flashTime+=Time.deltaTime) / flashDuration;
-//
-//			if( flashRatio >= 1f ){
-//
-//				Color newColor = new Color(1f,1f,1f,1f);
-//				img.color = newColor;
-//				flashing = false;
-//
-//			}else{
-//
-//				if( flashRatio < 0.5f ){
-//
-//					Color newColor = new Color(1f,1f,1f-flashRatio,1f);
-//					img.color = newColor;
-//
-//				}else{
-//
-//					Color newColor = new Color(1f,1f,0.5f+flashRatio,1f);
-//					img.color = newColor;
-//
-//				}
-//
-//			}
-//		}
 	}
-
-	//float flashTime = 0f;
-	//float flashDuration = 0.5f;
-	//bool flashing = false;
-	//bool collected = false;
 
 	bool fadeIn = false;
 	bool fadeOut = false;
 	float fadeDuration = 0.0f;
+	float fadeTime = 0.0f;
 
 	public void collect(){
 		if (collected)
 			return;
 
-		//flashTime = 0;
-		//flashing = true;
 		collected = true;
-		//Color newColor = new Color(1f,1f,1f,1f);
-		//img.color = newColor;
-		show (1.0f);
+		//show (1.0f);
 	}
 
 	public void show(float duration){
-
 
 		if (collected) {
 			Color newColor = new Color(1f,1f,1f,0f);
 			img.color = newColor;
 
 			fadeDuration = duration;
+			fadeTime = 0.0f;
 			fadeIn = true;
 		} else {
 
@@ -93,14 +80,13 @@ public class ComicPagePart : MonoBehaviour {
 	}
 
 	public void hide(float duration){
-		//Color newColor = new Color(1f,1f,1f,0f);
-		//img.color = newColor;
-		
+
 		if (collected) {
 			Color newColor = new Color(1f,1f,1f,0f);
 			img.color = newColor;
 
 			fadeDuration = duration;
+			fadeTime = 0.0f;
 			fadeOut = true;
 		} else {
 			

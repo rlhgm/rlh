@@ -102,6 +102,8 @@ public class Player2Controller : MonoBehaviour {
 				Image img = allImages[i];
 				if( img.gameObject.name == "mapBackgroundImage" ){
 					mapBackgroundImage = img;
+					Color newColor = new Color(1f,1f,1f,0f);
+					mapBackgroundImage.color = newColor;
 					//print ( "jest mapBackgroundImage");
 					continue;
 				}
@@ -433,10 +435,25 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
+	float puzzleMapShowTime = 0.0f;
+	bool puzzleMapShowing = false;
+	int puzzleShowingPhase = 0;
+
 	void collectMapPart(GameObject mapPart){
 		int mapPartID = mapPart.GetComponent<ComicPage>().partID;
 		mapPartParts [mapPartID].collect ();
 		Destroy (mapPart);
+
+		showPuzzleMap ();
+	}
+
+	void showPuzzleMap(){
+		puzzleMapShowTime = 0.0f;
+		puzzleMapShowing = true;
+		puzzleShowingPhase = 1;
+	}
+	void hidePuzzleMap(){
+
 	}
 
 	bool userJumpKeyPressed = false;
@@ -450,6 +467,48 @@ public class Player2Controller : MonoBehaviour {
 	
 		if (Input.GetKeyDown (KeyCode.P)) {
 			gamePaused = !gamePaused;
+		}
+
+		if (puzzleMapShowing) {
+			puzzleMapShowTime += Time.deltaTime;
+
+			if( puzzleMapShowTime < 1.0f ){
+
+				float phaseRatio = puzzleMapShowTime / 1.0f;
+
+				Color newColor = new Color(1f,1f,1f,phaseRatio);
+				mapBackgroundImage.color = newColor;
+
+			} else if( puzzleMapShowTime < 2.0f ){
+
+				if( puzzleShowingPhase == 0 ){
+					puzzleShowingPhase = 1;
+
+					Color newColor = new Color(1f,1f,1f,1f);
+					mapBackgroundImage.color = newColor;
+				}
+
+			} else {
+
+				if( puzzleShowingPhase == 1 ){
+					puzzleShowingPhase = 2;
+				}
+
+				if( puzzleMapShowTime >= 3.0f ){
+
+					puzzleMapShowing = false;
+					Color newColor = new Color(1f,1f,1f,0f);
+					mapBackgroundImage.color = newColor;
+
+				}else{
+
+					float phaseRatio = puzzleMapShowTime-2.0f / 1.0f;
+					Color newColor = new Color(1f,1f,1f,1f-phaseRatio);
+					mapBackgroundImage.color = newColor;
+
+				}
+
+			}
 		}
 
 		if( gamePaused ){
