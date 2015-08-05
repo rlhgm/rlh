@@ -26,6 +26,7 @@ GameObject:
   - 114: {fileID: 11447002}
   - 61: {fileID: 6140462}
   - 82: {fileID: 8267918}
+  - 81: {fileID: 8168686}
   m_Layer: 15
   m_Name: player2
   m_TagString: Player
@@ -324,7 +325,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.3999996, y: -32.0999985, z: 0}
+  m_LocalPosition: {x: -138, y: -47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447238}
@@ -465,6 +466,13 @@ BoxCollider2D:
   m_Offset: {x: 0, y: .949999988}
   serializedVersion: 2
   m_Size: {x: 1, y: 1.89999998}
+--- !u!81 &8168686
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112758}
+  m_Enabled: 1
 --- !u!82 &8267918
 AudioSource:
   m_ObjectHideFlags: 1
@@ -580,6 +588,7 @@ MonoBehaviour:
   MaxSpeedY: 15
   HardLandingHeight: 2
   VeryHardLandingHeight: 6
+  MaxFallDistToCatch: 6
   RopeSwingForce: 4250
   RopeClimbSpeedUp: 1
   RopeClimbSpeedDown: 3
@@ -587,8 +596,8 @@ MonoBehaviour:
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
   CLIMBDUR_CATCH: .5
-  CLIMBDUR_CLIMB: .75
   LANDING_HARD_DURATION: .300000012
+  TURN_LEFTRIGHT_DURATION: .0799999982
   keyLeft: 97
   keyRight: 100
   keyRun: 304
@@ -607,8 +616,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
   dieSounds:
   - {fileID: 8300000, guid: 420182c3f3d22e64c83a441b914ffdd2, type: 3}
+  landingSound: {fileID: 0}
+  ropeCatchSound: {fileID: 0}
   IdleAnimFreq: 10
+  DeathByVeryHardLandingText: You crushed your bones from fall. press space.
+  DeathBySnakeText: You've been beaten by a snake. press space.
+  DeathByCrocodileText: You've been eaten by an alligator. press space
+  DeathByPoisonText: You've been poisoned. Press space.
+  DeathByDefaultText: You died. Press space
+  canBeFuddleFromBird: 1
+  CrouchInOutDuration: .200000003
+  ClimbPullDownRange: .510999978
   mountIdleSprite: {fileID: 21300002, guid: 251a067bf40f8ca428f1d4c947c953cf, type: 3}
+  catchIdleSprite: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   swingVelocity: {x: 2.7752471, y: -.896844625}
   catchedRope: {fileID: 0}
