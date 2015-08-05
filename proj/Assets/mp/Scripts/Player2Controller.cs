@@ -1190,10 +1190,10 @@ public class Player2Controller : MonoBehaviour {
 		return false;
 	}
 	int Act_IDLE(){
-		//velocity.x = 0.0f;
-		if( Input.GetKeyDown(keyDown) ){
-			tryStartClimbPullDown();
-		}
+//		//velocity.x = 0.0f;
+//		if( Input.GetKeyDown(keyDown) ){
+//			tryStartClimbPullDown();
+//		}
 		return 0;
 	}
 
@@ -2253,9 +2253,15 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInState (State.ON_GROUND)) {
 
-			//crouch();
-			setAction(Action.CROUCH_IN);
-			return true;
+			if(	tryStartClimbPullDown() ) {
+
+				return true;
+
+			} else {
+				//crouch();
+				setAction(Action.CROUCH_IN);
+				return true;
+			}
 		}
 
 		return false;
