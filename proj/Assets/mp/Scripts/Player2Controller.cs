@@ -384,6 +384,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	public void reborn(){
+		sprRend.enabled = true;
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
 		setAction (Action.IDLE);
@@ -440,6 +441,10 @@ public class Player2Controller : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Crocodile") {
 			die (DeathType.CROCODILE);
+
+			other.gameObject.GetComponent<Crocodile>().attackStart();
+			sprRend.enabled = false;
+
 			return;
 		}
 		if (other.gameObject.tag == "ShowInfoTrigger") {
@@ -3584,7 +3589,9 @@ public class Player2Controller : MonoBehaviour {
 				break;
 
 			case DeathType.CROCODILE:
-				animator.Play ("zap_die");
+				//animator.Play ("zap_die");
+
+
 				msgInfo = DeathByCrocodileText;
 				break;
 

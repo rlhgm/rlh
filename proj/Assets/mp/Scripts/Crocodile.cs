@@ -97,35 +97,57 @@ public class Crocodile : MonoBehaviour {
 
 		int wit = whereIsTarget ();
 
+		Vector3 desiredPos = transform.position;
+
 		switch (wit){
 		case -1:
 			pos.x = waterLeftLimit.x+mySize.x*0.5f;
-			transform.position = pos;
 			break;
 		case 0:
 			pos.x = player.transform.position.x;
-			//if (pos.x < leftLimit.x) pos.x = leftLimit.x;
-			//if (pos.x > rightLimit.x) pos.x = rightLimit.x;
-
 			if( pos.x < waterLeftLimit.x+mySize.x*0.5f ) pos.x = waterLeftLimit.x+mySize.x*0.5f;
 			if( pos.x > waterRightLimit.x-mySize.x*0.5f ) pos.x = waterRightLimit.x-mySize.x*0.5f;
-
-			transform.position = pos;
 			break;
 		case 1:
-			//pos.x = rightLimit.x;
 			pos.x = waterRightLimit.x-mySize.x*0.5f;
-			transform.position = pos;
 			break;
 		}
 
-		if ((fromLastFlipTime += Time.deltaTime) > 0.5f) {
-			if (lastPos.x > transform.position.x) {
-				turnLeft ();
-			} else {
-				turnRight ();
+		fromLastFlipTime += Time.deltaTime;
+
+		desiredPos.x = pos.x;
+		Vector3 distToSwim = desiredPos - transform.position;
+		float dtsm = Mathf.Abs( distToSwim.magnitude );
+//		if (dtsm > 2.0f) {
+//			animator.speed = 1.0f;
+//		} else {
+//			animator.speed = dtsm/2.0f;
+//		}
+
+		if (dtsm > 1.0f) {
+
+			///if (dtsm > 2.0f) {
+			//	animator.speed = 1.0f;
+			//} else {
+			//	animator.speed = dtsm/2.0f;
+			//}
+
+			Vector3 dts = distToSwim.normalized * (AttackSpeed * Time.deltaTime);
+
+			transform.position = transform.position + dts;
+
+			if (fromLastFlipTime > 0.5f) {
+				if (lastPos.x > transform.position.x) {
+					turnLeft ();
+				} else {
+					turnRight ();
+				}
+				fromLastFlipTime = 0.0f;
 			}
-			fromLastFlipTime = 0.0f;
+		} else {
+
+			//animator.speed = 0.0f;
+
 		}
 
 		lastPlayerPos = player.transform.position;
@@ -152,5 +174,15 @@ public class Crocodile : MonoBehaviour {
 		return 0;
 	}
 
+	bool attacking = false;
+
+	public void attackStart(){
+		animator.Play ("croc_zap_attack");
+		animator.speed = 1.0f;
+	}
+
+	void attackStop(){
+	
+	}
 	//public State state;
 }
