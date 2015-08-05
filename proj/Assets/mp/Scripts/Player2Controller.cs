@@ -426,6 +426,8 @@ public class Player2Controller : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "CheckPoint") {
 			//print( "checkpoint : " + other.gameObject.name );
+
+			//if( 
 			lastTouchedCheckPoint = other.gameObject;
 
 			// zatwierdzam wszystkie zdobyte kawalki mapy...
@@ -451,6 +453,8 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 	}
+
+	//void OnTrigger
 
 	float puzzleMapShowTime = 0.0f;
 	bool puzzleMapShowing = false;
