@@ -403,6 +403,8 @@ public class Player2Controller : MonoBehaviour {
 				if( canBeFuddleFromBird )
 					fuddledFromBrid = true;
 
+			} else if( isInState(State.IN_AIR) ) {
+				velocity.x = 0.0f;
 			}
 			return;
 		}
