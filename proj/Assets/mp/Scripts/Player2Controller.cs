@@ -519,7 +519,7 @@ public class Player2Controller : MonoBehaviour {
 
 				float phaseRatio = puzzleMapShowTime / 1.0f;
 
-				Color newColor = new Color(1f,1f,1f,phaseRatio);
+				Color newColor = new Color(1f,1f,1f,0.75f*phaseRatio);
 				mapBackgroundImage.color = newColor;
 
 
@@ -558,7 +558,7 @@ public class Player2Controller : MonoBehaviour {
 				}else{
 
 					float phaseRatio = puzzleMapShowTime-2.0f / 1.0f;
-					Color newColor = new Color(1f,1f,1f,1f-phaseRatio);
+					Color newColor = new Color(1f,1f,1f,0.75f-0.75f*phaseRatio);
 					mapBackgroundImage.color = newColor;
 
 				}
