@@ -33,11 +33,19 @@ namespace UnityStandardAssets._2D
 		public Vector2 targetStage = new Vector2 ();
 
 		public Vector2 backgroundLimits = new Vector2 (-30, 30);
+		
 
 		Camera camera;
 
 		void Awake(){
 			//public GameObject[] backgroundsBackgrounds;
+
+
+			//to niby ma robic ze wszystkie pixele maja taki sam rozmiar w kamerze
+			//float s_baseOrthographicSize = Screen.height / 64.0f / 2.0f;
+			//Camera.main.orthographicSize = s_baseOrthographicSize;
+
+
 			for (int i = 0; i < backgroundsNodes.Length; ++i) {
 				if( backgroundsNodes[i] == null ) continue;
 				if( backgroundsBackgrounds[i] == null) continue;
