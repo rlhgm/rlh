@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c265859d1eb497842b5af52ea5c0a896
-timeCreated: 1438740811
+timeCreated: 1438759504
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -61,7 +61,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .25}
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_swim_idle_1
       rect:
@@ -71,7 +71,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .25}
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_swim_idle_2
       rect:
@@ -81,7 +81,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .25}
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: croc_swim_idle_3
       rect:
@@ -91,7 +91,7 @@ TextureImporter:
         width: 161
         height: 45
       alignment: 9
-      pivot: {x: .25, y: .25}
+      pivot: {x: .25, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
