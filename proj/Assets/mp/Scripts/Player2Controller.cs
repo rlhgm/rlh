@@ -438,12 +438,14 @@ public class Player2Controller : MonoBehaviour {
 	float puzzleMapShowTime = 0.0f;
 	bool puzzleMapShowing = false;
 	int puzzleShowingPhase = 0;
+	int newPuzzleCollectedID = 0;
 
 	void collectMapPart(GameObject mapPart){
 		int mapPartID = mapPart.GetComponent<ComicPage>().partID;
 		mapPartParts [mapPartID].collect ();
 		Destroy (mapPart);
 
+		newPuzzleCollectedID = mapPartID;
 		showPuzzleMap ();
 	}
 
@@ -451,7 +453,16 @@ public class Player2Controller : MonoBehaviour {
 		puzzleMapShowTime = 0.0f;
 		puzzleMapShowing = true;
 		puzzleShowingPhase = 1;
+
+		for (int i = 0; i < mapPartParts.Length; ++i) {
+			if (i == newPuzzleCollectedID)
+				continue;
+			if (mapPartParts[i].collected) {
+				mapPartParts[i].show(1.0f);
+			}
+		}
 	}
+
 	void hidePuzzleMap(){
 
 	}
@@ -479,24 +490,36 @@ public class Player2Controller : MonoBehaviour {
 				Color newColor = new Color(1f,1f,1f,phaseRatio);
 				mapBackgroundImage.color = newColor;
 
+
+
 			} else if( puzzleMapShowTime < 2.0f ){
 
-				if( puzzleShowingPhase == 0 ){
-					puzzleShowingPhase = 1;
+				if( puzzleShowingPhase == 1){
+					puzzleShowingPhase = 2;
 
 					Color newColor = new Color(1f,1f,1f,1f);
 					mapBackgroundImage.color = newColor;
+
+					mapPartParts[newPuzzleCollectedID].show(0.5f);
+
 				}
 
 			} else {
 
-				if( puzzleShowingPhase == 1 ){
-					puzzleShowingPhase = 2;
+				if( puzzleShowingPhase == 2 ){
+					puzzleShowingPhase = 3;
+
+					for (int i = 0; i < mapPartParts.Length; ++i) {
+						if (mapPartParts[i].collected) {
+							mapPartParts[i].hide(1.0f);
+						}
+					}
 				}
 
 				if( puzzleMapShowTime >= 3.0f ){
 
 					puzzleMapShowing = false;
+					puzzleShowingPhase = 0;
 					Color newColor = new Color(1f,1f,1f,0f);
 					mapBackgroundImage.color = newColor;
 
