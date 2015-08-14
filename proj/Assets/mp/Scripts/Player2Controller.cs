@@ -251,48 +251,6 @@ public class Player2Controller : MonoBehaviour {
 		//print("StateIdleExit");
 	}
 	public void StateIdleUpdate(float normTime){
-		//print("StateIdleUpdate " + normTime);
-
-		//if (normTime < 1.0f)
-		//	return;
-
-		//print("StateIdleUpdate " + normTime);
-		//print ("currentActionTime : " + currentActionTime);
-
-//		AnimatorClipInfo[] acis = animator.GetCurrentAnimatorClipInfo(0);
-//		if (acis.Length > 0) {
-//			AnimatorClipInfo aci = acis[0];
-//
-//			print( "aci.clip.length : " + aci.clip.length );
-//		}
-		//print (animator.playbackTime);
-
-		//AnimatorStateInfo asi = animator.GetCurrentAnimatorStateInfo (0);
-		//print (asi.length + " " + asi.normalizedTime);
-
-		//animator.
-//		int r = Random.Range(0,20);
-//		print (r);
-//
-//		if (r < 18) {
-//			animator.Play("zapidle");
-//		} else if (r < 19) {
-//			animator.Play ("zapidle_var1");
-//		} else {
-//			animator.Play ("zapidle_var2");
-//		}
-
-//		switch( r ){
-//		case 0:
-//			animator.Play("zapidle");
-//			break;
-//		case 1:
-//			animator.Play ("zapidle_var1");
-//			break;
-//		case 2:
-//			animator.Play ("zapidle_var2");
-//			break;
-//		}
 	}
 
 	public int IdleAnimFreq = 10;
@@ -302,45 +260,22 @@ public class Player2Controller : MonoBehaviour {
 		switch( stateIdleNum ){
 		case 1:
 		case 2:
-			animator.Play("zapidle");
+			if( dir2() == 1 ) animator.Play("Zap_idle_R");
+			else animator.Play ("Zap_idle_L");
 			break;
 		case 0:
 			if( IdleAnimFreq >= 3 ){
-				//animator.Play ("zapidle");
 				int r = Random.Range(0,IdleAnimFreq);
 				if( r == 0 ){
-					animator.Play ("zapidle_var1");
+					if( dir2() == 1 ) animator.Play ("Zap_idle_variation_1_R");
+					else animator.Play ("Zap_idle_variation_1_L");
 				}else if( r == 1 ){
-					animator.Play ("zapidle_var2");
+					if( dir2 () == 1 ) animator.Play ("Zap_idle_variation_2_R");
+					else animator.Play ("Zap_idle_variation_2_L");
 				}
 			}
-			//		print (r);
-			//
-			//		if (r < 18) {
-			//			animator.Play("zapidle");
-			//		} else if (r < 19) {
-			//			animator.Play ("zapidle_var1");
-			//		} else {
-			//			animator.Play ("zapidle_var2");
-			//		}
 			break;
-//		case 1:
-//		case 2:
-//			animator.Play ("zapidle_var2");
-//			break;
 		}
-
-//		switch( stateIdleNum ){
-//		case 2:
-//			animator.Play("zapidle");
-//			break;
-//		case 0:
-//			animator.Play ("zapidle_var1");
-//			break;
-//		case 1:
-//			animator.Play ("zapidle_var2");
-//			break;
-//		}
 	}
 
 	public enum DeathType{
@@ -2525,6 +2460,9 @@ public class Player2Controller : MonoBehaviour {
 	Vector2 dir(){
 		return gfx.localScale.x > 0.0f ? Vector2.right : -Vector2.right;
 	}
+	int dir2(){
+		return gfx.localScale.x > 0f ? (int)1f : (int)-1f;
+	}
 
 	void setActionIdle(){
 		velocity.x = 0.0f;
@@ -3557,9 +3495,8 @@ public class Player2Controller : MonoBehaviour {
 		switch (newAction) {
 			
 		case Action.IDLE:
-			animator.Play("zapidle");
-			//animator.Play ("zapidle_var1");
-			//animator.Play ("zapidle_var2");
+			if( dir2() == 1 ) animator.Play("Zap_idle_R");
+			else animator.Play ("Zap_idle_L");
 			break;
 
 		case Action.DIE:
