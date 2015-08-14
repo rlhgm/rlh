@@ -260,17 +260,17 @@ public class Player2Controller : MonoBehaviour {
 		switch( stateIdleNum ){
 		case 1:
 		case 2:
-			if( dir2() == 1 ) animator.Play("Zap_idle_R");
+			if( faceRight() ) animator.Play("Zap_idle_R");
 			else animator.Play ("Zap_idle_L");
 			break;
 		case 0:
 			if( IdleAnimFreq >= 3 ){
 				int r = Random.Range(0,IdleAnimFreq);
 				if( r == 0 ){
-					if( dir2() == 1 ) animator.Play ("Zap_idle_variation_1_R");
+					if( faceRight() ) animator.Play ("Zap_idle_variation_1_R");
 					else animator.Play ("Zap_idle_variation_1_L");
 				}else if( r == 1 ){
-					if( dir2 () == 1 ) animator.Play ("Zap_idle_variation_2_R");
+					if( faceRight() ) animator.Play ("Zap_idle_variation_2_R");
 					else animator.Play ("Zap_idle_variation_2_L");
 				}
 			}
@@ -2463,6 +2463,9 @@ public class Player2Controller : MonoBehaviour {
 	int dir2(){
 		return gfx.localScale.x > 0f ? (int)1f : (int)-1f;
 	}
+	bool faceRight(){
+		return gfx.localScale.x > 0f;
+	}
 
 	void setActionIdle(){
 		velocity.x = 0.0f;
@@ -3495,7 +3498,7 @@ public class Player2Controller : MonoBehaviour {
 		switch (newAction) {
 			
 		case Action.IDLE:
-			if( dir2() == 1 ) animator.Play("Zap_idle_R");
+			if( faceRight() ) animator.Play("Zap_idle_R");
 			else animator.Play ("Zap_idle_L");
 			break;
 
@@ -3677,39 +3680,37 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_IDLE:
-			//animator.Play("Zap_Crouch_walking_left");
-			if( dir2 () == 1 ) animator.Play("Zap_crouch_move_R");
+			if( faceRight () ) animator.Play("Zap_crouch_move_R");
 			else animator.Play("Zap_crouch_move_L");
 			animator.speed = 0f;
 			break;
 
 		case Action.CROUCH_LEFT:
-			//animator.Play("Zap_Crouch_walking_left");
 			animator.Play("Zap_crouch_move_L");
 			break;
 		case Action.CROUCH_RIGHT:
-			//animator.Play("Zap_Crouch_walking_right");
 			animator.Play("Zap_crouch_move_R");
 			break;
 
 		case Action.CROUCH_LEFT_BACK:
-			//animator.Play("Zap_Crouch_walking_left_back");
 			animator.Play("Zap_crouch_move_back_L");
 			break;
 
 		case Action.CROUCH_RIGHT_BACK:
-			//animator.Play("Zap_Crouch_walking_right_back");
 			animator.Play("Zap_crouch_move_back_R");
 			break;
 
 		case Action.ROPECLIMB_IDLE:
-			//animator.SetTrigger("climbrope_idle");
-			animator.Play("newclimbrope_idle");
-			//animator.speed = 0f;
+			//animator.Play("newclimbrope_idle");
+			if( faceRight() ) animator.Play("Zap_liana_climbup_R");
+			else animator.Play("Zap_liana_climbup_L");
+			animator.speed = 0f;
 			break;
 
 		case Action.ROPECLIMB_UP:
-			animator.Play("newclimbrope_updown");
+			//animator.Play("newclimbrope_updown");
+			if( faceRight() ) animator.Play("Zap_liana_climbup_R");
+			else animator.Play("Zap_liana_climbup_L");
 			break;
 
 		case Action.ROPECLIMB_DOWN:
