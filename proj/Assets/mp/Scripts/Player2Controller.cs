@@ -3664,11 +3664,12 @@ public class Player2Controller : MonoBehaviour {
 			animator.Play("mount_right");
 			break;
 		case Action.MOUNT_UP:
-			animator.Play("mount_up");
+			//animator.Play("mount_up");
+			animator.Play("Zap_climbmove_up");
 			break;
 		case Action.MOUNT_DOWN:
-			//animator.SetTrigger("mount_down");
-			animator.Play("mount_down");
+			//animator.Play("mount_down");
+			animator.Play("Zap_climbmove_down");
 			break;
 
 		case Action.CROUCH_IN:
