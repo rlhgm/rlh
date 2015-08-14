@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: c97c9f74f3feeda499b803bce78e4dd2
-timeCreated: 1439559272
+timeCreated: 1439563919
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Zap_climbmove_L_0
+    21300002: Zap_climbmove_L_1
+    21300004: Zap_climbmove_L_2
+    21300006: Zap_climbmove_L_3
+    21300008: Zap_climbmove_L_4
+    21300010: Zap_climbmove_L_5
+    21300012: Zap_climbmove_L_6
+    21300014: Zap_climbmove_L_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +56,87 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Zap_climbmove_L_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .506326556, y: .89225018}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .506326556, y: .885923386}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .518979788, y: .892250001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .5, y: .904903233}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .481019974, y: .892250001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .5316329, y: .87959677}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .550612926, y: .898576617}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_climbmove_L_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .493673325, y: .892250001}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
