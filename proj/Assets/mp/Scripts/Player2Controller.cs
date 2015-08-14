@@ -3560,14 +3560,12 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			//animator.Play("stand_turn_left");
-			animator.Play("stand_turn_left");
+			animator.Play("Zap_walk_back_left");
 			wantJumpAfter = false;
 			break;
 
 		case Action.TURN_STAND_RIGHT:
-			//animator.Play("stand_turn_right");
-			animator.Play("stand_turn_right");
+			animator.Play("Zap_walk_back_right");
 			wantJumpAfter = false;
 			break;
 
