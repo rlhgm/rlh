@@ -3677,34 +3677,29 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_IDLE:
-			//animator.SetTrigger("crouchidle");
-			//animator.Play("crouch_leftright");
-			animator.Play("Zap_Crouch_walking_left");
+			//animator.Play("Zap_Crouch_walking_left");
+			if( dir2 () == 1 ) animator.Play("Zap_crouch_move_R");
+			else animator.Play("Zap_crouch_move_L");
 			animator.speed = 0f;
 			break;
 
 		case Action.CROUCH_LEFT:
-			//animator.Play("crouch_leftright");
-			animator.Play("Zap_Crouch_walking_left");
-			//animator.GetCurrentAnimatorClipInfo().
-			//if( dir () != -Vector2.right ){
-			//	animator.speed = -1.0f;
-			//}
+			//animator.Play("Zap_Crouch_walking_left");
+			animator.Play("Zap_crouch_move_L");
 			break;
 		case Action.CROUCH_RIGHT:
-			//animator.Play("crouch_leftright");
-			animator.Play("Zap_Crouch_walking_right");
-			//if( dir () != Vector2.right ){
-			//	animator.speed = -1.0f;
-			//}
+			//animator.Play("Zap_Crouch_walking_right");
+			animator.Play("Zap_crouch_move_R");
 			break;
 
 		case Action.CROUCH_LEFT_BACK:
-			animator.Play("Zap_Crouch_walking_left_back");
+			//animator.Play("Zap_Crouch_walking_left_back");
+			animator.Play("Zap_crouch_move_back_L");
 			break;
 
 		case Action.CROUCH_RIGHT_BACK:
-			animator.Play("Zap_Crouch_walking_right_back");
+			//animator.Play("Zap_Crouch_walking_right_back");
+			animator.Play("Zap_crouch_move_back_R");
 			break;
 
 		case Action.ROPECLIMB_IDLE:

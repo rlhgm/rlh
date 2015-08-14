@@ -1706,7 +1706,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 112758, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_Name
-      value: player2 (1)
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8267918, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: Mute
