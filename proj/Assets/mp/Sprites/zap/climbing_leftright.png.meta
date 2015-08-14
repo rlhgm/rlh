@@ -1,17 +1,9 @@
 fileFormatVersion: 2
 guid: e062a2ed4270a0f4e9fc3023a3b538df
-timeCreated: 1438225303
+timeCreated: 1439548690
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: climbing_leftright_0
-    21300002: climbing_leftright_1
-    21300004: climbing_leftright_2
-    21300006: climbing_leftright_3
-    21300008: climbing_leftright_4
-    21300010: climbing_leftright_5
-    21300012: climbing_leftright_6
-    21300014: climbing_leftright_7
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,92 +43,12 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 24
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: climbing_leftright_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 7
-        width: 64
-        height: 57
-      alignment: 9
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_1
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 6
-        width: 64
-        height: 58
-      alignment: 9
-      pivot: {x: .460000008, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 5
-        width: 64
-        height: 59
-      alignment: 9
-      pivot: {x: .430000007, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 5
-        width: 64
-        height: 59
-      alignment: 9
-      pivot: {x: .439999998, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 5
-        width: 64
-        height: 59
-      alignment: 9
-      pivot: {x: .460000008, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 6
-        width: 64
-        height: 58
-      alignment: 9
-      pivot: {x: .469999999, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_6
-      rect:
-        serializedVersion: 2
-        x: 385
-        y: 7
-        width: 64
-        height: 57
-      alignment: 9
-      pivot: {x: .479999989, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: climbing_leftright_7
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 7
-        width: 64
-        height: 57
-      alignment: 9
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
