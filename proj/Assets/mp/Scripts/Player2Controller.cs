@@ -3538,11 +3538,6 @@ public class Player2Controller : MonoBehaviour {
 				break;
 
 			};
-			//if( param == (int)DeathType.VERY_HARD_LANDING ){
-			//	animator.Play ("death_hitground");
-			//}else{ //if( param == 0 ){
-			//	animator.Play ("zap_die");
-			//}
 
 			showInfo (msgInfo, -1);
 
@@ -3551,14 +3546,17 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.WALK_LEFT:
+			animator.Play("Zap_walk_L");
+			break;
 		case Action.WALK_RIGHT:
-			animator.Play ("zapwalk");
+			animator.Play("Zap_walk_R");
 			break;
 			
 		case Action.RUN_LEFT:
+			animator.Play("Zap_run_L");
+			break;
 		case Action.RUN_RIGHT:
-			//animator.SetTrigger("run");
-			animator.Play("zaprun");
+			animator.Play("Zap_run_L");
 			break;
 
 		case Action.TURN_STAND_LEFT:
