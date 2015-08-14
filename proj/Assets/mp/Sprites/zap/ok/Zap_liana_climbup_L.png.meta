@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 006738eaf5f18084db0f9861e1c65229
-timeCreated: 1439559498
+timeCreated: 1439560711
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,8 +64,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .65183866, y: .822657287}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_1
       rect:
@@ -74,8 +74,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .65183866, y: .803677797}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_2
       rect:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .651838541, y: .797351003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_3
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .651838541, y: .746738136}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_4
       rect:
@@ -104,8 +104,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .670818329, y: .740411341}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_5
       rect:
@@ -114,8 +114,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .651838303, y: .759391129}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_6
       rect:
@@ -124,8 +124,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .696124077, y: .778371155}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_liana_climbup_L_7
       rect:
@@ -134,8 +134,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .664491653, y: .835310459}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
