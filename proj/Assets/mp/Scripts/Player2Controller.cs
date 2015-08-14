@@ -3673,11 +3673,15 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_IN:
-			animator.Play("zapcrouchin");
+			//animator.Play("zapcrouchin");
+			if( faceRight() ) animator.Play("Zap_crouch_in_R");
+			else animator.Play("Zap_crouch_in_L");
 			break;
 			
 		case Action.GET_UP:
-			animator.Play("zapgetup");
+			//animator.Play("zapgetup");
+			if( faceRight() ) animator.Play("Zap_getup_R");
+			else animator.Play("Zap_getup_L");
 			break;
 
 		case Action.CROUCH_IDLE:
