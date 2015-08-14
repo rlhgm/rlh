@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: f7da3d694283cca4796807a34151b46e
+timeCreated: 1438766479
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: croc_zap_attack_0
+    21300002: croc_zap_attack_1
+    21300004: croc_zap_attack_2
+    21300006: croc_zap_attack_3
+    21300008: croc_zap_attack_4
+    21300010: croc_zap_attack_5
+    21300012: croc_zap_attack_6
+    21300014: croc_zap_attack_7
+    21300016: croc_zap_attack_8
+    21300018: croc_zap_attack_9
+    21300020: croc_zap_attack_10
+    21300022: croc_zap_attack_11
+    21300024: croc_zap_attack_12
+    21300026: croc_zap_attack_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 16
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: croc_zap_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_2
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_3
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_4
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_5
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_6
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 45
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_8
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_9
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 0
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_10
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_11
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_12
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 0
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: croc_zap_attack_13
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 0
+        width: 161
+        height: 45
+      alignment: 9
+      pivot: {x: .25, y: .25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
