@@ -3587,12 +3587,16 @@ public class Player2Controller : MonoBehaviour {
 				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 		case Action.PREPARE_TO_JUMP:
-			animator.Play("preparetojump");
+			if( faceRight() ) animator.Play("Zap_jump_in_R");
+			else animator.Play("Zap_jump_in_L");
 			break;
 
 		case Action.JUMP:
 			if( param == 0 ){
-				animator.Play("jump");
+
+				if( faceRight() ) animator.Play("Zap_jump_fly_R");
+				else animator.Play("Zap_jump_fly_L");
+
 			}else if (param == 1) {
 				animator.Play("zap_jump_from_climb");
 			}
