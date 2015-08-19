@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1e52b05e30c477546af3eb4f0d62ec0e
-timeCreated: 1439997636
+timeCreated: 1439998775
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -65,7 +65,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .506326556, y: .892250001}
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_1
       rect:
@@ -75,7 +75,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .5, y: .892250001}
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_2
       rect:
@@ -85,7 +85,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .506326437, y: .898576617}
+      pivot: {x: .506326437, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_3
       rect:
@@ -95,7 +95,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .512653112, y: .892250001}
+      pivot: {x: .5316329, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_4
       rect:
@@ -105,7 +105,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .506326675, y: .892250001}
+      pivot: {x: .518979549, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_5
       rect:
@@ -115,7 +115,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .5, y: .885923386}
+      pivot: {x: .481019974, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_6
       rect:
@@ -125,7 +125,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .5316329, y: .898576617}
+      pivot: {x: .481019974, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_climbmove_R_7
       rect:
@@ -135,7 +135,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: .493673325, y: .904903233}
+      pivot: {x: .512652874, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

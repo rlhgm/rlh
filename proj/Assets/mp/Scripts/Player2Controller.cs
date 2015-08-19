@@ -3474,7 +3474,7 @@ public class Player2Controller : MonoBehaviour {
 			//cameraTarget.localPosition = new Vector3(0f, cameraTargetRopeDiffY, 0f);
 			break;
 		case State.MOUNT:
-			animator.Play("mount_up");
+			animator.Play("Zap_climbmove_up");
 			//gfx.GetComponent<SpriteRenderer>().sprite
 			break;
 		};
@@ -3504,10 +3504,10 @@ public class Player2Controller : MonoBehaviour {
 		if (action == newAction)
 			return false;
 
-		//print ("setAction oldAction : " + action);
-		//print ("setAction newAction : " + newAction);
-		//print ("setAction : " + newAction + " ustawiona");
-		//print ("============================");
+		print ("setAction oldAction : " + action);
+		print ("setAction newAction : " + newAction);
+		print ("setAction : " + newAction + " ustawiona");
+		print ("============================");
 		
 		action = newAction;
 		currentActionTime = 0.0f;
