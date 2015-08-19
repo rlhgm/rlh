@@ -3658,10 +3658,17 @@ public class Player2Controller : MonoBehaviour {
 		case Action.CLIMB_CATCH:
 			//animator.SetTrigger("climb_catch");
 			if( param == 0 ){
-				animator.Play("zapclimbcatch");
+				//animator.Play("zapclimbcatch");
+				//zap_rocks_catch_position_L
+				if( faceRight() ) animator.Play("zap_rocks_catch_position_R");
+				else animator.Play("zap_rocks_catch_position_L");
+
 			}else if( param == 1 ){
 				// tu juz jest we wlasciwej klatce
-				animator.Play("zapclimbcatch_rev");
+				//zap_rocks_catch_position_rev_L
+				//animator.Play("zapclimbcatch_rev");
+				if( faceRight() ) animator.Play("zap_rocks_catch_position_rev_R");
+				else animator.Play("zap_rocks_catch_position_rev_L");
 				animator.speed = 0.0f;
 				//sprRend.sprite = catchIdleSprite;
 			}
