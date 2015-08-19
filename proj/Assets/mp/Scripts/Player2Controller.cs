@@ -3530,29 +3530,35 @@ public class Player2Controller : MonoBehaviour {
 			switch( dt ){
 
 			case DeathType.VERY_HARD_LANDING:
-				animator.Play ("death_hitground");
+				//animator.Play ("death_hitground");
+				if( faceRight() ) animator.Play("Zap_death_hitground_R");
+				else animator.Play("Zap_death_hitground_L");
 				msgInfo = DeathByVeryHardLandingText;
 				break;
 
 			case DeathType.SNAKE:
-				animator.Play ("Zap_death_poison");
+				//animator.Play ("Zap_death_poison");
+				if( faceRight() ) animator.Play("Zap_death_poison_R");
+				else animator.Play("Zap_death_poison_L");
 				msgInfo = DeathBySnakeText;
 				break;
 
 			case DeathType.POISON:
-				animator.Play ("Zap_death_poison");
+				//animator.Play ("Zap_death_poison");
+				if( faceRight() ) animator.Play("Zap_death_poison_R");
+				else animator.Play("Zap_death_poison_L");
 				msgInfo = DeathByPoisonText;
 				break;
 
 			case DeathType.CROCODILE:
 				//animator.Play ("zap_die");
-
-
 				msgInfo = DeathByCrocodileText;
 				break;
 
 			default:
-				animator.Play ("zap_die");
+				//animator.Play ("zap_die");
+				if( faceRight() ) animator.Play("Zap_death_hitground_R");
+				else animator.Play("Zap_death_hitground_L");
 				msgInfo = DeathByDefaultText;
 				break;
 
