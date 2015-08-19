@@ -412,7 +412,7 @@ public class Player2Controller : MonoBehaviour {
 		ComicPage comicPart = mapPart.GetComponent<ComicPage>();
 		int mapPartID = comicPart.partID;
 
-		if (mapPartParts [mapPartID].collected)
+	 	if (mapPartParts [mapPartID].collected)
 			return;
 
 		mapPartParts [mapPartID].collect ();
@@ -3698,17 +3698,20 @@ public class Player2Controller : MonoBehaviour {
 			//animator.SetTrigger("mount_idle");
 			//animator.StopPlayback();
 			//animator.Play("mount_up");
+			animator.Play("Zap_climbmove_up");
 			animator.speed = 0.0f;
-			sprRend.sprite = mountIdleSprite;
+			//sprRend.sprite = mountIdleSprite;
 			break;
 
 		case Action.MOUNT_LEFT:
 			//animator.SetTrigger("mount_left");
-			animator.Play("mount_left");
+			//animator.Play("mount_left");
+			animator.Play("Zap_climbmove_left");
 			break;
 		case Action.MOUNT_RIGHT:
 			//animator.SetTrigger("mount_right");
-			animator.Play("mount_right");
+			//animator.Play("mount_right");
+			animator.Play("Zap_climbmove_right");
 			break;
 		case Action.MOUNT_UP:
 			//animator.Play("mount_up");
