@@ -3672,12 +3672,17 @@ public class Player2Controller : MonoBehaviour {
 			break;
 		case Action.CLIMB_CLIMB:
 			//animator.SetTrigger("climb_climb");
-			animator.Play("zapclimbclimb");
+			//animator.Play("zapclimbclimb");
+			if( faceRight() ) animator.Play("Zap_jump_climb_R");
+			else animator.Play("Zap_jump_climb_L");
+
 			break;
 
 		case Action.CLIMB_PULLDOWN:
 			//animator.Play("zappulldown");
-			animator.Play("zapdrop");
+			//animator.Play("zapdrop");
+			if( faceRight() ) animator.Play("Zap_drop_R");
+			else animator.Play("Zap_drop_L");
 			break;
 
 		case Action.MOUNT_IDLE:
