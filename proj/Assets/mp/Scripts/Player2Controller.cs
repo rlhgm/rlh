@@ -3621,7 +3621,9 @@ public class Player2Controller : MonoBehaviour {
 				else animator.Play("Zap_jump_fly_L");
 
 			}else if (param == 1) {
-				animator.Play("zap_jump_from_climb");
+				//animator.Play("zap_jump_from_climb");
+				if( faceRight() ) animator.Play("zap_rocks_climb_R");
+				else animator.Play("zap_rocks_climb_L");
 			}
 			if( jumpSounds.Length != 0 )
 				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
