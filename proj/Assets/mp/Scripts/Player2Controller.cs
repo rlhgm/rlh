@@ -3608,7 +3608,11 @@ public class Player2Controller : MonoBehaviour {
 		case Action.JUMP_LEFT_LONG:
 		case Action.JUMP_RIGHT:
 		case Action.JUMP_RIGHT_LONG:
-			animator.Play("zapjump");
+			//animator.Play("zapjump");
+
+			if( faceRight() ) animator.Play("Zap_run_jump_fly_R");
+			else animator.Play("Zap_run_jump_fly_L");
+
 			if( jumpSounds.Length != 0 )
 				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
