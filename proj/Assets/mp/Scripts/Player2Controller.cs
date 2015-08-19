@@ -1627,19 +1627,16 @@ public class Player2Controller : MonoBehaviour {
 				//animator.Play("Zap_liana_swingback");
 				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
 				else animator.Play("Zap_liana_swingback_L");
+				animator.speed = 1f;
 
 			}else{
 
 				//animator.Play("Zap_liana_swingfront");
 				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
 				else animator.Play("Zap_liana_swingfront_L");
+				animator.speed = 1f;
 
 			}
-
-//			} else {
-//				animator.Play("newclimbrope_idle");
-//			}
-
 		}
 		else if (Input.GetKey (keyRight)) {
 			//turnRight();
@@ -1655,22 +1652,20 @@ public class Player2Controller : MonoBehaviour {
 				//animator.Play("Zap_liana_swingfront");
 				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
 				else animator.Play("Zap_liana_swingfront_L");
+				animator.speed = 1f;
 
 			}else{
 
 				//animator.Play("Zap_liana_swingback");
 				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
 				else animator.Play("Zap_liana_swingback_L");
+				animator.speed = 1f;
 
 			}
-
-//			} else {
-//				animator.Play("newclimbrope_idle");
-//			}
 		}
 
 		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) ) {
-			animator.Play("newclimbrope_idle");
+			setActionRopeClimbIdle();
 		}
 
 		if (tryJumpFromRope () != 0) {
@@ -2486,6 +2481,11 @@ public class Player2Controller : MonoBehaviour {
 	void setActionIdle(){
 		velocity.x = 0.0f;
 		setAction (Action.IDLE);
+	}
+	void setActionRopeClimbIdle(){
+		if( faceRight() ) animator.Play("Zap_liana_climbup_R");
+		else animator.Play("Zap_liana_climbup_L");
+		animator.speed = 0f;
 	}
 	void setActionCrouchIdle(){
 		velocity.x = 0.0f;
@@ -3733,10 +3733,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.ROPECLIMB_IDLE:
-			//animator.Play("newclimbrope_idle");
-			if( faceRight() ) animator.Play("Zap_liana_climbup_R");
-			else animator.Play("Zap_liana_climbup_L");
-			animator.speed = 0f;
+			setActionRopeClimbIdle();
 			break;
 
 		case Action.ROPECLIMB_UP:
