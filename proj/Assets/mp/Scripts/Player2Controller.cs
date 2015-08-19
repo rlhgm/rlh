@@ -412,6 +412,9 @@ public class Player2Controller : MonoBehaviour {
 		ComicPage comicPart = mapPart.GetComponent<ComicPage>();
 		int mapPartID = comicPart.partID;
 
+		if (mapPartParts.Length == 0 || mapPartParts[mapPartID] == null ) 
+			return;
+
 	 	if (mapPartParts [mapPartID].collected)
 			return;
 
