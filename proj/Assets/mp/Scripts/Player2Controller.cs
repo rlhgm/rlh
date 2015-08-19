@@ -3574,18 +3574,19 @@ public class Player2Controller : MonoBehaviour {
 
 		case Action.TURN_RUN_LEFT:
 			//animator.Play("stand_turn_left");
-			animator.Play("run_turn_left");
+			animator.Play("Zap_runback_L");
 			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
 				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
-			animator.Play("run_turn_right");
+			animator.Play("Zap_runback_R");
 			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
 				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
+
 		case Action.PREPARE_TO_JUMP:
 			if( faceRight() ) animator.Play("Zap_jump_in_R");
 			else animator.Play("Zap_jump_in_L");
