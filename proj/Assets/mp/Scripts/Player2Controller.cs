@@ -3614,7 +3614,9 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.LANDING_HARD:
-			animator.Play("landing_hard");
+			if( faceRight() ) animator.Play("Zap_landing_hard_R");
+			else animator.Play("Zap_landing_hard_L");
+
 			if( landingSounds.Length != 0 )
 				audio.PlayOneShot(landingSounds[Random.Range(0,landingSounds.Length)], 0.15F);
 			break;
