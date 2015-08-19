@@ -1623,9 +1623,17 @@ public class Player2Controller : MonoBehaviour {
 			}
 
 			if( dir () == Vector2.right ){
-				animator.Play("Zap_liana_swingback");
+
+				//animator.Play("Zap_liana_swingback");
+				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
+				else animator.Play("Zap_liana_swingback_L");
+
 			}else{
-				animator.Play("Zap_liana_swingfront");
+
+				//animator.Play("Zap_liana_swingfront");
+				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
+				else animator.Play("Zap_liana_swingfront_L");
+
 			}
 
 //			} else {
@@ -1643,9 +1651,17 @@ public class Player2Controller : MonoBehaviour {
 			}
 				
 			if( dir () == Vector2.right ){
-				animator.Play("Zap_liana_swingfront");
+
+				//animator.Play("Zap_liana_swingfront");
+				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
+				else animator.Play("Zap_liana_swingfront_L");
+
 			}else{
-				animator.Play("Zap_liana_swingback");
+
+				//animator.Play("Zap_liana_swingback");
+				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
+				else animator.Play("Zap_liana_swingback_L");
+
 			}
 
 //			} else {
@@ -3730,7 +3746,10 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.ROPECLIMB_DOWN:
-			animator.Play("Zap_liana_slide");
+			//animator.Play("Zap_liana_slide");
+			if( faceRight() ) animator.Play("Zap_liana_slide_R");
+			else animator.Play("Zap_liana_slide_L");
+
 			break;
 
 		};

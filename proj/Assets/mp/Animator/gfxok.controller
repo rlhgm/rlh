@@ -145,6 +145,29 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1102 &110207824
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_liana_swingback_R
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: df70e0a1b6bb1c54583fbe371691eb11, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
 --- !u!1102 &110209634
 AnimatorState:
   serializedVersion: 5
@@ -192,6 +215,29 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1102 &110211530
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_liana_swingfront_L
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 6c8871a161529b24ea4413b40b7c3479, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
 --- !u!1102 &110215606
 AnimatorState:
   serializedVersion: 5
@@ -211,6 +257,29 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 0e93914cf120b0440b27168826c34df7, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &110217564
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_liana_slide_L
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 08d73953860ef3c4dade55f26ee22017, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -351,6 +420,29 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 32d2bf9749dc79345885e0388334724e, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &110251264
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_liana_slide_R
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 00aedf2df08c70a4ca8dda4016466a60, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -540,6 +632,29 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1102 &110266736
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_liana_swingback_L
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: f3d522451049d50408f0f0ed292ad81d, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
 --- !u!1102 &110267974
 AnimatorState:
   serializedVersion: 5
@@ -720,6 +835,29 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 7b80262613589b244b155613775bfced, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &110289730
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_liana_swingfront_R
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 414022cea139dd14e917230a7bc19907, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -915,10 +1053,10 @@ AnimatorStateMachine:
     m_Position: {x: 408, y: 24, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110264920}
-    m_Position: {x: 24, y: 84, z: 0}
+    m_Position: {x: -192, y: 192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110267974}
-    m_Position: {x: 24, y: 132, z: 0}
+    m_Position: {x: -192, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110281564}
     m_Position: {x: -192, y: 84, z: 0}
@@ -927,10 +1065,10 @@ AnimatorStateMachine:
     m_Position: {x: -192, y: 132, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110256532}
-    m_Position: {x: -192, y: 192, z: 0}
+    m_Position: {x: -192, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110291258}
-    m_Position: {x: -192, y: 240, z: 0}
+    m_Position: {x: -192, y: 348, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110235742}
     m_Position: {x: 240, y: 84, z: 0}
@@ -945,16 +1083,16 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110295832}
-    m_Position: {x: 24, y: 192, z: 0}
+    m_Position: {x: 24, y: 84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110215606}
-    m_Position: {x: 24, y: 240, z: 0}
+    m_Position: {x: 24, y: 132, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110274678}
-    m_Position: {x: -432, y: 84, z: 0}
+    m_Position: {x: -420, y: 84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110294026}
-    m_Position: {x: -432, y: 132, z: 0}
+    m_Position: {x: -420, y: 132, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110298320}
     m_Position: {x: 240, y: 300, z: 0}
@@ -993,10 +1131,28 @@ AnimatorStateMachine:
     m_Position: {x: -660, y: 348, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110269512}
-    m_Position: {x: -192, y: 300, z: 0}
+    m_Position: {x: -192, y: 408, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110282966}
-    m_Position: {x: -192, y: 348, z: 0}
+    m_Position: {x: -192, y: 456, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110217564}
+    m_Position: {x: 24, y: 192, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110251264}
+    m_Position: {x: 24, y: 240, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110266736}
+    m_Position: {x: 24, y: 300, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110207824}
+    m_Position: {x: 24, y: 348, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110211530}
+    m_Position: {x: 24, y: 408, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110289730}
+    m_Position: {x: 24, y: 456, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
