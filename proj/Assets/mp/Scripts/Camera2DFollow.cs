@@ -134,13 +134,24 @@ namespace UnityStandardAssets._2D
 			Vector3 res = fitToStage (targetStage, newPos);
 
 			Vector3 posDiff = res - transform.position;
-			float pdm = posDiff.magnitude;
 
-			if (pdm > 0.35f)
-				pdm = 0.35f;
-			pdm = (pdm * pdm);
+			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
 
-			transform.position = transform.position + posDiff * pdm;
+				float pdm = posDiff.magnitude;
+
+				if (pdm > 0.35f)
+					pdm = 0.35f;
+
+				if (pdm > 0.1f)
+					pdm = (pdm * pdm);
+				else
+					pdm = 1f;
+
+				transform.position = transform.position + posDiff * pdm;
+
+			} else {
+				transform.position = transform.position + posDiff;
+			}
 
 			int numberOfBackgrounds = backgroundsNodes.Length;
 
