@@ -1,22 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
     <Files>
-      <File FileName="proj.sln" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="3719" Column="23" />
-      <File FileName="Assets\mp\Scripts\Crocodile.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\BirdEmiter.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\ShowInfoTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\zap_idle1_beh.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\PlaySounds.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Snake.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\BirdDestroyer.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\RopeLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\ComicPage.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\ComicPagePart.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="3500" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
