@@ -3751,11 +3751,11 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CROUCH_LEFT_BACK:
-			animator.Play("Zap_crouch_move_back_L");
+			animator.Play("Zap_crouch_move_back_R");
 			break;
 
 		case Action.CROUCH_RIGHT_BACK:
-			animator.Play("Zap_crouch_move_back_R");
+			animator.Play("Zap_crouch_move_back_L");
 			break;
 
 		case Action.ROPECLIMB_IDLE:
