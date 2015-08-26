@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-namespace UnityStandardAssets._2D
-{
+//namespace UnityStandardAssets._2D
+//{
     public class Camera2DFollow : MonoBehaviour
     {
         //public Transform target;
@@ -35,7 +35,7 @@ namespace UnityStandardAssets._2D
 		public Vector2 backgroundLimits = new Vector2 (-30, 30);
 		
 
-		Camera camera;
+		public Camera camera;
 
 		void Awake(){
 			//public GameObject[] backgroundsBackgrounds;
@@ -94,6 +94,8 @@ namespace UnityStandardAssets._2D
 			//}
 			///aaa
 			camera = GetComponent<Camera> ();
+
+			target.mainCamera = camera;
 
 			hms.x = camera.orthographicSize * camera.aspect;
 			hms.y = camera.orthographicSize;
@@ -274,4 +276,4 @@ namespace UnityStandardAssets._2D
 			return stageCenter;
 		}
     }
-}
+//}

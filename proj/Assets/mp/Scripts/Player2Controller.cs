@@ -88,6 +88,8 @@ public class Player2Controller : MonoBehaviour {
 
 	AudioSource audio;
 
+	public Camera mainCamera;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 		//print (guiCanvas);
@@ -118,6 +120,12 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 		}
+
+		//Camera2DFollow _cameraMain = FindObjectOfType<Camera2DFollow> ();
+		//mainCamera = _cameraMain.camera;
+		//if (mainCamera) {
+		//	print ("jest kamera");
+		//}
 
 		coll = GetComponent<BoxCollider2D> ();
 		gfx  = transform.Find("gfx").transform;
@@ -457,6 +465,19 @@ public class Player2Controller : MonoBehaviour {
 	
 		if (Input.GetKeyDown (KeyCode.P)) {
 			gamePaused = !gamePaused;
+		}
+
+		if( Input.GetMouseButton(0) ){ // left
+			//print ("left: " + Input.mousePosition);
+			if( mainCamera ){
+				Vector3 mp = Input.mousePosition;
+				mp.z = 10f;
+				print ( mp + " " + mainCamera.ScreenToWorldPoint(mp) );
+				//print ( mainCamera.ViewportToWorldPoint( new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) );
+			}
+		}
+		if( Input.GetMouseButton(1) ){ // right
+			//print ("right: " + Input.mousePosition);
 		}
 
 		if (puzzleMapShowing) {
@@ -3504,10 +3525,10 @@ public class Player2Controller : MonoBehaviour {
 		if (action == newAction)
 			return false;
 
-		print ("setAction oldAction : " + action);
-		print ("setAction newAction : " + newAction);
-		print ("setAction : " + newAction + " ustawiona");
-		print ("============================");
+		//print ("setAction oldAction : " + action);
+		//print ("setAction newAction : " + newAction);
+		//print ("setAction : " + newAction + " ustawiona");
+		//print ("============================");
 		
 		action = newAction;
 		currentActionTime = 0.0f;
