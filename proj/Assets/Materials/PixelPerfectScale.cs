@@ -4,7 +4,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class PixelPerfectScale : MonoBehaviour
 {
-	public int screenVerticalPixels = 256;
+	public int screenVerticalPixels = 384;
 
 	public bool preferUncropped = true;
 
