@@ -4,13 +4,19 @@ using System.Collections;
 [ExecuteInEditMode]
 public class PixelPerfectScale : MonoBehaviour
 {
-	public int screenVerticalPixels = 384;
+	public int screenVerticalPixels = 768;
 
 	public bool preferUncropped = true;
 
-	private float screenPixelsY = 0;
+	public float screenPixelsY = 0;
 	
-	private bool currentCropped = false;
+	public bool currentCropped = false;
+
+	public float screenRatio;
+	public float ratio;
+
+	public Camera mainCamera = null;
+	public Camera touchCamera = null;
 
 	void Update()
 	{
@@ -19,8 +25,8 @@ public class PixelPerfectScale : MonoBehaviour
 			screenPixelsY = (float)Screen.height;
 			currentCropped = preferUncropped;
 
-			float screenRatio = screenPixelsY/screenVerticalPixels;
-			float ratio;
+			screenRatio = screenPixelsY/screenVerticalPixels;
+			//ratio;
 
 			if(preferUncropped)
 			{
@@ -32,6 +38,10 @@ public class PixelPerfectScale : MonoBehaviour
 			}
 
 			transform.localScale = Vector3.one*ratio;
+
+			if( touchCamera ){
+				touchCamera.orthographicSize = mainCamera.orthographicSize * screenRatio;
+			}
 		}
 	}
 }

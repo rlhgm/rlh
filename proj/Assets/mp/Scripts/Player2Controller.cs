@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -89,6 +89,7 @@ public class Player2Controller : MonoBehaviour {
 	AudioSource audio;
 
 	public Camera mainCamera;
+	public Camera touchCamera;
 
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
@@ -458,6 +459,8 @@ public class Player2Controller : MonoBehaviour {
 	float timeFromJumpKeyPressed = 0.0f;
 	bool jumpKeyPressed = false;
 
+	public PixelPerfectScale pps = null;
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -467,13 +470,95 @@ public class Player2Controller : MonoBehaviour {
 			gamePaused = !gamePaused;
 		}
 
-		if( Input.GetMouseButton(0) ){ // left
+		if( Input.GetMouseButtonDown(0) ){ // left
 			//print ("left: " + Input.mousePosition);
 			if( mainCamera ){
 				Vector3 mp = Input.mousePosition;
-				mp.z = 10f;
-				print ( mp + " " + mainCamera.ScreenToWorldPoint(mp) );
+//				mp.z = 10f;
+//				Vector3 mpInWorld = mainCamera.ScreenToWorldPoint(mp);
+//				print ( mp + " " + mpInWorld );
+//
+////				//Multiplying it by ratio and dividing it by the floor of screenRatio.
+//				float screenVerticalPixels = 768;
+//				float screenPixelsY = (float)Screen.height;
+// 				float screenRatio = screenPixelsY/screenVerticalPixels;
+//				float ratio;
+//				
+//				if(preferUncropped)
+//				{
+//					ratio = Mathf.Floor(screenRatio)/screenRatio;
+//				}
+//				else
+//				{
+//					ratio = Mathf.Ceil(screenRatio)/screenRatio;
+//				}
+//
+//				print ("ratio : " + ratio + " screenRatio : " + screenRatio);
+//
+//				mpInWorld *= ratio;
+//				//mpInWorld /= Mathf.Floor(screenRatio);
+//				print ( " ??? -> " + mpInWorld );
+//
+//				mp *= ratio;
+//				//mp /= screenRatio;
+//
+//				print ( mp + " 222 => " + mainCamera.ScreenToWorldPoint(mp) );
+
 				//print ( mainCamera.ViewportToWorldPoint( new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) );
+
+				//Screen.
+
+				if( pps ){
+
+//					print ( mp );
+//
+//					Vector3 ss = new Vector3( Screen.width, Screen.height, 0f );
+//					Vector3 ssrt = ss * pps.ratio;
+//					print ( "screen : " + ss + " " + ssrt );
+//
+//					Vector3 _aaa = new Vector3( mp.x / ss.x, mp.y / ss.y );
+//					Vector3 res1 = new Vector3( _aaa.x * ssrt.x, _aaa.y * ssrt.y  );
+//
+//					Vector3 res2 = mp;// * pps.ratio;
+//
+//					print ( "res1 " + res1 + " res2 " + res2 );
+//
+//					Vector3 _r1 = mainCamera.ScreenToWorldPoint(res1);
+//					Vector3 _r2 = mainCamera.ScreenToWorldPoint(res2);
+//
+//					print ( _r1 + " " + _r2 );
+//
+//					//print( mainCamera
+//
+//					print ( "" );
+
+//					Vector3 ss = new Vector3( Screen.width, Screen.height, 0f );
+//					float asrt = ss.x / ss.y;
+//					print ( "screen: " + ss + " mouse: " + mp + " asrt: " + asrt );
+//
+//					float csy = mainCamera.orthographicSize * pps.screenRatio;
+//
+//					Vector2 cameraSize = new Vector2( asrt * csy, csy );
+//
+//
+//					Vector2 csd = new Vector2();
+//					csd.y = mainCamera.orthographicSize - cameraSize.y;
+//					csd.x = (mainCamera.orthographicSize*asrt) - cameraSize.x;
+//
+//					print ( "cameraSize: " + cameraSize + " csd: " + csd );
+//					Vector3 r1 = mainCamera.ScreenToWorldPoint( mp );
+//					//Vector3 r2 = mainCamera.ScreenToWorldPoint( mp * pps.ratio x);
+//					print( "r1: " + r1 );
+//
+//					print ( "=============================" );
+
+					if( touchCamera ){
+						print ( touchCamera.ScreenToWorldPoint(mp) );
+					}
+					//mp *= pps.screenRatio;
+
+					//print ( mainCamera.ScreenToWorldPoint(mp) );
+				}
 			}
 		}
 		if( Input.GetMouseButton(1) ){ // right
