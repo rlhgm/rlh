@@ -171,7 +171,8 @@ public class Player2Controller : MonoBehaviour {
 
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
 		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
-		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask;
+		layerIdGroundMoveableMask = 1 << LayerMask.NameToLayer("GroundMoveable");
+		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask | layerIdGroundMoveableMask;
 		layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
 		
 		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
@@ -484,6 +485,43 @@ public class Player2Controller : MonoBehaviour {
 	bool jumpKeyPressed = false;
 
 	public PixelPerfectScale pps = null;
+	public Vector3 lastMousePosition = new Vector3();
+
+	public Transform testStone = null;
+
+	void FixedUpdate(){
+		Vector3 currentMousePosition = Input.mousePosition;
+		//if (currentMousePosition != lastMousePosition) {
+			
+			if( Input.GetMouseButton(0) ){
+				if( touchCamera ){
+					Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
+					
+					if( testStone ){
+						//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
+						Vector3 posDiff = touchInScene - testStone.position;
+						posDiff.z = testStone.position.z;
+						float posDiffLength = posDiff.magnitude;
+						if( posDiffLength < 5f ){
+
+							Rigidbody2D testStoneRigidBody = testStone.GetComponent<Rigidbody2D>();
+
+							//testStoneRigidBody.add
+							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+							//testStoneRigidBody.MovePosition( touchInScene );
+
+							float coef = 1f;
+							testStoneRigidBody.MovePosition( testStone.position + posDiff * coef * Time.fixedDeltaTime );
+
+							//print( testStoneRigidBody.velocity );
+						}
+					}
+				}
+			}
+			
+			lastMousePosition = currentMousePosition;
+		//}
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -595,6 +633,50 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E)) {
 			setNextWeapon();
 		}
+
+		if (Input.GetMouseButtonDown (0)) {
+
+			testStone = null;
+
+			Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+
+			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene ) ;//, layerIdGroundMoveableMask );
+			if( hit.collider ){
+				testStone = hit.collider.gameObject.transform;
+				if( testStone ){
+
+					testStone.GetComponent<Rigidbody2D>().gravityScale = 0f;
+
+				}
+			}
+		}
+
+		if (Input.GetMouseButtonUp (0)) {
+
+			if( testStone ){
+
+				testStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
+				testStone = null;
+
+			}
+
+		}
+
+//		Vector3 currentMousePosition = Input.mousePosition;
+//		if (currentMousePosition != lastMousePosition) {
+//
+//			if( Input.GetMouseButton(0) ){
+//				if( touchCamera ){
+//					Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
+//
+//					if( testStone ){
+//						testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
+//					}
+//				}
+//			}
+//
+//			lastMousePosition = currentMousePosition;
+//		}
 
 		if (puzzleMapShowing) {
 			puzzleMapShowTime += Time.deltaTime;
@@ -3969,6 +4051,7 @@ public class Player2Controller : MonoBehaviour {
 	
 	int layerIdGroundMask;
 	int layerIdGroundPermeableMask;
+	int layerIdGroundMoveableMask;
 	int layerIdGroundAllMask;
 	int layerIdLastGroundTypeTouchedMask;
 	int layerIdGroundHandlesMask;
