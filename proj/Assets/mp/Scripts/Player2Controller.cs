@@ -91,6 +91,11 @@ public class Player2Controller : MonoBehaviour {
 	public Camera mainCamera;
 	public Camera touchCamera;
 
+	public Weapon currentWeapon;
+	public List<Weapon> weapons = new List<Weapon>(3);
+
+	Transform weaponText;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 		//print (guiCanvas);
@@ -221,6 +226,30 @@ public class Player2Controller : MonoBehaviour {
 
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
+
+		weapons.Add( new Knife() );
+		weapons.Add( new GravityGun() );
+
+		//currentWeapon = weapons;
+		//currentWeapon.ToString ();
+		printWeapons ();
+
+		weaponText = transform.Find ("weaponText");
+		if (weaponText) {
+			MeshRenderer weaponTextMeshRenderer = weaponText.GetComponent<MeshRenderer>();
+			if( weaponTextMeshRenderer ){
+				weaponTextMeshRenderer.sortingLayerName = "WaterFront";
+				weaponTextMeshRenderer.sortingOrder = 50;
+			}
+		}
+	}
+
+	void printWeapons(){
+		print ("weapons : ");
+		for (int i = 0; i < weapons.Count; ++i) {
+			print ( weapons[i] );
+		}
+		print ("============================");
 	}
 
 	public AudioSource getAudioSource(){

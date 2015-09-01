@@ -67,6 +67,9 @@
      <Compile Include="Assets\mp\Scripts\Snake.cs" />
      <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
      <Compile Include="Assets\mp\Scripts\Water.cs" />
+     <Compile Include="Assets\mp\Scripts\Weapons\GravityGun.cs" />
+     <Compile Include="Assets\mp\Scripts\Weapons\Knife.cs" />
+     <Compile Include="Assets\mp\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />
  <Reference Include="UnityEngine.UI">

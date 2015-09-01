@@ -1,11 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="539" Column="66" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="229" Column="5" />
       <File FileName="Assets\Materials\PixelPerfectScale.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Editor\RLHOptionsWindow.cs" Line="28" Column="5" />
+      <File FileName="Assets\Editor\RLHOptionsWindow.cs" Line="1" Column="1" />
+      <File FileName="Assets\Editor\RLHEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="16" Column="1" />
+      <File FileName="Assets\mp\Scripts\Weapons\Weapon.cs" Line="16" Column="1" />
+      <File FileName="Assets\mp\Scripts\Weapons\Knife.cs" Line="16" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
