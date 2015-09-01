@@ -92,9 +92,11 @@ public class Player2Controller : MonoBehaviour {
 	public Camera touchCamera;
 
 	public Weapon currentWeapon;
+	public int currentWeaponIndex = 0;
 	public List<Weapon> weapons = new List<Weapon>(3);
 
 	Transform weaponText;
+	TextMesh weaponTextMesh;
 
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
@@ -177,47 +179,6 @@ public class Player2Controller : MonoBehaviour {
 		layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
 		layerIdRopesMask = 1 << LayerMask.NameToLayer("Ropes");
 
-//		CLIMB_DURATION = 1.5f;
-//		CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
-//		CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
-//		CLIMBDUR_CATCH = 0.5f;
-//		CLIMBDUR_CLIMB = 0.75f;
-		
-//		WalkSpeed = 3.0f;
-//		RunSpeed = 5.0f;
-//		JumpSpeed = 3.5f;
-//		JumpLongSpeed = 4.1f;
-//		CrouchSpeed = WalkSpeed * 0.5f;
-//		MountSpeed = 2.0f; // ile na sek.
-//		MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-//		SpeedUpParam = 7.0f; //WALK_SPEED; // ile jednosek predkosci przyspiesza na sekunde - teraz do pelnej predkosci chodu w 1.s
-//		SlowDownParam = WalkSpeed * 2.0f; // ile jednosek predkosci hamuje na sekunde - teraz z automatu w 0.5 sek.
-//		FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
-//		FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
-//
-//		JumpImpulse = 7.0f;
-//		JumpLongImpulse = 7.15f;
-//		GravityForce = -20.0f;
-//		MaxSpeedY = 15.0f;
-
-
-//		public float WalkSpeed = 3.0f;
-//		public float RunSpeed = 5.0f;
-//		public float JumpSpeed = 3.5f;
-//		public float JumpLongSpeed = 4.1f;
-//		public float CrouchSpeed = WalkSpeed*0.5f;
-//		public float MountSpeed = 2.0f; // ile na sek.
-//		public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-//		public float SpeedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekund
-//		public float SlowDownParam = WalkSpeed*2.0f; // ile jednosek predkosci hamuje na sekunde
-//		public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
-//		public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
-//		
-//		public float JumpImpulse = 7.0f; 
-//		public float JumpLongImpulse = 7.15f; 
-//		public float GravityForce = -20.0f;
-//		public float MaxSpeedY = 15.0f;
-
 		myWidth = coll.size.x;
 		myHalfWidth = myWidth * 0.5f;
 		myHeight = coll.size.y;
@@ -227,8 +188,10 @@ public class Player2Controller : MonoBehaviour {
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 
+		weapons.Add( new Empty () );
 		weapons.Add( new Knife() );
 		weapons.Add( new GravityGun() );
+		setWeapon ();
 
 		//currentWeapon = weapons;
 		//currentWeapon.ToString ();
@@ -241,6 +204,8 @@ public class Player2Controller : MonoBehaviour {
 				weaponTextMeshRenderer.sortingLayerName = "WaterFront";
 				weaponTextMeshRenderer.sortingOrder = 50;
 			}
+
+			weaponTextMesh = weaponText.GetComponent<TextMesh>();
 		}
 	}
 
@@ -250,6 +215,36 @@ public class Player2Controller : MonoBehaviour {
 			print ( weapons[i] );
 		}
 		print ("============================");
+
+		System.Console.WriteLine("asdfasdf asdf asdf ass fd");
+	}
+
+	void setPrevWeapon(){
+		currentWeaponIndex -= 1;
+		if (currentWeaponIndex < 0) {
+			currentWeaponIndex = weapons.Count-1;
+		}
+		setWeapon();
+	}
+	void setNextWeapon(){
+		currentWeaponIndex += 1;
+		if (currentWeaponIndex == weapons.Count) {
+			currentWeaponIndex = 0;
+		}
+		setWeapon();
+	}
+	void setWeapon(Weapon newCurrentWeapon){
+		currentWeapon = newCurrentWeapon;
+		if (weaponTextMesh) {
+			weaponTextMesh.text = currentWeapon.name;
+		}
+	}
+	void setWeapon(int iii){
+		Weapon cw = weapons [iii];
+		setWeapon ( cw );
+	}
+	void setWeapon(){
+		setWeapon (currentWeaponIndex);
 	}
 
 	public AudioSource getAudioSource(){
@@ -592,6 +587,13 @@ public class Player2Controller : MonoBehaviour {
 		}
 		if( Input.GetMouseButton(1) ){ // right
 			//print ("right: " + Input.mousePosition);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			setPrevWeapon();
+		}
+		if (Input.GetKeyDown (KeyCode.E)) {
+			setNextWeapon();
 		}
 
 		if (puzzleMapShowing) {
