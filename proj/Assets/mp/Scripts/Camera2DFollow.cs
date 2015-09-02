@@ -23,7 +23,7 @@ using UnityEngine;
 
 		public GameObject[] backgroundsBackgrounds;
 
-		private Vector3 lastPos;
+		//private Vector3 lastPos;
 
 		public Vector2 stageSize = new Vector2 (20f, 10f);
 		public Vector2 stagesOffset = new Vector2 (0f, 0f);
@@ -34,8 +34,7 @@ using UnityEngine;
 
 		public Vector2 backgroundLimits = new Vector2 (-30, 30);
 		
-
-		public Camera camera;
+		public Camera myCamera;
 
 		void Awake(){
 			//public GameObject[] backgroundsBackgrounds;
@@ -93,18 +92,18 @@ using UnityEngine;
 			//Transform camTarget = target.getCameraTarget();
 			//}
 			///aaa
-			camera = GetComponent<Camera> ();
+			myCamera = GetComponent<Camera> ();
 
-			target.mainCamera = camera;
-			target.touchCamera = camera.transform.Find("TouchCamera").GetComponent<Camera>();
+			target.mainCamera = myCamera;
+			target.touchCamera = myCamera.transform.Find("TouchCamera").GetComponent<Camera>();
 
-			hms.x = camera.orthographicSize * camera.aspect;
-			hms.y = camera.orthographicSize;
+			hms.x = myCamera.orthographicSize * GetComponent<Camera>().aspect;
+			hms.y = myCamera.orthographicSize;
 
 			transform.position = new Vector3( target.transform.position.x, target.transform.position.y, transform.position.z );
             transform.parent = null;
 
-			lastPos = transform.position;
+			//lastPos = transform.position;
         }
 
 
@@ -170,7 +169,7 @@ using UnityEngine;
 				backgroundsNodes[i].position = pos;
 			}
 
-			lastPos = transform.position;
+			//lastPos = transform.position;
         }
 
 		Vector2 getTargetStage(){

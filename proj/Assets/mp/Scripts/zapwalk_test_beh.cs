@@ -33,6 +33,6 @@ public class zapwalk_test_beh : StateMachineBehaviour {
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		//print ( "OnStateUpdate" );
-		int a = 0;
+		//int a = 0;
 	}
 }

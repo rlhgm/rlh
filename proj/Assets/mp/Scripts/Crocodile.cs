@@ -9,7 +9,7 @@ public class Crocodile : MonoBehaviour {
 	public Player2Controller player;
 	Vector2 mySize;
 
-	Vector3 swingStartPos;
+	//Vector3 swingStartPos;
 	Vector3 swingFinalPos;
 	Vector3 distToSwing;
 	float swingTime;
@@ -56,13 +56,13 @@ public class Crocodile : MonoBehaviour {
 
 		transform.position = startPos;
 
-		swingStartPos = transform.position;
+		//swingStartPos = transform.position;
 
 		CalmSpeed = 0.75f; // jednostek na sek.
 		SneakSpeed = 2.5f; // jednostek na sek.
 		AttackSpeed = 6.5f; // jednostek na sek.
 
-		leftLimit = water.transform.TransformPoint ( new Vector3(0.3f,-0.05f,0f) );
+		//leftLimit = water.transform.TransformPoint ( new Vector3(0.3f,-0.05f,0f) );
 		rightLimit = water.transform.TransformPoint ( new Vector3(0.7f,-0.05f,0f) );
 
 		waterLeftLimit = water.transform.TransformPoint ( new Vector3(0f,0f,0f) );
@@ -150,16 +150,16 @@ public class Crocodile : MonoBehaviour {
 
 		}
 
-		lastPlayerPos = player.transform.position;
+		//lastPlayerPos = player.transform.position;
 		lastPos = transform.position;
 	}
 
 	Vector3 lastPos = new Vector3 ();
-	Vector3 lastPlayerPos = new Vector3 ();
+	//Vector3 lastPlayerPos = new Vector3 ();
 
-	Vector3 leftLimit = new Vector3();
+	//Vector3 leftLimit = new Vector3();
 	Vector3 rightLimit = new Vector3();
-	bool calmGoToRight = false;
+	//bool calmGoToRight = false;
 	float fromLastFlipTime = 0.0f;
 
 	public Vector3 waterLeftLimit = new Vector3();
@@ -174,7 +174,7 @@ public class Crocodile : MonoBehaviour {
 		return 0;
 	}
 
-	bool attacking = false;
+	//bool attacking = false;
 
 	public void attackStart(){
 		animator.Play ("croc_zap_attack");

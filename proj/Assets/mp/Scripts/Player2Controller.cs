@@ -68,7 +68,7 @@ public class Player2Controller : MonoBehaviour {
 	public AudioClip landingSound;
 	public AudioClip ropeCatchSound;
 
-	AudioSource audio;
+	AudioSource myAudio;
 
 	public Camera mainCamera;
 	public Camera touchCamera;
@@ -104,9 +104,11 @@ public class Player2Controller : MonoBehaviour {
 				ComicPagePart cpp = img.GetComponent<ComicPagePart>();
 				if( cpp ){
 					mapPartParts[cpp.partID] = cpp;
+
 					//print ( "jest mapPart " + cpp.partID);
 					//Color newColor = new Color(1f,1f,1f,0f);
 					//img.color = newColor;
+
 				}
 			}
 		}
@@ -122,7 +124,7 @@ public class Player2Controller : MonoBehaviour {
 			behs[b].playerController = this;
 		}
 
-		audio = GetComponent<AudioSource>();
+		myAudio = GetComponent<AudioSource>();
 
 		PlaySounds[] pss = animator.GetBehaviours<PlaySounds>();
 		for( int b = 0 ; b < pss.Length ; ++b )
@@ -158,8 +160,8 @@ public class Player2Controller : MonoBehaviour {
 
 		myWidth = coll.size.x;
 		myHalfWidth = myWidth * 0.5f;
-		myHeight = coll.size.y;
-		myHalfHeight = myHeight * 0.5f;
+		//myHeight = coll.size.y;
+		//myHalfHeight = myHeight * 0.5f;
 		desiredSpeedX = 0.0f;
 
 		lastHandlePos = new Vector3();
@@ -225,7 +227,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	public AudioSource getAudioSource(){
-		return audio;
+		return myAudio;
 	}
 	public Transform getCameraTarget(){
 		return cameraTarget;
@@ -963,7 +965,7 @@ public class Player2Controller : MonoBehaviour {
 				if( !fuddledFromBrid && tryCatchRope() ){
 					
 					if( ropeCatchSound )
-						audio.PlayOneShot( ropeCatchSound );
+						myAudio.PlayOneShot( ropeCatchSound );
 					
 					return;
 				}
@@ -1139,7 +1141,7 @@ public class Player2Controller : MonoBehaviour {
 			if( justLanding ){
 
 				if( landingSound )
-					audio.PlayOneShot( landingSound );
+					myAudio.PlayOneShot( landingSound );
 
 				fuddledFromBrid = false;
 
@@ -1195,10 +1197,10 @@ public class Player2Controller : MonoBehaviour {
 		case State.CLIMB_ROPE:
 			//Vector3 lastSwingPos;
 			//Vector3 swingVelocity;
-			Vector3 newPos = catchedRopeLink.transform.position;
-			Vector3 posDiff = newPos - transform.position;
+			//Vector3 newPos = catchedRopeLink.transform.position;
+			//Vector3 posDiff = newPos - transform.position;
 
-			swingVelocity = posDiff / Time.deltaTime;
+			//swingVelocity = posDiff / Time.deltaTime;
 
 			//transform.position = catchedRopeLink.transform.position;
 			//Vector3 linkPos = catchedRopeLink.transform.position;
@@ -1529,7 +1531,7 @@ public class Player2Controller : MonoBehaviour {
 		return 0;
 	}
 
-	float fromStartRunBack = 0.0f;
+	//float fromStartRunBack = 0.0f;
 
 	int Act_RUN(int dir){
 
@@ -1940,7 +1942,7 @@ public class Player2Controller : MonoBehaviour {
 			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
 			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink> ().idn;
 			float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
-			float ropeAngle = Mathf.Abs (catchedRope.firstLinkAngle);
+			//float ropeAngle = Mathf.Abs (catchedRope.firstLinkAngle);
 			
 			if (Input.GetKey (keyLeft)) { //skacze w lewo
 				turnLeft ();
@@ -3706,7 +3708,7 @@ public class Player2Controller : MonoBehaviour {
 			showInfo (msgInfo, -1);
 
 			if( dieSounds.Length != 0 )
-				audio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
+				myAudio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
 			break;
 
 		case Action.WALK_LEFT:
@@ -3738,14 +3740,14 @@ public class Player2Controller : MonoBehaviour {
 			animator.Play("Zap_runback_L");
 			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
-				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
+				myAudio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
 			animator.Play("Zap_runback_R");
 			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
-				audio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
+				myAudio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
 			break;
 
 		case Action.PREPARE_TO_JUMP:
@@ -3765,7 +3767,7 @@ public class Player2Controller : MonoBehaviour {
 				else animator.Play("zap_rocks_climb_L");
 			}
 			if( jumpSounds.Length != 0 )
-				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
+				myAudio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
 			
 		case Action.JUMP_LEFT:
@@ -3778,7 +3780,7 @@ public class Player2Controller : MonoBehaviour {
 			else animator.Play("Zap_run_jump_fly_L");
 
 			if( jumpSounds.Length != 0 )
-				audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
+				myAudio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
 			break;
 
 		case Action.LANDING_HARD:
@@ -3786,7 +3788,7 @@ public class Player2Controller : MonoBehaviour {
 			else animator.Play("Zap_landing_hard_L");
 
 			if( landingSounds.Length != 0 )
-				audio.PlayOneShot(landingSounds[Random.Range(0,landingSounds.Length)], 0.15F);
+				myAudio.PlayOneShot(landingSounds[Random.Range(0,landingSounds.Length)], 0.15F);
 			break;
 
 		case Action.CLIMB_PREPARE_TO_JUMP:
@@ -3816,7 +3818,7 @@ public class Player2Controller : MonoBehaviour {
 			//animator.speed = 0f;
 
 			if( catchSounds.Length != 0)
-				audio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);
+				myAudio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);
 			break;
 		case Action.CLIMB_CLIMB:
 			//animator.SetTrigger("climb_climb");
@@ -3950,7 +3952,7 @@ public class Player2Controller : MonoBehaviour {
 	Vector3 lastVelocity;
 	Vector3 lastSwingPos;
 	[SerializeField]
-	Vector2 swingVelocity;
+	//Vector2 swingVelocity;
 	Vector3 impulse;
 	Vector3 startFallPos;
 
@@ -3963,8 +3965,8 @@ public class Player2Controller : MonoBehaviour {
 
 	float myWidth;
 	float myHalfWidth;
-	float myHeight;
-	float myHalfHeight;
+	//float myHeight;
+	//float myHalfHeight;
 	
 	int layerIdGroundMask;
 	int layerIdGroundPermeableMask;
@@ -3983,7 +3985,7 @@ public class Player2Controller : MonoBehaviour {
 	public RopeLink catchedRopeLink;
 
 	bool jumpFromMount = false;
-	bool jumpFromGround = false;
+	//bool jumpFromGround = false;
 	float climbDistFromWall;
 	float climbDuration;
 	Vector2 climbDir;
