@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GravityGun : Weapon {
@@ -54,9 +54,11 @@ public class GravityGun : Weapon {
 
 	Vector2 T; 			// sila ciagu
 	public static float inertiaFactor = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
+	public static float maxDistance = 5f;
 	Vector2 V; 			// predkosc
 	//float M; 			// masa
 	//Vector2 S; 			// polozenie
+	//RLHOptionsWindow.
 
 	public override void FUpdate () {
 		Vector3 currentMousePosition = Input.mousePosition;

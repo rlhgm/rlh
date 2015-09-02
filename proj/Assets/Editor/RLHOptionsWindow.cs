@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
@@ -12,7 +12,8 @@ public class RLHOptionsWindow : EditorWindow{
 	static string groundHandleLRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleLR.prefab";
 	static string groundMountPrefabPath = "Assets/mp/Prefabs/tile_mount.prefab";
 
-	float gravityGunInertiaFactor = GravityGun.inertiaFactor;
+	public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
+	public static float gravityGunMaxDist = GravityGun.maxDistance;
 
 	[MenuItem ("Window/RLH Options")]
 	public static void  ShowWindow () {
@@ -23,6 +24,8 @@ public class RLHOptionsWindow : EditorWindow{
 		Transform prefabGfx = prefabGround.transform.Find("gfx");
 
 		physicVisibility = prefabGfx.GetComponent<SpriteRenderer>().enabled;
+		gravityGunInertiaFactor = GravityGun.inertiaFactor;
+		gravityGunMaxDist = GravityGun.maxDistance;
 	}
 
 	void OnGUI () {
@@ -40,14 +43,24 @@ public class RLHOptionsWindow : EditorWindow{
 		if (newPhysicVisibility != physicVisibility) {
 			setPhysicVisibility(newPhysicVisibility);
 		}
-		//inertia factor
-		//GravityGun.C
-		//Debug.Log( "RLHOptionsWindow" );
 
-		gravityGunInertiaFactor = EditorGUILayout.FloatField("GravityGun interia factor:", gravityGunInertiaFactor);
-		if (GUILayout.Button ("Set")) {
-			GravityGun.inertiaFactor = gravityGunInertiaFactor;
+		//float newGravityGunInertiaFactor = EditorGUILayout.FloatField("GravityGun interia factor:", gravityGunInertiaFactor);
+		float newGravityGunInertiaFactor = EditorGUILayout.Slider("GravityGun interia factor:",gravityGunInertiaFactor,0.001f, 1f);
+		if (newGravityGunInertiaFactor != gravityGunInertiaFactor) {
+			gravityGunInertiaFactor = newGravityGunInertiaFactor;
+			GravityGun.inertiaFactor = newGravityGunInertiaFactor;
 		}
+
+		//float newGravityGunMaxDist = EditorGUILayout.FloatField("GravityGun max distance:", gravityGunMaxDist);
+		float newGravityGunMaxDist = EditorGUILayout.Slider("GravityGun max distance:",gravityGunMaxDist, 0.001f, 100f);
+		if (newGravityGunMaxDist != gravityGunMaxDist) {
+			gravityGunMaxDist = newGravityGunMaxDist;
+			GravityGun.maxDistance = newGravityGunMaxDist;
+		}
+
+		//if (GUILayout.Button ("Set")) {
+		//	GravityGun.inertiaFactor = gravityGunInertiaFactor;
+		//}
 	}
 
 	void setPhysicVisibility(bool newVisibility){
