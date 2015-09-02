@@ -53,7 +53,7 @@ public class GravityGun : Weapon {
 	}
 
 	Vector2 T; 			// sila ciagu
-	float C = 1.1f; 		// wspolczynnik oporu
+	float C = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
 	Vector2 V; 			// predkosc
 	//float M; 			// masa
 	//Vector2 S; 			// polozenie
@@ -117,7 +117,7 @@ public class GravityGun : Weapon {
 						//V = Vnew;
 						//S = Snew;
 
-						rb.AddForce(F,ForceMode2D.Force);
+						rb.AddForce(F,ForceMode2D.Impulse);
 					}
 				}
 			}
