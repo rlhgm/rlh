@@ -466,41 +466,43 @@ public class Player2Controller : MonoBehaviour {
 
 	public Transform testStone = null;
 
-	Vector2 lastMoveDist = new Vector2();
+	Vector3 lastToMoveDist = new Vector3();
 
 	void FixedUpdate(){
 		Vector3 currentMousePosition = Input.mousePosition;
 		//if (currentMousePosition != lastMousePosition) {
 			
-			if( Input.GetMouseButton(0) ){
-				if( touchCamera ){
-					Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
-					
-					if( testStone ){
-						//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-						Vector3 posDiff = touchInScene - testStone.position;
-						posDiff.z = testStone.position.z;
-						float posDiffLength = posDiff.magnitude;
-						if( posDiffLength < 5f ){
+		if( Input.GetMouseButton(0) ){
+			if( touchCamera ){
+				Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
+				
+				if( testStone ){
+					//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
+					Vector3 posDiff = touchInScene - testStone.position;
+					posDiff.z = testStone.position.z;
+					float posDiffLength = posDiff.magnitude;
+					if( posDiffLength < 5f ){
 
-							Rigidbody2D testStoneRigidBody = testStone.GetComponent<Rigidbody2D>();
+						Rigidbody2D testStoneRigidBody = testStone.GetComponent<Rigidbody2D>();
+						
+						if( testStoneRigidBody ){
 
 							//testStoneRigidBody.add
 							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
 							//testStoneRigidBody.MovePosition( touchInScene );
 
 							float coef = 1f;
-							lastMoveDist = posDiff * coef * Time.fixedDeltaTime;
-							testStoneRigidBody.MovePosition( testStone.position + posDiff * coef * Time.fixedDeltaTime );
+							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
+							lastToMoveDist.z = 0f;
+							testStoneRigidBody.MovePosition( testStone.position + lastToMoveDist * Time.fixedDeltaTime );
 
 							//print( testStoneRigidBody.velocity );
 						}
 					}
 				}
 			}
-			
-			lastMousePosition = currentMousePosition;
-		//}
+		}
+		lastMousePosition = currentMousePosition;
 	}
 
 	// Update is called once per frame
@@ -540,18 +542,21 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 
 			testStone = null;
-			lastMoveDist.x = 0.0f;
-			lastMoveDist.y = 0.0f;
+
+			lastToMoveDist.Set(0f,0f,0f);
 
 			Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
 
-			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene ) ;//, layerIdGroundMoveableMask );
+			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, layerIdGroundMoveableMask );
 			if( hit.collider ){
 				testStone = hit.collider.gameObject.transform;
 				if( testStone ){
-
-					testStone.GetComponent<Rigidbody2D>().gravityScale = 0f;
-
+					Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
+					if( tsrb ){
+						tsrb.gravityScale = 0f;
+					}else{
+						testStone = null;
+					}
 				}
 			}
 		}
@@ -559,11 +564,12 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 
 			if( testStone ){
-
-				testStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
-				testStone.GetComponent<Rigidbody2D>().AddForce( lastMoveDist, ForceMode2D.Force );
+				Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
+				if( tsrb ){
+					testStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
+					testStone.GetComponent<Rigidbody2D>().AddForce( lastToMoveDist, ForceMode2D.Impulse );
+				}
 				testStone = null;
-
 			}
 
 		}
