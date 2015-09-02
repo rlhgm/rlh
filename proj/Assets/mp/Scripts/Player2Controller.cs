@@ -59,7 +59,6 @@ public class Player2Controller : MonoBehaviour {
 
 	public Transform respawnPoint;
 
-
 	public AudioClip[] jumpSounds;
 	public AudioClip[] landingSounds;
 	public AudioClip[] turnRunSounds;
@@ -166,9 +165,9 @@ public class Player2Controller : MonoBehaviour {
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 
-		weapons.Add( new Empty () );
-		weapons.Add( new Knife() );
-		weapons.Add( new GravityGun() );
+		weapons.Add( new Empty (this) );
+		weapons.Add( new Knife(this) );
+		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask) );
 		setWeapon ();
 
 		//currentWeapon = weapons;
@@ -462,47 +461,49 @@ public class Player2Controller : MonoBehaviour {
 	bool jumpKeyPressed = false;
 
 	public PixelPerfectScale pps = null;
-	public Vector3 lastMousePosition = new Vector3();
-
-	public Transform testStone = null;
-
-	Vector3 lastToMoveDist = new Vector3();
+	//public Vector3 lastMousePosition = new Vector3();
+	//public Transform testStone = null;
+	//Vector3 lastToMoveDist = new Vector3();
 
 	void FixedUpdate(){
-		Vector3 currentMousePosition = Input.mousePosition;
-		//if (currentMousePosition != lastMousePosition) {
-			
-		if( Input.GetMouseButton(0) ){
-			if( touchCamera ){
-				Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
-				
-				if( testStone ){
-					//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-					Vector3 posDiff = touchInScene - testStone.position;
-					posDiff.z = testStone.position.z;
-					float posDiffLength = posDiff.magnitude;
-					if( posDiffLength < 5f ){
+//		Vector3 currentMousePosition = Input.mousePosition;
+//		//if (currentMousePosition != lastMousePosition) {
+//			
+//		if( Input.GetMouseButton(0) ){
+//			if( touchCamera ){
+//				Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
+//				
+//				if( testStone ){
+//					//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
+//					Vector3 posDiff = touchInScene - testStone.position;
+//					posDiff.z = testStone.position.z;
+//					float posDiffLength = posDiff.magnitude;
+//					if( posDiffLength < 5f ){
+//
+//						Rigidbody2D testStoneRigidBody = testStone.GetComponent<Rigidbody2D>();
+//						
+//						if( testStoneRigidBody ){
+//
+//							//testStoneRigidBody.add
+//							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+//							//testStoneRigidBody.MovePosition( touchInScene );
+//
+//							float coef = 1f;
+//							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
+//							lastToMoveDist.z = 0f;
+//							testStoneRigidBody.MovePosition( testStone.position + lastToMoveDist * Time.fixedDeltaTime );
+//
+//							//print( testStoneRigidBody.velocity );
+//						}
+//					}
+//				}
+//			}
+//		}
+//		lastMousePosition = currentMousePosition;
 
-						Rigidbody2D testStoneRigidBody = testStone.GetComponent<Rigidbody2D>();
-						
-						if( testStoneRigidBody ){
-
-							//testStoneRigidBody.add
-							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-							//testStoneRigidBody.MovePosition( touchInScene );
-
-							float coef = 1f;
-							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
-							lastToMoveDist.z = 0f;
-							testStoneRigidBody.MovePosition( testStone.position + lastToMoveDist * Time.fixedDeltaTime );
-
-							//print( testStoneRigidBody.velocity );
-						}
-					}
-				}
-			}
+		if (currentWeapon != null) {
+			currentWeapon.FUpdate();
 		}
-		lastMousePosition = currentMousePosition;
 	}
 
 	// Update is called once per frame
@@ -539,40 +540,40 @@ public class Player2Controller : MonoBehaviour {
 			setNextWeapon();
 		}
 
-		if (Input.GetMouseButtonDown (0)) {
-
-			testStone = null;
-
-			lastToMoveDist.Set(0f,0f,0f);
-
-			Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-
-			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, layerIdGroundMoveableMask );
-			if( hit.collider ){
-				testStone = hit.collider.gameObject.transform;
-				if( testStone ){
-					Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
-					if( tsrb ){
-						tsrb.gravityScale = 0f;
-					}else{
-						testStone = null;
-					}
-				}
-			}
-		}
-
-		if (Input.GetMouseButtonUp (0)) {
-
-			if( testStone ){
-				Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
-				if( tsrb ){
-					testStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
-					testStone.GetComponent<Rigidbody2D>().AddForce( lastToMoveDist, ForceMode2D.Impulse );
-				}
-				testStone = null;
-			}
-
-		}
+//		if (Input.GetMouseButtonDown (0)) {
+//
+//			testStone = null;
+//
+//			lastToMoveDist.Set(0f,0f,0f);
+//
+//			Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+//
+//			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, layerIdGroundMoveableMask );
+//			if( hit.collider ){
+//				testStone = hit.collider.gameObject.transform;
+//				if( testStone ){
+//					Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
+//					if( tsrb ){
+//						tsrb.gravityScale = 0f;
+//					}else{
+//						testStone = null;
+//					}
+//				}
+//			}
+//		}
+//
+//		if (Input.GetMouseButtonUp (0)) {
+//
+//			if( testStone ){
+//				Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
+//				if( tsrb ){
+//					testStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
+//					testStone.GetComponent<Rigidbody2D>().AddForce( lastToMoveDist, ForceMode2D.Impulse );
+//				}
+//				testStone = null;
+//			}
+//
+//		}
 
 //		Vector3 currentMousePosition = Input.mousePosition;
 //		if (currentMousePosition != lastMousePosition) {
@@ -589,6 +590,10 @@ public class Player2Controller : MonoBehaviour {
 //
 //			lastMousePosition = currentMousePosition;
 //		}
+
+		if (currentWeapon != null) {
+			currentWeapon.Update();
+		}
 
 		if (puzzleMapShowing) {
 			puzzleMapShowTime += Time.deltaTime;

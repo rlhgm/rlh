@@ -5,17 +5,20 @@ using System; //This allows the IComparable Interface
 public class Weapon : IComparable<Weapon> { //: MonoBehaviour {
 
 	public string name;
+	public Player2Controller player;
 
 	// Use this for initialization
-	public Weapon (string weaponName) {
+	public Weapon (string weaponName, Player2Controller playerController) {
 		Debug.Log ("hello world - weapon");
 		name = weaponName;
+		player = playerController;
 	}
 	
-//	// Update is called once per frame
-//	void Update () {
-//	
-//	}
+	public virtual void Update () {	
+	}
+
+	public virtual void FUpdate(){
+	}
 
 	//This method is required by the IComparable
 	//interface. 
@@ -30,7 +33,7 @@ public class Weapon : IComparable<Weapon> { //: MonoBehaviour {
 		return name.CompareTo(other.name);
 	}
 
-	public string ToString(){
+	public override string ToString(){
 		return name;
 	}
 }

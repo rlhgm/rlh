@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Empty : Weapon {
 	
-	public Empty () 
-		: base("None")
+	public Empty (Player2Controller playerController) 
+		: base("None", playerController)
 	{
 		Debug.Log ("hello world - none");
 	}
