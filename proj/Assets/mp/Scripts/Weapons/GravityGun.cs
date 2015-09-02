@@ -53,7 +53,7 @@ public class GravityGun : Weapon {
 	}
 
 	Vector2 T; 			// sila ciagu
-	float C = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
+	public static float inertiaFactor = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
 	Vector2 V; 			// predkosc
 	//float M; 			// masa
 	//Vector2 S; 			// polozenie
@@ -108,7 +108,7 @@ public class GravityGun : Weapon {
 						T = (tis - rb.worldCenterOfMass);
 						V = rb.velocity;
 
-						F = T - (C * V);
+						F = T - (inertiaFactor * V);
 						//A = F / M;
 
 						//Vnew = V + A * Time.fixedDeltaTime;

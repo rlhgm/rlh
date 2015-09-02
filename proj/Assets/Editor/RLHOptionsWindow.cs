@@ -12,6 +12,7 @@ public class RLHOptionsWindow : EditorWindow{
 	static string groundHandleLRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleLR.prefab";
 	static string groundMountPrefabPath = "Assets/mp/Prefabs/tile_mount.prefab";
 
+	float gravityGunInertiaFactor = GravityGun.inertiaFactor;
 
 	[MenuItem ("Window/RLH Options")]
 	public static void  ShowWindow () {
@@ -39,7 +40,14 @@ public class RLHOptionsWindow : EditorWindow{
 		if (newPhysicVisibility != physicVisibility) {
 			setPhysicVisibility(newPhysicVisibility);
 		}
+		//inertia factor
+		//GravityGun.C
 		//Debug.Log( "RLHOptionsWindow" );
+
+		gravityGunInertiaFactor = EditorGUILayout.FloatField("GravityGun interia factor:", gravityGunInertiaFactor);
+		if (GUILayout.Button ("Set")) {
+			GravityGun.inertiaFactor = gravityGunInertiaFactor;
+		}
 	}
 
 	void setPhysicVisibility(bool newVisibility){
