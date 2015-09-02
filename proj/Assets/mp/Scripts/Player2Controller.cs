@@ -169,7 +169,7 @@ public class Player2Controller : MonoBehaviour {
 
 		weapons.Add( new Empty (this) );
 		weapons.Add( new Knife(this) );
-		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask) );
+		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
 		setWeapon ();
 
 		//currentWeapon = weapons;
@@ -2609,13 +2609,13 @@ public class Player2Controller : MonoBehaviour {
 	//	return gfx.localScale.x > 0.0f;
 	//}
 	
-	Vector2 dir(){
+	public Vector2 dir(){
 		return gfx.localScale.x > 0.0f ? Vector2.right : -Vector2.right;
 	}
-	int dir2(){
+	public int dir2(){
 		return gfx.localScale.x > 0f ? (int)1f : (int)-1f;
 	}
-	bool faceRight(){
+	public bool faceRight(){
 		return gfx.localScale.x > 0f;
 	}
 
@@ -3929,10 +3929,10 @@ public class Player2Controller : MonoBehaviour {
 	BoxCollider2D coll;
 	Animator animator;
 	Transform sensorLeft1;
-	Transform sensorLeft2;
+	public Transform sensorLeft2;
 	Transform sensorLeft3;
 	Transform sensorRight1;
-	Transform sensorRight2;
+	public Transform sensorRight2;
 	Transform sensorRight3;
 	Transform sensorDown1;
 	Transform sensorDown2;
