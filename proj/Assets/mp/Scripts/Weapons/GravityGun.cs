@@ -4,8 +4,8 @@ using System.Collections;
 public class GravityGun : Weapon {
 
 	public Transform draggedStone = null;
-	public Vector3 lastToMoveDist = new Vector3();
-	public Vector3 lastMousePosition = new Vector3();
+	//public Vector3 lastToMoveDist = new Vector3();
+	//public Vector3 lastMousePosition = new Vector3();
 	public int layerIdGroundMoveableMask = 0;
 
 	public GravityGun (Player2Controller playerController, int stonesMask) 
@@ -20,7 +20,7 @@ public class GravityGun : Weapon {
 			
 			draggedStone = null;
 			
-			lastToMoveDist.Set(0f,0f,0f);
+			//lastToMoveDist.Set(0f,0f,0f);
 			
 			Vector3 mouseInScene = player.touchCamera.ScreenToWorldPoint(Input.mousePosition);
 			
@@ -40,15 +40,17 @@ public class GravityGun : Weapon {
 		
 		if (Input.GetMouseButtonUp (0)) {
 			
-			if( draggedStone ){
-				Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
-				if( tsrb ){
-					draggedStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
-					draggedStone.GetComponent<Rigidbody2D>().AddForce( lastToMoveDist, ForceMode2D.Impulse );
-				}
-				draggedStone = null;
-			}
-			
+//			if( draggedStone ){
+//				Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+//				if( tsrb ){
+//					draggedStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
+//					draggedStone.GetComponent<Rigidbody2D>().AddForce( lastToMoveDist, ForceMode2D.Impulse );
+//				}
+//				draggedStone = null;
+//			}
+
+			releaseStone();
+
 		}
 	}
 
@@ -71,7 +73,6 @@ public class GravityGun : Weapon {
 
 				if( draggedStone ){
 
-					//Rigidbody2D testStoneRigidBody = draggedStone.GetComponent<Rigidbody2D>();
 					Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
 					
 					if( rb ){
@@ -120,10 +121,29 @@ public class GravityGun : Weapon {
 						//S = Snew;
 
 						rb.AddForce(F,ForceMode2D.Impulse);
+
+						Vector3 _df = rb.worldCenterOfMass - new Vector2(player.transform.position.x, player.transform.position.y);
+
+						if( _df.magnitude > maxDistance ){
+							releaseStone();
+						}
 					}
 				}
 			}
 		}
-		lastMousePosition = currentMousePosition;
+		//lastMousePosition = currentMousePosition;
+	}
+
+	void releaseStone(){
+		if( draggedStone ){
+			Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+			if( tsrb ){
+
+				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+				rb.gravityScale = 1f;
+				//rb.AddForce( lastToMoveDist, ForceMode2D.Impulse );
+			}
+			draggedStone = null;
+		}
 	}
 }
