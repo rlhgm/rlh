@@ -40,7 +40,7 @@ public class PixelPerfectScale : MonoBehaviour
 			transform.localScale = Vector3.one*ratio;
 
 			if( touchCamera ){
-				touchCamera.orthographicSize = mainCamera.orthographicSize * screenRatio;
+				touchCamera.orthographicSize = mainCamera.orthographicSize / ratio;
 			}
 		}
 	}
