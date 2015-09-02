@@ -61,16 +61,24 @@ public class GravityGun : Weapon {
 				Vector3 touchInScene = player.touchCamera.ScreenToWorldPoint(currentMousePosition);
 				
 				if( draggedStone ){
-					//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-					Vector3 posDiff = touchInScene - draggedStone.position;
-					posDiff.z = draggedStone.position.z;
-					float posDiffLength = posDiff.magnitude;
-					if( posDiffLength < 5f ){
-						
-						Rigidbody2D testStoneRigidBody = draggedStone.GetComponent<Rigidbody2D>();
-						
-						if( testStoneRigidBody ){
-							
+
+					Rigidbody2D testStoneRigidBody = draggedStone.GetComponent<Rigidbody2D>();
+					
+					if( testStoneRigidBody ){
+
+						//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
+						Vector3 tsp = draggedStone.position;
+						Vector3 tsrgCOM = testStoneRigidBody.worldCenterOfMass;
+						Vector3 comdiff = tsrgCOM - tsp;
+
+						Vector3 posDiff = touchInScene - ( tsrgCOM );
+						posDiff.z = draggedStone.position.z;
+						float posDiffLength = posDiff.magnitude;
+
+						//if( posDiffLength < 5f ){
+
+							//testStoneRigidBody.worldCenterOfMass
+
 							//testStoneRigidBody.add
 							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
 							//testStoneRigidBody.MovePosition( touchInScene );
@@ -78,10 +86,11 @@ public class GravityGun : Weapon {
 							float coef = 1f;
 							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
 							lastToMoveDist.z = 0f;
-							testStoneRigidBody.MovePosition( draggedStone.position + lastToMoveDist * Time.fixedDeltaTime );
+							
+							testStoneRigidBody.MovePosition( (tsrgCOM-comdiff) + lastToMoveDist * Time.fixedDeltaTime );
 							
 							//print( testStoneRigidBody.velocity );
-						}
+						//}
 					}
 				}
 			}
