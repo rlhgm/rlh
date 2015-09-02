@@ -52,6 +52,12 @@ public class GravityGun : Weapon {
 		}
 	}
 
+	Vector2 T; 			// sila ciagu
+	float C = 1.1f; 		// wspolczynnik oporu
+	Vector2 V; 			// predkosc
+	//float M; 			// masa
+	//Vector2 S; 			// polozenie
+
 	public override void FUpdate () {
 		Vector3 currentMousePosition = Input.mousePosition;
 		//if (currentMousePosition != lastMousePosition) {
@@ -59,38 +65,59 @@ public class GravityGun : Weapon {
 		if( Input.GetMouseButton(0) ){
 			if( player.touchCamera ){
 				Vector3 touchInScene = player.touchCamera.ScreenToWorldPoint(currentMousePosition);
-				
+				Vector2 tis = touchInScene;
+
 				if( draggedStone ){
 
-					Rigidbody2D testStoneRigidBody = draggedStone.GetComponent<Rigidbody2D>();
+					//Rigidbody2D testStoneRigidBody = draggedStone.GetComponent<Rigidbody2D>();
+					Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
 					
-					if( testStoneRigidBody ){
+					if( rb ){
 
-						//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-						Vector3 tsp = draggedStone.position;
-						Vector3 tsrgCOM = testStoneRigidBody.worldCenterOfMass;
-						Vector3 comdiff = tsrgCOM - tsp;
-
-						Vector3 posDiff = touchInScene - ( tsrgCOM );
-						posDiff.z = draggedStone.position.z;
-						float posDiffLength = posDiff.magnitude;
-
-						//if( posDiffLength < 5f ){
-
-							//testStoneRigidBody.worldCenterOfMass
-
-							//testStoneRigidBody.add
-							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-							//testStoneRigidBody.MovePosition( touchInScene );
+//						//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
+//						Vector3 tsp = draggedStone.position;
+//						Vector3 tsrgCOM = testStoneRigidBody.worldCenterOfMass;
+//						Vector3 comdiff = tsrgCOM - tsp;
+//
+//						Vector3 posDiff = touchInScene - ( tsrgCOM );
+//						posDiff.z = draggedStone.position.z;
+//						float posDiffLength = posDiff.magnitude;
+//
+//						//if( posDiffLength < 5f ){
+//
+//							//testStoneRigidBody.worldCenterOfMass
+//
+//							//testStoneRigidBody.add
+//							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+//							//testStoneRigidBody.MovePosition( touchInScene );
+//							
+//							float coef = 1f;
+//							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
+//							lastToMoveDist.z = 0f;
+//							
+//							testStoneRigidBody.MovePosition( (tsrgCOM-comdiff) + lastToMoveDist * Time.fixedDeltaTime );
 							
-							float coef = 1f;
-							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
-							lastToMoveDist.z = 0f;
-							
-							testStoneRigidBody.MovePosition( (tsrgCOM-comdiff) + lastToMoveDist * Time.fixedDeltaTime );
-							
-							//print( testStoneRigidBody.velocity );
+						//testStoneRigidBody.velocity;
 						//}
+
+						Vector2 F;			// sila wypadkowa
+						//Vector2 A;			// przyspieszenie
+						//float Vnew; 		// nowa predkosc w chwili t + dt
+						//float Snew;			// nowe polozenie w chwili t + dt
+
+						T = (tis - rb.position);
+						V = rb.velocity;
+
+						F = T - (C * V);
+						//A = F / M;
+
+						//Vnew = V + A * Time.fixedDeltaTime;
+						//Snew = S + Vnew * Time.fixedDeltaTime;
+
+						//V = Vnew;
+						//S = Snew;
+
+						rb.AddForce(F,ForceMode2D.Force);
 					}
 				}
 			}
