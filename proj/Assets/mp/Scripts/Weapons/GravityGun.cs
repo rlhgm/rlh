@@ -105,7 +105,7 @@ public class GravityGun : Weapon {
 						//float Vnew; 		// nowa predkosc w chwili t + dt
 						//float Snew;			// nowe polozenie w chwili t + dt
 
-						T = (tis - rb.position);
+						T = (tis - rb.worldCenterOfMass);
 						V = rb.velocity;
 
 						F = T - (C * V);
