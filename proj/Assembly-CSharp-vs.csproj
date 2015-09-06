@@ -74,6 +74,7 @@
      <Compile Include="Assets\mp\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />
+     <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

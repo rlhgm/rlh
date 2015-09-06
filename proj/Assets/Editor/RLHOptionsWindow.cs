@@ -28,9 +28,25 @@ public class RLHOptionsWindow : EditorWindow{
 		gravityGunMaxDist = GravityGun.maxDistance;
 	}
 
+	void SceneGUI(SceneView sceneView)
+	{
+		// This will have scene events including mouse down on scenes objects
+		Event cur = Event.current;
+
+		Debug.Log ("RLHOptionsWindow::SceneGUI : " + cur.type);
+
+		if (cur.type == EventType.MouseDown) {
+			Debug.Log ("Mouse Down");
+		}
+
+	}
+
 	void OnGUI () {
+
+		//Debug.Log ("RLHOptionsWindow::OnGUI : " + Event.current.type);
+
 		if (Event.current.type == EventType.MouseDown) {
-//			//Debug.Log("Mouse Down");
+			//Debug.Log("Mouse Down");
 //			//Event.current.Use();
 //
 //			//Debug.Log( Selection.activeGameObject.name );

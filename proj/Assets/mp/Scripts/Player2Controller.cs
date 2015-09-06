@@ -172,7 +172,7 @@ public class Player2Controller : MonoBehaviour {
 		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
 		setWeapon ();
 
-		//currentWeapon = weapons;
+        //currentWeapon = weapons;
 		//currentWeapon.ToString ();
 		printWeapons ();
 

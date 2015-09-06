@@ -22,7 +22,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 439214}
+  - 4: {fileID: 424486}
   - 114: {fileID: 11447002}
   - 61: {fileID: 6140462}
   - 82: {fileID: 8267918}
@@ -58,6 +58,23 @@ GameObject:
   - 4: {fileID: 482544}
   m_Layer: 15
   m_Name: sensorDown1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &125406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 405964}
+  - 23: {fileID: 2366582}
+  - 102: {fileID: 10276840}
+  m_Layer: 15
+  m_Name: weaponText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +272,7 @@ Transform:
   m_LocalPosition: {x: .349999994, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 12
 --- !u!4 &405324
 Transform:
@@ -267,8 +284,20 @@ Transform:
   m_LocalPosition: {x: .5, y: 1.89999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 6
+--- !u!4 &405964
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125406}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 424486}
+  m_RootOrder: 15
 --- !u!4 &409722
 Transform:
   m_ObjectHideFlags: 1
@@ -279,7 +308,7 @@ Transform:
   m_LocalPosition: {x: -.5, y: .100000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 1
 --- !u!4 &410290
 Transform:
@@ -288,10 +317,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.98000002, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 14
 --- !u!4 &412478
 Transform:
@@ -303,28 +332,16 @@ Transform:
   m_LocalPosition: {x: .49000001, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 9
---- !u!4 &439108
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138216}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.5, y: 1.89999998, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 439214}
-  m_RootOrder: 3
---- !u!4 &439214
+--- !u!4 &424486
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54, y: 4, z: 0}
+  m_LocalPosition: {x: -22.8799992, y: 19.0100002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447238}
@@ -342,8 +359,21 @@ Transform:
   - {fileID: 403682}
   - {fileID: 441350}
   - {fileID: 410290}
+  - {fileID: 405964}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &439108
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.5, y: 1.89999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 424486}
+  m_RootOrder: 3
 --- !u!4 &441350
 Transform:
   m_ObjectHideFlags: 1
@@ -354,7 +384,7 @@ Transform:
   m_LocalPosition: {x: .349999994, y: 2.4000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 13
 --- !u!4 &447238
 Transform:
@@ -366,7 +396,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 0
 --- !u!4 &459762
 Transform:
@@ -378,7 +408,7 @@ Transform:
   m_LocalPosition: {x: -.5, y: 1.10000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 2
 --- !u!4 &459928
 Transform:
@@ -390,7 +420,7 @@ Transform:
   m_LocalPosition: {x: -.349999994, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 10
 --- !u!4 &472922
 Transform:
@@ -402,7 +432,7 @@ Transform:
   m_LocalPosition: {x: -.349999994, y: 2.4000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 11
 --- !u!4 &478390
 Transform:
@@ -414,7 +444,7 @@ Transform:
   m_LocalPosition: {x: .5, y: 1.10000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 5
 --- !u!4 &482544
 Transform:
@@ -426,7 +456,7 @@ Transform:
   m_LocalPosition: {x: -.49000001, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 7
 --- !u!4 &483262
 Transform:
@@ -438,7 +468,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 8
 --- !u!4 &489562
 Transform:
@@ -450,8 +480,32 @@ Transform:
   m_LocalPosition: {x: .5, y: .100000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 439214}
+  m_Father: {fileID: 424486}
   m_RootOrder: 4
+--- !u!23 &2366582
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125406}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 63a06257b83bed84c9ec66eb04f7ba46, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!61 &6140462
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -551,6 +605,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!102 &10276840
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125406}
+  m_Text: None
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 7
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 6
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 63a06257b83bed84c9ec66eb04f7ba46, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
 --- !u!114 &11447002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -611,6 +686,8 @@ MonoBehaviour:
   landingSound: {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
   ropeCatchSound: {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
   mainCamera: {fileID: 0}
+  touchCamera: {fileID: 0}
+  currentWeaponIndex: 0
   IdleAnimFreq: 10
   DeathByVeryHardLandingText: You crushed your bones from fall. press space.
   DeathBySnakeText: You've been beaten by a snake. press space.
@@ -618,12 +695,15 @@ MonoBehaviour:
   DeathByPoisonText: You've been poisoned. Press space.
   DeathByDefaultText: You died. Press space
   canBeFuddleFromBird: 1
+  pps: {fileID: 0}
   CrouchInOutDuration: .200000003
   ClimbPullDownRange: .510999978
   mountIdleSprite: {fileID: 21300002, guid: 251a067bf40f8ca428f1d4c947c953cf, type: 3}
   catchIdleSprite: {fileID: 0}
+  sensorLeft2: {fileID: 0}
+  sensorRight2: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  swingVelocity: {x: 2.7752471, y: -.896844625}
+  impulse: {x: 0, y: 0, z: 0}
   catchedRope: {fileID: 0}
   catchedRopeLink: {fileID: 0}
   state: 0
@@ -638,7 +718,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: fd12fed1ea997384d8e49281c9e0b3df, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
