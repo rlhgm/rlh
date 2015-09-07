@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b726f42b17a26d1468f51cb89af48d38
-timeCreated: 1438519775
+timeCreated: 1441649308
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -19,6 +19,23 @@ TextureImporter:
     21300024: Zap_death_poison_12
     21300026: Zap_death_poison_13
     21300028: Zap_death_poison_14
+    21300030: Zap_death_poison_L_0
+    21300032: Zap_death_poison_L_1
+    21300034: Zap_death_poison_L_2
+    21300036: Zap_death_poison_L_3
+    21300038: Zap_death_poison_L_4
+    21300040: Zap_death_poison_L_5
+    21300042: Zap_death_poison_L_6
+    21300044: Zap_death_poison_L_7
+    21300046: Zap_death_poison_L_8
+    21300048: Zap_death_poison_L_9
+    21300050: Zap_death_poison_L_10
+    21300052: Zap_death_poison_L_11
+    21300054: Zap_death_poison_L_12
+    21300056: Zap_death_poison_L_13
+    21300058: Zap_death_poison_L_14
+    21300060: Zap_death_poison_L_15
+    21300062: Zap_death_poison_L_16
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,161 +75,181 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 24
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Zap_death_poison_0
+    - name: Zap_death_poison_L_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_1
+    - name: Zap_death_poison_L_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_2
+    - name: Zap_death_poison_L_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_3
+    - name: Zap_death_poison_L_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_4
+    - name: Zap_death_poison_L_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_5
+    - name: Zap_death_poison_L_5
       rect:
         serializedVersion: 2
         x: 320
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_6
+    - name: Zap_death_poison_L_6
       rect:
         serializedVersion: 2
         x: 384
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_7
+    - name: Zap_death_poison_L_7
       rect:
         serializedVersion: 2
         x: 448
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_8
+    - name: Zap_death_poison_L_8
       rect:
         serializedVersion: 2
         x: 512
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_9
+    - name: Zap_death_poison_L_9
       rect:
         serializedVersion: 2
         x: 576
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_10
+    - name: Zap_death_poison_L_10
       rect:
         serializedVersion: 2
         x: 640
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_11
+    - name: Zap_death_poison_L_11
       rect:
         serializedVersion: 2
         x: 704
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_12
+    - name: Zap_death_poison_L_12
       rect:
         serializedVersion: 2
         x: 768
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_13
+    - name: Zap_death_poison_L_13
       rect:
         serializedVersion: 2
         x: 832
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_death_poison_14
+    - name: Zap_death_poison_L_14
       rect:
         serializedVersion: 2
         x: 896
-        y: 10
+        y: 0
         width: 64
-        height: 54
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_death_poison_L_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_death_poison_L_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: .25, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
