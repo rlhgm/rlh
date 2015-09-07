@@ -81,6 +81,17 @@ public class Player2Controller : MonoBehaviour {
 	Transform weaponText;
 	TextMesh weaponTextMesh;
 
+	//Transform shadowTransform;
+	//SpriteRenderer shadowSpriteRenderer;
+	//Sprite shadowSprite;
+
+	Transform shadowCenter;
+	Transform shadowLeft;
+	Transform shadowRight;
+	SpriteRenderer shadowCenterSR;
+	SpriteRenderer shadowLeftSR;
+	SpriteRenderer shadowRightSR;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 
@@ -109,6 +120,20 @@ public class Player2Controller : MonoBehaviour {
 		gfx  = transform.Find("gfx").transform;
 		animator = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
+
+		//shadowTransform = transform.Find ("shadow");
+		//shadowSpriteRenderer = shadowTransform.GetComponent<SpriteRenderer> ();
+		//shadowSprite = shadowSpriteRenderer.sprite;
+
+		shadowCenter = transform.Find ("shadowCenter");
+		if (shadowCenter) {
+			shadowLeft = shadowCenter.Find ("shadowLeft");
+			shadowRight = shadowCenter.Find ("shadowRight");
+
+			shadowCenterSR = shadowCenter.GetComponent<SpriteRenderer>();
+			shadowLeftSR = shadowLeft.GetComponent<SpriteRenderer>();
+			shadowRightSR = shadowRight.GetComponent<SpriteRenderer>();
+		}
 
 		zap_idle1_beh[] behs = animator.GetBehaviours<zap_idle1_beh>();
 		for( int b = 0 ; b < behs.Length ; ++b ){
@@ -485,6 +510,14 @@ public class Player2Controller : MonoBehaviour {
 			return true;
 
 		InfoLabelUpdate (deltaTime);
+
+
+//		if (Input.GetKeyDown (KeyCode.B)) {
+//			print( shadowSprite.uv );
+//			print( shadowSprite.border );
+//			print( shadowSprite.bounds );
+//			print( shadowSprite.rect );
+//		}
 
 		return false;
 	}
@@ -1038,6 +1071,37 @@ public class Player2Controller : MonoBehaviour {
 		};
 
 		lastVelocity = velocity;
+
+		updateShadow ();
+	}
+
+	void updateShadow(){
+		if (!shadowCenter)
+			return;
+
+		RaycastHit2D hit = Physics2D.Raycast (sensorDown1.position, -Vector2.up, 1f, layerIdGroundMask);
+		if (hit.collider) {
+			shadowLeftSR.enabled = true;
+			shadowLeftSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+		} else {
+			shadowLeftSR.enabled = false;
+		}
+
+		hit = Physics2D.Raycast (sensorDown2.position, -Vector2.up, 1f, layerIdGroundMask);
+		if (hit.collider) {
+			shadowCenterSR.enabled = true;
+			shadowCenterSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+		} else {
+			shadowCenterSR.enabled = false;
+		}
+
+		hit = Physics2D.Raycast (sensorDown3.position, -Vector2.up, 1f, layerIdGroundMask);
+		if (hit.collider) {
+			shadowRightSR.enabled = true;
+			shadowRightSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+		} else {
+			shadowRightSR.enabled = false;
+		}
 	}
 
 	float infoLabelShowDuration = 0f;
