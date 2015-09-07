@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2c980e92be21c144c8526783d81fe64f
-timeCreated: 1435654448
+timeCreated: 1441651342
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,10 @@ TextureImporter:
     21300002: Zap_landing_hard_1
     21300004: Zap_landing_hard_2
     21300006: Zap_landing_hard_3
+    21300008: Zap_landing_hard_L_0
+    21300010: Zap_landing_hard_L_1
+    21300012: Zap_landing_hard_L_2
+    21300014: Zap_landing_hard_L_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,49 +51,49 @@ TextureImporter:
   alignment: 7
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 24
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Zap_landing_hard_0
+    - name: Zap_landing_hard_L_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 8
         width: 64
-        height: 54
+        height: 56
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_landing_hard_1
+    - name: Zap_landing_hard_L_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 10
+        y: 8
         width: 64
-        height: 54
+        height: 56
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_landing_hard_2
+    - name: Zap_landing_hard_L_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 10
+        y: 8
         width: 64
-        height: 54
+        height: 56
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_landing_hard_3
+    - name: Zap_landing_hard_L_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 10
+        y: 8
         width: 64
-        height: 54
+        height: 56
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
