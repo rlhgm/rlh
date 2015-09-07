@@ -1,12 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\Editor\CM Tools\TileMaster\TileMaster.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="173" Column="44" />
-      <File FileName="Assets\Editor\RLHEditor.cs" Line="10" Column="5" />
-      <File FileName="Assets\Editor\RLHOptionsWindow.cs" Line="49" Column="6" />
-      <File FileName="Assets\Resources\Editor\CM Tools\TileMaster\TileMaster.cs" Line="51" Column="31" />
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="4018" Column="1" />
       <File FileName="Assets\mp\Scripts\Bird.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
