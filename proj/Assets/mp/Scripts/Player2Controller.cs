@@ -76,6 +76,8 @@ public class Player2Controller : MonoBehaviour {
 	public int currentWeaponIndex = 0;
 	public List<Weapon> weapons = new List<Weapon>(3);
 
+	public bool autoCatchEdges = false;
+
 	Transform weaponText;
 	TextMesh weaponTextMesh;
 
@@ -846,7 +848,9 @@ public class Player2Controller : MonoBehaviour {
 					
 					return;
 				}
+			}
 
+			if( Input.GetKey(keyJump) || autoCatchEdges ){
 				Vector3 fallDist = startFallPos - transform.position;
 				if( !fuddledFromBrid && fallDist.y < MaxFallDistToCatch )
 				{
