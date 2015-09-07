@@ -238,13 +238,13 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &110211782
+--- !u!1102 &110213264
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_death_hitground_L
+  m_Name: Zap_death_hitground_R
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -256,7 +256,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 29f90d63039c50a498b11af28c5249ec, type: 2}
+  m_Motion: {fileID: 7400000, guid: 655e56f90f2fe6347bd7e88325053dbe, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -441,29 +441,6 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 8f29085c34fda334bad9546730e814a0, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
---- !u!1102 &110231368
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_death_hitground_R
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 46381fb12d5ced94e992280c82fd54b1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -973,6 +950,29 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400000, guid: f9fdc8feea7dab1409cbb322705f649c, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &110271750
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_death_hitground_L
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 622c4b978abd311448111d6a1d2b43a5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1504,12 +1504,6 @@ AnimatorStateMachine:
     m_State: {fileID: 110289730}
     m_Position: {x: 24, y: 456, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 110211782}
-    m_Position: {x: 468, y: 84, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 110231368}
-    m_Position: {x: 468, y: 132, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 110287916}
     m_Position: {x: 696, y: 192, z: 0}
   - serializedVersion: 1
@@ -1569,6 +1563,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 110231212}
     m_Position: {x: 24, y: 240, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110271750}
+    m_Position: {x: 468, y: 84, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110213264}
+    m_Position: {x: 468, y: 132, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
