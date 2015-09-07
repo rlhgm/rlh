@@ -1030,6 +1030,10 @@ public class Player2Controller : MonoBehaviour {
 			transform.position = linkPos;
 			transform.rotation = catchedRopeLink.transform.rotation;
 
+			Quaternion quat = new Quaternion ();
+			quat.eulerAngles = new Vector3 (0f, 0f, 0f);
+			weaponText.rotation = quat;
+
 			break;
 		};
 
@@ -1500,51 +1504,62 @@ public class Player2Controller : MonoBehaviour {
 		if (!catchedRope)
 			return 0;
 
+		bool _swing = false;
+
 		if (Input.GetKey (keyLeft)) {
 
 			float fla = catchedRope.firstLinkAngle;
-			if( fla < 10f && fla > -15f){
+
+			if( fla > -20f && fla < 0f){
+				print ( "Rope swing : " + fla );
 				catchedRope.swing(-Vector2.right, RopeSwingForce * CurrentDeltaTime );
+				_swing = true;
 			}
 
-			if( dir () == Vector2.right ){
+			if( _swing ){
+				if( dir () == Vector2.right ){
 
-				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
-				else animator.Play("Zap_liana_swingback_L");
-				animator.speed = 1f;
+					if( faceRight() ) animator.Play("Zap_liana_swingback_R");
+					else animator.Play("Zap_liana_swingback_L");
+					animator.speed = 1f;
 
-			}else{
+				}else{
 
-				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
-				else animator.Play("Zap_liana_swingfront_L");
-				animator.speed = 1f;
+					if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
+					else animator.Play("Zap_liana_swingfront_L");
+					animator.speed = 1f;
 
+				}
 			}
 		}
 		else if (Input.GetKey (keyRight)) {
 
 			float fla = catchedRope.firstLinkAngle;
 
-			if( fla > -10f && fla < 15f){
+			if( fla < 20f && fla >= 0f){
+				print ( "Rope swing : " + fla );
 				catchedRope.swing(Vector2.right, RopeSwingForce * CurrentDeltaTime );
+				_swing = true;
 			}
-				
-			if( dir () == Vector2.right ){
 
-				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
-				else animator.Play("Zap_liana_swingfront_L");
-				animator.speed = 1f;
+			if( _swing ){
+				if( dir () == Vector2.right ){
 
-			}else{
+					if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
+					else animator.Play("Zap_liana_swingfront_L");
+					animator.speed = 1f;
 
-				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
-				else animator.Play("Zap_liana_swingback_L");
-				animator.speed = 1f;
+				}else{
 
+					if( faceRight() ) animator.Play("Zap_liana_swingback_R");
+					else animator.Play("Zap_liana_swingback_L");
+					animator.speed = 1f;
+
+				}
 			}
 		}
 
-		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) ) {
+		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) || !_swing) {
 			setActionRopeClimbIdle();
 		}
 
@@ -1721,8 +1736,13 @@ public class Player2Controller : MonoBehaviour {
 			Quaternion quat = new Quaternion ();
 			quat.eulerAngles = new Vector3 (0f, 0f, 0f);
 			transform.rotation = quat;
+
 			setState (State.IN_AIR);
-			
+
+			//Quaternion quat = new Quaternion ();
+			//quat.eulerAngles = new Vector3 (0f, 0f, 0f);
+			weaponText.rotation = quat;
+
 			return 1;
 		}
 
