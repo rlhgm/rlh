@@ -1504,7 +1504,7 @@ public class Player2Controller : MonoBehaviour {
 
 			float fla = catchedRope.firstLinkAngle;
 			if( fla < 10f && fla > -15f){
-				catchedRope.swing(-Vector2.right, RopeSwingForce * Time.deltaTime );
+				catchedRope.swing(-Vector2.right, RopeSwingForce * CurrentDeltaTime );
 			}
 
 			if( dir () == Vector2.right ){
@@ -1526,7 +1526,7 @@ public class Player2Controller : MonoBehaviour {
 			float fla = catchedRope.firstLinkAngle;
 
 			if( fla > -10f && fla < 15f){
-				catchedRope.swing(Vector2.right, RopeSwingForce * Time.deltaTime );
+				catchedRope.swing(Vector2.right, RopeSwingForce * CurrentDeltaTime );
 			}
 				
 			if( dir () == Vector2.right ){
