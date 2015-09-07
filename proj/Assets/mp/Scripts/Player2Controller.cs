@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Player2Controller : MonoBehaviour {
-
+public class Player2Controller : MonoBehaviour 
+{
 	Canvas guiCanvas = null;
 	Text infoLabel = null;
 	Image mapBackgroundImage = null;
@@ -80,16 +80,15 @@ public class Player2Controller : MonoBehaviour {
 	Transform weaponText;
 	TextMesh weaponTextMesh;
 
-	void Awake(){
+	void Awake()
+	{
 		guiCanvas = FindObjectOfType<Canvas> ();
-		//print (guiCanvas);
-		//guiText = guiCanvas.transform.Find ("Text").ga;
-		if (guiCanvas) {
+
+		if (guiCanvas) 
+		{
 			infoLabel = FindObjectOfType<Text> ();
-			//infoLabel.text = "hello world";
 			infoLabel.text = "";
 
-			//guiCanvas = FindObjectOfType<
 			Image[] allImages = FindObjectsOfType<Image>();
 			for( int i = 0 ; i < allImages.Length ; ++i ){
 				Image img = allImages[i];
@@ -97,18 +96,12 @@ public class Player2Controller : MonoBehaviour {
 					mapBackgroundImage = img;
 					Color newColor = new Color(1f,1f,1f,0f);
 					mapBackgroundImage.color = newColor;
-					//print ( "jest mapBackgroundImage");
 					continue;
 				}
 
 				ComicPagePart cpp = img.GetComponent<ComicPagePart>();
 				if( cpp ){
 					mapPartParts[cpp.partID] = cpp;
-
-					//print ( "jest mapPart " + cpp.partID);
-					//Color newColor = new Color(1f,1f,1f,0f);
-					//img.color = newColor;
-
 				}
 			}
 		}
@@ -171,9 +164,7 @@ public class Player2Controller : MonoBehaviour {
 		weapons.Add( new Knife(this) );
 		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
 		setWeapon ();
-
-        //currentWeapon = weapons;
-		//currentWeapon.ToString ();
+		
 		printWeapons ();
 
 		weaponText = transform.Find ("weaponText");
@@ -235,8 +226,6 @@ public class Player2Controller : MonoBehaviour {
 
 	void Start () {
 
-		//audio = GetComponent<AudioSource>();
-
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
 		desiredSpeedX = 0.0f;
@@ -244,7 +233,6 @@ public class Player2Controller : MonoBehaviour {
 
 		setState (State.ON_GROUND);
 		setAction (Action.IDLE);
-		//action = Action.IDLE;
 
 		climbDuration = 0.0f;
 		catchedClimbHandle = null;
@@ -253,14 +241,9 @@ public class Player2Controller : MonoBehaviour {
 		jumpFromMount = false;
 
 		lastTouchedCheckPoint = null;
-
-		//showInfo ("hello world", 10);
 	}
 
-	//bool isDead = false;
-
 	public void StateIdleExit(){
-		//print("StateIdleExit");
 	}
 	public void StateIdleUpdate(float normTime){
 	}
@@ -268,7 +251,6 @@ public class Player2Controller : MonoBehaviour {
 	public int IdleAnimFreq = 10;
 
 	public void StateIdleFinish(int stateIdleNum){
-		//print ("StateIdleFinish");
 		switch( stateIdleNum ){
 		case 1:
 		case 2:
@@ -303,14 +285,12 @@ public class Player2Controller : MonoBehaviour {
 	public string DeathByPoisonText = "zatrules sie. press space";
 	public string DeathByDefaultText = "zginales defaultowa smiercia. press space";
 
-	//public void die(int deathType){
 	public void die(DeathType deathType){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
 		setAction (Action.DIE, (int)deathType);
 		setState (State.OTHER);
 
-		//collectedMapParts
 		foreach(GameObject mapPart in collectedMapParts){
 
 			ComicPage comicPart = mapPart.GetComponent<ComicPage>();
@@ -322,8 +302,6 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		collectedMapParts.Clear ();
-
-		//showInfo ("PRESS SPACE", -1);
 	}
 
 	public bool isDead(){
@@ -356,7 +334,6 @@ public class Player2Controller : MonoBehaviour {
 	bool fuddledFromBrid = false;
 
 	void OnTriggerEnter2D(Collider2D other) {
-		//print( "PLAYER OnTriggerEnter" + other.gameObject.tag);
 		if (other.gameObject.tag == "Bird") {
 			if( isInState(State.MOUNT) ){
 				velocity.x = 0.0f;
@@ -373,9 +350,6 @@ public class Player2Controller : MonoBehaviour {
 			return;
 		}
 		if (other.gameObject.tag == "CheckPoint") {
-			//print( "checkpoint : " + other.gameObject.name );
-
-			//if( 
 			lastTouchedCheckPoint = other.gameObject;
 
 			// zatwierdzam wszystkie zdobyte kawalki mapy...
@@ -410,8 +384,6 @@ public class Player2Controller : MonoBehaviour {
 		}
 	}
 
-	//void OnTrigger
-
 	float puzzleMapShowTime = 0.0f;
 	bool puzzleMapShowing = false;
 	int puzzleShowingPhase = 0;
@@ -432,7 +404,6 @@ public class Player2Controller : MonoBehaviour {
 
 		mapPartParts [mapPartID].collect ();
 
-		//Destroy (mapPart);
 		mapPart.GetComponent<SpriteRenderer> ().enabled = false;
 		collectedMapParts.Add (mapPart);
 
@@ -455,54 +426,13 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void hidePuzzleMap(){
-
 	}
 
 	bool userJumpKeyPressed = false;
 	float timeFromJumpKeyPressed = 0.0f;
 	bool jumpKeyPressed = false;
 
-	public PixelPerfectScale pps = null;
-	//public Vector3 lastMousePosition = new Vector3();
-	//public Transform testStone = null;
-	//Vector3 lastToMoveDist = new Vector3();
-
 	void FixedUpdate(){
-//		Vector3 currentMousePosition = Input.mousePosition;
-//		//if (currentMousePosition != lastMousePosition) {
-//			
-//		if( Input.GetMouseButton(0) ){
-//			if( touchCamera ){
-//				Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
-//				
-//				if( testStone ){
-//					//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-//					Vector3 posDiff = touchInScene - testStone.position;
-//					posDiff.z = testStone.position.z;
-//					float posDiffLength = posDiff.magnitude;
-//					if( posDiffLength < 5f ){
-//
-//						Rigidbody2D testStoneRigidBody = testStone.GetComponent<Rigidbody2D>();
-//						
-//						if( testStoneRigidBody ){
-//
-//							//testStoneRigidBody.add
-//							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-//							//testStoneRigidBody.MovePosition( touchInScene );
-//
-//							float coef = 1f;
-//							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
-//							lastToMoveDist.z = 0f;
-//							testStoneRigidBody.MovePosition( testStone.position + lastToMoveDist * Time.fixedDeltaTime );
-//
-//							//print( testStoneRigidBody.velocity );
-//						}
-//					}
-//				}
-//			}
-//		}
-//		lastMousePosition = currentMousePosition;
-
 		if (currentWeapon != null) {
 			currentWeapon.FUpdate();
 		}
@@ -519,17 +449,6 @@ public class Player2Controller : MonoBehaviour {
 
 		if( Input.GetMouseButtonDown(0) ){ // left
 			//print ("left: " + Input.mousePosition);
-			if( mainCamera ){
-				Vector3 mp = Input.mousePosition;
-
-				if( pps ){
-
-					if( touchCamera ){
-						print ( touchCamera.ScreenToWorldPoint(mp) );
-					}
-
-				}
-			}
 		}
 		if( Input.GetMouseButton(1) ){ // right
 			//print ("right: " + Input.mousePosition);
@@ -541,57 +460,6 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E)) {
 			setNextWeapon();
 		}
-
-//		if (Input.GetMouseButtonDown (0)) {
-//
-//			testStone = null;
-//
-//			lastToMoveDist.Set(0f,0f,0f);
-//
-//			Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-//
-//			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, layerIdGroundMoveableMask );
-//			if( hit.collider ){
-//				testStone = hit.collider.gameObject.transform;
-//				if( testStone ){
-//					Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
-//					if( tsrb ){
-//						tsrb.gravityScale = 0f;
-//					}else{
-//						testStone = null;
-//					}
-//				}
-//			}
-//		}
-//
-//		if (Input.GetMouseButtonUp (0)) {
-//
-//			if( testStone ){
-//				Rigidbody2D tsrb = testStone.GetComponent<Rigidbody2D>();
-//				if( tsrb ){
-//					testStone.GetComponent<Rigidbody2D>().gravityScale = 1f;
-//					testStone.GetComponent<Rigidbody2D>().AddForce( lastToMoveDist, ForceMode2D.Impulse );
-//				}
-//				testStone = null;
-//			}
-//
-//		}
-
-//		Vector3 currentMousePosition = Input.mousePosition;
-//		if (currentMousePosition != lastMousePosition) {
-//
-//			if( Input.GetMouseButton(0) ){
-//				if( touchCamera ){
-//					Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
-//
-//					if( testStone ){
-//						testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-//					}
-//				}
-//			}
-//
-//			lastMousePosition = currentMousePosition;
-//		}
 
 		if (currentWeapon != null) {
 			currentWeapon.Update();
@@ -606,8 +474,6 @@ public class Player2Controller : MonoBehaviour {
 
 				Color newColor = new Color(1f,1f,1f,0.75f*phaseRatio);
 				mapBackgroundImage.color = newColor;
-
-
 
 			} else if( puzzleMapShowTime < 2.0f ){
 
@@ -745,9 +611,7 @@ public class Player2Controller : MonoBehaviour {
 		} else if (Input.GetKeyUp (keyRun)) {
 			keyRunUp();
 		}
-
-
-
+		
 		currentActionTime += Time.deltaTime;
 		currentStateTime += Time.deltaTime;
 
@@ -920,10 +784,6 @@ public class Player2Controller : MonoBehaviour {
 		switch (state) {
 
 		case State.MOUNT:
-//			if( !onMount() ){
-//				setAction(Action.JUMP);
-//				setState(State.IN_AIR);
-//			}
 			break;
 
 		case State.IN_AIR:
@@ -958,9 +818,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			//justLetGoHandle += Time.deltaTime;
-
-			if( Input.GetKey(keyJump) ) { //&& justLetGoHandle>toNextHandleDuration){
+			if( Input.GetKey(keyJump) ) { 
 
 				if( !fuddledFromBrid && tryCatchRope() ){
 					
@@ -1052,7 +910,6 @@ public class Player2Controller : MonoBehaviour {
 						velocity.x = JumpSpeed;
 				}
 
-
 				if( velocity.x > 0.0f ){
 
 					turnRight();
@@ -1063,7 +920,6 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-
 			Vector3 distToFall = new Vector3();
 			distToFall.x = velocity.x * Time.deltaTime;
 
@@ -1071,14 +927,9 @@ public class Player2Controller : MonoBehaviour {
 			{
 				float obstacleOnRoad = checkRight(distToFall.x + 0.01f,!firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
-					//print("distToFall.x = " + distToFall.x + " obstacleOnRoad = " + obstacleOnRoad );
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = obstacleOnRoad;
 						velocity.x = 0.0f;
-						//if( velocity.y > 0.0f )
-						//	velocity.y *=  0.5f;
-						//setAction(Action.FALL);
-						//setAction(Action.JUMP);
 					}
 				}
 			}
@@ -1086,15 +937,9 @@ public class Player2Controller : MonoBehaviour {
 			{
 				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
-					//print( "jest obstacle" );
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
-						//print (distToFall);
 						velocity.x = 0.0f;
-						//if( velocity.y > 0.0f )
-						//	velocity.y *=  0.5f;
-						//setAction(Action.FALL);
-						//setAction(Action.JUMP);
 					}
 				}
 			}
@@ -1118,6 +963,7 @@ public class Player2Controller : MonoBehaviour {
 				if( lastVelocity.y >= 0.0f ) { // zaczyna spadac
 					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
 					startFallPos = transform.position;
+					print ( "startFallPos : " + startFallPos );
 					if( lastVelocity.y > 0.0f ){
 						lastCatchedClimbHandle = null;
 					}
@@ -1125,15 +971,11 @@ public class Player2Controller : MonoBehaviour {
 				groundUnderFeet = checkDown( Mathf.Abs(distToFall.y) + 0.01f);
 				if( groundUnderFeet >= 0.0f ){
 					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
-
  						lastCatchedClimbHandle = null;
-
 						distToFall.y = -groundUnderFeet;
-
 						justLanding = true;
 					}
 				}
-
 			}
 
 			transform.position = transform.position + distToFall;
@@ -1156,38 +998,23 @@ public class Player2Controller : MonoBehaviour {
 
 					velocity.x = 0.0f;
 					setAction (Action.LANDING_HARD);
-					//resetActionAndState();
 
 				}else{
 
-					//velocity.x = 0.0f;
-					//setAction (Action.IDLE);
 					resetActionAndState();
 
 				}
-
-
 			}
 
 			break;
 			
 		case State.ON_GROUND:
-//			groundUnderFeet = checkDown(0.1f);
-//			if( groundUnderFeet < 0.0f ) {
-//				setState(State.IN_AIR);
-//				//setAction(Action.FALL);
-//				setAction(Action.JUMP);
-//			}
-
 			float distToGround = 0.0f;
 			bool groundUnderFeet2 = checkGround (true, layerIdGroundAllMask, ref distToGround);
 			if (groundUnderFeet2) {
-				//Vector3 pos = transform.position;
-				//pos.y += distToGround;
-				//transform.position = pos;
+
 			}else{
 				setState(State.IN_AIR);
-				//setAction(Action.FALL);
 				setAction(Action.JUMP);
 				wantGetUp = false;
 			}
@@ -1195,23 +1022,11 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case State.CLIMB_ROPE:
-			//Vector3 lastSwingPos;
-			//Vector3 swingVelocity;
-			//Vector3 newPos = catchedRopeLink.transform.position;
-			//Vector3 posDiff = newPos - transform.position;
-
-			//swingVelocity = posDiff / Time.deltaTime;
-
-			//transform.position = catchedRopeLink.transform.position;
-			//Vector3 linkPos = catchedRopeLink.transform.position;
-			//linkPos.y -= 0.5f;
-
 			Vector3 linkPos = catchedRopeLink.transform.TransformPoint( new Vector3(0.0f, ropeLinkCatchOffset, 0.0f) );
 			transform.position = linkPos;
 			transform.rotation = catchedRopeLink.transform.rotation;
 
 			break;
-
 		};
 
 		lastVelocity = velocity;
@@ -1240,7 +1055,6 @@ public class Player2Controller : MonoBehaviour {
 
 	bool tryStartClimbPullDown(){
 		GameObject potCatchedClimbHandle = canClimbPullDown();
-		//print(potCatchedClimbHandle);
 		if( potCatchedClimbHandle ){
 			
 			catchedClimbHandle = potCatchedClimbHandle;
@@ -1251,7 +1065,6 @@ public class Player2Controller : MonoBehaviour {
 			
 			Vector3 handlePos = potCatchedClimbHandle.transform.position;
 			
-			//climbAfterPos
 			climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
 			if( dir() == Vector2.right ){
 				climbAfterPos.x = handlePos.x - myHalfWidth;
@@ -1271,10 +1084,6 @@ public class Player2Controller : MonoBehaviour {
 		return false;
 	}
 	int Act_IDLE(){
-//		//velocity.x = 0.0f;
-//		if( Input.GetKeyDown(keyDown) ){
-//			tryStartClimbPullDown();
-//		}
 		return 0;
 	}
 
@@ -1297,9 +1106,6 @@ public class Player2Controller : MonoBehaviour {
 			canPullUp = true;
 			transform.position = climbAfterPos;
 		} else {
-			//float ratio = climbDuration / CLIMBDUR_CLIMB;
-			//if( ratio > 0.5f )
-			//	transform.position = climbBeforePos + climbDistToClimb*((ratio-0.5f) * 2.0f);
 		}
 		
 		return 0;
@@ -1311,9 +1117,7 @@ public class Player2Controller : MonoBehaviour {
 		
 		if (climbDuration >= climbToJumpDuration) {
 			setAction (Action.CLIMB_CATCH);
-			//setState(State.CLIMB);
 			climbDuration = 0.0f;
-			//canPullUp = true;
 			transform.position = climbAfterPos;
 		} else {
 			float ratio = climbDuration / climbToJumpDuration;
@@ -1337,44 +1141,28 @@ public class Player2Controller : MonoBehaviour {
 			
 			catchedClimbHandle = null;
 			lastCatchedClimbHandle = null;
-		//} else if (Input.GetKeyDown (keyDown)) {
-		//	velocity.x = 0.0f;
-		//	velocity.y = 0.0f;
-		//	setState (State.IN_AIR);
-		//	setAction (Action.JUMP);
-		//	catchedClimbHandle = null;
-		//	lastCatchedClimbHandle = null;
-			//justLetGoHandle = 0.0f;
 		} else if ( Input.GetKeyDown (keyJump)) {
 			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
-				//print("try jump left");
 				turnLeft ();
 				jumpLeft ();
 				catchedClimbHandle = null;
 				lastCatchedClimbHandle = null;
-				//justLetGoHandle = 0.0f;
 			} else if (Input.GetKey (keyRight)) {
-				//print("try jump right");
 				turnRight ();
 				jumpRight ();
 				catchedClimbHandle = null;
 				lastCatchedClimbHandle = null;
-				//justLetGoHandle = 0.0f;
 			} else if( Input.GetKey(keyDown) ){
 				velocity.x = 0.0f;
 				velocity.y = 0.0f;
 				setState (State.IN_AIR);
 				setAction (Action.JUMP);
-
-				//lastCatchedClimbHandle = null;
 				lastCatchedClimbHandle = catchedClimbHandle;
 				catchedClimbHandle = null;
 			} else {
-				//print("try jump up");
 				jumpFromClimb ();
 				lastCatchedClimbHandle = catchedClimbHandle;
 				catchedClimbHandle = null;
-				//justLetGoHandle = 0.0f;
 			}
 		}
 		
@@ -1444,7 +1232,6 @@ public class Player2Controller : MonoBehaviour {
 		if (speedX < desiredSpeedX) { // trzeba przyspieszyc
 
 			float velocityDamp = SpeedUpParam * Time.deltaTime;
-			//print ( velocityDamp + " " + speedX + " " + desiredSpeedX );
 			speedX += velocityDamp;
 			if( speedX > desiredSpeedX ){
 				speedX = desiredSpeedX;
@@ -1486,13 +1273,9 @@ public class Player2Controller : MonoBehaviour {
 
 	int Act_WALK(int dir){
 
-		//currentWalkRunDuration += Time.deltaTime;
-		//animator.speed = 1.0f;
-
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f ) {
 			setAction(Action.IDLE);
-			//action = Action.IDLE;
 			resetActionAndState();
 			return 0;
 		}
@@ -1500,15 +1283,12 @@ public class Player2Controller : MonoBehaviour {
 		distToMove = velocity.x * Time.deltaTime;
 
 		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.5f;
-		//print (animator.speed);
 
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
-			//print ("STOP STOP STOP");
 			distToMove = distToObstacle;
 			setActionIdle();
 		}
-		//print (distToObstacle);
 
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
@@ -1518,20 +1298,8 @@ public class Player2Controller : MonoBehaviour {
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
-//		} else {
-//			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
-//			if( groundUnderFeet ){
-//				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//			} else {
-//				setState(State.IN_AIR);
-//				setAction(Action.JUMP);
-//			}
-//		}
-
 		return 0;
 	}
-
-	//float fromStartRunBack = 0.0f;
 
 	int Act_RUN(int dir){
 
@@ -1548,9 +1316,6 @@ public class Player2Controller : MonoBehaviour {
 		if (turnBackHard) {
 
 			if (dir == 1) {
-//				if (Input.GetKeyUp (keyRight) && Input.GetKey (keyLeft)) {
-//					setAction (Action.TURN_RUN_LEFT);
-//				}
 
 				if( (Input.GetKeyDown(keyLeft) || Input.GetKey(keyLeft)) &&
 				   (Input.GetKeyUp(keyRight) || !Input.GetKey(keyRight))
@@ -1560,9 +1325,6 @@ public class Player2Controller : MonoBehaviour {
 				}
 
 			} else if (dir == -1) {
-//				if (Input.GetKeyUp (keyLeft) && Input.GetKey (keyRight)) {
-//					setAction (Action.TURN_RUN_RIGHT);
-//				}
 
 				if( (Input.GetKeyDown(keyRight) || Input.GetKey(keyRight)) &&
 				   (Input.GetKeyUp(keyLeft) || !Input.GetKey(keyLeft))
@@ -1593,15 +1355,6 @@ public class Player2Controller : MonoBehaviour {
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
-//		} else {
-//			groundUnderFeet = checkGround (false, layerIdGroundAllMask, ref distToGround);	
-//			if( groundUnderFeet ){
-//				transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//			} else {
-//				setState(State.IN_AIR);
-//				setAction(Action.JUMP);
-//			}
-//		}
 
 		return 0;
 	}
@@ -1616,18 +1369,13 @@ public class Player2Controller : MonoBehaviour {
 
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
-			//setAction(Action.IDLE);
-			//resetActionAndState ();
 		}
 
 		distToMove = velocity.x * Time.deltaTime;
-		
-		//animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
-		
+
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
-			//setActionIdle();
 			retVal = 1;
 		}
 		
@@ -1673,11 +1421,8 @@ public class Player2Controller : MonoBehaviour {
 		
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
-			//setAction(Action.CROUCH_IDLE);
 			setActionCrouchIdle();
-			//resetActionAndState ();
-			//setActionCrouchIdle();
-			if( crouching() ) { // Input.GetKey(keyDown) ){ - raczej zbedne
+			if( crouching() ) {
 				if( Input.GetKey(keyLeft) ) {
 					keyLeftDown();
 				} else if( Input.GetKey(keyRight) ){
@@ -1691,7 +1436,6 @@ public class Player2Controller : MonoBehaviour {
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
-			//setActionIdle();
 			setActionCrouchIdle();
 		}
 		
@@ -1723,8 +1467,7 @@ public class Player2Controller : MonoBehaviour {
 		Vector3 newPos3 = transform.position;
 		Vector3 distToMount = velocity * Time.deltaTime;
 		newPos3 += distToMount;
-		//transform.position = newPos3;
-		
+
 		if (distToMount.y < 0.0f) { // schodzi
 			groundUnderFeet = checkDown ( Mathf.Abs(distToMount.y) + 0.01f);
 			if (groundUnderFeet >= 0.0f) {
@@ -1734,7 +1477,6 @@ public class Player2Controller : MonoBehaviour {
 					velocity.y = 0.0f;
 					setState (State.ON_GROUND);
 					setAction (Action.IDLE);
-					//resetActionAndState();
 					transform.position = transform.position + distToMount;
 				}
 			}else{
@@ -1756,7 +1498,6 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 
 		if (Input.GetKey (keyLeft)) {
-			//turnLeft();
 
 			float fla = catchedRope.firstLinkAngle;
 			if( fla < 10f && fla > -15f){
@@ -1765,14 +1506,12 @@ public class Player2Controller : MonoBehaviour {
 
 			if( dir () == Vector2.right ){
 
-				//animator.Play("Zap_liana_swingback");
 				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
 				else animator.Play("Zap_liana_swingback_L");
 				animator.speed = 1f;
 
 			}else{
 
-				//animator.Play("Zap_liana_swingfront");
 				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
 				else animator.Play("Zap_liana_swingfront_L");
 				animator.speed = 1f;
@@ -1780,7 +1519,6 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 		else if (Input.GetKey (keyRight)) {
-			//turnRight();
 
 			float fla = catchedRope.firstLinkAngle;
 
@@ -1790,14 +1528,12 @@ public class Player2Controller : MonoBehaviour {
 				
 			if( dir () == Vector2.right ){
 
-				//animator.Play("Zap_liana_swingfront");
 				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
 				else animator.Play("Zap_liana_swingfront_L");
 				animator.speed = 1f;
 
 			}else{
 
-				//animator.Play("Zap_liana_swingback");
 				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
 				else animator.Play("Zap_liana_swingback_L");
 				animator.speed = 1f;
@@ -1942,8 +1678,7 @@ public class Player2Controller : MonoBehaviour {
 			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
 			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink> ().idn;
 			float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
-			//float ropeAngle = Mathf.Abs (catchedRope.firstLinkAngle);
-			
+
 			if (Input.GetKey (keyLeft)) { //skacze w lewo
 				turnLeft ();
 				
@@ -1963,9 +1698,6 @@ public class Player2Controller : MonoBehaviour {
 					jumpRight ();
 				}
 			} else if( Input.GetKeyDown (keyDown) || Input.GetKey (keyDown) ) {
-				//jump();
-				//velocity.x = -ps;
-				//velocity.y = (ropeAngle / 30.0f) * JumpLongImpulse;
 				velocity.x = 0f;
 				velocity.y = 0f;
 				setAction (Action.JUMP);
@@ -1973,8 +1705,6 @@ public class Player2Controller : MonoBehaviour {
 				return 0;
 			}
 			
-			//Vector3 posInWorld = transform.TransformPoint( 0f,-1.65f,0f );
-			//transform.position = posInWorld;
 			Vector3 oldPos = transform.position;
 			oldPos.y -= 1.65f;
 			transform.position = oldPos;
@@ -1995,22 +1725,10 @@ public class Player2Controller : MonoBehaviour {
 
 		return 0;
 	}
-	
-	void startWalkOrRun(float desiredSpeed, float accTime){
-//		timeFromStartWalkRun = 0.0f;
-//		walkRunStartSpeedX = velocity.x;
-//		
-//		speedDiff = (desiredSpeed - Mathf.Abs (walkRunStartSpeedX));
-//		if (speedDiff > 0.0f) {
-//			walkRunSpeedUp = true;
-//			timeToSpeedUp = (speedDiff * accTime) / desiredSpeed;
-//		}
-	}
 
 	bool keyLeftDown(){
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (State.ON_GROUND)) {
 			if (checkLeft (0.1f) >= 0.0f) {
-				//print ("cant move left");
 				if( dir() == Vector2.right )
 					turnLeftStart();
 				return false;
@@ -2019,13 +1737,11 @@ public class Player2Controller : MonoBehaviour {
 			if( dir() == -Vector2.right )
 			{
 				if (Input.GetKey (keyRun)) {
-					//startWalkOrRun(RUN_SPEED,stopToRunDuration);
 					desiredSpeedX = RunSpeed;
 					speedLimiter(-1,desiredSpeedX+1.0f);
 					setAction (Action.RUN_LEFT);
 					return true;
 				} else {
-					//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
 					desiredSpeedX = WalkSpeed;
 					speedLimiter(-1,desiredSpeedX+1.0f);
 					setAction (Action.WALK_LEFT);
@@ -2041,7 +1757,6 @@ public class Player2Controller : MonoBehaviour {
 				playerPos.x -= 0.1f;
 				turnLeft();
 				if (onMount (playerPos)) {
-					//turnLeft ();
 					velocity.x = -MountSpeed;
 					velocity.y = 0.0f;
 					setAction (Action.MOUNT_LEFT);
@@ -2050,10 +1765,8 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
 			if( checkLeft(0.1f) >= 0.0f ){
-				//turnLeft();
 				return false;
 			}
-			//turnLeft();
 			desiredSpeedX = CrouchSpeed;
 			if( dir () == -Vector2.right ){
 				setAction(Action.CROUCH_LEFT);
@@ -2067,21 +1780,17 @@ public class Player2Controller : MonoBehaviour {
 	bool keyRightDown(){
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
 			if( checkRight (0.1f) >= 0.0f ) {
-				//print ("cant move right");
 				if( dir () == -Vector2.right)
 					turnRightStart();
 				return false;
 			}
-			//turnRight();
 			if( dir() == Vector2.right ){
 				if( Input.GetKey(keyRun) ){
-					//startWalkOrRun(RUN_SPEED,stopToRunDuration);
 					desiredSpeedX = RunSpeed;
 					speedLimiter(1,desiredSpeedX+1.0f);
 					setAction(Action.RUN_RIGHT);
 					return true;
 				}else{
-					//startWalkOrRun(WALK_SPEED,stopToWalkDuration);
 					desiredSpeedX = WalkSpeed;
 					speedLimiter(1,desiredSpeedX+1.0f);
 					setAction(Action.WALK_RIGHT);
@@ -2097,7 +1806,6 @@ public class Player2Controller : MonoBehaviour {
 				playerPos.x += 0.1f;
 				turnRight();
 				if( onMount(playerPos) ){
-					//turnRight();
 					velocity.x = MountSpeed;
 					velocity.y = 0.0f;
 					setAction(Action.MOUNT_RIGHT);
@@ -2106,12 +1814,9 @@ public class Player2Controller : MonoBehaviour {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
 			if( checkRight(0.1f) >= 0.0f ){
-				//turnRight();
 				return false;
 			}
-			//turnRight();
 			desiredSpeedX = CrouchSpeed;
-			//setAction(Action.CROUCH_RIGHT);
 			if( dir () == Vector2.right ){
 				setAction(Action.CROUCH_RIGHT);
 			}else{
@@ -2126,15 +1831,8 @@ public class Player2Controller : MonoBehaviour {
 
 		if ( !setMountIdle() ) {
 			if (isInState (State.ON_GROUND)){
-				
-				//if( walking() != 0 || running() != 0 )
-				//	setAction(Action.BREAK);
-				//else
-				//setAction (Action.IDLE);
-
 				desiredSpeedX = 0.0f;
 			}
-			//resetActionAndState ();
 		} else {
 			if (isInState (State.MOUNT)) {
 				if( Input.GetKey(keyRight) )
@@ -2149,15 +1847,8 @@ public class Player2Controller : MonoBehaviour {
 	void keyRightUp(){
 		if (!setMountIdle ()) {
 			if (isInState (State.ON_GROUND)) {
-				
-				//if( walking() != 0 || running() != 0 )
-				//	setAction (Action.BREAK);
-				//else
-				//setAction(Action.IDLE);
-
 				desiredSpeedX = 0.0f;
 			}
-			//resetActionAndState ();
 		} else {
 			if (isInState (State.MOUNT)) {
 				if( Input.GetKey(keyLeft) )
@@ -2175,7 +1866,6 @@ public class Player2Controller : MonoBehaviour {
 			
 		case Action.WALK_LEFT:
 			if( Input.GetKey(keyLeft) ){
-				//startWalkOrRun(RUN_SPEED,walkToRunDuration);
 				desiredSpeedX = RunSpeed;
 				setAction(Action.RUN_LEFT);
 			}
@@ -2183,7 +1873,6 @@ public class Player2Controller : MonoBehaviour {
 			
 		case Action.WALK_RIGHT:
 			if( Input.GetKey(keyRight) ){
-				//startWalkOrRun(RUN_SPEED,walkToRunDuration);
 				desiredSpeedX = RunSpeed;
 				setAction(Action.RUN_RIGHT);
 			}
@@ -2195,7 +1884,6 @@ public class Player2Controller : MonoBehaviour {
 		switch (action) {
 			
 		case Action.RUN_LEFT:
-			//startWalkOrRun(WALK_SPEED,walkToRunDuration);
 			if( Input.GetKey(keyLeft) ){
 				desiredSpeedX = WalkSpeed;
 				setAction(Action.WALK_LEFT);
@@ -2205,7 +1893,6 @@ public class Player2Controller : MonoBehaviour {
 			break;
 			
 		case Action.RUN_RIGHT:
-			//startWalkOrRun(WALK_SPEED,walkToRunDuration);
 			if( Input.GetKey(keyRight) ) {
 				desiredSpeedX = WalkSpeed;
 				setAction(Action.WALK_RIGHT);
@@ -2214,17 +1901,12 @@ public class Player2Controller : MonoBehaviour {
 			}
 			break;
 		};
-
-//		if( isInState(State.ON_GROUND) )
-//			setAction (Action.IDLE);
-//		resetActionAndState ();
 	}
 	
 	void keyJumpDown(){
 
 		jumpKeyPressed = true;
 
-		//string s;
 		switch (action) {
 		case Action.IDLE:
 			if( isInState(State.ON_GROUND)) {
@@ -2350,7 +2032,6 @@ public class Player2Controller : MonoBehaviour {
 				return true;
 
 			} else {
-				//crouch();
 				setAction(Action.CROUCH_IN);
 				return true;
 			}
@@ -2371,7 +2052,6 @@ public class Player2Controller : MonoBehaviour {
 		} else if (isInState (State.ON_GROUND)) {
 			if( crouching() || isInAction(Action.CROUCH_IN) ){
 				if( canGetUp() ){
-					//getUp();
 					setAction(Action.GET_UP);
 				}else{
 					wantGetUp = true;
@@ -2381,10 +2061,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	void getUp(){
-		//velocity.x = 0.0f;
-		//velocity.y = 0.0f;
 		setAction(Action.IDLE);
-		//action = Action.IDLE;
 		resetActionAndState ();
 	}
 
@@ -2396,8 +2073,6 @@ public class Player2Controller : MonoBehaviour {
 			case Action.IDLE:
 			case Action.JUMP:
 			case Action.CROUCH_IN:
-				//velocity.x = 0.0f;
-				//velocity.y = 0.0f;
 				setAction (Action.CROUCH_IDLE);
 				if( Input.GetKey(keyLeft) ){
 					keyLeftDown();
@@ -2406,10 +2081,9 @@ public class Player2Controller : MonoBehaviour {
 				}else{
 					velocity.x = 0.0f;
 					velocity.y = 0.0f;
-					//setAction (Action.CROUCH_IDLE);
 				}
 				break;
-			//aaa
+			
 			case Action.WALK_LEFT:
 			case Action.RUN_LEFT:
 			case Action.JUMP_LEFT:
@@ -2417,7 +2091,6 @@ public class Player2Controller : MonoBehaviour {
 				if( Input.GetKey(keyLeft)){
 					velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
-					//setAction (Action.CROUCH_LEFT);
 					if( dir () == -Vector2.right ){
 						setAction(Action.CROUCH_LEFT);
 					}else{
@@ -2437,7 +2110,6 @@ public class Player2Controller : MonoBehaviour {
 				if( Input.GetKey(keyRight)){
 					velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
-					//setAction (Action.CROUCH_RIGHT);
 					if( dir () == Vector2.right ){
 						setAction(Action.CROUCH_RIGHT);
 					}else{
@@ -2468,7 +2140,6 @@ public class Player2Controller : MonoBehaviour {
 		setState(State.IN_AIR);
 		setAction (Action.JUMP);
 
-		//lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
 
@@ -2480,64 +2151,48 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void jumpLeft(){
-		//print ("jumpLeft");
 		velocity.x = -JumpSpeed;
 		velocity.y = 0.0f;
 		addImpulse(new Vector2(0.0f, JumpImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_LEFT);
-		//jumpStartX = transform.position.x;
 
-		//lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
 	
 	void jumpRight(){
-		//print ("jumpRight");
 		velocity.x = JumpSpeed;
 		velocity.y = 0.0f;
 		addImpulse(new Vector2(0.0f, JumpImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_RIGHT);
-		//jumpStartX = transform.position.x;
 
-		//lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
 	
 	void jumpLongLeft(){
-		//print ("jumpLongLeft");
 		velocity.x = -JumpLongSpeed;
 		velocity.y = 0.0f;
 		addImpulse(new Vector2(0.0f, JumpLongImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_LEFT_LONG);
-		//jumpStartX = transform.position.x;
 
-		//lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
 	
 	void jumpLongRight(){
-		//print ("jumpLongRight");
 		velocity.x = JumpLongSpeed;
 		velocity.y = 0.0f;
 		addImpulse(new Vector2(0.0f, JumpLongImpulse));
 		setState(State.IN_AIR);
 		setAction (Action.JUMP_RIGHT_LONG);
-		//jumpStartX = transform.position.x;
 
-		//lastHandlePos = new Vector3();
 		lastFrameHande = false;
 	}
-
-	//bool jumpAfterTurn = false;
 
 	void turnLeftStart(){
 		setAction (Action.TURN_STAND_LEFT);
 
-		//jumpAfterTurn = false;
-		//wantJumpAfter = false;
 		if (Input.GetKeyDown (keyJump) || ( Input.GetKey (keyJump) && canJumpAfter) )
 			wantJumpAfter = true;
 	}
@@ -2545,26 +2200,18 @@ public class Player2Controller : MonoBehaviour {
 	void turnRightStart(){
 		setAction (Action.TURN_STAND_RIGHT);
 
-		//wantJumpAfter = false;
 		if (Input.GetKeyDown (keyJump) || (Input.GetKey (keyJump) && canJumpAfter) )
 			wantJumpAfter = true;
 	}
 
 	void turnLeftFinish(){
 		setAction (Action.IDLE);
-		//action = Action.IDLE;
-		//keyJumpDown ();
 
-		//if (jumpKeyPressed || jumpAfterTurn) {
 		if( wantJumpAfter ) {
 			jumpLeft();
 
 			if( Input.GetKey(keyJump) )
 				canJumpAfter = false;
-
-//			if( Input.GetKey(keyLeft) ){
-//				jumpLeft();
-//			}
 
 		} else {
 			resetActionAndState ();
@@ -2573,10 +2220,6 @@ public class Player2Controller : MonoBehaviour {
 	
 	void turnRightFinish(){
 		setAction (Action.IDLE);
-		//action = Action.IDLE;
-		//resetActionAndState ();
-
-		//if (jumpKeyPressed || jumpAfterTurn) {
 
 		if( wantJumpAfter) {
 			jumpRight();
@@ -2584,10 +2227,7 @@ public class Player2Controller : MonoBehaviour {
 			if( Input.GetKey(keyJump) )
 				canJumpAfter = false;
 
-//			if( Input.GetKey(keyRight) ){
-//				jumpRight();
-//			}
-			
+
 		} else {
 			resetActionAndState ();
 		}
@@ -2604,11 +2244,7 @@ public class Player2Controller : MonoBehaviour {
 		scl.x = Mathf.Abs(scl.x) * 1.0f;
 		gfx.localScale = scl;
 	}
-	
-	//bool dir(){
-	//	return gfx.localScale.x > 0.0f;
-	//}
-	
+
 	public Vector2 dir(){
 		return gfx.localScale.x > 0.0f ? Vector2.right : -Vector2.right;
 	}
@@ -2644,7 +2280,7 @@ public class Player2Controller : MonoBehaviour {
 			velocity.x = 0.0f;
 			velocity.y = 0.0f;
 			setAction (Action.MOUNT_IDLE);
-			//resetActionAndState();
+
 			return true;
 		}
 		return false;
@@ -2652,22 +2288,15 @@ public class Player2Controller : MonoBehaviour {
 
 	void resetActionAndState(){
 		if (isInState (State.ON_GROUND)) {
-//			if( jumpKeyPressed ){
-//
-//			}
 			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
 				if (!keyDownDown ())
 					setActionIdle ();
 			} else if (Input.GetKey (keyLeft)) {
-				//if (Input.GetKey (keyLeft)) {
 				if (!keyLeftDown ())
 					setActionIdle ();
 			} else if (Input.GetKey (keyRight)) {
 				if (!keyRightDown ())
 					setActionIdle ();
-				//} else if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-				//		if( !keyDownDown() )
-				//			setActionIdle();
 			} else {
 				if (isInState (State.ON_GROUND)) {
 					setActionIdle ();
@@ -2682,15 +2311,11 @@ public class Player2Controller : MonoBehaviour {
 				if (!keyUpDown ())
 					setMountIdle ();
 			} else if (Input.GetKey (keyLeft)) {
-				//if (Input.GetKey (keyLeft)) {
 				if (!keyLeftDown ())
 					setMountIdle ();
 			} else if (Input.GetKey (keyRight)) {
 				if (!keyRightDown ())
 					setMountIdle ();
-				//} else if( Input.GetKey(keyDown) ) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-				//		if( !keyDownDown() )
-				//			setActionIdle();
 			} else {
 				if (isInState (State.ON_GROUND)) {
 					setActionIdle ();
@@ -2748,26 +2373,15 @@ public class Player2Controller : MonoBehaviour {
 			rayOrigin = sensorLeft1.position; // new Vector2( sensorRight1.position.x, sensorRight1.position.y );
 		}
 
-		//Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
-
 		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
  		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
-			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-			//print( hit.collider.gameObject.transform.rotation.to );
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-			//print (angle);
-			//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
 			if( angle <= 0.0f || angle > 45.0f ) 
 				return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
 			else 
 			{
-				//if( isInState(State.IN_AIR) ){
-				//	return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
-				//}
-				//else{
-					return -1.0f;
-				//}
+				return -1.0f;
 			}
 		} else {
 			if( crouching() ) 
@@ -2776,18 +2390,12 @@ public class Player2Controller : MonoBehaviour {
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
-				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
 			} else {
 
 				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
-					//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-					//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-					//print (angle);
 					return Mathf.Abs (hit.point.x - sensorLeft3.position.x);
 				} else {
 					return -1.0f;
@@ -2795,51 +2403,6 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 	}
-
-//	float checkLeftInFlight(float checkingDist){
-//		//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-//		//print( hit.collider.gameObject.transform.rotation.to );
-//
-//		//Vector2 rayOrigin = new Vector2( sensorLeft1.position.x, sensorLeft1.position.y );
-//		Vector2 rayOrigin = transform.position;
-//		rayOrigin.x -= myHalfWidth;
-//		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
-//		if (hit.collider != null) {
-//			float angle = Quaternion.Angle (transform.rotation, hit.collider.transform.rotation);
-//			//print (angle);
-//			//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
-//			int collLayer = hit.collider.gameObject.layer;
-//			if (angle <= 0.0f || angle > 45.0f) {
-//				if (collLayer & layerIdGroundPermeableMask) { // przez takie cos powienien przelatywac - plaskie lub stojace{
-//				} else {
-//					// to jest jakas zwykla przeszkoda zatrzymujemy sie na niej...
-//					//return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
-//				}
-//			} else {
-//				return -1.0f;
-//			}
-//		}
-//
-//		rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
-//		hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
-//		if (hit.collider != null){
-//			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-//			//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-//			//print (angle);
-//			return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
-//		} else {
-//			rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
-//			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
-//			if (hit.collider != null){
-//				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-//				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-//				//print (angle);
-//				return Mathf.Abs (hit.point.x - sensorLeft3.position.x);
-//			} else {
-//				return -1.0f;
-//			}
-//		}
-//	}
 
 	float checkRight(float checkingDist, bool flying = false){
 		Vector2 rayOrigin;
@@ -2852,10 +2415,7 @@ public class Player2Controller : MonoBehaviour {
 		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
-			//print( hit.collider.gameObject.transform.rotation.eulerAngles );
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-			//print (angle);
-			//return Mathf.Abs (hit.point.x - sensorRight1.position.x);
 			if( angle <= 0.0f || angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
 			else return -1.0f;
 		} else {
@@ -2865,18 +2425,12 @@ public class Player2Controller : MonoBehaviour {
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
 			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 			if (hit.collider != null){
-				//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-				//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-				//print (angle);
 				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
 			} else {
 
 				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
 				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
 				if (hit.collider != null){
-					//print( hit.collider.gameObject.transform.rotation.eulerAngles );
-					//float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-					//print (angle);
 					return Mathf.Abs (hit.point.x - sensorRight3.position.x);
 				} else {
 					return -1.0f;
@@ -2906,50 +2460,6 @@ public class Player2Controller : MonoBehaviour {
 			}
 			return true;
 		}
-
-//		if (dir () == Vector2.right) {
-//
-//			Vector2 rayOrigin = new Vector2(transform.position.x-myHalfWidth,transform.position.y+1.0f);
-//			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
-//			if (hit.collider != null)
-//			{
-//				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
-//					return false;
-//			}
-//			rayOrigin.y += 1;
-//
-//			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
-//			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
-//			if (hit.collider != null)
-//			{
-//				if( Mathf.Abs (rayOrigin.x+myWidth - hit.point.x) > 0.0001f )
-//					return false;
-//			}
-//
-//			return true;
-//
-//		} else {
-//
-//			Vector2 rayOrigin = new Vector2(transform.position.x+myHalfWidth,transform.position.y+1.0f);
-//			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, myWidth, layerIdGroundMask);
-//			if (hit.collider != null)
-//			{
-//				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
-//					return false;
-//			}
-//			rayOrigin.y += 1;
-//			
-//			//return Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask).collider == null;
-//			hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundMask);
-//			if (hit.collider != null)
-//			{
-//				if( Mathf.Abs (rayOrigin.x-myWidth - hit.point.x) > 0.0001f )
-//					return false;
-//			}
-//			
-//			return true;
-//		}
-
 	}
 
 	float checkDown(float checkingDist){
@@ -2958,7 +2468,6 @@ public class Player2Controller : MonoBehaviour {
 		Vector3 rayOrigin = sensorDown1.position;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundPermeableMask);
 		if (hit.collider) {// jesetem wewnatrz wskakiwalnej platformy ... nie moge sie zatrzymac..
-			//return -1.0f;
 			layerIdMask = layerIdGroundMask;
 		}
 
@@ -2989,9 +2498,6 @@ public class Player2Controller : MonoBehaviour {
 	bool checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
 		bool groundUnderFeet = false;
 
-		//bool groundUnderFeet1 = false;
-		//bool groundUnderFeet2 = false;
-		//bool groundUnderFeet3 = false;
 		float th = 0.9f;
 		float checkingDist = th + 0.5f;
 		if (fromFeet)
@@ -3017,15 +2523,12 @@ public class Player2Controller : MonoBehaviour {
 		float dist3;
 
 		if (hit1.collider != null) {
-			//dist1 = myHeight - Mathf.Abs (hit1.point.y - sensorDown1.position.y);aa
 			dist1 = rayOrigin1.y - hit1.point.y;
 			groundUnderFeet = true;
 			distToGround = dist1;
 			layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
 		}
 		if (hit2.collider != null) {
-			//dist2 = myHeight - Mathf.Abs (hit2.point.y - sensorDown2.position.y);
-			//hit1.collider.transform.gameObject.layer
 			dist2 = rayOrigin2.y - hit2.point.y;
 			if( groundUnderFeet ){
 				if( distToGround > dist2) distToGround = dist2;
@@ -3036,7 +2539,6 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 		if (hit3.collider != null) {
-			//dist3 = myHeight - Mathf.Abs (hit3.point.y - sensorDown3.position.y);
 			dist3 = rayOrigin3.y - hit3.point.y;
 			if( groundUnderFeet ){
 				if( distToGround > dist3) distToGround = dist3;
@@ -3053,60 +2555,18 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		return groundUnderFeet;
-
-//		if (groundUnderFeet) {
-//			if (dist1 < 0.0f && dist2 < 0.0f && dist3 < 0.0f) { // w całości odleciał
-//
-//				distToGround = dist1;
-//				if( distToGround > dist2 ) distToGround = dist2;
-//				if( distToGround > dist3 ) distToGround = dist3;
-//
-//			} else { // czymś się wbija
-//
-//
-//
-//			}
-//		}
-
-
-//		if (hit.collider != null) {
-//			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
-//		} else {
-//			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-//			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
-//			if (hit.collider != null){
-//				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
-//			} else {
-//				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-//				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, currentLayerIdGroundMask);
-//				if (hit.collider != null){
-//					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
-//				} else {
-//					return -1.0f;
-//				}
-//			}
-//		}  
 	}
 
 	bool tryCatchHandle(){
 		if (dir () == Vector2.right) {
 		
-			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleR1.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
 			RaycastHit2D hit; 
 			if (lastFrameHande)
 				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, layerIdGroundHandlesMask);
 			else
 				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
 		
-			//					// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-			//					bool _canCatch = true;
-			//					if( lastCatchedClimbHandle && velocity.y > 0 ){
-			//						_canCatch = false;
-			//					}
-		
 			if (hit.collider != null) {
-				//print ( hit.collider.gameObject.transform.position );
-			
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 				bool _canCatch = true;
 				if ((lastCatchedClimbHandle == hit.collider.gameObject) ) { //{ && velocity.y >= 0.0f) {
@@ -3120,18 +2580,14 @@ public class Player2Controller : MonoBehaviour {
 					Vector3 newPos = new Vector3 ();
 					newPos.x = handlePos.x - myHalfWidth;
 					newPos.y = handlePos.y - 2.4f; //myHeight;
-					//transform.position = newPos;
 				
 					canPullUp = canClimbPullUp ();
 				
 					if (canPullUp) {
-						//climbAfterPos.x = catchedClimbHandle.transform.position.x;
-						//climbAfterPos.y = catchedClimbHandle.transform.position.y;
 					}
 				
 					velocity.x = 0.0f;
 					velocity.y = 0.0f;
-					//impulse.y = 0.0f;
 				
 					climbBeforePos = transform.position;
 					climbAfterPos = newPos;
@@ -3152,7 +2608,6 @@ public class Player2Controller : MonoBehaviour {
 		
 		} else {
 		
-			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
 			RaycastHit2D hit; 
 			if (lastFrameHande)
 				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, layerIdGroundHandlesMask);
@@ -3175,13 +2630,10 @@ public class Player2Controller : MonoBehaviour {
 					Vector3 newPos = new Vector3 ();
 					newPos.x = handlePos.x + myHalfWidth;
 					newPos.y = handlePos.y - 2.4f; //myHeight;
-					//transform.position = newPos;
 				
 					canPullUp = canClimbPullUp ();
 				
 					if (canPullUp) {
-						//climbAfterPos.x = catchedClimbHandle.transform.position.x;
-						//climbAfterPos.y = catchedClimbHandle.transform.position.y;
 					}
 				
 					velocity.x = 0.0f;
@@ -3224,10 +2676,7 @@ public class Player2Controller : MonoBehaviour {
 			if (hit.collider != null) {
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 				bool _canCatch = true;
-//				if ((lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f) {
-//					_canCatch = false;
-//				}
-				
+
 				if (_canCatch) {
 
 					catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
@@ -3246,10 +2695,8 @@ public class Player2Controller : MonoBehaviour {
 					float force = RopeSwingForce * forceRatio;// * Time.deltaTime;
 
 					if( velocity.x < 0f ){
-						//catchedRope.swing(-Vector2.right, force);
 						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
 					}else if (velocity.x > 0){ 
-						//catchedRope.swing(Vector2.right, force);
 						catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
 					}
 
@@ -3258,8 +2705,6 @@ public class Player2Controller : MonoBehaviour {
 
 					setState(State.CLIMB_ROPE);
 					setAction(Action.ROPECLIMB_IDLE);
-
-					//cameraTarget.position.y = cameraTargetRopeDiffY;
 
 					transform.position = catchedRopeLink.transform.position;
 					transform.rotation = catchedRopeLink.transform.rotation;
@@ -3275,7 +2720,6 @@ public class Player2Controller : MonoBehaviour {
 			
 		} else {
 
-			//RaycastHit2D hit = Physics2D.Linecast(sensorHandleL1.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
 			RaycastHit2D hit; 
 			if (lastFrameHande)
 				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, layerIdRopesMask);
@@ -3290,9 +2734,6 @@ public class Player2Controller : MonoBehaviour {
 				
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
 				bool _canCatch = true;
-//				if ((lastCatchedClimbHandle == hit.collider.gameObject) && velocity.y >= 0.0f) {
-//					_canCatch = false;
-//				}				
 				if (_canCatch) {
 
 					catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
@@ -3311,10 +2752,8 @@ public class Player2Controller : MonoBehaviour {
 					float force = RopeSwingForce * forceRatio;// * Time.deltaTime;
 
 					if( velocity.x < 0f ){
-						//catchedRope.swing(-Vector2.right, force);
 						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
 					}else if (velocity.x > 0){ 
-						//catchedRope.swing(Vector2.right, force);
 						catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
 					}
 
@@ -3327,8 +2766,6 @@ public class Player2Controller : MonoBehaviour {
 					transform.position = catchedRopeLink.transform.position;
 					transform.rotation = catchedRopeLink.transform.rotation;
 
-
-
 					ropeLinkCatchOffset = 0.0f;
 					return true;
 				}
@@ -3340,55 +2777,6 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	float ropeLinkCatchOffset = 0.0f;
-//	bool canJumpToLayer(int testLayerID, ref Vector3 onLayerPlace){
-//		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
-//			return false;
-//
-//		switch( playerCurrentLayer ){
-//
-//		case 0:
-//			if( testLayerID == 0 ) return false;
-//
-//			Vector2 rayOrigin = transform.position;
-//			rayOrigin.y += 0.1f;
-//			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 1.5f, _layerIdGroundFarMask);
-//			if( !hit.collider ) return false;
-//
-//			float distToFarPlatform = Mathf.Abs (hit.point.y - rayOrigin.y);
-//			if( distToFarPlatform == 0.0f ) { // jezeli platforma far sasiaduje bezposrednio z near
-//
-//				rayOrigin.y += 1.0f;
-//				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
-//				if( hit.collider ) return false;
-//				else{
-//					onLayerPlace = transform.position;
-//					onLayerPlace.y += 1.0f;
-//					return true;
-//				}
-//
-//			}else if( Mathf.Abs((distToFarPlatform+0.1f)-1.0f) < 0.01f ){ // jezeli platforma far jest o 1.0 od near
-//
-//				rayOrigin.y += 2.0f;
-//				hit = Physics2D.Raycast (rayOrigin, Vector2.up, 2.5f, _layerIdGroundFarMask);
-//				if( hit.collider ) return false;
-//				else{
-//					onLayerPlace = transform.position;
-//					onLayerPlace.y += 2.0f;
-//					return true;
-//				}
-//
-//			}else{ // na inne nie mozemy skoczyc
-//				return false;
-//			}
-//			break;
-//
-//		case 1:
-//			return testLayerID == 0;
-//			break;
-//		}
-//
-//		return false;
-//	}
 
 	bool canClimbPullUp(){
 
@@ -3399,7 +2787,6 @@ public class Player2Controller : MonoBehaviour {
 		rayOrigin.x += 0.5f;
 		rayOrigin.y += 0.25f;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 0.5f, layerIdGroundMask);
-		//print ( "canClimbPullUp : " + hit);
 		return !hit.collider;
 	}
 
@@ -3423,7 +2810,6 @@ public class Player2Controller : MonoBehaviour {
 				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, -Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
 					return hit.collider.gameObject;
 				}
-
 			}
 
 		} else {
@@ -3437,9 +2823,6 @@ public class Player2Controller : MonoBehaviour {
 
 			}
 		}
-//
-//		return null;
-
 
 		// to jest ta druga sytuacja ...
 
@@ -3447,7 +2830,6 @@ public class Player2Controller : MonoBehaviour {
 	 	hit = Physics2D.Raycast (rayOrigin, Vector2.right , myWidth, layerIdGroundHandlesMask);
 
 		if (hit.collider) { 
-			//return hit.collider.gameObject;
 			// badam czy stoje na krawedzi odpowiednio zwrocony
 			if (dir () == Vector2.right) { //
 
@@ -3473,13 +2855,7 @@ public class Player2Controller : MonoBehaviour {
 	bool onMount(){
 		Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
 		rayOrigin.y += 0.3f;
-		//rayOrigin.y += 1.0f;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
-		//return hit.collider;
-//		if (hit.collider) {
-//			return hit.distance 
-//		}
-//		return false;
 
 		if (!hit.collider)
 			return false;
@@ -3499,9 +2875,7 @@ public class Player2Controller : MonoBehaviour {
 		Vector2 rayOrigin = posToCheck + sensorDiff;//aaa
 		rayOrigin.y += 0.3f;
 
-		//rayOrigin.y += 1.0f;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
-		//return hit.collider;
 
 		if (!hit.collider)
 			return false;
@@ -3513,7 +2887,6 @@ public class Player2Controller : MonoBehaviour {
 		rayOrigin.x += myWidth;
 		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
 		return hit.collider;
-
 	}
 
 	void SetImpulse(Vector2 imp) { impulse = imp; }
@@ -3588,32 +2961,23 @@ public class Player2Controller : MonoBehaviour {
 	bool firstFrameInState = false;
 
 	bool setState(State newState){
-		
-		//print ("setState oldState : " + state);
-		//print ("setState newState : " + newState);
-		
+
 		if (state == newState)
 			return false;
 
 		currentStateTime = 0.0f;
 		firstFrameInState = true;
-		//print ("setState : " + newState + " ustawiona");
-		//print ("============================");
 
 		state = newState;
-
-		//cameraTarget.localPosition = new Vector3(0f,0f,0f);
 
 		switch (state) {
 		case State.IN_AIR:
  			startFallPos = transform.position;
 			break;
 		case State.CLIMB_ROPE:
-			//cameraTarget.localPosition = new Vector3(0f, cameraTargetRopeDiffY, 0f);
 			break;
 		case State.MOUNT:
 			animator.Play("Zap_climbmove_up");
-			//gfx.GetComponent<SpriteRenderer>().sprite
 			break;
 		};
 
@@ -3636,17 +3000,10 @@ public class Player2Controller : MonoBehaviour {
 		return action;
 	}
 	bool setAction(Action newAction, int param = 0){
-		
-		//print ("setAction try : " + newAction);
-		
+
 		if (action == newAction)
 			return false;
 
-		//print ("setAction oldAction : " + action);
-		//print ("setAction newAction : " + newAction);
-		//print ("setAction : " + newAction + " ustawiona");
-		//print ("============================");
-		
 		action = newAction;
 		currentActionTime = 0.0f;
 
@@ -3663,41 +3020,31 @@ public class Player2Controller : MonoBehaviour {
 			DeathType dt = (DeathType)param;
 			string msgInfo = "";
 
-			//public string DeathByVeryHardLandingText = "rozjeb... sie o skale. press space";
-			//public string DeathBySnakeText = "pokasal cie waz. press space";
-			//public string DeathByCrocodileText = "zjadl cie krokodyl. press space";
-			//public string DeathByPoisonText = "zatrules sie. press space";
-			//public string DeathByDefaultText = ....
 			switch( dt ){
 
 			case DeathType.VERY_HARD_LANDING:
-				//animator.Play ("death_hitground");
 				if( faceRight() ) animator.Play("Zap_death_hitground_R");
 				else animator.Play("Zap_death_hitground_L");
 				msgInfo = DeathByVeryHardLandingText;
 				break;
 
 			case DeathType.SNAKE:
-				//animator.Play ("Zap_death_poison");
 				if( faceRight() ) animator.Play("Zap_death_poison_R");
 				else animator.Play("Zap_death_poison_L");
 				msgInfo = DeathBySnakeText;
 				break;
 
 			case DeathType.POISON:
-				//animator.Play ("Zap_death_poison");
 				if( faceRight() ) animator.Play("Zap_death_poison_R");
 				else animator.Play("Zap_death_poison_L");
 				msgInfo = DeathByPoisonText;
 				break;
 
 			case DeathType.CROCODILE:
-				//animator.Play ("zap_die");
 				msgInfo = DeathByCrocodileText;
 				break;
 
 			default:
-				//animator.Play ("zap_die");
 				if( faceRight() ) animator.Play("Zap_death_hitground_R");
 				else animator.Play("Zap_death_hitground_L");
 				msgInfo = DeathByDefaultText;
@@ -3736,7 +3083,6 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_RUN_LEFT:
-			//animator.Play("stand_turn_left");
 			animator.Play("Zap_runback_L");
 			wantJumpAfter = false;
 			if( turnRunSounds.Length != 0 )
@@ -3762,7 +3108,6 @@ public class Player2Controller : MonoBehaviour {
 				else animator.Play("Zap_jump_fly_L");
 
 			}else if (param == 1) {
-				//animator.Play("zap_jump_from_climb");
 				if( faceRight() ) animator.Play("zap_rocks_climb_R");
 				else animator.Play("zap_rocks_climb_L");
 			}
@@ -3774,7 +3119,6 @@ public class Player2Controller : MonoBehaviour {
 		case Action.JUMP_LEFT_LONG:
 		case Action.JUMP_RIGHT:
 		case Action.JUMP_RIGHT_LONG:
-			//animator.Play("zapjump");
 
 			if( faceRight() ) animator.Play("Zap_run_jump_fly_R");
 			else animator.Play("Zap_run_jump_fly_L");
@@ -3792,85 +3136,58 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.CLIMB_PREPARE_TO_JUMP:
-			//animator.SetTrigger("climb_preparetojump");
 			break;
 		case Action.CLIMB_JUMP_TO_CATCH:
-			//animator.SetTrigger("climb_jump");
-			//animator.Play("zapclimbjump");
 			break;
 		case Action.CLIMB_CATCH:
-			//animator.SetTrigger("climb_catch");
 			if( param == 0 ){
-				//animator.Play("zapclimbcatch");
-				//zap_rocks_catch_position_L
 				if( faceRight() ) animator.Play("zap_rocks_catch_position_R");
 				else animator.Play("zap_rocks_catch_position_L");
 
 			}else if( param == 1 ){
 				// tu juz jest we wlasciwej klatce
-				//zap_rocks_catch_position_rev_L
-				//animator.Play("zapclimbcatch_rev");
 				if( faceRight() ) animator.Play("zap_rocks_catch_position_rev_R");
 				else animator.Play("zap_rocks_catch_position_rev_L");
 				animator.speed = 0.0f;
-				//sprRend.sprite = catchIdleSprite;
 			}
-			//animator.speed = 0f;
 
 			if( catchSounds.Length != 0)
 				myAudio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);
 			break;
 		case Action.CLIMB_CLIMB:
-			//animator.SetTrigger("climb_climb");
-			//animator.Play("zapclimbclimb");
 			if( faceRight() ) animator.Play("Zap_jump_climb_R");
 			else animator.Play("Zap_jump_climb_L");
-
 			break;
 
 		case Action.CLIMB_PULLDOWN:
-			//animator.Play("zappulldown");
-			//animator.Play("zapdrop");
 			if( faceRight() ) animator.Play("Zap_drop_R");
 			else animator.Play("Zap_drop_L");
 			break;
 
 		case Action.MOUNT_IDLE:
-			//animator.SetTrigger("mount_idle");
-			//animator.StopPlayback();
-			//animator.Play("mount_up");
 			animator.Play("Zap_climbmove_up");
 			animator.speed = 0.0f;
-			//sprRend.sprite = mountIdleSprite;
 			break;
 
 		case Action.MOUNT_LEFT:
-			//animator.SetTrigger("mount_left");
-			//animator.Play("mount_left");
 			animator.Play("Zap_climbmove_left");
 			break;
 		case Action.MOUNT_RIGHT:
-			//animator.SetTrigger("mount_right");
-			//animator.Play("mount_right");
 			animator.Play("Zap_climbmove_right");
 			break;
 		case Action.MOUNT_UP:
-			//animator.Play("mount_up");
 			animator.Play("Zap_climbmove_up");
 			break;
 		case Action.MOUNT_DOWN:
-			//animator.Play("mount_down");
 			animator.Play("Zap_climbmove_down");
 			break;
 
 		case Action.CROUCH_IN:
-			//animator.Play("zapcrouchin");
 			if( faceRight() ) animator.Play("Zap_crouch_in_R");
 			else animator.Play("Zap_crouch_in_L");
 			break;
 			
 		case Action.GET_UP:
-			//animator.Play("zapgetup");
 			if( faceRight() ) animator.Play("Zap_getup_R");
 			else animator.Play("Zap_getup_L");
 			break;
@@ -3901,18 +3218,14 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.ROPECLIMB_UP:
-			//animator.Play("newclimbrope_updown");
 			if( faceRight() ) animator.Play("Zap_liana_climbup_R");
 			else animator.Play("Zap_liana_climbup_L");
 			break;
 
 		case Action.ROPECLIMB_DOWN:
-			//animator.Play("Zap_liana_slide");
 			if( faceRight() ) animator.Play("Zap_liana_slide_R");
 			else animator.Play("Zap_liana_slide_L");
-
 			break;
-
 		};
 
 		return true;
@@ -3945,14 +3258,11 @@ public class Player2Controller : MonoBehaviour {
 
 	Transform gfx;
 
-
-	//aa
 	[SerializeField]
 	Vector3 velocity;
 	Vector3 lastVelocity;
 	Vector3 lastSwingPos;
 	[SerializeField]
-	//Vector2 swingVelocity;
 	Vector3 impulse;
 	Vector3 startFallPos;
 
@@ -3985,7 +3295,6 @@ public class Player2Controller : MonoBehaviour {
 	public RopeLink catchedRopeLink;
 
 	bool jumpFromMount = false;
-	//bool jumpFromGround = false;
 	float climbDistFromWall;
 	float climbDuration;
 	Vector2 climbDir;
