@@ -9,11 +9,11 @@ public class Knife : Weapon {
 		Debug.Log ("hello world - knife");
 	}
 	
-	public override void Update () {
+	public override void Update (float deltaTime) {
 		
 	}
 	
-	public override void FUpdate () {
+	public override void FUpdate (float fDeltaTime) {
 		
 	}
 }

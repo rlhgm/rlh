@@ -14,10 +14,10 @@ public class Weapon : IComparable<Weapon> { //: MonoBehaviour {
 		player = playerController;
 	}
 	
-	public virtual void Update () {	
+	public virtual void Update (float deltaTime) {	
 	}
 
-	public virtual void FUpdate(){
+	public virtual void FUpdate(float fDeltaTime){
 	}
 
 	//This method is required by the IComparable

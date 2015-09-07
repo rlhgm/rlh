@@ -19,7 +19,7 @@ public class GravityGun : Weapon {
 		layerIdGroundMask = groundsMask;
 	}
 	
-	public override void Update () {
+	public override void Update (float deltaTime) {
 
 		if (!Input.GetMouseButton (0)) {
 			if (draggedStone == null) {
@@ -118,7 +118,7 @@ public class GravityGun : Weapon {
 	//Vector2 S; 			// polozenie
 	//RLHOptionsWindow.
 
-	public override void FUpdate () {
+	public override void FUpdate (float fDeltaTime) {
 		Vector3 currentMousePosition = Input.mousePosition;
 		//if (currentMousePosition != lastMousePosition) {
 		

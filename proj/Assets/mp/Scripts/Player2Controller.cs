@@ -429,42 +429,36 @@ public class Player2Controller : MonoBehaviour {
 
 	void FixedUpdate(){
 		if (currentWeapon != null) {
-			currentWeapon.FUpdate();
+			currentWeapon.FUpdate(Time.fixedDeltaTime);
 		}
 	}
 
 	private float ConstantFrameTime = 0.0333f;
+	private float CurrentDeltaTime = 0.0f;
 
 	// Update is called once per frame
 	void Update () {
 		float timeSinceLastFrame = Time.deltaTime;
 		//print ("Update() : " + timeSinceLastFrame);
 
-		//do{
-		//	timeSinceLastFrame -= ConstantFrameTime
-		//	//MyUpdate (deltaTime);
-		//}
+		if (GlobalUpdate (timeSinceLastFrame)) return;
 
 		while (timeSinceLastFrame > ConstantFrameTime) {
-			MyUpdate2(ConstantFrameTime);
+			ZapUpdate(ConstantFrameTime);
 			timeSinceLastFrame -= ConstantFrameTime;
 		}
 
-		MyUpdate2 (timeSinceLastFrame);
+		ZapUpdate (timeSinceLastFrame);
 	}
 
-	void MyUpdate2 (float deltaTime) {
-		//print ("MyUpdate2 (float deltaTime) : " + deltaTime);
-	}
-
-	void MyUpdate (float deltaTime) {
+	bool GlobalUpdate (float deltaTime) {
 		if (Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
-	
+
 		if (Input.GetKeyDown (KeyCode.P)) {
 			gamePaused = !gamePaused;
 		}
-
+		
 		if( Input.GetMouseButtonDown(0) ){ // left
 			//print ("left: " + Input.mousePosition);
 		}
@@ -479,64 +473,56 @@ public class Player2Controller : MonoBehaviour {
 			setNextWeapon();
 		}
 
-		if (currentWeapon != null) {
-			currentWeapon.Update();
-		}
+		PuzzleMapUpdate (deltaTime);
+		if (GamePausedUpdate (deltaTime))
+			return true;
 
+		InfoLabelUpdate (deltaTime);
+
+		return false;
+	}
+
+	void PuzzleMapUpdate(float deltaTime){
 		if (puzzleMapShowing) {
-			puzzleMapShowTime += Time.deltaTime;
-
+			puzzleMapShowTime += deltaTime;
+			
 			if( puzzleMapShowTime < 1.0f ){
-
-				float phaseRatio = puzzleMapShowTime / 1.0f;
-
+				float phaseRatio = puzzleMapShowTime / 1.0f;			
 				Color newColor = new Color(1f,1f,1f,0.75f*phaseRatio);
 				mapBackgroundImage.color = newColor;
-
 			} else if( puzzleMapShowTime < 2.0f ){
-
 				if( puzzleShowingPhase == 1){
 					puzzleShowingPhase = 2;
-
 					Color newColor = new Color(1f,1f,1f,1f);
 					mapBackgroundImage.color = newColor;
-
 					mapPartParts[newPuzzleCollectedID].show(0.5f);
-
 				}
-
 			} else {
-
 				if( puzzleShowingPhase == 2 ){
 					puzzleShowingPhase = 3;
-
 					for (int i = 0; i < mapPartParts.Length; ++i) {
 						if (mapPartParts[i].collected) {
 							mapPartParts[i].hide(1.0f);
 						}
 					}
 				}
-
+				
 				if( puzzleMapShowTime >= 3.0f ){
-
 					puzzleMapShowing = false;
 					puzzleShowingPhase = 0;
 					Color newColor = new Color(1f,1f,1f,0f);
 					mapBackgroundImage.color = newColor;
-
 				}else{
-
 					float phaseRatio = puzzleMapShowTime-2.0f / 1.0f;
 					Color newColor = new Color(1f,1f,1f,0.75f-0.75f*phaseRatio);
 					mapBackgroundImage.color = newColor;
-
 				}
-
+				
 			}
 		}
-
+	}
+	bool GamePausedUpdate(float deltaTime){
 		if( gamePaused ){
-
 			if (Input.GetKey("f")) {
 				transform.position = transform.position + new Vector3(-0.1f,0.0f,0.0f);
 				//showInfo("You press f",1f);
@@ -552,18 +538,28 @@ public class Player2Controller : MonoBehaviour {
 			else if (Input.GetKey("g")) {
 				transform.position = transform.position + new Vector3(0.0f,-0.1f,0.0f);
 				//showInfo("You press g",4f);
-			}
-
-			return;
+			}			
+			return true;
 		}
+		return false;
+	}
 
+	void InfoLabelUpdate(float deltaTime){
 		if (infoLabelSet) {
-			if( infoLabelShowDuration > 0 ){
-				if( (infoLabelShowTime+=Time.deltaTime) > infoLabelShowDuration ){
+			if (infoLabelShowDuration > 0) {
+				if ((infoLabelShowTime += deltaTime) > infoLabelShowDuration) {
 					infoLabelSet = false;
 					infoLabel.text = "";
 				}
 			}
+		}
+	}
+
+	void ZapUpdate (float deltaTime) {
+		CurrentDeltaTime = deltaTime;
+
+		if (currentWeapon != null) {
+			currentWeapon.Update(deltaTime);
 		}
 
 		if (isInAction (Action.DIE)) {
@@ -584,7 +580,7 @@ public class Player2Controller : MonoBehaviour {
 				userJumpKeyPressed = true;
 			}
 		} else {
-			timeFromJumpKeyPressed += Time.deltaTime;
+			timeFromJumpKeyPressed += deltaTime;
 			if (timeFromJumpKeyPressed >= 0.06f) {
 				timeFromJumpKeyPressed = 0.0f;
 				userJumpKeyPressed = false;
@@ -630,8 +626,8 @@ public class Player2Controller : MonoBehaviour {
 			keyRunUp();
 		}
 		
-		currentActionTime += Time.deltaTime;
-		currentStateTime += Time.deltaTime;
+		currentActionTime += deltaTime;
+		currentStateTime += deltaTime;
 
 		oldPos = transform.position;
 		newPosX = oldPos.x;
@@ -868,13 +864,12 @@ public class Player2Controller : MonoBehaviour {
 				lastFrameHande = false;
 			}
 
-			addImpulse(new Vector2(0.0f, GravityForce * Time.deltaTime));
-			
+			addImpulse(new Vector2(0.0f, GravityForce * deltaTime));
 
 			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
 				
 				if( Input.GetKey(keyLeft) ){
-					velocity.x -= (FlyUserControlParam * Time.deltaTime);
+					velocity.x -= (FlyUserControlParam * deltaTime);
 
 					if( isInAction(Action.JUMP_LEFT) ){
 						if( Mathf.Abs( velocity.x ) > JumpSpeed )
@@ -885,17 +880,12 @@ public class Player2Controller : MonoBehaviour {
 					}
 					
 				}else if ( Input.GetKey(keyRight) ){
-					velocity.x += (FlyUserControlParam * Time.deltaTime);
+					velocity.x += (FlyUserControlParam * deltaTime);
 					if( velocity.x > 0.0f ) velocity.x = 0.0f;
-				}else{
-					//velocity.x += (FlySlowDownParam * Time.deltaTime);
-					//if( velocity.x > 0.0f ) velocity.x = 0.0f;
 				}
-				
 			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
-
 				if( Input.GetKey(keyRight) ){
-					velocity.x += (FlyUserControlParam * Time.deltaTime);
+					velocity.x += (FlyUserControlParam * deltaTime);
 
 					if( isInAction(Action.JUMP_RIGHT) ){
 						if( Mathf.Abs( velocity.x ) > JumpSpeed )
@@ -906,43 +896,32 @@ public class Player2Controller : MonoBehaviour {
 					}
 
 				}else if( Input.GetKey(keyLeft) ) {
-					velocity.x -= (FlyUserControlParam * Time.deltaTime);
+					velocity.x -= (FlyUserControlParam * deltaTime);
 					if( velocity.x < 0.0f ) velocity.x = 0.0f;
-				}else{
-					//velocity.x -= (FlySlowDownParam * Time.deltaTime);
-					//if( velocity.x < 0.0f ) velocity.x = 0.0f;
 				} 
-				
 			}else if( isInAction(Action.JUMP) ){
-
 				if( Input.GetKey(keyLeft) ){
-					velocity.x -= (FlyUpUserControlParam * Time.deltaTime);
-					
+					velocity.x -= (FlyUpUserControlParam * deltaTime);
 					if( Mathf.Abs( velocity.x ) > JumpSpeed )
 						velocity.x = -JumpSpeed;
 				}
 				if( Input.GetKey(keyRight) ){
-					velocity.x += (FlyUpUserControlParam * Time.deltaTime);
-					
+					velocity.x += (FlyUpUserControlParam * deltaTime);
 					if( Mathf.Abs( velocity.x ) > JumpSpeed )
 						velocity.x = JumpSpeed;
 				}
 
 				if( velocity.x > 0.0f ){
-
 					turnRight();
-
 				}else if(velocity.x < 0.0f) {
-
 					turnLeft();
 				}
 			}
 
 			Vector3 distToFall = new Vector3();
-			distToFall.x = velocity.x * Time.deltaTime;
+			distToFall.x = velocity.x * deltaTime;
 
-			if( distToFall.x > 0.0f )
-			{
+			if( distToFall.x > 0.0f ){
 				float obstacleOnRoad = checkRight(distToFall.x + 0.01f,!firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
@@ -950,9 +929,7 @@ public class Player2Controller : MonoBehaviour {
 						velocity.x = 0.0f;
 					}
 				}
-			}
-			else if( distToFall.x < 0.0f )
-			{
+			}else if( distToFall.x < 0.0f ){
 				float obstacleOnRoad = checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
@@ -971,7 +948,7 @@ public class Player2Controller : MonoBehaviour {
 			if(velocity.y < -MaxSpeedY)
 				velocity.y = -MaxSpeedY;
 			
-			distToFall.y = velocity.y * Time.deltaTime;
+			distToFall.y = velocity.y * deltaTime;
 
 			bool justLanding = false;
 
@@ -1115,7 +1092,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	int Act_CLIMB_PULLDOWN(){
-		climbDuration += Time.deltaTime;
+		climbDuration += CurrentDeltaTime;
 		
 		if( climbDuration >= CLIMBDUR_CLIMB ){
 			setAction(Action.CLIMB_CATCH,1);
@@ -1131,7 +1108,7 @@ public class Player2Controller : MonoBehaviour {
 	
 	int Act_CLIMB_JUMP_TO_CATCH(){
 		// dociaganie do punktu:
-		climbDuration += Time.deltaTime;
+		climbDuration += CurrentDeltaTime;
 		
 		if (climbDuration >= climbToJumpDuration) {
 			setAction (Action.CLIMB_CATCH);
@@ -1188,8 +1165,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	int Act_CLIMB_CLIMB(){
-		
-		climbDuration += Time.deltaTime;
+		climbDuration += CurrentDeltaTime;
 		
 		if (climbDuration >= CLIMBDUR_CLIMB) {
 			setState (State.ON_GROUND);
@@ -1249,7 +1225,7 @@ public class Player2Controller : MonoBehaviour {
 		float speedX = Mathf.Abs (velocity.x);
 		if (speedX < desiredSpeedX) { // trzeba przyspieszyc
 
-			float velocityDamp = SpeedUpParam * Time.deltaTime;
+			float velocityDamp = SpeedUpParam * CurrentDeltaTime;
 			speedX += velocityDamp;
 			if( speedX > desiredSpeedX ){
 				speedX = desiredSpeedX;
@@ -1260,7 +1236,7 @@ public class Player2Controller : MonoBehaviour {
 			return false;
 
 		} else if (speedX > desiredSpeedX) { // trzeba zwolnic
-			float velocityDamp = SlowDownParam * Time.deltaTime;
+			float velocityDamp = SlowDownParam * CurrentDeltaTime;
 			speedX -= velocityDamp;
 			if( speedX < desiredSpeedX ){
 				speedX = desiredSpeedX;
@@ -1298,7 +1274,7 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 		}
 
-		distToMove = velocity.x * Time.deltaTime;
+		distToMove = velocity.x * CurrentDeltaTime;
 
 		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.5f;
 
@@ -1355,7 +1331,7 @@ public class Player2Controller : MonoBehaviour {
 
 		}
 
-		distToMove = velocity.x * Time.deltaTime;
+		distToMove = velocity.x * CurrentDeltaTime;
 
 		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
 
@@ -1389,7 +1365,7 @@ public class Player2Controller : MonoBehaviour {
 		if (speedReached && desiredSpeedX == 0.0f) {
 		}
 
-		distToMove = velocity.x * Time.deltaTime;
+		distToMove = velocity.x * CurrentDeltaTime;
 
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
@@ -1449,7 +1425,7 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 		
-		distToMove = velocity.x * Time.deltaTime;
+		distToMove = velocity.x * CurrentDeltaTime;
 		
 		float distToObstacle = 0.0f;
 		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
@@ -1471,7 +1447,7 @@ public class Player2Controller : MonoBehaviour {
 
 	int Act_MOUNTING(){
 		Vector3 newPos3 = transform.position;
-		Vector3 distToMount = velocity * Time.deltaTime;
+		Vector3 distToMount = velocity * CurrentDeltaTime;
 		newPos3 += distToMount;
 		if (onMount (newPos3)) {
 			transform.position = newPos3;
@@ -1483,7 +1459,7 @@ public class Player2Controller : MonoBehaviour {
 	
 	int Act_MOUNTING_DOWN(){
 		Vector3 newPos3 = transform.position;
-		Vector3 distToMount = velocity * Time.deltaTime;
+		Vector3 distToMount = velocity * CurrentDeltaTime;
 		newPos3 += distToMount;
 
 		if (distToMount.y < 0.0f) { // schodzi
@@ -1615,7 +1591,7 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 		} 
 
-		float climbDist = RopeClimbSpeedUp * Time.deltaTime;
+		float climbDist = RopeClimbSpeedUp * CurrentDeltaTime;
 
 		float newRopeLinkCatchOffset = ropeLinkCatchOffset + climbDist;
 		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
@@ -1656,7 +1632,7 @@ public class Player2Controller : MonoBehaviour {
 			return 0;
 		}
 
-		float climbDist = RopeClimbSpeedDown * Time.deltaTime;
+		float climbDist = RopeClimbSpeedDown * CurrentDeltaTime;
 		
 		float newRopeLinkCatchOffset = ropeLinkCatchOffset - climbDist;
 		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
@@ -2710,7 +2686,7 @@ public class Player2Controller : MonoBehaviour {
 					catchedRope.chooseDriver(catchedRopeLink.transform);
 
 					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
-					float force = RopeSwingForce * forceRatio;// * Time.deltaTime;
+					float force = RopeSwingForce * forceRatio;
 
 					if( velocity.x < 0f ){
 						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
@@ -2767,7 +2743,7 @@ public class Player2Controller : MonoBehaviour {
 					catchedRope.chooseDriver(catchedRopeLink.transform);
 
 					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
-					float force = RopeSwingForce * forceRatio;// * Time.deltaTime;
+					float force = RopeSwingForce * forceRatio;
 
 					if( velocity.x < 0f ){
 						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
