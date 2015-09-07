@@ -316,6 +316,11 @@ public class Player2Controller : MonoBehaviour {
 			transform.position = respawnPoint.position;
 		}
 
+		if (lastTouchedCheckPoint.GetComponent<CheckPoint> ().startMounted) {
+			setState(State.MOUNT);
+			setMountIdle();
+		}
+
 		resetInfo ();
 
 		NewRope[] ropes = FindObjectsOfType(typeof(NewRope)) as NewRope[];
