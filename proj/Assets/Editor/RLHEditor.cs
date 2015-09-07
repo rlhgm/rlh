@@ -8,10 +8,10 @@ public class RLHEditor : Editor{
 	
 	void OnSceneGUI () {
 		//Debug.Log("Scene Mouse Down");
-		if (Event.current.type == EventType.MouseDown) {
-			Debug.Log("Scene Mouse Down");
-			Event.current.Use();
-		}
+		//if (Event.current.type == EventType.MouseDown) {
+			//Debug.Log("Scene Mouse Down");
+			//Event.current.Use();
+		//}
 	}
 
 }
