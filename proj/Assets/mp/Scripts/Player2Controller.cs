@@ -1511,7 +1511,7 @@ public class Player2Controller : MonoBehaviour {
 			float fla = catchedRope.firstLinkAngle;
 
 			if( fla > -20f && fla < 0f){
-				print ( "Rope swing : " + fla );
+				//print ( "Rope swing : " + fla );
 				catchedRope.swing(-Vector2.right, RopeSwingForce * CurrentDeltaTime );
 				_swing = true;
 			}
@@ -1537,7 +1537,7 @@ public class Player2Controller : MonoBehaviour {
 			float fla = catchedRope.firstLinkAngle;
 
 			if( fla < 20f && fla >= 0f){
-				print ( "Rope swing : " + fla );
+				//print ( "Rope swing : " + fla );
 				catchedRope.swing(Vector2.right, RopeSwingForce * CurrentDeltaTime );
 				_swing = true;
 			}
