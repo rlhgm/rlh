@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: dba3b92a80ca08a4a9818b32d5ed8e5e
-timeCreated: 1438727400
+timeCreated: 1441662672
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: zap_crouch_in_0
     21300002: zap_crouch_in_1
+    21300004: Zap_crouch_in_R_0
+    21300006: Zap_crouch_in_R_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,23 +53,23 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: zap_crouch_in_0
+    - name: Zap_crouch_in_R_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 8
         width: 64
-        height: 54
+        height: 42
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: zap_crouch_in_1
+    - name: Zap_crouch_in_R_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 10
+        y: 8
         width: 64
-        height: 53
+        height: 32
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
