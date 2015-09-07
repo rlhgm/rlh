@@ -1079,26 +1079,44 @@ public class Player2Controller : MonoBehaviour {
 		if (!shadowCenter)
 			return;
 
-		RaycastHit2D hit = Physics2D.Raycast (sensorDown1.position, -Vector2.up, 1f, layerIdGroundMask);
-		if (hit.collider) {
-			shadowLeftSR.enabled = true;
-			shadowLeftSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
-		} else {
-			shadowLeftSR.enabled = false;
-		}
-
-		hit = Physics2D.Raycast (sensorDown2.position, -Vector2.up, 1f, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (sensorDown2.position, -Vector2.up, 1f, layerIdGroundMask);
 		if (hit.collider) {
 			shadowCenterSR.enabled = true;
 			shadowCenterSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+
+			Vector3 shadowPos = shadowCenter.localPosition;
+			shadowPos.y = -hit.distance;
+			shadowCenter.localPosition = shadowPos;
+
+			shadowCenter.rotation = hit.collider.transform.rotation;
 		} else {
 			shadowCenterSR.enabled = false;
+		}
+
+		hit = Physics2D.Raycast (sensorDown1.position, -Vector2.up, 1f, layerIdGroundMask);
+		if (hit.collider) {
+			shadowLeftSR.enabled = true;
+			shadowLeftSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+
+			float colliderRot = hit.collider.transform.rotation.eulerAngles.z;
+			float r = colliderRot - shadowCenter.rotation.eulerAngles.z;
+			Quaternion quat = new Quaternion ();
+			quat.eulerAngles = new Vector3 (0f, 0f, r);
+			shadowLeft.localRotation = quat;
+		} else {
+			shadowLeftSR.enabled = false;
 		}
 
 		hit = Physics2D.Raycast (sensorDown3.position, -Vector2.up, 1f, layerIdGroundMask);
 		if (hit.collider) {
 			shadowRightSR.enabled = true;
 			shadowRightSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+
+			float colliderRot = hit.collider.transform.rotation.eulerAngles.z;
+			float r = colliderRot - shadowCenter.rotation.eulerAngles.z;
+			Quaternion quat = new Quaternion ();
+			quat.eulerAngles = new Vector3 (0f, 0f, r);
+			shadowRight.localRotation = quat;
 		} else {
 			shadowRightSR.enabled = false;
 		}
