@@ -1079,10 +1079,12 @@ public class Player2Controller : MonoBehaviour {
 		if (!shadowCenter)
 			return;
 
-		RaycastHit2D hit = Physics2D.Raycast (sensorDown2.position, -Vector2.up, 1f, layerIdGroundMask);
+		float msd = 2f;
+
+		RaycastHit2D hit = Physics2D.Raycast (sensorDown2.position, -Vector2.up, msd, layerIdGroundMask);
 		if (hit.collider) {
 			shadowCenterSR.enabled = true;
-			shadowCenterSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+			shadowCenterSR.color = new Color (1f, 1f, 1f, (msd-hit.distance) / msd);
 
 			Vector3 shadowPos = shadowCenter.localPosition;
 			shadowPos.y = -hit.distance;
@@ -1093,10 +1095,10 @@ public class Player2Controller : MonoBehaviour {
 			shadowCenterSR.enabled = false;
 		}
 
-		hit = Physics2D.Raycast (sensorDown1.position, -Vector2.up, 1f, layerIdGroundMask);
+		hit = Physics2D.Raycast (sensorDown1.position, -Vector2.up, msd, layerIdGroundMask);
 		if (hit.collider) {
 			shadowLeftSR.enabled = true;
-			shadowLeftSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+			shadowLeftSR.color = new Color (1f, 1f, 1f, (msd-hit.distance) / msd);
 
 			float colliderRot = hit.collider.transform.rotation.eulerAngles.z;
 			float r = colliderRot - shadowCenter.rotation.eulerAngles.z;
@@ -1107,10 +1109,10 @@ public class Player2Controller : MonoBehaviour {
 			shadowLeftSR.enabled = false;
 		}
 
-		hit = Physics2D.Raycast (sensorDown3.position, -Vector2.up, 1f, layerIdGroundMask);
+		hit = Physics2D.Raycast (sensorDown3.position, -Vector2.up, msd, layerIdGroundMask);
 		if (hit.collider) {
 			shadowRightSR.enabled = true;
-			shadowRightSR.color = new Color (1f, 1f, 1f, 1f-hit.distance);
+			shadowRightSR.color = new Color (1f, 1f, 1f, (msd-hit.distance) / msd);
 
 			float colliderRot = hit.collider.transform.rotation.eulerAngles.z;
 			float r = colliderRot - shadowCenter.rotation.eulerAngles.z;
