@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dcc6ebad5ddf3964a91ac6206a05b193
-timeCreated: 1438684240
+timeCreated: 1441650512
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,6 +13,16 @@ TextureImporter:
     21300012: Zap_jump_climb_6
     21300014: Zap_jump_climb_7
     21300016: Zap_jump_climb_8
+    21300018: Zap_jump_climb_R_0
+    21300020: Zap_jump_climb_R_1
+    21300022: Zap_jump_climb_R_2
+    21300024: Zap_jump_climb_R_3
+    21300026: Zap_jump_climb_R_4
+    21300028: Zap_jump_climb_R_5
+    21300030: Zap_jump_climb_R_6
+    21300032: Zap_jump_climb_R_7
+    21300034: Zap_jump_climb_R_8
+    21300036: Zap_jump_climb_R_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,85 +68,105 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Zap_jump_climb_0
+    - name: Zap_jump_climb_R_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 28
         width: 64
-        height: 52
-      alignment: 9
-      pivot: {x: .49000001, y: -.180000007}
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 9
-        width: 64
-        height: 55
-      alignment: 9
-      pivot: {x: .5, y: -.100000001}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_2
+    - name: Zap_jump_climb_R_1
       rect:
         serializedVersion: 2
         x: 128
-        y: 10
+        y: 28
         width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .5, y: -.150000006}
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_3
+    - name: Zap_jump_climb_R_2
       rect:
         serializedVersion: 2
         x: 192
-        y: 11
+        y: 28
         width: 64
-        height: 53
-      alignment: 9
-      pivot: {x: .5, y: -.150000006}
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_4
+    - name: Zap_jump_climb_R_3
       rect:
         serializedVersion: 2
         x: 256
-        y: 12
+        y: 28
         width: 64
-        height: 52
-      alignment: 9
-      pivot: {x: .5, y: -.100000001}
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_5
+    - name: Zap_jump_climb_R_4
       rect:
         serializedVersion: 2
         x: 320
-        y: 10
+        y: 28
         width: 64
-        height: 54
+        height: 64
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_6
+    - name: Zap_jump_climb_R_5
       rect:
         serializedVersion: 2
         x: 384
-        y: 14
+        y: 28
         width: 64
-        height: 50
+        height: 64
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_jump_climb_7
+    - name: Zap_jump_climb_R_6
       rect:
         serializedVersion: 2
         x: 448
-        y: 14
+        y: 28
         width: 64
-        height: 50
+        height: 64
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_jump_climb_R_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 28
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_jump_climb_R_8
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 28
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_jump_climb_R_9
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 28
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
