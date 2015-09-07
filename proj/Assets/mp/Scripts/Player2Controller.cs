@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Player2Controller : MonoBehaviour 
-{
+public class Player2Controller : MonoBehaviour {
 	Canvas guiCanvas = null;
 	Text infoLabel = null;
 	Image mapBackgroundImage = null;
@@ -80,12 +79,10 @@ public class Player2Controller : MonoBehaviour
 	Transform weaponText;
 	TextMesh weaponTextMesh;
 
-	void Awake()
-	{
+	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 
-		if (guiCanvas) 
-		{
+		if (guiCanvas) {
 			infoLabel = FindObjectOfType<Text> ();
 			infoLabel.text = "";
 
@@ -112,16 +109,14 @@ public class Player2Controller : MonoBehaviour
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
 
 		zap_idle1_beh[] behs = animator.GetBehaviours<zap_idle1_beh>();
-		for( int b = 0 ; b < behs.Length ; ++b )
-		{
+		for( int b = 0 ; b < behs.Length ; ++b ){
 			behs[b].playerController = this;
 		}
 
 		myAudio = GetComponent<AudioSource>();
 
 		PlaySounds[] pss = animator.GetBehaviours<PlaySounds>();
-		for( int b = 0 ; b < pss.Length ; ++b )
-		{
+		for( int b = 0 ; b < pss.Length ; ++b ){
 			pss[b].playerController = this;
 		}
 
@@ -438,8 +433,31 @@ public class Player2Controller : MonoBehaviour
 		}
 	}
 
+	private float ConstantFrameTime = 0.0333f;
+
 	// Update is called once per frame
 	void Update () {
+		float timeSinceLastFrame = Time.deltaTime;
+		//print ("Update() : " + timeSinceLastFrame);
+
+		//do{
+		//	timeSinceLastFrame -= ConstantFrameTime
+		//	//MyUpdate (deltaTime);
+		//}
+
+		while (timeSinceLastFrame > ConstantFrameTime) {
+			MyUpdate2(ConstantFrameTime);
+			timeSinceLastFrame -= ConstantFrameTime;
+		}
+
+		MyUpdate2 (timeSinceLastFrame);
+	}
+
+	void MyUpdate2 (float deltaTime) {
+		//print ("MyUpdate2 (float deltaTime) : " + deltaTime);
+	}
+
+	void MyUpdate (float deltaTime) {
 		if (Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
 	
