@@ -10303,10 +10303,6 @@ Prefab:
       propertyPath: m_Name
       value: Snake (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 5021014, guid: 47850d0ecb5d9e54ea6b164c9d3fbfcc, type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47850d0ecb5d9e54ea6b164c9d3fbfcc, type: 2}
   m_IsPrefabParent: 0
