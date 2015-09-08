@@ -1267,7 +1267,7 @@ public class Player2Controller : MonoBehaviour {
 		if (climbDuration >= CLIMBDUR_CLIMB) {
 			setState (State.ON_GROUND);
 			climbDuration = 0.0f;
-			transform.position = climbAfterPos;
+			transform.position = climbAfterPos; 
 
 			if( canGetUp() ){
 				setAction (Action.IDLE);

@@ -112,13 +112,20 @@ public class GravityGun : Weapon {
 
 	Vector2 T; 			// sila ciagu
 	public static float inertiaFactor = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
+	public static float inertiaFactor2 = 0.03f; 	// wspolczynnik bezwladnosci jak gracz na siebie chce skierowac kamien
 	public static float maxDistance = 5f;
+	public static float minDistance = 2f;
+	public static float pushOutForce = 2f;
+	public static float pushOutMassFactor = 10f;
+
 	Vector2 V; 			// predkosc
 	//float M; 			// masa
 	//Vector2 S; 			// polozenie
 	//RLHOptionsWindow.
 
 	public override void FUpdate (float fDeltaTime) {
+		//Debug.Log ("FUpdate : " + fDeltaTime);
+
 		Vector3 currentMousePosition = Input.mousePosition;
 		//if (currentMousePosition != lastMousePosition) {
 		
@@ -133,69 +140,49 @@ public class GravityGun : Weapon {
 					
 					if( rb ){
 
-//						//testStone.position = new Vector3( touchInScene.x, touchInScene.y, testStone.position.z );
-//						Vector3 tsp = draggedStone.position;
-//						Vector3 tsrgCOM = testStoneRigidBody.worldCenterOfMass;
-//						Vector3 comdiff = tsrgCOM - tsp;
-//
-//						Vector3 posDiff = touchInScene - ( tsrgCOM );
-//						posDiff.z = draggedStone.position.z;
-//						float posDiffLength = posDiff.magnitude;
-//
-//						//if( posDiffLength < 5f ){
-//
-//							//testStoneRigidBody.worldCenterOfMass
-//
-//							//testStoneRigidBody.add
-//							//rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-//							//testStoneRigidBody.MovePosition( touchInScene );
-//							
-//							float coef = 1f;
-//							lastToMoveDist = posDiff * coef; //* Time.fixedDeltaTime;
-//							lastToMoveDist.z = 0f;
-//							
-//							testStoneRigidBody.MovePosition( (tsrgCOM-comdiff) + lastToMoveDist * Time.fixedDeltaTime );
-							
-						//testStoneRigidBody.velocity;
-						//}
+						Vector2 playerCenterPos = player.transform.position;
+						playerCenterPos.y += 1f;
+						Vector2 stoneCenterPos = rb.worldCenterOfMass;
 
-						Vector2 F;			// sila wypadkowa
-						//Vector2 A;			// przyspieszenie
-						//float Vnew; 		// nowa predkosc w chwili t + dt
-						//float Snew;			// nowe polozenie w chwili t + dt
+						Vector2 diff = stoneCenterPos - playerCenterPos;
 
-						T = (tis - rb.worldCenterOfMass);
-						V = rb.velocity;
+						Vector2 F = new Vector2(0f,0f);
 
-						F = T - (inertiaFactor * V);
-						//A = F / M;
+						float diffMagnitude = diff.magnitude;
 
-						//Vnew = V + A * Time.fixedDeltaTime;
-						//Snew = S + Vnew * Time.fixedDeltaTime;
+						if( diffMagnitude < minDistance+0.25f ){
 
-						//V = Vnew;
-						//S = Snew;
+							F = diff + diff * ( diffMagnitude / minDistance ) * pushOutForce * (rb.mass / pushOutMassFactor);
 
+						}else{
+
+							Vector2 diff2 = tis - playerCenterPos;
+							float diffMagnitude2 = diff2.magnitude;
+
+							if( diffMagnitude2 > minDistance ){
+
+								T = (tis - stoneCenterPos);
+								V = rb.velocity;
+
+								F = T - (inertiaFactor * V);
+
+							}else{ // jednak musi przyciagac ale slabiej albo do granicy a nie 
+
+								T = (tis - stoneCenterPos);
+								V = rb.velocity;
+								
+								F = T - (inertiaFactor2 * V) ;
+								F *= (rb.mass / pushOutMassFactor);
+							}
+						}
+
+						//Debug.Log("F : " + F);
 						rb.AddForce(F,ForceMode2D.Impulse);
-
-//						Vector2 rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
-//						Vector3 _df = rb.worldCenterOfMass - rayOrigin;
-//
-//						if( _df.magnitude > maxDistance ){
-//
-//							releaseStone();
-//
-//						} else {
-//
-//							RaycastHit2D hit = Physics2D.Linecast (rayOrigin, rb.worldCenterOfMass, layerIdGroundMask);
-//							if( hit.collider ){
-//								releaseStone();
-//							}
-//						}
 
 						if( !canBeDragged( draggedStone ) ){
 							releaseStone();
 						}
+
 					}
 				}
 			}
