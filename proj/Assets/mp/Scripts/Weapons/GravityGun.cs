@@ -140,18 +140,26 @@ public class GravityGun : Weapon {
 
 				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
 				if( rb ){
-					//if( rb.angularVelocity < 180 )
-					//	rb.angularVelocity += 1;
-					rb.rotation += ( fDeltaTime * userStoneRotateSpeed );
+
+					if( rb.angularVelocity < 180 )
+						rb.angularVelocity += ( fDeltaTime * userStoneRotateSpeed );
+
+					rb.angularVelocity = Mathf.Min( rb.angularVelocity, 180f);
+
+					//rb.rotation += ( fDeltaTime * userStoneRotateSpeed );
 				}
 			}
 			else if( Input.GetKey(KeyCode.X) ){ // albo w prawo
 
 				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
 				if( rb ){
-					//if( rb.angularVelocity > -180 )
-					//	rb.angularVelocity -= 1;
-					rb.rotation -= ( fDeltaTime * userStoneRotateSpeed );
+
+					if( rb.angularVelocity > -180 )
+						rb.angularVelocity -= ( fDeltaTime * userStoneRotateSpeed );
+
+					rb.angularVelocity = Mathf.Max( rb.angularVelocity, -180f);
+
+					//rb.rotation -= ( fDeltaTime * userStoneRotateSpeed );
 				}
 
 			}
