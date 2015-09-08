@@ -230,7 +230,7 @@ public class GravityGun : Weapon {
 						//Debug.Log("F : " + rb.velocity);
 						rb.AddForce(F,ForceMode2D.Impulse);
 
-						if( !canBeDragged( draggedStone ) ){
+						if( !canBeDragged( draggedStone, tis) ){
 							releaseStone();
 						}
 
@@ -279,12 +279,25 @@ public class GravityGun : Weapon {
 	}
 
 
-	bool canBeDragged(Transform stone){
+	bool canBeDragged(Transform stone, Vector2 stoneTargetPlace){
 
 		Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
 		if (!rb)
 			return false;
 
+		if( (rb.worldCenterOfMass - stoneTargetPlace).magnitude > 5f ){
+			return false;
+		}
+
+		return canBeDragged (stone);
+	}
+
+	bool canBeDragged(Transform stone){
+		
+		Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
+		if (!rb)
+			return false;
+		
 		Vector2 rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
 		Vector3 _df = rb.worldCenterOfMass - rayOrigin;
 		
@@ -299,7 +312,7 @@ public class GravityGun : Weapon {
 				return false;
 			}
 		}
-
+		
 		return true;
 	}
 }
