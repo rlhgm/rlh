@@ -20,6 +20,11 @@ public class Weapon : IComparable<Weapon> { //: MonoBehaviour {
 	public virtual void FUpdate(float fDeltaTime){
 	}
 
+	public virtual void activate(){
+	}
+	public virtual void deactivate(){
+	}
+
 	//This method is required by the IComparable
 	//interface. 
 	public int CompareTo(Weapon other)

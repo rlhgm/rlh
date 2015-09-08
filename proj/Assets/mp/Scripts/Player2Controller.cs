@@ -92,6 +92,9 @@ public class Player2Controller : MonoBehaviour {
 	SpriteRenderer shadowLeftSR;
 	SpriteRenderer shadowRightSR;
 
+	public Transform ggpsTransform;
+	public ParticleSystem ggps;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 
@@ -133,6 +136,11 @@ public class Player2Controller : MonoBehaviour {
 			shadowCenterSR = shadowCenter.GetComponent<SpriteRenderer>();
 			shadowLeftSR = shadowLeft.GetComponent<SpriteRenderer>();
 			shadowRightSR = shadowRight.GetComponent<SpriteRenderer>();
+		}
+
+		ggpsTransform = transform.Find ("GGParticleSystem");
+		if (ggpsTransform) {
+			ggps = ggpsTransform.GetComponent<ParticleSystem>();
 		}
 
 		zap_idle1_beh[] behs = animator.GetBehaviours<zap_idle1_beh>();
@@ -186,7 +194,10 @@ public class Player2Controller : MonoBehaviour {
 		weapons.Add( new Knife(this) );
 		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
 		setWeapon ();
-		
+
+		if (ggps)
+			ggps.Stop ();
+
 		printWeapons ();
 
 		weaponText = transform.Find ("weaponText");
@@ -226,7 +237,10 @@ public class Player2Controller : MonoBehaviour {
 		setWeapon();
 	}
 	void setWeapon(Weapon newCurrentWeapon){
+		if (currentWeapon != null)
+			currentWeapon.deactivate ();
 		currentWeapon = newCurrentWeapon;
+		currentWeapon.activate ();
 		if (weaponTextMesh) {
 			weaponTextMesh.text = currentWeapon.name;
 		}
@@ -607,6 +621,10 @@ public class Player2Controller : MonoBehaviour {
 				reborn();
 				return;
 			}
+		}
+
+		if (ggps) {
+			//ggps.Rotate( Vector3.forward, deltaTime * 720f );
 		}
 
 		SetImpulse(new Vector2(0.0f, 0.0f));

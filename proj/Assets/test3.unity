@@ -879,19 +879,19 @@ GameObject:
   - 198: {fileID: 107364163}
   - 199: {fileID: 107364162}
   m_Layer: 15
-  m_Name: GameObject
+  m_Name: GGParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &107364161
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 107364160}
-  m_LocalRotation: {x: 0, y: 0, z: .382683486, w: .923879564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -939,7 +939,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 107364160}
-  lengthInSec: 5
+  lengthInSec: 2
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -983,7 +983,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 0
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1110,7 +1110,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .100000001
+      scalar: .0500000007
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1186,7 +1186,7 @@ ParticleSystem:
     arc: 360
     placementMode: 0
     m_Mesh: {fileID: 0}
-    randomDirection: 0
+    randomDirection: 1
   EmissionModule:
     enabled: 1
     m_Type: 0
@@ -1308,10 +1308,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4278716671
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4278255411
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -1567,7 +1567,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     y:
-      scalar: 1
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1612,7 +1612,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    inWorldSpace: 0
+    inWorldSpace: 1
     randomizePerFrame: 1
   ExternalForcesModule:
     enabled: 0
@@ -1944,7 +1944,7 @@ ParticleSystem:
     voxelSize: .5
     collisionMessages: 0
   SubModule:
-    enabled: 1
+    enabled: 0
     subEmitterBirth: {fileID: 0}
     subEmitterBirth1: {fileID: 0}
     subEmitterCollision: {fileID: 0}
