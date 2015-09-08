@@ -1,25 +1,94 @@
-Initialize engine version: 5.1.1f1 (2046fc06d4d8)
+Initialize engine version: 5.1.2f1 (afd2369b692a)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.1090]
-    Renderer: NVIDIA GeForce 9300M GS 
-    Vendor:   NVIDIA
-    VRAM:     1136 MB (via DXGI)
-    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 NULL=1 RESZ=0 SlowINTZ=0
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 5700 Series (ID=0x68b8)
+    Vendor:   ATI
+    VRAM:     1010 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.161 seconds
-desktop: 1920x1080 60Hz; virtual: 3360x1220 at 0,0
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.108 seconds
+desktop: 1920x1080 50Hz; virtual: 3840x1080 at -1920,0
 <RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
-Platform assembly: C:\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
+<RI> Initialized touch support.
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
+hello world - weapon
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+hello world - none
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+hello world - weapon
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+hello world - knife
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+hello world - weapon
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+hello world - gravitygun
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+weapons : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+None
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Knife
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+GravityGun
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+============================
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+asdfasdf asdf asdf ass fd
+NullReferenceException: Object reference not set to an instance of an object
+  at Camera2DFollow.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+startFallPos : (-115.4, -46.7, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-115.5, -47.7, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-121.9, -46.7, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
