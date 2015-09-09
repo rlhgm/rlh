@@ -1618,7 +1618,7 @@ public class Player2Controller : MonoBehaviour {
 				_swing = true;
 			}
 
-			if( _swing ){
+			//if( _swing ){
 				if( dir () == Vector2.right ){
 
 					if( faceRight() ) animator.Play("Zap_liana_swingback_R");
@@ -1632,7 +1632,7 @@ public class Player2Controller : MonoBehaviour {
 					animator.speed = 1f;
 
 				}
-			}
+			//}
 		}
 		else if (Input.GetKey (keyRight)) {
 
@@ -1644,7 +1644,7 @@ public class Player2Controller : MonoBehaviour {
 				_swing = true;
 			}
 
-			if( _swing ){
+			//if( _swing ){
 				if( dir () == Vector2.right ){
 
 					if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
@@ -1658,10 +1658,10 @@ public class Player2Controller : MonoBehaviour {
 					animator.speed = 1f;
 
 				}
-			}
+			//}
 		}
 
-		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) || !_swing) {
+		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) ) { //|| !_swing) {
 			setActionRopeClimbIdle();
 		}
 
