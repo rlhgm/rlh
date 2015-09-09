@@ -14,7 +14,11 @@ public class Snake : MonoBehaviour {
 
 	public enum State{
 		ACTIVE = 1,
-		SLEEP = 2
+		SLEEP = 2,
+		TURN = 3,
+		GETS_UP = 4,
+		GETS_DOWN = 5,
+		BITTING = 6
 	};
 
 	void Awake(){
@@ -39,18 +43,48 @@ public class Snake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		turnTime+=Time.deltaTime;
+
+		if (state == State.TURN) {
+			if( turnTime > 0.33f ){
+				state = State.ACTIVE;
+			}
+			return;
+		}
+
+		if (state == State.GETS_DOWN ) {
+			if( turnTime > 0.5f ){
+				state = State.SLEEP;
+			}
+			return;
+		}
+		if (state == State.GETS_UP ) {
+			if( turnTime > 0.5f ){
+				state = State.ACTIVE;
+			}
+			return;
+		}
+
+		if (state == State.BITTING) {
+			if( turnTime > 0.35f ){
+				bite ();
+			}
+		}
+
 		float distToTarget = (target.transform.position - transform.position).magnitude;
 
 		if (state == State.ACTIVE) {
 
 			if( distToTarget > getDownDistance ){
 				getDown();
+				return;
 			}
 
 		} else if (state == State.SLEEP) {
 
 			if( distToTarget < getUpDistance ){
 				getUp();
+				return;
 			}
 		}
 
@@ -67,25 +101,19 @@ public class Snake : MonoBehaviour {
 
 			}
 		}
-
-		if (bitting) {
-			if( (biteTime+=Time.deltaTime) > 0.35f ){
-				bite ();
-			}
-		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			Player2Controller playerController = target.GetComponent<Player2Controller> ();
-			if( !playerController.isDead() ){
+			if( !playerController.isDead() && state == State.ACTIVE){
 				biteStart();
 			}
 		}
 	}
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			if( !bitting ){
+			if( state == State.ACTIVE){
 				Player2Controller playerController = target.GetComponent<Player2Controller> ();
 				if( !playerController.isDead() ){
 					if( (fromLastBite += Time.deltaTime) > toNextBite )
@@ -97,24 +125,29 @@ public class Snake : MonoBehaviour {
 		}
 	}
 
-	bool bitting = false;
-	float biteTime = 0f;
+	//bool bitting = false;
+	//float biteTime = 0f;
 	float fromLastBite = 0f;
 	float toNextBite = 1.5f;
 	Vector3 lastBiteTargetPos = new Vector3();
 
 	void biteStart(){
 		animator.SetTrigger("attack");
-		biteTime = 0f;
-		bitting = true;
+		//biteTime = 0f;
+		//bitting = true;
 		fromLastBite = 0f;
 		toNextBite = Random.Range (3f, 5f);
+
+		state = State.BITTING;
+		turnTime = 0f;
 	}
 
 	void bite(){
 		lastBiteTargetPos = target.transform.position;
-		biteTime = 0f;
-		bitting = false;
+		//biteTime = 0f;
+		//bitting = false;
+		turnTime = 0f;
+		state = State.ACTIVE;
 
 		Vector3 attackDir = attackPoint.position - transform.position;
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, attackDir, attackDir.magnitude, layerIdPlayerMask);
@@ -129,27 +162,41 @@ public class Snake : MonoBehaviour {
 		return transform.localScale.x > 0f ? -1 : 1;
 	}
 
+	float turnTime = 0f;
+
 	void turnLeft(){
+		if (state != State.ACTIVE)
+			return;
 		animator.SetTrigger("turn_right");
 		Vector3 scl = transform.localScale;
 		scl.x = Mathf.Abs(scl.x) * 1.0f;
 		transform.localScale = scl;
+
+		turnTime = 0f;
+		state = State.TURN;
 	}
 	void turnRight(){
+		if (state != State.ACTIVE)
+			return;
 		animator.SetTrigger("turn_left");
 		Vector3 scl = transform.localScale;
 		scl.x = Mathf.Abs(scl.x) * -1.0f;
 		transform.localScale = scl;
+
+		turnTime = 0f;
+		state = State.TURN;
 	}
 
 
 	void getDown(){
 		animator.SetTrigger("gets_down");
-		state = State.SLEEP;
+		turnTime = 0f;
+		state = State.GETS_DOWN;
 	}
 
 	void getUp(){
 		animator.SetTrigger("gets_up");
-		state = State.ACTIVE;
+		turnTime = 0f;
+		state = State.GETS_UP;
 	}
 }
