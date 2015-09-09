@@ -30,9 +30,15 @@ public class Snake : MonoBehaviour {
 	void Update () {
 		if( target ){
 			if( target.transform.position.x < transform.position.x ){
-				turnLeft();
+
+				if( dir() > 0 )
+					turnLeft();
+
 			}else{
-				turnRight();
+
+				if( dir () < 0 )
+					turnRight();
+
 			}
 		}
 
@@ -93,12 +99,18 @@ public class Snake : MonoBehaviour {
 		//fromLastBite = 0f;
 	}
 
+	int dir(){
+		return transform.localScale.x > 0f ? -1 : 1;
+	}
+
 	void turnLeft(){
+		animator.SetTrigger("turn_right");
 		Vector3 scl = transform.localScale;
 		scl.x = Mathf.Abs(scl.x) * 1.0f;
 		transform.localScale = scl;
 	}
 	void turnRight(){
+		animator.SetTrigger("turn_left");
 		Vector3 scl = transform.localScale;
 		scl.x = Mathf.Abs(scl.x) * -1.0f;
 		transform.localScale = scl;
