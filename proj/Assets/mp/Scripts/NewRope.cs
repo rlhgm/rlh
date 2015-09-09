@@ -15,7 +15,8 @@ public class NewRope : MonoBehaviour {
 
 	public int weakLinkIndex = -1;
 	public float weakLinkBreakUpDuration = 2f;
-	public float weakLinkTimeToBreakUp = 2f;
+	[SerializeField]
+	float weakLinkTimeToBreakUp = 2f;
 
 	void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
