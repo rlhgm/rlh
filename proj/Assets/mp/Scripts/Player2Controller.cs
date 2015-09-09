@@ -502,6 +502,9 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetButtonDown("Cancel")){
 			Application.Quit();
 		}
+		//if (Input.GetButtonDown("HUJHUJHUJ")){
+		//	Application.Quit();
+		//}
 
 		if (Input.GetButtonDown("Horizontal")){
 			print("Button down");
