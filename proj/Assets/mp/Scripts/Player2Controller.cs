@@ -55,7 +55,11 @@ public class Player2Controller : MonoBehaviour {
 	public KeyCode keyUp = KeyCode.UpArrow;
 	public KeyCode keyDown = KeyCode.DownArrow;
 
-	static string JumpButtonName = "Jump";
+	static string ButtonName_Jump = "Jump";
+
+	bool ButtonJustPressed_Jump;
+	bool ButtonPressed_Jump;
+	bool ButtonJustReleased_Jump;
 
 	public Transform respawnPoint;
 
@@ -502,15 +506,16 @@ public class Player2Controller : MonoBehaviour {
 		if (Input.GetButtonDown("Cancel")){
 			Application.Quit();
 		}
-		//if (Input.GetButtonDown("HUJHUJHUJ")){
-		//	Application.Quit();
+
+		//if (Input.GetButtonDown("Horizontal")){
+			//print("Button down");
+			//float val = Input.GetAxis ("Horizontal");
+			//print( val );
 		//}
 
-		if (Input.GetButtonDown("Horizontal")){
-			print("Button down");
-			float val = Input.GetAxis ("Horizontal");
-			print( val );
-		}
+		ButtonJustPressed_Jump = Input.GetButtonDown (ButtonName_Jump);
+		ButtonPressed_Jump = Input.GetButton (ButtonName_Jump);
+		ButtonJustReleased_Jump = Input.GetButtonUp (ButtonName_Jump);
 
 		//float val = Input.GetAxis ("Cancel");
 		//if( val != 0f )
@@ -648,7 +653,7 @@ public class Player2Controller : MonoBehaviour {
 		firstFrameInState = false;
 
 		if (!userJumpKeyPressed) {
-			if( Input.GetButtonDown(JumpButtonName) ){
+			if( ButtonJustPressed_Jump ){
 				timeFromJumpKeyPressed = 0.0f;
 				userJumpKeyPressed = true;
 			}
@@ -675,7 +680,7 @@ public class Player2Controller : MonoBehaviour {
 			keyDownUp();
 		}
 
-		if (Input.GetButtonUp (JumpButtonName)) {
+		if (ButtonJustReleased_Jump) {
 			keyJumpUp ();
 		}
 
@@ -755,7 +760,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			if (Input.GetButtonDown (JumpButtonName)) {
+			if (ButtonJustPressed_Jump) {
 				wantJumpAfter = true;
 			}
 			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
@@ -765,7 +770,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_RIGHT:
-			if (Input.GetButtonDown (JumpButtonName)) {
+			if (ButtonJustPressed_Jump) {
 				wantJumpAfter = true;
 			}
 			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
@@ -892,7 +897,7 @@ public class Player2Controller : MonoBehaviour {
 					}
 				}
 			}
-			if( jumpFromMount && Input.GetButton(JumpButtonName) ){
+			if( jumpFromMount && ButtonPressed_Jump ){
 				Vector3 fallDist = startFallPos - transform.position;
 				if( !fuddledFromBrid && (fallDist.y < MaxFallDistToCatch) )
 				{
@@ -905,7 +910,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			if( Input.GetButton(JumpButtonName) ) { 
+			if( ButtonPressed_Jump ) { 
 
 				if( !fuddledFromBrid && tryCatchRope() ){
 					
@@ -916,7 +921,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			if( Input.GetButton(JumpButtonName) || autoCatchEdges ){
+			if( ButtonPressed_Jump || autoCatchEdges ){
 				Vector3 fallDist = startFallPos - transform.position;
 				if( !fuddledFromBrid && fallDist.y < MaxFallDistToCatch )
 				{
@@ -927,7 +932,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			if( Input.GetButtonDown(JumpButtonName) ){
+			if( ButtonJustPressed_Jump ){
 				lastFrameHande = true;
 				if( dir () == Vector2.right )
 					lastHandlePos = sensorHandleR2.position;
@@ -935,7 +940,7 @@ public class Player2Controller : MonoBehaviour {
 					lastHandlePos = sensorHandleL2.position;
 			}
 
-			if( Input.GetButtonUp(JumpButtonName) ) {
+			if( ButtonJustReleased_Jump ) {
 				lastFrameHande = false;
 			}
 
@@ -1266,7 +1271,7 @@ public class Player2Controller : MonoBehaviour {
 			
 			catchedClimbHandle = null;
 			lastCatchedClimbHandle = null;
-		} else if ( Input.GetButtonDown (JumpButtonName)) {
+		} else if ( ButtonJustPressed_Jump ) {
 			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
 				turnLeft ();
 				jumpLeft ();
@@ -1487,7 +1492,7 @@ public class Player2Controller : MonoBehaviour {
 
 		int retVal = 0;
 
-		if (Input.GetButtonDown (JumpButtonName)) {
+		if (ButtonJustPressed_Jump) {
 			wantJumpAfter = true;
 		}
 
@@ -1807,7 +1812,7 @@ public class Player2Controller : MonoBehaviour {
 
 	int tryJumpFromRope(){
 
-		if (Input.GetButtonDown (JumpButtonName)) {
+		if (ButtonJustPressed_Jump) {
 			
 			float ropeSpeed = catchedRope.firstLinkSpeed;
 			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
@@ -2333,14 +2338,14 @@ public class Player2Controller : MonoBehaviour {
 	void turnLeftStart(){
 		setAction (Action.TURN_STAND_LEFT);
 
-		if (Input.GetButtonDown (JumpButtonName) || ( Input.GetButton (JumpButtonName) && canJumpAfter) )
+		if (ButtonJustPressed_Jump || ( ButtonPressed_Jump && canJumpAfter) )
 			wantJumpAfter = true;
 	}
 
 	void turnRightStart(){
 		setAction (Action.TURN_STAND_RIGHT);
 
-		if (Input.GetButtonDown (JumpButtonName) || (Input.GetButton (JumpButtonName) && canJumpAfter) )
+		if (ButtonJustPressed_Jump || (ButtonPressed_Jump && canJumpAfter) )
 			wantJumpAfter = true;
 	}
 
@@ -2350,7 +2355,7 @@ public class Player2Controller : MonoBehaviour {
 		if( wantJumpAfter ) {
 			jumpLeft();
 
-			if( Input.GetButton(JumpButtonName) )
+			if( ButtonPressed_Jump )
 				canJumpAfter = false;
 
 		} else {
@@ -2364,9 +2369,8 @@ public class Player2Controller : MonoBehaviour {
 		if( wantJumpAfter) {
 			jumpRight();
 
-			if( Input.GetButton(JumpButtonName) )
+			if( ButtonPressed_Jump )
 				canJumpAfter = false;
-
 
 		} else {
 			resetActionAndState ();
