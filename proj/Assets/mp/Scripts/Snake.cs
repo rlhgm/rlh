@@ -3,14 +3,24 @@ using System.Collections;
 
 public class Snake : MonoBehaviour {
 
+	public float getUpDistance = 4.0f;
+	public float getDownDistance = 5.0f;
+	public State state;
+
 	Animator animator;
 	GameObject target;
 	Transform attackPoint;
 	int layerIdPlayerMask;
 
+	public enum State{
+		ACTIVE = 1,
+		SLEEP = 2
+	};
+
 	void Awake(){
 		animator = transform.GetComponent<Animator>();
 		attackPoint = transform.Find ("attackPoint").transform;
+		state = State.ACTIVE;
 	}
 
 	// Use this for initialization
@@ -28,6 +38,22 @@ public class Snake : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		float distToTarget = (target.transform.position - transform.position).magnitude;
+
+		if (state == State.ACTIVE) {
+
+			if( distToTarget > getDownDistance ){
+				getDown();
+			}
+
+		} else if (state == State.SLEEP) {
+
+			if( distToTarget < getUpDistance ){
+				getUp();
+			}
+		}
+
 		if( target ){
 			if( target.transform.position.x < transform.position.x ){
 
@@ -116,4 +142,14 @@ public class Snake : MonoBehaviour {
 		transform.localScale = scl;
 	}
 
+
+	void getDown(){
+		animator.SetTrigger("gets_down");
+		state = State.SLEEP;
+	}
+
+	void getUp(){
+		animator.SetTrigger("gets_up");
+		state = State.ACTIVE;
+	}
 }
