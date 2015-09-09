@@ -6,11 +6,15 @@ public class RLHOptionsWindow : EditorWindow{
 
 	static bool physicVisibility;
 
-	static string groundNormalPrefabPath = "Assets/mp/Prefabs/tile_ground1_normal.prefab";
-	static string groundHandleLPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleL.prefab";
-	static string groundHandleRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleR.prefab";
-	static string groundHandleLRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleLR.prefab";
-	static string groundMountPrefabPath = "Assets/mp/Prefabs/tile_mount.prefab";
+	static string GroundNormalPrefabPath = "Assets/mp/Prefabs/tile_ground1_normal.prefab";
+	static string GroundHandleLPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleL.prefab";
+	static string GroundHandleRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleR.prefab";
+	static string GroundHandleLRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleLR.prefab";
+	static string GroundMountPrefabPath = "Assets/mp/Prefabs/tile_mount.prefab";
+
+	static string CheckpointPrefabPath = "Assets/mp/Prefabs/CheckPoint.prefab";
+	static string KillerPhysicPrefabPath = "Assets/mp/Prefabs/KillerPhysic.prefab";
+	static string ShowInfoTriggerPrefabPath = "Assets/mp/Prefabs/ShowInfoTrigger.prefab";
 
 	public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
 	public static float gravityGunMaxDist = GravityGun.maxDistance;
@@ -20,7 +24,7 @@ public class RLHOptionsWindow : EditorWindow{
 		EditorWindow.GetWindow(typeof(RLHOptionsWindow));
 		//Debug.Log( "show RLHOptionsWindow" );
 
-		GameObject prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(groundNormalPrefabPath);
+		GameObject prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(GroundNormalPrefabPath);
 		Transform prefabGfx = prefabGround.transform.Find("gfx");
 
 		physicVisibility = prefabGfx.GetComponent<SpriteRenderer>().enabled;
@@ -82,24 +86,33 @@ public class RLHOptionsWindow : EditorWindow{
 	void setPhysicVisibility(bool newVisibility){
 		physicVisibility = newVisibility;
 
-		GameObject prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(groundNormalPrefabPath);
-		prefabGround.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		GameObject prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundNormalPrefabPath);
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
 
-		prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(groundHandleLPrefabPath);
-		prefabGround.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabGround.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundHandleLPrefabPath);
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
 
-		prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(groundHandleRPrefabPath);
-		prefabGround.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabGround.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundHandleRPrefabPath);
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
 
-		prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(groundHandleLRPrefabPath);
-		prefabGround.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabGround.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabGround.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundHandleLRPrefabPath);
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
 
-		prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(groundMountPrefabPath);
-		prefabGround.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundMountPrefabPath);
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(CheckpointPrefabPath);
+		prefabObject.GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(KillerPhysicPrefabPath);
+		prefabObject.GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+
+		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
+		prefabObject.GetComponent<SpriteRenderer> ().enabled = physicVisibility;
 	}
 
 //	void OnSceneGUI () {
