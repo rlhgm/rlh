@@ -13,6 +13,10 @@ public class NewRope : MonoBehaviour {
 	public float firstLinkMaxSpeed;
 	public float firstLinkAngle;
 
+	public int weakLinkIndex = -1;
+	public float weakLinkBreakUpDuration = 2f;
+	public float weakLinkTimeToBreakUp = 2f;
+
 	void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
 		Destroy (spriteRenderer);
@@ -26,6 +30,7 @@ public class NewRope : MonoBehaviour {
 	}
 
 	void createLinks(){
+
 		int numberOfLinks = links.Length;
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
@@ -56,6 +61,11 @@ public class NewRope : MonoBehaviour {
 			
 			links[i] = newLink;
 		}
+
+		if (weakLinkIndex >= links.Length)
+			weakLinkIndex = -1;
+		
+		weakLinkTimeToBreakUp = weakLinkBreakUpDuration;
 	}
 	// Use this for initialization
 	void Start () {
@@ -118,6 +128,31 @@ public class NewRope : MonoBehaviour {
 //		}
 
 		//print (s);
+	}
+
+	public bool breakUpStep(int linkIndex, float deltaTime){
+		if (weakLinkIndex < 0)
+			return false;
+		if (linkIndex < weakLinkIndex)
+			return false;
+
+		weakLinkTimeToBreakUp -= deltaTime;
+		if (weakLinkTimeToBreakUp <= 0f) {
+			breakUp();
+			return true;
+		}
+
+		return false;
+	}
+
+	void breakUp(){
+		if (weakLinkIndex < 0 || weakLinkIndex >= links.Length)
+			return;
+
+		RopeLink weakLink = links [weakLinkIndex];
+		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
+
+		weakHingeJoint.enabled = false;
 	}
 
 	public void swing (Vector2 dir, float force){

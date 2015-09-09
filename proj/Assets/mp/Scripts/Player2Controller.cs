@@ -833,15 +833,15 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.ROPECLIMB_IDLE:
-			Act_ROPECLIMB_IDLE();
+			Act_ROPECLIMB_IDLE(deltaTime);
 			break;
 
 		case Action.ROPECLIMB_UP:
-			Act_ROPECLIMB_UP();
+			Act_ROPECLIMB_UP(deltaTime);
 			break;
 
 		case Action.ROPECLIMB_DOWN:
-			Act_ROPECLIMB_DOWN();
+			Act_ROPECLIMB_DOWN(deltaTime);
 			break;
 		};
 
@@ -1601,7 +1601,7 @@ public class Player2Controller : MonoBehaviour {
 	NewRope justJumpedRope = null;
 	bool justJumpedMount = false;
 
-	int Act_ROPECLIMB_IDLE(){
+	int Act_ROPECLIMB_IDLE(float deltaTime){
 
 		if (!catchedRope)
 			return 0;
@@ -1682,6 +1682,8 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 
+		tryBreakUpRope (deltaTime);
+
 		return 0;
 	}
 
@@ -1707,7 +1709,19 @@ public class Player2Controller : MonoBehaviour {
 		return true;
 	}
 
-	int Act_ROPECLIMB_UP(){
+	bool tryBreakUpRope(float deltaTime){
+
+		if (catchedRopeLink) {
+			if( catchedRopeLink.rope.breakUpStep( catchedRopeLink.idn, deltaTime ) ){
+				tryJumpFromRope(true);
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	int Act_ROPECLIMB_UP(float deltaTime){
 
 		if (!catchedRope)
 			return 0;
@@ -1740,11 +1754,12 @@ public class Player2Controller : MonoBehaviour {
 			ropeLinkCatchOffset = newRopeLinkCatchOffset;
 		}
 
+		tryBreakUpRope (deltaTime);
 
 		return 0;
 	}
 
-	int Act_ROPECLIMB_DOWN(){
+	int Act_ROPECLIMB_DOWN(float deltaTime){
 
 		if (!catchedRope)
 			return 0;
@@ -1786,13 +1801,14 @@ public class Player2Controller : MonoBehaviour {
 			ropeLinkCatchOffset = newRopeLinkCatchOffset;
 		}
 
+		tryBreakUpRope (deltaTime);
 
 		return 0;
 	}
 
-	int tryJumpFromRope(){
+	int tryJumpFromRope(bool forceJumpOff = false){
 
-		if (Input.GetKeyDown (keyJump)) {
+		if (Input.GetKeyDown (keyJump) || forceJumpOff) {
 			
 			float ropeSpeed = catchedRope.firstLinkSpeed;
 			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
@@ -1817,7 +1833,7 @@ public class Player2Controller : MonoBehaviour {
 				} else {
 					jumpRight ();
 				}
-			} else if( Input.GetKeyDown (keyDown) || Input.GetKey (keyDown) ) {
+			} else if( Input.GetKeyDown (keyDown) || Input.GetKey (keyDown) || forceJumpOff ) {
 				velocity.x = 0f;
 				velocity.y = 0f;
 				setAction (Action.JUMP);
