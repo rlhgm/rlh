@@ -2608,7 +2608,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.61458349
+  orthographic size: 5.95833349
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -9573,7 +9573,7 @@ Transform:
   m_GameObject: {fileID: 1038731992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.20944881, y: 1.20944881, z: 1.20944881}
+  m_LocalScale: {x: 1.34265733, y: 1.34265733, z: 1.34265733}
   m_Children:
   - {fileID: 1225409483}
   m_Father: {fileID: 1535172079}
@@ -9591,10 +9591,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 768
   preferUncropped: 0
-  screenPixelsY: 635
+  screenPixelsY: 572
   currentCropped: 0
-  screenRatio: .826822937
-  ratio: 1.20944881
+  screenRatio: .744791687
+  ratio: 1.34265733
   mainCamera: {fileID: 2143118006}
   touchCamera: {fileID: 214894816}
 --- !u!1001 &1039750996

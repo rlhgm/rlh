@@ -13,7 +13,7 @@ GameObject:
   - 233: {fileID: 23380544}
   - 61: {fileID: 6120242}
   - 114: {fileID: 11413356}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: ropelink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,6 +150,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
