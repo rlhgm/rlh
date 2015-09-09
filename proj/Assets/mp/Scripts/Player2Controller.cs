@@ -54,7 +54,8 @@ public class Player2Controller : MonoBehaviour {
 	public KeyCode keyRun = KeyCode.LeftShift;
 	public KeyCode keyUp = KeyCode.UpArrow;
 	public KeyCode keyDown = KeyCode.DownArrow;
-	public KeyCode keyJump = KeyCode.Space;
+
+	static string JumpButtonName = "Jump";
 
 	public Transform respawnPoint;
 
@@ -498,8 +499,19 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	bool GlobalUpdate (float deltaTime) {
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetButtonDown("Cancel")){
 			Application.Quit();
+		}
+
+		if (Input.GetButtonDown("Horizontal")){
+			print("Button down");
+			float val = Input.GetAxis ("Horizontal");
+			print( val );
+		}
+
+		//float val = Input.GetAxis ("Cancel");
+		//if( val != 0f )
+		//	print( val );
 
 		if (Input.GetKeyDown (KeyCode.P)) {
 			gamePaused = !gamePaused;
@@ -633,7 +645,7 @@ public class Player2Controller : MonoBehaviour {
 		firstFrameInState = false;
 
 		if (!userJumpKeyPressed) {
-			if (Input.GetKeyDown (keyJump)) {
+			if( Input.GetButtonDown(JumpButtonName) ){
 				timeFromJumpKeyPressed = 0.0f;
 				userJumpKeyPressed = true;
 			}
@@ -660,7 +672,7 @@ public class Player2Controller : MonoBehaviour {
 			keyDownUp();
 		}
 
-		if (Input.GetKeyUp (keyJump)) {
+		if (Input.GetButtonUp (JumpButtonName)) {
 			keyJumpUp ();
 		}
 
@@ -740,7 +752,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			if (Input.GetKeyDown (keyJump)) {
+			if (Input.GetButtonDown (JumpButtonName)) {
 				wantJumpAfter = true;
 			}
 			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
@@ -750,7 +762,7 @@ public class Player2Controller : MonoBehaviour {
 			break;
 
 		case Action.TURN_STAND_RIGHT:
-			if (Input.GetKeyDown (keyJump)) {
+			if (Input.GetButtonDown (JumpButtonName)) {
 				wantJumpAfter = true;
 			}
 			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
@@ -860,7 +872,7 @@ public class Player2Controller : MonoBehaviour {
 
 		case State.IN_AIR:
 
-			if( jumpKeyPressed ) { //Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
+			if( jumpKeyPressed ) {
 				Vector3 fallDist = startFallPos - transform.position;
 				if( !fuddledFromBrid && (fallDist.y < MaxFallDistToCatch) )
 				{
@@ -877,7 +889,7 @@ public class Player2Controller : MonoBehaviour {
 					}
 				}
 			}
-			if( jumpFromMount && Input.GetKey(keyJump) ){
+			if( jumpFromMount && Input.GetButton(JumpButtonName) ){
 				Vector3 fallDist = startFallPos - transform.position;
 				if( !fuddledFromBrid && (fallDist.y < MaxFallDistToCatch) )
 				{
@@ -890,7 +902,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			if( Input.GetKey(keyJump) ) { 
+			if( Input.GetButton(JumpButtonName) ) { 
 
 				if( !fuddledFromBrid && tryCatchRope() ){
 					
@@ -901,7 +913,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			if( Input.GetKey(keyJump) || autoCatchEdges ){
+			if( Input.GetButton(JumpButtonName) || autoCatchEdges ){
 				Vector3 fallDist = startFallPos - transform.position;
 				if( !fuddledFromBrid && fallDist.y < MaxFallDistToCatch )
 				{
@@ -912,7 +924,7 @@ public class Player2Controller : MonoBehaviour {
 				}
 			}
 
-			if( Input.GetKeyDown(keyJump) ){
+			if( Input.GetButtonDown(JumpButtonName) ){
 				lastFrameHande = true;
 				if( dir () == Vector2.right )
 					lastHandlePos = sensorHandleR2.position;
@@ -920,7 +932,7 @@ public class Player2Controller : MonoBehaviour {
 					lastHandlePos = sensorHandleL2.position;
 			}
 
-			if( Input.GetKeyUp(keyJump) ) {
+			if( Input.GetButtonUp(JumpButtonName) ) {
 				lastFrameHande = false;
 			}
 
@@ -1251,7 +1263,7 @@ public class Player2Controller : MonoBehaviour {
 			
 			catchedClimbHandle = null;
 			lastCatchedClimbHandle = null;
-		} else if ( Input.GetKeyDown (keyJump)) {
+		} else if ( Input.GetButtonDown (JumpButtonName)) {
 			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
 				turnLeft ();
 				jumpLeft ();
@@ -1472,7 +1484,7 @@ public class Player2Controller : MonoBehaviour {
 
 		int retVal = 0;
 
-		if (Input.GetKeyDown (keyJump)) {
+		if (Input.GetButtonDown (JumpButtonName)) {
 			wantJumpAfter = true;
 		}
 
@@ -1792,7 +1804,7 @@ public class Player2Controller : MonoBehaviour {
 
 	int tryJumpFromRope(){
 
-		if (Input.GetKeyDown (keyJump)) {
+		if (Input.GetButtonDown (JumpButtonName)) {
 			
 			float ropeSpeed = catchedRope.firstLinkSpeed;
 			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
@@ -2318,14 +2330,14 @@ public class Player2Controller : MonoBehaviour {
 	void turnLeftStart(){
 		setAction (Action.TURN_STAND_LEFT);
 
-		if (Input.GetKeyDown (keyJump) || ( Input.GetKey (keyJump) && canJumpAfter) )
+		if (Input.GetButtonDown (JumpButtonName) || ( Input.GetButton (JumpButtonName) && canJumpAfter) )
 			wantJumpAfter = true;
 	}
 
 	void turnRightStart(){
 		setAction (Action.TURN_STAND_RIGHT);
 
-		if (Input.GetKeyDown (keyJump) || (Input.GetKey (keyJump) && canJumpAfter) )
+		if (Input.GetButtonDown (JumpButtonName) || (Input.GetButton (JumpButtonName) && canJumpAfter) )
 			wantJumpAfter = true;
 	}
 
@@ -2335,7 +2347,7 @@ public class Player2Controller : MonoBehaviour {
 		if( wantJumpAfter ) {
 			jumpLeft();
 
-			if( Input.GetKey(keyJump) )
+			if( Input.GetButton(JumpButtonName) )
 				canJumpAfter = false;
 
 		} else {
@@ -2349,7 +2361,7 @@ public class Player2Controller : MonoBehaviour {
 		if( wantJumpAfter) {
 			jumpRight();
 
-			if( Input.GetKey(keyJump) )
+			if( Input.GetButton(JumpButtonName) )
 				canJumpAfter = false;
 
 
