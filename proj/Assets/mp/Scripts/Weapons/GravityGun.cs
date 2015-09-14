@@ -33,76 +33,80 @@ public class GravityGun : Weapon {
 
 	public override void Update (float deltaTime) {
 
-		if( player.ggps ) {
-			player.ggpsTransform.Rotate( Vector3.forward, deltaTime * 360f );
-		}
+		Vector2 mouseInScene = player.touchCamera.ScreenToWorldPoint(Input.mousePosition);
+		Debug.Log ("Knife::Update mouseInScene");
 
-		if (!Input.GetMouseButton (0)) {
-			if (draggedStone == null) {
 
-				if (lastFlashStone) {
-					unflashStone (lastFlashStone);
-					lastFlashStone = null;
-				}
-					
-				Vector2 mouseInScene = player.touchCamera.ScreenToWorldPoint(Input.mousePosition);
-
-				Vector2 rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
-				Vector3 _df = mouseInScene - rayOrigin;
-				
-				if( _df.magnitude <= maxDistance ){
-
-					RaycastHit2D hit = Physics2D.Linecast (mouseInScene, mouseInScene, layerIdGroundMoveableMask);
-					if( hit.collider ){
-
-						lastFlashStone = hit.collider.gameObject.transform;
-						if( lastFlashStone ){
-							Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
-							if( tsrb ){
-
-								//rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
-
-								hit = Physics2D.Linecast (rayOrigin, tsrb.worldCenterOfMass, layerIdGroundMask);
-								if( hit.collider ){
-									lastFlashStone = null;
-								}else{
-									flashStone(lastFlashStone);
-								}
-
-							}else{
-								lastFlashStone = null;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		if (Input.GetMouseButtonDown (0)) {
-			
-			draggedStone = null;
-
-			Vector3 mouseInScene = player.touchCamera.ScreenToWorldPoint(Input.mousePosition);
-			
-			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, layerIdGroundMoveableMask );
-			if( hit.collider ){
-				draggedStone = hit.collider.gameObject.transform;
-
-				if( canBeDragged(draggedStone) ){
-
-					Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
-					tsrb.gravityScale = 0f;
-					flashStone(draggedStone);
-
-				} else {
-					draggedStone = null;
-				}
-			}
-		}
-		
-		if (Input.GetMouseButtonUp (0)) {
-			releaseStone();
-		}
+//		if( player.ggps ) {
+//			player.ggpsTransform.Rotate( Vector3.forward, deltaTime * 360f );
+//		}
+//
+//		if (!Input.GetMouseButton (0)) {
+//			if (draggedStone == null) {
+//
+//				if (lastFlashStone) {
+//					unflashStone (lastFlashStone);
+//					lastFlashStone = null;
+//				}
+//					
+//				Vector2 mouseInScene = player.touchCamera.ScreenToWorldPoint(Input.mousePosition);
+//
+//				Vector2 rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
+//				Vector3 _df = mouseInScene - rayOrigin;
+//				
+//				if( _df.magnitude <= maxDistance ){
+//
+//					RaycastHit2D hit = Physics2D.Linecast (mouseInScene, mouseInScene, layerIdGroundMoveableMask);
+//					if( hit.collider ){
+//
+//						lastFlashStone = hit.collider.gameObject.transform;
+//						if( lastFlashStone ){
+//							Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
+//							if( tsrb ){
+//
+//								//rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
+//
+//								hit = Physics2D.Linecast (rayOrigin, tsrb.worldCenterOfMass, layerIdGroundMask);
+//								if( hit.collider ){
+//									lastFlashStone = null;
+//								}else{
+//									flashStone(lastFlashStone);
+//								}
+//
+//							}else{
+//								lastFlashStone = null;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//
+//		if (Input.GetMouseButtonDown (0)) {
+//			
+//			draggedStone = null;
+//
+//			Vector3 mouseInScene = player.touchCamera.ScreenToWorldPoint(Input.mousePosition);
+//			
+//			RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, layerIdGroundMoveableMask );
+//			if( hit.collider ){
+//				draggedStone = hit.collider.gameObject.transform;
+//
+//				if( canBeDragged(draggedStone) ){
+//
+//					Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+//					tsrb.gravityScale = 0f;
+//					flashStone(draggedStone);
+//
+//				} else {
+//					draggedStone = null;
+//				}
+//			}
+//		}
+//		
+//		if (Input.GetMouseButtonUp (0)) {
+//			releaseStone();
+//		}
 	}
 
 	Vector2 T; 			// sila ciagu

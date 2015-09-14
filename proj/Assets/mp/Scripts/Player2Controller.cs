@@ -74,7 +74,7 @@ public class Player2Controller : MonoBehaviour {
 
 	public Weapon currentWeapon;
 	public int currentWeaponIndex = 0;
-	public List<Weapon> weapons = new List<Weapon>(3);
+	public List<Weapon> weapons;
 
 	public bool autoCatchEdges = false;
 
@@ -190,6 +190,7 @@ public class Player2Controller : MonoBehaviour {
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 
+		weapons = new List<Weapon>(3);
 		weapons.Add( new Empty (this) );
 		weapons.Add( new Knife(this) );
 		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
@@ -261,6 +262,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void Start () {
+		print ("Player2Controller::Start()");
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
