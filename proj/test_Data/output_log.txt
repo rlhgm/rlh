@@ -1,31 +1,105 @@
 Initialize engine version: 5.1.2f1 (afd2369b692a)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: AMD Radeon HD 5700 Series (ID=0x68b8)
-    Vendor:   ATI
-    VRAM:     1010 MB
+    Version:  Direct3D 11.0 [level 10.0]
+    Renderer: NVIDIA GeForce 9300M GS  (ID=0x6e9)
+    Vendor:   NVIDIA
+    VRAM:     497 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
-Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.108 seconds
-desktop: 1920x1080 50Hz; virtual: 3840x1080 at -1920,0
+Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.177 seconds
+desktop: 1440x900 60Hz; virtual: 1440x900 at 0,0
 <RI> Initializing input.
-XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
-<RI> Initialized touch support.
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1562)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1562)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1562)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1562)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1562)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1562)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+A script behaviour has a different serialization layout when loading. (Read 32 bytes but expected 44 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+ 
+(Filename:  Line: 1652)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+A script behaviour has a different serialization layout when loading. (Read 32 bytes but expected 44 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+ 
+(Filename:  Line: 1652)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+A script behaviour has a different serialization layout when loading. (Read 32 bytes but expected 44 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+ 
+(Filename:  Line: 1652)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+A script behaviour has a different serialization layout when loading. (Read 32 bytes but expected 44 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+ 
+(Filename:  Line: 1652)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+A script behaviour has a different serialization layout when loading. (Read 32 bytes but expected 44 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+ 
+(Filename:  Line: 1652)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+A script behaviour has a different serialization layout when loading. (Read 32 bytes but expected 44 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+ 
+(Filename:  Line: 1652)
+
 hello world - weapon
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
@@ -76,19 +150,275 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
-startFallPos : (-115.4, -46.7, 0.0)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-startFallPos : (-115.5, -47.7, 0.0)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
-
-startFallPos : (-121.9, -46.7, 0.0)
+startFallPos : (-121.9, -46.8, 0.0)
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
 
 ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-123.2, -45.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-115.4, -46.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-111.3, -47.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-109.3, -47.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-105.9, -47.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-95.3, -46.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-96.9, -39.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ShowInfoTrigger
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-97.0, -37.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-93.5, -39.1, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-83.5, -36.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-84.9, -34.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-85.9, -31.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-81.1, -29.1, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-73.2, -24.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-61.5, -22.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-54.1, -22.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-45.8, -29.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-61.7, -22.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-53.9, -22.9, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-51.1, -29.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-41.4, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-36.7, -30.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-25.5, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-19.8, -32.4, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-13.4, -33.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-5.2, -32.1, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-37.7, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-41.5, -32.6, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.5, -35.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.5, -38.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.5, -40.4, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-43.5, -42.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-46.5, -45.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-46.5, -46.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-43.5, -43.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-40.5, -40.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-41.8, -40.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.5, -35.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.5, -35.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.1, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-38.0, -32.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-25.1, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-23.0, -30.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-24.4, -29.9, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-25.4, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-25.8, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-23.8, -33.0, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-26.5, -35.2, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-25.8, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-20.6, -33.1, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-38.1, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-42.4, -31.5, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-50.3, -32.8, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-44.0, -29.3, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-51.2, -32.4, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-45.3, -28.4, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-45.2, -28.6, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-50.1, -32.9, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+startFallPos : (-51.7, -32.7, 0.0)
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
 

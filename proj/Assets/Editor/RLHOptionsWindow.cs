@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class RLHOptionsWindow : EditorWindow{
 
-	static bool physicVisibility;
+	static bool PhysicVisibility;
+	static bool LevelArtVisibility = false;
+	static GameObject LevelArtGameObject = null;
 
 	static string GroundNormalPrefabPath = "Assets/mp/Prefabs/tile_ground1_normal.prefab";
 	static string GroundHandleLPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleL.prefab";
@@ -19,6 +22,8 @@ public class RLHOptionsWindow : EditorWindow{
 	public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
 	public static float gravityGunMaxDist = GravityGun.maxDistance;
 
+
+
 	[MenuItem ("Window/RLH Options")]
 	public static void  ShowWindow () {
 		EditorWindow.GetWindow(typeof(RLHOptionsWindow));
@@ -27,9 +32,14 @@ public class RLHOptionsWindow : EditorWindow{
 		GameObject prefabGround = AssetDatabase.LoadAssetAtPath<GameObject>(GroundNormalPrefabPath);
 		Transform prefabGfx = prefabGround.transform.Find("gfx");
 
-		physicVisibility = prefabGfx.GetComponent<SpriteRenderer>().enabled;
+		PhysicVisibility = prefabGfx.GetComponent<SpriteRenderer>().enabled;
 		gravityGunInertiaFactor = GravityGun.inertiaFactor;
 		gravityGunMaxDist = GravityGun.maxDistance;
+
+		LevelArtGameObject = GameObject.Find ("Level Art");
+		if (LevelArtGameObject != null) {
+			LevelArtVisibility = LevelArtGameObject.activeInHierarchy;
+		}
 	}
 
 	void SceneGUI(SceneView sceneView)
@@ -59,9 +69,19 @@ public class RLHOptionsWindow : EditorWindow{
 		}
 
 		// The actual window code goes here
-		bool newPhysicVisibility = EditorGUILayout.Toggle ("Physics visibility", physicVisibility);
-		if (newPhysicVisibility != physicVisibility) {
+		bool newPhysicVisibility = EditorGUILayout.Toggle ("Physics visibility", PhysicVisibility);
+		if (newPhysicVisibility != PhysicVisibility) {
 			setPhysicVisibility(newPhysicVisibility);
+		}
+
+		if (LevelArtGameObject != null) {
+			LevelArtVisibility = LevelArtGameObject.activeInHierarchy;
+			bool newLevelArtVisibility = EditorGUILayout.Toggle ("LevelArt visibility", LevelArtVisibility);
+			if (newLevelArtVisibility != LevelArtVisibility) {
+				setLevelArtVisibility (newLevelArtVisibility);
+			}
+		} else {
+			EditorGUILayout.LabelField( "Nie ma noda : Level Art" );
 		}
 
 		//float newGravityGunInertiaFactor = EditorGUILayout.FloatField("GravityGun interia factor:", gravityGunInertiaFactor);
@@ -83,36 +103,61 @@ public class RLHOptionsWindow : EditorWindow{
 		//}
 	}
 
+	void OnHierarchyChange() {
+		//EditorApplication.ExecuteMenuItem("Assets/Sync MonoDevelop Project");
+//		Debug.Log("OnHierarchyChange");
+//
+//		LevelArtGameObject = GameObject.Find ("Level Art");
+//		if (LevelArtGameObject != null) {
+//			LevelArtVisibility = LevelArtGameObject.activeInHierarchy;
+//		}
+
+	}
+
+	void OnProjectChange() {
+		//EditorApplication.ExecuteMenuItem("Assets/Sync MonoDevelop Project");
+		Debug.Log("OnProjectChange");
+	}
+
 	void setPhysicVisibility(bool newVisibility){
-		physicVisibility = newVisibility;
+		PhysicVisibility = newVisibility;
+
+		//Debug.Log ("RLHOptionsWindow::setPhysicVisibility : " + physicVisibility);
 
 		GameObject prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundNormalPrefabPath);
-		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundHandleLPrefabPath);
-		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabObject.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+		prefabObject.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundHandleRPrefabPath);
-		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabObject.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+		prefabObject.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundHandleLRPrefabPath);
-		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabObject.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
-		prefabObject.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+		prefabObject.transform.Find ("handleGfxL").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+		prefabObject.transform.Find ("handleGfxR").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundMountPrefabPath);
-		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(CheckpointPrefabPath);
-		prefabObject.GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(KillerPhysicPrefabPath);
-		prefabObject.GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
-		prefabObject.GetComponent<SpriteRenderer> ().enabled = physicVisibility;
+		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+	}
+
+	void setLevelArtVisibility(bool newVisibility){
+		if (LevelArtGameObject != null) {
+			LevelArtVisibility = newVisibility;
+			LevelArtGameObject.SetActive( LevelArtVisibility );
+		}
 	}
 
 //	void OnSceneGUI () {
