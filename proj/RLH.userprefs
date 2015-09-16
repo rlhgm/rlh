@@ -1,6 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Player2Controller.cs">
+    <Files>
+      <File FileName="Assets\mp\Scripts\Player2Controller.cs" Line="1864" Column="6" />
+      <File FileName="Assets\mp\Scripts\ZapControllers\ZapController.cs" Line="10" Column="2" />
+      <File FileName="Assets\mp\Scripts\ZapControllers\ZapNormalController.cs" Line="14" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
