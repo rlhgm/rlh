@@ -22,4 +22,11 @@ public class ZapController {
 	}
 	public virtual void deactivate(){
 	}
+
+	protected bool isInState(Zap.State test){
+		return zap.isInState (test);
+	}
+	protected bool isNotInState(Zap.State test) {
+		return zap.isNotInState(test);
+	}
 }

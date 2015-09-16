@@ -931,13 +931,13 @@ public class Zap : MonoBehaviour {
 
 
 
-	void turnLeft(){
+	public void turnLeft(){
 		Vector3 scl = gfx.localScale;
 		scl.x = Mathf.Abs(scl.x) * -1.0f;
 		gfx.localScale = scl;
 
 	}
-	void turnRight(){
+	public void turnRight(){
 		Vector3 scl = gfx.localScale;
 		scl.x = Mathf.Abs(scl.x) * 1.0f;
 		gfx.localScale = scl;
@@ -953,114 +953,8 @@ public class Zap : MonoBehaviour {
 		return gfx.localScale.x > 0f;
 	}
 
-	void setActionIdle(){
-		velocity.x = 0.0f;
-		setAction (Action.IDLE);
-	}
-	void setActionRopeClimbIdle(){
-		if( faceRight() ) animator.Play("Zap_liana_climbup_R");
-		else animator.Play("Zap_liana_climbup_L");
-		animator.speed = 0f;
-	}
-	void setActionCrouchIdle(){
-		velocity.x = 0.0f;
-		setAction (Action.CROUCH_IDLE);
-	}
-	void setActionMountIdle(){
-		velocity.x = 0.0f;
-		velocity.y = 0.0f;
-		setState(State.MOUNT);
-		setAction(Action.MOUNT_IDLE);
-		resetActionAndState ();
-	}
-	bool setMountIdle(){
-		if (isInState (State.MOUNT)) {
-			velocity.x = 0.0f;
-			velocity.y = 0.0f;
-			setAction (Action.MOUNT_IDLE);
 
-			return true;
-		}
-		return false;
-	}
-
-	void resetActionAndState(){
-		if (isInState (State.ON_GROUND)) {
-			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-				if (!keyDownDown ())
-					setActionIdle ();
-			} else if (Input.GetKey (keyLeft)) {
-				if (!keyLeftDown ())
-					setActionIdle ();
-			} else if (Input.GetKey (keyRight)) {
-				if (!keyRightDown ())
-					setActionIdle ();
-			} else {
-				if (isInState (State.ON_GROUND)) {
-					setActionIdle ();
-				}
-			}
-		} else if (isInState (State.MOUNT)) {
-
-			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-				if (!keyDownDown ())
-					setMountIdle ();
-			}else if( Input.GetKey (keyUp)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
-				if (!keyUpDown ())
-					setMountIdle ();
-			} else if (Input.GetKey (keyLeft)) {
-				if (!keyLeftDown ())
-					setMountIdle ();
-			} else if (Input.GetKey (keyRight)) {
-				if (!keyRightDown ())
-					setMountIdle ();
-			} else {
-				if (isInState (State.ON_GROUND)) {
-					setActionIdle ();
-				}
-			}
-		}
-	}
 	
-	int walking(){
-		if (isInAction (Action.WALK_RIGHT))
-			return 1;
-		if (isInAction (Action.WALK_LEFT))
-			return -1;
-		return 0;
-	}
-	
-	int running(){
-		if (isInAction (Action.RUN_RIGHT))
-			return 1;
-		if (isInAction (Action.RUN_LEFT))
-			return -1;
-		return 0;
-	}
-	
-	bool moving(Vector2 dir){
-		if (dir == Vector2.right)
-			return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
-		else 
-			return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
-	}
-	bool moving(int dir){
-		if (dir == 1)
-			return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
-		else 
-			return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
-	}
-	bool jumping(){
-		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
-	}
-	bool mounting(){
-		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
-	}
-	bool crouching(){
-		return isInAction(Action.CROUCH_IDLE) || 
-			isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_LEFT_BACK) ||
-			isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
-	}
 
 	float checkLeft(float checkingDist, bool flying = false){
 		Vector2 rayOrigin;
@@ -1550,7 +1444,7 @@ public class Zap : MonoBehaviour {
 		}
 	}
 
-	bool onMount(){
+	bool checkMount(){
 		Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
 		rayOrigin.y += 0.3f;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
@@ -1567,7 +1461,7 @@ public class Zap : MonoBehaviour {
 		return hit.collider;
 	}
 
-	bool onMount(Vector3 posToCheck){
+	bool checkMount(Vector3 posToCheck){
 		Vector3 sensorDiff = sensorLeft3.transform.position - transform.position; // transform.position;
 
 		Vector2 rayOrigin = posToCheck + sensorDiff;//aaa

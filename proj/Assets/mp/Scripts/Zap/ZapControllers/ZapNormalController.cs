@@ -71,7 +71,7 @@ public class ZapNormalController : ZapController {
 				wantJumpAfter = true;
 			}
 			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
-				turnLeft();
+				zap.turnLeft();
 				turnLeftFinish();
 			}
 			break;
@@ -81,14 +81,14 @@ public class ZapNormalController : ZapController {
 				wantJumpAfter = true;
 			}
 			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
-				turnRight();
+				zap.turnRight();
 				turnRightFinish();
 			}
 			break;
 			
 		case Action.TURN_RUN_LEFT:
 			if( currentActionTime >= 0.85f ){
-				turnLeft();
+				zap.turnLeft();
 				if( wantJumpAfter ){
 					jumpLeft();
 				}else{
@@ -104,7 +104,7 @@ public class ZapNormalController : ZapController {
 			
 		case Action.TURN_RUN_RIGHT:
 			if( currentActionTime >= 0.85f ){
-				turnRight();
+				zap.turnRight();
 				if( wantJumpAfter ){
 					jumpRight();
 				}else{
@@ -168,7 +168,6 @@ public class ZapNormalController : ZapController {
 		
 		if (wantGetUp) {
 			if( canGetUp() ){
-				//getUp();
 				setAction(Action.GET_UP);
 				wantGetUp = false;
 			}
@@ -176,10 +175,10 @@ public class ZapNormalController : ZapController {
 		
 		switch (zap.getState()) {
 			
-		case State.MOUNT:
+		case Zap.State.MOUNT:
 			break;
 			
-		case State.IN_AIR:
+		case Zap.State.IN_AIR:
 			
 			if( jumpKeyPressed ) { //Input.GetKeyDown(keyJump) || Input.GetKey(keyJump) ){
 				Vector3 fallDist = startFallPos - transform.position;
@@ -713,6 +712,7 @@ public class ZapNormalController : ZapController {
 	bool isNotInAction(Action test){
 		return action != test;
 	}
+
 
 	override int keyUpDown(){
 		if (isInState (State.MOUNT)) {
@@ -1724,6 +1724,116 @@ public class ZapNormalController : ZapController {
 			resetActionAndState ();
 		}
 	}
+
+	void setActionIdle(){
+		velocity.x = 0.0f;
+		setAction (Action.IDLE);
+	}
+	void setActionRopeClimbIdle(){
+		if( faceRight() ) animator.Play("Zap_liana_climbup_R");
+		else animator.Play("Zap_liana_climbup_L");
+		animator.speed = 0f;
+	}
+	void setActionCrouchIdle(){
+		velocity.x = 0.0f;
+		setAction (Action.CROUCH_IDLE);
+	}
+	void setActionMountIdle(){
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		setState(State.MOUNT);
+		setAction(Action.MOUNT_IDLE);
+		resetActionAndState ();
+	}
+	bool setMountIdle(){
+		if (isInState (State.MOUNT)) {
+			velocity.x = 0.0f;
+			velocity.y = 0.0f;
+			setAction (Action.MOUNT_IDLE);
+			
+			return true;
+		}
+		return false;
+	}
+	
+	void resetActionAndState(){
+		if (isInState (State.ON_GROUND)) {
+			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				if (!keyDownDown ())
+					setActionIdle ();
+			} else if (Input.GetKey (keyLeft)) {
+				if (!keyLeftDown ())
+					setActionIdle ();
+			} else if (Input.GetKey (keyRight)) {
+				if (!keyRightDown ())
+					setActionIdle ();
+			} else {
+				if (isInState (State.ON_GROUND)) {
+					setActionIdle ();
+				}
+			}
+		} else if (isInState (State.MOUNT)) {
+			
+			if (Input.GetKey (keyDown)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				if (!keyDownDown ())
+					setMountIdle ();
+			}else if( Input.GetKey (keyUp)) { //&& (Input.GetKey(keyLeft) || Input.GetKey(keyRight)) ){
+				if (!keyUpDown ())
+					setMountIdle ();
+			} else if (Input.GetKey (keyLeft)) {
+				if (!keyLeftDown ())
+					setMountIdle ();
+			} else if (Input.GetKey (keyRight)) {
+				if (!keyRightDown ())
+					setMountIdle ();
+			} else {
+				if (isInState (State.ON_GROUND)) {
+					setActionIdle ();
+				}
+			}
+		}
+	}
+
+	int walking(){
+		if (isInAction (Action.WALK_RIGHT))
+			return 1;
+		if (isInAction (Action.WALK_LEFT))
+			return -1;
+		return 0;
+	}
+	
+	int running(){
+		if (isInAction (Action.RUN_RIGHT))
+			return 1;
+		if (isInAction (Action.RUN_LEFT))
+			return -1;
+		return 0;
+	}
+	
+	bool moving(Vector2 dir){
+		if (dir == Vector2.right)
+			return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
+		else 
+			return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
+	}
+	bool moving(int dir){
+		if (dir == 1)
+			return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
+		else 
+			return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
+	}
+	bool jumping(){
+		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
+	}
+	bool mounting(){
+		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
+	}
+	bool crouching(){
+		return isInAction(Action.CROUCH_IDLE) || 
+			isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_LEFT_BACK) ||
+				isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
+	}
+
 
 	Action action;
 	public float CrouchInOutDuration = 0.2f;
