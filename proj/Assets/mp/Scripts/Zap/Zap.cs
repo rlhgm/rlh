@@ -375,7 +375,8 @@ public class Zap : MonoBehaviour {
 
 	bool userJumpKeyPressed = false;
 	float timeFromJumpKeyPressed = 0.0f;
-	bool jumpKeyPressed = false;
+	[HideInInspector]
+	public bool jumpKeyPressed = false;
 
 	void FixedUpdate(){
 		if (currentController != null) {
@@ -523,14 +524,7 @@ public class Zap : MonoBehaviour {
 	void ZapUpdate (float deltaTime) {
 		CurrentDeltaTime = deltaTime;
 
-		if (isDead()) {
-			if( Input.GetKeyDown(KeyCode.Space) ){
-				reborn();
-				return;
-			}
-		}
-
-		if (userJumpKeyPressed) {
+		if (!userJumpKeyPressed) {
 			if (Input.GetKeyDown (keyJump)) {
 				timeFromJumpKeyPressed = 0.0f;
 				userJumpKeyPressed = true;
@@ -540,7 +534,8 @@ public class Zap : MonoBehaviour {
 			if (timeFromJumpKeyPressed >= 0.06f) {
 				timeFromJumpKeyPressed = 0.0f;
 				userJumpKeyPressed = false;
-				
+				jumpKeyPressed = true;
+
 				currentController.keyJumpDown ();
 			}
 		}
@@ -559,6 +554,7 @@ public class Zap : MonoBehaviour {
 		}
 		
 		if (Input.GetKeyUp (keyJump)) {
+			jumpKeyPressed = false;
 			currentController.keyJumpUp ();
 		}
 		
@@ -580,6 +576,13 @@ public class Zap : MonoBehaviour {
 			currentController.keyRunDown();
 		} else if (Input.GetKeyUp (keyRun)) {
 			currentController.keyRunUp();
+		}
+
+		if (isDead()) {
+			if( Input.GetKeyDown(KeyCode.Space) ){
+				reborn();
+				return;
+			}
 		}
 
 		stateJustChanged = false;
@@ -972,7 +975,8 @@ public class Zap : MonoBehaviour {
 		return state; 
 	}
 
-	bool stateJustChanged = false;
+	[HideInInspector]
+	public bool stateJustChanged = false;
 
 	public bool setState(State newState){
 
@@ -1083,7 +1087,7 @@ public class Zap : MonoBehaviour {
 	int layerIdGroundPermeableMask;
 	int layerIdGroundMoveableMask;
 	[HideInInspector]
-	int layerIdGroundAllMask;
+	public int layerIdGroundAllMask;
 	[HideInInspector]
 	public int layerIdLastGroundTypeTouchedMask;
 	[HideInInspector]

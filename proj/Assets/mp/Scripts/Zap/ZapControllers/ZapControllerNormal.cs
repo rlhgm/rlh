@@ -238,7 +238,7 @@ public class ZapControllerNormal : ZapController {
 			
 		case Zap.State.IN_AIR:
 			
-			if( jumpKeyPressed ) { //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
+			if( zap.jumpKeyPressed ) { //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
 				Vector3 fallDist = zap.startFallPos - transform.position;
 				if( !zap.isFuddledFromBrid() && (fallDist.y < MaxFallDistToCatch) )
 				{
@@ -360,7 +360,7 @@ public class ZapControllerNormal : ZapController {
 			distToFall.x = zap.velocity.x * deltaTime;
 			
 			if( distToFall.x > 0.0f ){
-				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f,!zap.firstFrameInState);
+				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f,!zap.stateJustChanged);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = obstacleOnRoad;
@@ -368,7 +368,7 @@ public class ZapControllerNormal : ZapController {
 					}
 				}
 			}else if( distToFall.x < 0.0f ){
-				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!firstFrameInState);
+				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!zap.stateJustChanged);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
@@ -396,7 +396,7 @@ public class ZapControllerNormal : ZapController {
 				if( zap.lastVelocity.y >= 0.0f ) { // zaczyna spadac
 					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
 					zap.startFallPos = transform.position;
-					print ( "zap.startFallPos : " + zap.startFallPos );
+					//print ( "zap.startFallPos : " + zap.startFallPos );
 					if( zap.lastVelocity.y > 0.0f ){
 						lastCatchedClimbHandle = null;
 					}
@@ -443,7 +443,7 @@ public class ZapControllerNormal : ZapController {
 			
 		case Zap.State.ON_GROUND:
 			float distToGround = 0.0f;
-			bool groundUnderFeet2 = zap.checkGround (true, layerIdGroundAllMask, ref distToGround);
+			bool groundUnderFeet2 = zap.checkGround (true, zap.layerIdGroundAllMask, ref distToGround);
 			if (groundUnderFeet2) {
 				
 			}else{
@@ -558,42 +558,42 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.DIE:
-			DeathType dt = (DeathType)param;
+			Zap.DeathType dt = (Zap.DeathType)param;
 			string msgInfo = "";
 			
 			switch( dt ){
 				
-			case DeathType.VERY_HARD_LANDING:
+			case Zap.DeathType.VERY_HARD_LANDING:
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_hitground_R");
 				else zap.getAnimator().Play("Zap_death_hitground_L");
-				msgInfo = DeathByVeryHardLandingText;
+				msgInfo = zap.DeathByVeryHardLandingText;
 				break;
 				
-			case DeathType.SNAKE:
+			case Zap.DeathType.SNAKE:
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_poison_R");
 				else zap.getAnimator().Play("Zap_death_poison_L");
-				msgInfo = DeathBySnakeText;
+				msgInfo = zap.DeathBySnakeText;
 				break;
 				
-			case DeathType.POISON:
+			case Zap.DeathType.POISON:
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_poison_R");
 				else zap.getAnimator().Play("Zap_death_poison_L");
-				msgInfo = DeathByPoisonText;
+				msgInfo = zap.DeathByPoisonText;
 				break;
 				
-			case DeathType.CROCODILE:
-				msgInfo = DeathByCrocodileText;
+			case Zap.DeathType.CROCODILE:
+				msgInfo = zap.DeathByCrocodileText;
 				break;
 				
 			default:
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_hitground_R");
 				else zap.getAnimator().Play("Zap_death_hitground_L");
-				msgInfo = DeathByDefaultText;
+				msgInfo = zap.DeathByDefaultText;
 				break;
 				
 			};
 			
-			showInfo (msgInfo, -1);
+			zap.showInfo (msgInfo, -1);
 			
 			if( zap.dieSounds.Length != 0 )
 				zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0,zap.dieSounds.Length)], 0.3F);
@@ -638,7 +638,7 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.PREPARE_TO_JUMP:
-			if( zap.faceRight() ) Play("Zap_jump_in_R");
+			if( zap.faceRight() ) zap.getAnimator().Play("Zap_jump_in_R");
 			else zap.getAnimator().Play("Zap_jump_in_L");
 			break;
 			
@@ -1002,7 +1002,7 @@ public class ZapControllerNormal : ZapController {
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
 			if( zap.checkRight(0.1f) >= 0.0f ){
-				return false;
+				return 0;
 			}
 			desiredSpeedX = CrouchSpeed;
 			if( zap.dir () == Vector2.right ){
@@ -1031,6 +1031,8 @@ public class ZapControllerNormal : ZapController {
 					keyDownDown();
 			}
 		}
+
+		return 0;
 	}
 
 	public override int keyRightUp(){
@@ -1048,10 +1050,16 @@ public class ZapControllerNormal : ZapController {
 					keyDownDown();
 			}
 		}
+
+		return 0;
 	}
 
+	//bool jumpKeyPressed = false;
+
 	public override int keyJumpDown(){
-		
+
+		//jumpKeyPressed = true;
+
 		switch (action) {
 		case Action.IDLE:
 			if( isInState(Zap.State.ON_GROUND)) {
@@ -1084,12 +1092,12 @@ public class ZapControllerNormal : ZapController {
 			
 			if( Input.GetKey(zap.keyLeft)){
 				jumpLeft();
-				return;
+				return 0;
 			}
 			
 			if( Input.GetKey(zap.keyRight)){
 				jumpRight();
-				return;
+				return 0;
 			}
 			
 			zap.velocity.x = 0.0f;
@@ -1113,12 +1121,16 @@ public class ZapControllerNormal : ZapController {
 			jumpRight();
 			break;
 		};
+
+		return 0;
 	}
 	
 	public override int keyJumpUp(){
+		//jumpKeyPressed = false;
 		jumpFromMount = false;
 		justJumpedRope = null;
 		canJumpAfter = true;
+		return 0;
 	}
 
 	int Action_IDLE(){
@@ -1361,7 +1373,7 @@ public class ZapControllerNormal : ZapController {
 			}
 			
 			//if( _swing ){
-			if( dir () == Vector2.right ){
+			if( zap.dir () == Vector2.right ){
 				
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_swingback_R");
 				else zap.getAnimator().Play("Zap_liana_swingback_L");
@@ -1387,7 +1399,7 @@ public class ZapControllerNormal : ZapController {
 			}
 			
 			//if( _swing ){
-			if( dir () == Vector2.right ){
+			if( zap.dir () == Vector2.right ){
 				
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_swingfront_R");
 				else zap.getAnimator().Play("Zap_liana_swingfront_L");
@@ -1417,7 +1429,7 @@ public class ZapControllerNormal : ZapController {
 				setAction(Action.ROPECLIMB_UP);
 			}
 			
-		} else if (Input.GetKey (keyDown)) {
+		} else if (Input.GetKey (zap.keyDown)) {
 			
 			if( canRopeClimbDown() ) {
 				setAction(Action.ROPECLIMB_DOWN);
@@ -1817,13 +1829,13 @@ public class ZapControllerNormal : ZapController {
 	void resetActionAndState(){
 		if (isInState (Zap.State.ON_GROUND)) {
 			if (Input.GetKey (zap.keyDown)) { //&& (Input.GetKey(zap.keyLeft) || Input.GetKey(zap.keyRight)) ){
-				if (!keyDownDown ())
+				if (keyDownDown () == 0)
 					setActionIdle ();
 			} else if (Input.GetKey (zap.keyLeft)) {
-				if (!keyLeftDown ())
+				if (keyLeftDown () == 0)
 					setActionIdle ();
 			} else if (Input.GetKey (zap.keyRight)) {
-				if (!keyRightDown ())
+				if (keyRightDown () == 0)
 					setActionIdle ();
 			} else {
 				if (isInState (Zap.State.ON_GROUND)) {
@@ -1833,16 +1845,16 @@ public class ZapControllerNormal : ZapController {
 		} else if (isInState (Zap.State.MOUNT)) {
 			
 			if (Input.GetKey (zap.keyDown)) { //&& (Input.GetKey(zap.keyLeft) || Input.GetKey(zap.keyRight)) ){
-				if (!keyDownDown ())
+				if (keyDownDown () == 0)
 					setMountIdle ();
 			}else if( Input.GetKey (zap.keyUp)) { //&& (Input.GetKey(zap.keyLeft) || Input.GetKey(zap.keyRight)) ){
-				if (!keyUpDown ())
+				if (keyUpDown () == 0)
 					setMountIdle ();
 			} else if (Input.GetKey (zap.keyLeft)) {
-				if (!keyLeftDown ())
+				if (keyLeftDown () == 0)
 					setMountIdle ();
 			} else if (Input.GetKey (zap.keyRight)) {
-				if (!keyRightDown ())
+				if (keyRightDown () == 0)
 					setMountIdle ();
 			} else {
 				if (isInState (Zap.State.ON_GROUND)) {
@@ -1912,7 +1924,7 @@ public class ZapControllerNormal : ZapController {
 				if( zap.canBeFuddleFromBird )
 					zap.setFuddledFromBrid(true);
 				
-			} else if( isInState(State.IN_AIR) ) {
+			} else if( isInState(Zap.State.IN_AIR) ) {
 				zap.velocity.x = 0.0f;
 			}
 			return true;
@@ -1933,7 +1945,7 @@ public class ZapControllerNormal : ZapController {
 			Vector3 handlePos = potCatchedClimbHandle.transform.position;
 			
 			climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
-			if( dir() == Vector2.right ){
+			if( zap.dir() == Vector2.right ){
 				climbAfterPos.x = handlePos.x - zap.getMyHalfWidth();
 			}else{
 				climbAfterPos.x = handlePos.x + zap.getMyHalfWidth();
@@ -2196,7 +2208,7 @@ public class ZapControllerNormal : ZapController {
 	
 	bool tryCatchRope(){
 		
-		if (dir () == Vector2.right) {
+		if (zap.dir () == Vector2.right) {
 			
 			
 			RaycastHit2D hit; 
@@ -2338,7 +2350,7 @@ public class ZapControllerNormal : ZapController {
 		
 		RaycastHit2D hit;
 		
-		if (dir () == Vector2.right) { //
+		if (zap.dir () == Vector2.right) { //
 			
 			hit = Physics2D.Raycast (zap.sensorDown2.position, -Vector2.right , ClimbPullDownRange, zap.layerIdGroundHandlesMask);
 			if( hit.collider ){
@@ -2367,7 +2379,7 @@ public class ZapControllerNormal : ZapController {
 		
 		if (hit.collider) { 
 			// badam czy stoje na krawedzi odpowiednio zwrocony
-			if (dir () == Vector2.right) { //
+			if (zap.dir () == Vector2.right) { //
 				
 				// pod lewa noga musi byc przepasc
 				rayOrigin = zap.sensorDown1.position;
