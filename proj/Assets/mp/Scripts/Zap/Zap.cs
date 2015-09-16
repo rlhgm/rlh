@@ -134,7 +134,7 @@ public class Zap : MonoBehaviour {
 		desiredSpeedX = 0.0f;
 
 		lastHandlePos = new Vector3();
-		lastFrameHande = false;
+
 
 		zapControllerNormal = new ZapControllerNormal(this);
 	}
@@ -150,11 +150,11 @@ public class Zap : MonoBehaviour {
 		setState (State.ON_GROUND);
 		currentController.activate ();
 
-		climbDuration = 0.0f;
-		catchedClimbHandle = null;
-		canPullUp = false;
+		//climbDuration = 0.0f;
 
-		jumpFromMount = false;
+
+
+
 
 		lastTouchedCheckPoint = null;
 	}
@@ -268,6 +268,12 @@ public class Zap : MonoBehaviour {
 
 	public bool canBeFuddleFromBird = true;
 	bool fuddledFromBrid = false;
+	public bool isFuddledFromBrid(){
+		return fuddledFromBrid;
+	}
+	public void setFuddledFromBrid(bool fuddled){
+		fuddledFromBrid = fuddled;
+	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (currentController.triggerEnter (other))
@@ -380,6 +386,13 @@ public class Zap : MonoBehaviour {
 
 	private float ConstantFrameTime = 0.0333f;
 	private float CurrentDeltaTime = 0.0f;
+
+	public float getConstantFrameTime(){
+		return ConstantFrameTime;
+	}
+	public float getCurrentDeltaTime(){
+		return CurrentDeltaTime;
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -702,7 +715,7 @@ public class Zap : MonoBehaviour {
 	}
 
 
-	bool canGetUp(){
+	public bool canGetUp(){
 		
 		if (dir () == Vector2.right) {
 			RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
@@ -1000,32 +1013,44 @@ public class Zap : MonoBehaviour {
 		return animator;
 	}
 	Animator animator;
-	Transform sensorLeft1;
+
+	//[HideInInspector]
+	public Transform sensorLeft1;
+	//[HideInInspector]
 	public Transform sensorLeft2;
+	//[HideInInspector]
 	Transform sensorLeft3;
+	//[HideInInspector]
 	Transform sensorRight1;
+	//[HideInInspector]
 	public Transform sensorRight2;
+	//[HideInInspector]
 	Transform sensorRight3;
+	//[HideInInspector]
 	Transform sensorDown1;
+	//[HideInInspector]
 	Transform sensorDown2;
+	//[HideInInspector]
 	Transform sensorDown3;
-	
-	Transform sensorHandleL2;
-	Transform sensorHandleR2;
+
+	[HideInInspector]
+	public Transform sensorHandleL2;
+	[HideInInspector]
+	public Transform sensorHandleR2;
 
 	Transform cameraTarget;
-
 	Transform gfx;
 
-	[SerializeField]
-	Vector3 velocity;
-	Vector3 lastVelocity;
+	[HideInInspector]
+	public Vector3 velocity;
+	[HideInInspector]
+	public Vector3 lastVelocity;
+
 	Vector3 lastSwingPos;
 	[SerializeField]
 	Vector3 impulse;
 	Vector3 startFallPos;
 
-	Vector3 mountJumpStartPos;
 
 	float desiredSpeedX = 0.0f;
 
@@ -1050,34 +1075,24 @@ public class Zap : MonoBehaviour {
 	int layerIdGroundPermeableMask;
 	int layerIdGroundMoveableMask;
 	int layerIdGroundAllMask;
-	int layerIdLastGroundTypeTouchedMask;
+	[HideInInspector]
+	public int layerIdLastGroundTypeTouchedMask;
 	int layerIdGroundHandlesMask;
 	int layerIdRopesMask;
 	int layerIdMountMask;
-	
-	GameObject catchedClimbHandle;
-	GameObject lastCatchedClimbHandle;
-	bool canPullUp;
-	public NewRope catchedRope;
-	public RopeLink catchedRopeLink;
 
-	bool jumpFromMount = false;
 	float climbDistFromWall;
-	float climbDuration;
+	//float climbDuration;
 	Vector2 climbDir;
 	
-	Vector3 climbBeforePos;
-	Vector3 climbAfterPos;
-	Vector3 climbDistToClimb;
-	float climbToJumpDuration;
+
 	
 	float groundUnderFeet;
 	
 	bool gamePaused = false;
 
 	Vector3 lastHandlePos;
-	bool lastFrameHande;
-	
+
 	int playerCurrentLayer;
 
 	private State state;
