@@ -669,7 +669,7 @@ public class Zap : MonoBehaviour {
 	}
 
 
-	bool checkObstacle(int dir, float distToCheck, ref float distToObstacle){
+	public bool checkObstacle(int dir, float distToCheck, ref float distToObstacle){
 		if (dir == 1) {
 			distToObstacle = checkRight (Mathf.Abs (distToCheck) + 0.01f);
 			if (distToObstacle < 0.0f)
@@ -813,9 +813,9 @@ public class Zap : MonoBehaviour {
 				return 0;
 			}
 			
-			Vector3 oldPos = transform.position;
-			oldPos.y -= 1.65f;
-			transform.position = oldPos;
+			Vector3 _oldPos = transform.position;
+			_oldPos.y -= 1.65f;
+			transform.position = _oldPos;
 			
 			justJumpedRope = catchedRope;
 			
@@ -921,9 +921,30 @@ public class Zap : MonoBehaviour {
 	}
 
 
-	
+	bool canGetUp(){
+		
+		if (dir () == Vector2.right) {
+			RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null) {
+				float hpx = hit.point.x;  
+				float _d = Mathf.Abs (sensorLeft3.position.x + myWidth - hpx);
+				if (_d > 0.0001f)
+					return false;
+			}
+			return true;
+		} else {
+			RaycastHit2D hit = Physics2D.Raycast (sensorRight3.position, -Vector2.right, myWidth, layerIdGroundMask);
+			if (hit.collider != null) {
+				float hpx = hit.point.x;  
+				float _d = Mathf.Abs (sensorRight3.position.x - myWidth - hpx);
+				if (_d > 0.0001f)
+					return false;
+			}
+			return true;
+		}
+	}
 
-	float checkLeft(float checkingDist, bool flying = false){
+	public float checkLeft(float checkingDist, bool flying = false){
 		Vector2 rayOrigin;
 		if (flying) {
  			rayOrigin = transform.position;
@@ -963,7 +984,7 @@ public class Zap : MonoBehaviour {
 		}
 	}
 
-	float checkRight(float checkingDist, bool flying = false){
+	public float checkRight(float checkingDist, bool flying = false){
 		Vector2 rayOrigin;
 		if (flying) {
 			rayOrigin = transform.position;
@@ -998,30 +1019,7 @@ public class Zap : MonoBehaviour {
 		} 
 	}
 
-	bool canGetUp(){
-
-		if (dir () == Vector2.right) {
-			RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
-			if (hit.collider != null) {
-				float hpx = hit.point.x;  
-				float _d = Mathf.Abs (sensorLeft3.position.x + myWidth - hpx);
-				if (_d > 0.0001f)
-					return false;
-			}
-			return true;
-		} else {
-			RaycastHit2D hit = Physics2D.Raycast (sensorRight3.position, -Vector2.right, myWidth, layerIdGroundMask);
-			if (hit.collider != null) {
-				float hpx = hit.point.x;  
-				float _d = Mathf.Abs (sensorRight3.position.x - myWidth - hpx);
-				if (_d > 0.0001f)
-					return false;
-			}
-			return true;
-		}
-	}
-
-	float checkDown(float checkingDist){
+	public float checkDown(float checkingDist){
 
 		int layerIdMask = layerIdGroundAllMask;
 		Vector3 rayOrigin = sensorDown1.position;
@@ -1054,7 +1052,7 @@ public class Zap : MonoBehaviour {
 		}  
 	}
 
-	bool checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
+	public bool checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
 		bool groundUnderFeet = false;
 
 		float th = 0.9f;
@@ -1114,6 +1112,43 @@ public class Zap : MonoBehaviour {
 		}
 
 		return groundUnderFeet;
+	}
+
+	public bool checkMount(){
+		Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
+		rayOrigin.y += 0.3f;
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
+		
+		if (!hit.collider)
+			return false;
+		
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+		if (!hit.collider)
+			return false;
+		
+		rayOrigin.x += myWidth;
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+		return hit.collider;
+	}
+	
+	public bool checkMount(Vector3 posToCheck){
+		Vector3 sensorDiff = sensorLeft3.transform.position - transform.position; // transform.position;
+		
+		Vector2 rayOrigin = posToCheck + sensorDiff;//aaa
+		rayOrigin.y += 0.3f;
+		
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
+		
+		if (!hit.collider)
+			return false;
+		
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+		if (!hit.collider)
+			return false;
+		
+		rayOrigin.x += myWidth;
+		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+		return hit.collider;
 	}
 
 	bool tryCatchHandle(){
@@ -1411,42 +1446,7 @@ public class Zap : MonoBehaviour {
 		}
 	}
 
-	bool checkMount(){
-		Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
-		rayOrigin.y += 0.3f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
 
-		if (!hit.collider)
-			return false;
-
-		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
-		if (!hit.collider)
-			return false;
-
-		rayOrigin.x += myWidth;
-		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
-		return hit.collider;
-	}
-
-	bool checkMount(Vector3 posToCheck){
-		Vector3 sensorDiff = sensorLeft3.transform.position - transform.position; // transform.position;
-
-		Vector2 rayOrigin = posToCheck + sensorDiff;//aaa
-		rayOrigin.y += 0.3f;
-
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);
-
-		if (!hit.collider)
-			return false;
-
-		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
-		if (!hit.collider)
-			return false;
-
-		rayOrigin.x += myWidth;
-		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, 1f, layerIdMountMask);
-		return hit.collider;
-	}
 
 	void SetImpulse(Vector2 imp) { impulse = imp; }
 	Vector2 getImpulse() { return impulse; }
@@ -1568,7 +1568,6 @@ public class Zap : MonoBehaviour {
 	int layerIdLastGroundTypeTouchedMask;
 	int layerIdGroundHandlesMask;
 	int layerIdRopesMask;
-	
 	int layerIdMountMask;
 	
 	GameObject catchedClimbHandle;
@@ -1590,10 +1589,7 @@ public class Zap : MonoBehaviour {
 	float groundUnderFeet;
 	
 	bool gamePaused = false;
-	float distToMove;
-	Vector3 oldPos;
-	float newPosX;
-	
+
 	Vector3 lastHandlePos;
 	bool lastFrameHande;
 	

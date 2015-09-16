@@ -4,12 +4,10 @@ using System; //This allows the IComparable Interface
 
 public class ZapController {
 	
-	public string name;
-	public Zap zap;
-	
 	public ZapController (Zap playerController, string controllerName) {
 		name = controllerName;
 		zap = playerController;
+		transform = zap.transform;
 	}
 	
 	public virtual void Update (float deltaTime) {	
@@ -30,5 +28,7 @@ public class ZapController {
 		return zap.isNotInState(test);
 	}
 
-
+	protected string name;
+	protected Zap zap = null;
+	protected Transform transform = null;
 }
