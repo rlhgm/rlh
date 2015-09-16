@@ -61,7 +61,6 @@
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
-     <Compile Include="Assets\mp\Scripts\Player2Controller.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
      <Compile Include="Assets\mp\Scripts\ShowInfoTrigger.cs" />
@@ -72,8 +71,9 @@
      <Compile Include="Assets\mp\Scripts\Weapons\GravityGun.cs" />
      <Compile Include="Assets\mp\Scripts\Weapons\Knife.cs" />
      <Compile Include="Assets\mp\Scripts\Weapons\Weapon.cs" />
-     <Compile Include="Assets\mp\Scripts\ZapControllers\ZapController.cs" />
-     <Compile Include="Assets\mp\Scripts\ZapControllers\ZapNormalController.cs" />
+     <Compile Include="Assets\mp\Scripts\Zap\Zap.cs" />
+     <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" />
+     <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapNormalController.cs" />
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />

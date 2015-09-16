@@ -13278,7 +13278,7 @@ Prefab:
       objectReference: {fileID: 1038731994}
     - target: {fileID: 112758, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_Name
-      value: ZapPlayer
+      value: Zap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
