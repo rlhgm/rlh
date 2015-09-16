@@ -105,7 +105,7 @@ public class Snake : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			Player2Controller playerController = target.GetComponent<Player2Controller> ();
+			Zap playerController = target.GetComponent<Zap> ();
 			if( !playerController.isDead() && state == State.ACTIVE){
 				biteStart();
 			}
@@ -114,7 +114,7 @@ public class Snake : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			if( state == State.ACTIVE){
-				Player2Controller playerController = target.GetComponent<Player2Controller> ();
+				Zap playerController = target.GetComponent<Zap> ();
 				if( !playerController.isDead() ){
 					if( (fromLastBite += Time.deltaTime) > toNextBite )
 						biteStart();
@@ -152,8 +152,8 @@ public class Snake : MonoBehaviour {
 		Vector3 attackDir = attackPoint.position - transform.position;
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, attackDir, attackDir.magnitude, layerIdPlayerMask);
 		if (hit.collider != null) {
-			Player2Controller playerController = target.GetComponent<Player2Controller> ();
-			playerController.die (Player2Controller.DeathType.SNAKE);
+			Zap playerController = target.GetComponent<Zap> ();
+			playerController.die (Zap.DeathType.SNAKE);
 		}
 		//fromLastBite = 0f;
 	}

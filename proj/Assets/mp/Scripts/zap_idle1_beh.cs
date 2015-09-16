@@ -3,7 +3,7 @@ using System.Collections;
 
 public class zap_idle1_beh : StateMachineBehaviour {
 
-	public Player2Controller playerController = null;
+	public Zap playerController = null;
 	//public AudioClip[] dieSounds;
 	public int stateIdleNum = 0;
 

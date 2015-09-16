@@ -5,10 +5,10 @@ using System; //This allows the IComparable Interface
 public class Weapon : IComparable<Weapon> { //: MonoBehaviour {
 
 	public string name;
-	public Player2Controller player;
+	public Zap player;
 
 	// Use this for initialization
-	public Weapon (string weaponName, Player2Controller playerController) {
+	public Weapon (string weaponName, Zap playerController) {
 		Debug.Log ("hello world - weapon");
 		name = weaponName;
 		player = playerController;

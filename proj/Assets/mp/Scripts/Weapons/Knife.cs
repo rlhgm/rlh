@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Knife : Weapon {
 
-	public Knife (Player2Controller playerController) 
+	public Knife (Zap playerController) 
 		: base("Knife", playerController)
 	{
 		Debug.Log ("hello world - knife");

@@ -6,7 +6,7 @@ using UnityEngine;
     public class Camera2DFollow : MonoBehaviour
     {
         //public Transform target;
-		public Player2Controller target;
+		public Zap target;
 		//Transform camTarget;
         //public float damping = 1;
         //public float lookAheadFactor = 3;
@@ -127,7 +127,7 @@ using UnityEngine;
 			//Vector3 newPos = new Vector3( target.transform.position.x, target.transform.position.y, transform.position.z );
 			Vector3 newPos = new Vector3( camTarget.position.x, camTarget.position.y, transform.position.z );
 
-			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
+			if (target.isInState (Zap.State.CLIMB_ROPE)) {
 				newPos.y -= camTarget.localPosition.y;
 			} //else {
 			//	newPos.y += target.cameraTargetNormalDiffY;
@@ -137,7 +137,7 @@ using UnityEngine;
 
 			Vector3 posDiff = res - transform.position;
 
-			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
+			if (target.isInState (Zap.State.CLIMB_ROPE)) {
 
 				float pdm = posDiff.magnitude;
 
@@ -184,7 +184,7 @@ using UnityEngine;
 			Transform camTarget = target.getCameraTarget();
 			Vector3 targetPos = camTarget.position;
 
-			if (target.isInState (Player2Controller.State.CLIMB_ROPE)) {
+			if (target.isInState (Zap.State.CLIMB_ROPE)) {
 				targetPos.y -= camTarget.localPosition.y;
 			} //else {
 

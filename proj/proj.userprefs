@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Weapons\GravityGun.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="336" Column="1" />
+      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="1570" Column="23" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" Line="1854" Column="27" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" Line="30" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -98,7 +98,7 @@ public class Zap : MonoBehaviour {
 
 		PlaySounds[] pss = animator.GetBehaviours<PlaySounds>();
 		for( int b = 0 ; b < pss.Length ; ++b ){
-			pss[b].playerController = this;
+			pss[b].zap = this;
 		}
 
 		sensorLeft1 = transform.Find("sensorLeft1").transform;
@@ -517,7 +517,7 @@ public class Zap : MonoBehaviour {
 				timeFromJumpKeyPressed = 0.0f;
 				userJumpKeyPressed = false;
 				
-				keyJumpDown ();
+				currentController.keyJumpDown ();
 			}
 		}
 		
@@ -839,57 +839,57 @@ public class Zap : MonoBehaviour {
 		return 0;
 	}
 
-	virtual int keyLeftDown(){
-		return 0;
-	}
-	virtual int keyLeftUp(){
-		return 0;
-	}
+//	virtual protected int keyLeftDown(){
+//		return 0;
+//	}
+//	virtual protected int keyLeftUp(){
+//		return 0;
+//	}
+//
+//	virtual protected int keyRightDown(){
+//		return 0;
+//	}
+//	virtual protected int keyRightUp(){
+//		return 0;
+//	}
+//
+//	virtual protected int keyUpDown(){
+//		return 0;
+//	}
+//	virtual protected int keyUpUp(){
+//		return 0;
+//	}
+//	
+//	virtual protected int keyDownDown(){
+//		return 0;
+//	}
+//	virtual protected int keyDownUp(){
+//		return 0;
+//	}
+//
+//	virtual protected int keyRunDown(){
+//		return 0;
+//	}
+//	virtual protected int keyRunUp(){
+//		return 0;
+//	}
+//
+//	virtual protected int keyJumpDownSpec(){
+//		return 0;
+//	}
+//	virtual protected int keyJumpUpSpec(){
+//		return 0;
+//	}
 
-	virtual int keyRightDown(){
-		return 0;
-	}
-	virtual int keyRightUp(){
-		return 0;
-	}
-
-	virtual int keyUpDown(){
-		return 0;
-	}
-	virtual int keyUpUp(){
-		return 0;
-	}
-	
-	virtual int keyDownDown(){
-		return 0;
-	}
-	virtual int keyDownUp(){
-		return 0;
-	}
-
-	virtual int keyRunDown(){
-		return 0;
-	}
-	virtual int keyRunUp(){
-		return 0;
-	}
-
-	virtual int keyJumpDownSpec(){
-		return 0;
-	}
-	virtual int keyJumpUpSpec(){
-		return 0;
-	}
-
-	int keyJumpDown(){
-		jumpKeyPressed = true;
-		return keyJumpDownSpec ();
-	}
-	
-	int keyJumpUp(){
-		jumpKeyPressed = false;
-		return keyJumpUpSpec ();
-	}
+//	private int keyJumpDown(){
+//		jumpKeyPressed = true;
+//		return keyJumpDownSpec ();
+//	}
+//	
+//	private int keyJumpUp(){
+//		jumpKeyPressed = false;
+//		return keyJumpUpSpec ();
+//	}
 
 	void getUp(){
 		setAction(Action.IDLE);

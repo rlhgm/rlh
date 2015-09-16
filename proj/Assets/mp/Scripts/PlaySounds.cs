@@ -28,7 +28,7 @@ public class PlaySounds : StateMachineBehaviour {
 	//
 	//}
 
-	public Player2Controller playerController = null;
+	public Zap zap = null;
 	public float[] NormTimes;
 	public AudioClip[] sounds;
 	//public AudioSource audio;
@@ -69,7 +69,7 @@ public class PlaySounds : StateMachineBehaviour {
 			if( played[s] ) continue;
 
 			if( NormTimes[s] <= animNormTime ) { //gramy dzwiek
-				playerController.getAudioSource().PlayOneShot( sounds[s] );
+				zap.getAudioSource().PlayOneShot( sounds[s] );
 				played[s] = true;
 			}
 		}

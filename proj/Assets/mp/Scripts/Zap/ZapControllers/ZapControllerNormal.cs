@@ -755,7 +755,7 @@ public class ZapControllerNormal : ZapController {
 	}
 
 
-	override int keyUpDown(){
+	public override int keyUpDown(){
 		if (isInState (Zap.State.MOUNT)) {
 			if( !mounting () ){
 				Vector3 playerPos = transform.position;
@@ -779,7 +779,7 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
-	override int keyUpUp(){
+	public override int keyUpUp(){
 		if ( setMountIdle ()) {
 			if (isInState (Zap.State.MOUNT)) {
 				if( Input.GetKey(zap.keyLeft) )
@@ -793,7 +793,7 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
-	override int keyDownDown(){
+	public override int keyDownDown(){
 		if (isInState (Zap.State.MOUNT)) {
 			if (!mounting ()) {
 				Vector3 playerPos = transform.position;
@@ -820,7 +820,7 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
-	override int keyDownUp(){
+	public override int keyDownUp(){
 		if ( setMountIdle ()) {
 			if (isInState (Zap.State.MOUNT)) {
 				if( Input.GetKey(zap.keyLeft) )
@@ -842,7 +842,7 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
-	override int keyRunDown(){
+	public override int keyRunDown(){
 		switch (action) {
 			
 		case Action.WALK_LEFT:
@@ -862,7 +862,8 @@ public class ZapControllerNormal : ZapController {
 
 		return 0;
 	}
-	override int keyRunUp(){
+
+	public override int keyRunUp(){
 		
 		switch (action) {
 			
@@ -888,7 +889,7 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
-	override int keyLeftDown(){
+	public override int keyLeftDown(){
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (Zap.State.ON_GROUND)) {
 			if (zap.checkLeft (0.1f) >= 0.0f) {
 				if( dir() == Vector2.right )
@@ -939,7 +940,8 @@ public class ZapControllerNormal : ZapController {
 		}
 		return false;
 	}
-	override int keyRightDown(){
+
+	public override int keyRightDown(){
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND) ) {
 			if( zap.checkRight (0.1f) >= 0.0f ) {
 				if( zap.dir () == -Vector2.right)
@@ -989,7 +991,7 @@ public class ZapControllerNormal : ZapController {
 		return false;
 	}
 	
-	override int keyLeftUp(){
+	public override int keyLeftUp(){
 		
 		if ( !setMountIdle() ) {
 			if (isInState (Zap.State.ON_GROUND)){
@@ -1006,7 +1008,8 @@ public class ZapControllerNormal : ZapController {
 			}
 		}
 	}
-	override int keyRightUp(){
+
+	public override int keyRightUp(){
 		if (!setMountIdle ()) {
 			if (isInState (Zap.State.ON_GROUND)) {
 				desiredSpeedX = 0.0f;
@@ -1023,7 +1026,7 @@ public class ZapControllerNormal : ZapController {
 		}
 	}
 
-	override int keyJumpDownSpec(){
+	public override int keyJumpDown(){
 		
 		switch (action) {
 		case Action.IDLE:
@@ -1088,7 +1091,7 @@ public class ZapControllerNormal : ZapController {
 		};
 	}
 	
-	override int keyJumpUp(){
+	public override int keyJumpUp(){
 		jumpFromMount = false;
 		justJumpedRope = null;
 		canJumpAfter = true;

@@ -6,7 +6,7 @@ public class Crocodile : MonoBehaviour {
 	BoxCollider2D coll;
 	Animator animator;
 	public Water water;
-	public Player2Controller player;
+	public Zap player;
 	Vector2 mySize;
 
 	//Vector3 swingStartPos;

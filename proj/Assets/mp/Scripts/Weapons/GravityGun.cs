@@ -12,7 +12,7 @@ public class GravityGun : Weapon {
 	public int layerIdGroundMoveableMask = 0;
 	public int layerIdGroundMask = 0;
 
-	public GravityGun (Player2Controller playerController, int stonesMask, int groundsMask) 
+	public GravityGun (Zap playerController, int stonesMask, int groundsMask) 
 		: base("GravityGun", playerController)
 	{
 		Debug.Log ("hello world - gravitygun");
@@ -24,7 +24,7 @@ public class GravityGun : Weapon {
 		//if (player.ggps) {
 		//	player.ggps.Play ();
 			//player.ggps.
-		}
+		//}
 	}
 	public override void deactivate(){
 		//if( player.ggps )

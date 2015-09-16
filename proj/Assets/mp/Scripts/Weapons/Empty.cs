@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Empty : Weapon {
 	
-	public Empty (Player2Controller playerController) 
+	public Empty (Zap playerController) 
 		: base("None", playerController)
 	{
 		Debug.Log ("hello world - none");
