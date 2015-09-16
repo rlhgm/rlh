@@ -539,7 +539,9 @@ public class Zap : MonoBehaviour {
 				currentController.keyJumpDown ();
 			}
 		}
-		
+
+		SetImpulse(new Vector2(0.0f, 0.0f));
+
 		if (Input.GetKeyDown (keyUp)) {
 			currentController.keyUpDown();
 		} 

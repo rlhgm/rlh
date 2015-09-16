@@ -5,15 +5,15 @@ using System.Collections;
 //[System.Serializable]
 public class ZapControllerNormal : ZapController {
 
-	public float WalkSpeed = 3.0f;
-	public float RunSpeed = 4.0f;
+	public float WalkSpeed = 2.5f;
+	public float RunSpeed = 5.7f;
 	public float JumpSpeed = 3.5f;
-	public float JumpLongSpeed = 4.1f;
-	public float CrouchSpeed = 1.5f;
+	public float JumpLongSpeed = 4.9f;
+	public float CrouchSpeed = 1.8f;
 	public float MountSpeed = 2.0f; // ile na sek.
-	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-	public float SpeedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekund
-	public float SlowDownParam = 6.0f; // ile jednosek predkosci hamuje na sekunde
+	public float MountJumpDist = 10.0f; // następnie naciskasz spacje a on skacze
+	public float SpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
+	public float SlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
 	public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
 	public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
 	public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
@@ -23,11 +23,11 @@ public class ZapControllerNormal : ZapController {
 	public float GravityForce = -20.0f;
 	public float MaxSpeedY = 15.0f;
 	
-	public float HardLandingHeight = 3.0f;
+	public float HardLandingHeight = 2.0f;
 	public float VeryHardLandingHeight = 6.0f;
-	public float MaxFallDistToCatch = 3.0f;
+	public float MaxFallDistToCatch = 6.0f;
 	
-	public float RopeSwingForce = 500f;
+	public float RopeSwingForce = 4250f;
 	public float RopeClimbSpeedUp = 1.0f;
 	public float RopeClimbSpeedDown = 3.0f;
 	
@@ -36,7 +36,7 @@ public class ZapControllerNormal : ZapController {
 	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
 	public float CLIMBDUR_CATCH = 0.5f;
 	/*public*/ float CLIMBDUR_CLIMB = 0.65f;
-	public float LANDING_HARD_DURATION = 0.5f;
+	public float LANDING_HARD_DURATION = 0.3f;
 	
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
 
@@ -70,7 +70,7 @@ public class ZapControllerNormal : ZapController {
 
 	public override void Update (float deltaTime) {	
 		
-		SetImpulse(new Vector2(0.0f, 0.0f));
+
 		
 		justJumpedMount = false;
 
@@ -1069,7 +1069,7 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.WALK_LEFT:
-			jumpLeft();
+ 			jumpLeft();
 			break;
 		case Action.WALK_RIGHT:
 			jumpRight();
@@ -1160,11 +1160,11 @@ public class ZapControllerNormal : ZapController {
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		
-//		float distToGround = 0.0f;
-//		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
-//		if (groundUnderFeet) {
-//			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//		}
+		float distToGround = 0.0f;
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
 		return 0;
 	}
 	
@@ -1217,11 +1217,11 @@ public class ZapControllerNormal : ZapController {
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		
-//		float distToGround = 0.0f;
-//		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
-//		if (groundUnderFeet) {
-//			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//		}
+		float distToGround = 0.0f;
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
 		
 		return 0;
 	}
@@ -1249,11 +1249,11 @@ public class ZapControllerNormal : ZapController {
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		
-//		float distToGround = 0.0f;
-//		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
-//		if (groundUnderFeet) {
-//			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//		}
+		float distToGround = 0.0f;
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
 		
 		return retVal;
 	}
