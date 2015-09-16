@@ -602,9 +602,9 @@ public class Player2Controller : MonoBehaviour {
 			keyRunUp();
 		}
 
+		stateJustChanged = false;
+
 		currentController.Update( CurrentDeltaTime );
-
-
 
 		updateShadow ();
 	}
@@ -1115,7 +1115,6 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	NewRope justJumpedRope = null;
-	bool justJumpedMount = false;
 
 	int Act_ROPECLIMB_IDLE(float deltaTime){
 
@@ -2333,7 +2332,7 @@ public class Player2Controller : MonoBehaviour {
 		return state; 
 	}
 
-	bool firstFrameInState = false;
+	bool stateJustChanged = false;
 
 	bool setState(State newState){
 
@@ -2341,7 +2340,7 @@ public class Player2Controller : MonoBehaviour {
 			return false;
 
 		currentStateTime = 0.0f;
-		firstFrameInState = true;
+		stateJustChanged = true;
 
 		state = newState;
 

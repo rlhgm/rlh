@@ -10,17 +10,13 @@ public class ZapNormalController : ZapController {
 	}
 
 	bool justJumpedMount = false;
-	bool firstFrameInState = false;
 
 	public override void Update (float deltaTime) {	
 		
 		SetImpulse(new Vector2(0.0f, 0.0f));
 		
 		justJumpedMount = false;
-		firstFrameInState = false;
-		
 
-		
 		currentActionTime += deltaTime;
 		currentStateTime += deltaTime;
 		
@@ -319,7 +315,7 @@ public class ZapNormalController : ZapController {
 			distToFall.x = velocity.x * deltaTime;
 			
 			if( distToFall.x > 0.0f ){
-				float obstacleOnRoad = checkRight(distToFall.x + 0.01f,!firstFrameInState);
+				float obstacleOnRoad = checkRight(distToFall.x + 0.01f,!zap.firstFrameInState);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = obstacleOnRoad;
