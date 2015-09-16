@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 //using System; //This allows the IComparable Interface
 
+//[System.Serializable]
 public class ZapControllerNormal : ZapController {
 
 	public float WalkSpeed = 3.0f;
