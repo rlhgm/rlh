@@ -9,40 +9,7 @@ public class Zap : MonoBehaviour {
 	Image mapBackgroundImage = null;
 	ComicPagePart[] mapPartParts = new ComicPagePart[3];
 
-	public float WalkSpeed = 3.0f;
-	public float RunSpeed = 4.0f;
-	public float JumpSpeed = 3.5f;
-	public float JumpLongSpeed = 4.1f;
-	public float CrouchSpeed = 1.5f;
-	public float MountSpeed = 2.0f; // ile na sek.
-	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-	public float SpeedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekund
-	public float SlowDownParam = 6.0f; // ile jednosek predkosci hamuje na sekunde
-	public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
-	public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
-	public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
 
-	public float JumpImpulse = 7.0f; 
-	public float JumpLongImpulse = 7.15f; 
-	public float GravityForce = -20.0f;
-	public float MaxSpeedY = 15.0f;
-
-	public float HardLandingHeight = 3.0f;
-	public float VeryHardLandingHeight = 6.0f;
-	public float MaxFallDistToCatch = 3.0f;
-
-	public float RopeSwingForce = 500f;
-	public float RopeClimbSpeedUp = 1.0f;
-	public float RopeClimbSpeedDown = 3.0f;
-
-	public float CLIMB_DURATION = 1.5f;
-	public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
-	public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
-	public float CLIMBDUR_CATCH = 0.5f;
-	/*public*/ float CLIMBDUR_CLIMB = 0.65f;
-	public float LANDING_HARD_DURATION = 0.5f;
-
-	public float TURN_LEFTRIGHT_DURATION = 0.2f;
 	
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
@@ -84,9 +51,6 @@ public class Zap : MonoBehaviour {
 	ZapController zapControllerNormal;
 
 	void Awake(){
-		zapControllerNormal = new ZapNormalController(this);
-		currentController = zapControllerNormal;
-
 		guiCanvas = FindObjectOfType<Canvas> ();
 
 		if (guiCanvas) {
@@ -171,17 +135,13 @@ public class Zap : MonoBehaviour {
 
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
-	}
 
-
-	public AudioSource getAudioSource(){
-		return myAudio;
-	}
-	public Transform getCameraTarget(){
-		return cameraTarget;
+		zapControllerNormal = new ZapControllerNormal(this);
 	}
 
 	void Start () {
+		currentController = zapControllerNormal;
+
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
 		desiredSpeedX = 0.0f;
@@ -197,6 +157,13 @@ public class Zap : MonoBehaviour {
 		jumpFromMount = false;
 
 		lastTouchedCheckPoint = null;
+	}
+
+	public AudioSource getAudioSource(){
+		return myAudio;
+	}
+	public Transform getCameraTarget(){
+		return cameraTarget;
 	}
 
 	public void StateIdleExit(){
@@ -1507,7 +1474,7 @@ public class Zap : MonoBehaviour {
 
 	bool stateJustChanged = false;
 
-	bool setState(State newState){
+	public bool setState(State newState){
 
 		if (state == newState)
 			return false;
@@ -1544,6 +1511,9 @@ public class Zap : MonoBehaviour {
 	/*////////////////////////////////////////////////////////////*/
 
 	BoxCollider2D coll;
+	public Animator getAnimator(){
+		return animator;
+	}
 	Animator animator;
 	Transform sensorLeft1;
 	public Transform sensorLeft2;
@@ -1628,9 +1598,6 @@ public class Zap : MonoBehaviour {
 	bool lastFrameHande;
 	
 	int playerCurrentLayer;
-	bool wantGetUp = false;
-	bool wantJumpAfter = false;
-	bool canJumpAfter = true;
 
 	private State state;
 }

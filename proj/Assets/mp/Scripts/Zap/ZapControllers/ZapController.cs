@@ -29,4 +29,6 @@ public class ZapController {
 	protected bool isNotInState(Zap.State test) {
 		return zap.isNotInState(test);
 	}
+
+
 }
