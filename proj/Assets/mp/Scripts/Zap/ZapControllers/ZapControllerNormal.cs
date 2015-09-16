@@ -63,6 +63,9 @@ public class ZapControllerNormal : ZapController {
 	float climbToJumpDuration;
 
 	Vector3 mountJumpStartPos;
+	Vector3 lastHandlePos;
+
+	float groundUnderFeet;
 
 	public override void Update (float deltaTime) {	
 		
@@ -236,7 +239,7 @@ public class ZapControllerNormal : ZapController {
 		case Zap.State.IN_AIR:
 			
 			if( jumpKeyPressed ) { //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
-				Vector3 fallDist = startFallPos - transform.position;
+				Vector3 fallDist = zap.startFallPos - transform.position;
 				if( !zap.isFuddledFromBrid() && (fallDist.y < MaxFallDistToCatch) )
 				{
 					if( zap.checkMount() ){
@@ -253,7 +256,7 @@ public class ZapControllerNormal : ZapController {
 				}
 			}
 			if( jumpFromMount && Input.GetKey(zap.keyJump) ){
-				Vector3 fallDist = startFallPos - transform.position;
+				Vector3 fallDist = zap.startFallPos - transform.position;
 				if( !zap.isFuddledFromBrid() && (fallDist.y < MaxFallDistToCatch) )
 				{
 					Vector3 flyDist = transform.position - mountJumpStartPos;
@@ -277,7 +280,7 @@ public class ZapControllerNormal : ZapController {
 			}
 			
 			if( Input.GetKey(zap.keyJump) || zap.autoCatchEdges ){
-				Vector3 fallDist = startFallPos - transform.position;
+				Vector3 fallDist = zap.startFallPos - transform.position;
 				if( !zap.isFuddledFromBrid() && fallDist.y < MaxFallDistToCatch )
 				{
 					if( tryCatchHandle() ){
@@ -392,8 +395,8 @@ public class ZapControllerNormal : ZapController {
 			} else if( distToFall.y < 0.0f ) { // spada
 				if( zap.lastVelocity.y >= 0.0f ) { // zaczyna spadac
 					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
-					startFallPos = transform.position;
-					print ( "startFallPos : " + startFallPos );
+					zap.startFallPos = transform.position;
+					print ( "zap.startFallPos : " + zap.startFallPos );
 					if( zap.lastVelocity.y > 0.0f ){
 						lastCatchedClimbHandle = null;
 					}
@@ -420,7 +423,7 @@ public class ZapControllerNormal : ZapController {
 				zap.setState(Zap.State.ON_GROUND);
 				zap.velocity.y = 0.0f;
 				
-				Vector3 fallDist = startFallPos - transform.position;
+				Vector3 fallDist = zap.startFallPos - transform.position;
 				
 				if( fallDist.y >= VeryHardLandingHeight ){
 					zap.die(Zap.DeathType.VERY_HARD_LANDING);
@@ -476,6 +479,8 @@ public class ZapControllerNormal : ZapController {
 		catchedClimbHandle = null;
 		canPullUp = false;
 		lastFrameHande = false;
+		desiredSpeedX = 0.0f;
+		lastHandlePos = new Vector3();
 	}
 	public override void deactivate(){
 	}
@@ -851,7 +856,7 @@ public class ZapControllerNormal : ZapController {
 			}
 		} else if (isInState (Zap.State.ON_GROUND)) {
 			if( crouching() || isInAction(Action.CROUCH_IN) ){
-				if( canGetUp() ){
+				if( zap.canGetUp() ){
 					setAction(Action.GET_UP);
 				}else{
 					wantGetUp = true;
@@ -911,27 +916,27 @@ public class ZapControllerNormal : ZapController {
 	public override int keyLeftDown(){
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (Zap.State.ON_GROUND)) {
 			if (zap.checkLeft (0.1f) >= 0.0f) {
-				if( dir() == Vector2.right )
+				if( zap.dir() == Vector2.right )
 					turnLeftStart();
-				return false;
+				return 0;
 			}
 			
 			if( zap.dir() == -Vector2.right )
 			{
-				if (Input.GetKey (keyRun)) {
+				if (Input.GetKey (zap.keyRun)) {
 					desiredSpeedX = RunSpeed;
 					speedLimiter(-1,desiredSpeedX+1.0f);
 					setAction (Action.RUN_LEFT);
-					return true;
+					return 1;
 				} else {
 					desiredSpeedX = WalkSpeed;
 					speedLimiter(-1,desiredSpeedX+1.0f);
 					setAction (Action.WALK_LEFT);
-					return true;
+					return 1;
 				}
 			} else {
 				turnLeftStart();
-				return true;
+				return 1;
 			}
 		} else if (isInState (Zap.State.MOUNT)) {
 			if (!mounting ()) {
@@ -942,12 +947,12 @@ public class ZapControllerNormal : ZapController {
 					zap.velocity.x = -MountSpeed;
 					zap.velocity.y = 0.0f;
 					setAction (Action.MOUNT_LEFT);
-					return true;
+					return 1;
 				}
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
 			if( zap.checkLeft(0.1f) >= 0.0f ){
-				return false;
+				return 0;
 			}
 			desiredSpeedX = CrouchSpeed;
 			if( zap.dir () == -Vector2.right ){
@@ -955,9 +960,9 @@ public class ZapControllerNormal : ZapController {
 			}else{
 				setAction(Action.CROUCH_LEFT_BACK);
 			}
-			return true;
+			return 1;
 		}
-		return false;
+		return 0;
 	}
 
 	public override int keyRightDown(){
@@ -965,23 +970,23 @@ public class ZapControllerNormal : ZapController {
 			if( zap.checkRight (0.1f) >= 0.0f ) {
 				if( zap.dir () == -Vector2.right)
 					turnRightStart();
-				return false;
+				return 0;
 			}
 			if( zap.dir() == Vector2.right ){
 				if( Input.GetKey(zap.keyRun) ){
 					desiredSpeedX = RunSpeed;
 					speedLimiter(1,desiredSpeedX+1.0f);
 					setAction(Action.RUN_RIGHT);
-					return true;
+					return 1;
 				}else{
 					desiredSpeedX = WalkSpeed;
 					speedLimiter(1,desiredSpeedX+1.0f);
 					setAction(Action.WALK_RIGHT);
-					return true;
+					return 1;
 				}
 			}else{
 				turnRightStart();
-				return true;
+				return 1;
 			}
 		} else if (isInState (Zap.State.MOUNT)) {
 			if( !mounting() ){
@@ -992,7 +997,7 @@ public class ZapControllerNormal : ZapController {
 					zap.velocity.x = MountSpeed;
 					zap.velocity.y = 0.0f;
 					setAction(Action.MOUNT_RIGHT);
-					return true;
+					return 1;
 				}
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
@@ -1005,9 +1010,9 @@ public class ZapControllerNormal : ZapController {
 			}else{
 				setAction(Action.CROUCH_RIGHT_BACK);
 			}
-			return true;
+			return 1;
 		}
-		return false;
+		return 0;
 	}
 	
 	public override int keyLeftUp(){
@@ -1020,9 +1025,9 @@ public class ZapControllerNormal : ZapController {
 			if (isInState (Zap.State.MOUNT)) {
 				if( Input.GetKey(zap.keyRight) )
 					keyRightDown();
-				else if(Input.GetKey(keyUp) )
+				else if(Input.GetKey(zap.keyUp) )
 					keyUpDown();
-				else if(Input.GetKey(keyDown) )
+				else if(Input.GetKey(zap.keyDown) )
 					keyDownDown();
 			}
 		}
@@ -1891,7 +1896,7 @@ public class ZapControllerNormal : ZapController {
 	}
 	public override void reborn(){
 		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
-			zap.setState(State.MOUNT);
+			zap.setState(Zap.State.MOUNT);
 			setMountIdle();
 		}
 	}
@@ -1929,9 +1934,9 @@ public class ZapControllerNormal : ZapController {
 			
 			climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
 			if( dir() == Vector2.right ){
-				climbAfterPos.x = handlePos.x - myHalfWidth;
+				climbAfterPos.x = handlePos.x - zap.getMyHalfWidth();
 			}else{
-				climbAfterPos.x = handlePos.x + myHalfWidth;
+				climbAfterPos.x = handlePos.x + zap.getMyHalfWidth();
 			}
 			
 			climbBeforePos = transform.position;
@@ -2026,15 +2031,15 @@ public class ZapControllerNormal : ZapController {
 
 	int tryJumpFromRope(bool forceJumpOff = false){
 		
-		if (Input.GetKeyDown (keyJump) || forceJumpOff) {
+		if (Input.GetKeyDown (zap.keyJump) || forceJumpOff) {
 			
 			float ropeSpeed = catchedRope.firstLinkSpeed;
 			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
 			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink> ().idn;
 			float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
 			
-			if (Input.GetKey (keyLeft)) { //skacze w lewo
-				turnLeft ();
+			if (Input.GetKey (zap.keyLeft)) { //skacze w lewo
+				zap.turnLeft ();
 				
 				if (ropeSpeed > 0f) { // lina tez leci w lewo
 					jumpLongLeft ();
@@ -2042,8 +2047,8 @@ public class ZapControllerNormal : ZapController {
 				} else {
 					jumpLeft ();
 				}
-			} else if (Input.GetKey (keyRight)) { //skacze w prawo
-				turnRight ();
+			} else if (Input.GetKey (zap.keyRight)) { //skacze w prawo
+				zap.turnRight ();
 				
 				if (ropeSpeed < 0f) { // lina tez leci w prawo
 					jumpLongRight ();
@@ -2051,7 +2056,7 @@ public class ZapControllerNormal : ZapController {
 				} else {
 					jumpRight ();
 				}
-			} else if( Input.GetKeyDown (keyDown) || Input.GetKey (keyDown) || forceJumpOff ) {
+			} else if( Input.GetKeyDown (zap.keyDown) || Input.GetKey (zap.keyDown) || forceJumpOff ) {
 				zap.velocity.x = 0f;
 				zap.velocity.y = 0f;
 				setAction (Action.JUMP);
@@ -2073,7 +2078,7 @@ public class ZapControllerNormal : ZapController {
 			quat.eulerAngles = new Vector3 (0f, 0f, 0f);
 			transform.rotation = quat;
 			
-			setState (State.IN_AIR);
+			zap.setState (Zap.State.IN_AIR);
 			
 			//Quaternion quat = new Quaternion ();
 			//quat.eulerAngles = new Vector3 (0f, 0f, 0f);
@@ -2095,9 +2100,9 @@ public class ZapControllerNormal : ZapController {
 			
 			RaycastHit2D hit; 
 			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleR2.position, layerIdGroundHandlesMask);
+				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
 			else
-				hit = Physics2D.Linecast (zap.sensorHandleR2.position, zap.sensorHandleR2.position, layerIdGroundHandlesMask); 
+				hit = Physics2D.Linecast (zap.sensorHandleR2.position, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask); 
 			
 			if (hit.collider != null) {
 				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
@@ -2111,7 +2116,7 @@ public class ZapControllerNormal : ZapController {
 					
 					Vector3 handlePos = catchedClimbHandle.transform.position;
 					Vector3 newPos = new Vector3 ();
-					newPos.x = handlePos.x - myHalfWidth;
+					newPos.x = handlePos.x - zap.getMyHalfWidth();
 					newPos.y = handlePos.y - 2.4f; //myHeight;
 					
 					canPullUp = canClimbPullUp ();
@@ -2142,9 +2147,9 @@ public class ZapControllerNormal : ZapController {
 			
 			RaycastHit2D hit; 
 			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleL2.position, layerIdGroundHandlesMask);
+				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleL2.position, zap.layerIdGroundHandlesMask);
 			else
-				hit = Physics2D.Linecast (zap.sensorHandleL2.position, zap.sensorHandleL2.position, layerIdGroundHandlesMask); 
+				hit = Physics2D.Linecast (zap.sensorHandleL2.position, zap.sensorHandleL2.position, zap.layerIdGroundHandlesMask); 
 			
 			
 			if (hit.collider != null) {
@@ -2160,7 +2165,7 @@ public class ZapControllerNormal : ZapController {
 					
 					Vector3 handlePos = catchedClimbHandle.transform.position;
 					Vector3 newPos = new Vector3 ();
-					newPos.x = handlePos.x + myHalfWidth;
+					newPos.x = handlePos.x + zap.getMyHalfWidth();
 					newPos.y = handlePos.y - 2.4f; //myHeight;
 					
 					canPullUp = canClimbPullUp ();
@@ -2196,12 +2201,12 @@ public class ZapControllerNormal : ZapController {
 			
 			RaycastHit2D hit; 
 			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleR2.position, layerIdRopesMask);
+				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleR2.position, zap.layerIdRopesMask);
 			else
-				hit = Physics2D.Linecast (zap.sensorHandleR2.position, zap.sensorHandleR2.position, layerIdRopesMask); 
+				hit = Physics2D.Linecast (zap.sensorHandleR2.position, zap.sensorHandleR2.position, zap.layerIdRopesMask); 
 			
 			if( hit.collider == null ){
-				hit = Physics2D.Linecast( zap.sensorHandleL2.position, zap.sensorHandleR2.position, layerIdRopesMask); 
+				hit = Physics2D.Linecast( zap.sensorHandleL2.position, zap.sensorHandleR2.position, zap.layerIdRopesMask); 
 			}
 			
 			if (hit.collider != null) {
@@ -2234,7 +2239,7 @@ public class ZapControllerNormal : ZapController {
 					zap.velocity.x = 0.0f;
 					zap.velocity.y = 0.0f;
 					
-					setState(State.CLIMB_ROPE);
+					zap.setState(Zap.State.CLIMB_ROPE);
 					setAction(Action.ROPECLIMB_IDLE);
 					
 					transform.position = catchedRopeLink.transform.position;
@@ -2253,12 +2258,12 @@ public class ZapControllerNormal : ZapController {
 			
 			RaycastHit2D hit; 
 			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleL2.position, layerIdRopesMask);
+				hit = Physics2D.Linecast (lastHandlePos, zap.sensorHandleL2.position, zap.layerIdRopesMask);
 			else
-				hit = Physics2D.Linecast (zap.sensorHandleL2.position, zap.sensorHandleL2.position, layerIdRopesMask); 
+				hit = Physics2D.Linecast (zap.sensorHandleL2.position, zap.sensorHandleL2.position, zap.layerIdRopesMask); 
 			
 			if( hit.collider == null ){
-				hit = Physics2D.Linecast( zap.sensorHandleL2.position, zap.sensorHandleR2.position, layerIdRopesMask); 
+				hit = Physics2D.Linecast( zap.sensorHandleL2.position, zap.sensorHandleR2.position, zap.layerIdRopesMask); 
 			}
 			
 			if (hit.collider != null) {
@@ -2291,7 +2296,7 @@ public class ZapControllerNormal : ZapController {
 					zap.velocity.x = 0.0f;
 					zap.velocity.y = 0.0f;
 					
-					setState(State.CLIMB_ROPE);
+					zap.setState(Zap.State.CLIMB_ROPE);
 					setAction(Action.ROPECLIMB_IDLE);
 					
 					transform.position = catchedRopeLink.transform.position;
@@ -2317,7 +2322,7 @@ public class ZapControllerNormal : ZapController {
 		Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
 		rayOrigin.x += 0.5f;
 		rayOrigin.y += 0.25f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 0.5f, layerIdGroundMask);
+		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundMask);
 		return !hit.collider;
 	}
 	
@@ -2325,7 +2330,7 @@ public class ZapControllerNormal : ZapController {
 	
 	GameObject canClimbPullDown(){
 		
-		if (!isInState (State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
+		if (!isInState (Zap.State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
 			return null;
 		
 		// 1: sytuacja gdy zap jest swoim srodkiem nad tilem
@@ -2335,20 +2340,20 @@ public class ZapControllerNormal : ZapController {
 		
 		if (dir () == Vector2.right) { //
 			
-			hit = Physics2D.Raycast (sensorDown2.position, -Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
+			hit = Physics2D.Raycast (zap.sensorDown2.position, -Vector2.right , ClimbPullDownRange, zap.layerIdGroundHandlesMask);
 			if( hit.collider ){
 				
-				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, -Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
+				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, -Vector2.right , 0.5f, zap.layerIdGroundMask).collider == null ) {
 					return hit.collider.gameObject;
 				}
 			}
 			
 		} else {
 			
-			hit = Physics2D.Raycast (sensorDown2.position, Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
+			hit = Physics2D.Raycast (zap.sensorDown2.position, Vector2.right , ClimbPullDownRange, zap.layerIdGroundHandlesMask);
 			if( hit.collider ){
 				
-				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
+				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, Vector2.right , 0.5f, zap.layerIdGroundMask).collider == null ) {
 					return hit.collider.gameObject;
 				}
 				
@@ -2357,23 +2362,23 @@ public class ZapControllerNormal : ZapController {
 		
 		// to jest ta druga sytuacja ...
 		
-		Vector2 rayOrigin = sensorDown1.position; 
-		hit = Physics2D.Raycast (rayOrigin, Vector2.right , myWidth, layerIdGroundHandlesMask);
+		Vector2 rayOrigin = zap.sensorDown1.position; 
+		hit = Physics2D.Raycast (rayOrigin, Vector2.right , zap.getMyWidth(), zap.layerIdGroundHandlesMask);
 		
 		if (hit.collider) { 
 			// badam czy stoje na krawedzi odpowiednio zwrocony
 			if (dir () == Vector2.right) { //
 				
 				// pod lewa noga musi byc przepasc
-				rayOrigin = sensorDown1.position;
-				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask).collider ) return null;
+				rayOrigin = zap.sensorDown1.position;
+				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, zap.layerIdGroundMask).collider ) return null;
 				else return hit.collider.gameObject;
 				
 			} else {
 				
 				// pod prawa noga musi byc przepasc
-				rayOrigin = sensorDown3.position;
-				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask).collider ) return null;
+				rayOrigin = zap.sensorDown3.position;
+				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, zap.layerIdGroundMask).collider ) return null;
 				else return hit.collider.gameObject;
 				
 			}
@@ -2387,6 +2392,7 @@ public class ZapControllerNormal : ZapController {
 	bool wantGetUp = false;
 	bool wantJumpAfter = false;
 	bool canJumpAfter = true;
+	float desiredSpeedX = 0.0f;
 
 	Action action;
 	public float CrouchInOutDuration = 0.2f;

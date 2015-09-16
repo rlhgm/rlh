@@ -131,9 +131,8 @@ public class Zap : MonoBehaviour {
 		myHalfWidth = myWidth * 0.5f;
 		//myHeight = coll.size.y;
 		//myHalfHeight = myHeight * 0.5f;
-		desiredSpeedX = 0.0f;
 
-		lastHandlePos = new Vector3();
+
 
 
 		zapControllerNormal = new ZapControllerNormal(this);
@@ -144,7 +143,7 @@ public class Zap : MonoBehaviour {
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
-		desiredSpeedX = 0.0f;
+
 		startFallPos = transform.position;
 
 		setState (State.ON_GROUND);
@@ -1026,12 +1025,12 @@ public class Zap : MonoBehaviour {
 	public Transform sensorRight2;
 	//[HideInInspector]
 	Transform sensorRight3;
-	//[HideInInspector]
-	Transform sensorDown1;
-	//[HideInInspector]
-	Transform sensorDown2;
-	//[HideInInspector]
-	Transform sensorDown3;
+	[HideInInspector]
+	public Transform sensorDown1;
+	[HideInInspector]
+	public Transform sensorDown2;
+	[HideInInspector]
+	public Transform sensorDown3;
 
 	[HideInInspector]
 	public Transform sensorHandleL2;
@@ -1049,7 +1048,8 @@ public class Zap : MonoBehaviour {
 	Vector3 lastSwingPos;
 	[SerializeField]
 	Vector3 impulse;
-	Vector3 startFallPos;
+	[HideInInspector]
+	public Vector3 startFallPos;
 
 
 	float desiredSpeedX = 0.0f;
@@ -1068,17 +1068,28 @@ public class Zap : MonoBehaviour {
 
 	float myWidth;
 	float myHalfWidth;
+
+	public float getMyWidth(){
+		return myWidth;
+	}
+	public float getMyHalfWidth(){
+		return myHalfWidth;
+	}
 	//float myHeight;
 	//float myHalfHeight;
-	
-	int layerIdGroundMask;
+
+	[HideInInspector]
+	public int layerIdGroundMask;
 	int layerIdGroundPermeableMask;
 	int layerIdGroundMoveableMask;
+	[HideInInspector]
 	int layerIdGroundAllMask;
 	[HideInInspector]
 	public int layerIdLastGroundTypeTouchedMask;
-	int layerIdGroundHandlesMask;
-	int layerIdRopesMask;
+	[HideInInspector]
+	public int layerIdGroundHandlesMask;
+	[HideInInspector]
+	public int layerIdRopesMask;
 	int layerIdMountMask;
 
 	float climbDistFromWall;
@@ -1087,11 +1098,11 @@ public class Zap : MonoBehaviour {
 	
 
 	
-	float groundUnderFeet;
+
 	
 	bool gamePaused = false;
 
-	Vector3 lastHandlePos;
+
 
 	int playerCurrentLayer;
 
