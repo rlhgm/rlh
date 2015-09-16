@@ -5,9 +5,9 @@ using System; //This allows the IComparable Interface
 public class ZapController {
 	
 	public string name;
-	public Player2Controller zap;
+	public Zap zap;
 	
-	public ZapController (string controllerName, Player2Controller playerController) {
+	public ZapController (Zap playerController, string controllerName) {
 		name = controllerName;
 		zap = playerController;
 	}

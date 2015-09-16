@@ -4,12 +4,10 @@ using System; //This allows the IComparable Interface
 
 public class ZapNormalController : ZapController {
 	
-	public ZapNormalController (Player2Controller playerController) 
-		: base("NormalController",playerController)
+	public ZapNormalController (Zap zapPlayer) 
+		: base(zapPlayer,"NormalController")
 	{
 	}
-
-	bool justJumpedMount = false;
 
 	public override void Update (float deltaTime) {	
 		
@@ -17,20 +15,19 @@ public class ZapNormalController : ZapController {
 		
 		justJumpedMount = false;
 
-		currentActionTime += deltaTime;
-		currentStateTime += deltaTime;
-		
+		currentActionTime = zap.getCurrentActionTime();
+
 		oldPos = transform.position;
 		newPosX = oldPos.x;
 		distToMove = 0.0f;
 		
 		switch (action) {
 		case Action.IDLE:
-			Act_IDLE();
+			Action_IDLE();
 			break;
 			
 		case Action.LANDING_HARD:
-			Act_LANDING_HARD();
+			Action_LANDING_HARD();
 			break;
 			
 		case Action.PREPARE_TO_JUMP:
@@ -40,36 +37,33 @@ public class ZapNormalController : ZapController {
 			break;
 			
 		case Action.CLIMB_PULLDOWN:
-			Act_CLIMB_PULLDOWN();
+			Action_CLIMB_PULLDOWN();
 			break;
 			
 		case Action.CLIMB_JUMP_TO_CATCH:
-			Act_CLIMB_JUMP_TO_CATCH();
+			Action_CLIMB_JUMP_TO_CATCH();
 			break;
 			
 		case Action.CLIMB_CATCH:
-			Act_CLIMB_CATCH();
+			Action_CLIMB_CATCH();
 			break;
 			
 		case Action.CLIMB_CLIMB:
-			Act_CLIMB_CLIMB();
+			Action_CLIMB_CLIMB();
 			break;
-			
-			//case Action.BREAK:
-			//	break;
-			
+
 		case Action.WALK_LEFT:
-			Act_WALK(-1);
+			Action_WALK(-1);
 			break;
 		case Action.RUN_LEFT:
-			Act_RUN(-1);
+			Action_RUN(-1);
 			break;
 			
 		case Action.WALK_RIGHT:
-			Act_WALK(1);
+			Action_WALK(1);
 			break;
 		case Action.RUN_RIGHT:
-			Act_RUN(1);
+			Action_RUN(1);
 			break;
 			
 		case Action.TURN_STAND_LEFT:
@@ -102,11 +96,8 @@ public class ZapNormalController : ZapController {
 					resetActionAndState();
 				}
 			}else{
-				int res = Act_TURN_RUN(1);
+				int res = Action_TURN_RUN(1);
 				if( res == 1 ){
-					//turnLeft();
-					//setActionIdle();
-					//resetActionAndState();
 				}
 			}
 			break;
@@ -121,35 +112,32 @@ public class ZapNormalController : ZapController {
 					resetActionAndState();
 				}
 			}else{
-				int res = Act_TURN_RUN(-1);
+				int res = Action_TURN_RUN(-1);
 				if( res == 1 ){
-					//turnRight();
-					//setActionIdle();
-					//resetActionAndState();
 				}
 			}
 			break;
 			
 		case Action.CROUCH_IN:
-			Act_CROUCH_IN();
+			Action_CROUCH_IN();
 			break;
 			
 		case Action.GET_UP:
-			Act_GET_UP();
+			Action_GET_UP();
 			break;
 			
 		case Action.CROUCH_IDLE:
-			Act_CROUCH_IDLE();
+			Action_CROUCH_IDLE();
 			break;
 			
 		case Action.CROUCH_LEFT:
 		case Action.CROUCH_LEFT_BACK:
-			Act_CROUCH_LEFTRIGHT(-1);
+			Action_CROUCH_LEFTRIGHT(-1);
 			break;
 			
 		case Action.CROUCH_RIGHT:
 		case Action.CROUCH_RIGHT_BACK:
-			Act_CROUCH_LEFTRIGHT(1);
+			Action_CROUCH_LEFTRIGHT(1);
 			break;
 			
 		case Action.MOUNT_IDLE:
@@ -158,23 +146,23 @@ public class ZapNormalController : ZapController {
 		case Action.MOUNT_LEFT:
 		case Action.MOUNT_RIGHT:
 		case Action.MOUNT_UP:
-			Act_MOUNTING();
+			Action_MOUNTING();
 			break;
 			
 		case Action.MOUNT_DOWN:
-			Act_MOUNTING_DOWN();
+			Action_MOUNTING_DOWN();
 			break;
 			
 		case Action.ROPECLIMB_IDLE:
-			Act_ROPECLIMB_IDLE(deltaTime);
+			Action_ROPECLIMB_IDLE(deltaTime);
 			break;
 			
 		case Action.ROPECLIMB_UP:
-			Act_ROPECLIMB_UP(deltaTime);
+			Action_ROPECLIMB_UP(deltaTime);
 			break;
 			
 		case Action.ROPECLIMB_DOWN:
-			Act_ROPECLIMB_DOWN(deltaTime);
+			Action_ROPECLIMB_DOWN(deltaTime);
 			break;
 		};
 		
@@ -186,7 +174,7 @@ public class ZapNormalController : ZapController {
 			}
 		}
 		
-		switch (state) {
+		switch (zap.getState()) {
 			
 		case State.MOUNT:
 			break;
@@ -441,6 +429,51 @@ public class ZapNormalController : ZapController {
 		impulse.y += imp.y; 
 	}
 
+	public enum Action{
+		UNDEF = 0,
+		IDLE,
+		WALK_LEFT,
+		WALK_RIGHT,
+		RUN_LEFT,
+		RUN_RIGHT,
+		TURN_STAND_LEFT,
+		TURN_STAND_RIGHT,
+		TURN_RUN_LEFT,
+		TURN_RUN_RIGHT,
+		//BREAK,
+		PREPARE_TO_JUMP,
+		JUMP,
+		JUMP_LEFT,
+		JUMP_LEFT_LONG,
+		JUMP_RIGHT,
+		JUMP_RIGHT_LONG,
+		CROUCH_IN,
+		GET_UP,
+		CROUCH_IDLE,
+		CROUCH_LEFT,
+		CROUCH_RIGHT,
+		CROUCH_LEFT_BACK,
+		CROUCH_RIGHT_BACK,
+		LANDING_HARD,
+		FALL,
+		STOP_WALK,
+		STOP_RUN,
+		CLIMB_PREPARE_TO_JUMP,
+		CLIMB_JUMP_TO_CATCH,
+		CLIMB_CATCH,
+		CLIMB_CLIMB,
+		CLIMB_PULLDOWN,
+		MOUNT_IDLE,
+		MOUNT_LEFT,
+		MOUNT_RIGHT,
+		MOUNT_UP,
+		MOUNT_DOWN,
+		ROPECLIMB_IDLE,
+		ROPECLIMB_UP,
+		ROPECLIMB_DOWN,
+		DIE
+	};
+
 	Action getAction(){
 		return action;
 	}
@@ -450,8 +483,7 @@ public class ZapNormalController : ZapController {
 			return false;
 		
 		action = newAction;
-		currentActionTime = 0.0f;
-		
+		zap.resetCurrentActionTime ();
 		animator.speed = 1.0f;
 		
 		switch (newAction) {
@@ -1021,6 +1053,682 @@ public class ZapNormalController : ZapController {
 		canJumpAfter = true;
 	}
 
+	int Action_IDLE(){
+		return 0;
+	}
 
+	int Action_WALK(int dir){
+		
+		bool speedReached = checkSpeed (dir);
+		if (speedReached && desiredSpeedX == 0.0f ) {
+			setAction(Action.IDLE);
+			resetActionAndState();
+			return 0;
+		}
+		
+		distToMove = velocity.x * CurrentDeltaTime;
+		
+		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.5f;
+		
+		float distToObstacle = 0.0f;
+		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			setActionIdle();
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
+		return 0;
+	}
+	
+	int Action_RUN(int dir){
+		
+		bool speedReached = checkSpeed (dir);
+		if (speedReached && desiredSpeedX == 0.0f) {
+			setAction(Action.IDLE);
+			resetActionAndState ();
+			return 0;
+		}
+		
+		float speedRatio = (Mathf.Abs (velocity.x) / RunSpeed);
+		bool turnBackHard = speedRatio > 0.5f;
+		
+		if (turnBackHard) {
+			
+			if (dir == 1) {
+				
+				if( (Input.GetKeyDown(keyLeft) || Input.GetKey(keyLeft)) &&
+				   (Input.GetKeyUp(keyRight) || !Input.GetKey(keyRight))
+				   )
+				{
+					setAction (Action.TURN_RUN_LEFT);
+				}
+				
+			} else if (dir == -1) {
+				
+				if( (Input.GetKeyDown(keyRight) || Input.GetKey(keyRight)) &&
+				   (Input.GetKeyUp(keyLeft) || !Input.GetKey(keyLeft))
+				   )
+				{
+					setAction (Action.TURN_RUN_RIGHT);
+				}
+				
+			}
+			
+		}
+		
+		distToMove = velocity.x * CurrentDeltaTime;
+		
+		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
+		
+		float distToObstacle = 0.0f;
+		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			setActionIdle();
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
+		
+		return 0;
+	}
+	
+	int Action_TURN_RUN(int dir){
+		
+		int retVal = 0;
+		
+		if (Input.GetKeyDown (keyJump)) {
+			wantJumpAfter = true;
+		}
+		
+		bool speedReached = checkSpeed (dir);
+		if (speedReached && desiredSpeedX == 0.0f) {
+		}
+		
+		distToMove = velocity.x * CurrentDeltaTime;
+		
+		float distToObstacle = 0.0f;
+		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			retVal = 1;
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
+		
+		return retVal;
+	}
+
+	int Action_CROUCH_IN(){
+		
+		if (currentActionTime >= CrouchInOutDuration) {
+			crouch();
+		}
+		return 0;
+	}
+	
+	int Action_GET_UP(){
+		
+		if (currentActionTime >= CrouchInOutDuration) {
+			getUp();			
+		}
+		
+		return 0;
+	}
+	
+	int Action_CROUCH_IDLE(){
+		if( Input.GetKey(keyDown) ){
+			tryStartClimbPullDown();
+		}
+		return 0;
+	}
+	
+	int Action_CROUCH_LEFTRIGHT(int dir){
+		
+		bool speedReached = checkSpeed (dir);
+		if (speedReached && desiredSpeedX == 0.0f) {
+			setActionCrouchIdle();
+			if( crouching() ) {
+				if( Input.GetKey(keyLeft) ) {
+					keyLeftDown();
+				} else if( Input.GetKey(keyRight) ){
+					keyRightDown();
+				}
+			}
+		}
+		
+		distToMove = velocity.x * CurrentDeltaTime;
+		
+		float distToObstacle = 0.0f;
+		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			setActionCrouchIdle();
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
+		
+		return 0;
+	}
+	
+	int Action_MOUNTING(){
+		Vector3 newPos3 = transform.position;
+		Vector3 distToMount = velocity * CurrentDeltaTime;
+		newPos3 += distToMount;
+		if (onMount (newPos3)) {
+			transform.position = newPos3;
+		} else {
+			setMountIdle();
+		}
+		return 0;
+	}
+	
+	int Action_MOUNTING_DOWN(){
+		Vector3 newPos3 = transform.position;
+		Vector3 distToMount = velocity * CurrentDeltaTime;
+		newPos3 += distToMount;
+		
+		if (distToMount.y < 0.0f) { // schodzi
+			groundUnderFeet = checkDown ( Mathf.Abs(distToMount.y) + 0.01f);
+			if (groundUnderFeet >= 0.0f) {
+				if (groundUnderFeet < Mathf.Abs (distToMount.y)) {
+					distToMount.y = -groundUnderFeet;
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					setState (State.ON_GROUND);
+					setAction (Action.IDLE);
+					transform.position = transform.position + distToMount;
+				}
+			}else{
+				if( onMount(newPos3) )
+					transform.position = newPos3;
+				else
+					setMountIdle();
+			}
+		}
+		return 0;
+	}
+
+
+	
+	int Action_ROPECLIMB_IDLE(float deltaTime){
+		
+		if (!catchedRope)
+			return 0;
+		
+		bool _swing = false;
+		
+		if (Input.GetKey (keyLeft)) {
+			
+			float fla = catchedRope.firstLinkAngle;
+			
+			if( fla > -20f && fla < 0f){
+				//print ( "Rope swing : " + fla );
+				catchedRope.swing(-Vector2.right, RopeSwingForce * CurrentDeltaTime );
+				_swing = true;
+			}
+			
+			//if( _swing ){
+			if( dir () == Vector2.right ){
+				
+				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
+				else animator.Play("Zap_liana_swingback_L");
+				animator.speed = 1f;
+				
+			}else{
+				
+				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
+				else animator.Play("Zap_liana_swingfront_L");
+				animator.speed = 1f;
+				
+			}
+			//}
+		}
+		else if (Input.GetKey (keyRight)) {
+			
+			float fla = catchedRope.firstLinkAngle;
+			
+			if( fla < 20f && fla >= 0f){
+				//print ( "Rope swing : " + fla );
+				catchedRope.swing(Vector2.right, RopeSwingForce * CurrentDeltaTime );
+				_swing = true;
+			}
+			
+			//if( _swing ){
+			if( dir () == Vector2.right ){
+				
+				if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
+				else animator.Play("Zap_liana_swingfront_L");
+				animator.speed = 1f;
+				
+			}else{
+				
+				if( faceRight() ) animator.Play("Zap_liana_swingback_R");
+				else animator.Play("Zap_liana_swingback_L");
+				animator.speed = 1f;
+				
+			}
+			//}
+		}
+		
+		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) ) { //|| !_swing) {
+			setActionRopeClimbIdle();
+		}
+		
+		if (tryJumpFromRope () != 0) {
+			return 0;
+		}
+		
+		if (Input.GetKey (keyUp)) { 
+			
+			if( canRopeClimbUp() ){
+				setAction(Action.ROPECLIMB_UP);
+			}
+			
+		} else if (Input.GetKey (keyDown)) {
+			
+			if( canRopeClimbDown() ) {
+				setAction(Action.ROPECLIMB_DOWN);
+			}
+		}
+		
+		tryBreakUpRope (deltaTime);
+		
+		return 0;
+	}
+	int Action_LANDING_HARD(){
+		if (currentActionTime >= LANDING_HARD_DURATION) {
+			setAction(Action.IDLE);
+			resetActionAndState();
+		}
+		
+		return 0;
+	}
+	
+	int Action_CLIMB_PULLDOWN(){
+		climbDuration += CurrentDeltaTime;
+		
+		if( climbDuration >= CLIMBDUR_CLIMB ){
+			setAction(Action.CLIMB_CATCH,1);
+			setState(State.CLIMB);
+			climbDuration = 0.0f;
+			canPullUp = true;
+			transform.position = climbAfterPos;
+		} else {
+		}
+		
+		return 0;
+	}
+	
+	int Action_CLIMB_JUMP_TO_CATCH(){
+		// dociaganie do punktu:
+		climbDuration += CurrentDeltaTime;
+		
+		if (climbDuration >= climbToJumpDuration) {
+			setAction (Action.CLIMB_CATCH);
+			climbDuration = 0.0f;
+			transform.position = climbAfterPos;
+		} else {
+			float ratio = climbDuration / climbToJumpDuration;
+			transform.position = climbBeforePos + climbDistToClimb * ratio;
+		}
+		
+		return 0;
+	}
+	
+	int Action_CLIMB_CATCH(){
+		if ( (Input.GetKeyDown (keyUp) || Input.GetKey(keyUp)) && canPullUp) {
+			
+			climbAfterPos.x = catchedClimbHandle.transform.position.x;
+			climbAfterPos.y = catchedClimbHandle.transform.position.y;
+			
+			climbBeforePos = transform.position;
+			climbDistToClimb = climbAfterPos - climbBeforePos;
+			
+			setAction (Action.CLIMB_CLIMB);
+			climbDuration = 0.0f;
+			
+			catchedClimbHandle = null;
+			lastCatchedClimbHandle = null;
+		} else if ( Input.GetKeyDown (keyJump)) {
+			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
+				turnLeft ();
+				jumpLeft ();
+				catchedClimbHandle = null;
+				lastCatchedClimbHandle = null;
+			} else if (Input.GetKey (keyRight)) {
+				turnRight ();
+				jumpRight ();
+				catchedClimbHandle = null;
+				lastCatchedClimbHandle = null;
+			} else if( Input.GetKey(keyDown) ){
+				velocity.x = 0.0f;
+				velocity.y = 0.0f;
+				setState (State.IN_AIR);
+				setAction (Action.JUMP);
+				lastCatchedClimbHandle = catchedClimbHandle;
+				catchedClimbHandle = null;
+			} else {
+				jumpFromClimb ();
+				lastCatchedClimbHandle = catchedClimbHandle;
+				catchedClimbHandle = null;
+			}
+		}
+		
+		return 0;
+	}
+	
+	int Action_CLIMB_CLIMB(){
+		climbDuration += CurrentDeltaTime;
+		
+		if (climbDuration >= CLIMBDUR_CLIMB) {
+			setState (State.ON_GROUND);
+			climbDuration = 0.0f;
+			transform.position = climbAfterPos; 
+			
+			if( canGetUp() ){
+				setAction (Action.IDLE);
+				resetActionAndState ();
+			}else{
+				setAction (Action.CROUCH_IDLE);
+				wantGetUp = !Input.GetKey(keyDown);
+				
+				if( Input.GetKey(keyLeft) ) {
+					keyLeftDown();
+				} else if( Input.GetKey(keyRight) ){
+					keyRightDown();
+				}
+			}
+			
+		} else {
+			float ratio = climbDuration / CLIMBDUR_CLIMB;
+			transform.position = climbBeforePos + climbDistToClimb * ratio;
+		}
+		
+		return 0;
+	}
+
+	int Action_ROPECLIMB_UP(float deltaTime){
+		
+		if (!catchedRope)
+			return 0;
+		
+		if (Input.GetKeyUp (keyUp)) { 
+			setAction(Action.ROPECLIMB_IDLE);
+			return 0;
+		} 
+		
+		float climbDist = RopeClimbSpeedUp * CurrentDeltaTime;
+		
+		float newRopeLinkCatchOffset = ropeLinkCatchOffset + climbDist;
+		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
+		
+		if( newRopeLinkCatchOffset > 0.0f ) // przekroczyłem ogniwo w gore...
+		{
+			if( catchedRopeLink.transform.parent ) { // jak ogniwo ma rodzica to przechodze wyzej 
+				
+				catchedRopeLink = catchedRopeLink.transform.parent.GetComponent<RopeLink>();
+				catchedRope.chooseDriver(catchedRopeLink.transform);
+				ropeLinkCatchOffset = -0.5f - newRopeLinkCatchOffset;
+				
+			}else {
+				ropeLinkCatchOffset = 0.0f;
+				setAction(Action.ROPECLIMB_IDLE);
+			}
+			
+		} else {
+			
+			ropeLinkCatchOffset = newRopeLinkCatchOffset;
+		}
+		
+		tryBreakUpRope (deltaTime);
+		
+		return 0;
+	}
+	
+	int Action_ROPECLIMB_DOWN(float deltaTime){
+		
+		if (!catchedRope)
+			return 0;
+		
+		if (Input.GetKeyUp (keyDown)) {
+			setAction(Action.ROPECLIMB_IDLE);
+			return 0;
+		}
+		
+		if (tryJumpFromRope () != 0) {
+			return 0;
+		}
+		
+		float climbDist = RopeClimbSpeedDown * CurrentDeltaTime;
+		
+		float newRopeLinkCatchOffset = ropeLinkCatchOffset - climbDist;
+		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
+		
+		if( newRopeLinkCatchOffset <= -0.5f ) // przekroczyłem ogniwo w gore...
+		{
+			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma dzicko to przechodze niżej 
+				
+				if( catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
+					catchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
+					catchedRope.chooseDriver(catchedRopeLink.transform);
+					ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
+				}else{
+					ropeLinkCatchOffset = -0.5f;
+					setAction(Action.ROPECLIMB_IDLE);
+				}
+				
+			}else {
+				ropeLinkCatchOffset = -0.5f;
+				setAction(Action.ROPECLIMB_IDLE);
+			}
+			
+		} else {
+			
+			ropeLinkCatchOffset = newRopeLinkCatchOffset;
+		}
+		
+		tryBreakUpRope (deltaTime);
+		
+		return 0;
+	}
+
+	void crouch(){
+		if (isInState (State.ON_GROUND)) {
+			
+			switch (action) {
+				
+			case Action.IDLE:
+			case Action.JUMP:
+			case Action.CROUCH_IN:
+				setAction (Action.CROUCH_IDLE);
+				if( Input.GetKey(keyLeft) ){
+					keyLeftDown();
+				} else if( Input.GetKey(keyRight) ){
+					keyRightDown();
+				}else{
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+				}
+				break;
+				
+			case Action.WALK_LEFT:
+			case Action.RUN_LEFT:
+			case Action.JUMP_LEFT:
+			case Action.JUMP_LEFT_LONG:
+				if( Input.GetKey(keyLeft)){
+					velocity.x = 0.0f;
+					desiredSpeedX = CrouchSpeed;
+					if( dir () == -Vector2.right ){
+						setAction(Action.CROUCH_LEFT);
+					}else{
+						setAction(Action.CROUCH_LEFT_BACK);
+					}
+				}else{
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					setAction (Action.CROUCH_IDLE);
+				}
+				break;
+				
+			case Action.WALK_RIGHT:
+			case Action.RUN_RIGHT:
+			case Action.JUMP_RIGHT:
+			case Action.JUMP_RIGHT_LONG:
+				if( Input.GetKey(keyRight)){
+					velocity.x = 0.0f;
+					desiredSpeedX = CrouchSpeed;
+					if( dir () == Vector2.right ){
+						setAction(Action.CROUCH_RIGHT);
+					}else{
+						setAction(Action.CROUCH_RIGHT_BACK);
+					}
+				}else{
+					velocity.x = 0.0f;
+					velocity.y = 0.0f;
+					setAction (Action.CROUCH_IDLE);
+				}
+				break;
+			}
+			
+		}
+	}
+	
+	void preparetojump(){
+		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
+			return;
+		
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		setAction (Action.PREPARE_TO_JUMP);
+	}
+	
+	void jump(){
+		addImpulse(new Vector2(0.0f, JumpImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP);
+		
+		lastFrameHande = false;
+	}
+	
+	void jumpFromClimb(){
+		addImpulse(new Vector2(0.0f, JumpImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP,1);
+		lastFrameHande = false;
+	}
+	
+	void jumpLeft(){
+		velocity.x = -JumpSpeed;
+		velocity.y = 0.0f;
+		addImpulse(new Vector2(0.0f, JumpImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP_LEFT);
+		
+		lastFrameHande = false;
+	}
+	
+	void jumpRight(){
+		velocity.x = JumpSpeed;
+		velocity.y = 0.0f;
+		addImpulse(new Vector2(0.0f, JumpImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP_RIGHT);
+		
+		lastFrameHande = false;
+	}
+	
+	void jumpLongLeft(){
+		velocity.x = -JumpLongSpeed;
+		velocity.y = 0.0f;
+		addImpulse(new Vector2(0.0f, JumpLongImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP_LEFT_LONG);
+		
+		lastFrameHande = false;
+	}
+	
+	void jumpLongRight(){
+		velocity.x = JumpLongSpeed;
+		velocity.y = 0.0f;
+		addImpulse(new Vector2(0.0f, JumpLongImpulse));
+		setState(State.IN_AIR);
+		setAction (Action.JUMP_RIGHT_LONG);
+		
+		lastFrameHande = false;
+	}
+	
+	void turnLeftStart(){
+		setAction (Action.TURN_STAND_LEFT);
+		
+		if (Input.GetKeyDown (keyJump) || ( Input.GetKey (keyJump) && canJumpAfter) )
+			wantJumpAfter = true;
+	}
+	
+	void turnRightStart(){
+		setAction (Action.TURN_STAND_RIGHT);
+		
+		if (Input.GetKeyDown (keyJump) || (Input.GetKey (keyJump) && canJumpAfter) )
+			wantJumpAfter = true;
+	}
+	
+	void turnLeftFinish(){
+		setAction (Action.IDLE);
+		
+		if( wantJumpAfter ) {
+			jumpLeft();
+			
+			if( Input.GetKey(keyJump) )
+				canJumpAfter = false;
+			
+		} else {
+			resetActionAndState ();
+		}
+	}
+	
+	void turnRightFinish(){
+		setAction (Action.IDLE);
+		
+		if( wantJumpAfter) {
+			jumpRight();
+			
+			if( Input.GetKey(keyJump) )
+				canJumpAfter = false;
+			
+			
+		} else {
+			resetActionAndState ();
+		}
+	}
+
+	Action action;
+	public float CrouchInOutDuration = 0.2f;
+	bool justJumpedMount = false;
+	float currentActionTime = 0f;
+	NewRope justJumpedRope = null;
 	Vector3 impulse;
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Player2Controller : MonoBehaviour {
+public class Zap : MonoBehaviour {
 	Canvas guiCanvas = null;
 	Text infoLabel = null;
 	Image mapBackgroundImage = null;
@@ -16,12 +16,7 @@ public class Player2Controller : MonoBehaviour {
 	public float CrouchSpeed = 1.5f;
 	public float MountSpeed = 2.0f; // ile na sek.
 	public float MountJumpDist = 4.0f; // następnie naciskasz spacje a on skacze
-	//[2015-06-18 17:58:40] Rafał Sankowski: i jeśli nadal trzymasz spacje
-	//[2015-06-18 17:59:02] Rafał Sankowski: to po przeskoczeniu ustalonej wartości (mowilismy o tym) się lapie
 	public float SpeedUpParam = 7.0f; // ile jednosek predkosci hamuje na sekund
-	/// <summary>
-	/// ile jednosek predkosci hamuje na sekunde
-	/// </summary>
 	public float SlowDownParam = 6.0f; // ile jednosek predkosci hamuje na sekunde
 	public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
 	public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
@@ -120,10 +115,6 @@ public class Player2Controller : MonoBehaviour {
 		animator = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
 
-		//shadowTransform = transform.Find ("shadow");
-		//shadowSpriteRenderer = shadowTransform.GetComponent<SpriteRenderer> ();
-		//shadowSprite = shadowSpriteRenderer.sprite;
-
 		shadowCenter = transform.Find ("shadowCenter");
 		if (shadowCenter) {
 			shadowLeft = shadowCenter.Find ("shadowLeft");
@@ -191,8 +182,6 @@ public class Player2Controller : MonoBehaviour {
 	}
 
 	void Start () {
-		print ("Player2Controller::Start()");
-
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
 		desiredSpeedX = 0.0f;
@@ -603,6 +592,8 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		stateJustChanged = false;
+		currentStateTime += deltaTime;
+		currentActionTime += deltaTime;
 
 		currentController.Update( CurrentDeltaTime );
 
@@ -709,121 +700,7 @@ public class Player2Controller : MonoBehaviour {
 		}
 		return false;
 	}
-	int Act_IDLE(){
-		return 0;
-	}
 
-	int Act_LANDING_HARD(){
-		if (currentActionTime >= LANDING_HARD_DURATION) {
-			setAction(Action.IDLE);
-			resetActionAndState();
-		}
-
-		return 0;
-	}
-
-	int Act_CLIMB_PULLDOWN(){
-		climbDuration += CurrentDeltaTime;
-		
-		if( climbDuration >= CLIMBDUR_CLIMB ){
-			setAction(Action.CLIMB_CATCH,1);
-			setState(State.CLIMB);
-			climbDuration = 0.0f;
-			canPullUp = true;
-			transform.position = climbAfterPos;
-		} else {
-		}
-		
-		return 0;
-	}
-	
-	int Act_CLIMB_JUMP_TO_CATCH(){
-		// dociaganie do punktu:
-		climbDuration += CurrentDeltaTime;
-		
-		if (climbDuration >= climbToJumpDuration) {
-			setAction (Action.CLIMB_CATCH);
-			climbDuration = 0.0f;
-			transform.position = climbAfterPos;
-		} else {
-			float ratio = climbDuration / climbToJumpDuration;
-			transform.position = climbBeforePos + climbDistToClimb * ratio;
-		}
-		
-		return 0;
-	}
-	
-	int Act_CLIMB_CATCH(){
-		if ( (Input.GetKeyDown (keyUp) || Input.GetKey(keyUp)) && canPullUp) {
-			
-			climbAfterPos.x = catchedClimbHandle.transform.position.x;
-			climbAfterPos.y = catchedClimbHandle.transform.position.y;
-			
-			climbBeforePos = transform.position;
-			climbDistToClimb = climbAfterPos - climbBeforePos;
-			
-			setAction (Action.CLIMB_CLIMB);
-			climbDuration = 0.0f;
-			
-			catchedClimbHandle = null;
-			lastCatchedClimbHandle = null;
-		} else if ( Input.GetKeyDown (keyJump)) {
-			if (dir () == Vector2.right && Input.GetKey (keyLeft)) {
-				turnLeft ();
-				jumpLeft ();
-				catchedClimbHandle = null;
-				lastCatchedClimbHandle = null;
-			} else if (Input.GetKey (keyRight)) {
-				turnRight ();
-				jumpRight ();
-				catchedClimbHandle = null;
-				lastCatchedClimbHandle = null;
-			} else if( Input.GetKey(keyDown) ){
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
-				setState (State.IN_AIR);
-				setAction (Action.JUMP);
-				lastCatchedClimbHandle = catchedClimbHandle;
-				catchedClimbHandle = null;
-			} else {
-				jumpFromClimb ();
-				lastCatchedClimbHandle = catchedClimbHandle;
-				catchedClimbHandle = null;
-			}
-		}
-		
-		return 0;
-	}
-	
-	int Act_CLIMB_CLIMB(){
-		climbDuration += CurrentDeltaTime;
-		
-		if (climbDuration >= CLIMBDUR_CLIMB) {
-			setState (State.ON_GROUND);
-			climbDuration = 0.0f;
-			transform.position = climbAfterPos; 
-
-			if( canGetUp() ){
-				setAction (Action.IDLE);
-				resetActionAndState ();
-			}else{
-				setAction (Action.CROUCH_IDLE);
-				wantGetUp = !Input.GetKey(keyDown);
-				
-				if( Input.GetKey(keyLeft) ) {
-					keyLeftDown();
-				} else if( Input.GetKey(keyRight) ){
-					keyRightDown();
-				}
-			}
-
-		} else {
-			float ratio = climbDuration / CLIMBDUR_CLIMB;
-			transform.position = climbBeforePos + climbDistToClimb * ratio;
-		}
-		
-		return 0;
-	}
 
 	bool checkObstacle(int dir, float distToCheck, ref float distToObstacle){
 		if (dir == 1) {
@@ -896,311 +773,7 @@ public class Player2Controller : MonoBehaviour {
 		return false;
 	}
 
-	int Act_WALK(int dir){
 
-		bool speedReached = checkSpeed (dir);
-		if (speedReached && desiredSpeedX == 0.0f ) {
-			setAction(Action.IDLE);
-			resetActionAndState();
-			return 0;
-		}
-
-		distToMove = velocity.x * CurrentDeltaTime;
-
-		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / WalkSpeed ) * 0.5f;
-
-		float distToObstacle = 0.0f;
-		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
-			distToMove = distToObstacle;
-			setActionIdle();
-		}
-
-		newPosX += distToMove;		
-		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-
-		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		}
-		return 0;
-	}
-
-	int Act_RUN(int dir){
-
-		bool speedReached = checkSpeed (dir);
-		if (speedReached && desiredSpeedX == 0.0f) {
-			setAction(Action.IDLE);
-			resetActionAndState ();
-			return 0;
-		}
-
-		float speedRatio = (Mathf.Abs (velocity.x) / RunSpeed);
-		bool turnBackHard = speedRatio > 0.5f;
-
-		if (turnBackHard) {
-
-			if (dir == 1) {
-
-				if( (Input.GetKeyDown(keyLeft) || Input.GetKey(keyLeft)) &&
-				   (Input.GetKeyUp(keyRight) || !Input.GetKey(keyRight))
-				   )
-				{
-					setAction (Action.TURN_RUN_LEFT);
-				}
-
-			} else if (dir == -1) {
-
-				if( (Input.GetKeyDown(keyRight) || Input.GetKey(keyRight)) &&
-				   (Input.GetKeyUp(keyLeft) || !Input.GetKey(keyLeft))
-				   )
-				{
-					setAction (Action.TURN_RUN_RIGHT);
-				}
-
-			}
-
-		}
-
-		distToMove = velocity.x * CurrentDeltaTime;
-
-		animator.speed = 0.5f + (Mathf.Abs( velocity.x ) / RunSpeed ) * 0.5f;
-
-		float distToObstacle = 0.0f;
-		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
-			distToMove = distToObstacle;
-			setActionIdle();
-		}
-		
-		newPosX += distToMove;		
-		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-
-		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		}
-
-		return 0;
-	}
-
-	int Act_TURN_RUN(int dir){
-
-		int retVal = 0;
-
-		if (Input.GetKeyDown (keyJump)) {
-			wantJumpAfter = true;
-		}
-
-		bool speedReached = checkSpeed (dir);
-		if (speedReached && desiredSpeedX == 0.0f) {
-		}
-
-		distToMove = velocity.x * CurrentDeltaTime;
-
-		float distToObstacle = 0.0f;
-		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
-			distToMove = distToObstacle;
-			retVal = 1;
-		}
-		
-		newPosX += distToMove;		
-		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-		
-		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		}
-		
-		return retVal;
-	}
-
-	public float CrouchInOutDuration = 0.2f;
-
-	int Act_CROUCH_IN(){
-
-		if (currentActionTime >= CrouchInOutDuration) {
-			crouch();
-		}
-		return 0;
-	}
-
-	int Act_GET_UP(){
-
-		if (currentActionTime >= CrouchInOutDuration) {
-			getUp();			
-		}
-
-		return 0;
-	}
-
-	int Act_CROUCH_IDLE(){
-		if( Input.GetKey(keyDown) ){
-			tryStartClimbPullDown();
-		}
-		return 0;
-	}
-
-	int Act_CROUCH_LEFTRIGHT(int dir){
-		
-		bool speedReached = checkSpeed (dir);
-		if (speedReached && desiredSpeedX == 0.0f) {
-			setActionCrouchIdle();
-			if( crouching() ) {
-				if( Input.GetKey(keyLeft) ) {
-					keyLeftDown();
-				} else if( Input.GetKey(keyRight) ){
-					keyRightDown();
-				}
-			}
-		}
-		
-		distToMove = velocity.x * CurrentDeltaTime;
-		
-		float distToObstacle = 0.0f;
-		if (checkObstacle (dir, distToMove, ref distToObstacle)) {
-			distToMove = distToObstacle;
-			setActionCrouchIdle();
-		}
-		
-		newPosX += distToMove;		
-		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-		
-		float distToGround = 0.0f;
-		bool groundUnderFeet = checkGround (false, layerIdLastGroundTypeTouchedMask, ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		}
-	
-		return 0;
-	}
-
-	int Act_MOUNTING(){
-		Vector3 newPos3 = transform.position;
-		Vector3 distToMount = velocity * CurrentDeltaTime;
-		newPos3 += distToMount;
-		if (onMount (newPos3)) {
-			transform.position = newPos3;
-		} else {
-			setMountIdle();
-		}
-		return 0;
-	}
-	
-	int Act_MOUNTING_DOWN(){
-		Vector3 newPos3 = transform.position;
-		Vector3 distToMount = velocity * CurrentDeltaTime;
-		newPos3 += distToMount;
-
-		if (distToMount.y < 0.0f) { // schodzi
-			groundUnderFeet = checkDown ( Mathf.Abs(distToMount.y) + 0.01f);
-			if (groundUnderFeet >= 0.0f) {
-				if (groundUnderFeet < Mathf.Abs (distToMount.y)) {
-					distToMount.y = -groundUnderFeet;
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-					setState (State.ON_GROUND);
-					setAction (Action.IDLE);
-					transform.position = transform.position + distToMount;
-				}
-			}else{
-				if( onMount(newPos3) )
-					transform.position = newPos3;
-				else
-					setMountIdle();
-			}
-		}
-		return 0;
-	}
-
-	NewRope justJumpedRope = null;
-
-	int Act_ROPECLIMB_IDLE(float deltaTime){
-
-		if (!catchedRope)
-			return 0;
-
-		bool _swing = false;
-
-		if (Input.GetKey (keyLeft)) {
-
-			float fla = catchedRope.firstLinkAngle;
-
-			if( fla > -20f && fla < 0f){
-				//print ( "Rope swing : " + fla );
-				catchedRope.swing(-Vector2.right, RopeSwingForce * CurrentDeltaTime );
-				_swing = true;
-			}
-
-			//if( _swing ){
-				if( dir () == Vector2.right ){
-
-					if( faceRight() ) animator.Play("Zap_liana_swingback_R");
-					else animator.Play("Zap_liana_swingback_L");
-					animator.speed = 1f;
-
-				}else{
-
-					if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
-					else animator.Play("Zap_liana_swingfront_L");
-					animator.speed = 1f;
-
-				}
-			//}
-		}
-		else if (Input.GetKey (keyRight)) {
-
-			float fla = catchedRope.firstLinkAngle;
-
-			if( fla < 20f && fla >= 0f){
-				//print ( "Rope swing : " + fla );
-				catchedRope.swing(Vector2.right, RopeSwingForce * CurrentDeltaTime );
-				_swing = true;
-			}
-
-			//if( _swing ){
-				if( dir () == Vector2.right ){
-
-					if( faceRight() ) animator.Play("Zap_liana_swingfront_R");
-					else animator.Play("Zap_liana_swingfront_L");
-					animator.speed = 1f;
-
-				}else{
-
-					if( faceRight() ) animator.Play("Zap_liana_swingback_R");
-					else animator.Play("Zap_liana_swingback_L");
-					animator.speed = 1f;
-
-				}
-			//}
-		}
-
-		if (Input.GetKeyUp (keyLeft) || Input.GetKeyUp(keyRight) ) { //|| !_swing) {
-			setActionRopeClimbIdle();
-		}
-
-		if (tryJumpFromRope () != 0) {
-			return 0;
-		}
-
-		if (Input.GetKey (keyUp)) { 
-
-			if( canRopeClimbUp() ){
-				setAction(Action.ROPECLIMB_UP);
-			}
-
-		} else if (Input.GetKey (keyDown)) {
-
-			if( canRopeClimbDown() ) {
-				setAction(Action.ROPECLIMB_DOWN);
-			}
-		}
-
-		tryBreakUpRope (deltaTime);
-
-		return 0;
-	}
 
 	bool canRopeClimbUp(){
 		if (ropeLinkCatchOffset == 0f) {
@@ -1236,90 +809,7 @@ public class Player2Controller : MonoBehaviour {
 		return false;
 	}
 
-	int Act_ROPECLIMB_UP(float deltaTime){
 
-		if (!catchedRope)
-			return 0;
-
-		if (Input.GetKeyUp (keyUp)) { 
-			setAction(Action.ROPECLIMB_IDLE);
-			return 0;
-		} 
-
-		float climbDist = RopeClimbSpeedUp * CurrentDeltaTime;
-
-		float newRopeLinkCatchOffset = ropeLinkCatchOffset + climbDist;
-		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
-
-		if( newRopeLinkCatchOffset > 0.0f ) // przekroczyłem ogniwo w gore...
-		{
-			if( catchedRopeLink.transform.parent ) { // jak ogniwo ma rodzica to przechodze wyzej 
-
-				catchedRopeLink = catchedRopeLink.transform.parent.GetComponent<RopeLink>();
-				catchedRope.chooseDriver(catchedRopeLink.transform);
-				ropeLinkCatchOffset = -0.5f - newRopeLinkCatchOffset;
-
-			}else {
-				ropeLinkCatchOffset = 0.0f;
-				setAction(Action.ROPECLIMB_IDLE);
-			}
-
-		} else {
-
-			ropeLinkCatchOffset = newRopeLinkCatchOffset;
-		}
-
-		tryBreakUpRope (deltaTime);
-
-		return 0;
-	}
-
-	int Act_ROPECLIMB_DOWN(float deltaTime){
-
-		if (!catchedRope)
-			return 0;
-
-		if (Input.GetKeyUp (keyDown)) {
-			setAction(Action.ROPECLIMB_IDLE);
-			return 0;
-		}
-
-		if (tryJumpFromRope () != 0) {
-			return 0;
-		}
-
-		float climbDist = RopeClimbSpeedDown * CurrentDeltaTime;
-		
-		float newRopeLinkCatchOffset = ropeLinkCatchOffset - climbDist;
-		// zakladam ze nie przebedzie wiecej niz jednego ogniwa w klatce...
-		
-		if( newRopeLinkCatchOffset <= -0.5f ) // przekroczyłem ogniwo w gore...
-		{
-			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma dzicko to przechodze niżej 
-
-				if( catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
-					catchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
-					catchedRope.chooseDriver(catchedRopeLink.transform);
-					ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
-				}else{
-					ropeLinkCatchOffset = -0.5f;
-					setAction(Action.ROPECLIMB_IDLE);
-				}
-				
-			}else {
-				ropeLinkCatchOffset = -0.5f;
-				setAction(Action.ROPECLIMB_IDLE);
-			}
-			
-		} else {
-			
-			ropeLinkCatchOffset = newRopeLinkCatchOffset;
-		}
-
-		tryBreakUpRope (deltaTime);
-
-		return 0;
-	}
 
 	int tryJumpFromRope(bool forceJumpOff = false){
 
@@ -1439,173 +929,7 @@ public class Player2Controller : MonoBehaviour {
 		resetActionAndState ();
 	}
 
-	void crouch(){
-		if (isInState (State.ON_GROUND)) {
-		
-			switch (action) {
-			
-			case Action.IDLE:
-			case Action.JUMP:
-			case Action.CROUCH_IN:
-				setAction (Action.CROUCH_IDLE);
-				if( Input.GetKey(keyLeft) ){
-					keyLeftDown();
-				} else if( Input.GetKey(keyRight) ){
-					keyRightDown();
-				}else{
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-				}
-				break;
-			
-			case Action.WALK_LEFT:
-			case Action.RUN_LEFT:
-			case Action.JUMP_LEFT:
-			case Action.JUMP_LEFT_LONG:
-				if( Input.GetKey(keyLeft)){
-					velocity.x = 0.0f;
-					desiredSpeedX = CrouchSpeed;
-					if( dir () == -Vector2.right ){
-						setAction(Action.CROUCH_LEFT);
-					}else{
-						setAction(Action.CROUCH_LEFT_BACK);
-					}
-				}else{
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-					setAction (Action.CROUCH_IDLE);
-				}
-				break;
-			
-			case Action.WALK_RIGHT:
-			case Action.RUN_RIGHT:
-			case Action.JUMP_RIGHT:
-			case Action.JUMP_RIGHT_LONG:
-				if( Input.GetKey(keyRight)){
-					velocity.x = 0.0f;
-					desiredSpeedX = CrouchSpeed;
-					if( dir () == Vector2.right ){
-						setAction(Action.CROUCH_RIGHT);
-					}else{
-						setAction(Action.CROUCH_RIGHT_BACK);
-					}
-				}else{
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-					setAction (Action.CROUCH_IDLE);
-				}
-				break;
-			}
 
-		}
-	}
-
-	void preparetojump(){
-		if (isNotInState (State.ON_GROUND) || isNotInAction (Action.IDLE))
-			return;
-
-		velocity.x = 0.0f;
-		velocity.y = 0.0f;
-		setAction (Action.PREPARE_TO_JUMP);
-	}
-
-	void jump(){
-		addImpulse(new Vector2(0.0f, JumpImpulse));
-		setState(State.IN_AIR);
-		setAction (Action.JUMP);
-
-		lastFrameHande = false;
-	}
-
-	void jumpFromClimb(){
-		addImpulse(new Vector2(0.0f, JumpImpulse));
-		setState(State.IN_AIR);
-		setAction (Action.JUMP,1);
-		lastFrameHande = false;
-	}
-
-	void jumpLeft(){
-		velocity.x = -JumpSpeed;
-		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpImpulse));
-		setState(State.IN_AIR);
-		setAction (Action.JUMP_LEFT);
-
-		lastFrameHande = false;
-	}
-	
-	void jumpRight(){
-		velocity.x = JumpSpeed;
-		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpImpulse));
-		setState(State.IN_AIR);
-		setAction (Action.JUMP_RIGHT);
-
-		lastFrameHande = false;
-	}
-	
-	void jumpLongLeft(){
-		velocity.x = -JumpLongSpeed;
-		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpLongImpulse));
-		setState(State.IN_AIR);
-		setAction (Action.JUMP_LEFT_LONG);
-
-		lastFrameHande = false;
-	}
-	
-	void jumpLongRight(){
-		velocity.x = JumpLongSpeed;
-		velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpLongImpulse));
-		setState(State.IN_AIR);
-		setAction (Action.JUMP_RIGHT_LONG);
-
-		lastFrameHande = false;
-	}
-
-	void turnLeftStart(){
-		setAction (Action.TURN_STAND_LEFT);
-
-		if (Input.GetKeyDown (keyJump) || ( Input.GetKey (keyJump) && canJumpAfter) )
-			wantJumpAfter = true;
-	}
-
-	void turnRightStart(){
-		setAction (Action.TURN_STAND_RIGHT);
-
-		if (Input.GetKeyDown (keyJump) || (Input.GetKey (keyJump) && canJumpAfter) )
-			wantJumpAfter = true;
-	}
-
-	void turnLeftFinish(){
-		setAction (Action.IDLE);
-
-		if( wantJumpAfter ) {
-			jumpLeft();
-
-			if( Input.GetKey(keyJump) )
-				canJumpAfter = false;
-
-		} else {
-			resetActionAndState ();
-		}
-	}
-	
-	void turnRightFinish(){
-		setAction (Action.IDLE);
-
-		if( wantJumpAfter) {
-			jumpRight();
-
-			if( Input.GetKey(keyJump) )
-				canJumpAfter = false;
-
-
-		} else {
-			resetActionAndState ();
-		}
-	}
 
 	void turnLeft(){
 		Vector3 scl = gfx.localScale;
@@ -2272,52 +1596,7 @@ public class Player2Controller : MonoBehaviour {
 	}
 	
 	/*////////////////////////////////////////////////////////////*/
-	
-	public enum Action{
-		UNDEF = 0,
-		IDLE,
-		WALK_LEFT,
-		WALK_RIGHT,
-		RUN_LEFT,
-		RUN_RIGHT,
-		TURN_STAND_LEFT,
-		TURN_STAND_RIGHT,
-		TURN_RUN_LEFT,
-		TURN_RUN_RIGHT,
-		//BREAK,
-		PREPARE_TO_JUMP,
-		JUMP,
-		JUMP_LEFT,
-		JUMP_LEFT_LONG,
-		JUMP_RIGHT,
-		JUMP_RIGHT_LONG,
-		CROUCH_IN,
-		GET_UP,
-		CROUCH_IDLE,
-		CROUCH_LEFT,
-		CROUCH_RIGHT,
-		CROUCH_LEFT_BACK,
-		CROUCH_RIGHT_BACK,
-		LANDING_HARD,
-		FALL,
-		STOP_WALK,
-		STOP_RUN,
-		CLIMB_PREPARE_TO_JUMP,
-		CLIMB_JUMP_TO_CATCH,
-		CLIMB_CATCH,
-		CLIMB_CLIMB,
-		CLIMB_PULLDOWN,
-		MOUNT_IDLE,
-		MOUNT_LEFT,
-		MOUNT_RIGHT,
-		MOUNT_UP,
-		MOUNT_DOWN,
-		ROPECLIMB_IDLE,
-		ROPECLIMB_UP,
-		ROPECLIMB_DOWN,
-		DIE
-	};
-	
+
 	public enum State
 	{
 		ON_GROUND = 0,
@@ -2328,7 +1607,7 @@ public class Player2Controller : MonoBehaviour {
 		OTHER
 	};
 
-	State getState() { 
+	public State getState() { 
 		return state; 
 	}
 
@@ -2367,250 +1646,7 @@ public class Player2Controller : MonoBehaviour {
 	/*////////////////////////////////////////////////////////////*/
 
 	SpriteRenderer sprRend = null;
-	//public Sprite mountIdleSprite = null;
-	//public Sprite catchIdleSprite = null;
 
-	Action getAction(){
-		return action;
-	}
-	bool setAction(Action newAction, int param = 0){
-
-		if (action == newAction)
-			return false;
-
-		action = newAction;
-		currentActionTime = 0.0f;
-
-		animator.speed = 1.0f;
-
-		switch (newAction) {
-			
-		case Action.IDLE:
-			if( faceRight() ) animator.Play("Zap_idle_R");
-			else animator.Play ("Zap_idle_L");
-			break;
-
-		case Action.DIE:
-			DeathType dt = (DeathType)param;
-			string msgInfo = "";
-
-			switch( dt ){
-
-			case DeathType.VERY_HARD_LANDING:
-				if( faceRight() ) animator.Play("Zap_death_hitground_R");
-				else animator.Play("Zap_death_hitground_L");
-				msgInfo = DeathByVeryHardLandingText;
-				break;
-
-			case DeathType.SNAKE:
-				if( faceRight() ) animator.Play("Zap_death_poison_R");
-				else animator.Play("Zap_death_poison_L");
-				msgInfo = DeathBySnakeText;
-				break;
-
-			case DeathType.POISON:
-				if( faceRight() ) animator.Play("Zap_death_poison_R");
-				else animator.Play("Zap_death_poison_L");
-				msgInfo = DeathByPoisonText;
-				break;
-
-			case DeathType.CROCODILE:
-				msgInfo = DeathByCrocodileText;
-				break;
-
-			default:
-				if( faceRight() ) animator.Play("Zap_death_hitground_R");
-				else animator.Play("Zap_death_hitground_L");
-				msgInfo = DeathByDefaultText;
-				break;
-
-			};
-
-			showInfo (msgInfo, -1);
-
-			if( dieSounds.Length != 0 )
-				myAudio.PlayOneShot(dieSounds[Random.Range(0,dieSounds.Length)], 0.3F);
-			break;
-
-		case Action.WALK_LEFT:
-			animator.Play("Zap_walk_L");
-			break;
-		case Action.WALK_RIGHT:
-			animator.Play("Zap_walk_R");
-			break;
-			
-		case Action.RUN_LEFT:
-			animator.Play("Zap_run_L");
-			break;
-		case Action.RUN_RIGHT:
-			animator.Play("Zap_run_L");
-			break;
-
-		case Action.TURN_STAND_LEFT:
-			animator.Play("Zap_walk_back_left");
-			wantJumpAfter = false;
-			break;
-
-		case Action.TURN_STAND_RIGHT:
-			animator.Play("Zap_walk_back_right");
-			wantJumpAfter = false;
-			break;
-
-		case Action.TURN_RUN_LEFT:
-			animator.Play("Zap_runback_L");
-			wantJumpAfter = false;
-			if( turnRunSounds.Length != 0 )
-				myAudio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
-			break;
-			
-		case Action.TURN_RUN_RIGHT:
-			animator.Play("Zap_runback_R");
-			wantJumpAfter = false;
-			if( turnRunSounds.Length != 0 )
-				myAudio.PlayOneShot(turnRunSounds[Random.Range(0,turnRunSounds.Length)], 0.5F);
-			break;
-
-		case Action.PREPARE_TO_JUMP:
-			if( faceRight() ) animator.Play("Zap_jump_in_R");
-			else animator.Play("Zap_jump_in_L");
-			break;
-
-		case Action.JUMP:
-			if( param == 0 ){
-
-				if( faceRight() ) animator.Play("Zap_jump_fly_R");
-				else animator.Play("Zap_jump_fly_L");
-
-			}else if (param == 1) {
-				if( faceRight() ) animator.Play("zap_rocks_climb_R");
-				else animator.Play("zap_rocks_climb_L");
-			}
-			if( jumpSounds.Length != 0 )
-				myAudio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
-			break;
-			
-		case Action.JUMP_LEFT:
-		case Action.JUMP_LEFT_LONG:
-		case Action.JUMP_RIGHT:
-		case Action.JUMP_RIGHT_LONG:
-
-			if( faceRight() ) animator.Play("Zap_run_jump_fly_R");
-			else animator.Play("Zap_run_jump_fly_L");
-
-			if( jumpSounds.Length != 0 )
-				myAudio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)], 0.2F);
-			break;
-
-		case Action.LANDING_HARD:
-			if( faceRight() ) animator.Play("Zap_landing_hard_R");
-			else animator.Play("Zap_landing_hard_L");
-
-			if( landingSounds.Length != 0 )
-				myAudio.PlayOneShot(landingSounds[Random.Range(0,landingSounds.Length)], 0.15F);
-			break;
-
-		case Action.CLIMB_PREPARE_TO_JUMP:
-			break;
-		case Action.CLIMB_JUMP_TO_CATCH:
-			break;
-		case Action.CLIMB_CATCH:
-			if( param == 0 ){
-				if( faceRight() ) animator.Play("zap_rocks_catch_position_R");
-				else animator.Play("zap_rocks_catch_position_L");
-
-			}else if( param == 1 ){
-				// tu juz jest we wlasciwej klatce
-				if( faceRight() ) animator.Play("zap_rocks_catch_position_rev_R");
-				else animator.Play("zap_rocks_catch_position_rev_L");
-				animator.speed = 0.0f;
-			}
-
-			if( catchSounds.Length != 0)
-				myAudio.PlayOneShot(catchSounds[Random.Range(0,catchSounds.Length)], 0.7F);
-			break;
-		case Action.CLIMB_CLIMB:
-			if( faceRight() ) animator.Play("Zap_jump_climb_R");
-			else animator.Play("Zap_jump_climb_L");
-			break;
-
-		case Action.CLIMB_PULLDOWN:
-			if( faceRight() ) animator.Play("Zap_drop_R");
-			else animator.Play("Zap_drop_L");
-			break;
-
-		case Action.MOUNT_IDLE:
-			animator.Play("Zap_climbmove_up");
-			animator.speed = 0.0f;
-			break;
-
-		case Action.MOUNT_LEFT:
-			animator.Play("Zap_climbmove_left");
-			break;
-		case Action.MOUNT_RIGHT:
-			animator.Play("Zap_climbmove_right");
-			break;
-		case Action.MOUNT_UP:
-			animator.Play("Zap_climbmove_up");
-			break;
-		case Action.MOUNT_DOWN:
-			animator.Play("Zap_climbmove_down");
-			break;
-
-		case Action.CROUCH_IN:
-			if( faceRight() ) animator.Play("Zap_crouch_in_R");
-			else animator.Play("Zap_crouch_in_L");
-			break;
-			
-		case Action.GET_UP:
-			if( faceRight() ) animator.Play("Zap_getup_R");
-			else animator.Play("Zap_getup_L");
-			break;
-
-		case Action.CROUCH_IDLE:
-			if( faceRight () ) animator.Play("Zap_crouch_move_R");
-			else animator.Play("Zap_crouch_move_L");
-			animator.speed = 0f;
-			break;
-
-		case Action.CROUCH_LEFT:
-			animator.Play("Zap_crouch_move_L");
-			break;
-		case Action.CROUCH_RIGHT:
-			animator.Play("Zap_crouch_move_R");
-			break;
-
-		case Action.CROUCH_LEFT_BACK:
-			animator.Play("Zap_crouch_move_back_R");
-			break;
-
-		case Action.CROUCH_RIGHT_BACK:
-			animator.Play("Zap_crouch_move_back_L");
-			break;
-
-		case Action.ROPECLIMB_IDLE:
-			setActionRopeClimbIdle();
-			break;
-
-		case Action.ROPECLIMB_UP:
-			if( faceRight() ) animator.Play("Zap_liana_climbup_R");
-			else animator.Play("Zap_liana_climbup_L");
-			break;
-
-		case Action.ROPECLIMB_DOWN:
-			if( faceRight() ) animator.Play("Zap_liana_slide_R");
-			else animator.Play("Zap_liana_slide_L");
-			break;
-		};
-
-		return true;
-	}
-	bool isInAction(Action test) {
-		return action == test;
-	}
-	bool isNotInAction(Action test){
-		return action != test;
-	}
-	
 	/*////////////////////////////////////////////////////////////*/
 
 	BoxCollider2D coll;
@@ -2644,8 +1680,17 @@ public class Player2Controller : MonoBehaviour {
 
 	float desiredSpeedX = 0.0f;
 
-	float currentActionTime = 0.0f;
+	float currentActionTime = 0f;
+	public float getCurrentActionTime() {
+		return currentActionTime;
+	}
+	public void resetCurrentActionTime(){
+		currentActionTime = 0f;
+	}
 	float currentStateTime = 0.0f;
+	public float getCurrentStateTime(){
+		return currentStateTime;
+	}
 
 	float myWidth;
 	float myHalfWidth;
@@ -2693,8 +1738,5 @@ public class Player2Controller : MonoBehaviour {
 	bool wantJumpAfter = false;
 	bool canJumpAfter = true;
 
-	[SerializeField]
 	private State state;
-	[SerializeField]
-	private Action action;
 }
