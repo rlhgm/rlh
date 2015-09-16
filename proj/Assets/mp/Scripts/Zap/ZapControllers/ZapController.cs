@@ -71,6 +71,17 @@ public class ZapController {
 		return 0;
 	}
 
+	public virtual bool crouching(){
+		return false;
+	}
+
+	public virtual void zapDie (Zap.DeathType deathType){
+	}
+	public virtual void reborn (){
+	}
+	public virtual bool triggerEnter(Collider2D other){
+		return false;
+	}
 
 	protected string name;
 	protected Zap zap = null;

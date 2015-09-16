@@ -148,7 +148,7 @@ public class Zap : MonoBehaviour {
 		startFallPos = transform.position;
 
 		setState (State.ON_GROUND);
-		setAction (Action.IDLE);
+		currentController.activate ();
 
 		climbDuration = 0.0f;
 		catchedClimbHandle = null;
@@ -211,8 +211,9 @@ public class Zap : MonoBehaviour {
 	public void die(DeathType deathType){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
-		setAction (Action.DIE, (int)deathType);
-		setState (State.OTHER);
+
+		currentController.zapDie (deathType);
+		setState (State.DEAD);
 
 		foreach(GameObject mapPart in collectedMapParts){
 
@@ -225,18 +226,23 @@ public class Zap : MonoBehaviour {
 		}
 
 		collectedMapParts.Clear ();
+
 	}
 
 	public bool isDead(){
-		return action == Action.DIE && state == State.OTHER;
+		//return action == Action.DIE && state == State.OTHER;
+		return isInState (State.DEAD);
 	}
 
 	public void reborn(){
 		sprRend.enabled = true;
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
-		setAction (Action.IDLE);
+		//setAction (Action.IDLE);
+
+		currentController = zapControllerNormal;
 		setState (State.ON_GROUND);
+		currentController.activate ();
 
 		if (lastTouchedCheckPoint) {
 			transform.position = lastTouchedCheckPoint.transform.position;
@@ -244,10 +250,8 @@ public class Zap : MonoBehaviour {
 			transform.position = respawnPoint.position;
 		}
 
-		if (lastTouchedCheckPoint.GetComponent<CheckPoint> ().startMounted) {
-			setState(State.MOUNT);
-			setMountIdle();
-		}
+		currentController.reborn ();
+
 
 		resetInfo ();
 
@@ -256,27 +260,35 @@ public class Zap : MonoBehaviour {
 			rope.reset();
 		}
 	}
+	public GameObject getLastTouchedCheckPoint(){
+		return lastTouchedCheckPoint;
+	}
+
 	GameObject lastTouchedCheckPoint;
 
 	public bool canBeFuddleFromBird = true;
 	bool fuddledFromBrid = false;
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Bird") {
-			if( isInState(State.MOUNT) ){
-				velocity.x = 0.0f;
-				velocity.y = 0.0f;
-				setAction(Action.JUMP);
-				setState(State.IN_AIR);
-
-				if( canBeFuddleFromBird )
-					fuddledFromBrid = true;
-
-			} else if( isInState(State.IN_AIR) ) {
-				velocity.x = 0.0f;
-			}
+		if (currentController.triggerEnter (other))
 			return;
-		}
+
+//		if (other.gameObject.tag == "Bird") {
+//			if( isInState(State.MOUNT) ){
+//				velocity.x = 0.0f;
+//				velocity.y = 0.0f;
+//				setAction(Action.JUMP);
+//				setState(State.IN_AIR);
+//
+//				if( canBeFuddleFromBird )
+//					fuddledFromBrid = true;
+//
+//			} else if( isInState(State.IN_AIR) ) {
+//				velocity.x = 0.0f;
+//			}
+//			return;
+//		}
+
 		if (other.gameObject.tag == "CheckPoint") {
 			lastTouchedCheckPoint = other.gameObject;
 
@@ -499,7 +511,7 @@ public class Zap : MonoBehaviour {
 	void ZapUpdate (float deltaTime) {
 		CurrentDeltaTime = deltaTime;
 
-		if (isInAction (Action.DIE)) {
+		if (isDead()) {
 			if( Input.GetKeyDown(KeyCode.Space) ){
 				reborn();
 				return;
@@ -522,40 +534,40 @@ public class Zap : MonoBehaviour {
 		}
 		
 		if (Input.GetKeyDown (keyUp)) {
-			keyUpDown();
+			currentController.keyUpDown();
 		} 
 		if (Input.GetKeyUp (keyUp)) {
-			keyUpUp();
+			currentController.keyUpUp();
 		}
 		if (Input.GetKeyDown (keyDown)) {
-			keyDownDown();
+			currentController.keyDownDown();
 		} 
 		if (Input.GetKeyUp (keyDown)) {
-			keyDownUp();
+			currentController.keyDownUp();
 		}
 		
 		if (Input.GetKeyUp (keyJump)) {
-			keyJumpUp ();
+			currentController.keyJumpUp ();
 		}
 		
 		if (Input.GetKeyDown (keyLeft)) {
-			keyLeftDown();
+			currentController.keyLeftDown();
 		} 
 		if (Input.GetKeyDown (keyRight)) {
-			keyRightDown();
+			currentController.keyRightDown();
 		}
 		
 		if (Input.GetKeyUp (keyLeft)) {
-			keyLeftUp();
+			currentController.keyLeftUp();
 		} 
 		if (Input.GetKeyUp (keyRight)) {
-			keyRightUp();
+			currentController.keyRightUp();
 		}
 		
 		if (Input.GetKeyDown (keyRun)) {
-			keyRunDown();
+			currentController.keyRunDown();
 		} else if (Input.GetKeyUp (keyRun)) {
-			keyRunUp();
+			currentController.keyRunUp();
 		}
 
 		stateJustChanged = false;
@@ -637,36 +649,7 @@ public class Zap : MonoBehaviour {
 		}
 	}
 
-	bool tryStartClimbPullDown(){
-		GameObject potCatchedClimbHandle = canClimbPullDown();
-		if( potCatchedClimbHandle ){
-			
-			catchedClimbHandle = potCatchedClimbHandle;
-			
-			velocity.x = 0.0f;
-			velocity.y = 0.0f;
-			climbDuration = 0.0f;
-			
-			Vector3 handlePos = potCatchedClimbHandle.transform.position;
-			
-			climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
-			if( dir() == Vector2.right ){
-				climbAfterPos.x = handlePos.x - myHalfWidth;
-			}else{
-				climbAfterPos.x = handlePos.x + myHalfWidth;
-			}
-			
-			climbBeforePos = transform.position;
-			climbDistToClimb = climbAfterPos - climbBeforePos;
 
-			wantGetUp = false;
-			setAction(Action.CLIMB_PULLDOWN);
-			setState(State.CLIMB);
-
-			return true;
-		}
-		return false;
-	}
 
 
 	public bool checkObstacle(int dir, float distToCheck, ref float distToObstacle){
@@ -696,208 +679,6 @@ public class Zap : MonoBehaviour {
 		return dir == 1 ? keyRight : keyLeft;
 	}
 	
-	bool checkSpeed(int dir){
-		float speedX = Mathf.Abs (velocity.x);
-		if (speedX < desiredSpeedX) { // trzeba przyspieszyc
-
-			float velocityDamp = SpeedUpParam * CurrentDeltaTime;
-			speedX += velocityDamp;
-			if( speedX > desiredSpeedX ){
-				speedX = desiredSpeedX;
-				velocity.x = desiredSpeedX * dir;
-				return true;
-			}
-			velocity.x = speedX * dir;
-			return false;
-
-		} else if (speedX > desiredSpeedX) { // trzeba zwolnic
-			float velocityDamp = SlowDownParam * CurrentDeltaTime;
-			speedX -= velocityDamp;
-			if( speedX < desiredSpeedX ){
-				speedX = desiredSpeedX;
-				velocity.x = desiredSpeedX * dir;
-				return true;
-			}
-			velocity.x = speedX * dir;
-			return false;
-		}
-		return true;
-	}
-
-	bool speedLimiter(int dir, float absMaxSpeed){
-		if( dir == -1 ){
-			if( velocity.x < 0.0f && Mathf.Abs(velocity.x) > absMaxSpeed ){
-				velocity.x = -absMaxSpeed;
-				return true;
-			}
-		}else if( dir == 1 ){
-			if( velocity.x > 0.0f && Mathf.Abs(velocity.x) > absMaxSpeed ){
-				velocity.x = absMaxSpeed;
-				return true;
-			}
-		}
-		//aa
-		return false;
-	}
-
-
-
-	bool canRopeClimbUp(){
-		if (ropeLinkCatchOffset == 0f) {
-			return catchedRopeLink.transform.parent;
-		}
-		return true; 
-	}
-	bool canRopeClimbDown(){
-		if (ropeLinkCatchOffset == -0.5f) {
-
-			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma dzicko to przechodze niżej 
-
-				if( catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
-					return true;
-				}
-
-			}
-
-			return false;
-		}
-		return true;
-	}
-
-	bool tryBreakUpRope(float deltaTime){
-
-		if (catchedRopeLink) {
-			if( catchedRopeLink.rope.breakUpStep( catchedRopeLink.idn, deltaTime ) ){
-				tryJumpFromRope(true);
-				return false;
-			}
-		}
-
-		return false;
-	}
-
-
-
-	int tryJumpFromRope(bool forceJumpOff = false){
-
-		if (Input.GetKeyDown (keyJump) || forceJumpOff) {
-			
-			float ropeSpeed = catchedRope.firstLinkSpeed;
-			float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
-			int crl_idn = catchedRope.currentLink.GetComponent<RopeLink> ().idn;
-			float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
-
-			if (Input.GetKey (keyLeft)) { //skacze w lewo
-				turnLeft ();
-				
-				if (ropeSpeed > 0f) { // lina tez leci w lewo
-					jumpLongLeft ();
-					velocity.x -= ps;
-				} else {
-					jumpLeft ();
-				}
-			} else if (Input.GetKey (keyRight)) { //skacze w prawo
-				turnRight ();
-				
-				if (ropeSpeed < 0f) { // lina tez leci w prawo
-					jumpLongRight ();
-					velocity.y += ps;
-				} else {
-					jumpRight ();
-				}
-			} else if( Input.GetKeyDown (keyDown) || Input.GetKey (keyDown) || forceJumpOff ) {
-				velocity.x = 0f;
-				velocity.y = 0f;
-				setAction (Action.JUMP);
-			}else{
-				return 0;
-			}
-			
-			Vector3 _oldPos = transform.position;
-			_oldPos.y -= 1.65f;
-			transform.position = _oldPos;
-			
-			justJumpedRope = catchedRope;
-			
-			catchedRope.resetDiver ();
-			catchedRope = null;
-			catchedRopeLink = null;
-			
-			Quaternion quat = new Quaternion ();
-			quat.eulerAngles = new Vector3 (0f, 0f, 0f);
-			transform.rotation = quat;
-
-			setState (State.IN_AIR);
-
-			//Quaternion quat = new Quaternion ();
-			//quat.eulerAngles = new Vector3 (0f, 0f, 0f);
-			//weaponText.rotation = quat;
-
-			return 1;
-		}
-
-		return 0;
-	}
-
-//	virtual protected int keyLeftDown(){
-//		return 0;
-//	}
-//	virtual protected int keyLeftUp(){
-//		return 0;
-//	}
-//
-//	virtual protected int keyRightDown(){
-//		return 0;
-//	}
-//	virtual protected int keyRightUp(){
-//		return 0;
-//	}
-//
-//	virtual protected int keyUpDown(){
-//		return 0;
-//	}
-//	virtual protected int keyUpUp(){
-//		return 0;
-//	}
-//	
-//	virtual protected int keyDownDown(){
-//		return 0;
-//	}
-//	virtual protected int keyDownUp(){
-//		return 0;
-//	}
-//
-//	virtual protected int keyRunDown(){
-//		return 0;
-//	}
-//	virtual protected int keyRunUp(){
-//		return 0;
-//	}
-//
-//	virtual protected int keyJumpDownSpec(){
-//		return 0;
-//	}
-//	virtual protected int keyJumpUpSpec(){
-//		return 0;
-//	}
-
-//	private int keyJumpDown(){
-//		jumpKeyPressed = true;
-//		return keyJumpDownSpec ();
-//	}
-//	
-//	private int keyJumpUp(){
-//		jumpKeyPressed = false;
-//		return keyJumpUpSpec ();
-//	}
-
-	void getUp(){
-		setAction(Action.IDLE);
-		resetActionAndState ();
-	}
-
-
-
 	public void turnLeft(){
 		Vector3 scl = gfx.localScale;
 		scl.x = Mathf.Abs(scl.x) * -1.0f;
@@ -964,7 +745,7 @@ public class Zap : MonoBehaviour {
 				return -1.0f;
 			}
 		} else {
-			if( crouching() ) 
+			if( currentController.crouching() ) 
 				return -1.0f;
 
 			rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
@@ -999,7 +780,7 @@ public class Zap : MonoBehaviour {
 			if( angle <= 0.0f || angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
 			else return -1.0f;
 		} else {
-			if (crouching())
+			if (currentController.crouching())
 				return -1.0f;
 
 			rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
@@ -1151,300 +932,6 @@ public class Zap : MonoBehaviour {
 		return hit.collider;
 	}
 
-	bool tryCatchHandle(){
-		if (dir () == Vector2.right) {
-		
-			RaycastHit2D hit; 
-			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, layerIdGroundHandlesMask);
-			else
-				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, layerIdGroundHandlesMask); 
-		
-			if (hit.collider != null) {
-				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-				bool _canCatch = true;
-				if ((lastCatchedClimbHandle == hit.collider.gameObject) ) { //{ && velocity.y >= 0.0f) {
-					_canCatch = false;
-				}
-			
-				if (_canCatch) {
-   					catchedClimbHandle = hit.collider.gameObject;
-				
-					Vector3 handlePos = catchedClimbHandle.transform.position;
-					Vector3 newPos = new Vector3 ();
-					newPos.x = handlePos.x - myHalfWidth;
-					newPos.y = handlePos.y - 2.4f; //myHeight;
-				
-					canPullUp = canClimbPullUp ();
-				
-					if (canPullUp) {
-					}
-				
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-				
-					climbBeforePos = transform.position;
-					climbAfterPos = newPos;
-					climbDistToClimb = climbAfterPos - climbBeforePos;
-					climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
-				
-					setState (State.CLIMB); 
-					setAction (Action.CLIMB_JUMP_TO_CATCH);
-					climbDuration = 0.0f;
-					lastFrameHande = false;
-
- 					return true;
-				}
-			}
-		
-			lastHandlePos = sensorHandleR2.position;
-			return false;
-		
-		} else {
-		
-			RaycastHit2D hit; 
-			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, layerIdGroundHandlesMask);
-			else
-				hit = Physics2D.Linecast (sensorHandleL2.position, sensorHandleL2.position, layerIdGroundHandlesMask); 
-		
-		
-			if (hit.collider != null) {
-			
-				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-				bool _canCatch = true;
-				if ((lastCatchedClimbHandle == hit.collider.gameObject) ) { // && velocity.y >= 0.0f) {
-					_canCatch = false;
-				}
-			
-				if (_canCatch) {
-					catchedClimbHandle = hit.collider.gameObject;
-				
-					Vector3 handlePos = catchedClimbHandle.transform.position;
-					Vector3 newPos = new Vector3 ();
-					newPos.x = handlePos.x + myHalfWidth;
-					newPos.y = handlePos.y - 2.4f; //myHeight;
-				
-					canPullUp = canClimbPullUp ();
-				
-					if (canPullUp) {
-					}
-				
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-				
-					climbBeforePos = transform.position;
-					climbAfterPos = newPos;
-					climbDistToClimb = climbAfterPos - climbBeforePos;
-					climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
-				
-					setState (State.CLIMB); 
-					setAction (Action.CLIMB_JUMP_TO_CATCH);
-					climbDuration = 0.0f;
-					lastFrameHande = false;
-
-					return true;
-				}
-			}
-		
-			lastHandlePos = sensorHandleL2.position;
-			return false;
-		}
-	}
-
-	bool tryCatchRope(){
-
-		if (dir () == Vector2.right) {
-
-		
-			RaycastHit2D hit; 
-			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, sensorHandleR2.position, layerIdRopesMask);
-			else
-				hit = Physics2D.Linecast (sensorHandleR2.position, sensorHandleR2.position, layerIdRopesMask); 
-
-			if( hit.collider == null ){
-				hit = Physics2D.Linecast( sensorHandleL2.position, sensorHandleR2.position, layerIdRopesMask); 
-			}
-
-			if (hit.collider != null) {
-				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-				bool _canCatch = true;
-
-				if (_canCatch) {
-
-					catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
-
-					if( justJumpedRope == catchedRopeLink.rope ){
-						catchedRopeLink = null;
-						lastHandlePos = sensorHandleR2.position;
-						return false;
-					}
-
-					catchedRope = catchedRopeLink.rope;
-
-					catchedRope.chooseDriver(catchedRopeLink.transform);
-
-					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
-					float force = RopeSwingForce * forceRatio;
-
-					if( velocity.x < 0f ){
-						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
-					}else if (velocity.x > 0){ 
-						catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
-					}
-
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-
-					setState(State.CLIMB_ROPE);
-					setAction(Action.ROPECLIMB_IDLE);
-
-					transform.position = catchedRopeLink.transform.position;
-					transform.rotation = catchedRopeLink.transform.rotation;
-
-					ropeLinkCatchOffset = 0.0f;
-
-					return true;
-				}
-			}
-			
-			lastHandlePos = sensorHandleR2.position;
-			return false;
-			
-		} else {
-
-			RaycastHit2D hit; 
-			if (lastFrameHande)
-				hit = Physics2D.Linecast (lastHandlePos, sensorHandleL2.position, layerIdRopesMask);
-			else
-				hit = Physics2D.Linecast (sensorHandleL2.position, sensorHandleL2.position, layerIdRopesMask); 
-			
-			if( hit.collider == null ){
-				hit = Physics2D.Linecast( sensorHandleL2.position, sensorHandleR2.position, layerIdRopesMask); 
-			}
-
-			if (hit.collider != null) {
-				
-				// tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
-				bool _canCatch = true;
-				if (_canCatch) {
-
-					catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
-					
-					if( justJumpedRope == catchedRopeLink.rope ){
-						catchedRopeLink = null;
-						lastHandlePos = sensorHandleL2.position;
-						return false;
-					}
-
-					catchedRope = catchedRopeLink.rope;
-					
-					catchedRope.chooseDriver(catchedRopeLink.transform);
-
-					float forceRatio = Mathf.Abs( velocity.x ) / JumpLongSpeed;
-					float force = RopeSwingForce * forceRatio;
-
-					if( velocity.x < 0f ){
-						catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
-					}else if (velocity.x > 0){ 
-						catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
-					}
-
-					velocity.x = 0.0f;
-					velocity.y = 0.0f;
-					
-					setState(State.CLIMB_ROPE);
-					setAction(Action.ROPECLIMB_IDLE);
-					
-					transform.position = catchedRopeLink.transform.position;
-					transform.rotation = catchedRopeLink.transform.rotation;
-
-					ropeLinkCatchOffset = 0.0f;
-					return true;
-				}
-			}
-			
-			lastHandlePos = sensorHandleL2.position;
-			return false;
-		}
-	}
-
-	float ropeLinkCatchOffset = 0.0f;
-
-	bool canClimbPullUp(){
-
-		if (!catchedClimbHandle)
-			return false;
-
-		Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
-		rayOrigin.x += 0.5f;
-		rayOrigin.y += 0.25f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 0.5f, layerIdGroundMask);
-		return !hit.collider;
-	}
-
-	public float ClimbPullDownRange = 0.511f;
-
-	GameObject canClimbPullDown(){
-
-		if (!isInState (State.ON_GROUND) || !(isInAction (Action.IDLE) || isInAction(Action.CROUCH_IDLE)) )
-			return null;
-
-		// 1: sytuacja gdy zap jest swoim srodkiem nad tilem
-		// 2: sytuacja gdy zap jest swoim srodkiem juz poza tilem
-
-		RaycastHit2D hit;
-
-		if (dir () == Vector2.right) { //
-			
-			hit = Physics2D.Raycast (sensorDown2.position, -Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
-			if( hit.collider ){
-
-				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, -Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
-					return hit.collider.gameObject;
-				}
-			}
-
-		} else {
-			
-			hit = Physics2D.Raycast (sensorDown2.position, Vector2.right , ClimbPullDownRange, layerIdGroundHandlesMask);
-			if( hit.collider ){
-
-				if( Physics2D.Raycast (hit.collider.gameObject.transform.position, Vector2.right , 0.5f, layerIdGroundMask).collider == null ) {
-					return hit.collider.gameObject;
-				}
-
-			}
-		}
-
-		// to jest ta druga sytuacja ...
-
-		Vector2 rayOrigin = sensorDown1.position; 
-	 	hit = Physics2D.Raycast (rayOrigin, Vector2.right , myWidth, layerIdGroundHandlesMask);
-
-		if (hit.collider) { 
-			// badam czy stoje na krawedzi odpowiednio zwrocony
-			if (dir () == Vector2.right) { //
-
-				// pod lewa noga musi byc przepasc
-				rayOrigin = sensorDown1.position;
-				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask).collider ) return null;
-				else return hit.collider.gameObject;
-
-			} else {
-
-				// pod prawa noga musi byc przepasc
-				rayOrigin = sensorDown3.position;
-				if( Physics2D.Raycast (rayOrigin, -Vector2.up , 0.5f, layerIdGroundMask).collider ) return null;
-				else return hit.collider.gameObject;
-
-			}
-
-		} else {
-			return null;
-		}
-	}
 
 
 
@@ -1465,6 +952,7 @@ public class Zap : MonoBehaviour {
 		CLIMB,
 		MOUNT,
 		CLIMB_ROPE,
+		DEAD,
 		OTHER
 	};
 
@@ -1507,9 +995,6 @@ public class Zap : MonoBehaviour {
 	/*////////////////////////////////////////////////////////////*/
 
 	SpriteRenderer sprRend = null;
-
-	/*////////////////////////////////////////////////////////////*/
-
 	BoxCollider2D coll;
 	public Animator getAnimator(){
 		return animator;
