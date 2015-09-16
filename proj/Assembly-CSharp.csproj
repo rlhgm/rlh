@@ -57,6 +57,8 @@
      <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
+     <Compile Include="Assets\mp\Scripts\Controllers\ZapController.cs" />
+     <Compile Include="Assets\mp\Scripts\Controllers\ZapNormalController.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />

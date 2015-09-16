@@ -72,14 +72,14 @@ public class Player2Controller : MonoBehaviour {
 	public Camera mainCamera;
 	public Camera touchCamera;
 
-	public Weapon currentWeapon;
-	public int currentWeaponIndex = 0;
-	public List<Weapon> weapons;
+	//public Weapon currentWeapon;
+	//public int currentWeaponIndex = 0;
+	//public List<Weapon> weapons;
 
 	public bool autoCatchEdges = false;
 
-	Transform weaponText;
-	TextMesh weaponTextMesh;
+	//Transform weaponText;
+	//TextMesh weaponTextMesh;
 
 	//Transform shadowTransform;
 	//SpriteRenderer shadowSpriteRenderer;
@@ -190,69 +190,69 @@ public class Player2Controller : MonoBehaviour {
 		lastHandlePos = new Vector3();
 		lastFrameHande = false;
 
-		weapons = new List<Weapon>(3);
-		weapons.Add( new Empty (this) );
-		weapons.Add( new Knife(this) );
-		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
-		setWeapon ();
+//		weapons = new List<Weapon>(3);
+//		weapons.Add( new Empty (this) );
+//		weapons.Add( new Knife(this) );
+//		weapons.Add( new GravityGun(this, layerIdGroundMoveableMask, layerIdGroundMask) );
+//		setWeapon ();
 
 		if (ggps)
 			ggps.Stop ();
 
-		printWeapons ();
-
-		weaponText = transform.Find ("weaponText");
-		if (weaponText) {
-			MeshRenderer weaponTextMeshRenderer = weaponText.GetComponent<MeshRenderer>();
-			if( weaponTextMeshRenderer ){
-				weaponTextMeshRenderer.sortingLayerName = "WaterFront";
-				weaponTextMeshRenderer.sortingOrder = 50;
-			}
-
-			weaponTextMesh = weaponText.GetComponent<TextMesh>();
-		}
+//		printWeapons ();
+//
+//		weaponText = transform.Find ("weaponText");
+//		if (weaponText) {
+//			MeshRenderer weaponTextMeshRenderer = weaponText.GetComponent<MeshRenderer>();
+//			if( weaponTextMeshRenderer ){
+//				weaponTextMeshRenderer.sortingLayerName = "WaterFront";
+//				weaponTextMeshRenderer.sortingOrder = 50;
+//			}
+//
+//			weaponTextMesh = weaponText.GetComponent<TextMesh>();
+//		}
 	}
 
-	void printWeapons(){
-		print ("weapons : ");
-		for (int i = 0; i < weapons.Count; ++i) {
-			print ( weapons[i] );
-		}
-		print ("============================");
-
-		System.Console.WriteLine("asdfasdf asdf asdf ass fd");
-	}
-
-	void setPrevWeapon(){
-		currentWeaponIndex -= 1;
-		if (currentWeaponIndex < 0) {
-			currentWeaponIndex = weapons.Count-1;
-		}
-		setWeapon();
-	}
-	void setNextWeapon(){
-		currentWeaponIndex += 1;
-		if (currentWeaponIndex == weapons.Count) {
-			currentWeaponIndex = 0;
-		}
-		setWeapon();
-	}
-	void setWeapon(Weapon newCurrentWeapon){
-		if (currentWeapon != null)
-			currentWeapon.deactivate ();
-		currentWeapon = newCurrentWeapon;
-		currentWeapon.activate ();
-		if (weaponTextMesh) {
-			weaponTextMesh.text = currentWeapon.name;
-		}
-	}
-	void setWeapon(int iii){
-		Weapon cw = weapons [iii];
-		setWeapon ( cw );
-	}
-	void setWeapon(){
-		setWeapon (currentWeaponIndex);
-	}
+//	void printWeapons(){
+//		print ("weapons : ");
+//		for (int i = 0; i < weapons.Count; ++i) {
+//			print ( weapons[i] );
+//		}
+//		print ("============================");
+//
+//		System.Console.WriteLine("asdfasdf asdf asdf ass fd");
+//	}
+//
+//	void setPrevWeapon(){
+//		currentWeaponIndex -= 1;
+//		if (currentWeaponIndex < 0) {
+//			currentWeaponIndex = weapons.Count-1;
+//		}
+//		setWeapon();
+//	}
+//	void setNextWeapon(){
+//		currentWeaponIndex += 1;
+//		if (currentWeaponIndex == weapons.Count) {
+//			currentWeaponIndex = 0;
+//		}
+//		setWeapon();
+//	}
+//	void setWeapon(Weapon newCurrentWeapon){
+//		if (currentWeapon != null)
+//			currentWeapon.deactivate ();
+//		currentWeapon = newCurrentWeapon;
+//		currentWeapon.activate ();
+//		if (weaponTextMesh) {
+//			weaponTextMesh.text = currentWeapon.name;
+//		}
+//	}
+	//void setWeapon(int iii){
+	//	Weapon cw = weapons [iii];
+	//	setWeapon ( cw );
+	//}
+	//void setWeapon(){
+	//	setWeapon (currentWeaponIndex);
+	//}
 
 	public AudioSource getAudioSource(){
 		return myAudio;
@@ -476,9 +476,9 @@ public class Player2Controller : MonoBehaviour {
 	bool jumpKeyPressed = false;
 
 	void FixedUpdate(){
-		if (currentWeapon != null) {
-			currentWeapon.FUpdate(Time.fixedDeltaTime);
-		}
+		//if (currentWeapon != null) {
+		//	currentWeapon.FUpdate(Time.fixedDeltaTime);
+		//}
 	}
 
 	private float ConstantFrameTime = 0.0333f;
@@ -515,10 +515,10 @@ public class Player2Controller : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Q)) {
-			setPrevWeapon();
+			//setPrevWeapon();
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
-			setNextWeapon();
+			//setNextWeapon();
 		}
 
 		PuzzleMapUpdate (deltaTime);
@@ -614,9 +614,9 @@ public class Player2Controller : MonoBehaviour {
 	void ZapUpdate (float deltaTime) {
 		CurrentDeltaTime = deltaTime;
 
-		if (currentWeapon != null) {
-			currentWeapon.Update(deltaTime);
-		}
+		//if (currentWeapon != null) {
+		//	currentWeapon.Update(deltaTime);
+		//}
 
 		if (isInAction (Action.DIE)) {
 			if( Input.GetKeyDown(KeyCode.Space) ){
@@ -1085,7 +1085,7 @@ public class Player2Controller : MonoBehaviour {
 
 			Quaternion quat = new Quaternion ();
 			quat.eulerAngles = new Vector3 (0f, 0f, 0f);
-			weaponText.rotation = quat;
+			//weaponText.rotation = quat;
 
 			break;
 		};
@@ -1861,7 +1861,7 @@ public class Player2Controller : MonoBehaviour {
 
 			//Quaternion quat = new Quaternion ();
 			//quat.eulerAngles = new Vector3 (0f, 0f, 0f);
-			weaponText.rotation = quat;
+			//weaponText.rotation = quat;
 
 			return 1;
 		}
