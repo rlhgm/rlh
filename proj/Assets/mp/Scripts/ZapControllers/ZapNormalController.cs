@@ -12,64 +12,14 @@ public class ZapNormalController : ZapController {
 	bool justJumpedMount = false;
 	bool firstFrameInState = false;
 
-	public virtual void Update (float deltaTime) {	
+	public override void Update (float deltaTime) {	
 		
 		SetImpulse(new Vector2(0.0f, 0.0f));
 		
 		justJumpedMount = false;
 		firstFrameInState = false;
 		
-		if (!userJumpKeyPressed) {
-			if (Input.GetKeyDown (keyJump)) {
-				timeFromJumpKeyPressed = 0.0f;
-				userJumpKeyPressed = true;
-			}
-		} else {
-			timeFromJumpKeyPressed += deltaTime;
-			if (timeFromJumpKeyPressed >= 0.06f) {
-				timeFromJumpKeyPressed = 0.0f;
-				userJumpKeyPressed = false;
-				
-				keyJumpDown ();
-			}
-		}
-		
-		if (Input.GetKeyDown (keyUp)) {
-			keyUpDown();
-		} 
-		if (Input.GetKeyUp (keyUp)) {
-			keyUpUp();
-		}
-		if (Input.GetKeyDown (keyDown)) {
-			keyDownDown();
-		} 
-		if (Input.GetKeyUp (keyDown)) {
-			keyDownUp();
-		}
-		
-		if (Input.GetKeyUp (keyJump)) {
-			keyJumpUp ();
-		}
-		
-		if (Input.GetKeyDown (keyLeft)) {
-			keyLeftDown();
-		} 
-		if (Input.GetKeyDown (keyRight)) {
-			keyRightDown();
-		}
-		
-		if (Input.GetKeyUp (keyLeft)) {
-			keyLeftUp();
-		} 
-		if (Input.GetKeyUp (keyRight)) {
-			keyRightUp();
-		}
-		
-		if (Input.GetKeyDown (keyRun)) {
-			keyRunDown();
-		} else if (Input.GetKeyUp (keyRun)) {
-			keyRunUp();
-		}
+
 		
 		currentActionTime += deltaTime;
 		currentStateTime += deltaTime;
@@ -479,12 +429,12 @@ public class ZapNormalController : ZapController {
 
 	}
 	
-	public virtual void FUpdate(float fDeltaTime){
+	public override void FUpdate(float fDeltaTime){
 	}
 	
-	public virtual void activate(){
+	public override void activate(){
 	}
-	public virtual void deactivate(){
+	public override void deactivate(){
 	}
 
 	void SetImpulse(Vector2 imp) { impulse = imp; }
@@ -735,6 +685,346 @@ public class ZapNormalController : ZapController {
 	bool isNotInAction(Action test){
 		return action != test;
 	}
+
+	override int keyUpDown(){
+		if (isInState (State.MOUNT)) {
+			if( !mounting () ){
+				Vector3 playerPos = transform.position;
+				playerPos.y += 0.1f;
+				if( onMount(playerPos) ){
+					velocity.x = 0.0f;
+					velocity.y = MountSpeed;
+					setAction (Action.MOUNT_UP);
+					return 1;
+				}
+			}
+		} else if (isInState (State.ON_GROUND)) {
+			if( onMount() ){
+				velocity.x = 0.0f;
+				velocity.y = MountSpeed;
+				setAction (Action.MOUNT_UP);
+				setState(State.MOUNT);
+				return 1;
+			}
+		}
+		return 0;
+	}
+
+	override int keyUpUp(){
+		if ( setMountIdle ()) {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyLeft) )
+					keyLeftDown();
+				else if(Input.GetKey(keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(keyDown) )
+					keyDownDown();
+			}
+		}
+		return 0;
+	}
+
+	override int keyDownDown(){
+		if (isInState (State.MOUNT)) {
+			if (!mounting ()) {
+				Vector3 playerPos = transform.position;
+				playerPos.y -= 0.1f;
+				if (onMount (playerPos)) {
+					velocity.x = 0.0f;
+					velocity.y = -MountSpeed;
+					setAction (Action.MOUNT_DOWN);
+					return 1;
+				}
+			}
+		} else if (isInState (State.ON_GROUND)) {
+			
+			if(	tryStartClimbPullDown() ) {
+				
+				return 1;
+				
+			} else {
+				setAction(Action.CROUCH_IN);
+				return 1;
+			}
+		}
+		
+		return 0;
+	}
+
+	override int keyDownUp(){
+		if ( setMountIdle ()) {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyLeft) )
+					keyLeftDown();
+				else if(Input.GetKey(keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(keyUp) )
+					keyUpDown();
+			}
+		} else if (isInState (State.ON_GROUND)) {
+			if( crouching() || isInAction(Action.CROUCH_IN) ){
+				if( canGetUp() ){
+					setAction(Action.GET_UP);
+				}else{
+					wantGetUp = true;
+				}
+			}
+		}
+		return 0;
+	}
+
+	override int keyRunDown(){
+		switch (action) {
+			
+		case Action.WALK_LEFT:
+			if( Input.GetKey(keyLeft) ){
+				desiredSpeedX = RunSpeed;
+				setAction(Action.RUN_LEFT);
+			}
+			break;
+			
+		case Action.WALK_RIGHT:
+			if( Input.GetKey(keyRight) ){
+				desiredSpeedX = RunSpeed;
+				setAction(Action.RUN_RIGHT);
+			}
+			break;
+		};
+
+		return 0;
+	}
+	override int keyRunUp(){
+		
+		switch (action) {
+			
+		case Action.RUN_LEFT:
+			if( Input.GetKey(keyLeft) ){
+				desiredSpeedX = WalkSpeed;
+				setAction(Action.WALK_LEFT);
+			}else{
+				desiredSpeedX = 0.0f;
+			}
+			break;
+			
+		case Action.RUN_RIGHT:
+			if( Input.GetKey(keyRight) ) {
+				desiredSpeedX = WalkSpeed;
+				setAction(Action.WALK_RIGHT);
+			}else{
+				desiredSpeedX = 0.0f;
+			}
+			break;
+		};
+
+		return 0;
+	}
+
+	override int keyLeftDown(){
+		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (State.ON_GROUND)) {
+			if (checkLeft (0.1f) >= 0.0f) {
+				if( dir() == Vector2.right )
+					turnLeftStart();
+				return false;
+			}
+			
+			if( dir() == -Vector2.right )
+			{
+				if (Input.GetKey (keyRun)) {
+					desiredSpeedX = RunSpeed;
+					speedLimiter(-1,desiredSpeedX+1.0f);
+					setAction (Action.RUN_LEFT);
+					return true;
+				} else {
+					desiredSpeedX = WalkSpeed;
+					speedLimiter(-1,desiredSpeedX+1.0f);
+					setAction (Action.WALK_LEFT);
+					return true;
+				}
+			} else {
+				turnLeftStart();
+				return true;
+			}
+		} else if (isInState (State.MOUNT)) {
+			if (!mounting ()) {
+				Vector3 playerPos = transform.position;
+				playerPos.x -= 0.1f;
+				turnLeft();
+				if (onMount (playerPos)) {
+					velocity.x = -MountSpeed;
+					velocity.y = 0.0f;
+					setAction (Action.MOUNT_LEFT);
+					return true;
+				}
+			}
+		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
+			if( checkLeft(0.1f) >= 0.0f ){
+				return false;
+			}
+			desiredSpeedX = CrouchSpeed;
+			if( dir () == -Vector2.right ){
+				setAction(Action.CROUCH_LEFT);
+			}else{
+				setAction(Action.CROUCH_LEFT_BACK);
+			}
+			return true;
+		}
+		return false;
+	}
+	override int keyRightDown(){
+		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(State.ON_GROUND) ) {
+			if( checkRight (0.1f) >= 0.0f ) {
+				if( dir () == -Vector2.right)
+					turnRightStart();
+				return false;
+			}
+			if( dir() == Vector2.right ){
+				if( Input.GetKey(keyRun) ){
+					desiredSpeedX = RunSpeed;
+					speedLimiter(1,desiredSpeedX+1.0f);
+					setAction(Action.RUN_RIGHT);
+					return true;
+				}else{
+					desiredSpeedX = WalkSpeed;
+					speedLimiter(1,desiredSpeedX+1.0f);
+					setAction(Action.WALK_RIGHT);
+					return true;
+				}
+			}else{
+				turnRightStart();
+				return true;
+			}
+		} else if (isInState (State.MOUNT)) {
+			if( !mounting() ){
+				Vector3 playerPos = transform.position;
+				playerPos.x += 0.1f;
+				turnRight();
+				if( onMount(playerPos) ){
+					velocity.x = MountSpeed;
+					velocity.y = 0.0f;
+					setAction(Action.MOUNT_RIGHT);
+					return true;
+				}
+			}
+		} else if (isInAction (Action.CROUCH_IDLE) && isInState (State.ON_GROUND)) {
+			if( checkRight(0.1f) >= 0.0f ){
+				return false;
+			}
+			desiredSpeedX = CrouchSpeed;
+			if( dir () == Vector2.right ){
+				setAction(Action.CROUCH_RIGHT);
+			}else{
+				setAction(Action.CROUCH_RIGHT_BACK);
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	override int keyLeftUp(){
+		
+		if ( !setMountIdle() ) {
+			if (isInState (State.ON_GROUND)){
+				desiredSpeedX = 0.0f;
+			}
+		} else {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(keyUp) )
+					keyUpDown();
+				else if(Input.GetKey(keyDown) )
+					keyDownDown();
+			}
+		}
+	}
+	override int keyRightUp(){
+		if (!setMountIdle ()) {
+			if (isInState (State.ON_GROUND)) {
+				desiredSpeedX = 0.0f;
+			}
+		} else {
+			if (isInState (State.MOUNT)) {
+				if( Input.GetKey(keyLeft) )
+					keyLeftDown();
+				else if(Input.GetKey(keyUp) )
+					keyUpDown();
+				else if(Input.GetKey(keyDown) )
+					keyDownDown();
+			}
+		}
+	}
+
+	override int keyJumpDownSpec(){
+		
+		switch (action) {
+		case Action.IDLE:
+			if( isInState(State.ON_GROUND)) {
+				preparetojump();
+			}
+			break;
+			
+		case Action.WALK_LEFT:
+			jumpLeft();
+			break;
+		case Action.WALK_RIGHT:
+			jumpRight();
+			break;
+			
+		case Action.RUN_LEFT:
+			jumpLongLeft();
+			break;
+		case Action.RUN_RIGHT:
+			jumpLongRight();
+			break;
+			
+		case Action.MOUNT_IDLE:
+		case Action.MOUNT_UP:
+		case Action.MOUNT_DOWN:
+			
+			lastFrameHande = false;
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+			justJumpedMount = true;
+			
+			if( Input.GetKey(keyLeft)){
+				jumpLeft();
+				return;
+			}
+			
+			if( Input.GetKey(keyRight)){
+				jumpRight();
+				return;
+			}
+			
+			velocity.x = 0.0f;
+			velocity.y = 0.0f;
+			setAction(Action.JUMP);
+			setState (State.IN_AIR);
+			
+			break;
+			
+		case Action.MOUNT_LEFT:
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+			justJumpedMount = true;
+			jumpLeft();
+			break;
+			
+		case Action.MOUNT_RIGHT:
+			mountJumpStartPos = transform.position;
+			jumpFromMount = true;
+			justJumpedMount = true;
+			jumpRight();
+			break;
+		};
+	}
+	
+	override int keyJumpUp(){
+		jumpFromMount = false;
+		justJumpedRope = null;
+		canJumpAfter = true;
+	}
+
 
 	Vector3 impulse;
 }

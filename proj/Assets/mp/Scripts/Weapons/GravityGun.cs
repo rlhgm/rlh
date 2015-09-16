@@ -21,14 +21,14 @@ public class GravityGun : Weapon {
 	}
 
 	public override void activate(){
-		if (player.ggps) {
-			player.ggps.Play ();
+		//if (player.ggps) {
+		//	player.ggps.Play ();
 			//player.ggps.
 		}
 	}
 	public override void deactivate(){
-		if( player.ggps )
-			player.ggps.Stop ();
+		//if( player.ggps )
+		//	player.ggps.Stop ();
 	}
 
 	public override void Update (float deltaTime) {
