@@ -397,7 +397,7 @@ public class Zap : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float timeSinceLastFrame = Time.deltaTime;
-		//print ("Update() : " + timeSinceLastFrame);
+		//print ("Zap::Update() : " + timeSinceLastFrame);
 
 		if (GlobalUpdate (timeSinceLastFrame)) return;
 
@@ -446,6 +446,81 @@ public class Zap : MonoBehaviour {
 //		}
 
 		return false;
+	}
+
+	void ZapUpdate (float deltaTime) {
+		CurrentDeltaTime = deltaTime;
+		
+		SetImpulse(new Vector2(0.0f, 0.0f));
+		
+		if (!userJumpKeyPressed) {
+			if (Input.GetKeyDown (keyJump)) {
+				timeFromJumpKeyPressed = 0.0f;
+				userJumpKeyPressed = true;
+			}
+		} else {
+			timeFromJumpKeyPressed += deltaTime;
+			if (timeFromJumpKeyPressed >= 0.06f) {
+				timeFromJumpKeyPressed = 0.0f;
+				userJumpKeyPressed = false;
+				jumpKeyPressed = true;
+				
+ 				currentController.keyJumpDown ();
+			}
+		}
+		
+		if (Input.GetKeyDown (keyUp)) {
+			currentController.keyUpDown();
+		} 
+		if (Input.GetKeyUp (keyUp)) {
+			currentController.keyUpUp();
+		}
+		if (Input.GetKeyDown (keyDown)) {
+			currentController.keyDownDown();
+		} 
+		if (Input.GetKeyUp (keyDown)) {
+			currentController.keyDownUp();
+		}
+		
+		if (Input.GetKeyUp (keyJump)) {
+			jumpKeyPressed = false;
+			currentController.keyJumpUp ();
+		}
+		
+		if (Input.GetKeyDown (keyLeft)) {
+			currentController.keyLeftDown();
+		} 
+		if (Input.GetKeyDown (keyRight)) {
+			currentController.keyRightDown();
+		}
+		
+		if (Input.GetKeyUp (keyLeft)) {
+			currentController.keyLeftUp();
+		} 
+		if (Input.GetKeyUp (keyRight)) {
+			currentController.keyRightUp();
+		}
+		
+		if (Input.GetKeyDown (keyRun)) {
+			currentController.keyRunDown();
+		} else if (Input.GetKeyUp (keyRun)) {
+			currentController.keyRunUp();
+		}
+		
+		if (isDead()) {
+			if( Input.GetKeyDown(KeyCode.Space) ){
+				reborn();
+				return;
+			}
+		}
+		
+		stateJustChanged = false;
+		currentStateTime += deltaTime;
+		currentActionTime += deltaTime;
+		
+		currentController.Update( CurrentDeltaTime );
+		
+		updateShadow ();
 	}
 
 	void PuzzleMapUpdate(float deltaTime){
@@ -519,81 +594,6 @@ public class Zap : MonoBehaviour {
 				}
 			}
 		}
-	}
-
-	void ZapUpdate (float deltaTime) {
-		CurrentDeltaTime = deltaTime;
-
-		if (!userJumpKeyPressed) {
-			if (Input.GetKeyDown (keyJump)) {
-				timeFromJumpKeyPressed = 0.0f;
-				userJumpKeyPressed = true;
-			}
-		} else {
-			timeFromJumpKeyPressed += deltaTime;
-			if (timeFromJumpKeyPressed >= 0.06f) {
-				timeFromJumpKeyPressed = 0.0f;
-				userJumpKeyPressed = false;
-				jumpKeyPressed = true;
-
-				currentController.keyJumpDown ();
-			}
-		}
-
-		SetImpulse(new Vector2(0.0f, 0.0f));
-
-		if (Input.GetKeyDown (keyUp)) {
-			currentController.keyUpDown();
-		} 
-		if (Input.GetKeyUp (keyUp)) {
-			currentController.keyUpUp();
-		}
-		if (Input.GetKeyDown (keyDown)) {
-			currentController.keyDownDown();
-		} 
-		if (Input.GetKeyUp (keyDown)) {
-			currentController.keyDownUp();
-		}
-		
-		if (Input.GetKeyUp (keyJump)) {
-			jumpKeyPressed = false;
-			currentController.keyJumpUp ();
-		}
-		
-		if (Input.GetKeyDown (keyLeft)) {
-			currentController.keyLeftDown();
-		} 
-		if (Input.GetKeyDown (keyRight)) {
-			currentController.keyRightDown();
-		}
-		
-		if (Input.GetKeyUp (keyLeft)) {
-			currentController.keyLeftUp();
-		} 
-		if (Input.GetKeyUp (keyRight)) {
-			currentController.keyRightUp();
-		}
-		
-		if (Input.GetKeyDown (keyRun)) {
-			currentController.keyRunDown();
-		} else if (Input.GetKeyUp (keyRun)) {
-			currentController.keyRunUp();
-		}
-
-		if (isDead()) {
-			if( Input.GetKeyDown(KeyCode.Space) ){
-				reborn();
-				return;
-			}
-		}
-
-		stateJustChanged = false;
-		currentStateTime += deltaTime;
-		currentActionTime += deltaTime;
-
-		currentController.Update( CurrentDeltaTime );
-
-		updateShadow ();
 	}
 
 	void updateShadow(){
@@ -952,10 +952,10 @@ public class Zap : MonoBehaviour {
 
 
 
-	void SetImpulse(Vector2 imp) { impulse = imp; }
-	Vector2 getImpulse() { return impulse; }
-	void addImpulse(Vector3 imp) { impulse += imp; }
-	void addImpulse(Vector2 imp) { 
+	public void SetImpulse(Vector2 imp) { impulse = imp; }
+	public Vector2 GetImpulse() { return impulse; }
+	public void AddImpulse(Vector3 imp) { impulse += imp; }
+	public void AddImpulse(Vector2 imp) { 
 		impulse.x += imp.x; 
 		impulse.y += imp.y; 
 	}

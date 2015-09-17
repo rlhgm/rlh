@@ -3002,6 +3002,7 @@ Transform:
   - {fileID: 478724162}
   - {fileID: 1232066132}
   - {fileID: 2052317651}
+  - {fileID: 1142963025}
   m_Father: {fileID: 0}
   m_RootOrder: 27
 --- !u!1001 &290263349
@@ -11262,6 +11263,56 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 413904, guid: a79fe67a42d23754b88bc7bd1377f5f1, type: 2}
   m_PrefabInternal: {fileID: 1142267136}
+--- !u!1001 &1142963024
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 275135182}
+    m_Modifications:
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -43.5200005
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.819999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 135496, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+      propertyPath: m_Name
+      value: CheckPoint (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1142963025 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 410750, guid: a877dec9dbdc90f428f2c410625af7b3, type: 2}
+  m_PrefabInternal: {fileID: 1142963024}
 --- !u!114 &1147666084 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11462844, guid: ca34252b9ad8ed44695ebf8b250a2ab2,

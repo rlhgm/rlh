@@ -70,7 +70,7 @@ public class ZapControllerNormal : ZapController {
 
 	public override void Update (float deltaTime) {	
 		
-
+		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 		
 		justJumpedMount = false;
 
@@ -303,7 +303,7 @@ public class ZapControllerNormal : ZapController {
 				lastFrameHande = false;
 			}
 			
-			addImpulse(new Vector2(0.0f, GravityForce * deltaTime));
+			zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
 			
 			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
 				
@@ -381,7 +381,7 @@ public class ZapControllerNormal : ZapController {
 			transform.position = transform.position + distToFall;
 			distToFall.x = 0f;
 			
-			zap.velocity.y += impulse.y;
+			zap.velocity.y += zap.GetImpulse().y;
 			if(zap.velocity.y > MaxSpeedY)
 				zap.velocity.y = MaxSpeedY;
 			if(zap.velocity.y < -MaxSpeedY)
@@ -486,13 +486,13 @@ public class ZapControllerNormal : ZapController {
 	public override void deactivate(){
 	}
 
-	void SetImpulse(Vector2 imp) { impulse = imp; }
-	Vector2 getImpulse() { return impulse; }
-	void addImpulse(Vector3 imp) { impulse += imp; }
-	void addImpulse(Vector2 imp) { 
-		impulse.x += imp.x; 
-		impulse.y += imp.y; 
-	}
+//	void SetImpulse(Vector2 imp) { impulse = imp; }
+//	Vector2 getImpulse() { return impulse; }
+//	void addImpulse(Vector3 imp) { impulse += imp; }
+//	void addImpulse(Vector2 imp) { 
+//		impulse.x += imp.x; 
+//		impulse.y += imp.y; 
+//	}
 
 	public enum Action{
 		UNDEF = 0,
@@ -1059,6 +1059,7 @@ public class ZapControllerNormal : ZapController {
 
 	public override int keyJumpDown(){
 
+		Debug.Log ("ZapControllerNormal::keyJumpDown()");
 		//jumpKeyPressed = true;
 
 		switch (action) {
@@ -1699,7 +1700,7 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	void jump(){
-		addImpulse(new Vector2(0.0f, JumpImpulse));
+		zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
 		zap.setState(Zap.State.IN_AIR);
 		setAction (Action.JUMP);
 		
@@ -1707,7 +1708,7 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	void jumpFromClimb(){
-		addImpulse(new Vector2(0.0f, JumpImpulse));
+		zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
 		zap.setState(Zap.State.IN_AIR);
 		setAction (Action.JUMP,1);
 		lastFrameHande = false;
@@ -1716,7 +1717,7 @@ public class ZapControllerNormal : ZapController {
 	void jumpLeft(){
 		zap.velocity.x = -JumpSpeed;
 		zap.velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpImpulse));
+		zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
 		zap.setState(Zap.State.IN_AIR);
 		setAction (Action.JUMP_LEFT);
 		
@@ -1726,7 +1727,7 @@ public class ZapControllerNormal : ZapController {
 	void jumpRight(){
 		zap.velocity.x = JumpSpeed;
 		zap.velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpImpulse));
+		zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
 		zap.setState(Zap.State.IN_AIR);
 		setAction (Action.JUMP_RIGHT);
 		
@@ -1736,7 +1737,7 @@ public class ZapControllerNormal : ZapController {
 	void jumpLongLeft(){
 		zap.velocity.x = -JumpLongSpeed;
 		zap.velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpLongImpulse));
+		zap.AddImpulse(new Vector2(0.0f, JumpLongImpulse));
 		zap.setState(Zap.State.IN_AIR);
 		setAction (Action.JUMP_LEFT_LONG);
 		
@@ -1746,7 +1747,7 @@ public class ZapControllerNormal : ZapController {
 	void jumpLongRight(){
 		zap.velocity.x = JumpLongSpeed;
 		zap.velocity.y = 0.0f;
-		addImpulse(new Vector2(0.0f, JumpLongImpulse));
+		zap.AddImpulse(new Vector2(0.0f, JumpLongImpulse));
 		zap.setState(Zap.State.IN_AIR);
 		setAction (Action.JUMP_RIGHT_LONG);
 		
@@ -2412,5 +2413,5 @@ public class ZapControllerNormal : ZapController {
 	bool justJumpedMount = false;
 	float currentActionTime = 0f;
 	NewRope justJumpedRope = null;
-	Vector3 impulse;
+	//Vector3 impulse;
 }
