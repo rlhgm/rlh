@@ -328,6 +328,10 @@ public class ZapControllerKnife : ZapController {
 		JUMP_LEFT_BACK,
 		JUMP_RIGHT_FRONT,
 		JUMP_RIGHT_BACK,
+		ROLL_LEFT_FRONT,
+		ROLL_LEFT_BACK,
+		ROLL_RIGHT_FRONT,
+		ROLL_RIGHT_BACK,
 		CROUCH_IN,
 		GET_UP,
 		CROUCH_IDLE,
@@ -474,6 +478,22 @@ public class ZapControllerKnife : ZapController {
 
 		case Action.JUMP_RIGHT_BACK:
 			zap.getAnimator().Play("Zap_knife_jumpback");
+			break;
+
+		case Action.ROLL_LEFT_FRONT:
+			zap.getAnimator().Play("Zap_knife_crouch_tumblefront");
+			break;
+			
+		case Action.ROLL_LEFT_BACK:
+			zap.getAnimator().Play("Zap_knife_crouch_tumbleback");
+			break;
+			
+		case Action.ROLL_RIGHT_FRONT:
+			zap.getAnimator().Play("Zap_knife_crouch_tumblefront");
+			break;
+			
+		case Action.ROLL_RIGHT_BACK:
+			zap.getAnimator().Play("Zap_knife_crouch_tumbleback");
 			break;
 
 //		case Action.JUMP_LEFT:
