@@ -7,10 +7,10 @@ public class ZapControllerKnife : ZapController {
 	
 	public float WalkSpeed = 1.5f;
 	public float WalkBackSpeed = 1.5f;
-	public float RunSpeed = 5.7f;
+	//public float RunSpeed = 5.7f;
 	//public float JumpSpeed = 3.8f;
 	//public float JumpLongSpeed = 4.9f;
-	public float CrouchSpeed = 1.8f;
+	public float CrouchSpeed = 1.0f;
 
 	//public float JumpImpulse = 7.0f; 
 	//public float JumpLongImpulse = 7.15f; 
@@ -470,24 +470,24 @@ public class ZapControllerKnife : ZapController {
 			break;
 			
 		case Action.CROUCH_IDLE:
-			if( zap.faceRight () ) zap.getAnimator().Play("Zap_crouch_move_R");
-			else zap.getAnimator().Play("Zap_crouch_move_L");
-			zap.getAnimator().speed = 0f;
+			if( zap.faceRight () ) zap.getAnimator().Play("Zap_knife_crouch_idle");
+			else zap.getAnimator().Play("Zap_knife_crouch_idle");
+			//zap.getAnimator().speed = 0f;
 			break;
 			
 		case Action.CROUCH_LEFT:
-			zap.getAnimator().Play("Zap_crouch_move_L");
+			zap.getAnimator().Play("Zap_knife_crouch_walk");
 			break;
 		case Action.CROUCH_RIGHT:
-			zap.getAnimator().Play("Zap_crouch_move_R");
+			zap.getAnimator().Play("Zap_knife_crouch_walk");
 			break;
 			
 		case Action.CROUCH_LEFT_BACK:
-			zap.getAnimator().Play("Zap_crouch_move_back_R");
+			zap.getAnimator().Play("Zap_knife_crouch_walkback");
 			break;
 			
 		case Action.CROUCH_RIGHT_BACK:
-			zap.getAnimator().Play("Zap_crouch_move_back_L");
+			zap.getAnimator().Play("Zap_knife_crouch_walkback");
 			break;
 		};
 		
