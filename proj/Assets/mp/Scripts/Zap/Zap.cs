@@ -136,8 +136,8 @@ public class Zap : MonoBehaviour {
 	}
 
 	void Start () {
-		currentController = zapControllerNormal;
-		//currentController = zapControllerKnife;
+		//currentController = zapControllerNormal;
+		currentController = zapControllerKnife;
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);

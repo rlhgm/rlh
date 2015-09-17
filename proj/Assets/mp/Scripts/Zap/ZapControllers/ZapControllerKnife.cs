@@ -5,7 +5,7 @@ using System.Collections;
 //[System.Serializable]
 public class ZapControllerKnife : ZapController {
 	
-	public float WalkSpeed = 2.5f;
+	public float WalkSpeed = 1.5f;
 	public float RunSpeed = 5.7f;
 	//public float JumpSpeed = 3.8f;
 	//public float JumpLongSpeed = 4.9f;
@@ -382,19 +382,19 @@ public class ZapControllerKnife : ZapController {
 			break;
 			
 		case Action.WALK_LEFT:
-			zap.getAnimator().Play("Zap_walk_L");
+			zap.getAnimator().Play("Zap_knife_walk");
 			break;
 		case Action.WALK_RIGHT:
-			zap.getAnimator().Play("Zap_walk_R");
+			zap.getAnimator().Play("Zap_knife_walk");
 			break;
 
 		case Action.TURN_STAND_LEFT:
-			zap.getAnimator().Play("Zap_walk_back_left");
+			zap.getAnimator().Play("Zap_knife_turnleft");
 			wantJumpAfter = false;
 			break;
 			
 		case Action.TURN_STAND_RIGHT:
-			zap.getAnimator().Play("Zap_walk_back_right");
+			zap.getAnimator().Play("Zap_knife_turnright");
 			wantJumpAfter = false;
 			break;
 			
