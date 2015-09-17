@@ -452,7 +452,11 @@ public class Zap : MonoBehaviour {
 		CurrentDeltaTime = deltaTime;
 		
 		SetImpulse(new Vector2(0.0f, 0.0f));
-		
+
+		stateJustChanged = false;
+		currentStateTime += deltaTime;
+		currentActionTime += deltaTime;
+
 		if (!userJumpKeyPressed) {
 			if (Input.GetKeyDown (keyJump)) {
 				timeFromJumpKeyPressed = 0.0f;
@@ -514,9 +518,7 @@ public class Zap : MonoBehaviour {
 			}
 		}
 		
-		stateJustChanged = false;
-		currentStateTime += deltaTime;
-		currentActionTime += deltaTime;
+
 		
 		currentController.Update( CurrentDeltaTime );
 		
@@ -1046,9 +1048,9 @@ public class Zap : MonoBehaviour {
 	Transform cameraTarget;
 	Transform gfx;
 
-	[HideInInspector]
+	//[HideInInspector]
 	public Vector3 velocity;
-	[HideInInspector]
+	//[HideInInspector]
 	public Vector3 lastVelocity;
 
 	Vector3 lastSwingPos;

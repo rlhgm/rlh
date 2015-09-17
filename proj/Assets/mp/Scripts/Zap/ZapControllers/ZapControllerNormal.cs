@@ -7,7 +7,7 @@ public class ZapControllerNormal : ZapController {
 
 	public float WalkSpeed = 2.5f;
 	public float RunSpeed = 5.7f;
-	public float JumpSpeed = 3.5f;
+	public float JumpSpeed = 3.8f;
 	public float JumpLongSpeed = 4.9f;
 	public float CrouchSpeed = 1.8f;
 	public float MountSpeed = 2.0f; // ile na sek.
