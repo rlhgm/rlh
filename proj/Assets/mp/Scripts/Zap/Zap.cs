@@ -9,8 +9,6 @@ public class Zap : MonoBehaviour {
 	Image mapBackgroundImage = null;
 	ComicPagePart[] mapPartParts = new ComicPagePart[3];
 
-
-	
 	public KeyCode keyLeft = KeyCode.LeftArrow;
 	public KeyCode keyRight = KeyCode.RightArrow;
 	public KeyCode keyRun = KeyCode.LeftShift;
@@ -49,6 +47,7 @@ public class Zap : MonoBehaviour {
 
 	ZapController currentController;
 	ZapController zapControllerNormal;
+	ZapController zapControllerKnife;
 
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
@@ -132,14 +131,13 @@ public class Zap : MonoBehaviour {
 		//myHeight = coll.size.y;
 		//myHalfHeight = myHeight * 0.5f;
 
-
-
-
 		zapControllerNormal = new ZapControllerNormal(this);
+		zapControllerKnife = new ZapControllerKnife(this);
 	}
 
 	void Start () {
 		currentController = zapControllerNormal;
+		//currentController = zapControllerKnife;
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
@@ -148,12 +146,6 @@ public class Zap : MonoBehaviour {
 
 		setState (State.ON_GROUND);
 		currentController.activate ();
-
-		//climbDuration = 0.0f;
-
-
-
-
 
 		lastTouchedCheckPoint = null;
 	}
@@ -225,7 +217,6 @@ public class Zap : MonoBehaviour {
 		}
 
 		collectedMapParts.Clear ();
-
 	}
 
 	public bool isDead(){
@@ -250,8 +241,7 @@ public class Zap : MonoBehaviour {
 		}
 
 		currentController.reborn ();
-
-
+		
 		resetInfo ();
 
 		NewRope[] ropes = FindObjectsOfType(typeof(NewRope)) as NewRope[];
@@ -259,6 +249,7 @@ public class Zap : MonoBehaviour {
 			rope.reset();
 		}
 	}
+
 	public GameObject getLastTouchedCheckPoint(){
 		return lastTouchedCheckPoint;
 	}

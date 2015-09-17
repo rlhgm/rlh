@@ -16,6 +16,9 @@ public class ZapControllerKnife : ZapController {
 	public float GravityForce = -20.0f;
 	public float MaxSpeedY = 15.0f;
 
+	public float SpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
+	public float SlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
+
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
 	public float CrouchInOutDuration = 0.2f;
 
@@ -328,8 +331,12 @@ public class ZapControllerKnife : ZapController {
 		switch (newAction) {
 			
 		case Action.IDLE:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_idle_R");
-			else zap.getAnimator().Play ("Zap_idle_L");
+			//if( zap.faceRight() ) zap.getAnimator().Play("Zap_idle_R");
+			//else zap.getAnimator().Play ("Zap_idle_L");
+
+			if( zap.faceRight() ) zap.getAnimator().Play("Zap_knife_idle");
+			else zap.getAnimator().Play ("Zap_knife_idle");
+
 			break;
 			
 		case Action.DIE:
@@ -468,16 +475,16 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override int keyUpUp(){
-		if ( setMountIdle ()) {
-			if (isInState (Zap.State.MOUNT)) {
-				if( Input.GetKey(zap.keyLeft) )
-					keyLeftDown();
-				else if(Input.GetKey(zap.keyRight) )
-					keyRightDown();
-				else if(Input.GetKey(zap.keyDown) )
-					keyDownDown();
-			}
-		}
+//		if ( setMountIdle ()) {
+//			if (isInState (Zap.State.MOUNT)) {
+//				if( Input.GetKey(zap.keyLeft) )
+//					keyLeftDown();
+//				else if(Input.GetKey(zap.keyRight) )
+//					keyRightDown();
+//				else if(Input.GetKey(zap.keyDown) )
+//					keyDownDown();
+//			}
+//		}
 		return 0;
 	}
 	
@@ -491,16 +498,17 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override int keyDownUp(){
-		if ( setMountIdle ()) {
-			if (isInState (Zap.State.MOUNT)) {
-				if( Input.GetKey(zap.keyLeft) )
-					keyLeftDown();
-				else if(Input.GetKey(zap.keyRight) )
-					keyRightDown();
-				else if(Input.GetKey(zap.keyUp) )
-					keyUpDown();
-			}
-		} else if (isInState (Zap.State.ON_GROUND)) {
+//		if ( setMountIdle ()) {
+//			if (isInState (Zap.State.MOUNT)) {
+//				if( Input.GetKey(zap.keyLeft) )
+//					keyLeftDown();
+//				else if(Input.GetKey(zap.keyRight) )
+//					keyRightDown();
+//				else if(Input.GetKey(zap.keyUp) )
+//					keyUpDown();
+//			}
+		//} else
+		if (isInState (Zap.State.ON_GROUND)) {
 			if( crouching() || isInAction(Action.CROUCH_IN) ){
 				if( zap.canGetUp() ){
 					setAction(Action.GET_UP);
@@ -585,40 +593,49 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override int keyLeftUp(){
-		
-		if ( !setMountIdle() ) {
-			if (isInState (Zap.State.ON_GROUND)){
-				desiredSpeedX = 0.0f;
-			}
-		} else {
-			if (isInState (Zap.State.MOUNT)) {
-				if( Input.GetKey(zap.keyRight) )
-					keyRightDown();
-				else if(Input.GetKey(zap.keyUp) )
-					keyUpDown();
-				else if(Input.GetKey(zap.keyDown) )
-					keyDownDown();
-			}
+
+		if (isInState (Zap.State.ON_GROUND)){
+			desiredSpeedX = 0.0f;
 		}
+
+//		if ( !setMountIdle() ) {
+//			if (isInState (Zap.State.ON_GROUND)){
+//				desiredSpeedX = 0.0f;
+//			}
+//		} else {
+//			if (isInState (Zap.State.MOUNT)) {
+//				if( Input.GetKey(zap.keyRight) )
+//					keyRightDown();
+//				else if(Input.GetKey(zap.keyUp) )
+//					keyUpDown();
+//				else if(Input.GetKey(zap.keyDown) )
+//					keyDownDown();
+//			}
+//		}
 		
 		return 0;
 	}
 	
 	public override int keyRightUp(){
-		if (!setMountIdle ()) {
-			if (isInState (Zap.State.ON_GROUND)) {
-				desiredSpeedX = 0.0f;
-			}
-		} else {
-			if (isInState (Zap.State.MOUNT)) {
-				if( Input.GetKey(zap.keyLeft) )
-					keyLeftDown();
-				else if(Input.GetKey(zap.keyUp) )
-					keyUpDown();
-				else if(Input.GetKey(zap.keyDown) )
-					keyDownDown();
-			}
+
+		if (isInState (Zap.State.ON_GROUND)) {
+			desiredSpeedX = 0.0f;
 		}
+
+//		if (!setMountIdle ()) {
+//			if (isInState (Zap.State.ON_GROUND)) {
+//				desiredSpeedX = 0.0f;
+//			}
+//		} else {
+//			if (isInState (Zap.State.MOUNT)) {
+//				if( Input.GetKey(zap.keyLeft) )
+//					keyLeftDown();
+//				else if(Input.GetKey(zap.keyUp) )
+//					keyUpDown();
+//				else if(Input.GetKey(zap.keyDown) )
+//					keyDownDown();
+//			}
+//		}
 		
 		return 0;
 	}
@@ -632,18 +649,18 @@ public class ZapControllerKnife : ZapController {
 		
 		switch (action) {
 		case Action.IDLE:
-			if( isInState(Zap.State.ON_GROUND)) {
-				preparetojump();
+			if (isInState (Zap.State.ON_GROUND)) {
+				//preparetojump ();
 			}
 			break;
 			
 		case Action.WALK_LEFT:
-			jumpLeft();
+			//jumpLeft ();
 			break;
 		case Action.WALK_RIGHT:
-			jumpRight();
+			//jumpRight ();
 			break;
-		
+		}
 		return 0;
 	}
 	
@@ -738,7 +755,7 @@ public class ZapControllerKnife : ZapController {
 	
 	int Action_CROUCH_IDLE(){
 		if( Input.GetKey(zap.keyDown) ){
-			tryStartClimbPullDown();
+			//tryStartClimbPullDown();
 		}
 		return 0;
 	}
@@ -890,9 +907,7 @@ public class ZapControllerKnife : ZapController {
 				break;
 				
 			case Action.WALK_LEFT:
-			case Action.RUN_LEFT:
 			case Action.JUMP_LEFT:
-			case Action.JUMP_LEFT_LONG:
 				if( Input.GetKey(zap.keyLeft)){
 					zap.velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
@@ -909,9 +924,7 @@ public class ZapControllerKnife : ZapController {
 				break;
 				
 			case Action.WALK_RIGHT:
-			case Action.RUN_RIGHT:
 			case Action.JUMP_RIGHT:
-			case Action.JUMP_RIGHT_LONG:
 				if( Input.GetKey(zap.keyRight)){
 					zap.velocity.x = 0.0f;
 					desiredSpeedX = CrouchSpeed;
@@ -993,7 +1006,7 @@ public class ZapControllerKnife : ZapController {
 		setAction (Action.IDLE);
 		
 		if( wantJumpAfter ) {
-			jumpLeft();
+			//jumpLeft();
 			
 			if( Input.GetKey(zap.keyJump) )
 				canJumpAfter = false;
@@ -1007,7 +1020,7 @@ public class ZapControllerKnife : ZapController {
 		setAction (Action.IDLE);
 		
 		if( wantJumpAfter) {
-			jumpRight();
+			//jumpRight();
 			
 			if( Input.GetKey(zap.keyJump) )
 				canJumpAfter = false;
@@ -1043,26 +1056,7 @@ public class ZapControllerKnife : ZapController {
 					setActionIdle ();
 				}
 			}
-		} else if (isInState (Zap.State.MOUNT)) {
-			
-			if (Input.GetKey (zap.keyDown)) { //&& (Input.GetKey(zap.keyLeft) || Input.GetKey(zap.keyRight)) ){
-				if (keyDownDown () == 0)
-					setMountIdle ();
-			}else if( Input.GetKey (zap.keyUp)) { //&& (Input.GetKey(zap.keyLeft) || Input.GetKey(zap.keyRight)) ){
-				if (keyUpDown () == 0)
-					setMountIdle ();
-			} else if (Input.GetKey (zap.keyLeft)) {
-				if (keyLeftDown () == 0)
-					setMountIdle ();
-			} else if (Input.GetKey (zap.keyRight)) {
-				if (keyRightDown () == 0)
-					setMountIdle ();
-			} else {
-				if (isInState (Zap.State.ON_GROUND)) {
-					setActionIdle ();
-				}
-			}
-		}
+		} 
 	}
 	
 	int walking(){
@@ -1086,10 +1080,7 @@ public class ZapControllerKnife : ZapController {
 			return isInAction(Action.WALK_LEFT);
 	}
 	bool jumping(){
-		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
-	}
-	bool mounting(){
-		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
+		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_RIGHT);
 	}
 	public override bool crouching(){
 		return isInAction(Action.CROUCH_IDLE) || 
