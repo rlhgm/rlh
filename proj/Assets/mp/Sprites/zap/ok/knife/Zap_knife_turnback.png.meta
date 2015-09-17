@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: e0938928707871840827ef4b3dd5cd7a
-timeCreated: 1442347364
+timeCreated: 1442483436
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Zap_knife_turnback_0
+    21300002: Zap_knife_turnback_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +50,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Zap_knife_turnback_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 96
+        height: 50
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_knife_turnback_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 17
+        width: 96
+        height: 50
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
