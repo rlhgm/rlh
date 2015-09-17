@@ -53,6 +53,7 @@ public class ZapControllerKnife : ZapController {
 		distToMove = 0.0f;
 
 		checkStartAttack ();
+		checkStartCrouchAttack ();
 
 		switch (action) {
 		case Action.IDLE:
@@ -61,6 +62,10 @@ public class ZapControllerKnife : ZapController {
 
 		case Action.ATTACK:
 			Action_ATTACK();
+			break;
+
+		case Action.CROUCH_ATTACK:
+			Action_CROUCH_ATTACK();
 			break;
 
 		case Action.PREPARE_TO_JUMP:
@@ -325,6 +330,7 @@ public class ZapControllerKnife : ZapController {
 		CROUCH_RIGHT,
 		CROUCH_LEFT_BACK,
 		CROUCH_RIGHT_BACK,
+		CROUCH_ATTACK,
 		FALL,
 		STOP_WALK,
 		STOP_RUN,
@@ -474,7 +480,11 @@ public class ZapControllerKnife : ZapController {
 			else zap.getAnimator().Play("Zap_knife_crouch_idle");
 			//zap.getAnimator().speed = 0f;
 			break;
-			
+
+		case Action.CROUCH_ATTACK:
+			zap.getAnimator().Play("Zap_knife_crouch_attack",-1,0f);
+			break;
+
 		case Action.CROUCH_LEFT:
 			zap.getAnimator().Play("Zap_knife_crouch_walk");
 			break;
@@ -521,8 +531,15 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override int keyDownDown(){
-		if (isInState (Zap.State.ON_GROUND)) {			
-			setAction(Action.CROUCH_IN);
+		if (isInState (Zap.State.ON_GROUND)) {
+
+			if( !crouching() ) {// || isInAction(Action.CROUCH_ATTACK) ){
+				setAction(Action.CROUCH_IN);
+				return 1;
+			}
+
+			crouch();
+
 			return 1;
 		}
 		
@@ -727,14 +744,21 @@ public class ZapControllerKnife : ZapController {
 	}
 
 	bool checkStartAttack(){
-
 		if (isInAction (Action.IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || walking () != 0) {
 			if (Input.GetMouseButton (0)) {
 				setAction (Action.ATTACK);
 				return true;
 			}
 		}
-
+		return false;
+	}
+	bool checkStartCrouchAttack(){
+		if (isInAction (Action.CROUCH_IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || crouching () ) {
+			if (Input.GetMouseButton (0)) {
+				setAction (Action.CROUCH_ATTACK);
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -755,6 +779,19 @@ public class ZapControllerKnife : ZapController {
 				}
 				return 1;
 			}
+		}
+		return 0;
+	}
+
+	int Action_CROUCH_ATTACK(){
+		if (zap.currentActionTime > ATTACK_DURATION) {
+			
+			setAction(Action.ATTACK_JUST_FINISHED);
+			if( !checkStartCrouchAttack() ){
+				setAction(Action.CROUCH_IDLE);
+				resetActionAndState();
+			}
+			return 1;
 		}
 		return 0;
 	}
@@ -955,6 +992,7 @@ public class ZapControllerKnife : ZapController {
 			case Action.IDLE:
 			case Action.JUMP:
 			case Action.CROUCH_IN:
+			case Action.CROUCH_IDLE:
 				setAction (Action.CROUCH_IDLE);
 				if( Input.GetKey(zap.keyLeft) ){
 					keyLeftDown();
