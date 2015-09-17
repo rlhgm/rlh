@@ -17,6 +17,7 @@ public class ZapControllerKnife : ZapController {
 	public float MaxSpeedY = 15.0f;
 
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
+	public float CrouchInOutDuration = 0.2f;
 
 	public ZapControllerKnife (Zap zapPlayer) 
 		: base(zapPlayer,"Knife")
@@ -38,9 +39,7 @@ public class ZapControllerKnife : ZapController {
 	
 	public override void Update (float deltaTime) {	
 		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
-		
-		justJumpedMount = false;
-		
+
 		currentActionTime = zap.getCurrentActionTime();
 		
 		oldPos = transform.position;
@@ -57,23 +56,7 @@ public class ZapControllerKnife : ZapController {
 				//jump();
 			}
 			break;
-			
-//		case Action.CLIMB_PULLDOWN:
-//			Action_CLIMB_PULLDOWN();
-//			break;
 
-//		case Action.CLIMB_JUMP_TO_CATCH:
-//			Action_CLIMB_JUMP_TO_CATCH();
-//			break;
-			
-//		case Action.CLIMB_CATCH:
-//			Action_CLIMB_CATCH();
-//			break;
-			
-//		case Action.CLIMB_CLIMB:
-//			Action_CLIMB_CLIMB();
-//			break;
-			
 		case Action.WALK_LEFT:
 			Action_WALK(-1);
 			break;
@@ -477,28 +460,9 @@ public class ZapControllerKnife : ZapController {
 	bool isNotInAction(Action test){
 		return action != test;
 	}
-	
-	
+
 	public override int keyUpDown(){
-		if (isInState (Zap.State.MOUNT)) {
-			if( !mounting () ){
-				Vector3 playerPos = transform.position;
-				playerPos.y += 0.1f;
-				if( zap.checkMount(playerPos) ){
-					zap.velocity.x = 0.0f;
-					zap.velocity.y = MountSpeed;
-					setAction (Action.MOUNT_UP);
-					return 1;
-				}
-			}
-		} else if (isInState (Zap.State.ON_GROUND)) {
-			if( zap.checkMount() ){
-				zap.velocity.x = 0.0f;
-				zap.velocity.y = MountSpeed;
-				setAction (Action.MOUNT_UP);
-				zap.setState(Zap.State.MOUNT);
-				return 1;
-			}
+		if (isInState (Zap.State.ON_GROUND)) {
 		}
 		return 0;
 	}
@@ -518,27 +482,9 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override int keyDownDown(){
-		if (isInState (Zap.State.MOUNT)) {
-			if (!mounting ()) {
-				Vector3 playerPos = transform.position;
-				playerPos.y -= 0.1f;
-				if (zap.checkMount (playerPos)) {
-					zap.velocity.x = 0.0f;
-					zap.velocity.y = -MountSpeed;
-					setAction (Action.MOUNT_DOWN);
-					return 1;
-				}
-			}
-		} else if (isInState (Zap.State.ON_GROUND)) {
-			
-			if(	tryStartClimbPullDown() ) {
-				
-				return 1;
-				
-			} else {
-				setAction(Action.CROUCH_IN);
-				return 1;
-			}
+		if (isInState (Zap.State.ON_GROUND)) {			
+			setAction(Action.CROUCH_IN);
+			return 1;
 		}
 		
 		return 0;
@@ -567,49 +513,10 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override int keyRunDown(){
-		switch (action) {
-			
-		case Action.WALK_LEFT:
-			if( Input.GetKey(zap.keyLeft) ){
-				desiredSpeedX = RunSpeed;
-				setAction(Action.RUN_LEFT);
-			}
-			break;
-			
-		case Action.WALK_RIGHT:
-			if( Input.GetKey(zap.keyRight) ){
-				desiredSpeedX = RunSpeed;
-				setAction(Action.RUN_RIGHT);
-			}
-			break;
-		};
-		
 		return 0;
 	}
 	
 	public override int keyRunUp(){
-		
-		switch (action) {
-			
-		case Action.RUN_LEFT:
-			if( Input.GetKey(zap.keyLeft) ){
-				desiredSpeedX = WalkSpeed;
-				setAction(Action.WALK_LEFT);
-			}else{
-				desiredSpeedX = 0.0f;
-			}
-			break;
-			
-		case Action.RUN_RIGHT:
-			if( Input.GetKey(zap.keyRight) ) {
-				desiredSpeedX = WalkSpeed;
-				setAction(Action.WALK_RIGHT);
-			}else{
-				desiredSpeedX = 0.0f;
-			}
-			break;
-		};
-		
 		return 0;
 	}
 	
@@ -621,34 +528,15 @@ public class ZapControllerKnife : ZapController {
 				return 0;
 			}
 			
-			if( zap.dir() == -Vector2.right )
-			{
-				if (Input.GetKey (zap.keyRun)) {
-					desiredSpeedX = RunSpeed;
-					speedLimiter(-1,desiredSpeedX+1.0f);
-					setAction (Action.RUN_LEFT);
-					return 1;
-				} else {
-					desiredSpeedX = WalkSpeed;
-					speedLimiter(-1,desiredSpeedX+1.0f);
-					setAction (Action.WALK_LEFT);
-					return 1;
-				}
+			if( zap.dir() == -Vector2.right ){
+				desiredSpeedX = WalkSpeed;
+				speedLimiter(-1,desiredSpeedX+1.0f);
+				setAction (Action.WALK_LEFT);
+				return 1;
+
 			} else {
 				turnLeftStart();
 				return 1;
-			}
-		} else if (isInState (Zap.State.MOUNT)) {
-			if (!mounting ()) {
-				Vector3 playerPos = transform.position;
-				playerPos.x -= 0.1f;
-				zap.turnLeft();
-				if (zap.checkMount (playerPos)) {
-					zap.velocity.x = -MountSpeed;
-					zap.velocity.y = 0.0f;
-					setAction (Action.MOUNT_LEFT);
-					return 1;
-				}
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
 			if( zap.checkLeft(0.1f) >= 0.0f ){
@@ -673,32 +561,13 @@ public class ZapControllerKnife : ZapController {
 				return 0;
 			}
 			if( zap.dir() == Vector2.right ){
-				if( Input.GetKey(zap.keyRun) ){
-					desiredSpeedX = RunSpeed;
-					speedLimiter(1,desiredSpeedX+1.0f);
-					setAction(Action.RUN_RIGHT);
-					return 1;
-				}else{
-					desiredSpeedX = WalkSpeed;
-					speedLimiter(1,desiredSpeedX+1.0f);
-					setAction(Action.WALK_RIGHT);
-					return 1;
-				}
+				desiredSpeedX = WalkSpeed;
+				speedLimiter(1,desiredSpeedX+1.0f);
+				setAction(Action.WALK_RIGHT);
+				return 1;
 			}else{
 				turnRightStart();
 				return 1;
-			}
-		} else if (isInState (Zap.State.MOUNT)) {
-			if( !mounting() ){
-				Vector3 playerPos = transform.position;
-				playerPos.x += 0.1f;
-				zap.turnRight();
-				if( zap.checkMount(playerPos) ){
-					zap.velocity.x = MountSpeed;
-					zap.velocity.y = 0.0f;
-					setAction(Action.MOUNT_RIGHT);
-					return 1;
-				}
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
 			if( zap.checkRight(0.1f) >= 0.0f ){
@@ -774,62 +643,12 @@ public class ZapControllerKnife : ZapController {
 		case Action.WALK_RIGHT:
 			jumpRight();
 			break;
-			
-		case Action.RUN_LEFT:
-			jumpLongLeft();
-			break;
-		case Action.RUN_RIGHT:
-			jumpLongRight();
-			break;
-			
-		case Action.MOUNT_IDLE:
-		case Action.MOUNT_UP:
-		case Action.MOUNT_DOWN:
-			
-			lastFrameHande = false;
-			mountJumpStartPos = transform.position;
-			jumpFromMount = true;
-			justJumpedMount = true;
-			
-			if( Input.GetKey(zap.keyLeft)){
-				jumpLeft();
-				return 0;
-			}
-			
-			if( Input.GetKey(zap.keyRight)){
-				jumpRight();
-				return 0;
-			}
-			
-			zap.velocity.x = 0.0f;
-			zap.velocity.y = 0.0f;
-			setAction(Action.JUMP);
-			zap.setState (Zap.State.IN_AIR);
-			
-			break;
-			
-		case Action.MOUNT_LEFT:
-			mountJumpStartPos = transform.position;
-			jumpFromMount = true;
-			justJumpedMount = true;
-			jumpLeft();
-			break;
-			
-		case Action.MOUNT_RIGHT:
-			mountJumpStartPos = transform.position;
-			jumpFromMount = true;
-			justJumpedMount = true;
-			jumpRight();
-			break;
-		};
 		
 		return 0;
 	}
 	
 	public override int keyJumpUp(){
 		//jumpKeyPressed = false;
-		jumpFromMount = false;
-		justJumpedRope = null;
 		canJumpAfter = true;
 		return 0;
 	}
@@ -1256,15 +1075,15 @@ public class ZapControllerKnife : ZapController {
 	
 	bool moving(Vector2 dir){
 		if (dir == Vector2.right)
-			return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
+			return isInAction(Action.WALK_RIGHT);
 		else 
-			return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
+			return isInAction(Action.WALK_LEFT);
 	}
 	bool moving(int dir){
 		if (dir == 1)
-			return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
+			return isInAction(Action.WALK_RIGHT);
 		else 
-			return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
+			return isInAction(Action.WALK_LEFT);
 	}
 	bool jumping(){
 		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
@@ -1283,7 +1102,6 @@ public class ZapControllerKnife : ZapController {
 	public override void reborn(){
 		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
 			zap.setState(Zap.State.MOUNT);
-			//setMountIdle();
 		}
 	}
 	public override bool triggerEnter(Collider2D other){
@@ -1306,36 +1124,6 @@ public class ZapControllerKnife : ZapController {
 		
 		return false;
 	}
-	
-//	bool tryStartClimbPullDown(){
-//		GameObject potCatchedClimbHandle = canClimbPullDown();
-//		if( potCatchedClimbHandle ){
-//			
-//			catchedClimbHandle = potCatchedClimbHandle;
-//			
-//			zap.velocity.x = 0.0f;
-//			zap.velocity.y = 0.0f;
-//			
-//			Vector3 handlePos = potCatchedClimbHandle.transform.position;
-//			
-//			climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
-//			if( zap.dir() == Vector2.right ){
-//				climbAfterPos.x = handlePos.x - zap.getMyHalfWidth();
-//			}else{
-//				climbAfterPos.x = handlePos.x + zap.getMyHalfWidth();
-//			}
-//			
-//			climbBeforePos = transform.position;
-//			climbDistToClimb = climbAfterPos - climbBeforePos;
-//			
-//			wantGetUp = false;
-//			setAction(Action.CLIMB_PULLDOWN);
-//			zap.setState(Zap.State.CLIMB);
-//			
-//			return true;
-//		}
-//		return false;
-//	}
 	
 	bool checkSpeed(int dir){
 		float speedX = Mathf.Abs (zap.velocity.x);
@@ -1385,18 +1173,6 @@ public class ZapControllerKnife : ZapController {
 	void getUp(){
 		setAction(Action.IDLE);
 		resetActionAndState ();
-	}
-
-	bool canClimbPullUp(){
-		
-		if (!catchedClimbHandle)
-			return false;
-		
-		Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
-		rayOrigin.x += 0.5f;
-		rayOrigin.y += 0.25f;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundMask);
-		return !hit.collider;
 	}
 	
 	public float ClimbPullDownRange = 0.511f;
@@ -1465,9 +1241,6 @@ public class ZapControllerKnife : ZapController {
 	bool wantJumpAfter = false;
 	bool canJumpAfter = true;
 	float desiredSpeedX = 0.0f;
-	
 	Action action;
-	public float CrouchInOutDuration = 0.2f;
-	bool justJumpedMount = false;
 	float currentActionTime = 0f;
 }
