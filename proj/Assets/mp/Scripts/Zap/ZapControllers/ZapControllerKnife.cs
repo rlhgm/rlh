@@ -6,6 +6,7 @@ using System.Collections;
 public class ZapControllerKnife : ZapController {
 	
 	public float WalkSpeed = 1.5f;
+	public float WalkBackSpeed = 1.5f;
 	public float RunSpeed = 5.7f;
 	//public float JumpSpeed = 3.8f;
 	//public float JumpLongSpeed = 4.9f;
@@ -61,10 +62,12 @@ public class ZapControllerKnife : ZapController {
 			break;
 
 		case Action.WALK_LEFT:
+		case Action.WALKBACK_LEFT:
 			Action_WALK(-1);
 			break;
 
 		case Action.WALK_RIGHT:
+		case Action.WALKBACK_RIGHT:
 			Action_WALK(1);
 			break;
 
@@ -297,6 +300,8 @@ public class ZapControllerKnife : ZapController {
 		IDLE,
 		WALK_LEFT,
 		WALK_RIGHT,
+		WALKBACK_LEFT,
+		WALKBACK_RIGHT,
 		TURN_STAND_LEFT,
 		TURN_STAND_RIGHT,
 		PREPARE_TO_JUMP,
@@ -386,6 +391,13 @@ public class ZapControllerKnife : ZapController {
 			break;
 		case Action.WALK_RIGHT:
 			zap.getAnimator().Play("Zap_knife_walk");
+			break;
+
+		case Action.WALKBACK_LEFT:
+			zap.getAnimator().Play("Zap_knife_walkback");
+			break;
+		case Action.WALKBACK_RIGHT:
+			zap.getAnimator().Play("Zap_knife_walkback");
 			break;
 
 		case Action.TURN_STAND_LEFT:
@@ -531,8 +543,9 @@ public class ZapControllerKnife : ZapController {
 	public override int keyLeftDown(){
 		if ((isInAction (Action.IDLE) || moving (-1) || jumping ()) && isInState (Zap.State.ON_GROUND)) {
 			if (zap.checkLeft (0.1f) >= 0.0f) {
-				if( zap.dir() == Vector2.right )
-					turnLeftStart();
+				if( zap.dir() == Vector2.right ){
+					//turnLeftStart();
+				}
 				return 0;
 			}
 			
@@ -543,7 +556,10 @@ public class ZapControllerKnife : ZapController {
 				return 1;
 
 			} else {
-				turnLeftStart();
+				//turnLeftStart();
+				desiredSpeedX = WalkBackSpeed;
+				speedLimiter(-1,desiredSpeedX+1.0f);
+				setAction (Action.WALKBACK_LEFT);
 				return 1;
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
@@ -564,8 +580,9 @@ public class ZapControllerKnife : ZapController {
 	public override int keyRightDown(){
 		if ( (isInAction (Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND) ) {
 			if( zap.checkRight (0.1f) >= 0.0f ) {
-				if( zap.dir () == -Vector2.right)
-					turnRightStart();
+				if( zap.dir () == -Vector2.right){
+					//turnRightStart();
+				}
 				return 0;
 			}
 			if( zap.dir() == Vector2.right ){
@@ -574,7 +591,10 @@ public class ZapControllerKnife : ZapController {
 				setAction(Action.WALK_RIGHT);
 				return 1;
 			}else{
-				turnRightStart();
+				//turnRightStart();
+				desiredSpeedX = WalkBackSpeed;
+				speedLimiter(1,desiredSpeedX+1.0f);
+				setAction(Action.WALKBACK_RIGHT);
 				return 1;
 			}
 		} else if (isInAction (Action.CROUCH_IDLE) && isInState (Zap.State.ON_GROUND)) {
@@ -669,13 +689,39 @@ public class ZapControllerKnife : ZapController {
 		canJumpAfter = true;
 		return 0;
 	}
-	
+
+	bool checkDir(){
+		Vector2 mouseInScene = zap.touchCamera.ScreenToWorldPoint (Input.mousePosition);
+		if (zap.faceRight ()) {
+			if (transform.position.x > mouseInScene.x){
+				setAction (Action.TURN_STAND_LEFT);
+				return true;
+			}
+		} else {
+			if (transform.position.x < mouseInScene.x){
+				setAction (Action.TURN_STAND_RIGHT);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	int Action_IDLE(){
+
+		checkDir ();
+
 		return 0;
 	}
 	
 	int Action_WALK(int dir){
-		
+
+		bool dirChanged = checkDir ();
+		if (dirChanged) {
+			//setAction(Action.IDLE);
+			//resetActionAndState();
+			return 0;
+		}
+
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f ) {
 			setAction(Action.IDLE);
@@ -704,38 +750,6 @@ public class ZapControllerKnife : ZapController {
 		return 0;
 	}
 
-	int Action_TURN_RUN(int dir){
-		
-		int retVal = 0;
-		
-		if (Input.GetKeyDown (zap.keyJump)) {
-			wantJumpAfter = true;
-		}
-		
-		bool speedReached = checkSpeed (dir);
-		if (speedReached && desiredSpeedX == 0.0f) {
-		}
-		
-		distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
-		
-		float distToObstacle = 0.0f;
-		if (zap.checkObstacle (dir, distToMove, ref distToObstacle)) {
-			distToMove = distToObstacle;
-			retVal = 1;
-		}
-		
-		newPosX += distToMove;		
-		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-		
-		float distToGround = 0.0f;
-		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		}
-		
-		return retVal;
-	}
-	
 	int Action_CROUCH_IN(){
 		
 		if (currentActionTime >= CrouchInOutDuration) {
@@ -1059,25 +1073,25 @@ public class ZapControllerKnife : ZapController {
 		} 
 	}
 	
-	int walking(){
-		if (isInAction (Action.WALK_RIGHT))
-			return 1;
-		if (isInAction (Action.WALK_LEFT))
-			return -1;
-		return 0;
-	}
+//	int walking(){
+//		if (isInAction (Action.WALK_RIGHT))
+//			return 1;
+//		if (isInAction (Action.WALK_LEFT))
+//			return -1;
+//		return 0;
+//	}
 	
 	bool moving(Vector2 dir){
 		if (dir == Vector2.right)
-			return isInAction(Action.WALK_RIGHT);
+			return isInAction(Action.WALK_RIGHT) || isInAction(Action.WALKBACK_RIGHT);
 		else 
-			return isInAction(Action.WALK_LEFT);
+			return isInAction(Action.WALK_LEFT) || isInAction(Action.WALKBACK_LEFT);
 	}
 	bool moving(int dir){
 		if (dir == 1)
-			return isInAction(Action.WALK_RIGHT);
+			return isInAction(Action.WALK_RIGHT) || isInAction(Action.WALKBACK_RIGHT);
 		else 
-			return isInAction(Action.WALK_LEFT);
+			return isInAction(Action.WALK_LEFT) || isInAction(Action.WALKBACK_LEFT);
 	}
 	bool jumping(){
 		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_RIGHT);
