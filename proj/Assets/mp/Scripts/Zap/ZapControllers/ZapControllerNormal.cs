@@ -43,7 +43,7 @@ public class ZapControllerNormal : ZapController {
 
 
 	public ZapControllerNormal (Zap zapPlayer) 
-		: base(zapPlayer,"NormalController")
+		: base(zapPlayer,"Normal")
 	{
 	}
 

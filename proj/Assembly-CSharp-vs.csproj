@@ -73,6 +73,7 @@
      <Compile Include="Assets\mp\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\Zap.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" />
+     <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" />
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />

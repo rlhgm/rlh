@@ -84,6 +84,10 @@ public class ZapController {
 		return false;
 	}
 
+	public string getName(){
+		return name;
+	}
+
 	protected string name;
 	protected Zap zap = null;
 	protected Transform transform = null;
