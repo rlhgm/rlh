@@ -74,7 +74,7 @@ public class ZapControllerNormal : ZapController {
 		
 		justJumpedMount = false;
 
-		currentActionTime = zap.getCurrentActionTime();
+		//currentActionTime = zap.getCurrentActionTime();
 
 		oldPos = transform.position;
 		newPosX = oldPos.x;
@@ -90,7 +90,7 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.PREPARE_TO_JUMP:
-			if( currentActionTime >= 0.2f ){
+			if( zap.currentActionTime >= 0.2f ){
 				jump();
 			}
 			break;
@@ -129,7 +129,7 @@ public class ZapControllerNormal : ZapController {
 			if (Input.GetKeyDown (zap.keyJump)) {
 				wantJumpAfter = true;
 			}
-			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
+			if( zap.currentActionTime >= TURN_LEFTRIGHT_DURATION ){
 				zap.turnLeft();
 				turnLeftFinish();
 			}
@@ -139,14 +139,14 @@ public class ZapControllerNormal : ZapController {
 			if (Input.GetKeyDown (zap.keyJump)) {
 				wantJumpAfter = true;
 			}
-			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
+			if( zap.currentActionTime >= TURN_LEFTRIGHT_DURATION ){
 				zap.turnRight();
 				turnRightFinish();
 			}
 			break;
 			
 		case Action.TURN_RUN_LEFT:
-			if( currentActionTime >= 0.85f ){
+			if( zap.currentActionTime >= 0.85f ){
 				zap.turnLeft();
 				if( wantJumpAfter ){
 					jumpLeft();
@@ -162,7 +162,7 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
-			if( currentActionTime >= 0.85f ){
+			if( zap.currentActionTime >= 0.85f ){
 				zap.turnRight();
 				if( wantJumpAfter ){
 					jumpRight();
@@ -1261,7 +1261,7 @@ public class ZapControllerNormal : ZapController {
 
 	int Action_CROUCH_IN(){
 		
-		if (currentActionTime >= CrouchInOutDuration) {
+		if (zap.currentActionTime >= CrouchInOutDuration) {
 			crouch();
 		}
 		return 0;
@@ -1269,7 +1269,7 @@ public class ZapControllerNormal : ZapController {
 	
 	int Action_GET_UP(){
 		
-		if (currentActionTime >= CrouchInOutDuration) {
+		if (zap.currentActionTime >= CrouchInOutDuration) {
 			getUp();			
 		}
 		
@@ -1443,7 +1443,7 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 	int Action_LANDING_HARD(){
-		if (currentActionTime >= LANDING_HARD_DURATION) {
+		if (zap.currentActionTime >= LANDING_HARD_DURATION) {
 			setAction(Action.IDLE);
 			resetActionAndState();
 		}
@@ -1452,7 +1452,7 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_CLIMB_PULLDOWN(){
-		if( currentActionTime >= CLIMBDUR_CLIMB ){
+		if( zap.currentActionTime >= CLIMBDUR_CLIMB ){
 			setAction(Action.CLIMB_CATCH,1);
 			zap.setState(Zap.State.CLIMB);
 			canPullUp = true;
@@ -1465,11 +1465,11 @@ public class ZapControllerNormal : ZapController {
 	
 	int Action_CLIMB_JUMP_TO_CATCH(){
 		// dociaganie do punktu:
-		if (currentActionTime >= climbToJumpDuration) {
+		if (zap.currentActionTime >= climbToJumpDuration) {
 			setAction (Action.CLIMB_CATCH);
 			transform.position = climbAfterPos;
 		} else {
-			float ratio = currentActionTime / climbToJumpDuration;
+			float ratio = zap.currentActionTime / climbToJumpDuration;
 			transform.position = climbBeforePos + climbDistToClimb * ratio;
 		}
 		
@@ -1518,7 +1518,7 @@ public class ZapControllerNormal : ZapController {
 	
 	int Action_CLIMB_CLIMB(){
 
-		if (currentActionTime >= CLIMBDUR_CLIMB) {
+		if (zap.currentActionTime >= CLIMBDUR_CLIMB) {
 			zap.setState (Zap.State.ON_GROUND);
 			transform.position = climbAfterPos; 
 			
@@ -1537,7 +1537,7 @@ public class ZapControllerNormal : ZapController {
 			}
 			
 		} else {
-			float ratio = currentActionTime / CLIMBDUR_CLIMB;
+			float ratio = zap.currentActionTime / CLIMBDUR_CLIMB;
 			transform.position = climbBeforePos + climbDistToClimb * ratio;
 		}
 		
@@ -2411,7 +2411,7 @@ public class ZapControllerNormal : ZapController {
 	Action action;
 	public float CrouchInOutDuration = 0.2f;
 	bool justJumpedMount = false;
-	float currentActionTime = 0f;
+	//float currentActionTime = 0f;
 	NewRope justJumpedRope = null;
 	//Vector3 impulse;
 }

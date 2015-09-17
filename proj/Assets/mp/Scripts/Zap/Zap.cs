@@ -1053,10 +1053,11 @@ public class Zap : MonoBehaviour {
 
 	float desiredSpeedX = 0.0f;
 
-	float currentActionTime = 0f;
-	public float getCurrentActionTime() {
-		return currentActionTime;
-	}
+	[HideInInspector]
+	public float currentActionTime = 0f;
+//	public float getCurrentActionTime() {
+//		return currentActionTime;
+//	}
 	public void resetCurrentActionTime(){
 		currentActionTime = 0f;
 	}

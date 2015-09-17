@@ -21,6 +21,8 @@ public class ZapControllerKnife : ZapController {
 	public float SlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
 
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
+	public float ATTACK_DURATION = 0.5f;
+
 	public float CrouchInOutDuration = 0.2f;
 
 	public ZapControllerKnife (Zap zapPlayer) 
@@ -44,19 +46,25 @@ public class ZapControllerKnife : ZapController {
 	public override void Update (float deltaTime) {	
 		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 
-		currentActionTime = zap.getCurrentActionTime();
+		//currentActionTime = zap.getCurrentActionTime();
 		
 		oldPos = transform.position;
 		newPosX = oldPos.x;
 		distToMove = 0.0f;
-		
+
+		checkStartAttack ();
+
 		switch (action) {
 		case Action.IDLE:
 			Action_IDLE();
 			break;
 
+		case Action.ATTACK:
+			Action_ATTACK();
+			break;
+
 		case Action.PREPARE_TO_JUMP:
-			if( currentActionTime >= 0.2f ){
+			if( zap.currentActionTime >= 0.2f ){
 				//jump();
 			}
 			break;
@@ -75,7 +83,7 @@ public class ZapControllerKnife : ZapController {
 			if (Input.GetKeyDown (zap.keyJump)) {
 				wantJumpAfter = true;
 			}
-			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
+			if( zap.currentActionTime >= TURN_LEFTRIGHT_DURATION ){
 				zap.turnLeft();
 				turnLeftFinish();
 			}
@@ -85,7 +93,7 @@ public class ZapControllerKnife : ZapController {
 			if (Input.GetKeyDown (zap.keyJump)) {
 				wantJumpAfter = true;
 			}
-			if( currentActionTime >= TURN_LEFTRIGHT_DURATION ){
+			if( zap.currentActionTime >= TURN_LEFTRIGHT_DURATION ){
 				zap.turnRight();
 				turnRightFinish();
 			}
@@ -304,6 +312,8 @@ public class ZapControllerKnife : ZapController {
 		WALKBACK_RIGHT,
 		TURN_STAND_LEFT,
 		TURN_STAND_RIGHT,
+		ATTACK,
+		ATTACK_JUST_FINISHED,
 		PREPARE_TO_JUMP,
 		JUMP,
 		JUMP_LEFT,
@@ -343,7 +353,17 @@ public class ZapControllerKnife : ZapController {
 			else zap.getAnimator().Play ("Zap_knife_idle");
 
 			break;
-			
+
+		case Action.ATTACK:
+			string animName = "Zap_knife_attack_0";
+			if( param == 0 ){
+				if( Random.Range(0,2) == 1 )
+					animName = "Zap_knife_attack_1";
+			}
+			//Debug.Log( animName );
+			zap.getAnimator().Play(animName,-1,0f);
+			break;
+
 		case Action.DIE:
 			Zap.DeathType dt = (Zap.DeathType)param;
 			string msgInfo = "";
@@ -706,13 +726,39 @@ public class ZapControllerKnife : ZapController {
 		return false;
 	}
 
+	bool checkStartAttack(){
+
+		if (isInAction (Action.IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || walking () != 0) {
+			if (Input.GetMouseButton (0)) {
+				setAction (Action.ATTACK);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	int Action_IDLE(){
 
 		checkDir ();
 
 		return 0;
 	}
-	
+
+	int Action_ATTACK(){
+		if (zap.currentActionTime > ATTACK_DURATION) {
+
+			if( !checkDir() ){
+				setAction(Action.ATTACK_JUST_FINISHED);
+				if( !checkStartAttack() ){
+					resetActionAndState();
+				}
+				return 1;
+			}
+		}
+		return 0;
+	}
+
 	int Action_WALK(int dir){
 
 		bool dirChanged = checkDir ();
@@ -752,7 +798,7 @@ public class ZapControllerKnife : ZapController {
 
 	int Action_CROUCH_IN(){
 		
-		if (currentActionTime >= CrouchInOutDuration) {
+		if (zap.currentActionTime >= CrouchInOutDuration) {
 			crouch();
 		}
 		return 0;
@@ -760,7 +806,7 @@ public class ZapControllerKnife : ZapController {
 	
 	int Action_GET_UP(){
 		
-		if (currentActionTime >= CrouchInOutDuration) {
+		if (zap.currentActionTime >= CrouchInOutDuration) {
 			getUp();			
 		}
 		
@@ -809,7 +855,7 @@ public class ZapControllerKnife : ZapController {
 	}
 
 //	int Action_CLIMB_PULLDOWN(){
-//		if( currentActionTime >= CLIMBDUR_CLIMB ){
+//		if( zap.currentActionTime >= CLIMBDUR_CLIMB ){
 //			setAction(Action.CLIMB_CATCH,1);
 //			zap.setState(Zap.State.CLIMB);
 //			canPullUp = true;
@@ -822,11 +868,11 @@ public class ZapControllerKnife : ZapController {
 	
 //	int Action_CLIMB_JUMP_TO_CATCH(){
 //		// dociaganie do punktu:
-//		if (currentActionTime >= climbToJumpDuration) {
+//		if (zap.currentActionTime >= climbToJumpDuration) {
 //			setAction (Action.CLIMB_CATCH);
 //			transform.position = climbAfterPos;
 //		} else {
-//			float ratio = currentActionTime / climbToJumpDuration;
+//			float ratio = zap.currentActionTime / climbToJumpDuration;
 //			transform.position = climbBeforePos + climbDistToClimb * ratio;
 //		}
 //		
@@ -875,7 +921,7 @@ public class ZapControllerKnife : ZapController {
 	
 //	int Action_CLIMB_CLIMB(){
 //		
-//		if (currentActionTime >= CLIMBDUR_CLIMB) {
+//		if (zap.currentActionTime >= CLIMBDUR_CLIMB) {
 //			zap.setState (Zap.State.ON_GROUND);
 //			transform.position = climbAfterPos; 
 //			
@@ -894,7 +940,7 @@ public class ZapControllerKnife : ZapController {
 //			}
 //			
 //		} else {
-//			float ratio = currentActionTime / CLIMBDUR_CLIMB;
+//			float ratio = zap.currentActionTime / CLIMBDUR_CLIMB;
 //			transform.position = climbBeforePos + climbDistToClimb * ratio;
 //		}
 //		
@@ -1073,13 +1119,13 @@ public class ZapControllerKnife : ZapController {
 		} 
 	}
 	
-//	int walking(){
-//		if (isInAction (Action.WALK_RIGHT))
-//			return 1;
-//		if (isInAction (Action.WALK_LEFT))
-//			return -1;
-//		return 0;
-//	}
+	int walking(){
+		if (isInAction(Action.WALK_RIGHT) || isInAction(Action.WALKBACK_RIGHT))
+			return 1;
+		if (isInAction(Action.WALK_LEFT) || isInAction(Action.WALKBACK_LEFT))
+			return -1;
+		return 0;
+	}
 	
 	bool moving(Vector2 dir){
 		if (dir == Vector2.right)
@@ -1247,5 +1293,5 @@ public class ZapControllerKnife : ZapController {
 	bool canJumpAfter = true;
 	float desiredSpeedX = 0.0f;
 	Action action;
-	float currentActionTime = 0f;
+	//float currentActionTime = 0f;
 }
