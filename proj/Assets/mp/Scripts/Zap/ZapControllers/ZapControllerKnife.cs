@@ -9,8 +9,8 @@ public class ZapControllerKnife : ZapController {
 	public float WalkBackSpeed = 1.5f;
 	//public float RunSpeed = 5.7f;
 
-	public float JumpSpeed = 3.8f;
-	public float JumpImpulse = 7.0f; 
+	public float JumpSpeed = 5.8f;
+	public float JumpImpulse = 5.0f; 
 
 	//public float JumpLongSpeed = 4.9f;
 	public float CrouchSpeed = 1.0f;
@@ -144,57 +144,57 @@ public class ZapControllerKnife : ZapController {
 			
 			zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
 			
-			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
-				
-				if( Input.GetKey(zap.keyLeft) ){
-					zap.velocity.x -= (FlyUserControlParam * deltaTime);
-					
-					if( isInAction(Action.JUMP_LEFT) ){
-						if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-							zap.velocity.x = -JumpSpeed;
-					}else{
-						if( Mathf.Abs( zap.velocity.x ) > JumpLongSpeed )
-							zap.velocity.x = -JumpLongSpeed;
-					}
-					
-				}else if ( Input.GetKey(zap.keyRight) ){
-					zap.velocity.x += (FlyUserControlParam * deltaTime);
-					if( zap.velocity.x > 0.0f ) zap.velocity.x = 0.0f;
-				}
-			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
-				if( Input.GetKey(zap.keyRight) ){
-					zap.velocity.x += (FlyUserControlParam * deltaTime);
-					
-					if( isInAction(Action.JUMP_RIGHT) ){
-						if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-							zap.velocity.x = JumpSpeed;
-					}else{
-						if( Mathf.Abs( zap.velocity.x ) > JumpLongSpeed )
-							zap.velocity.x = JumpLongSpeed;
-					}
-					
-				}else if( Input.GetKey(zap.keyLeft) ) {
-					zap.velocity.x -= (FlyUserControlParam * deltaTime);
-					if( zap.velocity.x < 0.0f ) zap.velocity.x = 0.0f;
-				} 
-			}else if( isInAction(Action.JUMP) ){
-				if( Input.GetKey(zap.keyLeft) ){
-					zap.velocity.x -= (FlyUpUserControlParam * deltaTime);
-					if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-						zap.velocity.x = -JumpSpeed;
-				}
-				if( Input.GetKey(zap.keyRight) ){
-					zap.velocity.x += (FlyUpUserControlParam * deltaTime);
-					if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-						zap.velocity.x = JumpSpeed;
-				}
-				
-				if( zap.velocity.x > 0.0f ){
-					zap.turnRight();
-				}else if(zap.velocity.x < 0.0f) {
-					zap.turnLeft();
-				}
-			}
+//			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
+//				
+//				if( Input.GetKey(zap.keyLeft) ){
+//					zap.velocity.x -= (FlyUserControlParam * deltaTime);
+//					
+//					if( isInAction(Action.JUMP_LEFT) ){
+//						if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
+//							zap.velocity.x = -JumpSpeed;
+//					}else{
+//						if( Mathf.Abs( zap.velocity.x ) > JumpLongSpeed )
+//							zap.velocity.x = -JumpLongSpeed;
+//					}
+//					
+//				}else if ( Input.GetKey(zap.keyRight) ){
+//					zap.velocity.x += (FlyUserControlParam * deltaTime);
+//					if( zap.velocity.x > 0.0f ) zap.velocity.x = 0.0f;
+//				}
+//			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
+//				if( Input.GetKey(zap.keyRight) ){
+//					zap.velocity.x += (FlyUserControlParam * deltaTime);
+//					
+//					if( isInAction(Action.JUMP_RIGHT) ){
+//						if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
+//							zap.velocity.x = JumpSpeed;
+//					}else{
+//						if( Mathf.Abs( zap.velocity.x ) > JumpLongSpeed )
+//							zap.velocity.x = JumpLongSpeed;
+//					}
+//					
+//				}else if( Input.GetKey(zap.keyLeft) ) {
+//					zap.velocity.x -= (FlyUserControlParam * deltaTime);
+//					if( zap.velocity.x < 0.0f ) zap.velocity.x = 0.0f;
+//				} 
+//			}else if( isInAction(Action.JUMP) ){
+//				if( Input.GetKey(zap.keyLeft) ){
+//					zap.velocity.x -= (FlyUpUserControlParam * deltaTime);
+//					if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
+//						zap.velocity.x = -JumpSpeed;
+//				}
+//				if( Input.GetKey(zap.keyRight) ){
+//					zap.velocity.x += (FlyUpUserControlParam * deltaTime);
+//					if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
+//						zap.velocity.x = JumpSpeed;
+//				}
+//				
+//				if( zap.velocity.x > 0.0f ){
+//					zap.turnRight();
+//				}else if(zap.velocity.x < 0.0f) {
+//					zap.turnLeft();
+//				}
+//			}
 			
 			Vector3 distToFall = new Vector3();
 			distToFall.x = zap.velocity.x * deltaTime;
@@ -238,13 +238,13 @@ public class ZapControllerKnife : ZapController {
 					zap.startFallPos = transform.position;
 					//print ( "zap.startFallPos : " + zap.startFallPos );
 					if( zap.lastVelocity.y > 0.0f ){
-						lastCatchedClimbHandle = null;
+						//lastCatchedClimbHandle = null;
 					}
 				}
 				groundUnderFeet = zap.checkDown( Mathf.Abs(distToFall.y) + 0.01f);
 				if( groundUnderFeet >= 0.0f ){
 					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
-						lastCatchedClimbHandle = null;
+						//lastCatchedClimbHandle = null;
 						distToFall.y = -groundUnderFeet;
 						justLanding = true;
 					}
@@ -265,18 +265,18 @@ public class ZapControllerKnife : ZapController {
 				
 				Vector3 fallDist = zap.startFallPos - transform.position;
 				
-				if( fallDist.y >= VeryHardLandingHeight ){
-					zap.die(Zap.DeathType.VERY_HARD_LANDING);
-				} else if( fallDist.y >= HardLandingHeight ){
-					
-					zap.velocity.x = 0.0f;
-					setAction (Action.LANDING_HARD);
-					
-				}else{
+//				if( fallDist.y >= VeryHardLandingHeight ){
+//					zap.die(Zap.DeathType.VERY_HARD_LANDING);
+//				} else if( fallDist.y >= HardLandingHeight ){
+//					
+//					zap.velocity.x = 0.0f;
+//					setAction (Action.LANDING_HARD);
+//					
+//				}else{
 					
 					resetActionAndState();
 					
-				}
+				//}
 			}
 			
 			break;
