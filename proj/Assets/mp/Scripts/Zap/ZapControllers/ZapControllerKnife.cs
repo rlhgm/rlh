@@ -23,7 +23,7 @@ public class ZapControllerKnife : ZapController {
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
 	public float ATTACK_DURATION = 0.5f;
 
-	public float CrouchInOutDuration = 0.2f;
+	public float CrouchInOutDuration = 0.1f;
 
 	public ZapControllerKnife (Zap zapPlayer) 
 		: base(zapPlayer,"Knife")
@@ -466,13 +466,15 @@ public class ZapControllerKnife : ZapController {
 			break;
 
 		case Action.CROUCH_IN:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_crouch_in_R");
-			else zap.getAnimator().Play("Zap_crouch_in_L");
+			//if( zap.faceRight() ) zap.getAnimator().Play("Zap_crouch_in_R");
+			//else zap.getAnimator().Play("Zap_crouch_in_L");
+			zap.getAnimator().Play("Zap_knife_crouch_in");
 			break;
 			
 		case Action.GET_UP:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_getup_R");
-			else zap.getAnimator().Play("Zap_getup_L");
+			//if( zap.faceRight() ) zap.getAnimator().Play("Zap_getup_R");
+			//else zap.getAnimator().Play("Zap_getup_L");
+			zap.getAnimator().Play("Zap_knife_get_up");
 			break;
 			
 		case Action.CROUCH_IDLE:
