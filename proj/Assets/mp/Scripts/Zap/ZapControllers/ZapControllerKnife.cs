@@ -762,18 +762,25 @@ public class ZapControllerKnife : ZapController {
 //			break;
 		}
 
+		if (isNotInState (Zap.State.ON_GROUND))
+			return 0;
+
+		if (isNotInAction (Action.IDLE) && walking () == 0)
+			return 0;
+
 		if (Input.GetKey (zap.keyLeft)) {
 
+			//if( isIn
 			jumpLeft();
 
-			return 0;
+			return 1;
 		}
 
 		if (Input.GetKey (zap.keyRight)) {
 
 			jumpRight();
 
-			return 0;
+			return 1;
 		}
 
 		return 0;
