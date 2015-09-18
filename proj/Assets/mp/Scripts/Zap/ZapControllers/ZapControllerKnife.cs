@@ -29,8 +29,9 @@ public class ZapControllerKnife : ZapController {
 
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
 	public float ATTACK_DURATION = 0.5f;
-
-	public float CrouchInOutDuration = 0.1f;
+	public float PULLOUT_KNIFE_DURATION = 0.3f;
+	public float HIDE_KNIFE_DURATION = 0.35f;
+	public float CROUCHINOUT_DURATION = 0.1f;
 
 	public ZapControllerKnife (Zap zapPlayer) 
 		: base(zapPlayer,"Knife")
@@ -64,7 +65,16 @@ public class ZapControllerKnife : ZapController {
 
 		switch (action) {
 		case Action.IDLE:
-			Action_IDLE();
+			if( Action_IDLE() != 0 )
+				return;
+			break;
+
+		case Action.PULLOUT_KNIFE:
+			Action_PULLOUT_KNIFE();
+			break;
+
+		case Action.HIDE_KNIFE:
+			Action_HIDE_KNIFE();
 			break;
 
 		case Action.ATTACK:
@@ -318,7 +328,8 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override void activate(){
-		setAction (Action.IDLE);
+		//setAction (Action.IDLE);
+		setAction (Action.PULLOUT_KNIFE);
 		canPullUp = false;
 		desiredSpeedX = 0.0f;
 	}
@@ -328,6 +339,8 @@ public class ZapControllerKnife : ZapController {
 	public enum Action{
 		UNDEF = 0,
 		IDLE,
+		PULLOUT_KNIFE,
+		HIDE_KNIFE,
 		WALK_LEFT,
 		WALK_RIGHT,
 		WALKBACK_LEFT,
@@ -381,6 +394,16 @@ public class ZapControllerKnife : ZapController {
 			if( zap.faceRight() ) zap.getAnimator().Play("Zap_knife_idle");
 			else zap.getAnimator().Play ("Zap_knife_idle");
 
+			break;
+
+		case Action.PULLOUT_KNIFE:
+			if( zap.faceRight() ) zap.getAnimator().Play("Zap_knife_pull");
+			else zap.getAnimator().Play ("Zap_knife_pull");
+			break;
+
+		case Action.HIDE_KNIFE:
+			if( zap.faceRight() ) zap.getAnimator().Play("Zap_knife_hide");
+			else zap.getAnimator().Play ("Zap_knife_hide");
 			break;
 
 		case Action.ATTACK:
@@ -849,8 +872,32 @@ public class ZapControllerKnife : ZapController {
 
 	int Action_IDLE(){
 
+		if (Input.GetMouseButtonDown (1)) {
+//			zap._hideKnife();
+//			return 1;
+
+			setAction(Action.HIDE_KNIFE);
+			return 0;
+		}
+
 		checkDir ();
 
+		return 0;
+	}
+
+	int Action_PULLOUT_KNIFE(){
+		if (zap.currentActionTime > PULLOUT_KNIFE_DURATION) {
+			setAction(Action.ATTACK,1);
+			return 1;
+		}
+		return 0;
+	}
+
+	int Action_HIDE_KNIFE(){
+		if (zap.currentActionTime > HIDE_KNIFE_DURATION) {
+			zap._hideKnife();
+			return 1;
+		}
 		return 0;
 	}
 
@@ -954,7 +1001,7 @@ public class ZapControllerKnife : ZapController {
 
 	int Action_CROUCH_IN(){
 		
-		if (zap.currentActionTime >= CrouchInOutDuration) {
+		if (zap.currentActionTime >= CROUCHINOUT_DURATION) {
 			crouch();
 		}
 		return 0;
@@ -962,7 +1009,7 @@ public class ZapControllerKnife : ZapController {
 	
 	int Action_GET_UP(){
 		
-		if (zap.currentActionTime >= CrouchInOutDuration) {
+		if (zap.currentActionTime >= CROUCHINOUT_DURATION) {
 			getUp();			
 		}
 		

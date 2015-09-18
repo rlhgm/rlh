@@ -136,8 +136,8 @@ public class Zap : MonoBehaviour {
 	}
 
 	void Start () {
-		//currentController = zapControllerNormal;
-		currentController = zapControllerKnife;
+		currentController = zapControllerNormal;
+		//currentController = zapControllerKnife;
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
@@ -148,6 +148,20 @@ public class Zap : MonoBehaviour {
 		currentController.activate ();
 
 		lastTouchedCheckPoint = null;
+	}
+
+	public void setCurrentController(ZapController newController){
+		if (currentController != null)
+			currentController.deactivate ();
+		currentController = newController;
+		currentController.activate ();
+	}
+
+	public void _pullOutKnife(){
+		setCurrentController (zapControllerKnife);
+	}
+	public void _hideKnife(){
+		setCurrentController (zapControllerNormal);
 	}
 
 	public AudioSource getAudioSource(){
@@ -508,9 +522,7 @@ public class Zap : MonoBehaviour {
 				return;
 			}
 		}
-		
 
-		
 		currentController.Update( CurrentDeltaTime );
 		
 		updateShadow ();

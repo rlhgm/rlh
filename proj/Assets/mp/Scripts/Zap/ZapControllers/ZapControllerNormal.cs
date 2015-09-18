@@ -82,7 +82,8 @@ public class ZapControllerNormal : ZapController {
 		
 		switch (action) {
 		case Action.IDLE:
-			Action_IDLE();
+			if( Action_IDLE() != 0 )
+				return;
 			break;
 			
 		case Action.LANDING_HARD:
@@ -475,6 +476,7 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	public override void activate(){
+		setAction (Action.UNDEF);
 		setAction (Action.IDLE);
 		jumpFromMount = false;
 		catchedClimbHandle = null;
@@ -1136,6 +1138,13 @@ public class ZapControllerNormal : ZapController {
 	}
 
 	int Action_IDLE(){
+
+		if (Input.GetMouseButtonDown (0)) {
+
+			zap._pullOutKnife();
+			return 1;
+		}
+
 		return 0;
 	}
 
