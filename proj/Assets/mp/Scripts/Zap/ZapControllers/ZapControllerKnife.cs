@@ -12,6 +12,10 @@ public class ZapControllerKnife : ZapController {
 	public float JumpSpeed = 5.8f;
 	public float JumpImpulse = 5.0f; 
 
+	public float rollSpeed = 4.8f;
+	public float rollDuration = 0.6f;
+	public float rollMaxDist = 3f;
+
 	//public float JumpLongSpeed = 4.9f;
 	public float CrouchSpeed = 1.0f;
 
@@ -85,6 +89,16 @@ public class ZapControllerKnife : ZapController {
 		case Action.WALK_RIGHT:
 		case Action.WALKBACK_RIGHT:
 			Action_WALK(1);
+			break;
+
+		case Action.ROLL_LEFT_BACK:
+		case Action.ROLL_LEFT_FRONT:
+			Action_ROLL(-1);
+			break;
+
+		case Action.ROLL_RIGHT_BACK:
+		case Action.ROLL_RIGHT_FRONT:
+			Action_ROLL(1);
 			break;
 
 		case Action.TURN_STAND_LEFT:
@@ -765,22 +779,28 @@ public class ZapControllerKnife : ZapController {
 		if (isNotInState (Zap.State.ON_GROUND))
 			return 0;
 
-		if (isNotInAction (Action.IDLE) && walking () == 0)
+		if ( isInAction (Action.IDLE) || walking () != 0){
+			if (Input.GetKey (zap.keyLeft)) {
+				jumpLeft();
+				return 1;
+			}
+			if (Input.GetKey (zap.keyRight)) {
+				jumpRight();
+				return 1;
+			}
 			return 0;
-
-		if (Input.GetKey (zap.keyLeft)) {
-
-			//if( isIn
-			jumpLeft();
-
-			return 1;
 		}
 
-		if (Input.GetKey (zap.keyRight)) {
-
-			jumpRight();
-
-			return 1;
+		if (crouching ()) {
+			if (Input.GetKey (zap.keyLeft)) {
+				rollLeft();
+				return 1;
+			}
+			if (Input.GetKey (zap.keyRight)) {
+				rollRight();
+				return 1;
+			}
+			return 0;
 		}
 
 		return 0;
@@ -885,6 +905,40 @@ public class ZapControllerKnife : ZapController {
 		if (zap.checkObstacle (dir, distToMove, ref distToObstacle)) {
 			distToMove = distToObstacle;
 			setActionIdle();
+		}
+		
+		newPosX += distToMove;		
+		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
+		
+		float distToGround = 0.0f;
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		if (groundUnderFeet) {
+			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
+		}
+		return 0;
+	}
+
+	int Action_ROLL(int dir){
+		
+//		bool speedReached = checkSpeed (dir);
+//		if (speedReached && desiredSpeedX == 0.0f ) {
+//			setAction(Action.IDLE);
+//			resetActionAndState();
+//			return 0;
+//		}
+
+		if (zap.currentActionTime >= rollDuration) {
+			setAction(Action.IDLE);
+			resetActionAndState();
+			return 0;
+		}
+
+		distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
+		
+		float distToObstacle = 0.0f;
+		if (zap.checkObstacle (dir, distToMove, ref distToObstacle)) {
+			distToMove = distToObstacle;
+			//setActionIdle();
 		}
 		
 		newPosX += distToMove;		
@@ -1058,6 +1112,24 @@ public class ZapControllerKnife : ZapController {
 			setAction (Action.JUMP_RIGHT_FRONT);
 		else
 			setAction (Action.JUMP_RIGHT_BACK);
+	}
+
+	void rollLeft(){
+		zap.velocity.x = -rollSpeed;
+		zap.velocity.y = 0.0f;
+		if( !zap.faceRight() )
+			setAction (Action.ROLL_LEFT_FRONT);
+		else
+			setAction (Action.ROLL_LEFT_BACK);
+	}
+	
+	void rollRight(){
+		zap.velocity.x = rollSpeed;
+		zap.velocity.y = 0.0f;
+		if( zap.faceRight() )
+			setAction (Action.ROLL_RIGHT_FRONT);
+		else
+			setAction (Action.ROLL_RIGHT_BACK);
 	}
 
 	void turnLeftStart(){
