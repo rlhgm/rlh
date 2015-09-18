@@ -29,7 +29,9 @@ public class Zap : MonoBehaviour {
 
 	AudioSource myAudio;
 
+	[HideInInspector]
 	public Camera mainCamera;
+	[HideInInspector]
 	public Camera touchCamera;
 
 	public bool autoCatchEdges = false;
@@ -1024,18 +1026,18 @@ public class Zap : MonoBehaviour {
 	}
 	Animator animator;
 
-	//[HideInInspector]
+	[HideInInspector]
 	public Transform sensorLeft1;
-	//[HideInInspector]
+	[HideInInspector]
 	public Transform sensorLeft2;
-	//[HideInInspector]
+	[HideInInspector]
 	Transform sensorLeft3;
-	//[HideInInspector]
+	[HideInInspector]
 	Transform sensorRight1;
-	//[HideInInspector]
+	[HideInInspector]
 	public Transform sensorRight2;
-	//[HideInInspector]
-	Transform sensorRight3;
+	[HideInInspector]
+	public Transform sensorRight3;
 	[HideInInspector]
 	public Transform sensorDown1;
 	[HideInInspector]
@@ -1051,13 +1053,13 @@ public class Zap : MonoBehaviour {
 	Transform cameraTarget;
 	Transform gfx;
 
-	//[HideInInspector]
+	[HideInInspector]
 	public Vector3 velocity;
-	//[HideInInspector]
+	[HideInInspector]
 	public Vector3 lastVelocity;
 
 	Vector3 lastSwingPos;
-	[SerializeField]
+	//[SerializeField]
 	Vector3 impulse;
 	[HideInInspector]
 	public Vector3 startFallPos;

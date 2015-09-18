@@ -789,6 +789,7 @@ MonoBehaviour:
   sensorLeft1: {fileID: 0}
   sensorLeft2: {fileID: 0}
   sensorRight2: {fileID: 0}
+  sensorRight3: {fileID: 0}
   sensorDown1: {fileID: 0}
   sensorDown2: {fileID: 0}
   sensorDown3: {fileID: 0}
@@ -796,8 +797,8 @@ MonoBehaviour:
   sensorHandleR2: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   lastVelocity: {x: 0, y: 0, z: 0}
-  impulse: {x: 0, y: 0, z: 0}
   startFallPos: {x: 0, y: 0, z: 0}
+  currentActionTime: 0
   layerIdGroundMask: 0
   layerIdGroundAllMask: 0
   layerIdLastGroundTypeTouchedMask: 0
