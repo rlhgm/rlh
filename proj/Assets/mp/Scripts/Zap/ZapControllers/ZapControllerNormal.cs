@@ -42,8 +42,12 @@ public class ZapControllerNormal : ZapController {
 
 
 
-	public ZapControllerNormal (Zap zapPlayer) 
-		: base(zapPlayer,"Normal")
+//	public ZapControllerNormal (Zap zapPlayer) 
+//		: base(zapPlayer,"Normal")
+//	{
+//	}
+	public ZapControllerNormal () 
+		: base("Normal")
 	{
 	}
 
@@ -68,7 +72,7 @@ public class ZapControllerNormal : ZapController {
 
 	float groundUnderFeet;
 
-	public override void Update (float deltaTime) {	
+	public override void MUpdate (float deltaTime) {	
 		
 		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 		

@@ -3,15 +3,27 @@ using System.Collections;
 using System; //This allows the IComparable Interface
 
 //[System.Serializable]
-public class ZapController {
+[Serializable]
+public class ZapController : ScriptableObject{
 	
-	public ZapController (Zap playerController, string controllerName) {
+//	public ZapController (Zap playerController, string controllerName) {
+//		name = controllerName;
+//		zap = playerController;
+//		transform = zap.transform;
+//	}
+
+	public ZapController (string controllerName) {
 		name = controllerName;
+		//zap = playerController;
+		//transform = zap.transform;
+	}
+
+	public void setZap(Zap playerController){
 		zap = playerController;
 		transform = zap.transform;
 	}
-	
-	public virtual void Update (float deltaTime) {	
+
+	public virtual void MUpdate (float deltaTime) {	
 	}
 	
 	public virtual void FUpdate(float fDeltaTime){

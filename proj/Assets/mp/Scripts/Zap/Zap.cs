@@ -48,8 +48,8 @@ public class Zap : MonoBehaviour {
 	SpriteRenderer shadowRightSR;
 
 	ZapController currentController;
-	ZapController zapControllerNormal;
-	ZapController zapControllerKnife;
+	public ZapControllerNormal zapControllerNormal; // = ScriptableObject.CreateInstance<ZapControllerNormal>();
+	public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
 
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
@@ -133,8 +133,14 @@ public class Zap : MonoBehaviour {
 		//myHeight = coll.size.y;
 		//myHalfHeight = myHeight * 0.5f;
 
-		zapControllerNormal = new ZapControllerNormal(this);
-		zapControllerKnife = new ZapControllerKnife(this);
+//		zapControllerNormal = new ZapControllerNormal(this);
+//		zapControllerKnife = new ZapControllerKnife(this);
+
+		//zapControllerNormal = new ZapControllerNormal();
+		//zapControllerKnife = new ZapControllerKnife();
+
+		zapControllerNormal.setZap(this);
+		//zapControllerKnife.setZap(this);
 	}
 
 	void Start () {
@@ -525,7 +531,7 @@ public class Zap : MonoBehaviour {
 			}
 		}
 
-		currentController.Update( CurrentDeltaTime );
+		currentController.MUpdate( CurrentDeltaTime );
 		
 		updateShadow ();
 	}

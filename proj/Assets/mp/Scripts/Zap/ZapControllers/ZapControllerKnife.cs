@@ -33,11 +33,16 @@ public class ZapControllerKnife : ZapController {
 	public float HIDE_KNIFE_DURATION = 0.35f;
 	public float CROUCHINOUT_DURATION = 0.1f;
 
-	public ZapControllerKnife (Zap zapPlayer) 
-		: base(zapPlayer,"Knife")
+//	public ZapControllerKnife (Zap zapPlayer) 
+//		: base(zapPlayer,"Knife")
+//	{
+//	}
+
+	public ZapControllerKnife () 
+		: base("Knife")
 	{
 	}
-	
+
 	bool canPullUp;
 
 	float distToMove;
@@ -51,7 +56,7 @@ public class ZapControllerKnife : ZapController {
 
 	float groundUnderFeet;
 	
-	public override void Update (float deltaTime) {	
+	public override void MUpdate (float deltaTime) {	
 		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 
 		//currentActionTime = zap.getCurrentActionTime();
