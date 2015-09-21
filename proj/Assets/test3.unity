@@ -12232,20 +12232,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 54
       objectReference: {fileID: 0}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: respawnPoint
-      value: 
-      objectReference: {fileID: 397091552}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: zapControllerNormal
-      value: 
-      objectReference: {fileID: 11400000, guid: 132093d154c53b3419b6403fa4c24503,
-        type: 2}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: zapControllerKnife
-      value: 
-      objectReference: {fileID: 11400000, guid: 15a1f557bc968ed4881e0388e8b285df,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
   m_IsPrefabParent: 0

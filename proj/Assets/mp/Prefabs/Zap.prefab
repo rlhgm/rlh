@@ -754,13 +754,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae328598ce58c58409133125c114a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyLeft: 276
-  keyRight: 275
+  keyLeft: 97
+  keyRight: 100
   keyRun: 304
-  keyUp: 273
-  keyDown: 274
+  keyUp: 119
+  keyDown: 115
   keyJump: 32
-  respawnPoint: {fileID: 0}
   jumpSounds:
   - {fileID: 8300000, guid: 9526c3f17de4de642888d5b55ccc7206, type: 3}
   - {fileID: 8300000, guid: 4cfec2b82d1e6ac4ca4c6c40cd93ec4c, type: 3}
@@ -777,6 +776,9 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   touchCamera: {fileID: 0}
   autoCatchEdges: 0
+  zapControllerNormal: {fileID: 11400000, guid: 132093d154c53b3419b6403fa4c24503,
+    type: 2}
+  zapControllerKnife: {fileID: 11400000, guid: 15a1f557bc968ed4881e0388e8b285df, type: 2}
   IdleAnimFreq: 10
   DeathByVeryHardLandingText: You crushed your bones from fall. press space.
   DeathBySnakeText: You've been beaten by a snake. press space.
