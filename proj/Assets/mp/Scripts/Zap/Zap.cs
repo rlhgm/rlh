@@ -141,7 +141,7 @@ public class Zap : MonoBehaviour {
 		//zapControllerKnife = new ZapControllerKnife();
 
 		zapControllerNormal.setZap(this);
-		//zapControllerKnife.setZap(this);
+		zapControllerKnife.setZap(this);
 	}
 
 	void Start () {

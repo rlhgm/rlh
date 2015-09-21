@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class YourClassAsset
+public class ZapControllerNormalCreateAsset
 {
 	[MenuItem("Assets/Create/ZapControllerNormal")]
 	public static void CreateAsset ()
