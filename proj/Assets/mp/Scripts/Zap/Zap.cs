@@ -16,7 +16,8 @@ public class Zap : MonoBehaviour {
 	public KeyCode keyDown = KeyCode.DownArrow;
 	public KeyCode keyJump = KeyCode.Space;
 
-	public Transform respawnPoint;
+	//public Transform respawnPoint;
+	Vector3 startPoint = new Vector3();
 
 	public AudioClip[] jumpSounds;
 	public AudioClip[] landingSounds;
@@ -156,6 +157,8 @@ public class Zap : MonoBehaviour {
 		currentController.activate ();
 
 		lastTouchedCheckPoint = null;
+
+		startPoint = transform.position;
 	}
 
 	public void setCurrentController(ZapController newController){
@@ -259,7 +262,7 @@ public class Zap : MonoBehaviour {
 		if (lastTouchedCheckPoint) {
 			transform.position = lastTouchedCheckPoint.transform.position;
 		} else {
-			transform.position = respawnPoint.position;
+			transform.position = startPoint;// respawnPoint.position;
 		}
 
 		currentController.reborn ();
