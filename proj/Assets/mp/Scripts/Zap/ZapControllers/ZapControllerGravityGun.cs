@@ -31,11 +31,11 @@ public class ZapControllerGravityGun : ZapController {
 
 	Vector2 T; 			// sila ciagu
 	public float inertiaFactor = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
-	public float inertiaFactor2 = 0.03f; 	// wspolczynnik bezwladnosci jak gracz na siebie chce skierowac kamien
-	public float maxDistance = 5f;
+	//public float inertiaFactor2 = 0.03f; 	// wspolczynnik bezwladnosci jak gracz na siebie chce skierowac kamien
+	public float maxDistance = 8f;
 	public float minDistance = 2f;
-	public float pushOutForce = 2f;
-	public float pushOutMassFactor = 10f;
+	//public float pushOutForce = 2f;
+	//public float pushOutMassFactor = 10f;
 	
 	List<Rigidbody2D> droppedStones = new List<Rigidbody2D> (3);
 	
@@ -414,24 +414,25 @@ public class ZapControllerGravityGun : ZapController {
 			if( rb.IsSleeping() ){
 				//Debug.Log ( "remove dropped stone: " + rb ); 
 				droppedStones.Remove(rb);
-			}else{
-				Vector2 playerCenterPos = zap.transform.position;
-				playerCenterPos.y += 1f;
-				Vector2 stoneCenterPos = rb.worldCenterOfMass;
-						
-				Vector2 diff = stoneCenterPos - playerCenterPos;
-				Vector2 F = new Vector2(0f,0f);
-				float diffMagnitude = diff.magnitude;
-						
-				if( diffMagnitude < minDistance+0.25f ){
-					//F = diff + diff * pushOutForce * (rb.mass / pushOutMassFactor);
-					//F = diff.normalized * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
-
-					// im blizej srodka i im szybciej tym mocniej wypycha
-					F = diff * (diffMagnitude/minDistance) * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
-					rb.AddForce(F,ForceMode2D.Impulse);
-				}
 			}
+//			}else{
+//				Vector2 playerCenterPos = zap.transform.position;
+//				playerCenterPos.y += 1f;
+//				Vector2 stoneCenterPos = rb.worldCenterOfMass;
+//						
+//				Vector2 diff = stoneCenterPos - playerCenterPos;
+//				Vector2 F = new Vector2(0f,0f);
+//				float diffMagnitude = diff.magnitude;
+//						
+//				if( diffMagnitude < minDistance+0.25f ){
+//					//F = diff + diff * pushOutForce * (rb.mass / pushOutMassFactor);
+//					//F = diff.normalized * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
+//
+//					// im blizej srodka i im szybciej tym mocniej wypycha
+//					F = diff * (diffMagnitude/minDistance) * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
+//					rb.AddForce(F,ForceMode2D.Impulse);
+//				}
+//			}
 		}
 			
 		if( Input.GetMouseButton(0) ){
@@ -449,9 +450,9 @@ public class ZapControllerGravityGun : ZapController {
 					Vector2 F = new Vector2(0f,0f);
 	
 					float diffMagnitude = diff.magnitude;
-					if( diffMagnitude < minDistance+0.25f ){
-						F = diff + diff * ( diffMagnitude / minDistance ) * pushOutForce * (rb.mass / pushOutMassFactor);
-					}else{
+					//if( diffMagnitude < minDistance+0.25f ){
+					//	F = diff + diff * ( diffMagnitude / minDistance ) * pushOutForce * (rb.mass / pushOutMassFactor);
+					//}else{
 						Vector2 diff2 = tis - playerCenterPos;
 						float diffMagnitude2 = diff2.magnitude;
 
@@ -461,14 +462,14 @@ public class ZapControllerGravityGun : ZapController {
 							V = rb.velocity;
 
 							F = T - (inertiaFactor * V);
-
-						}else{ // jednak musi przyciagac ale slabiej albo do granicy a nie 
-							T = (tis - stoneCenterPos);
-							V = rb.velocity;							
-							F = T - (inertiaFactor2 * V) ;
-							F *= (rb.mass / pushOutMassFactor);
 						}
-					}
+//						}else{ // jednak musi przyciagac ale slabiej albo do granicy a nie 
+//							T = (tis - stoneCenterPos);
+//							V = rb.velocity;							
+//							F = T - (inertiaFactor2 * V) ;
+//							F *= (rb.mass / pushOutMassFactor);
+//						}
+					//}
 	
 					//Debug.Log("F : " + rb.velocity);
 					rb.AddForce(F,ForceMode2D.Impulse);
