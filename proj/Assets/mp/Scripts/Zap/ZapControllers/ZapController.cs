@@ -16,6 +16,27 @@ public class ZapController : ScriptableObject{
 		name = controllerName;
 		//zap = playerController;
 		//transform = zap.transform;
+
+		//target.mainCamera = myCamera;
+		//target.touchCamera = myCamera.transform.Find("TouchCamera").GetComponent<Camera>();
+//		Camera mc = Camera.main;
+//		if (mc) {
+//			Transform touchCameraTransform = mc.transform.Find ("TouchCamera");
+//			if( touchCameraTransform ){
+//				touchCamera = touchCameraTransform.GetComponent<Camera> ();
+//			}
+//		}
+	}
+
+	void OnEnable() {
+		//print("script was enabled");
+		Camera mc = Camera.main;
+		if (mc) {
+			Transform touchCameraTransform = mc.transform.Find ("TouchCamera");
+			if( touchCameraTransform ){
+				touchCamera = touchCameraTransform.GetComponent<Camera> ();
+			}
+		}
 	}
 
 	public void setZap(Zap playerController){
@@ -103,6 +124,5 @@ public class ZapController : ScriptableObject{
 	//protected string name;
 	protected Zap zap = null;
 	protected Transform transform = null;
-	
 	protected Camera touchCamera;
 }

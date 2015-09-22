@@ -104,8 +104,25 @@ public class ZapControllerGravityGun : ZapController {
 	}
 
 
-	void leftMouseButtonClicked(){
+	void leftMouseButtonClicked(){			
+		draggedStone = null;
 
+		Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+		
+		RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask );
+		if( hit.collider ){
+			draggedStone = hit.collider.gameObject.transform;
+
+			if( canBeDragged(draggedStone) ){
+
+				Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+				tsrb.gravityScale = 0f;
+				flashStone(draggedStone);
+
+			} else {
+				draggedStone = null;
+			}
+		}
 	}
 
 	public override void MUpdate (float deltaTime) {	
@@ -119,7 +136,15 @@ public class ZapControllerGravityGun : ZapController {
 		
 		//checkStartAttack ();
 		//checkStartCrouchAttack ();
-		
+
+		if( !Input.GetMouseButton(0) ){ 
+			leftMouseNotPressed();
+		}
+
+		if (Input.GetMouseButtonDown (0)) {
+			leftMouseButtonClicked();
+		}
+
 		switch (action) {
 		case Action.IDLE:
 			if( Action_IDLE() != 0 )
@@ -339,6 +364,118 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	public override void FUpdate(float fDeltaTime){
+		if( draggedStone ){ 
+			if( Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) ||
+			   Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) ){
+
+				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+				if( rb ){
+					rb.angularVelocity = 0;
+				}
+			}
+
+			if( Input.GetKey(KeyCode.Z) ){ // obracam kamien w lewo ...
+
+				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+				if( rb ){
+
+					if( rb.angularVelocity < 180 )
+						rb.angularVelocity += ( fDeltaTime * userStoneRotateSpeed );
+
+					rb.angularVelocity = Mathf.Min( rb.angularVelocity, 180f);
+
+					//rb.rotation += ( fDeltaTime * userStoneRotateSpeed );
+				}
+			}
+			else if( Input.GetKey(KeyCode.X) ){ // albo w prawo
+
+				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+				if( rb ){
+
+					if( rb.angularVelocity > -180 )
+						rb.angularVelocity -= ( fDeltaTime * userStoneRotateSpeed );
+
+					rb.angularVelocity = Mathf.Max( rb.angularVelocity, -180f);
+
+					//rb.rotation -= ( fDeltaTime * userStoneRotateSpeed );
+				}
+
+			}
+		}
+
+		Vector3 currentMousePosition = Input.mousePosition;
+			
+		for (int i = 0 ; i < droppedStones.Count; ++i) {
+			Rigidbody2D rb = droppedStones[i];
+			if( rb.IsSleeping() ){
+				//Debug.Log ( "remove dropped stone: " + rb ); 
+				droppedStones.Remove(rb);
+			}else{
+				Vector2 playerCenterPos = zap.transform.position;
+				playerCenterPos.y += 1f;
+				Vector2 stoneCenterPos = rb.worldCenterOfMass;
+						
+				Vector2 diff = stoneCenterPos - playerCenterPos;
+				Vector2 F = new Vector2(0f,0f);
+				float diffMagnitude = diff.magnitude;
+						
+				if( diffMagnitude < minDistance+0.25f ){
+					//F = diff + diff * pushOutForce * (rb.mass / pushOutMassFactor);
+					//F = diff.normalized * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
+
+					// im blizej srodka i im szybciej tym mocniej wypycha
+					F = diff * (diffMagnitude/minDistance) * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
+					rb.AddForce(F,ForceMode2D.Impulse);
+				}
+			}
+		}
+			
+		if( Input.GetMouseButton(0) ){
+			Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
+			Vector2 tis = touchInScene;
+	
+			if( draggedStone ){
+				Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+				if( rb ){
+					Vector2 playerCenterPos = zap.transform.position;
+					playerCenterPos.y += 1f;
+					Vector2 stoneCenterPos = rb.worldCenterOfMass;
+	
+					Vector2 diff = stoneCenterPos - playerCenterPos;
+					Vector2 F = new Vector2(0f,0f);
+	
+					float diffMagnitude = diff.magnitude;
+					if( diffMagnitude < minDistance+0.25f ){
+						F = diff + diff * ( diffMagnitude / minDistance ) * pushOutForce * (rb.mass / pushOutMassFactor);
+					}else{
+						Vector2 diff2 = tis - playerCenterPos;
+						float diffMagnitude2 = diff2.magnitude;
+
+						if( diffMagnitude2 > minDistance ){
+
+							T = (tis - stoneCenterPos);
+							V = rb.velocity;
+
+							F = T - (inertiaFactor * V);
+
+						}else{ // jednak musi przyciagac ale slabiej albo do granicy a nie 
+							T = (tis - stoneCenterPos);
+							V = rb.velocity;							
+							F = T - (inertiaFactor2 * V) ;
+							F *= (rb.mass / pushOutMassFactor);
+						}
+					}
+	
+					//Debug.Log("F : " + rb.velocity);
+					rb.AddForce(F,ForceMode2D.Impulse);
+	
+					if( !canBeDragged( draggedStone, tis) ){
+						releaseStone();
+					}
+	
+				}
+			}
+		}
 	}
 	
 	public override void activate(){
