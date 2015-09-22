@@ -100,7 +100,7 @@ public class ZapController : ScriptableObject{
 		return name;
 	}
 
-	protected string name;
+	//protected string name;
 	protected Zap zap = null;
 	protected Transform transform = null;
 }
