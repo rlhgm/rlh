@@ -769,10 +769,12 @@ public class ZapControllerGravityGun : ZapController {
 		if ( isInAction (Action.IDLE) || walking () != 0){
 			if (Input.GetKey (zap.keyLeft)) {
 				//jumpLeft();
+				rollLeft();
 				return 1;
 			}
 			if (Input.GetKey (zap.keyRight)) {
 				//jumpRight();
+				rollRight();
 				return 1;
 			}
 			return 0;
