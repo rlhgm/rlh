@@ -569,7 +569,13 @@ public class ZapControllerGravityGun : ZapController {
 			string msgInfo = "";
 			
 			switch( dt ){
-				
+
+			case Zap.DeathType.STONE_HIT:
+				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_stonehit_R");
+				else zap.getAnimator().Play("Zap_death_stonehit_L");
+				msgInfo = zap.DeathByStoneHitText;
+				break;
+
 			case Zap.DeathType.VERY_HARD_LANDING:
 				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_hitground_R");
 				else zap.getAnimator().Play("Zap_death_hitground_L");

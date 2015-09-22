@@ -251,13 +251,15 @@ public class Zap : MonoBehaviour {
 		VERY_HARD_LANDING = 1,
 		SNAKE,
 		CROCODILE,
-		POISON
+		POISON,
+		STONE_HIT
 	};
 
 	public string DeathByVeryHardLandingText = "rozjeb... sie o skale. press space";
 	public string DeathBySnakeText = "pokasal cie waz. press space";
 	public string DeathByCrocodileText = "zjadl cie krokodyl. press space";
 	public string DeathByPoisonText = "zatrules sie. press space";
+	public string DeathByStoneHitText = "pierdolnela cie skala. press space";
 	public string DeathByDefaultText = "zginales defaultowa smiercia. press space";
 
 	public void die(DeathType deathType){
@@ -326,9 +328,69 @@ public class Zap : MonoBehaviour {
 		fuddledFromBrid = fuddled;
 	}
 
+	public float stoneDeadlySpeed = 3f;
+	public float stoneDeadlyMass = 5f;
+	public float stoneDeadlyEnergy = 10;
+
+	bool hitByStone(Transform stone){
+		Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D> ();
+		if (!stoneBody)
+			return false;
+
+		float stoneSpeed = stoneBody.velocity.magnitude;
+		if (stoneSpeed > stoneDeadlySpeed) {
+			die(DeathType.STONE_HIT );
+			return true;
+		}
+
+		float stoneMass = stoneBody.mass;
+		if (stoneMass > stoneDeadlyMass) {
+			die(DeathType.STONE_HIT );
+			return true;
+		}
+
+		float stoneEnergy = stoneSpeed * stoneMass;
+		if (stoneEnergy > stoneDeadlyEnergy) {
+			die(DeathType.STONE_HIT );
+			return true;
+		}
+
+		return false;
+	}
+
+	
+//	void OnCollisionEnter2D	(Collider2D other){
+//		if (other.transform.gameObject.layer == layerIdGroundMoveableMask) { // to jest kamien 
+//			hitByStone( other.transform );
+//			return;
+//		}
+//	}
+//
+//	void OnCollisionStay2D(Collider2D other){
+//		if (other.transform.gameObject.layer == layerIdGroundMoveableMask) { // to jest kamien 
+//			hitByStone( other.transform );
+//			return;
+//		}
+//	}
+
+	void OnTriggerStay2D(Collider2D other) {
+		int lid = other.transform.gameObject.layer;
+		if (lid == LayerMask.NameToLayer("GroundMoveable") ) { // layerIdGroundMoveableMask) { // to jest kamien 
+			hitByStone( other.transform );
+			return;
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
 		if (currentController.triggerEnter (other))
 			return;
+
+		int lid = other.transform.gameObject.layer;
+		int lid2 = LayerMask.NameToLayer ("GroundMoveable");
+		if (lid == lid2 ) {// layerIdGroundMoveableMask) { // to jest kamien 
+			hitByStone( other.transform );
+			return;
+		}
 
 //		if (other.gameObject.tag == "Bird") {
 //			if( isInState(State.MOUNT) ){
