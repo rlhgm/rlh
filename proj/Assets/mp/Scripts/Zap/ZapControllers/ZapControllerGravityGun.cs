@@ -33,7 +33,7 @@ public class ZapControllerGravityGun : ZapController {
 	public float inertiaFactor = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
 	//public float inertiaFactor2 = 0.03f; 	// wspolczynnik bezwladnosci jak gracz na siebie chce skierowac kamien
 	public float maxDistance = 8f;
-	public float minDistance = 2f;
+	//public float minDistance = 2f;
 	//public float pushOutForce = 2f;
 	//public float pushOutMassFactor = 10f;
 	
@@ -456,13 +456,13 @@ public class ZapControllerGravityGun : ZapController {
 						Vector2 diff2 = tis - playerCenterPos;
 						float diffMagnitude2 = diff2.magnitude;
 
-						if( diffMagnitude2 > minDistance ){
+						//if( diffMagnitude2 > minDistance ){
 
 							T = (tis - stoneCenterPos);
 							V = rb.velocity;
 
 							F = T - (inertiaFactor * V);
-						}
+						//}
 //						}else{ // jednak musi przyciagac ale slabiej albo do granicy a nie 
 //							T = (tis - stoneCenterPos);
 //							V = rb.velocity;							

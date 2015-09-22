@@ -3,7 +3,7 @@ using System.Collections;
 using System; //This allows the IComparable Interface
 
 //[System.Serializable]
-[Serializable]
+//[Serializable]
 public class ZapController : ScriptableObject{
 	
 //	public ZapController (Zap playerController, string controllerName) {
