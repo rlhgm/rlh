@@ -841,7 +841,7 @@ public class ZapControllerKnife : ZapController {
 	}
 
 	bool checkDir(){
-		Vector2 mouseInScene = zap.touchCamera.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
 		if (zap.faceRight ()) {
 			if (transform.position.x > mouseInScene.x){
 				setAction (Action.TURN_STAND_LEFT);

@@ -103,4 +103,6 @@ public class ZapController : ScriptableObject{
 	//protected string name;
 	protected Zap zap = null;
 	protected Transform transform = null;
+	
+	protected Camera touchCamera;
 }

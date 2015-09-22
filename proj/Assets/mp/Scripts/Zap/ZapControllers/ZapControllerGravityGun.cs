@@ -46,6 +46,7 @@ public class ZapControllerGravityGun : ZapController {
 		: base("GravityGun")
 	{
 		//zap.layer
+
 	}
 	
 	float distToMove;
@@ -67,8 +68,9 @@ public class ZapControllerGravityGun : ZapController {
 				unflashStone (lastFlashStone);
 				lastFlashStone = null;
 			}
+			//Camera.main.
 								
-			Vector2 mouseInScene = zap.touchCamera.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
 			
 			Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
 			Vector3 _df = mouseInScene - rayOrigin;
@@ -636,7 +638,7 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	bool checkDir(){
-		Vector2 mouseInScene = zap.touchCamera.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
 		if (zap.faceRight ()) {
 			if (transform.position.x > mouseInScene.x){
 				setAction (Action.TURN_STAND_LEFT);

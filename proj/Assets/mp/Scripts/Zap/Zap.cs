@@ -30,10 +30,10 @@ public class Zap : MonoBehaviour {
 
 	AudioSource myAudio;
 
-	[HideInInspector]
-	public Camera mainCamera;
-	[HideInInspector]
-	public Camera touchCamera;
+	//[HideInInspector]
+	//public Camera mainCamera;
+	//[HideInInspector]
+	//public Camera touchCamera;
 
 	public bool autoCatchEdges = false;
 

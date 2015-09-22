@@ -19,8 +19,8 @@ public class RLHOptionsWindow : EditorWindow{
 	static string KillerPhysicPrefabPath = "Assets/mp/Prefabs/KillerPhysic.prefab";
 	static string ShowInfoTriggerPrefabPath = "Assets/mp/Prefabs/ShowInfoTrigger.prefab";
 
-	public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
-	public static float gravityGunMaxDist = GravityGun.maxDistance;
+	//public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
+	//public static float gravityGunMaxDist = GravityGun.maxDistance;
 
 
 
@@ -33,8 +33,8 @@ public class RLHOptionsWindow : EditorWindow{
 		Transform prefabGfx = prefabGround.transform.Find("gfx");
 
 		PhysicVisibility = prefabGfx.GetComponent<SpriteRenderer>().enabled;
-		gravityGunInertiaFactor = GravityGun.inertiaFactor;
-		gravityGunMaxDist = GravityGun.maxDistance;
+		//gravityGunInertiaFactor = GravityGun.inertiaFactor;
+		//gravityGunMaxDist = GravityGun.maxDistance;
 
 		LevelArtGameObject = GameObject.Find ("Level Art");
 		if (LevelArtGameObject != null) {
@@ -84,19 +84,19 @@ public class RLHOptionsWindow : EditorWindow{
 			EditorGUILayout.LabelField( "Nie ma noda : Level Art" );
 		}
 
-		//float newGravityGunInertiaFactor = EditorGUILayout.FloatField("GravityGun interia factor:", gravityGunInertiaFactor);
-		float newGravityGunInertiaFactor = EditorGUILayout.Slider("GravityGun interia factor:",gravityGunInertiaFactor,0.001f, 1f);
-		if (newGravityGunInertiaFactor != gravityGunInertiaFactor) {
-			gravityGunInertiaFactor = newGravityGunInertiaFactor;
-			GravityGun.inertiaFactor = newGravityGunInertiaFactor;
-		}
+//		//float newGravityGunInertiaFactor = EditorGUILayout.FloatField("GravityGun interia factor:", gravityGunInertiaFactor);
+//		float newGravityGunInertiaFactor = EditorGUILayout.Slider("GravityGun interia factor:",gravityGunInertiaFactor,0.001f, 1f);
+//		if (newGravityGunInertiaFactor != gravityGunInertiaFactor) {
+//			gravityGunInertiaFactor = newGravityGunInertiaFactor;
+//			GravityGun.inertiaFactor = newGravityGunInertiaFactor;
+//		}
 
-		//float newGravityGunMaxDist = EditorGUILayout.FloatField("GravityGun max distance:", gravityGunMaxDist);
-		float newGravityGunMaxDist = EditorGUILayout.Slider("GravityGun max distance:",gravityGunMaxDist, 0.001f, 100f);
-		if (newGravityGunMaxDist != gravityGunMaxDist) {
-			gravityGunMaxDist = newGravityGunMaxDist;
-			GravityGun.maxDistance = newGravityGunMaxDist;
-		}
+//		//float newGravityGunMaxDist = EditorGUILayout.FloatField("GravityGun max distance:", gravityGunMaxDist);
+//		float newGravityGunMaxDist = EditorGUILayout.Slider("GravityGun max distance:",gravityGunMaxDist, 0.001f, 100f);
+//		if (newGravityGunMaxDist != gravityGunMaxDist) {
+//			gravityGunMaxDist = newGravityGunMaxDist;
+//			GravityGun.maxDistance = newGravityGunMaxDist;
+//		}
 
 		//if (GUILayout.Button ("Set")) {
 		//	GravityGun.inertiaFactor = gravityGunInertiaFactor;
