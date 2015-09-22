@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875f76fb2769443439ca052ac8327906, type: 3}
+  m_Name: ZapControllerGravityGun
+  m_EditorClassIdentifier: 
+  WalkSpeed: 1
+  WalkBackSpeed: 1
+  JumpSpeed: 5.80000019
+  JumpImpulse: 5
+  rollSpeed: 4.80000019
+  rollDuration: .600000024
+  rollMaxDist: 3
+  CrouchSpeed: 1
+  GravityForce: -20
+  MaxSpeedY: 15
+  SpeedUpParam: 10
+  SlowDownParam: 20
+  TURN_LEFTRIGHT_DURATION: .200000003
+  ATTACK_DURATION: .5
+  PULLOUT_KNIFE_DURATION: .300000012
+  HIDE_KNIFE_DURATION: .349999994
+  CROUCHINOUT_DURATION: .100000001
+  ClimbPullDownRange: .510999978

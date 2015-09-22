@@ -49,6 +49,7 @@
      <Compile Include="Assets\Editor\RLHEditor.cs" />
      <Compile Include="Assets\Editor\RLHOptionsWindow.cs" />
      <Compile Include="Assets\Editor\ScriptableObjectsUtility.cs" />
+     <Compile Include="Assets\Editor\ZapControllerGravityGunCreateAsset.cs" />
      <Compile Include="Assets\Editor\ZapControllerKnifeCreateAsset.cs" />
      <Compile Include="Assets\Editor\ZapControllerNormalCreateAsset.cs" />
      <Compile Include="Assets\Resources\Editor\CM Tools\TileMaster\TileMaster.cs" />

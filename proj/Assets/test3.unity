@@ -12232,6 +12232,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 54
       objectReference: {fileID: 0}
+    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
+      propertyPath: zapControllerGravityGun
+      value: 
+      objectReference: {fileID: 11400000, guid: a32b30679f579a8418c78e5cb7a8ddcd,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
   m_IsPrefabParent: 0

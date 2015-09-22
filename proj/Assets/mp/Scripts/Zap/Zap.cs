@@ -51,6 +51,7 @@ public class Zap : MonoBehaviour {
 	ZapController currentController;
 	public ZapControllerNormal zapControllerNormal; // = ScriptableObject.CreateInstance<ZapControllerNormal>();
 	public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
+	public ZapControllerGravityGun zapControllerGravityGun; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
 
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
@@ -142,6 +143,7 @@ public class Zap : MonoBehaviour {
 
 		zapControllerNormal.setZap(this);
 		zapControllerKnife.setZap(this);
+		zapControllerGravityGun.setZap (this);
 	}
 
 	void Start () {
@@ -172,6 +174,12 @@ public class Zap : MonoBehaviour {
 		setCurrentController (zapControllerKnife);
 	}
 	public void _hideKnife(){
+		setCurrentController (zapControllerNormal);
+	}
+	public void _pullOutGravityGun(){
+		setCurrentController (zapControllerGravityGun);
+	}
+	public void _hideGravityGun(){
 		setCurrentController (zapControllerNormal);
 	}
 
