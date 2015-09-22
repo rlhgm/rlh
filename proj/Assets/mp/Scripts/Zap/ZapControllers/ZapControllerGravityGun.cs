@@ -145,6 +145,10 @@ public class ZapControllerGravityGun : ZapController {
 			leftMouseButtonClicked();
 		}
 
+		if (Input.GetMouseButtonUp (0)) {
+			releaseStone();
+		}
+
 		switch (action) {
 		case Action.IDLE:
 			if( Action_IDLE() != 0 )
