@@ -24,17 +24,10 @@ public class ZapControllerGravityGun : ZapController {
 	public float HIDE_GRAVITYGUN_DURATION = 0.35f;
 	public float CROUCHINOUT_DURATION = 0.1f;
 	
-	//	public ZapControllerKnife (Zap zapPlayer) 
-	//		: base(zapPlayer,"Knife")
-	//	{
-	//	}
-	
 	public ZapControllerGravityGun () 
 		: base("GravityGun")
 	{
 	}
-	
-	//bool canPullUp;
 	
 	float distToMove;
 	Vector3 oldPos;
@@ -72,21 +65,7 @@ public class ZapControllerGravityGun : ZapController {
 		case Action.HIDE_GRAVITYGUN:
 			Action_HIDE_GRAVITYGUN();
 			break;
-			
-		//case Action.ATTACK:
-		//	Action_ATTACK();
-		//	break;
-			
-		//case Action.CROUCH_ATTACK:
-		//	Action_CROUCH_ATTACK();
-		//	break;
-			
-//		case Action.PREPARE_TO_JUMP:
-//			if( zap.currentActionTime >= 0.2f ){
-//				//jump();
-//			}
-//			break;
-			
+
 		case Action.WALK_LEFT:
 		case Action.WALKBACK_LEFT:
 			Action_WALK(-1);
@@ -126,35 +105,6 @@ public class ZapControllerGravityGun : ZapController {
 				turnRightFinish();
 			}
 			break;
-			
-		//case Action.CROUCH_IN:
-		//	Action_CROUCH_IN();
-		//	break;
-			
-		//case Action.GET_UP:
-		//	Action_GET_UP();
-		//	break;
-			
-		//case Action.CROUCH_IDLE:
-		//	Action_CROUCH_IDLE();
-		//	break;
-			
-//		case Action.CROUCH_LEFT:
-//		case Action.CROUCH_LEFT_BACK:
-//			Action_CROUCH_LEFTRIGHT(-1);
-//			break;
-//			
-//		case Action.CROUCH_RIGHT:
-//		case Action.CROUCH_RIGHT_BACK:
-//			Action_CROUCH_LEFTRIGHT(1);
-//			break;
-//		};
-		
-//		if (wantGetUp) {
-//			if( zap.canGetUp() ){
-//				setAction(Action.GET_UP);
-//				wantGetUp = false;
-//			}
 		}
 		
 		switch (zap.getState()) {
@@ -343,26 +293,11 @@ public class ZapControllerGravityGun : ZapController {
 		WALKBACK_RIGHT,
 		TURN_STAND_LEFT,
 		TURN_STAND_RIGHT,
-		//ATTACK,
-		//ATTACK_JUST_FINISHED,
-		//PREPARE_TO_JUMP,
 		JUMP,
-		//JUMP_LEFT_FRONT,
-		//JUMP_LEFT_BACK,
-		//JUMP_RIGHT_FRONT,
-		//JUMP_RIGHT_BACK,
 		ROLL_LEFT_FRONT,
 		ROLL_LEFT_BACK,
 		ROLL_RIGHT_FRONT,
 		ROLL_RIGHT_BACK,
-		//CROUCH_IN,
-		//GET_UP,
-		//CROUCH_IDLE,
-		//CROUCH_LEFT,
-		//CROUCH_RIGHT,
-		//CROUCH_LEFT_BACK,
-		//CROUCH_RIGHT_BACK,
-		//CROUCH_ATTACK,
 		FALL,
 		STOP_WALK,
 		//STOP_RUN,
@@ -384,9 +319,6 @@ public class ZapControllerGravityGun : ZapController {
 		switch (newAction) {
 			
 		case Action.IDLE:
-			//if( zap.faceRight() ) zap.getAnimator().Play("Zap_idle_R");
-			//else zap.getAnimator().Play ("Zap_idle_L");
-			
 			if( zap.faceRight() ) zap.getAnimator().Play("Zap_knife_idle");
 			else zap.getAnimator().Play ("Zap_knife_idle");
 			
@@ -401,16 +333,6 @@ public class ZapControllerGravityGun : ZapController {
 			if( zap.faceRight() ) zap.getAnimator().Play("Zap_knife_hide");
 			else zap.getAnimator().Play ("Zap_knife_hide");
 			break;
-			
-//		case Action.ATTACK:
-//			string animName = "Zap_knife_attack_0";
-//			if( param == 0 ){
-//				if( Random.Range(0,2) == 1 )
-//					animName = "Zap_knife_attack_1";
-//			}
-//			//Debug.Log( animName );
-//			zap.getAnimator().Play(animName,-1,0f);
-//			break;
 			
 		case Action.DIE:
 			Zap.DeathType dt = (Zap.DeathType)param;
@@ -511,42 +433,14 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	public override int keyUpUp(){
-		//		if ( setMountIdle ()) {
-		//			if (isInState (Zap.State.MOUNT)) {
-		//				if( Input.GetKey(zap.keyLeft) )
-		//					keyLeftDown();
-		//				else if(Input.GetKey(zap.keyRight) )
-		//					keyRightDown();
-		//				else if(Input.GetKey(zap.keyDown) )
-		//					keyDownDown();
-		//			}
-		//		}
 		return 0;
 	}
 	
 	public override int keyDownDown(){
-		if (isInState (Zap.State.ON_GROUND)) {
-//			if( !crouching() ) {// || isInAction(Action.CROUCH_ATTACK) ){
-//				setAction(Action.CROUCH_IN);
-//				return 1;
-//			}
-//			crouch();
-			return 1;
-		}
-		
 		return 0;
 	}
 	
 	public override int keyDownUp(){
-//		if (isInState (Zap.State.ON_GROUND)) {
-//			if( crouching() || isInAction(Action.CROUCH_IN) ){
-//				if( zap.canGetUp() ){
-//					setAction(Action.GET_UP);
-//				}else{
-//					wantGetUp = true;
-//				}
-//			}
-//		}
 		return 0;
 	}
 	
@@ -625,9 +519,7 @@ public class ZapControllerGravityGun : ZapController {
 		
 		return 0;
 	}
-	
-	//bool jumpKeyPressed = false;
-	
+
 	public override int keyJumpDown(){
 		
 		//Debug.Log ("ZapControllerNormal::keyJumpDown()");
@@ -725,33 +617,6 @@ public class ZapControllerGravityGun : ZapController {
 		return 0;
 	}
 	
-//	int Action_ATTACK(){
-//		if (zap.currentActionTime > ATTACK_DURATION) {
-//			
-//			if( !checkDir() ){
-//				setAction(Action.ATTACK_JUST_FINISHED);
-//				if( !checkStartAttack() ){
-//					resetActionAndState();
-//				}
-//				return 1;
-//			}
-//		}
-//		return 0;
-//	}
-//	
-//	int Action_CROUCH_ATTACK(){
-//		if (zap.currentActionTime > ATTACK_DURATION) {
-//			
-//			setAction(Action.ATTACK_JUST_FINISHED);
-//			if( !checkStartCrouchAttack() ){
-//				setAction(Action.CROUCH_IDLE);
-//				resetActionAndState();
-//			}
-//			return 1;
-//		}
-//		return 0;
-//	}
-	
 	int Action_WALK(int dir){
 		
 		bool dirChanged = checkDir ();
@@ -814,145 +679,7 @@ public class ZapControllerGravityGun : ZapController {
 		}
 		return 0;
 	}
-	
-//	int Action_CROUCH_IN(){
-//		
-//		if (zap.currentActionTime >= CROUCHINOUT_DURATION) {
-//			crouch();
-//		}
-//		return 0;
-//	}
-//	
-//	int Action_GET_UP(){
-//		
-//		if (zap.currentActionTime >= CROUCHINOUT_DURATION) {
-//			getUp();			
-//		}
-//		
-//		return 0;
-//	}
-	
-//	int Action_CROUCH_IDLE(){
-//		if( Input.GetKey(zap.keyDown) ){
-//			//tryStartClimbPullDown();
-//		}
-//		return 0;
-//	}
-//	
-//	int Action_CROUCH_LEFTRIGHT(int dir){
-//		
-//		bool speedReached = checkSpeed (dir);
-//		if (speedReached && desiredSpeedX == 0.0f) {
-//			setActionCrouchIdle();
-//			if( crouching() ) {
-//				if( Input.GetKey(zap.keyLeft) ) {
-//					keyLeftDown();
-//				} else if( Input.GetKey(zap.keyRight) ){
-//					keyRightDown();
-//				}
-//			}
-//		}
-//		
-//		distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
-//		
-//		float distToObstacle = 0.0f;
-//		if (zap.checkObstacle (dir, distToMove, ref distToObstacle)) {
-//			distToMove = distToObstacle;
-//			setActionCrouchIdle();
-//		}
-//		
-//		newPosX += distToMove;		
-//		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-//		
-//		//		float distToGround = 0.0f;
-//		//		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
-//		//		if (groundUnderFeet) {
-//		//			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-//		//		}
-//		
-//		return 0;
-//	}
-//	
-//	void crouch(){
-//		if (isInState (Zap.State.ON_GROUND)) {
-//			
-//			switch (action) {
-//				
-//			case Action.IDLE:
-//				//case Action.JUMP:
-//			case Action.CROUCH_IN:
-//			case Action.CROUCH_IDLE:
-//				setAction (Action.CROUCH_IDLE);
-//				if( Input.GetKey(zap.keyLeft) ){
-//					keyLeftDown();
-//				} else if( Input.GetKey(zap.keyRight) ){
-//					keyRightDown();
-//				}else{
-//					zap.velocity.x = 0.0f;
-//					zap.velocity.y = 0.0f;
-//				}
-//				break;
-//				
-//			case Action.WALK_LEFT:
-//				//case Action.JUMP_LEFT:
-//				if( Input.GetKey(zap.keyLeft)){
-//					zap.velocity.x = 0.0f;
-//					desiredSpeedX = CrouchSpeed;
-//					if( zap.dir () == -Vector2.right ){
-//						setAction(Action.CROUCH_LEFT);
-//					}else{
-//						setAction(Action.CROUCH_LEFT_BACK);
-//					}
-//				}else{
-//					zap.velocity.x = 0.0f;
-//					zap.velocity.y = 0.0f;
-//					setAction (Action.CROUCH_IDLE);
-//				}
-//				break;
-//				
-//			case Action.WALK_RIGHT:
-//				//case Action.JUMP_RIGHT:
-//				if( Input.GetKey(zap.keyRight)){
-//					zap.velocity.x = 0.0f;
-//					desiredSpeedX = CrouchSpeed;
-//					if( zap.dir () == Vector2.right ){
-//						setAction(Action.CROUCH_RIGHT);
-//					}else{
-//						setAction(Action.CROUCH_RIGHT_BACK);
-//					}
-//				}else{
-//					zap.velocity.x = 0.0f;
-//					zap.velocity.y = 0.0f;
-//					setAction (Action.CROUCH_IDLE);
-//				}
-//				break;
-//			}
-//			
-//		}
-//	}
-	
-//	void jumpLeft(){
-//		zap.velocity.x = -JumpSpeed;
-//		zap.velocity.y = 0.0f;
-//		zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
-//		zap.setState(Zap.State.IN_AIR);
-//		if( !zap.faceRight() )
-//			setAction (Action.JUMP_LEFT_FRONT);
-//		else
-//			setAction (Action.JUMP_LEFT_BACK);
-//	}
-//	
-//	void jumpRight(){
-//		zap.velocity.x = JumpSpeed;
-//		zap.velocity.y = 0.0f;
-//		zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
-//		zap.setState(Zap.State.IN_AIR);
-//		if( zap.faceRight() )
-//			setAction (Action.JUMP_RIGHT_FRONT);
-//		else
-//			setAction (Action.JUMP_RIGHT_BACK);
-//	}
-	
+
 	void rollLeft(){
 		zap.velocity.x = -rollSpeed;
 		zap.velocity.y = 0.0f;
@@ -1018,10 +745,6 @@ public class ZapControllerGravityGun : ZapController {
 		zap.velocity.x = 0.0f;
 		setAction (Action.IDLE);
 	}
-//	void setActionCrouchIdle(){
-//		zap.velocity.x = 0.0f;
-//		setAction (Action.CROUCH_IDLE);
-//	}
 	
 	void resetActionAndState(){
 		if (isInState (Zap.State.ON_GROUND)) {
@@ -1066,11 +789,6 @@ public class ZapControllerGravityGun : ZapController {
 		//return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_RIGHT);
 		return false;
 	}
-//	public override bool crouching(){
-//		return isInAction(Action.CROUCH_IDLE) || 
-//			isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_LEFT_BACK) ||
-//				isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
-//	}
 	public override void zapDie (Zap.DeathType deathType){
 		setAction (Action.DIE, (int)deathType);
 	}
