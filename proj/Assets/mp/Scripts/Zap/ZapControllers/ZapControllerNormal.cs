@@ -1065,7 +1065,7 @@ public class ZapControllerNormal : ZapController {
 
 	public override int keyJumpDown(){
 
-		Debug.Log ("ZapControllerNormal::keyJumpDown()");
+		//Debug.Log ("ZapControllerNormal::keyJumpDown()");
 		//jumpKeyPressed = true;
 
 		switch (action) {

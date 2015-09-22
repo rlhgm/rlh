@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-//using System; //This allows the IComparable Interface
+using System.Collections.Generic;
 
 //[System.Serializable]
 public class ZapControllerGravityGun : ZapController {
@@ -23,10 +23,29 @@ public class ZapControllerGravityGun : ZapController {
 	public float PULLOUT_GRAVITYGUN_DURATION = 0.3f;
 	public float HIDE_GRAVITYGUN_DURATION = 0.35f;
 	public float CROUCHINOUT_DURATION = 0.1f;
+
+	public Transform draggedStone = null;
+	public Transform lastFlashStone = null;
+	//public int layerIdGroundMoveableMask = 0;
+	//public int layerIdGroundMask = 0;
+
+	Vector2 T; 			// sila ciagu
+	public float inertiaFactor = 0.09f; 		// wspolczynnik oporu - u mnie raczej bezwladnosci
+	public float inertiaFactor2 = 0.03f; 	// wspolczynnik bezwladnosci jak gracz na siebie chce skierowac kamien
+	public float maxDistance = 5f;
+	public float minDistance = 2f;
+	public float pushOutForce = 2f;
+	public float pushOutMassFactor = 10f;
 	
+	List<Rigidbody2D> droppedStones = new List<Rigidbody2D> (3);
+	
+	Vector2 V; 			// predkosc
+	public static float userStoneRotateSpeed = 180f;
+
 	public ZapControllerGravityGun () 
 		: base("GravityGun")
 	{
+		//zap.layer
 	}
 	
 	float distToMove;
@@ -39,7 +58,54 @@ public class ZapControllerGravityGun : ZapController {
 	float climbToJumpDuration;
 	
 	float groundUnderFeet;
-	
+
+	void leftMouseNotPressed(){
+
+		if (draggedStone == null) {
+
+			if (lastFlashStone) {
+				unflashStone (lastFlashStone);
+				lastFlashStone = null;
+			}
+								
+			Vector2 mouseInScene = zap.touchCamera.ScreenToWorldPoint(Input.mousePosition);
+			
+			Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+			Vector3 _df = mouseInScene - rayOrigin;
+							
+			if( _df.magnitude <= maxDistance ){
+
+				RaycastHit2D hit = Physics2D.Linecast (mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
+				if( hit.collider ){
+
+					lastFlashStone = hit.collider.gameObject.transform;
+					if( lastFlashStone ){
+						Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
+						if( tsrb ){
+
+							//rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
+
+							hit = Physics2D.Linecast (rayOrigin, tsrb.worldCenterOfMass, zap.layerIdGroundMask);
+							if( hit.collider ){
+								lastFlashStone = null;
+							}else{
+								flashStone(lastFlashStone);
+							}
+
+						}else{
+							lastFlashStone = null;
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	void leftMouseButtonClicked(){
+
+	}
+
 	public override void MUpdate (float deltaTime) {	
 		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 		
@@ -930,8 +996,83 @@ public class ZapControllerGravityGun : ZapController {
 		}
 	}
 	
-	//bool wantGetUp = false;
-	bool wantJumpAfter = false;
+	bool catchStone(Transform stone){
+		return false;
+	}
+
+	void releaseStone(){
+		if( draggedStone ){
+			Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+			if( tsrb ){
+				
+				//Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+				tsrb.gravityScale = 1f;
+				//rb.AddForce( lastToMoveDist, ForceMode2D.Impulse );
+			}
+			unflashStone(draggedStone);
+			
+			Debug.Log ( "add dropped stone: " + tsrb );
+			droppedStones.Add( tsrb );
+			draggedStone = null;
+		}
+	}
+
+	void flashStone(Transform stone){
+		setStoneOpacity (stone, 0.5f);
+	}
+	void unflashStone(Transform stone){
+		setStoneOpacity (stone, 1.0f);
+	}
+	void setStoneOpacity(Transform stone, float newOpacity){
+		SpriteRenderer sr = stone.GetComponent<SpriteRenderer> ();
+		if (!sr)
+			return;
+		
+		Color stoneColor = sr.color;
+		stoneColor.a = newOpacity;
+		sr.color = stoneColor;
+	}
+
+
+	bool canBeDragged(Transform stone, Vector2 stoneTargetPlace){
+		
+		Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
+		if (!rb)
+			return false;
+		
+		if( (rb.worldCenterOfMass - stoneTargetPlace).magnitude > 5f ){
+			return false;
+		}
+		
+		return canBeDragged (stone);
+	}
+
+	bool canBeDragged(Transform stone){
+		
+		Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
+		if (!rb)
+			return false;
+		
+		Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+		Vector3 _df = rb.worldCenterOfMass - rayOrigin;
+		
+		if( _df.magnitude > maxDistance ){
+			
+			return false;
+			
+		} else {
+			
+			RaycastHit2D hit = Physics2D.Linecast (rayOrigin, rb.worldCenterOfMass, zap.layerIdGroundMask);
+			if( hit.collider ){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+//bool wantGetUp = false;
+bool wantJumpAfter = false;
 	bool canJumpAfter = true;
 	float desiredSpeedX = 0.0f;
 	Action action;

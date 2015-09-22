@@ -1112,7 +1112,8 @@ public class Zap : MonoBehaviour {
 	[HideInInspector]
 	public int layerIdGroundMask;
 	int layerIdGroundPermeableMask;
-	int layerIdGroundMoveableMask;
+	[HideInInspector]
+	public int layerIdGroundMoveableMask;
 	[HideInInspector]
 	public int layerIdGroundAllMask;
 	[HideInInspector]
