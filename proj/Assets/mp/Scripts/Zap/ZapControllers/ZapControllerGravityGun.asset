@@ -28,9 +28,5 @@ MonoBehaviour:
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036
-  inertiaFactor2: .0299999993
-  maxDistance: 5
-  minDistance: 2
-  pushOutForce: 2
-  pushOutMassFactor: 10
+  maxDistance: 10
   ClimbPullDownRange: .510999978

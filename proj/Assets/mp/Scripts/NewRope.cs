@@ -161,11 +161,13 @@ public class NewRope : MonoBehaviour {
 		//}
 		//else if( dir == 
 
-		Vector2 dirForce = dir * force;
-		currentLink.GetComponent<Rigidbody2D>().AddForce( dirForce );
-		if( currentLink.transform.childCount > 0 ) {
-			Transform nextLink = currentLink.transform.GetChild(0);
-			nextLink.GetComponent<Rigidbody2D>().AddForce( dirForce );
+		if (currentLink) {
+			Vector2 dirForce = dir * force;
+			currentLink.GetComponent<Rigidbody2D> ().AddForce (dirForce);
+			if (currentLink.transform.childCount > 0) {
+				Transform nextLink = currentLink.transform.GetChild (0);
+				nextLink.GetComponent<Rigidbody2D> ().AddForce (dirForce);
+			}
 		}
 	}
 
