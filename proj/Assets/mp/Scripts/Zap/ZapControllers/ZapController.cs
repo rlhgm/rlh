@@ -39,9 +39,14 @@ public class ZapController : ScriptableObject{
 		}
 	}
 
-	public void setZap(Zap playerController){
+	protected WeaponMenuItem weaponMenuItem;
+
+	virtual public void setZap(Zap playerController){
 		zap = playerController;
 		transform = zap.transform;
+		if (weaponMenuItem) {
+			weaponMenuItem.setState(WeaponMenuItem.State.OFF);
+		}
 	}
 
 	public virtual void MUpdate (float deltaTime) {	
@@ -49,10 +54,23 @@ public class ZapController : ScriptableObject{
 	
 	public virtual void FUpdate(float fDeltaTime){
 	}
-	
+
+	public virtual void selected(){
+		if( weaponMenuItem )
+			weaponMenuItem.setState (WeaponMenuItem.State.ON);
+	}
+	public virtual void deselected(){
+		if( weaponMenuItem )
+			weaponMenuItem.setState (WeaponMenuItem.State.OFF);
+	}
+
 	public virtual void activate(){
+		if( weaponMenuItem )
+			weaponMenuItem.setState (WeaponMenuItem.State.BLINK);
 	}
 	public virtual void deactivate(){
+		if( weaponMenuItem )
+			weaponMenuItem.setState (WeaponMenuItem.State.ON);
 	}
 
 	protected bool isInState(Zap.State test){

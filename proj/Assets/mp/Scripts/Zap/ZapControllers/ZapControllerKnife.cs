@@ -43,6 +43,16 @@ public class ZapControllerKnife : ZapController {
 	{
 	}
 
+	public override void setZap(Zap playerController){
+		base.setZap (playerController);
+		if (zap.weaponMenu) {
+			weaponMenuItem = zap.weaponMenu.itemKnife;
+		}
+		if (weaponMenuItem) {
+			weaponMenuItem.setState(WeaponMenuItem.State.OFF);
+		}
+	}
+
 	bool canPullUp;
 
 	float distToMove;
@@ -333,12 +343,15 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	public override void activate(){
+		base.activate ();
+
 		//setAction (Action.IDLE);
 		setAction (Action.PULLOUT_KNIFE);
 		canPullUp = false;
 		desiredSpeedX = 0.0f;
 	}
 	public override void deactivate(){
+		base.deactivate ();
 	}
 	
 	public enum Action{

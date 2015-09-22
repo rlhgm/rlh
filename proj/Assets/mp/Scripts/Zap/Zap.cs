@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Zap : MonoBehaviour {
 	Canvas guiCanvas = null;
+	[HideInInspector]
+	public WeaponMenu weaponMenu = null;
 	Text infoLabel = null;
 	Image mapBackgroundImage = null;
 	ComicPagePart[] mapPartParts = new ComicPagePart[3];
@@ -49,6 +51,7 @@ public class Zap : MonoBehaviour {
 	SpriteRenderer shadowRightSR;
 
 	ZapController currentController;
+	ZapController choosenController;
 	public ZapControllerNormal zapControllerNormal; // = ScriptableObject.CreateInstance<ZapControllerNormal>();
 	public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
 	public ZapControllerGravityGun zapControllerGravityGun; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
@@ -57,6 +60,8 @@ public class Zap : MonoBehaviour {
 		guiCanvas = FindObjectOfType<Canvas> ();
 
 		if (guiCanvas) {
+			weaponMenu = guiCanvas.GetComponent<WeaponMenu>();
+
 			infoLabel = FindObjectOfType<Text> ();
 			infoLabel.text = "";
 
@@ -147,8 +152,10 @@ public class Zap : MonoBehaviour {
 	}
 
 	void Start () {
-		currentController = zapControllerNormal;
+		//currentController = zapControllerNormal;
 		//currentController = zapControllerKnife;
+		chooseController (zapControllerKnife);
+		setCurrentController (zapControllerNormal);
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
@@ -161,6 +168,13 @@ public class Zap : MonoBehaviour {
 		lastTouchedCheckPoint = null;
 
 		startPoint = transform.position;
+	}
+
+	public void chooseController(ZapController newController){
+		if (choosenController != null)
+			choosenController.deselected ();
+		choosenController = newController;
+		choosenController.selected ();
 	}
 
 	public void setCurrentController(ZapController newController){
@@ -455,6 +469,29 @@ public class Zap : MonoBehaviour {
 			//setNextWeapon();
 		}
 
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			print ("Q");
+			
+			if( choosenController == zapControllerKnife ){
+				print ("set choosen gravitygun");
+				chooseController(zapControllerGravityGun);
+			}else if( choosenController == zapControllerGravityGun ){
+				print ("set choosen knife");
+				chooseController(zapControllerKnife);
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.E)) {
+			print ("E");
+			
+			if( choosenController == zapControllerKnife ){
+				print ("set choosen gravitygun");
+				chooseController(zapControllerGravityGun);
+			}else if( choosenController == zapControllerGravityGun ){
+				print ("set choosen knife");
+				chooseController(zapControllerKnife);
+			}
+		}
+
 		PuzzleMapUpdate (deltaTime);
 		if (GamePausedUpdate (deltaTime))
 			return true;
@@ -534,7 +571,9 @@ public class Zap : MonoBehaviour {
 		} else if (Input.GetKeyUp (keyRun)) {
 			currentController.keyRunUp();
 		}
-		
+
+
+
 		if (isDead()) {
 			if( Input.GetKeyDown(KeyCode.Space) ){
 				reborn();

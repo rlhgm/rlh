@@ -46,9 +46,18 @@ public class ZapControllerGravityGun : ZapController {
 		: base("GravityGun")
 	{
 		//zap.layer
-
 	}
-	
+
+	public override void setZap(Zap playerController){
+		base.setZap (playerController);
+		if (zap.weaponMenu) {
+			weaponMenuItem = zap.weaponMenu.itemGravityGun;
+		}
+		if (weaponMenuItem) {
+			weaponMenuItem.setState(WeaponMenuItem.State.OFF);
+		}
+	}
+
 	float distToMove;
 	Vector3 oldPos;
 	float newPosX;
@@ -484,12 +493,15 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	public override void activate(){
+		base.activate ();
+
 		//setAction (Action.IDLE);
 		setAction (Action.PULLOUT_GRAVITYGUN);
 		//canPullUp = false;
 		desiredSpeedX = 0.0f;
 	}
 	public override void deactivate(){
+		base.deactivate ();
 	}
 	
 	public enum Action{

@@ -480,6 +480,8 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	public override void activate(){
+		base.activate ();
+
 		setAction (Action.UNDEF);
 		setAction (Action.IDLE);
 		jumpFromMount = false;
@@ -490,6 +492,8 @@ public class ZapControllerNormal : ZapController {
 		lastHandlePos = new Vector3();
 	}
 	public override void deactivate(){
+		base.deactivate ();
+
 	}
 
 //	void SetImpulse(Vector2 imp) { impulse = imp; }

@@ -55,10 +55,14 @@ public class WeaponMenuItem : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-		currentStateTime = 0f;
+	void Awake () {
 		sprite = transform.GetComponent<Image>();
 		blinkSprite = transform.Find ("blink").GetComponent<Image>();
+	}
+
+	// Use this for initialization
+	void Start () {
+		currentStateTime = 0f;
 		setState (State.OFF);
 	}
 	
