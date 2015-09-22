@@ -69,8 +69,16 @@ public class ZapController : ScriptableObject{
 			weaponMenuItem.setState (WeaponMenuItem.State.BLINK);
 	}
 	public virtual void deactivate(){
-		if( weaponMenuItem )
-			weaponMenuItem.setState (WeaponMenuItem.State.ON);
+		if (weaponMenuItem) {
+			if( zap.choosenController == this )
+				weaponMenuItem.setState (WeaponMenuItem.State.ON);
+			else
+				weaponMenuItem.setState (WeaponMenuItem.State.OFF);
+		}
+	}
+
+	public virtual bool tryDeactiveate(){
+		return true;
 	}
 
 	protected bool isInState(Zap.State test){

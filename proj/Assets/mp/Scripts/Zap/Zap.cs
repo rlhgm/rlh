@@ -50,8 +50,10 @@ public class Zap : MonoBehaviour {
 	SpriteRenderer shadowLeftSR;
 	SpriteRenderer shadowRightSR;
 
-	ZapController currentController;
-	ZapController choosenController;
+	[HideInInspector]
+	public ZapController currentController;
+	[HideInInspector]
+	public ZapController choosenController;
 	public ZapControllerNormal zapControllerNormal; // = ScriptableObject.CreateInstance<ZapControllerNormal>();
 	public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
 	public ZapControllerGravityGun zapControllerGravityGun; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
@@ -194,6 +196,18 @@ public class Zap : MonoBehaviour {
 		setCurrentController (zapControllerGravityGun);
 	}
 	public void _hideGravityGun(){
+		setCurrentController (zapControllerNormal);
+	}
+
+	public void pullChoosenWeapon(){
+		if (choosenController) {
+			setCurrentController(choosenController);
+		}
+	}
+	public void hideChoosenWeapon(){
+		//if (choosenController) {
+		//	setCurrentController(choosenController);
+		//}
 		setCurrentController (zapControllerNormal);
 	}
 
@@ -470,25 +484,42 @@ public class Zap : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Q)) {
-			print ("Q");
+			//print ("Q");
 			
 			if( choosenController == zapControllerKnife ){
-				print ("set choosen gravitygun");
-				chooseController(zapControllerGravityGun);
+				//print ("set choosen gravitygun");
+				if( choosenController == currentController && choosenController.tryDeactiveate() ){
+					chooseController(zapControllerGravityGun);
+				}else{
+					chooseController(zapControllerGravityGun);
+				}
 			}else if( choosenController == zapControllerGravityGun ){
-				print ("set choosen knife");
-				chooseController(zapControllerKnife);
+				//print ("set choosen knife");
+				if( choosenController == currentController && choosenController.tryDeactiveate() ){
+					chooseController(zapControllerKnife);
+				}else{
+					chooseController(zapControllerKnife);
+				}
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
-			print ("E");
+			//print ("E");
 			
 			if( choosenController == zapControllerKnife ){
-				print ("set choosen gravitygun");
-				chooseController(zapControllerGravityGun);
+				//print ("set choosen gravitygun");
+				// jezeli to jest aktywny kontroller:
+				if( choosenController == currentController && choosenController.tryDeactiveate() ){
+					chooseController(zapControllerGravityGun);
+				}else{
+					chooseController(zapControllerGravityGun);
+				}
 			}else if( choosenController == zapControllerGravityGun ){
-				print ("set choosen knife");
-				chooseController(zapControllerKnife);
+				//print ("set choosen knife");
+				if( choosenController == currentController && choosenController.tryDeactiveate() ){
+					chooseController(zapControllerKnife);
+				}else{
+					chooseController(zapControllerKnife);
+				}
 			}
 		}
 

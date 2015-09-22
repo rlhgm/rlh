@@ -1150,7 +1150,8 @@ public class ZapControllerNormal : ZapController {
 		if (Input.GetMouseButtonDown (0)) {
 
 			//zap._pullOutKnife();
-			zap._pullOutGravityGun();
+			//zap._pullOutGravityGun();
+			zap.pullChoosenWeapon();
 			return 1;
 		}
 

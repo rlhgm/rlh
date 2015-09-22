@@ -503,7 +503,15 @@ public class ZapControllerGravityGun : ZapController {
 	public override void deactivate(){
 		base.deactivate ();
 	}
-	
+
+	public override bool tryDeactiveate(){
+		if( isInAction(Action.IDLE) ){
+			setAction(Action.HIDE_GRAVITYGUN);
+			return true;
+		}
+		return false;
+	}
+
 	public enum Action{
 		UNDEF = 0,
 		IDLE,
@@ -833,7 +841,8 @@ public class ZapControllerGravityGun : ZapController {
 	
 	int Action_HIDE_GRAVITYGUN(){
 		if (zap.currentActionTime > HIDE_GRAVITYGUN_DURATION) {
-			zap._hideGravityGun();
+			//zap._hideGravityGun();
+			zap.hideChoosenWeapon();
 			return 1;
 		}
 		return 0;

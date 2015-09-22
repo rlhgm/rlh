@@ -70,7 +70,7 @@ public class WeaponMenuItem : MonoBehaviour {
 	void Update () {
 		switch (state) {
 		case State.BLINK:
-			setOpactity( blinkSprite, (Mathf.Sin(currentStateTime * Mathf.PI)+1f) * 0.5f );
+			setOpactity( blinkSprite, (Mathf.Sin(currentStateTime * 2f* Mathf.PI)+1f) * 0.5f );
 			break;
 		}
 
