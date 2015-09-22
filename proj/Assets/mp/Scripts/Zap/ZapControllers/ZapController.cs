@@ -136,6 +136,8 @@ public class ZapController : ScriptableObject{
 	}
 
 	public virtual void zapDie (Zap.DeathType deathType){
+		if( weaponMenuItem )
+			weaponMenuItem.setState (WeaponMenuItem.State.ON);
 	}
 	public virtual void reborn (){
 	}

@@ -71,6 +71,9 @@ public class ZapControllerGravityGun : ZapController {
 
 	void leftMouseNotPressed(){
 
+		if (zap.isDead ())
+			return;
+
 		if (draggedStone == null) {
 
 			if (lastFlashStone) {
@@ -112,8 +115,10 @@ public class ZapControllerGravityGun : ZapController {
 		}
 	}
 
-
 	void leftMouseButtonClicked(){			
+		if (zap.isDead ())
+			return;
+
 		draggedStone = null;
 
 		Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -1029,6 +1034,8 @@ public class ZapControllerGravityGun : ZapController {
 		return false;
 	}
 	public override void zapDie (Zap.DeathType deathType){
+		base.zapDie (deathType);
+		releaseStone ();
 		setAction (Action.DIE, (int)deathType);
 	}
 	public override void reborn(){

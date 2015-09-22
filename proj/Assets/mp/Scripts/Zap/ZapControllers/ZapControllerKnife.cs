@@ -1313,6 +1313,7 @@ public class ZapControllerKnife : ZapController {
 				isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
 	}
 	public override void zapDie (Zap.DeathType deathType){
+		base.zapDie (deathType);
 		setAction (Action.DIE, (int)deathType);
 	}
 	public override void reborn(){

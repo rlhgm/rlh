@@ -86,6 +86,7 @@ public class Zap : MonoBehaviour {
 
 		coll = GetComponent<BoxCollider2D> ();
 		gfx  = transform.Find("gfx").transform;
+		gfxCollider = gfx.GetComponent<PolygonCollider2D> ();
 		animator = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
 
@@ -265,6 +266,7 @@ public class Zap : MonoBehaviour {
 	public void die(DeathType deathType){
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
+		gfxCollider.enabled = false;
 
 		currentController.zapDie (deathType);
 		setState (State.DEAD);
@@ -289,6 +291,7 @@ public class Zap : MonoBehaviour {
 
 	public void reborn(){
 		sprRend.enabled = true;
+		gfxCollider.enabled = true;
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
 		//setAction (Action.IDLE);
@@ -328,9 +331,9 @@ public class Zap : MonoBehaviour {
 		fuddledFromBrid = fuddled;
 	}
 
-	public float stoneDeadlySpeed = 3f;
-	public float stoneDeadlyMass = 5f;
-	public float stoneDeadlyEnergy = 10;
+	public float stoneDeadlySpeed = 8f;
+	public float stoneDeadlyMass = 8f;
+	public float stoneDeadlyEnergy = 20;
 
 	bool hitByStone(Transform stone){
 		Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D> ();
@@ -1201,6 +1204,7 @@ public class Zap : MonoBehaviour {
 
 	Transform cameraTarget;
 	Transform gfx;
+	PolygonCollider2D gfxCollider;
 
 	[HideInInspector]
 	public Vector3 velocity;

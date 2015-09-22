@@ -1836,7 +1836,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_death_hitground_R_
+  m_Name: Zap_death_stonehit_R
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
