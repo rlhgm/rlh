@@ -1,16 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\NewRope.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\WeaponMenu.cs">
     <Files>
       <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" Line="1732" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="301" Column="2" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" Line="6" Column="3" />
+      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" Line="458" Column="6" />
-      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="100" Column="5" />
-      <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="109" Column="8" />
-      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="165" Column="1" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="1" Column="1" />
       <File FileName="Assets\mp\Scripts\BirdEmiterActivator.cs" Line="1" Column="1" />
+      <File FileName="Assets\test.cs" Line="13" Column="62" />
+      <File FileName="Assets\mp\Scripts\WeaponMenu.cs" Line="16" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

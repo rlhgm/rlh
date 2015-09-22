@@ -67,6 +67,8 @@
      <Compile Include="Assets\mp\Scripts\Snake.cs" />
      <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
      <Compile Include="Assets\mp\Scripts\Water.cs" />
+     <Compile Include="Assets\mp\Scripts\WeaponMenu.cs" />
+     <Compile Include="Assets\mp\Scripts\WeaponMenuItem.cs" />
      <Compile Include="Assets\mp\Scripts\Weapons\Empty.cs" />
      <Compile Include="Assets\mp\Scripts\Weapons\GravityGun.cs" />
      <Compile Include="Assets\mp\Scripts\Weapons\Knife.cs" />

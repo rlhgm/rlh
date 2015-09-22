@@ -522,6 +522,67 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 478980, guid: 8ce78a11cfa7fba40aef87e1e8560483, type: 2}
   m_PrefabInternal: {fileID: 1264221576}
+--- !u!1 &51852765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 51852766}
+  - 222: {fileID: 51852768}
+  - 114: {fileID: 51852767}
+  m_Layer: 5
+  m_Name: blink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &51852766
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51852765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 640483422}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 13, y: -13}
+  m_SizeDelta: {x: 26, y: 26}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &51852767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51852765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 9eb6d4742ae885946a0a4190ebe358ef, type: 2}
+  m_Color: {r: 1, g: .931034446, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ee55fb5bb4de46244ac3f4e399a4519e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &51852768
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51852765}
 --- !u!1001 &52051487
 Prefab:
   m_ObjectHideFlags: 0
@@ -4343,8 +4404,9 @@ GameObject:
   - 224: {fileID: 640483422}
   - 222: {fileID: 640483424}
   - 114: {fileID: 640483423}
+  - 114: {fileID: 640483425}
   m_Layer: 5
-  m_Name: Image
+  m_Name: weaponicon_machete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4359,7 +4421,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 51852766}
   m_Father: {fileID: 1303145058}
   m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 1}
@@ -4394,6 +4457,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 640483421}
+--- !u!114 &640483425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 640483421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a8946e18447614795d4a87d8aa85b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1001 &641275508
 Prefab:
   m_ObjectHideFlags: 0
@@ -11367,6 +11442,7 @@ GameObject:
   - 114: {fileID: 1303145060}
   - 114: {fileID: 1303145059}
   - 222: {fileID: 1303145062}
+  - 114: {fileID: 1303145063}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -11460,6 +11536,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303145057}
+--- !u!114 &1303145063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303145057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2750c3b7b8bf274bafc493a0a1cac3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemKnife: {fileID: 0}
+  itemGravityGun: {fileID: 0}
 --- !u!1001 &1311799952
 Prefab:
   m_ObjectHideFlags: 0
@@ -16100,6 +16189,67 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
   m_PrefabInternal: {fileID: 2058802658}
+--- !u!1 &2067496753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 2067496756}
+  - 222: {fileID: 2067496755}
+  - 114: {fileID: 2067496754}
+  m_Layer: 5
+  m_Name: blink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2067496754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067496753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 9eb6d4742ae885946a0a4190ebe358ef, type: 2}
+  m_Color: {r: 1, g: .929411769, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 30a96f608925fc9408e79441f2117ccb, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2067496755
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067496753}
+--- !u!224 &2067496756
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067496753}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2110081593}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 13, y: -13}
+  m_SizeDelta: {x: 26, y: 26}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1001 &2072872075
 Prefab:
   m_ObjectHideFlags: 0
@@ -16599,8 +16749,9 @@ GameObject:
   - 224: {fileID: 2110081593}
   - 222: {fileID: 2110081595}
   - 114: {fileID: 2110081594}
+  - 114: {fileID: 2110081596}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: weaponicon_gravitygun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16615,7 +16766,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2067496756}
   m_Father: {fileID: 1303145058}
   m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 1}
@@ -16650,6 +16802,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2110081592}
+--- !u!114 &2110081596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110081592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a8946e18447614795d4a87d8aa85b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1 &2127010126
 GameObject:
   m_ObjectHideFlags: 0
