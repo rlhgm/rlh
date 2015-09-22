@@ -13,7 +13,7 @@ GameObject:
   - 50: {fileID: 5048046}
   - 114: {fileID: 11426090}
   - 95: {fileID: 9567080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: crocodile
   m_TagString: Crocodile
   m_Icon: {fileID: 0}
@@ -130,7 +130,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105502}

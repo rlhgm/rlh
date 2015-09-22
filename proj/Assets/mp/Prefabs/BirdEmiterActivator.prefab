@@ -11,7 +11,7 @@ GameObject:
   - 61: {fileID: 6182102}
   - 50: {fileID: 5044618}
   - 114: {fileID: 11450884}
-  m_Layer: 16
+  m_Layer: 8
   m_Name: BirdEmiterActivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 16
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
