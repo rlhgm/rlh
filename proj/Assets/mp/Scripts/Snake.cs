@@ -18,7 +18,8 @@ public class Snake : MonoBehaviour {
 		TURN = 3,
 		GETS_UP = 4,
 		GETS_DOWN = 5,
-		BITTING = 6
+		BITTING = 6,
+		DEAD = 7
 	};
 
 	void Awake(){
@@ -39,7 +40,13 @@ public class Snake : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	public void cut(){
+		animator.SetTrigger("gets_down");
+		turnTime = 0f;
+		state = State.DEAD;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
