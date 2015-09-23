@@ -150,9 +150,12 @@ public class NewRope : MonoBehaviour {
 		if (weakLinkIndex < 0 || weakLinkIndex >= links.Length)
 			return;
 
-		RopeLink weakLink = links [weakLinkIndex];
-		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
+		cut (weakLinkIndex);
+	}
 
+	public void cut(int linkIndex){
+		RopeLink weakLink = links [linkIndex];
+		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
 		weakHingeJoint.enabled = false;
 	}
 
