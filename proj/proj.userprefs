@@ -1,24 +1,28 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\WeaponMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\NewRope.cs">
     <Files>
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" Line="1732" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" Line="435" Column="28" />
+      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="397" Column="1" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" Line="140" Column="52" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" Line="421" Column="5" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" Line="1037" Column="25" />
+      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="185" Column="1" />
       <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\BirdEmiterActivator.cs" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="101" Column="48" />
+      <File FileName="Assets\mp\Scripts\BirdEmiterActivator.cs" Line="19" Column="12" />
       <File FileName="Assets\test.cs" Line="13" Column="62" />
-      <File FileName="Assets\mp\Scripts\WeaponMenu.cs" Line="16" Column="1" />
+      <File FileName="Assets\mp\Scripts\WeaponMenu.cs" Line="31" Column="1" />
+      <File FileName="Assets\mp\Scripts\WeaponMenuItem.cs" Line="71" Column="19" />
+      <File FileName="Assets\mp\Scripts\RopeLink.cs" Line="10" Column="18" />
+      <File FileName="Assets\mp\Scripts\Snake.cs" Line="47" Column="21" />
+      <File FileName="Assets\mp\Scripts\Rope.cs" Line="10" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\BirdEmiterActivator.cs" line="19" />
       <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\BirdEmiterActivator.cs" line="28" />
+      <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\Zap\Zap.cs" line="137" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
