@@ -341,13 +341,20 @@ public class Zap : MonoBehaviour {
 	}
 
 	public float stoneDeadlySpeed = 8f;
-	public float stoneDeadlyMass = 8f;
-	public float stoneDeadlyEnergy = 20;
+	//public float stoneDeadlyMass = 8f;
+	//public float stoneDeadlyEnergy = 20;
 
 	bool hitByStone(Transform stone){
 		Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D> ();
 		if (!stoneBody)
 			return false;
+
+		if (currentController == zapControllerGravityGun) {
+			if( zapControllerGravityGun.draggedStone == stone ){
+				die(DeathType.STONE_HIT );
+				return true;
+			}
+		}
 
 		float stoneSpeed = stoneBody.velocity.magnitude;
 		if (stoneSpeed > stoneDeadlySpeed) {
@@ -355,17 +362,16 @@ public class Zap : MonoBehaviour {
 			return true;
 		}
 
-		float stoneMass = stoneBody.mass;
-		if (stoneMass > stoneDeadlyMass) {
-			die(DeathType.STONE_HIT );
-			return true;
-		}
-
-		float stoneEnergy = stoneSpeed * stoneMass;
-		if (stoneEnergy > stoneDeadlyEnergy) {
-			die(DeathType.STONE_HIT );
-			return true;
-		}
+//		float stoneMass = stoneBody.mass;
+//		if (stoneMass > stoneDeadlyMass) {
+//			die(DeathType.STONE_HIT );
+//			return true;
+//		}
+//		float stoneEnergy = stoneSpeed * stoneMass;
+//		if (stoneEnergy > stoneDeadlyEnergy) {
+//			die(DeathType.STONE_HIT );
+//			return true;
+//		}
 
 		return false;
 	}
