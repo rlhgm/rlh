@@ -1052,6 +1052,14 @@ MonoBehaviour:
   sensorDown3: {fileID: 0}
   sensorHandleL2: {fileID: 0}
   sensorHandleR2: {fileID: 0}
+  leftKnifeHitPointHigh1: {fileID: 0}
+  leftKnifeHitPointHigh2: {fileID: 0}
+  rightKnifeHitPointHigh1: {fileID: 0}
+  rightKnifeHitPointHigh2: {fileID: 0}
+  leftKnifeHitPointLow1: {fileID: 0}
+  leftKnifeHitPointLow2: {fileID: 0}
+  rightKnifeHitPointLow1: {fileID: 0}
+  rightKnifeHitPointLow2: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   lastVelocity: {x: 0, y: 0, z: 0}
   startFallPos: {x: 0, y: 0, z: 0}

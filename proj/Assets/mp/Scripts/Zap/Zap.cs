@@ -125,6 +125,15 @@ public class Zap : MonoBehaviour {
 		sensorHandleL2 = transform.Find("handlerL2").transform;
 		sensorHandleR2 = transform.Find("handlerR2").transform;
 
+		leftKnifeHitPointHigh1 = transform.Find ("leftKnifeHitPointHigh1").transform;
+		leftKnifeHitPointHigh2 = transform.Find ("leftKnifeHitPointHigh2").transform;
+		rightKnifeHitPointHigh1 = transform.Find ("rightKnifeHitPointHigh1").transform;
+		rightKnifeHitPointHigh2 = transform.Find ("rightKnifeHitPointHigh2").transform;
+		leftKnifeHitPointLow1 = transform.Find ("leftKnifeHitPointLow1").transform;
+		leftKnifeHitPointLow2 = transform.Find ("leftKnifeHitPointLow2").transform;
+		rightKnifeHitPointLow1 = transform.Find ("rightKnifeHitPointLow1").transform;
+		rightKnifeHitPointLow2 = transform.Find ("rightKnifeHitPointLow2").transform;
+
 		cameraTarget = transform.Find("cameraTarget").transform;
 
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
@@ -1201,6 +1210,23 @@ public class Zap : MonoBehaviour {
 	public Transform sensorHandleL2;
 	[HideInInspector]
 	public Transform sensorHandleR2;
+
+	[HideInInspector]
+	public Transform leftKnifeHitPointHigh1;
+	[HideInInspector]
+	public Transform leftKnifeHitPointHigh2;
+	[HideInInspector]
+	public Transform rightKnifeHitPointHigh1;
+	[HideInInspector]
+	public Transform rightKnifeHitPointHigh2;
+	[HideInInspector]
+	public Transform leftKnifeHitPointLow1;
+	[HideInInspector]
+	public Transform leftKnifeHitPointLow2;
+	[HideInInspector]
+	public Transform rightKnifeHitPointLow1;
+	[HideInInspector]
+	public Transform rightKnifeHitPointLow2;
 
 	Transform cameraTarget;
 	Transform gfx;

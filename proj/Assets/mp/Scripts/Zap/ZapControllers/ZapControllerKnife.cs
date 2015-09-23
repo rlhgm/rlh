@@ -402,6 +402,14 @@ public class ZapControllerKnife : ZapController {
 	Action getAction(){
 		return action;
 	}
+
+	void cut(Vector2 cutStart, Vector2 cutEnd){
+		RaycastHit2D[] hits = Physics2D.LinecastAll (cutStart, cutEnd);
+		for (int i = 0; i < hits.Length; ++i) {
+			Debug.Log( "trafionione : " + hits[i].collider.name );
+		}
+	}
+
 	bool setAction(Action newAction, int param = 0){
 		
 		if (action == newAction)
@@ -440,6 +448,19 @@ public class ZapControllerKnife : ZapController {
 			}
 			//Debug.Log( animName );
 			zap.getAnimator().Play(animName,-1,0f);
+
+			Vector2 cutStart;
+			Vector2 cutEnd;
+
+			if( zap.faceRight() ){
+				cutStart = zap.rightKnifeHitPointHigh1.position;
+				cutEnd = zap.rightKnifeHitPointHigh2.position;
+			}else{
+				cutStart = zap.leftKnifeHitPointHigh1.position;
+				cutEnd = zap.leftKnifeHitPointHigh2.position;
+			}
+			cut (cutStart,cutEnd);
+
 			break;
 
 		case Action.DIE:
@@ -595,6 +616,19 @@ public class ZapControllerKnife : ZapController {
 
 		case Action.CROUCH_ATTACK:
 			zap.getAnimator().Play("Zap_knife_crouch_attack",-1,0f);
+
+			Vector2 cutStartLow;
+			Vector2 cutEndLow;
+			
+			if( zap.faceRight() ){
+				cutStartLow = zap.rightKnifeHitPointLow1.position;
+				cutEndLow = zap.rightKnifeHitPointLow2.position;
+			}else{
+				cutStartLow = zap.leftKnifeHitPointLow1.position;
+				cutEndLow = zap.leftKnifeHitPointLow2.position;
+			}
+			cut (cutStartLow,cutEndLow);
+
 			break;
 
 		case Action.CROUCH_LEFT:
