@@ -6,6 +6,7 @@ public class NewRope : MonoBehaviour {
 	public RopeLink ropeLinkPrefab;
 	//Rigidbody2D driverRigidBody;
 	public Transform currentLink;
+	public Rigidbody2D attachedStone;
 
 	RopeLink[] links;
 
@@ -26,6 +27,10 @@ public class NewRope : MonoBehaviour {
 		links = new RopeLink[numberOfLinks];
 
 		//float linkLimitRest = 15.0f / numberOfLinks;
+
+		//if (transform.childCount == 1) {
+		//	attachedStone = transform.GetChild(0);
+		//}
 
 		createLinks ();
 	}
@@ -67,6 +72,41 @@ public class NewRope : MonoBehaviour {
 			weakLinkIndex = -1;
 		
 		weakLinkTimeToBreakUp = weakLinkBreakUpDuration;
+
+		if (attachedStone) {
+//			RopeLink specialLink = Instantiate<RopeLink>(ropeLinkPrefab);
+//			specialLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
+//			specialLink.rope = this;
+//			specialLink.GetComponent<Rigidbody2D>().mass = linkMass;
+//
+//
+//			Rigidbody2D lastRigidBody = lastLink.GetComponent<Rigidbody2D>();
+//			hingeJoint.connectedBody = attachedStone.GetComponent<Rigidbody2D>();
+//			newLink.transform.SetParent( lastLink.transform );
+//			hingeJoint.connectedAnchor = new Vector2(0f,-0.55f);
+//			newLink.transform.position = lastLink.transform.position + new Vector3(0f,-0.5f);
+//
+//			attachedStone.SetParent( links[numberOfLinks-1].transform );
+//			attachedStone.position = new Vector3(0f,0f,0f);
+
+			//DistanceJoint2D distJoint = Instantiate<DistanceJoint2D>();
+			//distJoint.distance = 0.5f;
+			//distJoint.enableCollision = false;
+			//distJoint.
+
+			DistanceJoint2D distJoint = lastLink.gameObject.AddComponent<DistanceJoint2D>();
+			distJoint.distance = 0.1f;
+			distJoint.enableCollision = false;
+			distJoint.anchor = new Vector2(0.0f,-0.5f);
+			distJoint.connectedAnchor = new Vector2(0f,0f);
+			distJoint.connectedBody = attachedStone;
+			attachedStone.transform.SetParent( lastLink.transform );
+			attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
+
+			//Vector3 locScale = attachedStone.localScale;
+
+			//attachedStone.localScale = locScale;
+		}
 	}
 	// Use this for initialization
 	void Start () {
