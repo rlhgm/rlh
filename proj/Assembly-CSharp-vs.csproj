@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-     <Compile Include="Assets\Panther.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
@@ -61,6 +60,7 @@
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
+     <Compile Include="Assets\mp\Scripts\Panther.cs" />
      <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
