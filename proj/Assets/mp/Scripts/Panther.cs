@@ -3,10 +3,20 @@ using System.Collections;
 
 public class Panther : MonoBehaviour {
 
-	public Transform terrainLimitA = null;
-	public Transform terrainLimitB = null;
+	public Transform markA = null;
+	public Transform markB = null;
+
+	public float LongDistance = 4f;
+	public float JumpDistance = 2f;
+	public float JumpFailure = 0f; // Random.Range(2,5);
+	public float RecoveryTime = 2f;
+	public float IdleDistance = 6f;
+	public float AttackDistance = 1.2f;
+	public int LifePoints = 4;
 
 	Animator animator = null;
+	float calmMinX = 0f;
+	float calmMaxX = 0f;
 
 	void Awake(){
 		animator = transform.GetComponent<Animator> ();
@@ -165,6 +175,33 @@ public class Panther : MonoBehaviour {
 	bool isNotInAction(State test){
 		return state != test;
 	}
+
+	int dir(){
+		return transform.localScale.x > 0f ? -1 : 1;
+	}
+	
+//	void turnLeft(){
+//		if (state != State.ACTIVE)
+//			return;
+//		animator.SetTrigger("turn_right");
+//		Vector3 scl = transform.localScale;
+//		scl.x = Mathf.Abs(scl.x) * 1.0f;
+//		transform.localScale = scl;
+//		
+//		turnTime = 0f;
+//		state = State.TURN;
+//	}
+//	void turnRight(){
+//		if (state != State.ACTIVE)
+//			return;
+//		animator.SetTrigger("turn_left");
+//		Vector3 scl = transform.localScale;
+//		scl.x = Mathf.Abs(scl.x) * -1.0f;
+//		transform.localScale = scl;
+//		
+//		turnTime = 0f;
+//		state = State.TURN;
+//	}
 
 	void IDLE_IN(){
 	}
