@@ -340,9 +340,11 @@ public class Zap : MonoBehaviour {
 		fuddledFromBrid = fuddled;
 	}
 
-	public float stoneDeadlySpeed = 8f;
+	//public float stoneDeadlySpeed = 8f;
 	//public float stoneDeadlyMass = 8f;
-	//public float stoneDeadlyEnergy = 20;
+	public float stoneDeadlyEnergy = 20f;
+	public float stoneMinDeadySpeed = 1f;
+	public float stoneMinDeadyMass = 0.5f;
 
 	bool hitByStone(Transform stone){
 		Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D> ();
@@ -357,21 +359,28 @@ public class Zap : MonoBehaviour {
 		}
 
 		float stoneSpeed = stoneBody.velocity.magnitude;
-		if (stoneSpeed > stoneDeadlySpeed) {
-			die(DeathType.STONE_HIT );
-			return true;
+//		if (stoneSpeed > stoneDeadlySpeed) {
+//			die (DeathType.STONE_HIT);
+//			return true;
+		//} else 
+		if (stoneSpeed < stoneMinDeadySpeed) {
+			return false;
 		}
 
-//		float stoneMass = stoneBody.mass;
+		float stoneMass = stoneBody.mass;
 //		if (stoneMass > stoneDeadlyMass) {
 //			die(DeathType.STONE_HIT );
 //			return true;
 //		}
-//		float stoneEnergy = stoneSpeed * stoneMass;
-//		if (stoneEnergy > stoneDeadlyEnergy) {
-//			die(DeathType.STONE_HIT );
-//			return true;
-//		}
+		if (stoneMass < stoneMinDeadyMass) {
+			return false;
+		}
+
+		float stoneEnergy = stoneSpeed * stoneMass;
+		if (stoneEnergy > stoneDeadlyEnergy) {
+			die(DeathType.STONE_HIT );
+			return true;
+		}
 
 		return false;
 	}
