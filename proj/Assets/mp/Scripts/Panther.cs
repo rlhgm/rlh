@@ -5,6 +5,14 @@ public class Panther : MonoBehaviour {
 
 	public Transform markA = null;
 	public Transform markB = null;
+	float terrainLimitXMin = 0f;
+	float terrainLimitXMax = 0f;
+	float terrainMiddleX = 0f;
+	float terrainSize = 0f;
+
+	float getPosAroundTerrainCenter(float epsilon = 1f){
+		return Random.Range (terrainMiddleX - epsilon, terrainMiddleX + epsilon);
+	}
 
 	public float LongDistance = 4f;
 	public float JumpDistance = 2f;
@@ -12,25 +20,45 @@ public class Panther : MonoBehaviour {
 	public float RecoveryTime = 2f;
 	public float IdleDistance = 6f;
 	public float AttackDistance = 1.2f;
+	public float FightDistance = 8f; // ???
 	public int LifePoints = 4;
+	public float walkSpeed = 2f;
+	public float runSpeed = 4;
 
 	Animator animator = null;
 	float calmMinX = 0f;
 	float calmMaxX = 0f;
+	float walkTargetX = 0f;
+	Action nextAction;
 
 	void Awake(){
 		animator = transform.GetComponent<Animator> ();
 	}
 
 	void Start () {
+		if (markA && markB) {
+			if( markA.position.x < markB.position.x ){
+				terrainLimitXMin = markA.position.x;
+				terrainLimitXMax = markB.position.x;
+			}else{
+				terrainLimitXMin = markB.position.x;
+				terrainLimitXMax = markA.position.x;
+			}
+			terrainSize = terrainLimitXMax - terrainLimitXMin;
+			terrainMiddleX = terrainLimitXMin + terrainSize*0.5f;
+		}
+
 		currentActionTime = 0f;
 		currentStateTime = 0f;
 		setState (State.CALM);
 		setAction (Action.IDLE);
 	}
-	
+
+	float idleDuration = 0;
+
 	void Update () {
 		currentActionTime += Time.deltaTime;
+		currentStateTime += Time.deltaTime;
 
 		switch (action) {
 		case Action.IDLE_IN:
@@ -112,6 +140,7 @@ public class Panther : MonoBehaviour {
 			animator.Play ("idle_in");
 			break;
 		case Action.IDLE:
+			idleDuration = Random.Range( 2f, 5f ); 
 			animator.Play ("idle");
 			break;
 		case Action.WALK:
@@ -177,7 +206,26 @@ public class Panther : MonoBehaviour {
 	}
 
 	int dir(){
-		return transform.localScale.x > 0f ? -1 : 1;
+		return transform.localScale.x > 0f ? 1 : -1;
+	}
+	int turn(){
+		Vector3 scl = transform.localScale;
+		scl.x *= -1f;
+		transform.localScale = scl;
+		return dir ();
+	}
+
+	int inTerrainLimits(float epsilon = 1f){
+		float posx = transform.position.x;
+		if (posx >= (terrainLimitXMin - epsilon)) { 
+			if (posx < (terrainLimitXMax + epsilon)) {
+				return 0;
+			}else{
+				return 1; // jest na prawo od max
+			}
+		} else {
+			return -1; // jest na lewo od min
+		}
 	}
 	
 //	void turnLeft(){
@@ -203,15 +251,72 @@ public class Panther : MonoBehaviour {
 //		state = State.TURN;
 //	}
 
+
 	void IDLE_IN(){
 	}
 	void IDLE(){
+		if (currentActionTime > idleDuration) {
+			int itl = inTerrainLimits();
+			if( itl == 0 ){
+				if( dir() == 1 ){
+					walkTargetX = terrainLimitXMax;
+				}else{
+					walkTargetX = terrainLimitXMin;
+				}
+				nextAction = Action.WALK_TURNBACK;
+				setAction(Action.WALK);
+			}
+		}
 	}
 	void WALK(){
+		Vector3 pos = transform.position;
+
+		if (dir () == 1) {
+			if( pos.x >= walkTargetX ){		
+				setAction(nextAction);
+				return;
+			}
+		} else {
+			if( pos.x <= walkTargetX ){
+				setAction(nextAction);
+				return;
+			}
+		}
+
+		float distToMove = walkSpeed * Time.deltaTime * dir ();
+		pos.x += distToMove;
+
+//		if (dir () == 1) {
+//			if( pos.x >= walkTargetX ){
+//			}
+//		} else {
+//			if( pos.x <= walkTargetX ){
+//			}
+//		}
+
+		transform.position = pos;
 	}
 	void RUN(){
 	}
 	void WALK_TURNBACK(){
+		if (currentActionTime > 0.667f) {
+			int newDir = turn();
+
+			if( Random.Range(0,2) == 1){
+
+				if( newDir == 1 ){
+					walkTargetX = terrainLimitXMax;
+				}else{
+					walkTargetX = terrainLimitXMin;
+				}
+				nextAction = Action.WALK_TURNBACK;
+
+			}else{
+				nextAction = Action.IDLE;
+				walkTargetX = getPosAroundTerrainCenter(terrainSize*0.25f);
+			}
+			setAction(Action.WALK);
+		}
 	}
 	void ROAR_IN(){
 	}

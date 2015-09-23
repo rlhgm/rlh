@@ -13340,7 +13340,10 @@ MonoBehaviour:
   RecoveryTime: 2
   IdleDistance: 6
   AttackDistance: 1.20000005
+  FightDistance: 8
   LifePoints: 4
+  walkSpeed: 2
+  runSpeed: 4
   state: 0
   action: 0
 --- !u!1001 &1607655211
