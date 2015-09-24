@@ -12291,7 +12291,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -109
+      value: -119
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -13385,7 +13385,7 @@ MonoBehaviour:
   markA: {fileID: 1065459964}
   markB: {fileID: 608483205}
   LongDistance: 4
-  JumpDistance: 2
+  JumpDistance: 4
   JumpFailure: 0
   RecoveryTime: 2
   IdleDistance: 6
@@ -13393,7 +13393,13 @@ MonoBehaviour:
   FightDistance: 8
   LifePoints: 4
   walkSpeed: 2
-  runSpeed: 4
+  runSpeed: 7
+  jumpInSpeed: 2
+  jumpSpeed: 9
+  flyDistance: 3
+  walkTurnBackDuration: .666999996
+  attackJumpInDuration: .150000006
+  attackLandingTurnbackDuration: .699999988
   state: 0
   action: 0
 --- !u!1001 &1607655211

@@ -7,20 +7,24 @@ public class Panther : MonoBehaviour {
 	public Transform markB = null;
 
 	public float LongDistance = 4f;
-	public float JumpDistance = 2f;
+	public float JumpDistance = 3f;
 	public float JumpFailure = 0f; // Random.Range(2,5);
 	public float RecoveryTime = 2f;
 	public float IdleDistance = 6f;
 	public float AttackDistance = 1.2f;
 	public float FightDistance = 8f; // ???
 	public int LifePoints = 4;
+
 	public float walkSpeed = 2f;
 	public float runSpeed = 6;
+	public float jumpInSpeed = 2;
 	public float jumpSpeed = 7;
-	public float jumpDistance = 4;
+
+	public float flyDistance = 3;
 
 	public float walkTurnBackDuration = 0.667f;
-
+	public float attackJumpInDuration = 0.2f;
+	public float attackLandingTurnbackDuration = 0.7f;
 
 	void Awake(){
 		animator = transform.GetComponent<Animator> ();
@@ -57,9 +61,7 @@ public class Panther : MonoBehaviour {
 		currentActionTime += Time.deltaTime;
 		currentStateTime += Time.deltaTime;
 
-		myPosX = transform.position.x;
-		zapPosX = zap.transform.position.x;
-		distToZap = Mathf.Abs( myPosX - zapPosX );
+		recalcPaD ();
 
 		switch (state) {
 		case State.CALM:
@@ -107,6 +109,9 @@ public class Panther : MonoBehaviour {
 		case Action.ROAR:
 			ROAR();
 			break;
+		case Action.ATTACK_JUMP_IN:
+			ATTACK_JUMP_IN();
+			break;
 		case Action.ATTACK_JUMP:
 			ATTACK_JUMP();
 			break;
@@ -140,6 +145,7 @@ public class Panther : MonoBehaviour {
 		WALK_TURNBACK,
 		ROAR_IN,
 		ROAR,
+		ATTACK_JUMP_IN,
 		ATTACK_JUMP,
 		ATTACK_LANDING_TURNBACK,
 		ATTACK_LANDING_FAILURE,
@@ -182,6 +188,9 @@ public class Panther : MonoBehaviour {
 			break;
 		case Action.ROAR:
 			animator.Play ("roar");
+			break;
+		case Action.ATTACK_JUMP_IN:
+			animator.Play ("attack_jump_in");
 			break;
 		case Action.ATTACK_JUMP:
 			jumpStartPosX = transform.position.x;
@@ -257,6 +266,15 @@ public class Panther : MonoBehaviour {
 		}
 	}
 
+	float move(float _speed){
+		Vector3 pos = transform.position;
+		float distToMove = _speed * Time.deltaTime * dir ();
+		pos.x += distToMove;
+		transform.position = pos;
+		recalcPaD ();
+		return pos.x;
+	}
+
 	void IDLE_IN(){
 	}
 	void IDLE(){
@@ -274,46 +292,24 @@ public class Panther : MonoBehaviour {
 		}
 	}
 	void WALK(){
-		Vector3 pos = transform.position;
-
+		float posx = move (walkSpeed);
 		if (dir () == 1) {
-			if( pos.x >= moveTargetX ){		
+			if( posx >= moveTargetX ){		
 				setAction(nextAction);
 				return;
 			}
 		} else {
-			if( pos.x <= moveTargetX ){
+			if( posx <= moveTargetX ){
 				setAction(nextAction);
 				return;
 			}
 		}
-
-		float distToMove = walkSpeed * Time.deltaTime * dir ();
-		pos.x += distToMove;
-
-		transform.position = pos;
 	}
 	void RUN(){
-		Vector3 pos = transform.position;
-		
-//		if (dir () == 1) {
-//			if( pos.x >= moveTargetX ){		
-//				setAction(nextAction);
-//				return;
-//			}
-//		} else {
-//			if( pos.x <= moveTargetX ){
-//				setAction(nextAction);
-//				return;
-//			}
-//		}
-		
-		float distToMove = runSpeed * Time.deltaTime * dir ();
-		pos.x += distToMove;
-		transform.position = pos;
+		move (runSpeed);
 
 		if (distToZap <= JumpDistance) {
-			setAction(Action.ATTACK_JUMP);
+			setAction(Action.ATTACK_JUMP_IN);
 		}
 	}
 	void WALK_TURNBACK(){
@@ -352,21 +348,30 @@ public class Panther : MonoBehaviour {
 	}
 	void ROAR(){
 	}
+	void ATTACK_JUMP_IN(){
+		move (jumpSpeed);
+		if (currentActionTime >= attackJumpInDuration) {
+			setAction(Action.ATTACK_JUMP);
+		}
+	}
 	void ATTACK_JUMP(){
-		Vector3 pos = transform.position;
+		move (jumpSpeed);
 
-		float distToMove = jumpSpeed * Time.deltaTime * dir ();
-		pos.x += distToMove;
-		transform.position = pos;
+		float flyDist = Mathf.Abs( myPosX - jumpStartPosX );
 
-		float flyDist = Mathf.Abs( pos.x - jumpStartPosX );
-
-		if (flyDist >= jumpDistance) {
-			setState(State.CALM);
-			setAction(Action.WALK_TURNBACK);
+		if (flyDist >= flyDistance) {
+			//setState(State.CALM);
+			setAction(Action.ATTACK_LANDING_TURNBACK);
 		}
 	}
 	void ATTACK_LANDING_TURNBACK(){
+		float actionSpeedRatio = 1f - (currentActionTime / attackLandingTurnbackDuration);
+		move (actionSpeedRatio * jumpSpeed);
+
+		if (currentActionTime >= attackLandingTurnbackDuration) {
+			turn();
+			setAction(Action.RUN);
+		}
 	}
 	void ATTACK_LANDING_FAILURE(){
 	}
@@ -391,6 +396,12 @@ public class Panther : MonoBehaviour {
 	float zapPosX;
 	float distToZap;
 	float jumpStartPosX;
+
+	void recalcPaD(){
+		myPosX = transform.position.x;
+		zapPosX = zap.transform.position.x;
+		distToZap = Mathf.Abs( myPosX - zapPosX );
+	}
 
 	float getPosAroundTerrainCenter(float epsilon = 1f){
 		return Random.Range (terrainMiddleX - epsilon, terrainMiddleX + epsilon);
