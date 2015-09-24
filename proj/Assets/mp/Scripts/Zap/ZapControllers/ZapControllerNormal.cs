@@ -117,17 +117,21 @@ public class ZapControllerNormal : ZapController {
 			break;
 
 		case Action.WALK_LEFT:
-			Action_WALK(-1);
+			if( Action_WALK(-1) != 0 )
+				return;
 			break;
 		case Action.RUN_LEFT:
-			Action_RUN(-1);
+			if( Action_RUN(-1) != 0 )
+				return;
 			break;
 			
 		case Action.WALK_RIGHT:
-			Action_WALK(1);
+			if( Action_WALK(1) != 0 )
+				return;
 			break;
 		case Action.RUN_RIGHT:
-			Action_RUN(1);
+			if( Action_RUN(1) != 0 )
+				return;
 			break;
 			
 		case Action.TURN_STAND_LEFT:
@@ -1157,15 +1161,21 @@ public class ZapControllerNormal : ZapController {
 
 			//zap._pullOutKnife();
 			//zap._pullOutGravityGun();
-			zap.pullChoosenWeapon();
-			return 1;
+			return zap.pullChoosenWeapon();
+			//return 1;
 		}
 
 		return 0;
 	}
 
 	int Action_WALK(int dir){
-		
+
+		if (Input.GetMouseButtonDown (0)) {
+			int pullRes = zap.pullChoosenWeapon();
+			if( pullRes != 0 )
+				return pullRes;
+		}
+
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f ) {
 			setAction(Action.IDLE);
@@ -1195,7 +1205,13 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_RUN(int dir){
-		
+
+		if (Input.GetMouseButtonDown (0)) {
+			int pullRes = zap.pullChoosenWeapon();
+			if( pullRes != 0 )
+				return pullRes;
+		}
+
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
 			setAction(Action.IDLE);

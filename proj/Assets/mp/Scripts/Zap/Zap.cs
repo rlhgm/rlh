@@ -209,10 +209,12 @@ public class Zap : MonoBehaviour {
 		setCurrentController (zapControllerNormal);
 	}
 
-	public void pullChoosenWeapon(){
+	public int pullChoosenWeapon(){
 		if (choosenController) {
 			setCurrentController(choosenController);
+			return 1;
 		}
+		return 0;
 	}
 	public void hideChoosenWeapon(){
 		//if (choosenController) {
