@@ -94,6 +94,8 @@ public class NewRope : MonoBehaviour {
 			//distJoint.enableCollision = false;
 			//distJoint.
 
+			asp = attachedStone.position;
+
 			DistanceJoint2D distJoint = lastLink.gameObject.AddComponent<DistanceJoint2D>();
 			distJoint.distance = 0.1f;
 			distJoint.enableCollision = false;
@@ -101,7 +103,8 @@ public class NewRope : MonoBehaviour {
 			distJoint.connectedAnchor = new Vector2(0f,0f);
 			distJoint.connectedBody = attachedStone;
 			attachedStone.transform.SetParent( lastLink.transform );
-			attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
+			//attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
+			attachedStone.MovePosition( asp );
 
 			//Vector3 locScale = attachedStone.localScale;
 
@@ -228,8 +231,16 @@ public class NewRope : MonoBehaviour {
 		swingMotorDuration = 0f;
 	}
 
+	Vector3 asp;
+	bool fasp = true;
+
 	void FixedUpdate(){
-		
+		if (fasp) {
+			if( attachedStone ){
+				attachedStone.MovePosition( asp );			
+			}
+			fasp = false;
+		}
 	}
 
 	float linkMass = 1f;
