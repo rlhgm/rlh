@@ -12,9 +12,10 @@ GameObject:
   - 95: {fileID: 9584324}
   - 61: {fileID: 6184956}
   - 114: {fileID: 11482878}
-  m_Layer: 15
+  - 50: {fileID: 5066438}
+  m_Layer: 8
   m_Name: Panther
-  m_TagString: Untagged
+  m_TagString: Panther
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,6 +32,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5066438
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 192674}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6184956
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -69,9 +86,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 192674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b67a579188f2de541a15227ae0a180c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b7b715d0e33f004b9370640ef0d1a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  markA: {fileID: 0}
+  markB: {fileID: 0}
+  LongDistance: 4
+  JumpDistance: 4
+  JumpFailurePercent: 100
+  RecoveryTime: 2
+  IdleDistance: 6
+  AttackDistance: 1.20000005
+  FightDistance: 8
+  LifePoints: 4
+  walkSpeed: 2
+  runSpeed: 7
+  jumpInSpeed: 2
+  jumpSpeed: 9
+  flyDistance: 3
+  flyHight: .349999994
+  walkTurnBackDuration: .666999996
+  attackJumpInDuration: .150000006
+  attackLandingTurnBackDuration: .699999988
+  attackLandingFailureDuration: .699999988
+  state: 0
+  action: 0
 --- !u!212 &21270108
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -104,7 +143,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Panther
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 192674}

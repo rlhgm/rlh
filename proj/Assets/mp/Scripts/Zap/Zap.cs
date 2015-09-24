@@ -263,6 +263,7 @@ public class Zap : MonoBehaviour {
 		VERY_HARD_LANDING = 1,
 		SNAKE,
 		CROCODILE,
+		PANTHER,
 		POISON,
 		STONE_HIT
 	};
@@ -270,6 +271,7 @@ public class Zap : MonoBehaviour {
 	public string DeathByVeryHardLandingText = "rozjeb... sie o skale. press space";
 	public string DeathBySnakeText = "pokasal cie waz. press space";
 	public string DeathByCrocodileText = "zjadl cie krokodyl. press space";
+	public string DeathByPantherText = "zjadla cie pantera. press space";
 	public string DeathByPoisonText = "zatrules sie. press space";
 	public string DeathByStoneHitText = "pierdolnela cie skala. press space";
 	public string DeathByDefaultText = "zginales defaultowa smiercia. press space";
@@ -454,6 +456,10 @@ public class Zap : MonoBehaviour {
 			other.gameObject.GetComponent<Crocodile>().attackStart();
 			sprRend.enabled = false;
 
+			return;
+		}
+		if (other.gameObject.tag == "Panther") {
+			die(DeathType.PANTHER);
 			return;
 		}
 		if (other.gameObject.tag == "ShowInfoTrigger") {

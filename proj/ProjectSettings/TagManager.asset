@@ -20,6 +20,7 @@ TagManager:
   - ComicPage
   - ComicPagePart
   - Crocodile
+  - Panther
   layers:
   - Default
   - TransparentFX
