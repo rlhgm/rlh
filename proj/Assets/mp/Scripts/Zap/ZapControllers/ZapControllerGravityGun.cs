@@ -37,7 +37,7 @@ public class ZapControllerGravityGun : ZapController {
 	//public float pushOutForce = 2f;
 	//public float pushOutMassFactor = 10f;
 	
-	List<Rigidbody2D> droppedStones = new List<Rigidbody2D> (3);
+	//List<Rigidbody2D> droppedStones = new List<Rigidbody2D> ();
 	
 	Vector2 V; 			// predkosc
 	public static float userStoneRotateSpeed = 180f;
@@ -423,31 +423,31 @@ public class ZapControllerGravityGun : ZapController {
 
 		Vector3 currentMousePosition = Input.mousePosition;
 			
-		for (int i = 0 ; i < droppedStones.Count; ++i) {
-			Rigidbody2D rb = droppedStones[i];
-			if( rb.IsSleeping() ){
-				//Debug.Log ( "remove dropped stone: " + rb ); 
-				droppedStones.Remove(rb);
-			}
-//			}else{
-//				Vector2 playerCenterPos = zap.transform.position;
-//				playerCenterPos.y += 1f;
-//				Vector2 stoneCenterPos = rb.worldCenterOfMass;
-//						
-//				Vector2 diff = stoneCenterPos - playerCenterPos;
-//				Vector2 F = new Vector2(0f,0f);
-//				float diffMagnitude = diff.magnitude;
-//						
-//				if( diffMagnitude < minDistance+0.25f ){
-//					//F = diff + diff * pushOutForce * (rb.mass / pushOutMassFactor);
-//					//F = diff.normalized * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
-//
-//					// im blizej srodka i im szybciej tym mocniej wypycha
-//					F = diff * (diffMagnitude/minDistance) * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
-//					rb.AddForce(F,ForceMode2D.Impulse);
-//				}
+//		for (int i = 0 ; i < droppedStones.Count; ++i) {
+//			Rigidbody2D rb = droppedStones[i];
+//			if( rb.IsSleeping() ){
+//				//Debug.Log ( "remove dropped stone: " + rb ); 
+//				droppedStones.Remove(rb);
 //			}
-		}
+////			}else{
+////				Vector2 playerCenterPos = zap.transform.position;
+////				playerCenterPos.y += 1f;
+////				Vector2 stoneCenterPos = rb.worldCenterOfMass;
+////						
+////				Vector2 diff = stoneCenterPos - playerCenterPos;
+////				Vector2 F = new Vector2(0f,0f);
+////				float diffMagnitude = diff.magnitude;
+////						
+////				if( diffMagnitude < minDistance+0.25f ){
+////					//F = diff + diff * pushOutForce * (rb.mass / pushOutMassFactor);
+////					//F = diff.normalized * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
+////
+////					// im blizej srodka i im szybciej tym mocniej wypycha
+////					F = diff * (diffMagnitude/minDistance) * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
+////					rb.AddForce(F,ForceMode2D.Impulse);
+////				}
+////			}
+//		}
 			
 		if( Input.GetMouseButton(0) ){
 			Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
@@ -1191,8 +1191,8 @@ public class ZapControllerGravityGun : ZapController {
 			}
 			unflashStone(draggedStone);
 			
-			Debug.Log ( "add dropped stone: " + tsrb );
-			droppedStones.Add( tsrb );
+			//Debug.Log ( "add dropped stone: " + tsrb );
+			//droppedStones.Add( tsrb );
 			draggedStone = null;
 		}
 	}

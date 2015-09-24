@@ -1,20 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Panther.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs">
     <Files>
       <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" Line="435" Column="28" />
-      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="397" Column="1" />
+      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="375" Column="22" />
       <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapController.cs" Line="140" Column="52" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" Line="400" Column="4" />
-      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" Line="1037" Column="25" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" Line="1044" Column="12" />
+      <File FileName="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" Line="1037" Column="15" />
       <File FileName="Assets\mp\Scripts\Weapons\GravityGun.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Panther.cs" Line="38" Column="8" />
+      <File FileName="Assets\mp\Scripts\Panther.cs" Line="319" Column="4" />
+      <File FileName="Assets\mp\Scripts\Snake.cs" Line="195" Column="3" />
+      <File FileName="Assets\mp\Scripts\NewRope.cs" Line="242" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\BirdEmiterActivator.cs" line="28" />
-      <Breakpoint file="C:\rlh\proj\Assets\mp\Scripts\Zap\Zap.cs" line="137" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
