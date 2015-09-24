@@ -601,7 +601,13 @@ public class ZapControllerNormal : ZapController {
 				else zap.getAnimator().Play("Zap_death_poison_L");
 				msgInfo = zap.DeathByPoisonText;
 				break;
-				
+
+			case Zap.DeathType.PANTHER:
+				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_panther");
+				else zap.getAnimator().Play("Zap_death_panther");
+				msgInfo = zap.DeathByPantherText;
+				break;
+
 			case Zap.DeathType.CROCODILE:
 				msgInfo = zap.DeathByCrocodileText;
 				break;
