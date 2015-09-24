@@ -5,14 +5,6 @@ public class Panther : MonoBehaviour {
 
 	public Transform markA = null;
 	public Transform markB = null;
-	float terrainLimitXMin = 0f;
-	float terrainLimitXMax = 0f;
-	float terrainMiddleX = 0f;
-	float terrainSize = 0f;
-
-	float getPosAroundTerrainCenter(float epsilon = 1f){
-		return Random.Range (terrainMiddleX - epsilon, terrainMiddleX + epsilon);
-	}
 
 	public float LongDistance = 4f;
 	public float JumpDistance = 2f;
@@ -23,13 +15,12 @@ public class Panther : MonoBehaviour {
 	public float FightDistance = 8f; // ???
 	public int LifePoints = 4;
 	public float walkSpeed = 2f;
-	public float runSpeed = 4;
+	public float runSpeed = 6;
+	public float jumpSpeed = 7;
+	public float jumpDistance = 4;
 
-	Animator animator = null;
-	float calmMinX = 0f;
-	float calmMaxX = 0f;
-	float walkTargetX = 0f;
-	Action nextAction;
+	public float walkTurnBackDuration = 0.667f;
+
 
 	void Awake(){
 		animator = transform.GetComponent<Animator> ();
@@ -48,17 +39,51 @@ public class Panther : MonoBehaviour {
 			terrainMiddleX = terrainLimitXMin + terrainSize*0.5f;
 		}
 
+		if (zap == null) {
+			GameObject[] targets = GameObject.FindGameObjectsWithTag("Player");
+			if( targets.Length == 1 ){
+				zap = targets[0].GetComponent<Zap>();
+				print ( this + " jest target");
+			}
+		}
+
 		currentActionTime = 0f;
 		currentStateTime = 0f;
 		setState (State.CALM);
 		setAction (Action.IDLE);
 	}
 
-	float idleDuration = 0;
-
 	void Update () {
 		currentActionTime += Time.deltaTime;
 		currentStateTime += Time.deltaTime;
+
+		myPosX = transform.position.x;
+		zapPosX = zap.transform.position.x;
+		distToZap = Mathf.Abs( myPosX - zapPosX );
+
+		switch (state) {
+		case State.CALM:
+			if( distToZap < FightDistance ){
+				setState(State.FIGHT);
+
+				// jezeli jest dupa do zapa to sie musi obrocic: i jezeli wlasnie nie zawraca...
+				//if( isInAction(Action.WALK) || isInAction(Action.IDLE) || ){
+				if( !walkTurningBack() ){
+					if( dir () != getToZapDir() ){
+						setAction(Action.WALK_TURNBACK);
+					}else{
+						setAction(Action.RUN);
+					}
+				}
+			}
+			break;
+		case State.FIGHT:
+			if( distToZap > FightDistance ){
+				setState(State.CALM);
+			}
+
+			break;
+		}
 
 		switch (action) {
 		case Action.IDLE_IN:
@@ -159,6 +184,7 @@ public class Panther : MonoBehaviour {
 			animator.Play ("roar");
 			break;
 		case Action.ATTACK_JUMP:
+			jumpStartPosX = transform.position.x;
 			animator.Play ("attack_jump");
 			break;
 		case Action.ATTACK_LANDING_TURNBACK:
@@ -181,6 +207,9 @@ public class Panther : MonoBehaviour {
 	}
 	bool isNotInAction(Action test){
 		return action != test;
+	}
+	bool walkTurningBack(){
+		return isInAction (Action.WALK_TURNBACK);
 	}
 
 	bool setState(State newState){
@@ -227,30 +256,6 @@ public class Panther : MonoBehaviour {
 			return -1; // jest na lewo od min
 		}
 	}
-	
-//	void turnLeft(){
-//		if (state != State.ACTIVE)
-//			return;
-//		animator.SetTrigger("turn_right");
-//		Vector3 scl = transform.localScale;
-//		scl.x = Mathf.Abs(scl.x) * 1.0f;
-//		transform.localScale = scl;
-//		
-//		turnTime = 0f;
-//		state = State.TURN;
-//	}
-//	void turnRight(){
-//		if (state != State.ACTIVE)
-//			return;
-//		animator.SetTrigger("turn_left");
-//		Vector3 scl = transform.localScale;
-//		scl.x = Mathf.Abs(scl.x) * -1.0f;
-//		transform.localScale = scl;
-//		
-//		turnTime = 0f;
-//		state = State.TURN;
-//	}
-
 
 	void IDLE_IN(){
 	}
@@ -259,9 +264,9 @@ public class Panther : MonoBehaviour {
 			int itl = inTerrainLimits();
 			if( itl == 0 ){
 				if( dir() == 1 ){
-					walkTargetX = terrainLimitXMax;
+					moveTargetX = terrainLimitXMax;
 				}else{
-					walkTargetX = terrainLimitXMin;
+					moveTargetX = terrainLimitXMin;
 				}
 				nextAction = Action.WALK_TURNBACK;
 				setAction(Action.WALK);
@@ -272,12 +277,12 @@ public class Panther : MonoBehaviour {
 		Vector3 pos = transform.position;
 
 		if (dir () == 1) {
-			if( pos.x >= walkTargetX ){		
+			if( pos.x >= moveTargetX ){		
 				setAction(nextAction);
 				return;
 			}
 		} else {
-			if( pos.x <= walkTargetX ){
+			if( pos.x <= moveTargetX ){
 				setAction(nextAction);
 				return;
 			}
@@ -286,36 +291,61 @@ public class Panther : MonoBehaviour {
 		float distToMove = walkSpeed * Time.deltaTime * dir ();
 		pos.x += distToMove;
 
-//		if (dir () == 1) {
-//			if( pos.x >= walkTargetX ){
-//			}
-//		} else {
-//			if( pos.x <= walkTargetX ){
-//			}
-//		}
-
 		transform.position = pos;
 	}
 	void RUN(){
+		Vector3 pos = transform.position;
+		
+//		if (dir () == 1) {
+//			if( pos.x >= moveTargetX ){		
+//				setAction(nextAction);
+//				return;
+//			}
+//		} else {
+//			if( pos.x <= moveTargetX ){
+//				setAction(nextAction);
+//				return;
+//			}
+//		}
+		
+		float distToMove = runSpeed * Time.deltaTime * dir ();
+		pos.x += distToMove;
+		transform.position = pos;
+
+		if (distToZap <= JumpDistance) {
+			setAction(Action.ATTACK_JUMP);
+		}
 	}
 	void WALK_TURNBACK(){
-		if (currentActionTime > 0.667f) {
+		if (currentActionTime > walkTurnBackDuration) {
 			int newDir = turn();
 
-			if( Random.Range(0,2) == 1){
+			switch( state ){
+			case State.CALM:
+				if( Random.Range(0,2) == 1){
 
-				if( newDir == 1 ){
-					walkTargetX = terrainLimitXMax;
+					if( newDir == 1 ){
+						moveTargetX = terrainLimitXMax;
+					}else{
+						moveTargetX = terrainLimitXMin;
+					}
+					nextAction = Action.WALK_TURNBACK;
+
 				}else{
-					walkTargetX = terrainLimitXMin;
+					nextAction = Action.IDLE;
+					moveTargetX = getPosAroundTerrainCenter(terrainSize*0.25f);
 				}
-				nextAction = Action.WALK_TURNBACK;
+				setAction(Action.WALK);
+				break;
 
-			}else{
-				nextAction = Action.IDLE;
-				walkTargetX = getPosAroundTerrainCenter(terrainSize*0.25f);
+			case State.FIGHT:
+				if( newDir != getToZapDir() ){
+					setAction(Action.WALK_TURNBACK);
+				}else{
+					setAction(Action.RUN);
+				}
+				break;
 			}
-			setAction(Action.WALK);
 		}
 	}
 	void ROAR_IN(){
@@ -323,6 +353,18 @@ public class Panther : MonoBehaviour {
 	void ROAR(){
 	}
 	void ATTACK_JUMP(){
+		Vector3 pos = transform.position;
+
+		float distToMove = jumpSpeed * Time.deltaTime * dir ();
+		pos.x += distToMove;
+		transform.position = pos;
+
+		float flyDist = Mathf.Abs( pos.x - jumpStartPosX );
+
+		if (flyDist >= jumpDistance) {
+			setState(State.CALM);
+			setAction(Action.WALK_TURNBACK);
+		}
 	}
 	void ATTACK_LANDING_TURNBACK(){
 	}
@@ -332,4 +374,33 @@ public class Panther : MonoBehaviour {
 	}
 	void RECOVERY(){
 	}
+
+	Animator animator = null;
+	float calmMinX = 0f;
+	float calmMaxX = 0f;
+	float moveTargetX = 0f;
+	Action nextAction;
+	Zap zap = null;
+	float terrainLimitXMin = 0f;
+	float terrainLimitXMax = 0f;
+	float terrainMiddleX = 0f;
+	float terrainSize = 0f;
+
+	float idleDuration = 0;
+	float myPosX;
+	float zapPosX;
+	float distToZap;
+	float jumpStartPosX;
+
+	float getPosAroundTerrainCenter(float epsilon = 1f){
+		return Random.Range (terrainMiddleX - epsilon, terrainMiddleX + epsilon);
+	}
+
+	int getToZapDir(){
+		if (myPosX > zapPosX)
+			return -1;
+		else 
+			return 1;
+	}
+
 }
