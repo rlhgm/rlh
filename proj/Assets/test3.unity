@@ -13397,6 +13397,7 @@ MonoBehaviour:
   jumpInSpeed: 2
   jumpSpeed: 9
   flyDistance: 3
+  flyHight: .349999994
   walkTurnBackDuration: .666999996
   attackJumpInDuration: .150000006
   attackLandingTurnbackDuration: .699999988

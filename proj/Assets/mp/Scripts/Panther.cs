@@ -21,6 +21,7 @@ public class Panther : MonoBehaviour {
 	public float jumpSpeed = 7;
 
 	public float flyDistance = 3;
+	public float flyHight = 1.0f;
 
 	public float walkTurnBackDuration = 0.667f;
 	public float attackJumpInDuration = 0.2f;
@@ -50,6 +51,8 @@ public class Panther : MonoBehaviour {
 				print ( this + " jest target");
 			}
 		}
+
+		myPosY = transform.position.y;
 
 		currentActionTime = 0f;
 		currentStateTime = 0f;
@@ -359,6 +362,12 @@ public class Panther : MonoBehaviour {
 
 		float flyDist = Mathf.Abs( myPosX - jumpStartPosX );
 
+		float flyHightRatio = flyDist / flyDistance;
+
+		Vector3 pos = transform.position;
+		pos.y = myPosY + flyHight * Mathf.Sin (flyHightRatio * Mathf.PI);
+		transform.position = pos;
+
 		if (flyDist >= flyDistance) {
 			//setState(State.CALM);
 			setAction(Action.ATTACK_LANDING_TURNBACK);
@@ -393,6 +402,7 @@ public class Panther : MonoBehaviour {
 
 	float idleDuration = 0;
 	float myPosX;
+	float myPosY;
 	float zapPosX;
 	float distToZap;
 	float jumpStartPosX;
