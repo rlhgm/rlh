@@ -8,7 +8,7 @@ public class Panther : MonoBehaviour {
 
 	public float LongDistance = 4f;
 	public float JumpDistance = 3f;
-	public float JumpFailure = 0f; // Random.Range(2,5);
+	public int JumpFailurePercent = 100; // Random.Range(2,5);
 	public float RecoveryTime = 2f;
 	public float IdleDistance = 6f;
 	public float AttackDistance = 1.2f;
@@ -25,7 +25,8 @@ public class Panther : MonoBehaviour {
 
 	public float walkTurnBackDuration = 0.667f;
 	public float attackJumpInDuration = 0.2f;
-	public float attackLandingTurnbackDuration = 0.7f;
+	public float attackLandingTurnBackDuration = 0.7f;
+	public float attackLandingFailureDuration = 0.7f;
 
 	void Awake(){
 		animator = transform.GetComponent<Animator> ();
@@ -282,6 +283,14 @@ public class Panther : MonoBehaviour {
 		return pos.x;
 	}
 
+	void whatNextInFight(){
+		if( dir () != getToZapDir() ){
+			setAction(Action.WALK_TURNBACK);
+		}else{
+			setAction(Action.RUN);
+		}
+	}
+	
 	void IDLE_IN(){
 	}
 	void IDLE(){
@@ -342,11 +351,7 @@ public class Panther : MonoBehaviour {
 				break;
 
 			case State.FIGHT:
-				if( newDir != getToZapDir() ){
-					setAction(Action.WALK_TURNBACK);
-				}else{
-					setAction(Action.RUN);
-				}
+				whatNextInFight();
 				break;
 			}
 		}
@@ -366,31 +371,52 @@ public class Panther : MonoBehaviour {
 
 		float flyDist = Mathf.Abs( myPosX - jumpStartPosX );
 
-		float flyHightRatio = flyDist / flyDistance;
-
+		float flyHightRatio = Mathf.Min(1f, flyDist / flyDistance);
+	//
 		Vector3 pos = transform.position;
 		pos.y = myPosY + flyHight * Mathf.Sin (flyHightRatio * Mathf.PI);
 		transform.position = pos;
 
 		if (flyDist >= flyDistance) {
 			//setState(State.CALM);
-			setAction(Action.ATTACK_LANDING_TURNBACK);
+			int destiny = Random.Range(0,101); // liczba <0,100>
+			if( destiny <= JumpFailurePercent ){ // laduje chujowo
+				setAction(Action.ATTACK_LANDING_FAILURE);
+			}else{
+				setAction(Action.ATTACK_LANDING_TURNBACK);
+			}
 		}
 	}
 	void ATTACK_LANDING_TURNBACK(){
-		float actionSpeedRatio = 1f - (currentActionTime / attackLandingTurnbackDuration);
+		float actionSpeedRatio = Mathf.Max(0f, 1f - (currentActionTime / attackLandingTurnBackDuration));
 		move (actionSpeedRatio * jumpSpeed);
 
-		if (currentActionTime >= attackLandingTurnbackDuration) {
+		if (currentActionTime >= attackLandingTurnBackDuration) {
 			turn();
 			setAction(Action.RUN);
 		}
 	}
 	void ATTACK_LANDING_FAILURE(){
+		float actionSpeedRatio = Mathf.Max (0f, 1f - ((currentActionTime*2f) / attackLandingTurnBackDuration));
+		move (actionSpeedRatio * jumpSpeed);
+
+		if (currentActionTime >= attackLandingFailureDuration) {
+			setAction(Action.RECOVERY);
+		}
 	}
 	void HIT(){
 	}
 	void RECOVERY(){
+		if (currentActionTime >= RecoveryTime) {
+			switch(state){
+			case State.FIGHT:
+				whatNextInFight();
+				break;
+			case State.CALM:
+
+				break;
+			}
+		}
 	}
 
 	Animator animator = null;
