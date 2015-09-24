@@ -167,7 +167,9 @@ public class Panther : MonoBehaviour {
 		
 		action = newAction;
 		currentActionTime = 0f;
+
 		animator.speed = 1f;
+		paint (Color.white);
 		
 		switch (newAction) {
 		case Action.IDLE_IN:
@@ -200,9 +202,11 @@ public class Panther : MonoBehaviour {
 			animator.Play ("attack_jump");
 			break;
 		case Action.ATTACK_LANDING_TURNBACK:
+			paint (Color.red);
 			animator.Play ("attack_landing_turnback");
 			break;
 		case Action.ATTACK_LANDING_FAILURE:
+			paint (Color.red);
 			animator.Play ("attack_landing_failure");
 			break;
 		case Action.HIT:
@@ -424,4 +428,8 @@ public class Panther : MonoBehaviour {
 			return 1;
 	}
 
+	void paint(Color newColor){
+		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
+		sr.color = newColor;
+	}
 }
