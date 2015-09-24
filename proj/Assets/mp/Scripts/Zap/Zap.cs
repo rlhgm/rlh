@@ -459,6 +459,7 @@ public class Zap : MonoBehaviour {
 			return;
 		}
 		if (other.gameObject.tag == "Panther") {
+			//if( currentController.isIn )
 			die(DeathType.PANTHER);
 			return;
 		}
@@ -545,6 +546,27 @@ public class Zap : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+//		if (Input.GetKey (keyLeft)) {
+//			if( Input.GetMouseButtonDown(0) ){
+//				print("tzymajac w lewo -> mouse left wlasnie wdusiles");
+//			}
+//			if( Input.GetMouseButton(0) ){
+//				print("tzymajac w lewo -> mouse left trzymasz");
+//			}
+//
+//			return;
+//		}
+//		if (Input.GetKey (keyRight)) {
+//			if( Input.GetMouseButtonDown(0) ){
+//				print("tzymajac w prawo -> mouse left wlasnie wdusiles");
+//			}
+//			if( Input.GetMouseButton(0) ){
+//				print("tzymajac w prawo -> mouse left trzymasz");
+//			}
+//			
+//			return;
+//		}
+//		return;
 		float timeSinceLastFrame = Time.deltaTime;
 		//print ("Zap::Update() : " + timeSinceLastFrame);
 
