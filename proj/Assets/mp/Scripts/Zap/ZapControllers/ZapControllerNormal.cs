@@ -1169,8 +1169,8 @@ public class ZapControllerNormal : ZapController {
 	}
 
 	int Action_WALK(int dir){
-
-		if (Input.GetMouseButtonDown (0)) {
+	
+		if (Input.GetButtonDown("Fire1")) {
 			int pullRes = zap.pullChoosenWeapon();
 			if( pullRes != 0 )
 				return pullRes;
