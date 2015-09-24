@@ -1368,11 +1368,13 @@ public class ZapControllerKnife : ZapController {
 		base.zapDie (deathType);
 		setAction (Action.DIE, (int)deathType);
 	}
-	public override void reborn(){
-		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
-			zap.setState(Zap.State.MOUNT);
-		}
-	}
+//	public override void reborn(){
+//		if( zap.getLastTouchedCheckPoint() != null ){
+//			if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
+//				zap.setState(Zap.State.MOUNT);
+//			}
+//		}
+//	}
 	public override bool triggerEnter(Collider2D other){
 		
 		if (other.gameObject.tag == "Bird") {

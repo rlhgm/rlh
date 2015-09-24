@@ -1044,11 +1044,11 @@ public class ZapControllerGravityGun : ZapController {
 		releaseStone ();
 		setAction (Action.DIE, (int)deathType);
 	}
-	public override void reborn(){
-		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
-			zap.setState(Zap.State.MOUNT);
-		}
-	}
+//	public override void reborn(){
+//		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
+//			zap.setState(Zap.State.MOUNT);
+//		}
+//	}
 	public override bool triggerEnter(Collider2D other){
 		
 		if (other.gameObject.tag == "Bird") {

@@ -140,6 +140,11 @@ public class ZapController : ScriptableObject{
 			weaponMenuItem.setState (WeaponMenuItem.State.ON);
 	}
 	public virtual void reborn (){
+		if( zap.getLastTouchedCheckPoint() != null ){
+			if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
+				zap.setState(Zap.State.MOUNT);
+			}
+		}
 	}
 	public virtual bool triggerEnter(Collider2D other){
 		return false;
