@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 476486}
   - 212: {fileID: 21227654}
   - 61: {fileID: 6115996}
-  - 114: {fileID: 11489608}
   - 50: {fileID: 5047170}
+  - 114: {fileID: 11462884}
   m_Layer: 8
   m_Name: PickableKnife
   m_TagString: Pickable
@@ -60,7 +60,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.08333337, y: 1.08333337}
---- !u!114 &11489608
+--- !u!114 &11462884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,9 +68,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 177344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbea4198035974c45a1e2e0de871171d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fd959e8f6402434cb42279fe76cb724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  isActive: 1
 --- !u!212 &21227654
 SpriteRenderer:
   m_ObjectHideFlags: 1

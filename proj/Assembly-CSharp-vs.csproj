@@ -48,8 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\CutableBush.cs" />
      <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-     <Compile Include="Assets\PickableGravityGun.cs" />
-     <Compile Include="Assets\PickableKnife.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
@@ -64,6 +62,7 @@
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\Panther.cs" />
+     <Compile Include="Assets\mp\Scripts\Pickable.cs" />
      <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />

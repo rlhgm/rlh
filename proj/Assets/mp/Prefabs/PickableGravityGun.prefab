@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 454368}
   - 212: {fileID: 21201942}
   - 61: {fileID: 6168786}
-  - 114: {fileID: 11497896}
   - 50: {fileID: 5059390}
+  - 114: {fileID: 11405790}
   m_Layer: 8
   m_Name: PickableGravityGun
   m_TagString: Pickable
@@ -60,7 +60,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.08333337, y: 1.08333337}
---- !u!114 &11497896
+--- !u!114 &11405790
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,9 +68,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 181940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec9b218ebb14d04a87546b58fc4243f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fd959e8f6402434cb42279fe76cb724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
+  isActive: 1
 --- !u!212 &21201942
 SpriteRenderer:
   m_ObjectHideFlags: 1
