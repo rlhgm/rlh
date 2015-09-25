@@ -326,9 +326,13 @@ public class ZapControllerKnife : ZapController {
 			if (groundUnderFeet2) {
 				
 			}else{
-				zap.setState(Zap.State.IN_AIR);
-				//setAction(Action.JUMP);
 				wantGetUp = false;
+
+				//zap.hideChoosenWeapon();
+				//zap.setState(Zap.State.IN_AIR);
+				//setAction(Action.JUMP);
+				zap.suddenlyInAir();
+
 			}
 			
 			break;
@@ -376,7 +380,7 @@ public class ZapControllerKnife : ZapController {
 		ATTACK,
 		ATTACK_JUST_FINISHED,
 		PREPARE_TO_JUMP,
-		JUMP,
+		//JUMP,
 		//JUMP_LEFT_FRONT,
 		//JUMP_LEFT_BACK,
 		//JUMP_RIGHT_FRONT,
@@ -1377,21 +1381,21 @@ public class ZapControllerKnife : ZapController {
 //	}
 	public override bool triggerEnter(Collider2D other){
 		
-		if (other.gameObject.tag == "Bird") {
-			if( isInState(Zap.State.MOUNT) ){
-				zap.velocity.x = 0.0f;
-				zap.velocity.y = 0.0f;
-				setAction(Action.JUMP);
-				zap.setState(Zap.State.IN_AIR);
-				
-				if( zap.canBeFuddleFromBird )
-					zap.setFuddledFromBrid(true);
-				
-			} else if( isInState(Zap.State.IN_AIR) ) {
-				zap.velocity.x = 0.0f;
-			}
-			return true;
-		}
+//		if (other.gameObject.tag == "Bird") {
+//			if( isInState(Zap.State.MOUNT) ){
+//				zap.velocity.x = 0.0f;
+//				zap.velocity.y = 0.0f;
+//				setAction(Action.JUMP);
+//				zap.setState(Zap.State.IN_AIR);
+//				
+//				if( zap.canBeFuddleFromBird )
+//					zap.setFuddledFromBrid(true);
+//				
+//			} else if( isInState(Zap.State.IN_AIR) ) {
+//				zap.velocity.x = 0.0f;
+//			}
+//			return true;
+//		}
 		
 		return false;
 	}

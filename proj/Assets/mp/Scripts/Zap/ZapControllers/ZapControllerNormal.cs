@@ -499,6 +499,9 @@ public class ZapControllerNormal : ZapController {
 		base.deactivate ();
 
 	}
+	public void suddenlyInAir(){
+		setAction (Action.JUMP);
+	}
 
 //	void SetImpulse(Vector2 imp) { impulse = imp; }
 //	Vector2 getImpulse() { return impulse; }

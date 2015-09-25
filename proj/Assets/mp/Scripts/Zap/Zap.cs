@@ -231,7 +231,14 @@ public class Zap : MonoBehaviour {
 		//}
 		setCurrentController (zapControllerNormal);
 	}
-
+	public void suddenlyInAir(){
+		if (currentController != zapControllerNormal) {
+			setCurrentController(zapControllerNormal);
+			setState (Zap.State.IN_AIR);
+			zapControllerNormal.suddenlyInAir(); 
+		}
+	}
+	
 	public AudioSource getAudioSource(){
 		return myAudio;
 	}
