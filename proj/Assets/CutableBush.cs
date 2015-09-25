@@ -9,6 +9,7 @@ public class CutableBush : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentLifePoints = LifePoints;
+		reset ();
 	}
 	
 	// Update is called once per frame
@@ -30,7 +31,7 @@ public class CutableBush : MonoBehaviour {
 
 		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
 		Color c = sr.color;
-		c.a = currentLifePoints / LifePoints;
+		c.a = (float)currentLifePoints / (float)LifePoints;
 		sr.color = c;
 
 		if (currentLifePoints == 0) {

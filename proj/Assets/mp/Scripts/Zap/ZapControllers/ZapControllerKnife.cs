@@ -422,6 +422,13 @@ public class ZapControllerKnife : ZapController {
 			Snake cutSnake = coll.GetComponent<Snake>();
 			if( cutSnake ){
 				cutSnake.cut();
+				return;
+			}
+
+			CutableBush cutBush = coll.GetComponent<CutableBush>();
+			if( cutBush ){
+				cutBush.cut();
+				return;
 			}
 		}
 	}
