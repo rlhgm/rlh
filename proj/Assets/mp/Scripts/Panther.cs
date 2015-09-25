@@ -16,6 +16,7 @@ public class Panther : MonoBehaviour {
 	public int LifePoints = 4;
 
 	public float walkSpeed = 2f;
+	public float walkFightSpeed = 1.5f;
 	public float runSpeed = 6;
 	public float jumpInSpeed = 2;
 	public float jumpSpeed = 7;
@@ -27,6 +28,7 @@ public class Panther : MonoBehaviour {
 	public float attackJumpInDuration = 0.2f;
 	public float attackLandingTurnBackDuration = 0.7f;
 	public float attackLandingFailureDuration = 0.7f;
+	public float attackDuration = 0.33f;
 
 	Vector3 startPos = new Vector3();
 	int startDir = 0;
@@ -162,9 +164,11 @@ public class Panther : MonoBehaviour {
 		IDLE,
 		WALK,
 		RUN,
+		WALKFIGHT,
 		WALK_TURNBACK,
 		ROAR_IN,
 		ROAR,
+		ATTACK,
 		ATTACK_JUMP_IN,
 		ATTACK_JUMP,
 		ATTACK_LANDING_TURNBACK,
@@ -203,6 +207,9 @@ public class Panther : MonoBehaviour {
 		case Action.RUN:
 			animator.Play ("run");
 			break;
+		case Action.WALKFIGHT:
+			animator.Play ("walkfight");
+			break;
 		case Action.WALK_TURNBACK:
 			animator.Play ("walk_turnback");
 			break;
@@ -211,6 +218,9 @@ public class Panther : MonoBehaviour {
 			break;
 		case Action.ROAR:
 			animator.Play ("roar");
+			break;
+		case Action.ATTACK:
+			animator.Play ("attack");
 			break;
 		case Action.ATTACK_JUMP_IN:
 			animator.Play ("attack_jump_in");
@@ -369,6 +379,26 @@ public class Panther : MonoBehaviour {
 			setAction(Action.ATTACK_JUMP_IN);
 		}
 	}
+	void WALKFIGHT(){
+		float posx = move (walkSpeed);
+		if (dir () == 1) {
+			if( posx >= moveTargetX ){		
+				if( nextAction == Action.EAT ){
+					setState(State.EAT_ZAP);
+				}
+				setAction(nextAction);
+				return;
+			}
+		} else {
+			if( posx <= moveTargetX ){
+				if( nextAction == Action.EAT ){
+					setState(State.EAT_ZAP);
+				}
+				setAction(nextAction);
+				return;
+			}
+		}
+	}
 	void WALK_TURNBACK(){
 		if (currentActionTime > walkTurnBackDuration) {
 			int newDir = turn();
@@ -401,6 +431,11 @@ public class Panther : MonoBehaviour {
 	void ROAR_IN(){
 	}
 	void ROAR(){
+	}
+	void ATTACK(){
+		if (currentActionTime >= attackDuration) {
+			whatNextInFight();
+		}
 	}
 	void ATTACK_JUMP_IN(){
 		move (jumpSpeed);
