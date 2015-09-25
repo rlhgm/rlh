@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\CutableBush.cs" />
      <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
+     <Compile Include="Assets\PickableGravityGun.cs" />
+     <Compile Include="Assets\PickableKnife.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />

@@ -22,6 +22,7 @@ TagManager:
   - Crocodile
   - Panther
   - PantherHitRegion
+  - Pickable
   layers:
   - Default
   - TransparentFX

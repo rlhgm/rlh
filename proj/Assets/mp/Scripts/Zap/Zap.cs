@@ -549,6 +549,9 @@ public class Zap : MonoBehaviour {
 			collectMapPart(other.gameObject);
 			return;
 		}
+		if (other.tag == "Pickable") {
+			print("znalazlem.... pickabla " + other.name);
+		}
 	}
 
 	float puzzleMapShowTime = 0.0f;
