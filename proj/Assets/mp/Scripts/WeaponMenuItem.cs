@@ -21,10 +21,27 @@ public class WeaponMenuItem : MonoBehaviour {
 		ON,
 		FADE_IN,
 		FADE_OUT,
-		BLINK
+		BLINK,
 	};
 
 	public State state;
+
+	public void SetVisibility(bool visibility){
+		if (visibility) {
+			Show ();
+		} else {
+			Hide();
+		}
+	}
+
+	public void Show(){
+		sprite.enabled = true;
+		blinkSprite.enabled = true;
+	}
+	public void Hide(){
+		sprite.enabled = false;
+		blinkSprite.enabled = false;
+	}
 
 	public void setState(State newState, float duration = 0f){
 		switch (newState) {

@@ -81,6 +81,18 @@ public class ZapController : ScriptableObject{
 		return true;
 	}
 
+	public virtual void SetCtrlEnabled(bool newCtrlEnable){
+		ctrlEnabled = newCtrlEnable;
+		if( weaponMenuItem )
+			weaponMenuItem.SetVisibility (ctrlEnabled);
+	}
+	public virtual void SetCtrlEnable(){
+		SetCtrlEnabled (true);
+	}
+	public virtual void SetCtrlDisable(){
+		SetCtrlEnabled (false);
+	}
+
 	protected bool isInState(Zap.State test){
 		return zap.isInState (test);
 	}
@@ -206,4 +218,5 @@ public class ZapController : ScriptableObject{
 	protected Zap zap = null;
 	protected Transform transform = null;
 	protected Camera touchCamera;
+	protected bool ctrlEnabled;
 }

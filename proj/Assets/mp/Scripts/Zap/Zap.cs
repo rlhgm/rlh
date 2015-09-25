@@ -69,6 +69,9 @@ public class Zap : MonoBehaviour {
 	public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
 	public ZapControllerGravityGun zapControllerGravityGun; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
 
+	public bool HaveKnife = false;
+	public bool HaveGravityGun = false;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 
@@ -177,8 +180,23 @@ public class Zap : MonoBehaviour {
 	void Start () {
 		//currentController = zapControllerNormal;
 		//currentController = zapControllerKnife;
-		chooseController (zapControllerKnife);
+
+
+//		if (!HaveKnife) {
+//			//weaponMenu.itemKnife.hide();
+//			zapControllerKnife.SetCtrlEnabled(
+//		}
+
+		if (HaveKnife) {
+			chooseController (zapControllerKnife);
+		} else if (HaveGravityGun) {
+			chooseController (zapControllerGravityGun);
+		}
+
 		setCurrentController (zapControllerNormal);
+
+		zapControllerKnife.SetCtrlEnabled (HaveKnife);
+		zapControllerGravityGun.SetCtrlEnabled (HaveGravityGun);
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
