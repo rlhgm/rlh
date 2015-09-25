@@ -1031,6 +1031,8 @@ MonoBehaviour:
   zapControllerKnife: {fileID: 11400000, guid: 15a1f557bc968ed4881e0388e8b285df, type: 2}
   zapControllerGravityGun: {fileID: 11400000, guid: a32b30679f579a8418c78e5cb7a8ddcd,
     type: 2}
+  HaveKnife: 0
+  HaveGravityGun: 0
   IdleAnimFreq: 10
   DeathByVeryHardLandingText: You crushed your bones from fall. press space.
   DeathBySnakeText: You've been beaten by a snake. press space.

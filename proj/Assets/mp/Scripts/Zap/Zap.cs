@@ -684,17 +684,21 @@ public class Zap : MonoBehaviour {
 			
 			if( choosenController == zapControllerKnife ){
 				//print ("set choosen gravitygun");
-				if( choosenController == currentController && choosenController.tryDeactiveate() ){
-					chooseController(zapControllerGravityGun);
-				}else{
-					chooseController(zapControllerGravityGun);
+				if( HaveGravityGun ){
+					if( choosenController == currentController && choosenController.tryDeactiveate() ){
+						chooseController(zapControllerGravityGun);
+					}else{
+						chooseController(zapControllerGravityGun);
+					}
 				}
 			}else if( choosenController == zapControllerGravityGun ){
 				//print ("set choosen knife");
-				if( choosenController == currentController && choosenController.tryDeactiveate() ){
-					chooseController(zapControllerKnife);
-				}else{
-					chooseController(zapControllerKnife);
+				if( HaveKnife ){
+					if( choosenController == currentController && choosenController.tryDeactiveate() ){
+						chooseController(zapControllerKnife);
+					}else{
+						chooseController(zapControllerKnife);
+					}
 				}
 			}
 		}
@@ -704,17 +708,21 @@ public class Zap : MonoBehaviour {
 			if( choosenController == zapControllerKnife ){
 				//print ("set choosen gravitygun");
 				// jezeli to jest aktywny kontroller:
-				if( choosenController == currentController && choosenController.tryDeactiveate() ){
-					chooseController(zapControllerGravityGun);
-				}else{
-					chooseController(zapControllerGravityGun);
+				if( HaveGravityGun ){
+					if( choosenController == currentController && choosenController.tryDeactiveate() ){
+						chooseController(zapControllerGravityGun);
+					}else{
+						chooseController(zapControllerGravityGun);
+					}
 				}
 			}else if( choosenController == zapControllerGravityGun ){
 				//print ("set choosen knife");
-				if( choosenController == currentController && choosenController.tryDeactiveate() ){
-					chooseController(zapControllerKnife);
-				}else{
-					chooseController(zapControllerKnife);
+				if( HaveKnife ){
+					if( choosenController == currentController && choosenController.tryDeactiveate() ){
+						chooseController(zapControllerKnife);
+					}else{
+						chooseController(zapControllerKnife);
+					}
 				}
 			}
 		}
