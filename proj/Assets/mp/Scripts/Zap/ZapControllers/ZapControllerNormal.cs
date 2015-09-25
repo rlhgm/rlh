@@ -202,12 +202,16 @@ public class ZapControllerNormal : ZapController {
 			
 		case Action.CROUCH_LEFT:
 		case Action.CROUCH_LEFT_BACK:
-			Action_CROUCH_LEFTRIGHT(-1);
+			if( Action_CROUCH_LEFTRIGHT(-1) != 0 ){
+				return;
+			}
 			break;
 			
 		case Action.CROUCH_RIGHT:
 		case Action.CROUCH_RIGHT_BACK:
-			Action_CROUCH_LEFTRIGHT(1);
+			if( Action_CROUCH_LEFTRIGHT(1) != 0 ){
+				return;
+			}
 			break;
 			
 		case Action.MOUNT_IDLE:
@@ -594,7 +598,7 @@ public class ZapControllerNormal : ZapController {
 	public override void FUpdate(float fDeltaTime){
 	}
 	
-	public override void activate(bool restore){
+	public override void activate(bool restore = false, bool crouch = false){
 		base.activate ();
 
 		setAction (Action.UNDEF);
@@ -1472,7 +1476,7 @@ public class ZapControllerNormal : ZapController {
 	
 	int Action_CROUCH_IDLE(){
 		if (Input.GetMouseButtonDown (0)) {
-			return zap.pullChoosenWeapon();
+			return zap.pullChoosenWeapon(true);
 		}
 
 		if( Input.GetKey(zap.keyDown) ){
@@ -1482,7 +1486,10 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_CROUCH_LEFTRIGHT(int dir){
-		
+		if (Input.GetMouseButtonDown (0)) {
+			return zap.pullChoosenWeapon(true);
+		}
+
 		bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
 			setActionCrouchIdle();

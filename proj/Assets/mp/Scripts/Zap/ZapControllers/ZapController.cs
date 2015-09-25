@@ -64,7 +64,7 @@ public class ZapController : ScriptableObject{
 			weaponMenuItem.setState (WeaponMenuItem.State.OFF);
 	}
 
-	public virtual void activate(bool restore = false){
+	public virtual void activate(bool restore = false, bool crouch = false){
 		if( weaponMenuItem )
 			weaponMenuItem.setState (WeaponMenuItem.State.BLINK);
 	}

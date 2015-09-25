@@ -346,7 +346,7 @@ public class ZapControllerKnife : ZapController {
 	public override void FUpdate(float fDeltaTime){
 	}
 	
-	public override void activate(bool restore){
+	public override void activate(bool restore = false, bool crouch = false){
 		base.activate ();
 		restored = restore;
 		//setAction (Action.IDLE);

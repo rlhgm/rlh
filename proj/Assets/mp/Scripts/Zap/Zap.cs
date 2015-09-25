@@ -225,7 +225,7 @@ public class Zap : MonoBehaviour {
 		choosenController.selected ();
 	}
 
-	public void setCurrentController(ZapController newController, bool restore = false){
+	public void setCurrentController(ZapController newController, bool restore = false, bool crouch = false){
 		if (currentController != null)
 			currentController.deactivate ();
 		currentController = newController;
@@ -245,9 +245,9 @@ public class Zap : MonoBehaviour {
 		setCurrentController (zapControllerNormal);
 	}
 
-	public int pullChoosenWeapon(){
+	public int pullChoosenWeapon(bool crouch = false){
 		if (choosenController) {
-			setCurrentController(choosenController);
+			setCurrentController(choosenController,false,crouch);
 			return 1;
 		}
 		return 0;

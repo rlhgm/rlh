@@ -501,7 +501,7 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	//bool restored = false;
 
-	public override void activate(bool restore){
+	public override void activate(bool restore = false, bool crouch = false){
 		base.activate ();
 		//setAction (Action.IDLE);
 		setAction (Action.PULLOUT_GRAVITYGUN);
