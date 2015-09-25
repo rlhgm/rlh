@@ -1947,7 +1947,7 @@ public class ZapControllerNormal : ZapController {
 		resetActionAndState ();
 	}
 	bool setMountIdle(){
-		if (isInState (Zap.State.MOUNT)) {
+		if (isInState (Zap.State.MOUNT) && isNotInAction(Action.MOUNT_ATTACK_LEFT) && isNotInAction(Action.MOUNT_ATTACK_RIGHT) ) {
 			zap.velocity.x = 0.0f;
 			zap.velocity.y = 0.0f;
 			setAction (Action.MOUNT_IDLE);
