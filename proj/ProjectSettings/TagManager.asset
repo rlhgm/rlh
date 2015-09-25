@@ -21,6 +21,7 @@ TagManager:
   - ComicPagePart
   - Crocodile
   - Panther
+  - PantherHitRegion
   layers:
   - Default
   - TransparentFX
