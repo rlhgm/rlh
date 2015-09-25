@@ -577,6 +577,23 @@ public class Zap : MonoBehaviour {
 			Pickable pickable = other.GetComponent<Pickable>();
 			if( pickable.isActive ){
 				switch( pickable.type ){
+				case Pickable.Type.KNIFE:
+					if( !HaveKnife ){
+						HaveKnife = true;
+						zapControllerKnife.SetCtrlEnabled (HaveKnife);
+						if( !HaveGravityGun )
+							chooseController(zapControllerKnife);
+					}
+					break;
+
+				case Pickable.Type.GRAVITY_GUN:
+					if( !HaveGravityGun){
+						HaveGravityGun = true;
+						zapControllerGravityGun.SetCtrlEnabled (HaveGravityGun);
+						if( !HaveKnife )
+							chooseController(zapControllerGravityGun);
+					}
+					break;
 				}
 				pickable.deactivate();
 			}
