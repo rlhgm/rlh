@@ -196,6 +196,32 @@ public class Panther : MonoBehaviour {
 	public Action action;
 	float currentActionTime;
 
+	void OnTriggerStay2D(Collider2D other) {
+		if (zap.isDead ())
+			return;
+
+		if (other.gameObject.tag == "Player") {
+			tryStartAttack();
+			return;
+		}
+	}
+	
+	void OnTriggerEnter2D(Collider2D other) {
+		if (zap.isDead ())
+			return;
+
+		if (other.gameObject.tag == "Player") {
+			tryStartAttack();
+			return;
+		}
+	}
+
+	void tryStartAttack(){
+		if( isInAction(Action.WALK) || isInAction(Action.WALKFIGHT) || isInAction(Action.IDLE) ){
+			setAction(Action.ATTACK);
+		}
+	}
+
 	public bool attacking(){
 		return isInAction (Action.ATTACK) || isInAction (Action.ATTACK_JUMP);
 	}

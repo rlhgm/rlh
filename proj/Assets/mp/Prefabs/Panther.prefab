@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -102, y: 3, z: 0}
+  m_LocalPosition: {x: -105, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,9 +58,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .5}
+  m_Offset: {x: .75, y: .5}
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: .5, y: 1.5}
 --- !u!95 &9584324
 Animator:
   serializedVersion: 3
@@ -100,6 +100,7 @@ MonoBehaviour:
   FightDistance: 8
   LifePoints: 4
   walkSpeed: 2
+  walkFightSpeed: 1.5
   runSpeed: 7
   jumpInSpeed: 2
   jumpSpeed: 9
@@ -109,6 +110,7 @@ MonoBehaviour:
   attackJumpInDuration: .150000006
   attackLandingTurnBackDuration: .699999988
   attackLandingFailureDuration: .699999988
+  attackDuration: .330000013
   state: 0
   action: 0
 --- !u!212 &21270108

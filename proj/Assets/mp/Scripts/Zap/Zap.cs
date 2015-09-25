@@ -439,14 +439,30 @@ public class Zap : MonoBehaviour {
 //	}
 
 	void OnTriggerStay2D(Collider2D other) {
+		if (isDead ())
+			return;
+
 		int lid = other.transform.gameObject.layer;
 		if (lid == LayerMask.NameToLayer("GroundMoveable") ) { // layerIdGroundMoveableMask) { // to jest kamien 
 			hitByStone( other.transform );
 			return;
 		}
+
+		if (other.gameObject.tag == "Panther") {
+			Panther panther = other.gameObject.GetComponent<Panther>();
+			if( panther.attacking() ){
+				if( !currentController.isInDodge() ){
+					die(DeathType.PANTHER);
+				}
+			}
+			return;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		if (isDead ())
+			return;
+
 		if (currentController.triggerEnter (other))
 			return;
 
