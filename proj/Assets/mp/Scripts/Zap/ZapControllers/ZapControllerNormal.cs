@@ -1513,8 +1513,14 @@ public class ZapControllerNormal : ZapController {
 		if (Input.GetMouseButtonDown (0)) {
 			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
 			if( mouseInScene.x < transform.position.x ){
+				if( zap.faceRight() ){
+					zap.turnLeft();
+				}
 				setAction(Action.MOUNT_ATTACK_LEFT);
 			}else{
+				if( !zap.faceRight() ){
+					zap.turnRight();
+				}
 				setAction(Action.MOUNT_ATTACK_RIGHT);
 			}
 			return 0;
