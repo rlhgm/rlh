@@ -1869,11 +1869,30 @@ public class ZapControllerNormal : ZapController {
 		if( newRopeLinkCatchOffset <= -0.5f ) // przekroczyłem ogniwo w gore...
 		{
 			if( catchedRopeLink.transform.childCount > 0 ) { // jak ogniwo ma dzicko to przechodze niżej 
-				
-				if( catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
-					catchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
-					catchedRope.chooseDriver(catchedRopeLink.transform);
-					ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
+
+				bool _asdf = true;
+
+//				if( catchedRopeLink.transform.parent ){
+//					HingeJoint2D parentHingeJoint = catchedRopeLink.transform.parent.GetComponent<HingeJoint2D>();
+//					_asdf = parentHingeJoint.enabled;
+//				}
+
+				if( _asdf && catchedRopeLink.transform.GetChild(0).transform.childCount > 0 ){ // chyba ze to jest ostatnie ogniwo
+
+					RopeLink newCatchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
+					//HingeJoint2D catchedHingeJoint = catchedRopeLink.GetComponent<HingeJoint2D>();
+					//if( catchedHingeJoint.enabled ){
+					if( catchedRope.chooseDriver(newCatchedRopeLink.transform) ){
+						catchedRopeLink = newCatchedRopeLink;
+						ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
+					}else{
+						ropeLinkCatchOffset = -0.5f;
+						setAction(Action.ROPECLIMB_IDLE);
+					}
+					//}else{
+					//	ropeLinkCatchOffset = -0.5f;
+					//	setAction(Action.ROPECLIMB_IDLE);
+					//}
 				}else{
 					ropeLinkCatchOffset = -0.5f;
 					setAction(Action.ROPECLIMB_IDLE);

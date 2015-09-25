@@ -20,6 +20,8 @@ public class NewRope : MonoBehaviour {
 	float weakLinkTimeToBreakUp = 2f;
 	public bool alwaysBreakOff = false;
 
+	public int cutedLinkIndex = -1;
+
 	void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
 		Destroy (spriteRenderer);
@@ -37,7 +39,7 @@ public class NewRope : MonoBehaviour {
 	}
 
 	void createLinks(){
-
+		cutedLinkIndex = -1;
 		int numberOfLinks = links.Length;
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
@@ -205,6 +207,7 @@ public class NewRope : MonoBehaviour {
 	}
 
 	public void cut(int linkIndex){
+		cutedLinkIndex = linkIndex;
 		RopeLink weakLink = links [linkIndex];
 		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
 		weakHingeJoint.enabled = false;
@@ -255,7 +258,10 @@ public class NewRope : MonoBehaviour {
 	float firstDriverLinkMass = 9f;
 	float secondDriverLinkMass = 5f;
 
-	public void chooseDriver(Transform newLink){
+	public bool chooseDriver(Transform newLink){
+		if (cutedLinkIndex>=0 && newLink.GetComponent<RopeLink> ().idn > cutedLinkIndex)
+			return false;
+
 		if (currentLink) {
 			currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
 			currentLink.GetComponent<Rigidbody2D> ().mass = linkMass;
@@ -281,6 +287,8 @@ public class NewRope : MonoBehaviour {
 			nextLink.GetComponent<Rigidbody2D> ().mass = secondDriverLinkMass;
 			//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.25f;
 		}
+
+		return true;
 	}
 
 	public void resetDiver(){
