@@ -229,7 +229,7 @@ public class Zap : MonoBehaviour {
 		if (currentController != null)
 			currentController.deactivate ();
 		currentController = newController;
-		currentController.activate (restore);
+		currentController.activate (restore, crouch);
 	}
 
 	public void _pullOutKnife(){

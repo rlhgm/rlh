@@ -350,7 +350,11 @@ public class ZapControllerKnife : ZapController {
 		base.activate ();
 		restored = restore;
 		//setAction (Action.IDLE);
-		setAction (Action.PULLOUT_KNIFE);
+		if (!crouch) {
+			setAction (Action.PULLOUT_KNIFE);
+		} else {
+			setAction (Action.CROUCH_ATTACK);
+		}
 		canPullUp = false;
 		desiredSpeedX = 0.0f;
 	}
