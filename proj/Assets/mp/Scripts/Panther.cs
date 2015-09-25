@@ -74,6 +74,8 @@ public class Panther : MonoBehaviour {
 	public void reset(){
 		currentLifePoints = LifePoints;
 
+		paintWithHP ();
+
 		transform.position = startPos;
 		myPosY = transform.position.y;
 		if (dir () != startDir)
@@ -168,7 +170,8 @@ public class Panther : MonoBehaviour {
 		FIGHT,
 		GOTO_EAT_ZAP,
 		EAT_ZAP,
-		ESCAPE
+		ESCAPE,
+		DEAD
 	}
 
 	public enum Action{
@@ -188,7 +191,8 @@ public class Panther : MonoBehaviour {
 		ATTACK_LANDING_FAILURE,
 		HIT,
 		EAT,
-		RECOVERY
+		RECOVERY,
+		DYING
 	};
 
 	public State state;
@@ -216,6 +220,22 @@ public class Panther : MonoBehaviour {
 		}
 	}
 
+	public void cut(){
+		currentLifePoints -= 1;
+		paintWithHP ();
+		if (currentLifePoints <= 0) {
+
+		}
+	}
+
+	void paintWithHP(){
+		float cratio = (float)currentLifePoints / (float)LifePoints;
+		Color newColor = Color.white;
+		newColor.g = cratio;
+		newColor.b = cratio;
+		paint (newColor);
+	}
+
 	void tryStartAttack(){
 		if( isInAction(Action.WALK) || isInAction(Action.WALKFIGHT) || isInAction(Action.IDLE) ){
 			setAction(Action.ATTACK);
@@ -234,7 +254,7 @@ public class Panther : MonoBehaviour {
 		currentActionTime = 0f;
 
 		animator.speed = 1f;
-		paint (Color.white);
+		//paint (Color.white);
 		
 		switch (newAction) {
 		case Action.IDLE_IN:
@@ -273,11 +293,11 @@ public class Panther : MonoBehaviour {
 			animator.Play ("attack_jump");
 			break;
 		case Action.ATTACK_LANDING_TURNBACK:
-			paint (Color.red);
+			//paint (Color.red);
 			animator.Play ("attack_landing_turnback");
 			break;
 		case Action.ATTACK_LANDING_FAILURE:
-			paint (Color.red);
+			//paint (Color.red);
 			animator.Play ("attack_landing_failure");
 			break;
 		case Action.HIT:
@@ -288,6 +308,9 @@ public class Panther : MonoBehaviour {
 			break;
 		case Action.RECOVERY:
 			animator.Play ("recovery");
+			break;
+		case Action.DYING:
+			animator.Play ("dying");
 			break;
 		}
 		return true;
@@ -357,6 +380,11 @@ public class Panther : MonoBehaviour {
 	}
 
 	void whatNextInFight(){
+		if (currentLifePoints <= 0) {
+			setState(State.DEAD);
+			setAction(Action.DYING);
+			return;
+		}
 		if (zap.isDead ()) {
 			setState(State.GOTO_EAT_ZAP);
 			if( dir () != getToZapDir() ){

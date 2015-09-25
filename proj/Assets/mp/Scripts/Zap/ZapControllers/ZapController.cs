@@ -192,6 +192,11 @@ public class ZapController : ScriptableObject{
 				return;
 			}
 
+			Panther cutPanther = coll.GetComponent<Panther>();
+			if( cutPanther ){
+				cutPanther.cut();
+				return;
+			}
 		}
 	}
 
