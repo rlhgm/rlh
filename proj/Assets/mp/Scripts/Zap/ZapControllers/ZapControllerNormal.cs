@@ -1970,9 +1970,11 @@ public class ZapControllerNormal : ZapController {
 		setAction (Action.DIE, (int)deathType);
 	}
 	public override void reborn(){
-		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
-			zap.setState(Zap.State.MOUNT);
-			setMountIdle();/////
+		if (zap.getLastTouchedCheckPoint ()) {
+			if (zap.getLastTouchedCheckPoint ().GetComponent<CheckPoint> ().startMounted) {
+				zap.setState (Zap.State.MOUNT);
+				setMountIdle ();/////
+			}
 		}
 	}
 	public override bool triggerEnter(Collider2D other){

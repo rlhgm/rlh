@@ -353,6 +353,10 @@ public class Zap : MonoBehaviour {
 		foreach (NewRope rope in ropes) {
 			rope.reset();
 		}
+		CutableBush[] bushes = FindObjectsOfType(typeof(CutableBush)) as CutableBush[];
+		foreach (CutableBush bush in bushes) {
+			bush.reset();
+		}
 	}
 
 	public GameObject getLastTouchedCheckPoint(){
