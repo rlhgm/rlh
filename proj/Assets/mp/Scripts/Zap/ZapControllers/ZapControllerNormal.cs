@@ -39,7 +39,7 @@ public class ZapControllerNormal : ZapController {
 	public float LANDING_HARD_DURATION = 0.3f;
 	
 	public float TURN_LEFTRIGHT_DURATION = 0.2f;
-
+	public float MOUNT_ATTACK_DURATION = 0.5f;
 
 
 //	public ZapControllerNormal (Zap zapPlayer) 
@@ -209,6 +209,7 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.MOUNT_IDLE:
+			Action_MOUNT_IDLE();
 			break;
 			
 		case Action.MOUNT_LEFT:
@@ -220,7 +221,12 @@ public class ZapControllerNormal : ZapController {
 		case Action.MOUNT_DOWN:
 			Action_MOUNTING_DOWN();
 			break;
-			
+
+		case Action.MOUNT_ATTACK_LEFT:
+		case Action.MOUNT_ATTACK_RIGHT:
+			Action_MOUNT_ATTACK();
+			break;
+
 		case Action.ROPECLIMB_IDLE:
 			Action_ROPECLIMB_IDLE(deltaTime);
 			break;
@@ -557,6 +563,8 @@ public class ZapControllerNormal : ZapController {
 		MOUNT_RIGHT,
 		MOUNT_UP,
 		MOUNT_DOWN,
+		MOUNT_ATTACK_LEFT,
+		MOUNT_ATTACK_RIGHT,
 		ROPECLIMB_IDLE,
 		ROPECLIMB_UP,
 		ROPECLIMB_DOWN,
@@ -758,6 +766,14 @@ public class ZapControllerNormal : ZapController {
 			break;
 		case Action.MOUNT_DOWN:
 			zap.getAnimator().Play("Zap_climbmove_down");
+			break;
+
+		case Action.MOUNT_ATTACK_LEFT:
+			zap.getAnimator().Play("Zap_knife_crouch_attack");
+			break;
+
+		case Action.MOUNT_ATTACK_RIGHT:
+			zap.getAnimator().Play ("Zap_knife_crouch_attack");
 			break;
 			
 		case Action.CROUCH_IN:
@@ -1373,8 +1389,31 @@ public class ZapControllerNormal : ZapController {
 		
 		return 0;
 	}
-	
+
+	int Action_MOUNT_IDLE(){
+		if (Input.GetMouseButtonDown (0)) {
+			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
+			if( mouseInScene.x < transform.position.x ){
+				setAction(Action.MOUNT_ATTACK_LEFT);
+			}else{
+				setAction(Action.MOUNT_ATTACK_RIGHT);
+			}
+			return 0;
+		}
+		return 0;
+	}
+
 	int Action_MOUNTING(){
+		if (Input.GetMouseButtonDown (0)) {
+			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
+			if( mouseInScene.x < transform.position.x ){
+				setAction(Action.MOUNT_ATTACK_LEFT);
+			}else{
+				setAction(Action.MOUNT_ATTACK_RIGHT);
+			}
+			return 0;
+		}
+
 		Vector3 newPos3 = transform.position;
 		Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
 		newPos3 += distToMount;
@@ -1387,6 +1426,16 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_MOUNTING_DOWN(){
+		if (Input.GetMouseButtonDown (0)) {
+			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
+			if( mouseInScene.x < transform.position.x ){
+				setAction(Action.MOUNT_ATTACK_LEFT);
+			}else{
+				setAction(Action.MOUNT_ATTACK_RIGHT);
+			}
+			return 0;
+		}
+
 		Vector3 newPos3 = transform.position;
 		Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
 		newPos3 += distToMount;
@@ -1412,8 +1461,22 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
+	int Action_MOUNT_ATTACK(){
+		if( zap.currentActionTime >= MOUNT_ATTACK_DURATION ){
+			if (isInState (Zap.State.MOUNT)) {
+				if( Input.GetKey(zap.keyLeft) )
+					keyLeftDown();
+				if( Input.GetKey(zap.keyRight) )
+					keyRightDown();
+				else if(Input.GetKey(zap.keyUp) )
+					keyUpDown();
+				else if(Input.GetKey(zap.keyDown) )
+					keyDownDown();
+			}
+		}
+		return 0;
+	}
 
-	
 	int Action_ROPECLIMB_IDLE(float deltaTime){
 		
 		if (!catchedRope)
@@ -1959,7 +2022,9 @@ public class ZapControllerNormal : ZapController {
 		return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
 	}
 	bool mounting(){
-		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN);
+		return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT) 
+			|| isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN)
+			|| isInAction(Action.MOUNT_ATTACK_LEFT) || isInAction(Action.MOUNT_ATTACK_RIGHT);
 	}
 	public override bool crouching(){
 		return isInAction(Action.CROUCH_IDLE) || 
