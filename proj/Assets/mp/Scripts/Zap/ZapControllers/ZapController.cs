@@ -12,13 +12,24 @@ public class ZapController : ScriptableObject{
 //		transform = zap.transform;
 //	}
 
-	public ZapController (string controllerName) {
-		name = controllerName;
-		//zap = playerController;
-		//transform = zap.transform;
+//	public ZapController (string controllerName) {
+//		name = controllerName;
+//		//zap = playerController;
+//		//transform = zap.transform;
+//
+//		//target.mainCamera = myCamera;
+//		//target.touchCamera = myCamera.transform.Find("TouchCamera").GetComponent<Camera>();
+////		Camera mc = Camera.main;
+////		if (mc) {
+////			Transform touchCameraTransform = mc.transform.Find ("TouchCamera");
+////			if( touchCameraTransform ){
+////				touchCamera = touchCameraTransform.GetComponent<Camera> ();
+////			}
+////		}
+//	}
 
-		//target.mainCamera = myCamera;
-		//target.touchCamera = myCamera.transform.Find("TouchCamera").GetComponent<Camera>();
+//	void OnEnable() {
+//		//print("script was enabled");
 //		Camera mc = Camera.main;
 //		if (mc) {
 //			Transform touchCameraTransform = mc.transform.Find ("TouchCamera");
@@ -26,18 +37,7 @@ public class ZapController : ScriptableObject{
 //				touchCamera = touchCameraTransform.GetComponent<Camera> ();
 //			}
 //		}
-	}
-
-	void OnEnable() {
-		//print("script was enabled");
-		Camera mc = Camera.main;
-		if (mc) {
-			Transform touchCameraTransform = mc.transform.Find ("TouchCamera");
-			if( touchCameraTransform ){
-				touchCamera = touchCameraTransform.GetComponent<Camera> ();
-			}
-		}
-	}
+//	}
 
 	protected WeaponMenuItem weaponMenuItem;
 
@@ -150,8 +150,12 @@ public class ZapController : ScriptableObject{
 		return false;
 	}
 
-	public string getName(){
-		return name;
+//	public string getName(){
+//		return name;
+//	}
+
+	public void setTouchCamera(Camera newTC){
+		touchCamera = newTC;
 	}
 
 	//protected string name;

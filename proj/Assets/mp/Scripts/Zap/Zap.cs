@@ -37,6 +37,15 @@ public class Zap : MonoBehaviour {
 	//[HideInInspector]
 	//public Camera touchCamera;
 
+	public void setTouchCamera(Camera newTC){
+		if (zapControllerNormal)
+			zapControllerNormal.setTouchCamera (newTC);
+		if (zapControllerKnife)
+			zapControllerKnife.setTouchCamera (newTC);
+		if (zapControllerGravityGun)
+			zapControllerGravityGun.setTouchCamera (newTC);
+	}
+
 	public bool autoCatchEdges = false;
 
 	//Transform shadowTransform;

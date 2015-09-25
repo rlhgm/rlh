@@ -95,7 +95,8 @@ using UnityEngine;
 			myCamera = GetComponent<Camera> ();
 			//target.mainCamera = myCamera;
 			//target.touchCamera = 
-			//Camera tc = myCamera.transform.Find("TouchCamera").GetComponent<Camera>();
+			Camera tc = myCamera.transform.Find("TouchCamera").GetComponent<Camera>();
+			target.setTouchCamera (tc);
 
 			hms.x = myCamera.orthographicSize * GetComponent<Camera>().aspect;
 			hms.y = myCamera.orthographicSize;

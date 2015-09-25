@@ -42,11 +42,11 @@ public class ZapControllerGravityGun : ZapController {
 	Vector2 V; 			// predkosc
 	public static float userStoneRotateSpeed = 180f;
 
-	public ZapControllerGravityGun () 
-		: base("GravityGun")
-	{
-		//zap.layer
-	}
+//	public ZapControllerGravityGun () 
+//		: base("GravityGun")
+//	{
+//		//zap.layer
+//	}
 
 	public override void setZap(Zap playerController){
 		base.setZap (playerController);

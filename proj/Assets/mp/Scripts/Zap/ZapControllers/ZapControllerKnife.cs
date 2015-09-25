@@ -38,10 +38,10 @@ public class ZapControllerKnife : ZapController {
 //	{
 //	}
 
-	public ZapControllerKnife () 
-		: base("Knife")
-	{
-	}
+//	public ZapControllerKnife () 
+//		: base("Knife")
+//	{
+//	}
 
 	public override void setZap(Zap playerController){
 		base.setZap (playerController);

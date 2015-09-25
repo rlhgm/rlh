@@ -46,10 +46,10 @@ public class ZapControllerNormal : ZapController {
 //		: base(zapPlayer,"Normal")
 //	{
 //	}
-	public ZapControllerNormal () 
-		: base("Normal")
-	{
-	}
+//	public ZapControllerNormal () 
+//		: base("Normal")
+//	{
+//	}
 
 	GameObject catchedClimbHandle;
 	GameObject lastCatchedClimbHandle;
