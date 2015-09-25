@@ -567,6 +567,7 @@ public class Zap : MonoBehaviour {
 //			return;
 //		}
 //		return;
+
 		float timeSinceLastFrame = Time.deltaTime;
 		//print ("Zap::Update() : " + timeSinceLastFrame);
 
