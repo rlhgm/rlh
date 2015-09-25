@@ -493,8 +493,11 @@ public class Zap : MonoBehaviour {
 			return;
 		}
 		if (other.gameObject.tag == "Panther") {
-			if( !currentController.isInDodge() ){
-				die(DeathType.PANTHER);
+			Panther panther = other.gameObject.GetComponent<Panther>();
+			if( panther.attacking() ){
+				if( !currentController.isInDodge() ){
+					die(DeathType.PANTHER);
+				}
 			}
 			return;
 		}

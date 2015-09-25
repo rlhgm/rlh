@@ -30,6 +30,8 @@ public class Panther : MonoBehaviour {
 	public float attackLandingFailureDuration = 0.7f;
 	public float attackDuration = 0.33f;
 
+	int currentLifePoints = 0;
+
 	Vector3 startPos = new Vector3();
 	int startDir = 0;
 
@@ -61,6 +63,8 @@ public class Panther : MonoBehaviour {
 		myPosY = transform.position.y;
 		startDir = dir ();
 
+		currentLifePoints = LifePoints;
+
 		currentActionTime = 0f;
 		currentStateTime = 0f;
 		setState (State.CALM);
@@ -68,6 +72,8 @@ public class Panther : MonoBehaviour {
 	}
 
 	public void reset(){
+		currentLifePoints = LifePoints;
+
 		transform.position = startPos;
 		myPosY = transform.position.y;
 		if (dir () != startDir)
@@ -189,6 +195,10 @@ public class Panther : MonoBehaviour {
 	float currentStateTime;
 	public Action action;
 	float currentActionTime;
+
+	public bool attacking(){
+		return isInAction (Action.ATTACK) || isInAction (Action.ATTACK_JUMP);
+	}
 
 	bool setAction(Action newAction, int param = 0){
 		if (action == newAction)
