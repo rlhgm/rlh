@@ -463,7 +463,103 @@ public class ZapControllerNormal : ZapController {
 			}
 			
 			break;
-			
+
+		case Zap.State.DEAD:
+
+//			zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
+//			
+//
+//			Vector3 distToFall = new Vector3();
+//			distToFall.x = zap.velocity.x * deltaTime;
+//			
+//			if( distToFall.x > 0.0f ){
+//				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f,!zap.stateJustChanged);
+//				if( obstacleOnRoad >= 0.0f ){
+//					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
+//						distToFall.x = obstacleOnRoad;
+//						zap.velocity.x = 0.0f;
+//					}
+//				}
+//			}else if( distToFall.x < 0.0f ){
+//				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!zap.stateJustChanged);
+//				if( obstacleOnRoad >= 0.0f ){
+//					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
+//						distToFall.x = -obstacleOnRoad;
+//						zap.velocity.x = 0.0f;
+//					}
+//				}
+//			}
+//			
+//			transform.position = transform.position + distToFall;
+//			distToFall.x = 0f;
+//			
+//			zap.velocity.y += zap.GetImpulse().y;
+//			if(zap.velocity.y > MaxSpeedY)
+//				zap.velocity.y = MaxSpeedY;
+//			if(zap.velocity.y < -MaxSpeedY)
+//				zap.velocity.y = -MaxSpeedY;
+//			
+//			distToFall.y = zap.velocity.y * deltaTime;
+//			
+//			bool justLanding = false;
+//			
+//			if( distToFall.y > 0.0f ) { // leci w gore
+//				//transform.position = transform.position + distToFall;
+//			} else if( distToFall.y < 0.0f ) { // spada
+//				if( zap.lastVelocity.y >= 0.0f ) { // zaczyna spadac
+//					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
+//					zap.startFallPos = transform.position;
+//					//print ( "zap.startFallPos : " + zap.startFallPos );
+//					if( zap.lastVelocity.y > 0.0f ){
+//						lastCatchedClimbHandle = null;
+//					}
+//				}
+//				groundUnderFeet = zap.checkDown( Mathf.Abs(distToFall.y) + 0.01f);
+//				if( groundUnderFeet >= 0.0f ){
+//					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
+//						lastCatchedClimbHandle = null;
+//						distToFall.y = -groundUnderFeet;
+//						justLanding = true;
+//					}
+//				}
+//			}
+//			
+//			transform.position = transform.position + distToFall;
+//			
+//			if( justLanding ){
+//				
+//				if( zap.landingSound )
+//					zap.getAudioSource().PlayOneShot( zap.landingSound );
+//				
+//				zap.setFuddledFromBrid( false );
+//				
+//				zap.setState(Zap.State.ON_GROUND);
+//				zap.velocity.y = 0.0f;
+//				
+//				Vector3 fallDist = zap.startFallPos - transform.position;
+//				
+//				if( fallDist.y >= VeryHardLandingHeight ){
+//					zap.beforeFallController = null;
+//					zap.die(Zap.DeathType.VERY_HARD_LANDING);
+//				} else if( fallDist.y >= HardLandingHeight ){
+//					
+//					//if( zap.beforeFallController == null ){
+//					zap.velocity.x = 0.0f;
+//					setAction (Action.LANDING_HARD);
+//					//}else{
+//					//}
+//					
+//				}else{
+//					if( zap.beforeFallController == null ){
+//						resetActionAndState();
+//					}else{
+//						zap.restoreBeforeFallController();
+//						//zap.beforeFallController = null;
+//					}
+//				}
+//			}
+			break;
+
 		case Zap.State.ON_GROUND:
 			float distToGround = 0.0f;
 			bool groundUnderFeet2 = zap.checkGround (true, zap.layerIdGroundAllMask, ref distToGround);
