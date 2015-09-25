@@ -346,9 +346,9 @@ public class ZapControllerKnife : ZapController {
 	public override void FUpdate(float fDeltaTime){
 	}
 	
-	public override void activate(){
+	public override void activate(bool restore){
 		base.activate ();
-
+		restored = restore;
 		//setAction (Action.IDLE);
 		setAction (Action.PULLOUT_KNIFE);
 		canPullUp = false;
@@ -972,10 +972,15 @@ public class ZapControllerKnife : ZapController {
 
 		return 0;
 	}
-
+	bool restored = false;
 	int Action_PULLOUT_KNIFE(){
 		if (zap.currentActionTime > PULLOUT_KNIFE_DURATION) {
-			setAction(Action.ATTACK,1);
+			if( !restored ){
+				setAction(Action.ATTACK,1);
+			}else{
+				restored = false;
+				setActionIdle();
+			}
 			return 1;
 		}
 		return 0;

@@ -436,16 +436,23 @@ public class ZapControllerNormal : ZapController {
 				Vector3 fallDist = zap.startFallPos - transform.position;
 				
 				if( fallDist.y >= VeryHardLandingHeight ){
+					zap.beforeFallController = null;
 					zap.die(Zap.DeathType.VERY_HARD_LANDING);
 				} else if( fallDist.y >= HardLandingHeight ){
-					
-					zap.velocity.x = 0.0f;
-					setAction (Action.LANDING_HARD);
+
+					//if( zap.beforeFallController == null ){
+						zap.velocity.x = 0.0f;
+						setAction (Action.LANDING_HARD);
+					//}else{
+					//}
 					
 				}else{
-					
-					resetActionAndState();
-					
+					if( zap.beforeFallController == null ){
+						resetActionAndState();
+					}else{
+						zap.restoreBeforeFallController();
+						//zap.beforeFallController = null;
+					}
 				}
 			}
 			
@@ -483,7 +490,7 @@ public class ZapControllerNormal : ZapController {
 	public override void FUpdate(float fDeltaTime){
 	}
 	
-	public override void activate(){
+	public override void activate(bool restore){
 		base.activate ();
 
 		setAction (Action.UNDEF);
@@ -1494,8 +1501,12 @@ public class ZapControllerNormal : ZapController {
 	}
 	int Action_LANDING_HARD(){
 		if (zap.currentActionTime >= LANDING_HARD_DURATION) {
-			setAction(Action.IDLE);
-			resetActionAndState();
+			if( zap.beforeFallController == null ){
+				setAction(Action.IDLE);
+				resetActionAndState();
+			}else{
+				zap.restoreBeforeFallController();
+			}
 		}
 		
 		return 0;

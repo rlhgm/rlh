@@ -62,6 +62,8 @@ public class Zap : MonoBehaviour {
 	[HideInInspector]
 	public ZapController currentController;
 	[HideInInspector]
+	public ZapController beforeFallController;
+	[HideInInspector]
 	public ZapController choosenController;
 	public ZapControllerNormal zapControllerNormal; // = ScriptableObject.CreateInstance<ZapControllerNormal>();
 	public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
@@ -189,6 +191,7 @@ public class Zap : MonoBehaviour {
 		lastTouchedCheckPoint = null;
 
 		startPoint = transform.position;
+		beforeFallController = null;
 	}
 
 	public void chooseController(ZapController newController){
@@ -198,11 +201,11 @@ public class Zap : MonoBehaviour {
 		choosenController.selected ();
 	}
 
-	public void setCurrentController(ZapController newController){
+	public void setCurrentController(ZapController newController, bool restore = false){
 		if (currentController != null)
 			currentController.deactivate ();
 		currentController = newController;
-		currentController.activate ();
+		currentController.activate (restore);
 	}
 
 	public void _pullOutKnife(){
@@ -233,9 +236,16 @@ public class Zap : MonoBehaviour {
 	}
 	public void suddenlyInAir(){
 		if (currentController != zapControllerNormal) {
+			beforeFallController = currentController;
 			setCurrentController(zapControllerNormal);
 			setState (Zap.State.IN_AIR);
 			zapControllerNormal.suddenlyInAir(); 
+		}
+	}
+	public void restoreBeforeFallController(){
+		if (beforeFallController != null) {
+			setCurrentController(beforeFallController,true);
+			beforeFallController = null;
 		}
 	}
 	
