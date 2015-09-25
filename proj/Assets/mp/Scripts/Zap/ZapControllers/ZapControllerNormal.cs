@@ -1464,14 +1464,17 @@ public class ZapControllerNormal : ZapController {
 	int Action_MOUNT_ATTACK(){
 		if( zap.currentActionTime >= MOUNT_ATTACK_DURATION ){
 			if (isInState (Zap.State.MOUNT)) {
+				setAction(Action.MOUNT_IDLE);
 				if( Input.GetKey(zap.keyLeft) )
 					keyLeftDown();
-				if( Input.GetKey(zap.keyRight) )
+				else if( Input.GetKey(zap.keyRight) )
 					keyRightDown();
 				else if(Input.GetKey(zap.keyUp) )
 					keyUpDown();
 				else if(Input.GetKey(zap.keyDown) )
 					keyDownDown();
+				else
+					setMountIdle();
 			}
 		}
 		return 0;
