@@ -72,6 +72,9 @@ public class Zap : MonoBehaviour {
 	public bool HaveKnife = false;
 	public bool HaveGravityGun = false;
 
+	bool _haveKnife = false;
+	bool _haveGravityGun = false;
+
 	void Awake(){
 		guiCanvas = FindObjectOfType<Canvas> ();
 
@@ -187,16 +190,19 @@ public class Zap : MonoBehaviour {
 //			zapControllerKnife.SetCtrlEnabled(
 //		}
 
+		_haveKnife = HaveKnife;
+		_haveGravityGun = HaveGravityGun;
 		if (HaveKnife) {
 			chooseController (zapControllerKnife);
 		} else if (HaveGravityGun) {
 			chooseController (zapControllerGravityGun);
 		}
 
-		setCurrentController (zapControllerNormal);
-
 		zapControllerKnife.SetCtrlEnabled (HaveKnife);
 		zapControllerGravityGun.SetCtrlEnabled (HaveGravityGun);
+
+		setCurrentController (zapControllerNormal);
+
 
 		velocity = new Vector3 (0, 0, 0);
 		impulse = new Vector3 (0, 0, 0);
@@ -353,6 +359,19 @@ public class Zap : MonoBehaviour {
 		velocity.y = 0.0f;
 		//setAction (Action.IDLE);
 
+
+		HaveKnife = _haveKnife;
+		HaveGravityGun = _haveGravityGun;
+		if (HaveKnife) {
+			chooseController (zapControllerKnife);
+		} else if (HaveGravityGun) {
+			chooseController (zapControllerGravityGun);
+		}
+		
+		zapControllerKnife.SetCtrlEnabled (HaveKnife);
+		zapControllerGravityGun.SetCtrlEnabled (HaveGravityGun);
+
+
 		currentController = zapControllerNormal;
 		setState (State.ON_GROUND);
 		currentController.activate ();
@@ -378,6 +397,10 @@ public class Zap : MonoBehaviour {
 		Panther[] panthers = FindObjectsOfType(typeof(Panther)) as Panther[];
 		foreach (Panther panther in panthers) {
 			panther.reset();
+		}
+		Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
+		foreach (Pickable pickable in pickables) {
+			pickable.activate();
 		}
 	}
 
@@ -550,7 +573,13 @@ public class Zap : MonoBehaviour {
 			return;
 		}
 		if (other.tag == "Pickable") {
-			print("znalazlem.... pickabla " + other.name);
+			//print("znalazlem.... pickabla " + other.name);
+			Pickable pickable = other.GetComponent<Pickable>();
+			if( pickable.isActive ){
+				switch( pickable.type ){
+				}
+				pickable.deactivate();
+			}
 		}
 	}
 
