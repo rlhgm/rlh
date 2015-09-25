@@ -195,7 +195,9 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.CROUCH_IDLE:
-			Action_CROUCH_IDLE();
+			if( Action_CROUCH_IDLE() != 0 ){
+				return;
+			}
 			break;
 			
 		case Action.CROUCH_LEFT:
@@ -1469,6 +1471,10 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_CROUCH_IDLE(){
+		if (Input.GetMouseButtonDown (0)) {
+			return zap.pullChoosenWeapon();
+		}
+
 		if( Input.GetKey(zap.keyDown) ){
 			tryStartClimbPullDown();
 		}
