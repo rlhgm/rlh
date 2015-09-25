@@ -769,10 +769,12 @@ public class ZapControllerNormal : ZapController {
 			break;
 
 		case Action.MOUNT_ATTACK_LEFT:
+			cut(zap.leftKnifeHitPointHigh1.position,zap.leftKnifeHitPointHigh2.position);
 			zap.getAnimator().Play("Zap_knife_crouch_attack");
 			break;
 
 		case Action.MOUNT_ATTACK_RIGHT:
+			cut(zap.rightKnifeHitPointHigh1.position,zap.rightKnifeHitPointHigh2.position);
 			zap.getAnimator().Play ("Zap_knife_crouch_attack");
 			break;
 			

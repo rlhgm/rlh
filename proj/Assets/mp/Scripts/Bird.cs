@@ -49,4 +49,9 @@ public class Bird : MonoBehaviour {
 		scl.x = Mathf.Abs(scl.x) * 1.0f;
 		transform.localScale = scl;
 	}
+
+	public void cut(){
+		GetComponent<SpriteRenderer> ().enabled = false;
+		GetComponent<Collider2D> ().enabled = false;
+	}
 }

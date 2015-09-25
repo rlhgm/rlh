@@ -407,31 +407,7 @@ public class ZapControllerKnife : ZapController {
 		return action;
 	}
 
-	void cut(Vector2 cutStart, Vector2 cutEnd){
-		RaycastHit2D[] hits = Physics2D.LinecastAll (cutStart, cutEnd);
-		for (int i = 0; i < hits.Length; ++i) {
 
-			Collider2D coll = hits[i].collider;
-			RopeLink cutRopeLink = coll.GetComponent<RopeLink>();
-			if( cutRopeLink ){
-				//Debug.Log( "trafionione : " + hits[i].collider.name );
-				cutRopeLink.cut();
-				return;
-			}
-
-			Snake cutSnake = coll.GetComponent<Snake>();
-			if( cutSnake ){
-				cutSnake.cut();
-				return;
-			}
-
-			CutableBush cutBush = coll.GetComponent<CutableBush>();
-			if( cutBush ){
-				cutBush.cut();
-				return;
-			}
-		}
-	}
 
 	bool setAction(Action newAction, int param = 0){
 		
