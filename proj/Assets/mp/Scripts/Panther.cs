@@ -93,7 +93,8 @@ public class Panther : MonoBehaviour {
 					if( dir () != getToZapDir() ){
 						setAction(Action.WALK_TURNBACK);
 					}else{
-						setAction(Action.RUN);
+						//setAction(Action.RUN);
+						whatNextInFight();
 					}
 				}
 			}
@@ -119,6 +120,9 @@ public class Panther : MonoBehaviour {
 		case Action.RUN:
 			RUN ();
 			break;
+		case Action.WALKFIGHT:
+			WALKFIGHT();
+			break;
 		case Action.WALK_TURNBACK:
 			WALK_TURNBACK();
 			break;
@@ -127,6 +131,9 @@ public class Panther : MonoBehaviour {
 			break;
 		case Action.ROAR:
 			ROAR();
+			break;
+		case Action.ATTACK:
+			ATTACK();
 			break;
 		case Action.ATTACK_JUMP_IN:
 			ATTACK_JUMP_IN();
@@ -332,7 +339,14 @@ public class Panther : MonoBehaviour {
 		if( dir () != getToZapDir() ){
 			setAction(Action.WALK_TURNBACK);
 		}else{
-			setAction(Action.RUN);
+			if( distToZap >= LongDistance ){
+				setAction(Action.RUN);
+			}else if (distToZap > AttackDistance) {
+				moveTargetX = zapPosX;
+				setAction(Action.WALKFIGHT);
+			}else{
+				//setAction(Action.ATTACK);
+			}
 		}
 	}
 	
@@ -380,21 +394,23 @@ public class Panther : MonoBehaviour {
 		}
 	}
 	void WALKFIGHT(){
-		float posx = move (walkSpeed);
+		float posx = move (walkFightSpeed);
 		if (dir () == 1) {
 			if( posx >= moveTargetX ){		
-				if( nextAction == Action.EAT ){
-					setState(State.EAT_ZAP);
-				}
-				setAction(nextAction);
+//				if( nextAction == Action.EAT ){
+//					setState(State.EAT_ZAP);
+//				}
+				//setAction(nextAction);
+				whatNextInFight();
 				return;
 			}
 		} else {
 			if( posx <= moveTargetX ){
-				if( nextAction == Action.EAT ){
-					setState(State.EAT_ZAP);
-				}
-				setAction(nextAction);
+//				if( nextAction == Action.EAT ){
+//					setState(State.EAT_ZAP);
+//				}
+//				setAction(nextAction);
+				whatNextInFight();
 				return;
 			}
 		}
@@ -470,7 +486,8 @@ public class Panther : MonoBehaviour {
 
 		if (currentActionTime >= attackLandingTurnBackDuration) {
 			turn();
-			setAction(Action.RUN);
+			//setAction(Action.RUN);
+			whatNextInFight();
 		}
 	}
 	void ATTACK_LANDING_FAILURE(){
