@@ -1955,12 +1955,12 @@ public class ZapControllerNormal : ZapController {
 	public override void zapDie (Zap.DeathType deathType){
 		setAction (Action.DIE, (int)deathType);
 	}
-//	public override void reborn(){
-//		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
-//			zap.setState(Zap.State.MOUNT);
-//			setMountIdle();
-//		}
-//	}
+	public override void reborn(){
+		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
+			zap.setState(Zap.State.MOUNT);
+			setMountIdle();/////
+		}
+	}
 	public override bool triggerEnter(Collider2D other){
 
 		if (other.gameObject.tag == "Bird") {

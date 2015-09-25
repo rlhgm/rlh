@@ -937,7 +937,7 @@ public class ZapControllerKnife : ZapController {
 
 	bool checkStartAttack(){
 		if (isInAction (Action.IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || walking () != 0) {
-			if (Input.GetMouseButton (0) || Input.GetMouseButtonDown(0)) {
+			if (Input.GetMouseButton (0) ) {  //|| Input.GetMouseButtonDown(0)) {
 				setAction (Action.ATTACK);
 				return true;
 			}
@@ -946,7 +946,7 @@ public class ZapControllerKnife : ZapController {
 	}
 	bool checkStartCrouchAttack(){
 		if (isInAction (Action.CROUCH_IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || crouching () ) {
-			if (Input.GetMouseButton (0) || Input.GetMouseButtonDown(0)) {
+			if (Input.GetMouseButton (0)  ) { //|| Input.GetMouseButtonDown(0)) {
 				setAction (Action.CROUCH_ATTACK);
 				return true;
 			}
