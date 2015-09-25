@@ -2140,7 +2140,11 @@ public class ZapControllerNormal : ZapController {
 			}else{
 				return 0;
 			}
-			
+
+			if( catchedRope.alwaysBreakOff ){
+				catchedRope.breakUp();
+			}
+
 			Vector3 _oldPos = transform.position;
 			_oldPos.y -= 1.65f;
 			transform.position = _oldPos;

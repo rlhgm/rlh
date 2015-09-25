@@ -16,8 +16,9 @@ public class NewRope : MonoBehaviour {
 
 	public int weakLinkIndex = -1;
 	public float weakLinkBreakUpDuration = 2f;
-	[SerializeField]
+	//[SerializeField]
 	float weakLinkTimeToBreakUp = 2f;
+	public bool alwaysBreakOff = false;
 
 	void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
@@ -181,6 +182,13 @@ public class NewRope : MonoBehaviour {
 			return false;
 
 		weakLinkTimeToBreakUp -= deltaTime;
+
+		RopeLink weakLink = links [linkIndex];
+		SpriteRenderer wlsr = weakLink.GetComponent<SpriteRenderer> ();
+		Color c = wlsr.color;
+		c.a = Mathf.Max(0f, (weakLinkTimeToBreakUp / weakLinkBreakUpDuration) );
+		wlsr.color = c;
+
 		if (weakLinkTimeToBreakUp <= 0f) {
 			breakUp();
 			return true;
@@ -189,7 +197,7 @@ public class NewRope : MonoBehaviour {
 		return false;
 	}
 
-	void breakUp(){
+	public void breakUp(){
 		if (weakLinkIndex < 0 || weakLinkIndex >= links.Length)
 			return;
 
