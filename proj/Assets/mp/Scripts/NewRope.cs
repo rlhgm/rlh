@@ -183,7 +183,7 @@ public class NewRope : MonoBehaviour {
 
 		weakLinkTimeToBreakUp -= deltaTime;
 
-		RopeLink weakLink = links [linkIndex];
+		RopeLink weakLink = links [weakLinkIndex];
 		SpriteRenderer wlsr = weakLink.GetComponent<SpriteRenderer> ();
 		Color c = wlsr.color;
 		c.a = Mathf.Max(0f, (weakLinkTimeToBreakUp / weakLinkBreakUpDuration) );
