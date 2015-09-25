@@ -27,9 +27,9 @@ public class ZapControllerKnife : ZapController {
 	public float SpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
 	public float SlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
 
-	public float TURN_LEFTRIGHT_DURATION = 0.2f;
+	public float TURN_LEFTRIGHT_DURATION = 0.1f;
 	public float ATTACK_DURATION = 0.5f;
-	public float PULLOUT_KNIFE_DURATION = 0.3f;
+	public float PULLOUT_KNIFE_DURATION = 0.15f;
 	public float HIDE_KNIFE_DURATION = 0.35f;
 	public float CROUCHINOUT_DURATION = 0.1f;
 

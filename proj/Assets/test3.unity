@@ -1636,7 +1636,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.11458349
+  orthographic size: 6.38541651
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -9123,7 +9123,7 @@ Transform:
   m_GameObject: {fileID: 1038731992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.12445092, y: 1.12445092, z: 1.12445092}
+  m_LocalScale: {x: 1.25285482, y: 1.25285482, z: 1.25285482}
   m_Children:
   - {fileID: 1225409483}
   m_Father: {fileID: 1535172079}
@@ -9141,10 +9141,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 768
   preferUncropped: 0
-  screenPixelsY: 683
+  screenPixelsY: 613
   currentCropped: 0
-  screenRatio: .889322937
-  ratio: 1.12445092
+  screenRatio: .798177063
+  ratio: 1.25285482
   mainCamera: {fileID: 2143118006}
   touchCamera: {fileID: 214894816}
 --- !u!1001 &1039750996
@@ -12392,11 +12392,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -81
+      value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
