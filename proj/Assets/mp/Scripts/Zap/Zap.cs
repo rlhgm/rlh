@@ -625,6 +625,10 @@ public class Zap : MonoBehaviour {
 		if( Input.GetMouseButton(1) ){ // right
 			//print ("right: " + Input.mousePosition);
 		}
+		//
+		if (Input.GetKeyDown (KeyCode.R)) {
+			reborn();
+		}
 
 		if (Input.GetKeyDown (KeyCode.Q)) {
 			//setPrevWeapon();
