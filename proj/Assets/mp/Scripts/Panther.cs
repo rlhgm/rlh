@@ -310,6 +310,9 @@ public class Panther : MonoBehaviour {
 				setAction(Action.WALK_TURNBACK);
 			}else{
 				moveTargetX = zap.transform.position.x;
+				//moveTargetX -= zap.dir2();
+				//if( dir () == 1 )
+				moveTargetX -= dir ();
 				nextAction = Action.EAT;
 				setAction(Action.WALK);
 			}
