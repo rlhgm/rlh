@@ -28,6 +28,9 @@ public class Panther : MonoBehaviour {
 	public float attackLandingTurnBackDuration = 0.7f;
 	public float attackLandingFailureDuration = 0.7f;
 
+	Vector3 startPos = new Vector3();
+	int startDir = 0;
+
 	void Awake(){
 		animator = transform.GetComponent<Animator> ();
 	}
@@ -52,11 +55,21 @@ public class Panther : MonoBehaviour {
 				print ( this + " jest target");
 			}
 		}
-
+		startPos = transform.position;
 		myPosY = transform.position.y;
+		startDir = dir ();
 
 		currentActionTime = 0f;
 		currentStateTime = 0f;
+		setState (State.CALM);
+		setAction (Action.IDLE);
+	}
+
+	public void reset(){
+		transform.position = startPos;
+		myPosY = transform.position.y;
+		if (dir () != startDir)
+			turn ();
 		setState (State.CALM);
 		setAction (Action.IDLE);
 	}

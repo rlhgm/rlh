@@ -357,6 +357,10 @@ public class Zap : MonoBehaviour {
 		foreach (CutableBush bush in bushes) {
 			bush.reset();
 		}
+		Panther[] panthers = FindObjectsOfType(typeof(Panther)) as Panther[];
+		foreach (Panther panther in panthers) {
+			panther.reset();
+		}
 	}
 
 	public GameObject getLastTouchedCheckPoint(){
