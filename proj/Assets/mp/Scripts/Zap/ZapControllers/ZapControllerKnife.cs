@@ -1007,6 +1007,11 @@ public class ZapControllerKnife : ZapController {
 
 	int Action_WALK(int dir){
 
+		if (Input.GetMouseButtonDown (1)) {
+			setAction(Action.HIDE_KNIFE);
+			return 0;
+		}
+
 		bool dirChanged = checkDir ();
 		if (dirChanged) {
 			//setAction(Action.IDLE);
