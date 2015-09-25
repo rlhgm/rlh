@@ -520,6 +520,15 @@ public class ZapControllerGravityGun : ZapController {
 		return false;
 	}
 
+	public override bool isInDodge(){
+		//if(
+		return isInAction(Action.ROLL_LEFT_FRONT) ||
+	    	isInAction(Action.ROLL_LEFT_BACK) ||
+	    	isInAction(Action.ROLL_RIGHT_FRONT) ||
+			isInAction(Action.ROLL_RIGHT_BACK);
+		//)
+	}
+
 	public enum Action{
 		UNDEF = 0,
 		IDLE,

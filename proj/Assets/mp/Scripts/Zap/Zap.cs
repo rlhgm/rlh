@@ -493,8 +493,9 @@ public class Zap : MonoBehaviour {
 			return;
 		}
 		if (other.gameObject.tag == "Panther") {
-			//if( currentController.isIn )
-			die(DeathType.PANTHER);
+			if( !currentController.isInDodge() ){
+				die(DeathType.PANTHER);
+			}
 			return;
 		}
 		if (other.gameObject.tag == "ShowInfoTrigger") {

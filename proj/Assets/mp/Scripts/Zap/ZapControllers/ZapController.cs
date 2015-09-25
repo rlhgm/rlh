@@ -150,6 +150,10 @@ public class ZapController : ScriptableObject{
 		return false;
 	}
 
+	public virtual bool isInDodge(){
+		return false;
+	}
+
 //	public string getName(){
 //		return name;
 //	}

@@ -3528,6 +3528,18 @@ Prefab:
       propertyPath: markB
       value: 
       objectReference: {fileID: 608483205}
+    - target: {fileID: 6184956, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
+      propertyPath: m_Size.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184956, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184956, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
+      propertyPath: m_Offset.x
+      value: .75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
   m_IsPrefabParent: 0
