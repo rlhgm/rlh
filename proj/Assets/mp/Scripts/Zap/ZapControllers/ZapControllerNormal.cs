@@ -865,13 +865,34 @@ public class ZapControllerNormal : ZapController {
 			break;
 
 		case Action.MOUNT_ATTACK_LEFT:
-			cut(zap.leftKnifeHitPointHigh1.position,zap.leftKnifeHitPointHigh2.position);
-			zap.getAnimator().Play("Zap_knife_crouch_attack");
+			Vector2 lCutBegin = zap.leftKnifeHitPointHigh1.position;
+			lCutBegin.x -= 0.5f;
+			lCutBegin.y += 1.3f;
+			Vector2 lCutEnd = zap.leftKnifeHitPointLow2.position;
+			cut(lCutBegin,lCutEnd);
+
+			lCutBegin = zap.leftKnifeHitPointHigh2.position;
+			lCutBegin.y += 1.25f;
+			lCutEnd = zap.leftKnifeHitPointLow1.position;
+			cut(lCutBegin,lCutEnd);
+
+			zap.getAnimator().Play("Zap_climb_knife_attack");
 			break;
 
 		case Action.MOUNT_ATTACK_RIGHT:
-			cut(zap.rightKnifeHitPointHigh1.position,zap.rightKnifeHitPointHigh2.position);
-			zap.getAnimator().Play ("Zap_knife_crouch_attack");
+			//cut(zap.rightKnifeHitPointHigh1.position,zap.rightKnifeHitPointHigh2.position);
+			Vector2 rCutBegin = zap.rightKnifeHitPointHigh2.position;
+			rCutBegin.x += 0.5f;
+			rCutBegin.y += 1.3f;
+			Vector2 rCutEnd = zap.rightKnifeHitPointLow1.position;
+			cut(rCutBegin,rCutEnd);
+			
+			rCutBegin = zap.rightKnifeHitPointHigh1.position;
+			rCutBegin.y += 1.25f;
+			rCutEnd = zap.rightKnifeHitPointLow2.position;
+			cut(rCutBegin,rCutEnd);
+
+			zap.getAnimator().Play ("Zap_climb_knife_attack");
 			break;
 			
 		case Action.CROUCH_IN:
