@@ -150,7 +150,10 @@ public class Panther : MonoBehaviour {
 	public enum State{
 		UNDEF = 0,
 		CALM,
-		FIGHT
+		FIGHT,
+		GOTO_EAT_ZAP,
+		EAT_ZAP,
+		ESCAPE
 	}
 
 	public enum Action{
@@ -167,6 +170,7 @@ public class Panther : MonoBehaviour {
 		ATTACK_LANDING_TURNBACK,
 		ATTACK_LANDING_FAILURE,
 		HIT,
+		EAT,
 		RECOVERY
 	};
 
@@ -225,6 +229,9 @@ public class Panther : MonoBehaviour {
 			break;
 		case Action.HIT:
 			animator.Play ("hit");
+			break;
+		case Action.EAT:
+			animator.Play ("eat");
 			break;
 		case Action.RECOVERY:
 			animator.Play ("recovery");
@@ -297,6 +304,18 @@ public class Panther : MonoBehaviour {
 	}
 
 	void whatNextInFight(){
+		if (zap.isDead ()) {
+			setState(State.GOTO_EAT_ZAP);
+			if( dir () != getToZapDir() ){
+				setAction(Action.WALK_TURNBACK);
+			}else{
+				moveTargetX = zap.transform.position.x;
+				nextAction = Action.EAT;
+				setAction(Action.WALK);
+			}
+			return;
+		}
+
 		if( dir () != getToZapDir() ){
 			setAction(Action.WALK_TURNBACK);
 		}else{
@@ -324,11 +343,17 @@ public class Panther : MonoBehaviour {
 		float posx = move (walkSpeed);
 		if (dir () == 1) {
 			if( posx >= moveTargetX ){		
+				if( nextAction == Action.EAT ){
+					setState(State.EAT_ZAP);
+				}
 				setAction(nextAction);
 				return;
 			}
 		} else {
 			if( posx <= moveTargetX ){
+				if( nextAction == Action.EAT ){
+					setState(State.EAT_ZAP);
+				}
 				setAction(nextAction);
 				return;
 			}
@@ -364,6 +389,7 @@ public class Panther : MonoBehaviour {
 				break;
 
 			case State.FIGHT:
+			case State.GOTO_EAT_ZAP:
 				whatNextInFight();
 				break;
 			}
