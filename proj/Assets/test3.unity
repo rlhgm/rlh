@@ -883,6 +883,10 @@ Prefab:
       propertyPath: m_Name
       value: tile_ground1_normal 47
       objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
   m_IsPrefabParent: 0
@@ -5130,6 +5134,10 @@ Prefab:
     - target: {fileID: 108752, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
       propertyPath: m_Name
       value: tile_ground1_normal 47 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
@@ -12677,11 +12685,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -123.120003
+      value: -72.1200027
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
