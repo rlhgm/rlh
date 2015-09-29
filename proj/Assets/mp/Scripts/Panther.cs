@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Panther : MonoBehaviour {
+public class Panther : MonoBehaviour, IKnifeCutable {
 
 	public Transform markA = null;
 	public Transform markB = null;
@@ -220,7 +220,7 @@ public class Panther : MonoBehaviour {
 		}
 	}
 
-	public void cut(){
+	public void Cut(){
 		currentLifePoints -= 1;
 		paintWithHP ();
 		if (currentLifePoints <= 0) {

@@ -205,12 +205,18 @@ public class ZapController : ScriptableObject{
 			}
 
 			if( coll.tag == "PantherHitRegion" ){
-				Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
-				if( cutPanther ){
-					cutPanther.cut();
-					return;
-				}
+                IKnifeCutable cutable = coll.transform.parent.GetComponent<IKnifeCutable>();
+                if (cutable != null)
+                {
+                    cutable.Cut();
+                }
+				//Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
+				//if( cutPanther ){
+				//	cutPanther.Cut();
+				//	return;
+				//}
 			}
+            
 		}
 	}
 
