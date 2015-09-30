@@ -157,6 +157,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &130302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 422894}
+  - 120: {fileID: 12086306}
+  m_Layer: 15
+  m_Name: GravityGunBeam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &131134
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +563,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.1200027, y: 6, z: 0}
+  m_LocalPosition: {x: -6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447238}
@@ -578,6 +594,7 @@ Transform:
   - {fileID: 419086}
   - {fileID: 428034}
   - {fileID: 459358}
+  - {fileID: 422894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &412478
@@ -604,6 +621,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 411340}
   m_RootOrder: 25
+--- !u!4 &422894
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 411340}
+  m_RootOrder: 28
 --- !u!4 &423158
 Transform:
   m_ObjectHideFlags: 1
@@ -1150,6 +1179,43 @@ MonoBehaviour:
   layerIdLastGroundTypeTouchedMask: 0
   layerIdGroundHandlesMask: 0
   layerIdRopesMask: 0
+--- !u!120 &12086306
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130302}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 52d587f5e27c15f429f3e8b425996c5a, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: -5, y: 0, z: -3}
+  - {x: -1, y: 3, z: -3}
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .100000001
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294907648
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294907648
+  m_UseWorldSpace: 1
 --- !u!198 &19826228
 ParticleSystem:
   m_ObjectHideFlags: 1
