@@ -113,6 +113,9 @@ public class Zap : MonoBehaviour {
 		shadowCenter = transform.Find ("shadowCenter");
 
         targeter = transform.Find("targeter");
+        gravityGunBeam = transform.Find("GravityGunBeam");
+        gravityGunBeam.GetComponent<LineRenderer>().sortingLayerName = "Player";
+        gravityGunBeam.GetComponent<LineRenderer>().sortingOrder = -1;
 
         if (shadowCenter) {
 			shadowLeft = shadowCenter.Find ("shadowLeft");
@@ -1422,8 +1425,9 @@ public class Zap : MonoBehaviour {
 	Transform gfx;
     Transform gfxLegs;
     Transform targeter;
+    Transform gravityGunBeam;
     //SpriteRenderer 
-	PolygonCollider2D gfxCollider;
+    PolygonCollider2D gfxCollider;
 
     public Transform GfxLegs
     {
