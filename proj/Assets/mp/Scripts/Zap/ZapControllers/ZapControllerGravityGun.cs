@@ -632,6 +632,7 @@ public class ZapControllerGravityGun : ZapController {
 		switch (newAction) {
 
             case Action.IDLE:
+                zap.GfxLegs.gameObject.SetActive(true);
                 if (zap.faceRight())
                 {
                     zap.AnimatorBody.Play("Zap_gg_body_walk_0");
@@ -642,7 +643,6 @@ public class ZapControllerGravityGun : ZapController {
                     zap.AnimatorBody.Play("Zap_gg_body_walk_0");
                     zap.AnimatorLegs.Play("Zap_GG_legs_walk");
                 }
-                zap.GfxLegs.gameObject.SetActive(true);
                 zap.AnimatorLegs.speed = 0f;
                 zap.AnimatorBody.speed = 0f;
                 break;
@@ -714,17 +714,17 @@ public class ZapControllerGravityGun : ZapController {
 
             case Action.WALK_LEFT:
                 //zap.AnimatorBody.Play("Zap_knife_walk");
+                zap.GfxLegs.gameObject.SetActive(true);
                 zap.AnimatorBody.Play("Zap_gg_body_walk_0");
                 zap.AnimatorLegs.Play("Zap_GG_legs_walk");
-                zap.GfxLegs.gameObject.SetActive(true);
                 //zap.AnimatorLegs.speed = 0f;
                 //zap.AnimatorBody.speed = 0f;
                 break;
             case Action.WALK_RIGHT:
                 //zap.AnimatorBody.Play("Zap_knife_walk");
-                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
-                zap.AnimatorLegs.Play("Zap_GG_legs_walk");
                 zap.GfxLegs.gameObject.SetActive(true);
+                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorLegs.Play("Zap_GG_legs_walk");                
                 break;
 
             case Action.WALKBACK_LEFT:
@@ -974,8 +974,9 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	int Action_WALK(int dir){
-		
-		bool dirChanged = checkDir ();
+        trackCursor(Action.IDLE);
+
+        bool dirChanged = checkDir ();
 		if (dirChanged) {
 			//setAction(Action.IDLE);
 			//resetActionAndState();
