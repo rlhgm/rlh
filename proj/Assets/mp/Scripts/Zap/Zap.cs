@@ -106,11 +106,15 @@ public class Zap : MonoBehaviour {
 		gfxCollider = gfx.GetComponent<PolygonCollider2D> ();
         gfxLegs = transform.Find("gfxLegs").transform;
 
-		animator = transform.Find("gfx").GetComponent<Animator>();
+		animatorBody = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
+        animatorLegs = transform.Find("gfxLegs").GetComponent<Animator>();
 
 		shadowCenter = transform.Find ("shadowCenter");
-		if (shadowCenter) {
+
+        targeter = transform.Find("targeter");
+
+        if (shadowCenter) {
 			shadowLeft = shadowCenter.Find ("shadowLeft");
 			shadowRight = shadowCenter.Find ("shadowRight");
 
@@ -119,14 +123,14 @@ public class Zap : MonoBehaviour {
 			shadowRightSR = shadowRight.GetComponent<SpriteRenderer>();
 		}
 
-		zap_idle1_beh[] behs = animator.GetBehaviours<zap_idle1_beh>();
+		zap_idle1_beh[] behs = animatorBody.GetBehaviours<zap_idle1_beh>();
 		for( int b = 0 ; b < behs.Length ; ++b ){
 			behs[b].playerController = this;
 		}
 
 		myAudio = GetComponent<AudioSource>();
 
-		PlaySounds[] pss = animator.GetBehaviours<PlaySounds>();
+		PlaySounds[] pss = animatorBody.GetBehaviours<PlaySounds>();
 		for( int b = 0 ; b < pss.Length ; ++b ){
 			pss[b].zap = this;
 		}
@@ -293,18 +297,18 @@ public class Zap : MonoBehaviour {
 		switch( stateIdleNum ){
 		case 1:
 		case 2:
-			if( faceRight() ) animator.Play("Zap_idle_R");
-			else animator.Play ("Zap_idle_L");
+			if( faceRight() ) animatorBody.Play("Zap_idle_R");
+			else animatorBody.Play ("Zap_idle_L");
 			break;
 		case 0:
 			if( IdleAnimFreq >= 3 ){
 				int r = Random.Range(0,IdleAnimFreq);
 				if( r == 0 ){
-					if( faceRight() ) animator.Play ("Zap_idle_variation_1_R");
-					else animator.Play ("Zap_idle_variation_1_L");
+					if( faceRight() ) animatorBody.Play ("Zap_idle_variation_1_R");
+					else animatorBody.Play ("Zap_idle_variation_1_L");
 				}else if( r == 1 ){
-					if( faceRight() ) animator.Play ("Zap_idle_variation_2_R");
-					else animator.Play ("Zap_idle_variation_2_L");
+					if( faceRight() ) animatorBody.Play ("Zap_idle_variation_2_R");
+					else animatorBody.Play ("Zap_idle_variation_2_L");
 				}
 			}
 			break;
@@ -1066,9 +1070,12 @@ public class Zap : MonoBehaviour {
 	public bool faceRight(){
 		return gfx.localScale.x > 0f;
 	}
+    public bool faceLeft()
+    {
+        return gfx.localScale.x < 0f;
+    }
 
-
-	public bool canGetUp(){
+    public bool canGetUp(){
 		
 		if (dir () == Vector2.right) {
 			RaycastHit2D hit = Physics2D.Raycast (sensorLeft3.position, Vector2.right, myWidth, layerIdGroundMask);
@@ -1346,7 +1353,7 @@ public class Zap : MonoBehaviour {
 		case State.CLIMB_ROPE:
 			break;
 		case State.MOUNT:
-			animator.Play("Zap_climbmove_up");
+			animatorBody.Play("Zap_climbmove_up");
 			break;
 		};
 
@@ -1407,6 +1414,7 @@ public class Zap : MonoBehaviour {
 	Transform cameraTarget;
 	Transform gfx;
     Transform gfxLegs;
+    Transform targeter;
     //SpriteRenderer 
 	PolygonCollider2D gfxCollider;
 
@@ -1417,20 +1425,38 @@ public class Zap : MonoBehaviour {
             return gfxLegs;
         }
     }
+    public Transform Targeter
+    {
+        get
+        {
+            return targeter;
+        }
+    }
 
     SpriteRenderer sprRend = null;
     BoxCollider2D coll;
-    public Animator getAnimator(){
-    	return animator;
-    }
-    Animator animator;
-    //public Animator AnimtorTop
+    //public Animator AnimatorBody
     //{
-    //    get
-    //    {
-    //        return animator;
-    //    }
+    //    return animator;
     //}
+
+    Animator animatorBody;
+    Animator animatorLegs;
+
+    public Animator AnimatorLegs
+    {
+        get
+        {
+            return animatorLegs;
+        }
+    }
+    public Animator AnimatorBody
+    {
+        get
+        {
+            return animatorBody;
+        }
+    }
 
     [HideInInspector]
 	public Vector3 velocity;

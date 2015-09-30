@@ -683,13 +683,13 @@ public class ZapControllerNormal : ZapController {
 		
 		action = newAction;
 		zap.resetCurrentActionTime ();
-		zap.getAnimator().speed = 1f;
+		zap.AnimatorBody.speed = 1f;
 		
 		switch (newAction) {
 			
 		case Action.IDLE:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_idle_R");
-			else zap.getAnimator().Play ("Zap_idle_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_idle_R");
+			else zap.AnimatorBody.Play ("Zap_idle_L");
 			break;
 			
 		case Action.DIE:
@@ -699,32 +699,32 @@ public class ZapControllerNormal : ZapController {
 			switch( dt ){
 
 			case Zap.DeathType.STONE_HIT:
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_stonehit_R");
-				else zap.getAnimator().Play("Zap_death_stonehit_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_stonehit_R");
+				else zap.AnimatorBody.Play("Zap_death_stonehit_L");
 				msgInfo = zap.DeathByStoneHitText;
 				break;
 
 			case Zap.DeathType.VERY_HARD_LANDING:
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_hitground_R");
-				else zap.getAnimator().Play("Zap_death_hitground_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_hitground_R");
+				else zap.AnimatorBody.Play("Zap_death_hitground_L");
 				msgInfo = zap.DeathByVeryHardLandingText;
 				break;
 				
 			case Zap.DeathType.SNAKE:
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_poison_R");
-				else zap.getAnimator().Play("Zap_death_poison_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_poison_R");
+				else zap.AnimatorBody.Play("Zap_death_poison_L");
 				msgInfo = zap.DeathBySnakeText;
 				break;
 				
 			case Zap.DeathType.POISON:
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_poison_R");
-				else zap.getAnimator().Play("Zap_death_poison_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_poison_R");
+				else zap.AnimatorBody.Play("Zap_death_poison_L");
 				msgInfo = zap.DeathByPoisonText;
 				break;
 
 			case Zap.DeathType.PANTHER:
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_panther");
-				else zap.getAnimator().Play("Zap_death_panther");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_panther");
+				else zap.AnimatorBody.Play("Zap_death_panther");
 				msgInfo = zap.DeathByPantherText;
 				break;
 
@@ -733,8 +733,8 @@ public class ZapControllerNormal : ZapController {
 				break;
 				
 			default:
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_death_hitground_R");
-				else zap.getAnimator().Play("Zap_death_hitground_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_hitground_R");
+				else zap.AnimatorBody.Play("Zap_death_hitground_L");
 				msgInfo = zap.DeathByDefaultText;
 				break;
 				
@@ -747,57 +747,57 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.WALK_LEFT:
-			zap.getAnimator().Play("Zap_walk_L");
+			zap.AnimatorBody.Play("Zap_walk_L");
 			break;
 		case Action.WALK_RIGHT:
-			zap.getAnimator().Play("Zap_walk_R");
+			zap.AnimatorBody.Play("Zap_walk_R");
 			break;
 			
 		case Action.RUN_LEFT:
-			zap.getAnimator().Play("Zap_run_L");
+			zap.AnimatorBody.Play("Zap_run_L");
 			break;
 		case Action.RUN_RIGHT:
-			zap.getAnimator().Play("Zap_run_L");
+			zap.AnimatorBody.Play("Zap_run_L");
 			break;
 			
 		case Action.TURN_STAND_LEFT:
-			zap.getAnimator().Play("Zap_walk_back_left");
+			zap.AnimatorBody.Play("Zap_walk_back_left");
 			wantJumpAfter = false;
 			break;
 			
 		case Action.TURN_STAND_RIGHT:
-			zap.getAnimator().Play("Zap_walk_back_right");
+			zap.AnimatorBody.Play("Zap_walk_back_right");
 			wantJumpAfter = false;
 			break;
 			
 		case Action.TURN_RUN_LEFT:
-			zap.getAnimator().Play("Zap_runback_L");
+			zap.AnimatorBody.Play("Zap_runback_L");
 			wantJumpAfter = false;
 			if( zap.turnRunSounds.Length != 0 )
 				zap.getAudioSource().PlayOneShot(zap.turnRunSounds[Random.Range(0,zap.turnRunSounds.Length)], 0.5F);
 			break;
 			
 		case Action.TURN_RUN_RIGHT:
-			zap.getAnimator().Play("Zap_runback_R");
+			zap.AnimatorBody.Play("Zap_runback_R");
 			wantJumpAfter = false;
 			if( zap.turnRunSounds.Length != 0 )
 				zap.getAudioSource().PlayOneShot(zap.turnRunSounds[Random.Range(0,zap.turnRunSounds.Length)], 0.5F);
 			break;
 			
 		case Action.PREPARE_TO_JUMP:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_jump_in_R");
-			else zap.getAnimator().Play("Zap_jump_in_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_jump_in_R");
+			else zap.AnimatorBody.Play("Zap_jump_in_L");
 			break;
 			
 		case Action.JUMP:
 			if( param == 0 ){
 				
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_jump_fly_R");
-				else zap.getAnimator().Play("Zap_jump_fly_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_jump_fly_R");
+				else zap.AnimatorBody.Play("Zap_jump_fly_L");
 				
 			}else if (param == 1) {
-				if( zap.faceRight() ) zap.getAnimator().Play("zap_rocks_climb_R");
-				else zap.getAnimator().Play("zap_rocks_climb_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("zap_rocks_climb_R");
+				else zap.AnimatorBody.Play("zap_rocks_climb_L");
 			}
 			if( zap.jumpSounds.Length != 0 )
 				zap.getAudioSource().PlayOneShot(zap.jumpSounds[Random.Range(0,zap.jumpSounds.Length)], 0.2F);
@@ -808,16 +808,16 @@ public class ZapControllerNormal : ZapController {
 		case Action.JUMP_RIGHT:
 		case Action.JUMP_RIGHT_LONG:
 			
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_run_jump_fly_R");
-			else zap.getAnimator().Play("Zap_run_jump_fly_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
+			else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 			
 			if( zap.jumpSounds.Length != 0 )
 				zap.getAudioSource().PlayOneShot(zap.jumpSounds[Random.Range(0,zap.jumpSounds.Length)], 0.2F);
 			break;
 			
 		case Action.LANDING_HARD:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_landing_hard_R");
-			else zap.getAnimator().Play("Zap_landing_hard_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_landing_hard_R");
+			else zap.AnimatorBody.Play("Zap_landing_hard_L");
 			
 			if( zap.landingSounds.Length != 0 )
 				zap.getAudioSource().PlayOneShot(zap.landingSounds[Random.Range(0,zap.landingSounds.Length)], 0.15F);
@@ -829,45 +829,45 @@ public class ZapControllerNormal : ZapController {
 			break;
 		case Action.CLIMB_CATCH:
 			if( param == 0 ){
-				if( zap.faceRight() ) zap.getAnimator().Play("zap_rocks_catch_position_R");
-				else zap.getAnimator().Play("zap_rocks_catch_position_L");
+				if( zap.faceRight() ) zap.AnimatorBody.Play("zap_rocks_catch_position_R");
+				else zap.AnimatorBody.Play("zap_rocks_catch_position_L");
 				
 			}else if( param == 1 ){
 				// tu juz jest we wlasciwej klatce
-				if( zap.faceRight() ) zap.getAnimator().Play("zap_rocks_catch_position_rev_R");
-				else zap.getAnimator().Play("zap_rocks_catch_position_rev_L");
-				zap.getAnimator().speed = 0.0f;
+				if( zap.faceRight() ) zap.AnimatorBody.Play("zap_rocks_catch_position_rev_R");
+				else zap.AnimatorBody.Play("zap_rocks_catch_position_rev_L");
+				zap.AnimatorBody.speed = 0.0f;
 			}
 			
 			if( zap.catchSounds.Length != 0)
 				zap.getAudioSource().PlayOneShot(zap.catchSounds[Random.Range(0,zap.catchSounds.Length)], 0.7F);
 			break;
 		case Action.CLIMB_CLIMB:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_jump_climb_R");
-			else zap.getAnimator().Play("Zap_jump_climb_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_jump_climb_R");
+			else zap.AnimatorBody.Play("Zap_jump_climb_L");
 			break;
 			
 		case Action.CLIMB_PULLDOWN:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_drop_R");
-			else zap.getAnimator().Play("Zap_drop_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_drop_R");
+			else zap.AnimatorBody.Play("Zap_drop_L");
 			break;
 			
 		case Action.MOUNT_IDLE:
-			zap.getAnimator().Play("Zap_climbmove_up");
-			zap.getAnimator().speed = 0.0f;
+			zap.AnimatorBody.Play("Zap_climbmove_up");
+			zap.AnimatorBody.speed = 0.0f;
 			break;
 			
 		case Action.MOUNT_LEFT:
-			zap.getAnimator().Play("Zap_climbmove_left");
+			zap.AnimatorBody.Play("Zap_climbmove_left");
 			break;
 		case Action.MOUNT_RIGHT:
-			zap.getAnimator().Play("Zap_climbmove_right");
+			zap.AnimatorBody.Play("Zap_climbmove_right");
 			break;
 		case Action.MOUNT_UP:
-			zap.getAnimator().Play("Zap_climbmove_up");
+			zap.AnimatorBody.Play("Zap_climbmove_up");
 			break;
 		case Action.MOUNT_DOWN:
-			zap.getAnimator().Play("Zap_climbmove_down");
+			zap.AnimatorBody.Play("Zap_climbmove_down");
 			break;
 
 		case Action.MOUNT_ATTACK_LEFT:
@@ -882,7 +882,7 @@ public class ZapControllerNormal : ZapController {
 			lCutEnd = zap.leftKnifeHitPointLow1.position;
 			cut(lCutBegin,lCutEnd);
 
-			zap.getAnimator().Play("Zap_climb_knife_attack");
+			zap.AnimatorBody.Play("Zap_climb_knife_attack");
 			break;
 
 		case Action.MOUNT_ATTACK_RIGHT:
@@ -898,38 +898,38 @@ public class ZapControllerNormal : ZapController {
 			rCutEnd = zap.rightKnifeHitPointLow2.position;
 			cut(rCutBegin,rCutEnd);
 
-			zap.getAnimator().Play ("Zap_climb_knife_attack");
+			zap.AnimatorBody.Play ("Zap_climb_knife_attack");
 			break;
 			
 		case Action.CROUCH_IN:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_crouch_in_R");
-			else zap.getAnimator().Play("Zap_crouch_in_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_crouch_in_R");
+			else zap.AnimatorBody.Play("Zap_crouch_in_L");
 			break;
 			
 		case Action.GET_UP:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_getup_R");
-			else zap.getAnimator().Play("Zap_getup_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_getup_R");
+			else zap.AnimatorBody.Play("Zap_getup_L");
 			break;
 			
 		case Action.CROUCH_IDLE:
-			if( zap.faceRight () ) zap.getAnimator().Play("Zap_crouch_move_R");
-			else zap.getAnimator().Play("Zap_crouch_move_L");
-			zap.getAnimator().speed = 0f;
+			if( zap.faceRight () ) zap.AnimatorBody.Play("Zap_crouch_move_R");
+			else zap.AnimatorBody.Play("Zap_crouch_move_L");
+			zap.AnimatorBody.speed = 0f;
 			break;
 			
 		case Action.CROUCH_LEFT:
-			zap.getAnimator().Play("Zap_crouch_move_L");
+			zap.AnimatorBody.Play("Zap_crouch_move_L");
 			break;
 		case Action.CROUCH_RIGHT:
-			zap.getAnimator().Play("Zap_crouch_move_R");
+			zap.AnimatorBody.Play("Zap_crouch_move_R");
 			break;
 			
 		case Action.CROUCH_LEFT_BACK:
-			zap.getAnimator().Play("Zap_crouch_move_back_R");
+			zap.AnimatorBody.Play("Zap_crouch_move_back_R");
 			break;
 			
 		case Action.CROUCH_RIGHT_BACK:
-			zap.getAnimator().Play("Zap_crouch_move_back_L");
+			zap.AnimatorBody.Play("Zap_crouch_move_back_L");
 			break;
 			
 		case Action.ROPECLIMB_IDLE:
@@ -937,13 +937,13 @@ public class ZapControllerNormal : ZapController {
 			break;
 			
 		case Action.ROPECLIMB_UP:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_climbup_R");
-			else zap.getAnimator().Play("Zap_liana_climbup_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_climbup_R");
+			else zap.AnimatorBody.Play("Zap_liana_climbup_L");
 			break;
 			
 		case Action.ROPECLIMB_DOWN:
-			if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_slide_R");
-			else zap.getAnimator().Play("Zap_liana_slide_L");
+			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_slide_R");
+			else zap.AnimatorBody.Play("Zap_liana_slide_L");
 			break;
 		};
 		
@@ -1342,7 +1342,7 @@ public class ZapControllerNormal : ZapController {
 		
 		distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 		
-		zap.getAnimator().speed = 0.5f + (Mathf.Abs( zap.velocity.x ) / WalkSpeed ) * 0.5f;
+		zap.AnimatorBody.speed = 0.5f + (Mathf.Abs( zap.velocity.x ) / WalkSpeed ) * 0.5f;
 		
 		float distToObstacle = 0.0f;
 		if (zap.checkObstacle (dir, distToMove, ref distToObstacle)) {
@@ -1405,7 +1405,7 @@ public class ZapControllerNormal : ZapController {
 		
 		distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 		
-		zap.getAnimator().speed = 0.5f + (Mathf.Abs( zap.velocity.x ) / RunSpeed ) * 0.5f;
+		zap.AnimatorBody.speed = 0.5f + (Mathf.Abs( zap.velocity.x ) / RunSpeed ) * 0.5f;
 		
 		float distToObstacle = 0.0f;
 		if (zap.checkObstacle (dir, distToMove, ref distToObstacle)) {
@@ -1638,15 +1638,15 @@ public class ZapControllerNormal : ZapController {
 			//if( _swing ){
 			if( zap.dir () == Vector2.right ){
 				
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_swingback_R");
-				else zap.getAnimator().Play("Zap_liana_swingback_L");
-				zap.getAnimator().speed = 1f;
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_swingback_R");
+				else zap.AnimatorBody.Play("Zap_liana_swingback_L");
+				zap.AnimatorBody.speed = 1f;
 				
 			}else{
 				
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_swingfront_R");
-				else zap.getAnimator().Play("Zap_liana_swingfront_L");
-				zap.getAnimator().speed = 1f;
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_swingfront_R");
+				else zap.AnimatorBody.Play("Zap_liana_swingfront_L");
+				zap.AnimatorBody.speed = 1f;
 				
 			}
 			//}
@@ -1664,15 +1664,15 @@ public class ZapControllerNormal : ZapController {
 			//if( _swing ){
 			if( zap.dir () == Vector2.right ){
 				
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_swingfront_R");
-				else zap.getAnimator().Play("Zap_liana_swingfront_L");
-				zap.getAnimator().speed = 1f;
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_swingfront_R");
+				else zap.AnimatorBody.Play("Zap_liana_swingfront_L");
+				zap.AnimatorBody.speed = 1f;
 				
 			}else{
 				
-				if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_swingback_R");
-				else zap.getAnimator().Play("Zap_liana_swingback_L");
-				zap.getAnimator().speed = 1f;
+				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_swingback_R");
+				else zap.AnimatorBody.Play("Zap_liana_swingback_L");
+				zap.AnimatorBody.speed = 1f;
 				
 			}
 			//}
@@ -2086,9 +2086,9 @@ public class ZapControllerNormal : ZapController {
 		setAction (Action.IDLE);
 	}
 	void setActionRopeClimbIdle(){
-		if( zap.faceRight() ) zap.getAnimator().Play("Zap_liana_climbup_R");
-		else zap.getAnimator().Play("Zap_liana_climbup_L");
-		zap.getAnimator().speed = 0f;
+		if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_liana_climbup_R");
+		else zap.AnimatorBody.Play("Zap_liana_climbup_L");
+		zap.AnimatorBody.speed = 0f;
 	}
 	void setActionCrouchIdle(){
 		zap.velocity.x = 0.0f;
