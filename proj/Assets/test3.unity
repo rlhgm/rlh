@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -455,6 +453,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300002, guid: f0c5ee73c17619d4db6895354332d53e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -714,6 +718,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 9eb6d4742ae885946a0a4190ebe358ef, type: 2}
   m_Color: {r: 1, g: .931034446, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: ee55fb5bb4de46244ac3f4e399a4519e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -838,6 +848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0520000011, y: 0}
   TwithTime: {x: .751999974, y: 0}
+  Delay: {x: 0, y: 0}
 --- !u!1001 &58972960
 Prefab:
   m_ObjectHideFlags: 0
@@ -1547,6 +1558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0500000007, y: 0}
   TwithTime: {x: .75, y: 0}
+  Delay: {x: 0, y: 0}
 --- !u!1001 &138198440
 Prefab:
   m_ObjectHideFlags: 0
@@ -2021,7 +2033,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.80338526
+  orthographic size: 7.66276026
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -2029,6 +2041,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3237,6 +3250,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300004, guid: f0c5ee73c17619d4db6895354332d53e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -3456,6 +3475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0399999991, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &426497449
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3688,6 +3708,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: f0c5ee73c17619d4db6895354332d53e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -3732,6 +3758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0199999996, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &436358867
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3986,7 +4013,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 467397572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.419999987, y: 2.69000006, z: 0}
+  m_LocalPosition: {x: -1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 302254412}
@@ -4002,8 +4029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabb1bcbeaa3c4043af51e2c0e9d810d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TwithRange: {x: .0500000007, y: 0}
-  TwithTime: {x: .75, y: 0}
+  TwithRange: {x: .100000001, y: 0}
+  TwithTime: {x: 1, y: 0}
+  Delay: {x: 0, y: 0}
 --- !u!1 &471198967
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,6 +4062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .100000001, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &471198969
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4968,7 +4997,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 559652700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.16999996, y: 2.49000001, z: 0}
+  m_LocalPosition: {x: -1, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 302254412}
@@ -4984,8 +5013,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabb1bcbeaa3c4043af51e2c0e9d810d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TwithRange: {x: .0500000007, y: 0}
-  TwithTime: {x: .800000012, y: 0}
+  TwithRange: {x: .100000001, y: 0}
+  TwithTime: {x: 1, y: 0}
+  Delay: {x: .25, y: 0}
 --- !u!1001 &566906374
 Prefab:
   m_ObjectHideFlags: 0
@@ -5180,6 +5210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .00999999978, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!1 &597441501
 GameObject:
   m_ObjectHideFlags: 0
@@ -5358,6 +5389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0579999983, y: 0}
   TwithTime: {x: .758000016, y: 0}
+  Delay: {x: 0, y: 0}
 --- !u!1 &608483204
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,6 +5851,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: ee55fb5bb4de46244ac3f4e399a4519e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -6167,6 +6205,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300006, guid: f0c5ee73c17619d4db6895354332d53e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -7075,6 +7119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .00999999978, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &813085102
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10803,6 +10848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .100000001, y: 0}
   TwithTime: {x: 1.95000005, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!1 &1038731992
 GameObject:
   m_ObjectHideFlags: 0
@@ -10827,7 +10873,7 @@ Transform:
   m_GameObject: {fileID: 1038731992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.61684215, y: 1.61684215, z: 1.61684215}
+  m_LocalScale: {x: 1.43551409, y: 1.43551409, z: 1.43551409}
   m_Children:
   - {fileID: 1225409483}
   m_Father: {fileID: 1535172079}
@@ -10845,10 +10891,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 768
   preferUncropped: 0
-  screenPixelsY: 475
+  screenPixelsY: 535
   currentCropped: 0
-  screenRatio: .618489563
-  ratio: 1.61684215
+  screenRatio: .696614563
+  ratio: 1.43551409
   mainCamera: {fileID: 2143118006}
   touchCamera: {fileID: 214894816}
 --- !u!1001 &1039750996
@@ -11227,6 +11273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .100000001, y: 0}
   TwithTime: {x: .699999988, y: 0}
+  Delay: {x: 0, y: 0}
 --- !u!1 &1072368210
 GameObject:
   m_ObjectHideFlags: 0
@@ -13077,6 +13124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .100000001, y: 0}
   TwithTime: {x: 2, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &1262635804
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14097,6 +14145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0450000018, y: 0}
   TwithTime: {x: .745000005, y: 0}
+  Delay: {x: 0, y: 0}
 --- !u!1001 &1432068485
 Prefab:
   m_ObjectHideFlags: 0
@@ -14384,7 +14433,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -89.1200027
+      value: -67
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -14412,7 +14461,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_RootOrder
-      value: 40
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: HaveKnife
@@ -14721,6 +14770,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -15031,6 +15081,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -15260,7 +15316,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &1571665166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15278,7 +15334,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &1571665167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15796,6 +15852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0799999982, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &1635533526
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16430,6 +16487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwithRange: {x: .0500000007, y: 0}
   TwithTime: {x: 1, y: 1}
+  Delay: {x: 0, y: 0}
 --- !u!212 &1749132878
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17701,6 +17759,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .963235319, g: .963235319, b: .963235319, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 63a06257b83bed84c9ec66eb04f7ba46, type: 3}
     m_FontSize: 14
@@ -18752,6 +18816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 9eb6d4742ae885946a0a4190ebe358ef, type: 2}
   m_Color: {r: 1, g: .929411769, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 30a96f608925fc9408e79441f2117ccb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -18997,6 +19067,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -19321,6 +19392,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 30a96f608925fc9408e79441f2117ccb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -19543,6 +19620,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: ab919bc5cbdaad54f8fbb404c75eb82d, type: 2}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
