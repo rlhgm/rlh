@@ -9,6 +9,7 @@ public class Twitchable : MonoBehaviour {
 
     public Vector2 TwithRange = new Vector2(1f, 1f);
     public Vector2 TwithTime = new Vector2(1f, 1f);
+    public Vector2 Delay = new Vector2(0f, 0f);
 
     // Use this for initialization
     void Start()
@@ -25,18 +26,18 @@ public class Twitchable : MonoBehaviour {
 
         if (TwithTime.x > 0f && TwithRange.x > 0f)
         {
-            float _dtx = (time / TwithTime.x) * Mathf.PI * 2f;
+            float _dtx = ((time - Delay.x) / TwithTime.x) * Mathf.PI * 2f;
             float dtx = Mathf.Sin(_dtx);
             currentPosition.x += dtx * TwithRange.x;
         }
-        
+
         if (TwithTime.y > 0f && TwithRange.y > 0f)
         {
-            float _dty = (time / TwithTime.y) * Mathf.PI * 2f;
+            float _dty = ((time - Delay.y) / TwithTime.y) * Mathf.PI * 2f;
             float dty = Mathf.Sin(_dty);
             currentPosition.y += dty * TwithRange.y;
         }
-        
+
         transform.position = currentPosition;
     }
 }
