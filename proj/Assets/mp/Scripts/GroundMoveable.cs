@@ -15,7 +15,7 @@ public class GroundMoveable : MonoBehaviour {
 
 	void OnMouseOver(){
 		if( Input.GetMouseButtonDown(0) ){
-			print("GetMouseButtonDown");
+			//print("GetMouseButtonDown");
 		}
 	}
 }
