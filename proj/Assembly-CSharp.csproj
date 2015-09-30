@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CutableBush.cs" />
      <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
@@ -59,7 +58,9 @@
      <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
+     <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
+     <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\Panther.cs" />
      <Compile Include="Assets\mp\Scripts\Pickable.cs" />
@@ -69,6 +70,7 @@
      <Compile Include="Assets\mp\Scripts\ShowInfoTrigger.cs" />
      <Compile Include="Assets\mp\Scripts\Snake.cs" />
      <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
+     <Compile Include="Assets\mp\Scripts\Twitchable.cs" />
      <Compile Include="Assets\mp\Scripts\Water.cs" />
      <Compile Include="Assets\mp\Scripts\WeaponMenu.cs" />
      <Compile Include="Assets\mp\Scripts\WeaponMenuItem.cs" />
