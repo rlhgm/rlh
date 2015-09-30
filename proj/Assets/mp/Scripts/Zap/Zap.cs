@@ -104,6 +104,8 @@ public class Zap : MonoBehaviour {
 		coll = GetComponent<BoxCollider2D> ();
 		gfx  = transform.Find("gfx").transform;
 		gfxCollider = gfx.GetComponent<PolygonCollider2D> ();
+        gfxLegs = transform.Find("gfxLegs").transform;
+
 		animator = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
 
@@ -492,7 +494,7 @@ public class Zap : MonoBehaviour {
 		if (other.gameObject.tag == "Panther") {
 			Panther panther = other.gameObject.GetComponent<Panther>();
 			if( panther.attacking() ){
-				if( !currentController.isInDodge() ){
+				if( !currentController.isDodging() ){
 					die(DeathType.PANTHER);
 				}
 			}
@@ -552,7 +554,7 @@ public class Zap : MonoBehaviour {
 		if (other.gameObject.tag == "Panther") {
 			Panther panther = other.gameObject.GetComponent<Panther>();
 			if( panther.attacking() ){
-				if( !currentController.isInDodge() ){
+				if( !currentController.isDodging() ){
 					die(DeathType.PANTHER);
 				}
 			}
@@ -1359,12 +1361,7 @@ public class Zap : MonoBehaviour {
 	
 	/*////////////////////////////////////////////////////////////*/
 
-	SpriteRenderer sprRend = null;
-	BoxCollider2D coll;
-	public Animator getAnimator(){
-		return animator;
-	}
-	Animator animator;
+	
 
 	[HideInInspector]
 	public Transform sensorLeft1;
@@ -1409,9 +1406,33 @@ public class Zap : MonoBehaviour {
 
 	Transform cameraTarget;
 	Transform gfx;
+    Transform gfxLegs;
+    //SpriteRenderer 
 	PolygonCollider2D gfxCollider;
 
-	[HideInInspector]
+    public Transform GfxLegs
+    {
+        get
+        {
+            return gfxLegs;
+        }
+    }
+
+    SpriteRenderer sprRend = null;
+    BoxCollider2D coll;
+    public Animator getAnimator(){
+    	return animator;
+    }
+    Animator animator;
+    //public Animator AnimtorTop
+    //{
+    //    get
+    //    {
+    //        return animator;
+    //    }
+    //}
+
+    [HideInInspector]
 	public Vector3 velocity;
 	[HideInInspector]
 	public Vector3 lastVelocity;

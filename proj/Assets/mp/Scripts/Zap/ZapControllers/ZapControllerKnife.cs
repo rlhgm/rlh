@@ -346,8 +346,8 @@ public class ZapControllerKnife : ZapController {
 	public override void FUpdate(float fDeltaTime){
 	}
 	
-	public override void activate(bool restore = false, bool crouch = false){
-		base.activate ();
+	public override void activateSpec(bool restore = false, bool crouch = false){
+		//base.activate ();
 		restored = restore;
 		//setAction (Action.IDLE);
 		if (!crouch) {
@@ -370,7 +370,7 @@ public class ZapControllerKnife : ZapController {
 		return false;
 	}
 
-	public override bool isInDodge(){
+	public override bool isDodging(){
 		//if(
 		return isInAction(Action.ROLL_LEFT_FRONT) ||
 			isInAction(Action.ROLL_LEFT_BACK) ||

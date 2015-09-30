@@ -69,9 +69,14 @@ public class ZapController : ScriptableObject{
 			weaponMenuItem.setState (WeaponMenuItem.State.OFF);
 	}
 
-	public virtual void activate(bool restore = false, bool crouch = false){
-		if( weaponMenuItem )
-			weaponMenuItem.setState (WeaponMenuItem.State.BLINK);
+    public void activate(bool restore = false, bool crouch = false)
+    {
+        if (weaponMenuItem) weaponMenuItem.setState(WeaponMenuItem.State.BLINK);
+        zap.GfxLegs.gameObject.SetActive(false);
+        activateSpec(restore, crouch);
+    }
+    public virtual void activateSpec(bool restore = false, bool crouch = false)
+    {
 	}
 	public virtual void deactivate(){
 		if (weaponMenuItem) {
@@ -167,7 +172,7 @@ public class ZapController : ScriptableObject{
 		return false;
 	}
 
-	public virtual bool isInDodge(){
+	public virtual bool isDodging(){
 		return false;
 	}
 

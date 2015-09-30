@@ -501,10 +501,11 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	//bool restored = false;
 
-	public override void activate(bool restore = false, bool crouch = false){
-		base.activate ();
-		//setAction (Action.IDLE);
-		setAction (Action.PULLOUT_GRAVITYGUN);
+	public override void activateSpec(bool restore = false, bool crouch = false){
+        //base.activate ();
+        //setAction (Action.IDLE);
+        zap.GfxLegs.gameObject.SetActive(true);
+        setAction (Action.PULLOUT_GRAVITYGUN);
 		//canPullUp = false;
 		desiredSpeedX = 0.0f;
 	}
@@ -520,7 +521,7 @@ public class ZapControllerGravityGun : ZapController {
 		return false;
 	}
 
-	public override bool isInDodge(){
+	public override bool isDodging(){
 		//if(
 		return isInAction(Action.ROLL_LEFT_FRONT) ||
 	    	isInAction(Action.ROLL_LEFT_BACK) ||
