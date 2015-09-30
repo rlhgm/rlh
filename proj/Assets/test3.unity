@@ -14433,11 +14433,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -67
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -14465,11 +14465,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: HaveKnife
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: HaveGravityGun
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 410290, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y

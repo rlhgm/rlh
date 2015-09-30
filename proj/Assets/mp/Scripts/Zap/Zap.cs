@@ -1429,6 +1429,14 @@ public class Zap : MonoBehaviour {
     //SpriteRenderer 
     PolygonCollider2D gfxCollider;
 
+    public Transform GravityGunBeam
+    {
+        get
+        {
+            return gravityGunBeam;
+        }
+    }
+
     public Transform GfxLegs
     {
         get

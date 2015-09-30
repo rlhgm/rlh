@@ -121,8 +121,9 @@ public class ZapControllerGravityGun : ZapController {
 
 		draggedStone = null;
         shooting = true;
+        zap.GravityGunBeam.gameObject.SetActive(true);
 
-		Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
 		
 		RaycastHit2D hit = Physics2D.Linecast( mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask );
 		if( hit.collider ){
@@ -162,7 +163,8 @@ public class ZapControllerGravityGun : ZapController {
 
 		if (Input.GetMouseButtonUp (0)) {
             shooting = false;
-			releaseStone();
+            zap.GravityGunBeam.gameObject.SetActive(false);
+            releaseStone();
 		}
 
 		switch (action) {
@@ -221,148 +223,6 @@ public class ZapControllerGravityGun : ZapController {
 		}
 		
 		switch (zap.getState()) {
-			
-//		case Zap.State.IN_AIR:
-//			
-//			
-//			zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
-//			
-//			//			if( isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) ){
-//			//				
-//			//				if( Input.GetKey(zap.keyLeft) ){
-//			//					zap.velocity.x -= (FlyUserControlParam * deltaTime);
-//			//					
-//			//					if( isInAction(Action.JUMP_LEFT) ){
-//			//						if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-//			//							zap.velocity.x = -JumpSpeed;
-//			//					}else{
-//			//						if( Mathf.Abs( zap.velocity.x ) > JumpLongSpeed )
-//			//							zap.velocity.x = -JumpLongSpeed;
-//			//					}
-//			//					
-//			//				}else if ( Input.GetKey(zap.keyRight) ){
-//			//					zap.velocity.x += (FlyUserControlParam * deltaTime);
-//			//					if( zap.velocity.x > 0.0f ) zap.velocity.x = 0.0f;
-//			//				}
-//			//			}else if( isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG) ){
-//			//				if( Input.GetKey(zap.keyRight) ){
-//			//					zap.velocity.x += (FlyUserControlParam * deltaTime);
-//			//					
-//			//					if( isInAction(Action.JUMP_RIGHT) ){
-//			//						if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-//			//							zap.velocity.x = JumpSpeed;
-//			//					}else{
-//			//						if( Mathf.Abs( zap.velocity.x ) > JumpLongSpeed )
-//			//							zap.velocity.x = JumpLongSpeed;
-//			//					}
-//			//					
-//			//				}else if( Input.GetKey(zap.keyLeft) ) {
-//			//					zap.velocity.x -= (FlyUserControlParam * deltaTime);
-//			//					if( zap.velocity.x < 0.0f ) zap.velocity.x = 0.0f;
-//			//				} 
-//			//			}else if( isInAction(Action.JUMP) ){
-//			//				if( Input.GetKey(zap.keyLeft) ){
-//			//					zap.velocity.x -= (FlyUpUserControlParam * deltaTime);
-//			//					if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-//			//						zap.velocity.x = -JumpSpeed;
-//			//				}
-//			//				if( Input.GetKey(zap.keyRight) ){
-//			//					zap.velocity.x += (FlyUpUserControlParam * deltaTime);
-//			//					if( Mathf.Abs( zap.velocity.x ) > JumpSpeed )
-//			//						zap.velocity.x = JumpSpeed;
-//			//				}
-//			//				
-//			//				if( zap.velocity.x > 0.0f ){
-//			//					zap.turnRight();
-//			//				}else if(zap.velocity.x < 0.0f) {
-//			//					zap.turnLeft();
-//			//				}
-//			//			}
-//			
-//			Vector3 distToFall = new Vector3();
-//			distToFall.x = zap.velocity.x * deltaTime;
-//			
-//			if( distToFall.x > 0.0f ){
-//				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f,!zap.stateJustChanged);
-//				if( obstacleOnRoad >= 0.0f ){
-//					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
-//						distToFall.x = obstacleOnRoad;
-//						zap.velocity.x = 0.0f;
-//					}
-//				}
-//			}else if( distToFall.x < 0.0f ){
-//				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!zap.stateJustChanged);
-//				if( obstacleOnRoad >= 0.0f ){
-//					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
-//						distToFall.x = -obstacleOnRoad;
-//						zap.velocity.x = 0.0f;
-//					}
-//				}
-//			}
-//			
-//			transform.position = transform.position + distToFall;
-//			distToFall.x = 0f;
-//			
-//			zap.velocity.y += zap.GetImpulse().y;
-//			if(zap.velocity.y > MaxSpeedY)
-//				zap.velocity.y = MaxSpeedY;
-//			if(zap.velocity.y < -MaxSpeedY)
-//				zap.velocity.y = -MaxSpeedY;
-//			
-//			distToFall.y = zap.velocity.y * deltaTime;
-//			
-//			bool justLanding = false;
-//			
-//			if( distToFall.y > 0.0f ) { // leci w gore
-//				//transform.position = transform.position + distToFall;
-//			} else if( distToFall.y < 0.0f ) { // spada
-//				if( zap.lastVelocity.y >= 0.0f ) { // zaczyna spadac
-//					// badam czy bohater nie "stoi" wewnatrz wskakiwalnej platformy
-//					zap.startFallPos = transform.position;
-//					//print ( "zap.startFallPos : " + zap.startFallPos );
-//					if( zap.lastVelocity.y > 0.0f ){
-//						//lastCatchedClimbHandle = null;
-//					}
-//				}
-//				groundUnderFeet = zap.checkDown( Mathf.Abs(distToFall.y) + 0.01f);
-//				if( groundUnderFeet >= 0.0f ){
-//					if( (groundUnderFeet < Mathf.Abs(distToFall.y)) || Mathf.Abs( groundUnderFeet - Mathf.Abs(distToFall.y)) < 0.01f  ){
-//						//lastCatchedClimbHandle = null;
-//						distToFall.y = -groundUnderFeet;
-//						justLanding = true;
-//					}
-//				}
-//			}
-//			
-//			transform.position = transform.position + distToFall;
-//			
-//			if( justLanding ){
-//				
-//				if( zap.landingSound )
-//					zap.getAudioSource().PlayOneShot( zap.landingSound );
-//				
-//				zap.setFuddledFromBrid( false );
-//				
-//				zap.setState(Zap.State.ON_GROUND);
-//				zap.velocity.y = 0.0f;
-//				
-//				Vector3 fallDist = zap.startFallPos - transform.position;
-//				
-//				//				if( fallDist.y >= VeryHardLandingHeight ){
-//				//					zap.die(Zap.DeathType.VERY_HARD_LANDING);
-//				//				} else if( fallDist.y >= HardLandingHeight ){
-//				//					
-//				//					zap.velocity.x = 0.0f;
-//				//					setAction (Action.LANDING_HARD);
-//				//					
-//				//				}else{
-//				
-//				resetActionAndState();
-//				
-//				//}
-//			}
-//			
-//			break;
 			
 		case Zap.State.ON_GROUND:
 			float distToGround = 0.0f;
@@ -507,6 +367,7 @@ public class ZapControllerGravityGun : ZapController {
         //base.activate ();
         //setAction (Action.IDLE);
         zap.GfxLegs.gameObject.SetActive(false);
+        zap.GravityGunBeam.gameObject.SetActive(false);
         setAction (Action.PULLOUT_GRAVITYGUN);
 		//canPullUp = false;
 		desiredSpeedX = 0.0f;
@@ -516,7 +377,8 @@ public class ZapControllerGravityGun : ZapController {
 		base.deactivate ();
         releaseStone();
         shooting = false;
-	}
+        zap.GravityGunBeam.gameObject.SetActive(false);
+    }
 
 	public override bool tryDeactiveate(){
 		if( isInAction(Action.IDLE) ){
@@ -565,6 +427,14 @@ public class ZapControllerGravityGun : ZapController {
 
     void trackCursor(Action act, bool shoot)
     {
+        if (shoot)
+        {
+            LineRenderer line = zap.GravityGunBeam.GetComponent<LineRenderer>();
+            Vector2 beamOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+
+            line.SetPosition(0, beamOrigin);
+        }
+
         Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 rayOrigin = zap.Targeter.position; // zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
         Vector3 df = mouseInScene - rayOrigin;

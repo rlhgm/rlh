@@ -73,6 +73,7 @@ public class ZapController : ScriptableObject{
     {
         if (weaponMenuItem) weaponMenuItem.setState(WeaponMenuItem.State.BLINK);
         zap.GfxLegs.gameObject.SetActive(false);
+        zap.GravityGunBeam.gameObject.SetActive(false);
         activateSpec(restore, crouch);
     }
     public virtual void activateSpec(bool restore = false, bool crouch = false)
