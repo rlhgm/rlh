@@ -1,38 +1,33 @@
-Initialize engine version: 5.1.3f1 (b0a23b31c3d8)
+Initialize engine version: 5.2.1f1 (44735ea161b3)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 11.0 [level 10.0]
-    Renderer: NVIDIA GeForce 9300M GS  (ID=0x6e9)
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 750 Ti (ID=0x1380)
     Vendor:   NVIDIA
-    VRAM:     497 MB
+    VRAM:     1970 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading C:\rlh\proj\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.355 seconds
-desktop: 1920x1080 60Hz; virtual: 3360x1080 at -1440,0
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.044 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
-Platform assembly: C:\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
+<RI> Initialized touch support.
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
 Panther (Panther) jest target
  
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at ZapControllerNormal.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.ZapUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 256c -> priority: 1 
+  Thread -> id: 2568 -> priority: 1 

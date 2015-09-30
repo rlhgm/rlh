@@ -41,23 +41,28 @@ public class ZapController : ScriptableObject{
 
 	protected WeaponMenuItem weaponMenuItem;
 
-	virtual public void setZap(Zap playerController){
-		zap = playerController;
-		transform = zap.transform;
-		if (weaponMenuItem) {
-			weaponMenuItem.setState(WeaponMenuItem.State.OFF);
-		}
-	}
+    virtual public void setZap(Zap playerController)
+    {
+        zap = playerController;
+        transform = zap.transform;
+        if (weaponMenuItem)
+        {
+            weaponMenuItem.setState(WeaponMenuItem.State.OFF);
+        }
+    }
 
-	public virtual void MUpdate (float deltaTime) {	
-	}
-	
-	public virtual void FUpdate(float fDeltaTime){
-	}
+    public virtual void MUpdate(float deltaTime)
+    {
+    }
 
-	public virtual void selected(){
-		if( weaponMenuItem )
-			weaponMenuItem.setState (WeaponMenuItem.State.ON);
+    public virtual void FUpdate(float fDeltaTime)
+    {
+    }
+
+    public virtual void selected()
+    {
+        if (weaponMenuItem)
+            weaponMenuItem.setState (WeaponMenuItem.State.ON);
 	}
 	public virtual void deselected(){
 		if( weaponMenuItem )
