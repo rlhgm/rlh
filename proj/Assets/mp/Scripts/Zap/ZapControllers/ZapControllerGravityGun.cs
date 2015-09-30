@@ -574,18 +574,34 @@ public class ZapControllerGravityGun : ZapController {
                 deg = -180f - deg;
             }
         }
-        Debug.Log("trackCursor : " + deg);
+        //Debug.Log("trackCursor : " + deg);
+        
 
         switch (act)
         {
             case Action.IDLE:
-                break;
-
             case Action.WALK_LEFT:
+            case Action.WALK_RIGHT:
+
+                if (deg < -45)
+                {
+                    zap.AnimatorBody.Play("Zap_gg_body_walk_-45");
+                }
+                else if (deg < 45)
+                {
+                    zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                }
+                else
+                {
+                    zap.AnimatorBody.Play("Zap_gg_body_walk_45");
+                }
                 break;
 
-            case Action.WALK_RIGHT:
-                break;
+            //case Action.WALK_LEFT:
+            //    break;
+
+            //case Action.WALK_RIGHT:
+            //    break;
 
             case Action.WALKBACK_LEFT:
                 break;
@@ -632,117 +648,134 @@ public class ZapControllerGravityGun : ZapController {
                 break;
 
             case Action.PULLOUT_GRAVITYGUN:
-			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_knife_pull");
-			else zap.AnimatorBody.Play ("Zap_knife_pull");
-			break;
-			
-		case Action.HIDE_GRAVITYGUN:
-			if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_knife_hide");
-			else zap.AnimatorBody.Play ("Zap_knife_hide");
-			break;
-			
-		case Action.DIE:
-			Zap.DeathType dt = (Zap.DeathType)param;
-			string msgInfo = "";
-			
-			switch( dt ){
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_knife_pull");
+                else zap.AnimatorBody.Play("Zap_knife_pull");
+                break;
 
-			case Zap.DeathType.STONE_HIT:
-				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_stonehit_R");
-				else zap.AnimatorBody.Play("Zap_death_stonehit_L");
-				msgInfo = zap.DeathByStoneHitText;
-				break;
+            case Action.HIDE_GRAVITYGUN:
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_knife_hide");
+                else zap.AnimatorBody.Play("Zap_knife_hide");
+                break;
 
-			case Zap.DeathType.VERY_HARD_LANDING:
-				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_hitground_R");
-				else zap.AnimatorBody.Play("Zap_death_hitground_L");
-				msgInfo = zap.DeathByVeryHardLandingText;
-				break;
-				
-			case Zap.DeathType.SNAKE:
-				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_poison_R");
-				else zap.AnimatorBody.Play("Zap_death_poison_L");
-				msgInfo = zap.DeathBySnakeText;
-				break;
-				
-			case Zap.DeathType.POISON:
-				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_poison_R");
-				else zap.AnimatorBody.Play("Zap_death_poison_L");
-				msgInfo = zap.DeathByPoisonText;
-				break;
+            case Action.DIE:
+                Zap.DeathType dt = (Zap.DeathType)param;
+                string msgInfo = "";
 
-			case Zap.DeathType.PANTHER:
-				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_panther");
-				else zap.AnimatorBody.Play("Zap_death_panther");
-				msgInfo = zap.DeathByPantherText;
-				break;
+                switch (dt)
+                {
 
-			case Zap.DeathType.CROCODILE:
-				msgInfo = zap.DeathByCrocodileText;
-				break;
-				
-			default:
-				if( zap.faceRight() ) zap.AnimatorBody.Play("Zap_death_hitground_R");
-				else zap.AnimatorBody.Play("Zap_death_hitground_L");
-				msgInfo = zap.DeathByDefaultText;
-				break;
-				
-			};
-			
-			zap.showInfo (msgInfo, -1);
-			
-			if( zap.dieSounds.Length != 0 )
-				zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0,zap.dieSounds.Length)], 0.3F);
-			break;
-			
-		case Action.WALK_LEFT:
-			zap.AnimatorBody.Play("Zap_knife_walk");
-			break;
-		case Action.WALK_RIGHT:
-			zap.AnimatorBody.Play("Zap_knife_walk");
-			break;
-			
-		case Action.WALKBACK_LEFT:
-			zap.AnimatorBody.Play("Zap_knife_walkback");
-			break;
-		case Action.WALKBACK_RIGHT:
-			zap.AnimatorBody.Play("Zap_knife_walkback");
-			break;
-			
-		case Action.TURN_STAND_LEFT:
-			zap.AnimatorBody.Play("Zap_knife_turnleft");
-			wantJumpAfter = false;
-			break;
-			
-		case Action.TURN_STAND_RIGHT:
-			zap.AnimatorBody.Play("Zap_knife_turnright");
-			wantJumpAfter = false;
-			break;
+                    case Zap.DeathType.STONE_HIT:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_stonehit_R");
+                        else zap.AnimatorBody.Play("Zap_death_stonehit_L");
+                        msgInfo = zap.DeathByStoneHitText;
+                        break;
 
-		case Action.ROLL_LEFT_FRONT:
-			zap.AnimatorBody.Play("Zap_knife_crouch_tumblefront");
-			break;
-			
-		case Action.ROLL_LEFT_BACK:
-			zap.AnimatorBody.Play("Zap_knife_crouch_tumbleback");
-			break;
-			
-		case Action.ROLL_RIGHT_FRONT:
-			zap.AnimatorBody.Play("Zap_knife_crouch_tumblefront");
-			break;
-			
-		case Action.ROLL_RIGHT_BACK:
-			zap.AnimatorBody.Play("Zap_knife_crouch_tumbleback");
-			break;
-		};
-		
-		return true;
-	}
-	bool isInAction(Action test) {
-		return action == test;
-	}
-	bool isNotInAction(Action test){
-		return action != test;
+                    case Zap.DeathType.VERY_HARD_LANDING:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_hitground_R");
+                        else zap.AnimatorBody.Play("Zap_death_hitground_L");
+                        msgInfo = zap.DeathByVeryHardLandingText;
+                        break;
+
+                    case Zap.DeathType.SNAKE:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_poison_R");
+                        else zap.AnimatorBody.Play("Zap_death_poison_L");
+                        msgInfo = zap.DeathBySnakeText;
+                        break;
+
+                    case Zap.DeathType.POISON:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_poison_R");
+                        else zap.AnimatorBody.Play("Zap_death_poison_L");
+                        msgInfo = zap.DeathByPoisonText;
+                        break;
+
+                    case Zap.DeathType.PANTHER:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_panther");
+                        else zap.AnimatorBody.Play("Zap_death_panther");
+                        msgInfo = zap.DeathByPantherText;
+                        break;
+
+                    case Zap.DeathType.CROCODILE:
+                        msgInfo = zap.DeathByCrocodileText;
+                        break;
+
+                    default:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_hitground_R");
+                        else zap.AnimatorBody.Play("Zap_death_hitground_L");
+                        msgInfo = zap.DeathByDefaultText;
+                        break;
+
+                };
+
+                zap.showInfo(msgInfo, -1);
+
+                if (zap.dieSounds.Length != 0)
+                    zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)], 0.3F);
+                break;
+
+            case Action.WALK_LEFT:
+                //zap.AnimatorBody.Play("Zap_knife_walk");
+                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorLegs.Play("Zap_GG_legs_walk");
+                zap.GfxLegs.gameObject.SetActive(true);
+                //zap.AnimatorLegs.speed = 0f;
+                //zap.AnimatorBody.speed = 0f;
+                break;
+            case Action.WALK_RIGHT:
+                //zap.AnimatorBody.Play("Zap_knife_walk");
+                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorLegs.Play("Zap_GG_legs_walk");
+                zap.GfxLegs.gameObject.SetActive(true);
+                break;
+
+            case Action.WALKBACK_LEFT:
+                //zap.AnimatorBody.Play("Zap_knife_walkback");
+                zap.GfxLegs.gameObject.SetActive(true);
+                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorLegs.Play("Zap_gg_legs_walkback");
+                break;
+            case Action.WALKBACK_RIGHT:
+                //zap.AnimatorBody.Play("Zap_knife_walkback");
+                zap.GfxLegs.gameObject.SetActive(true);
+                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorLegs.Play("Zap_gg_legs_walkback");                
+                break;
+
+            case Action.TURN_STAND_LEFT:
+                zap.AnimatorBody.Play("Zap_knife_turnleft");
+                wantJumpAfter = false;
+                break;
+
+            case Action.TURN_STAND_RIGHT:
+                zap.AnimatorBody.Play("Zap_knife_turnright");
+                wantJumpAfter = false;
+                break;
+
+            case Action.ROLL_LEFT_FRONT:
+                zap.AnimatorBody.Play("Zap_knife_crouch_tumblefront");
+                break;
+
+            case Action.ROLL_LEFT_BACK:
+                zap.AnimatorBody.Play("Zap_knife_crouch_tumbleback");
+                break;
+
+            case Action.ROLL_RIGHT_FRONT:
+                zap.AnimatorBody.Play("Zap_knife_crouch_tumblefront");
+                break;
+
+            case Action.ROLL_RIGHT_BACK:
+                zap.AnimatorBody.Play("Zap_knife_crouch_tumbleback");
+                break;
+        };
+
+        return true;
+    }
+    bool isInAction(Action test)
+    {
+        return action == test;
+    }
+    bool isNotInAction(Action test)
+    {
+        return action != test;
 	}
 	
 	public override int keyUpDown(){

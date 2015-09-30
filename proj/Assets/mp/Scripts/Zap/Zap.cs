@@ -1054,12 +1054,19 @@ public class Zap : MonoBehaviour {
 		scl.x = Mathf.Abs(scl.x) * -1.0f;
 		gfx.localScale = scl;
 
-	}
+        scl = gfxLegs.localScale;
+        scl.x = Mathf.Abs(scl.x) * -1.0f;
+        gfxLegs.localScale = scl;
+    }
 	public void turnRight(){
 		Vector3 scl = gfx.localScale;
 		scl.x = Mathf.Abs(scl.x) * 1.0f;
 		gfx.localScale = scl;
-	}
+
+        scl = gfxLegs.localScale;
+        scl.x = Mathf.Abs(scl.x) * 1.0f;
+        gfxLegs.localScale = scl;
+    }
 
 	public Vector2 dir(){
 		return gfx.localScale.x > 0.0f ? Vector2.right : -Vector2.right;
