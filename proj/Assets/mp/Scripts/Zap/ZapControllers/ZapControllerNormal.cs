@@ -1522,37 +1522,47 @@ public class ZapControllerNormal : ZapController {
 		return 0;
 	}
 
+    bool tryMountAttackStart()
+    {
+        if (zap.HaveKnife && Input.GetMouseButtonDown(0))
+        {
+            Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+            if (mouseInScene.x < transform.position.x)
+            {
+                if (zap.faceRight())
+                {
+                    zap.turnLeft();
+                }
+                setAction(Action.MOUNT_ATTACK_LEFT);
+            }
+            else
+            {
+                if (!zap.faceRight())
+                {
+                    zap.turnRight();
+                }
+                setAction(Action.MOUNT_ATTACK_RIGHT);
+            }
+            return true;
+        }
+        return false;
+    }
+
 	int Action_MOUNT_IDLE(){
-		if (zap.HaveKnife && Input.GetMouseButtonDown (0)) {
-			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
-			if( mouseInScene.x < transform.position.x ){
-				if( zap.faceRight() ){
-					zap.turnLeft();
-				}
-				setAction(Action.MOUNT_ATTACK_LEFT);
-			}else{
-				if( !zap.faceRight() ){
-					zap.turnRight();
-				}
-				setAction(Action.MOUNT_ATTACK_RIGHT);
-			}
-			return 0;
-		}
-		return 0;
+		if (tryMountAttackStart())
+        {
+            return 0;
+        }
+        return 0;
 	}
 
 	int Action_MOUNTING(){
-		if (zap.HaveKnife && Input.GetMouseButtonDown (0)) {
-			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
-			if( mouseInScene.x < transform.position.x ){
-				setAction(Action.MOUNT_ATTACK_LEFT);
-			}else{
-				setAction(Action.MOUNT_ATTACK_RIGHT);
-			}
-			return 0;
-		}
+        if (tryMountAttackStart())
+        {
+            return 0;
+        }
 
-		Vector3 newPos3 = transform.position;
+        Vector3 newPos3 = transform.position;
 		Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
 		newPos3 += distToMount;
 		if (zap.checkMount (newPos3)) {
@@ -1564,17 +1574,12 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_MOUNTING_DOWN(){
-		if (zap.HaveKnife && Input.GetMouseButtonDown (0)) {
-			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
-			if( mouseInScene.x < transform.position.x ){
-				setAction(Action.MOUNT_ATTACK_LEFT);
-			}else{
-				setAction(Action.MOUNT_ATTACK_RIGHT);
-			}
-			return 0;
-		}
+        if (tryMountAttackStart())
+        {
+            return 0;
+        }
 
-		Vector3 newPos3 = transform.position;
+        Vector3 newPos3 = transform.position;
 		Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
 		newPos3 += distToMount;
 		
