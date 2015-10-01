@@ -756,7 +756,7 @@ public class ZapControllerKnife : ZapController {
 //			return 0;
 //		}
 
-		if (crouching ()) {
+		if (crouching () || walking()!=0 ) {
 			if (Input.GetKey (zap.keyLeft)) {
 				rollLeft();
 				return 1;
