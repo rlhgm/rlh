@@ -792,8 +792,37 @@ public class ZapControllerKnife : ZapController {
 		}
 		return false;
 	}
+    bool checkDirCrouch()
+    {
+        Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+        if (zap.faceRight())
+        {
+            if (transform.position.x > mouseInScene.x)
+            {
+                //setAction(Action.TURN_STAND_LEFT);
+                zap.turnLeft();
+                setActionCrouchIdle();
+                resetActionAndState();
+                //turnLeftFinish();
+                return true;
+            }
+        }
+        else
+        {
+            if (transform.position.x < mouseInScene.x)
+            {
+                //setAction(Action.TURN_STAND_RIGHT);
+                zap.turnRight();
+                setActionCrouchIdle();
+                resetActionAndState();
+                //turnRightFinish();
+                return true;
+            }
+        }
+        return false;
+    }
 
-	bool checkStartAttack(){
+    bool checkStartAttack(){
 		if (isInAction (Action.IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || walking () != 0) {
 			if (Input.GetMouseButton (0) ) {  //|| Input.GetMouseButtonDown(0)) {
 				setAction (Action.ATTACK);
@@ -971,15 +1000,28 @@ public class ZapControllerKnife : ZapController {
 	}
 	
 	int Action_CROUCH_IDLE(){
-		if( Input.GetKey(zap.keyDown) ){
-			//tryStartClimbPullDown();
-		}
-		return 0;
+        //if( Input.GetKey(zap.keyDown) ){
+        //	//tryStartClimbPullDown();
+        //}
+
+        bool dirChanged = checkDirCrouch();
+        if (dirChanged)
+        {
+            return 0;
+        }
+
+        return 0;
 	}
 	
 	int Action_CROUCH_LEFTRIGHT(int dir){
-		
-		bool speedReached = checkSpeed (dir);
+
+        bool dirChanged = checkDirCrouch();
+        if (dirChanged)
+        {
+            return 0;
+        }
+        
+        bool speedReached = checkSpeed (dir);
 		if (speedReached && desiredSpeedX == 0.0f) {
 			setActionCrouchIdle();
 			if( crouching() ) {
