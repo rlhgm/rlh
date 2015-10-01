@@ -141,6 +141,13 @@ public class ZapControllerGravityGun : ZapController {
 		}
 	}
 
+    void stopShoot()
+    {
+        shooting = false;
+        zap.GravityGunBeam.gameObject.SetActive(false);
+        releaseStone();
+    }
+
 	public override void MUpdate (float deltaTime) {	
 		//Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 		
@@ -162,9 +169,7 @@ public class ZapControllerGravityGun : ZapController {
 		}
 
 		if (Input.GetMouseButtonUp (0)) {
-            shooting = false;
-            zap.GravityGunBeam.gameObject.SetActive(false);
-            releaseStone();
+            stopShoot();
 		}
 
 		switch (action) {
@@ -375,9 +380,7 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	public override void deactivate(){
 		base.deactivate ();
-        releaseStone();
-        shooting = false;
-        zap.GravityGunBeam.gameObject.SetActive(false);
+        stopShoot();
     }
 
 	public override bool tryDeactiveate(){
@@ -819,7 +822,7 @@ public class ZapControllerGravityGun : ZapController {
 			if (Input.GetKey (zap.keyLeft)) {
 				//jumpLeft();
 				rollLeft();
-				return 1;
+                return 1;
 			}
 			if (Input.GetKey (zap.keyRight)) {
 				//jumpRight();
@@ -965,6 +968,7 @@ public class ZapControllerGravityGun : ZapController {
 	}
 
 	void rollLeft(){
+        stopShoot();
 		zap.velocity.x = -rollSpeed;
 		zap.velocity.y = 0.0f;
 		if( !zap.faceRight() )
@@ -974,6 +978,7 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	void rollRight(){
+        stopShoot();
 		zap.velocity.x = rollSpeed;
 		zap.velocity.y = 0.0f;
 		if( zap.faceRight() )
