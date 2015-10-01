@@ -19,7 +19,7 @@ public class BirdEmiterActivator : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			//print ("BirdEmiterActivator::OnTriggerEnter2D");
 			for( int i = 0 ; i < birdEmitters.Length ; ++i ){
-				birdEmitters[i].onOff = true;
+				birdEmitters[i].OnOff = true;
 			}
 		}
 	}
@@ -28,7 +28,7 @@ public class BirdEmiterActivator : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			//print ("BirdEmiterActivator::OnTriggerEnter2D");
 			for( int i = 0 ; i < birdEmitters.Length ; ++i ){
-				birdEmitters[i].onOff = false;
+				birdEmitters[i].OnOff = false;
 			}
 		}
 	}

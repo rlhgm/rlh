@@ -4888,6 +4888,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11477582, guid: 84131610fbeaa644eb3f5a67300bf12d, type: 2}
       propertyPath: EmitFrequency
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477582, guid: 84131610fbeaa644eb3f5a67300bf12d, type: 2}
+      propertyPath: BirdsSpeed
       value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -13831,11 +13835,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 445088, guid: 10331422f73d0ec44b0dc4034fb96ac4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.87476349
+      value: .860000014
       objectReference: {fileID: 0}
     - target: {fileID: 445088, guid: 10331422f73d0ec44b0dc4034fb96ac4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.40435791
+      value: 8.77999973
       objectReference: {fileID: 0}
     - target: {fileID: 445088, guid: 10331422f73d0ec44b0dc4034fb96ac4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13867,7 +13871,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6182102, guid: 10331422f73d0ec44b0dc4034fb96ac4, type: 2}
       propertyPath: m_Size.y
-      value: 14
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11450884, guid: 10331422f73d0ec44b0dc4034fb96ac4, type: 2}
       propertyPath: birdEmitters.Array.data[0]
@@ -14433,11 +14437,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -17
+      value: -54
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z

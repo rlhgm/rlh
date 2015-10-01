@@ -411,7 +411,12 @@ public class Zap : MonoBehaviour {
 		foreach (Pickable pickable in pickables) {
 			pickable.activate();
 		}
-	}
+        BirdEmiter[] birdEmiters = FindObjectsOfType(typeof(BirdEmiter)) as BirdEmiter[];
+        foreach (BirdEmiter birdEmiter in birdEmiters)
+        {
+            birdEmiter.reset();
+        }
+    }
 
 	public GameObject getLastTouchedCheckPoint(){
 		return lastTouchedCheckPoint;
