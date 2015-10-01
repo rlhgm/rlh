@@ -1523,7 +1523,7 @@ public class ZapControllerNormal : ZapController {
 	}
 
 	int Action_MOUNT_IDLE(){
-		if (Input.GetMouseButtonDown (0)) {
+		if (zap.HaveKnife && Input.GetMouseButtonDown (0)) {
 			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
 			if( mouseInScene.x < transform.position.x ){
 				if( zap.faceRight() ){
@@ -1542,7 +1542,7 @@ public class ZapControllerNormal : ZapController {
 	}
 
 	int Action_MOUNTING(){
-		if (Input.GetMouseButtonDown (0)) {
+		if (zap.HaveKnife && Input.GetMouseButtonDown (0)) {
 			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
 			if( mouseInScene.x < transform.position.x ){
 				setAction(Action.MOUNT_ATTACK_LEFT);
@@ -1564,7 +1564,7 @@ public class ZapControllerNormal : ZapController {
 	}
 	
 	int Action_MOUNTING_DOWN(){
-		if (Input.GetMouseButtonDown (0)) {
+		if (zap.HaveKnife && Input.GetMouseButtonDown (0)) {
 			Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
 			if( mouseInScene.x < transform.position.x ){
 				setAction(Action.MOUNT_ATTACK_LEFT);
