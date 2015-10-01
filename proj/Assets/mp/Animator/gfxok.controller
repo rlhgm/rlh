@@ -619,6 +619,29 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1102 &110231142
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Zap_jump_climb_R
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 199d01623fb09f84e937918d0826fa21, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
 --- !u!1102 &110231212
 AnimatorState:
   serializedVersion: 5
@@ -1305,29 +1328,6 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 653431b9027deb942999437ce49bd1bd, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
---- !u!1102 &110265056
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_jump_climb_R
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 90e39009c13e3d14792d8bc69f22a0a8, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2081,9 +2081,6 @@ AnimatorStateMachine:
     m_State: {fileID: 110267794}
     m_Position: {x: 696, y: 240, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 110265056}
-    m_Position: {x: 696, y: 132, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 110264306}
     m_Position: {x: 696, y: 300, z: 0}
   - serializedVersion: 1
@@ -2239,6 +2236,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 110299170}
     m_Position: {x: 1284, y: 456, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110231142}
+    m_Position: {x: 696, y: 132, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
