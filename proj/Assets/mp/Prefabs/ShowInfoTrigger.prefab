@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6127964}
   - 50: {fileID: 5061866}
   - 114: {fileID: 11453920}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShowInfoTrigger
   m_TagString: ShowInfoTrigger
   m_Icon: {fileID: 0}
@@ -137,6 +137,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 29aff0eba10a8a54199bdb6be475e887,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101738}
