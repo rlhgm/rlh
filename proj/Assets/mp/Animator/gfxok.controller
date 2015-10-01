@@ -304,7 +304,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_gg_body_walk_0
-  m_Speed: 1
+  m_Speed: .800000012
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 96340ca29bfe4f24d9067c932dae7b93
-timeCreated: 1443440104
+timeCreated: 1443666337
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -61,7 +61,7 @@ TextureImporter:
         width: 24
         height: 72
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walkslant_plants_0_1
       rect:
@@ -71,7 +71,7 @@ TextureImporter:
         width: 24
         height: 72
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walkslant_plants_0_2
       rect:
@@ -81,7 +81,7 @@ TextureImporter:
         width: 24
         height: 72
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walkslant_plants_0_3
       rect:
@@ -91,7 +91,7 @@ TextureImporter:
         width: 24
         height: 72
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

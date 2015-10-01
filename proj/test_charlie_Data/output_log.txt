@@ -1,25 +1,23 @@
 Initialize engine version: 5.1.2f1 (afd2369b692a)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.1090]
-    Renderer: NVIDIA GeForce 9300M GS 
-    Vendor:   NVIDIA
-    VRAM:     1136 MB (via DXGI)
-    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 NULL=1 RESZ=0 SlowINTZ=0
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1404]
+    Renderer: AMD Radeon HD 5700 Series
+    Vendor:   ATI
+    VRAM:     1010 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 NULL=1 RESZ=1 SlowINTZ=1
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\rlh\proj\test_charlie_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading C:\rlh\proj\test_charlie_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.197 seconds
-desktop: 1920x1080 60Hz; virtual: 3360x1220 at 0,0
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\czare_000\Desktop\test\rlh\proj\test_charlie_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.093 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1200 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\rlh\proj\test_charlie_Data\Managed\System.dll (this message is harmless)
