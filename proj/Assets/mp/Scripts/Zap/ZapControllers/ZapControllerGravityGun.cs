@@ -854,14 +854,24 @@ public class ZapControllerGravityGun : ZapController {
 	}
 	
 	bool checkDir(){
-		Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
-		if (zap.faceRight ()) {
-			if (transform.position.x > mouseInScene.x){
+        Vector2 sightTarget;
+		//Vector2 mouseInScene = touchCamera.ScreenToWorldPoint (Input.mousePosition);
+        if( draggedStone )
+        {
+            sightTarget = draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass;
+        }
+        else
+        {
+            sightTarget = touchCamera.ScreenToWorldPoint (Input.mousePosition);
+        }
+
+        if (zap.faceRight ()) {
+			if (transform.position.x > sightTarget.x){
 				setAction (Action.TURN_STAND_LEFT);
 				return true;
 			}
 		} else {
-			if (transform.position.x < mouseInScene.x){
+			if (transform.position.x < sightTarget.x){
 				setAction (Action.TURN_STAND_RIGHT);
 				return true;
 			}
