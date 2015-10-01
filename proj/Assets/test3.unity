@@ -3610,7 +3610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1001 &432101991
 Prefab:
   m_ObjectHideFlags: 0
@@ -4247,7 +4247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
 --- !u!1001 &483016195
 Prefab:
   m_ObjectHideFlags: 0
@@ -5417,7 +5417,7 @@ Transform:
   m_Children:
   - {fileID: 387538174}
   m_Father: {fileID: 0}
-  m_RootOrder: 49
+  m_RootOrder: 47
 --- !u!1001 &609680039
 Prefab:
   m_ObjectHideFlags: 0
@@ -11722,7 +11722,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1001 &1112431479
 Prefab:
   m_ObjectHideFlags: 0
@@ -14462,18 +14462,6 @@ Prefab:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_RootOrder
       value: 39
-      objectReference: {fileID: 0}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: HaveKnife
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: HaveGravityGun
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 410290, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
@@ -17406,7 +17394,7 @@ Transform:
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 41
 --- !u!114 &1856352403
 MonoBehaviour:
   m_ObjectHideFlags: 0
