@@ -262,7 +262,7 @@ public class ZapControllerNormal : ZapController {
 			
 			if( zap.jumpKeyPressed ) { //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
 				Vector3 fallDist = zap.startFallPos - transform.position;
-				if( !zap.isFuddledFromBrid() && (fallDist.y < MaxFallDistToCatch) )
+				if( !zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch) )
 				{
 					if( zap.checkMount() ){
 						if( jumpFromMount ){
@@ -279,7 +279,7 @@ public class ZapControllerNormal : ZapController {
 			}
 			if( jumpFromMount && Input.GetKey(zap.keyJump) ){
 				Vector3 fallDist = zap.startFallPos - transform.position;
-				if( !zap.isFuddledFromBrid() && (fallDist.y < MaxFallDistToCatch) )
+				if( !zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch) )
 				{
 					Vector3 flyDist = transform.position - mountJumpStartPos;
 					if( flyDist.magnitude >= MountJumpDist ){
@@ -292,7 +292,7 @@ public class ZapControllerNormal : ZapController {
 			
 			if( Input.GetKey(zap.keyJump) ) { 
 				
-				if( !zap.isFuddledFromBrid() && tryCatchRope() ){
+				if( !zap.FuddleFromBird && tryCatchRope() ){
 					
 					if( zap.ropeCatchSound )
 						zap.getAudioSource().PlayOneShot( zap.ropeCatchSound );
@@ -303,7 +303,7 @@ public class ZapControllerNormal : ZapController {
 			
 			if( Input.GetKey(zap.keyJump) || zap.autoCatchEdges ){
 				Vector3 fallDist = zap.startFallPos - transform.position;
-				if( !zap.isFuddledFromBrid() && fallDist.y < MaxFallDistToCatch )
+				if( !zap.FuddleFromBird && fallDist.y < MaxFallDistToCatch )
 				{
 					if( tryCatchHandle() ){
 						zap.lastVelocity = zap.velocity;
@@ -440,7 +440,7 @@ public class ZapControllerNormal : ZapController {
 				if( zap.landingSound )
 					zap.getAudioSource().PlayOneShot( zap.landingSound );
 				
-				zap.setFuddledFromBrid( false );
+				zap.FuddleFromBird = false;
 				
 				zap.setState(Zap.State.ON_GROUND);
 				zap.velocity.y = 0.0f;
@@ -2210,22 +2210,25 @@ public class ZapControllerNormal : ZapController {
 	public override bool triggerEnter(Collider2D other){
 
 		if (other.gameObject.tag == "Bird") {
-			if( isInState(Zap.State.MOUNT) ){
-				zap.velocity.x = 0.0f;
-				zap.velocity.y = 0.0f;
-				setAction(Action.JUMP);
-				zap.setState(Zap.State.IN_AIR);
-				
-				if( zap.canBeFuddleFromBird )
-					zap.setFuddledFromBrid(true);
-				
-			} else if( isInState(Zap.State.IN_AIR) ) {
-				zap.velocity.x = 0.0f;
-			}
-			return true;
-		}
+            if (isInState(Zap.State.MOUNT) || isInState(Zap.State.CLIMB_ROPE))
+            {
+                zap.velocity.x = 0.0f;
+                zap.velocity.y = 0.0f;
+                setAction(Action.JUMP);
+                zap.setState(Zap.State.IN_AIR);
 
-		return false;
+                if (zap.canBeFuddleFromBird)
+                    zap.FuddleFromBird = true;
+
+            }
+            else if (isInState(Zap.State.IN_AIR))
+            {
+                zap.velocity.x = 0.0f;
+            }
+            return true;
+        }
+
+        return false;
 	}
 
 	bool tryStartClimbPullDown(){

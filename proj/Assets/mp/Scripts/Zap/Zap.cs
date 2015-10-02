@@ -426,16 +426,29 @@ public class Zap : MonoBehaviour {
 
 	public bool canBeFuddleFromBird = true;
 	bool fuddledFromBrid = false;
-	public bool isFuddledFromBrid(){
-		return fuddledFromBrid;
-	}
-	public void setFuddledFromBrid(bool fuddled){
-		fuddledFromBrid = fuddled;
-	}
+    //public bool isFuddledFromBrid()
+    //{
+    //    return fuddledFromBrid;
+    //}
+    //public void setFuddledFromBrid(bool fuddled)
+    //{
+    //    fuddledFromBrid = fuddled;
+    //}
+    public bool FuddleFromBird
+    {
+        set
+        {
+            fuddledFromBrid = value;
+        }
+        get
+        {
+            return fuddledFromBrid;
+        }
+    }
 
-	//public float stoneDeadlySpeed = 8f;
-	//public float stoneDeadlyMass = 8f;
-	public float stoneDeadlyEnergy = 20f;
+    //public float stoneDeadlySpeed = 8f;
+    //public float stoneDeadlyMass = 8f;
+    public float stoneDeadlyEnergy = 20f;
 	public float stoneMinDeadySpeed = 1f;
 	public float stoneMinDeadyMass = 0.5f;
 

@@ -747,11 +747,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 495142, guid: 943c2dbb59034ca4499080688d956a87, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.7347641
+      value: 5.07000017
       objectReference: {fileID: 0}
     - target: {fileID: 495142, guid: 943c2dbb59034ca4499080688d956a87, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.86435795
+      value: 6.01999998
       objectReference: {fileID: 0}
     - target: {fileID: 495142, guid: 943c2dbb59034ca4499080688d956a87, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4951,7 +4951,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11477582, guid: 84131610fbeaa644eb3f5a67300bf12d, type: 2}
       propertyPath: EmitFrequency
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11477582, guid: 84131610fbeaa644eb3f5a67300bf12d, type: 2}
       propertyPath: BirdsSpeed
@@ -14500,11 +14500,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -54
+      value: -48
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15728,11 +15728,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -44.8199997
+      value: -50.8699989
       objectReference: {fileID: 0}
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 13.9499998
+      value: 15.5600004
       objectReference: {fileID: 0}
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15769,7 +15769,7 @@ Prefab:
     - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: attachedStone
       value: 
-      objectReference: {fileID: 1090465838}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
   m_IsPrefabParent: 0
