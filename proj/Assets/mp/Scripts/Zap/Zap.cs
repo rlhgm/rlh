@@ -808,7 +808,17 @@ public class Zap : MonoBehaviour {
 	}
 
 	void ZapUpdate (float deltaTime) {
-		CurrentDeltaTime = deltaTime;
+
+        if (isDead())
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                reborn();
+                return;
+            }
+        }
+
+        CurrentDeltaTime = deltaTime;
 		
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
@@ -872,12 +882,7 @@ public class Zap : MonoBehaviour {
 
 
 
-		if (isDead()) {
-			if( Input.GetKeyDown(KeyCode.Space) ){
-				reborn();
-				return;
-			}
-		}
+	
 
 		currentController.MUpdate( CurrentDeltaTime );
 		
