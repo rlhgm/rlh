@@ -14,7 +14,7 @@ GameObject:
   - 50: {fileID: 5021014}
   - 114: {fileID: 11490390}
   - 82: {fileID: 8255602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 1
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -187,6 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac69fbcd8d6d93346b86f9405271ce9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getUpDistance: 4
+  getDownDistance: 5
+  state: 0
 --- !u!212 &21258080
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -233,6 +237,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: d264a10b54856b548bde7d7634e60146,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130130}

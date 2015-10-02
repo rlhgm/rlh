@@ -36,7 +36,7 @@ public class Snake : MonoBehaviour {
 			GameObject[] targets = GameObject.FindGameObjectsWithTag("Player");
 			if( targets.Length == 1 ){
 				target = targets[0];
-				//print ( this + " jest target");
+				print ( this + " jest target");
 			}
 		}
 	}
