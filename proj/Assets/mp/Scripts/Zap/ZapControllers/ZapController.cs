@@ -163,8 +163,8 @@ public class ZapController : ScriptableObject{
 			weaponMenuItem.setState (WeaponMenuItem.State.ON);
 	}
 	public virtual void reborn (){
-		if( zap.getLastTouchedCheckPoint() != null ){
-			if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
+		if( zap.LastTouchedCheckPoint != null ){
+			if (zap.LastTouchedCheckPoint.startMounted) {
 				zap.setState(Zap.State.MOUNT);
 			}
 		}

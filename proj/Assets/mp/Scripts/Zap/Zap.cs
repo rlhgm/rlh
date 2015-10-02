@@ -418,22 +418,17 @@ public class Zap : MonoBehaviour {
         }
     }
 
-	public GameObject getLastTouchedCheckPoint(){
-		return lastTouchedCheckPoint;
-	}
-
-	GameObject lastTouchedCheckPoint;
+    public CheckPoint LastTouchedCheckPoint
+    {
+        get
+        {
+            return lastTouchedCheckPoint;
+        }
+    }
+    CheckPoint lastTouchedCheckPoint;
 
 	public bool canBeFuddleFromBird = true;
 	bool fuddledFromBrid = false;
-    //public bool isFuddledFromBrid()
-    //{
-    //    return fuddledFromBrid;
-    //}
-    //public void setFuddledFromBrid(bool fuddled)
-    //{
-    //    fuddledFromBrid = fuddled;
-    //}
     public bool FuddleFromBird
     {
         set
@@ -541,30 +536,30 @@ public class Zap : MonoBehaviour {
 			return;
 		}
 
-//		if (other.gameObject.tag == "Bird") {
-//			if( isInState(State.MOUNT) ){
-//				velocity.x = 0.0f;
-//				velocity.y = 0.0f;
-//				setAction(Action.JUMP);
-//				setState(State.IN_AIR);
-//
-//				if( canBeFuddleFromBird )
-//					fuddledFromBrid = true;
-//
-//			} else if( isInState(State.IN_AIR) ) {
-//				velocity.x = 0.0f;
-//			}
-//			return;
-//		}
+        //		if (other.gameObject.tag == "Bird") {
+        //			if( isInState(State.MOUNT) ){
+        //				velocity.x = 0.0f;
+        //				velocity.y = 0.0f;
+        //				setAction(Action.JUMP);
+        //				setState(State.IN_AIR);
+        //
+        //				if( canBeFuddleFromBird )
+        //					fuddledFromBrid = true;
+        //
+        //			} else if( isInState(State.IN_AIR) ) {
+        //				velocity.x = 0.0f;
+        //			}
+        //			return;
+        //		}
 
-		if (other.gameObject.tag == "CheckPoint") {
-			lastTouchedCheckPoint = other.gameObject;
-
-			// zatwierdzam wszystkie zdobyte kawalki mapy...
-			collectedMapParts.Clear ();
-			return;
-		}
-		if (other.gameObject.tag == "KillerPhysic") {
+        if (other.gameObject.tag == "CheckPoint")
+        {
+            lastTouchedCheckPoint = other.GetComponent<CheckPoint>();
+            // zatwierdzam wszystkie zdobyte kawalki mapy...
+            collectedMapParts.Clear();
+            return;
+        }
+        if (other.gameObject.tag == "KillerPhysic") {
 			die(DeathType.POISON);
 			return;
 		}
