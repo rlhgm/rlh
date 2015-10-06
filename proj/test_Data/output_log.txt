@@ -4,7 +4,7 @@ Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
     Renderer: NVIDIA GeForce GTX 750 Ti (ID=0x1380)
     Vendor:   NVIDIA
-    VRAM:     1970 MB
+    VRAM:     1993 MB
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
 Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
@@ -17,7 +17,7 @@ Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into 
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.037 seconds
+- Completed reload, in  0.042 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -27,10 +27,38 @@ The referenced script on this Behaviour is missing!
  
 (Filename:  Line: 1649)
 
+Snake (6) (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Snake (4) (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Snake (1) (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Snake (5) (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
 Panther (Panther) jest target
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
+Snake (2) (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Snake (3) (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Snake (Snake) jest target
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 10ac -> priority: 1 
-  Thread -> id: 2bd4 -> priority: 1 
+  Thread -> id: 2d84 -> priority: 1 
+  Thread -> id: 40c8 -> priority: 1 
