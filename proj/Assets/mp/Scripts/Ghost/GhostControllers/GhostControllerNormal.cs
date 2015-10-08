@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
-//using System; //This allows the IComparable Interface
+using System; //This allows the IComparable Interface
 
-//[System.Serializable]
+[Serializable]
 public class GhostControllerNormal : GhostController
 {
     public float WalkSpeed = 2.5f;
@@ -65,6 +65,8 @@ public class GhostControllerNormal : GhostController
 
     public override void MUpdate(float deltaTime)
     {
+        //return;
+
         justJumpedMount = false;
 
         oldPos = transform.position;
@@ -659,6 +661,8 @@ public class GhostControllerNormal : GhostController
 
                 break;
         };
+
+        owner.sprRend.material.SetFloat("_ClipDist",  /*1.0f -*/ 0.5f * (owner.velocity.magnitude/RunSpeed) );
 
         owner.lastVelocity = owner.velocity;
 

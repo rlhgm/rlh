@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Ghost
-  m_Shader: {fileID: 205, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 902648413cc327649800d4a460c41e41, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
@@ -26,12 +26,19 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: c28b9733bd7a0b44e9d121363e0d526f, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Color
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -93,6 +100,10 @@ Material:
         second: .5
       data:
         first:
+          name: PixelSnap
+        second: 0
+      data:
+        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -131,6 +142,14 @@ Material:
         first:
           name: _InvFade
         second: 1
+      data:
+        first:
+          name: _Frequency
+        second: .0340000018
+      data:
+        first:
+          name: _Offset
+        second: 0
     m_Colors:
       data:
         first:
@@ -139,4 +158,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .235294104, g: .00173010537, b: .00173010537, a: 1}

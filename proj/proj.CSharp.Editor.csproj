@@ -139,6 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
+    <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
+    <None Include="Assets\mp\mas\NewUnlitShader.shader" />
+    <None Include="Assets\mp\mas\Slice.shader" />
+    <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -22,15 +22,28 @@ public class Ghost : MonoBehaviour
     public GhostController beforeFallController;
     [HideInInspector]
     public GhostController choosenController;
-    public GhostControllerNormal ghostControllerNormal;
+    public GhostControllerNormal ghostControllerNormal = new GhostControllerNormal();
+
+    //public void OnEnable()
+    //{
+    //    hideFlags = HideFlags.HideAndDontSave;
+    //    if (ghostControllerNormal == null)
+    //    {
+    //        ghostControllerNormal = ScriptableObject.CreateInstance<GhostControllerNormal>();
+    //    }
+    //}
 
     void Awake()
     {
         coll = GetComponent<BoxCollider2D>();
         gfx = transform.Find("gfx").transform;
-
+        
         animatorBody = transform.Find("gfx").GetComponent<Animator>();
         sprRend = gfx.GetComponent<SpriteRenderer>();
+        print(sprRend.material.shader);
+        //print(sprRend.material.GetFloat("_Frequency"));
+        //sprRend.material.SetFloat("_Frequency", .5f);
+        //print(sprRend.material.GetFloat("_Frequency"));
 
         sensorLeft1 = transform.Find("sensorLeft1").transform;
         sensorLeft2 = transform.Find("sensorLeft2").transform;
@@ -60,6 +73,7 @@ public class Ghost : MonoBehaviour
         myHalfWidth = myWidth * 0.5f;
         //myHeight = coll.size.y;
         //myHalfHeight = myHeight * 0.5f;
+        //ghostControllerNormal = ScriptableObject.CreateInstance<GhostControllerNormal>();
         ghostControllerNormal.setOwner(this);
     }
 
@@ -972,7 +986,7 @@ public class Ghost : MonoBehaviour
 
     Transform gfx;
     
-    SpriteRenderer sprRend = null;
+    public SpriteRenderer sprRend = null;
     BoxCollider2D coll;
     Animator animatorBody;
     public Animator AnimatorBody
@@ -1045,5 +1059,5 @@ public class Ghost : MonoBehaviour
 
     int playerCurrentLayer;
 
-    private State state;
+    public State state;
 }

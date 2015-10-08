@@ -2,9 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System; //This allows the IComparable Interface
 
-//[System.Serializable]
 //[Serializable]
-public class GhostController : ScriptableObject{
+public class GhostController {
 	
     virtual public void setOwner(Ghost ghost)
     {

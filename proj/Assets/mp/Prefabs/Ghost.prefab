@@ -164,7 +164,7 @@ GameObject:
   - 61: {fileID: 6183704}
   m_Layer: 15
   m_Name: Ghost
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39, y: -5, z: 0}
+  m_LocalPosition: {x: -20.4699993, y: -9.27000046, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489278}
@@ -406,7 +406,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -.100000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 488800}
@@ -471,11 +471,38 @@ MonoBehaviour:
   keyDown: 115
   keyJump: 32
   autoCatchEdges: 0
-  currentController: {fileID: 0}
-  beforeFallController: {fileID: 0}
-  choosenController: {fileID: 0}
-  ghostControllerNormal: {fileID: 11400000, guid: 25ea8cd5c523f6c4d8c3ad73213971db,
-    type: 2}
+  ghostControllerNormal:
+    WalkSpeed: 2.5
+    RunSpeed: 5.69999981
+    JumpSpeed: 3.79999995
+    JumpLongSpeed: 4.9000001
+    CrouchSpeed: 1.79999995
+    MountSpeed: 2
+    MountJumpDist: 10
+    SpeedUpParam: 3
+    SlowDownParam: 3
+    FlyUserControlParam: 8
+    FlyUpUserControlParam: 9
+    FlySlowDownParam: 5
+    JumpImpulse: 7
+    JumpLongImpulse: 7.1500001
+    GravityForce: -20
+    MaxSpeedY: 15
+    HardLandingHeight: 2
+    VeryHardLandingHeight: 6
+    MaxFallDistToCatch: 6
+    RopeSwingForce: 4250
+    RopeClimbSpeedUp: 1
+    RopeClimbSpeedDown: 3
+    CLIMB_DURATION: 1.5
+    CLIMBDUR_PREPARE_TO_JUMP: .5
+    CLIMBDUR_JUMP_TO_CATCH: .200000003
+    CLIMBDUR_CATCH: .5
+    LANDING_HARD_DURATION: .300000012
+    TURN_LEFTRIGHT_DURATION: .200000003
+    MOUNT_ATTACK_DURATION: .5
+    ClimbPullDownRange: .510999978
+    CrouchInOutDuration: .200000003
   IdleAnimFreq: 10
   canBeFuddleFromBird: 1
   stoneDeadlyEnergy: 20
@@ -492,6 +519,7 @@ MonoBehaviour:
   sensorDown3: {fileID: 0}
   sensorHandleL2: {fileID: 0}
   sensorHandleR2: {fileID: 0}
+  sprRend: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   lastVelocity: {x: 0, y: 0, z: 0}
   startFallPos: {x: 0, y: 0, z: 0}
@@ -502,6 +530,7 @@ MonoBehaviour:
   layerIdLastGroundTypeTouchedMask: 0
   layerIdGroundHandlesMask: 0
   layerIdRopesMask: 0
+  state: 0
 --- !u!212 &21247920
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -512,7 +541,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb600330b40f99548adbe3d55fb0f41c, type: 2}
+  - {fileID: 2100000, guid: 5ef2545680b983f45a21a8dd66249c50, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -527,7 +556,7 @@ SpriteRenderer:
   m_SortingLayerID: 952726619
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3c5b8282375daed44851ee94a4f7d6cd, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .583999991}
+  m_Color: {r: .985294104, g: .985294104, b: .985294104, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
