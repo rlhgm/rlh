@@ -1192,7 +1192,7 @@ public class Zap : MonoBehaviour {
 
     public float checkLeft(float checkingDist)
     {
-        int numRes = Physics2D.RaycastNonAlloc(sensorLeft1.position, Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+        int numRes = Physics2D.RaycastNonAlloc(sensorLeft1.position, -Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
         for (int i = 0; i < numRes; ++i)
         {
             hit = raycastHits[i];
@@ -1204,14 +1204,14 @@ public class Zap : MonoBehaviour {
         if (currentController.crouching() || currentController.isDodging())
             return -1.0f;
 
-        hit = Physics2D.Raycast(sensorLeft2.position, Vector2.right, checkingDist, layerIdGroundMask);
+        hit = Physics2D.Raycast(sensorLeft2.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
             return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
         }
         else
         {
-            hit = Physics2D.Raycast(sensorLeft3.position, Vector2.right, checkingDist, layerIdGroundMask);
+            hit = Physics2D.Raycast(sensorLeft3.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
             if (hit.collider != null)
             {
                 return Mathf.Abs(hit.point.x - sensorLeft3.position.x);
@@ -1234,14 +1234,14 @@ public class Zap : MonoBehaviour {
         if (currentController.crouching() || currentController.isDodging())
             return -1.0f;
 
-        hit = Physics2D.Raycast(sensorRight2.position, Vector2.right, checkingDist, layerIdGroundMask);
+        hit = Physics2D.Raycast(sensorRight2.position, Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
             return Mathf.Abs(hit.point.x - sensorRight2.position.x);
         }
         else
         {
-            hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundMask);
+            hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundAllMask);
             if (hit.collider != null)
             {
                 return Mathf.Abs(hit.point.x - sensorRight3.position.x);
