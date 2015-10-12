@@ -447,14 +447,18 @@ public class Zap : MonoBehaviour {
 	public float stoneMinDeadySpeed = 1f;
 	public float stoneMinDeadyMass = 0.5f;
 
+    public float mass = 5f;
+
 	bool hitByStone(Transform stone){
+        return false;
+
 		Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D> ();
 		if (!stoneBody)
 			return false;
 
 		if (currentController == zapControllerGravityGun) {
 			if( zapControllerGravityGun.draggedStone == stone ){
-				die(DeathType.STONE_HIT );
+				die(DeathType.STONE_HIT);
 				return true;
 			}
 		}
@@ -486,28 +490,84 @@ public class Zap : MonoBehaviour {
 		return false;
 	}
 
-	
-//	void OnCollisionEnter2D	(Collider2D other){
-//		if (other.transform.gameObject.layer == layerIdGroundMoveableMask) { // to jest kamien 
-//			hitByStone( other.transform );
-//			return;
-//		}
-//	}
-//
-//	void OnCollisionStay2D(Collider2D other){
-//		if (other.transform.gameObject.layer == layerIdGroundMoveableMask) { // to jest kamien 
-//			hitByStone( other.transform );
-//			return;
-//		}
-//	}
+    public bool touchStone(Transform stone)
+    {
+        Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D>();
+        if (!stoneBody)
+            return false;
 
-	void OnTriggerStay2D(Collider2D other) {
+        Vector2 touchedForce = -transform.up;
+        touchedForce = touchedForce * mass + (touchedForce * velocity.y * mass);
+        stoneBody.AddForce(touchedForce, ForceMode2D.Force);
+        print(touchedForce);
+
+        //if (currentController == zapControllerGravityGun)
+        //{
+        //    if (zapControllerGravityGun.draggedStone == stone)
+        //    {
+        //        die(DeathType.STONE_HIT);
+        //        return true;
+        //    }
+        //}
+
+        //float stoneSpeed = stoneBody.velocity.magnitude;
+        ////		if (stoneSpeed > stoneDeadlySpeed) {
+        ////			die (DeathType.STONE_HIT);
+        ////			return true;
+        ////} else 
+        //if (stoneSpeed < stoneMinDeadySpeed)
+        //{
+        //    return false;
+        //}
+
+        //float stoneMass = stoneBody.mass;
+        ////		if (stoneMass > stoneDeadlyMass) {
+        ////			die(DeathType.STONE_HIT );
+        ////			return true;
+        ////		}
+        //if (stoneMass < stoneMinDeadyMass)
+        //{
+        //    return false;
+        //}
+
+        //float stoneEnergy = stoneSpeed * stoneMass;
+        //if (stoneEnergy > stoneDeadlyEnergy)
+        //{
+        //    die(DeathType.STONE_HIT);
+        //    return true;
+        //}
+
+        return false;
+    }
+
+    //	void OnCollisionEnter2D	(Collider2D other){
+    //		if (other.transform.gameObject.layer == layerIdGroundMoveableMask) { // to jest kamien 
+    //			hitByStone( other.transform );
+    //			return;
+    //		}
+    //	}
+    //
+    //	void OnCollisionStay2D(Collider2D other){
+    //		if (other.transform.gameObject.layer == layerIdGroundMoveableMask) { // to jest kamien 
+    //			hitByStone( other.transform );
+    //			return;
+    //		}
+    //	}
+
+    void OnTriggerStay2D(Collider2D other) {
 		if (isDead ())
 			return;
 
 		int lid = other.transform.gameObject.layer;
 		if (lid == LayerMask.NameToLayer("GroundMoveable") ) { // layerIdGroundMoveableMask) { // to jest kamien 
-			hitByStone( other.transform );
+			if( hitByStone( other.transform ))
+            {
+                return;
+            }
+            else
+            {
+                //touchStone(other.transform);
+            }
 			return;
 		}
 
@@ -532,8 +592,15 @@ public class Zap : MonoBehaviour {
 		int lid = other.transform.gameObject.layer;
 		int lid2 = LayerMask.NameToLayer ("GroundMoveable");
 		if (lid == lid2 ) {// layerIdGroundMoveableMask) { // to jest kamien 
-			hitByStone( other.transform );
-			return;
+            if (hitByStone(other.transform))
+            {
+                return;
+            }
+            else
+            {
+                //touchStone(other.transform);
+            }
+            return;
 		}
 
         //		if (other.gameObject.tag == "Bird") {
@@ -1234,8 +1301,8 @@ public class Zap : MonoBehaviour {
 		}  
 	}
 
-	public bool checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
-		bool groundUnderFeet = false;
+	public Transform checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
+		Transform groundUnderFeet = null;
 
 		float th = 0.9f;
 		float checkingDist = th + 0.5f;
@@ -1263,7 +1330,7 @@ public class Zap : MonoBehaviour {
 
 		if (hit1.collider != null) {
 			dist1 = rayOrigin1.y - hit1.point.y;
-			groundUnderFeet = true;
+			groundUnderFeet = hit1.collider.transform;
 			distToGround = dist1;
 			layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
 		}
@@ -1272,7 +1339,7 @@ public class Zap : MonoBehaviour {
 			if( groundUnderFeet ){
 				if( distToGround > dist2) distToGround = dist2;
 			}else{
-				groundUnderFeet = true;
+				groundUnderFeet = hit2.collider.transform;
 				distToGround = dist2;
 				layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
 			}
@@ -1282,7 +1349,7 @@ public class Zap : MonoBehaviour {
 			if( groundUnderFeet ){
 				if( distToGround > dist3) distToGround = dist3;
 			}else{
-				groundUnderFeet = true;
+				groundUnderFeet = hit3.collider.transform;
 				distToGround = dist3;
 				layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
 			}

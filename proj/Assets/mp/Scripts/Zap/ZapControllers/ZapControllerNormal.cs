@@ -566,20 +566,23 @@ public class ZapControllerNormal : ZapController {
 //			}
 			break;
 
-		case Zap.State.ON_GROUND:
-			float distToGround = 0.0f;
-			bool groundUnderFeet2 = zap.checkGround (true, zap.layerIdGroundAllMask, ref distToGround);
-			if (groundUnderFeet2) {
-				
-			}else{
-				zap.setState(Zap.State.IN_AIR);
-				setAction(Action.JUMP);
-				wantGetUp = false;
-			}
-			
-			break;
-			
-		case Zap.State.CLIMB_ROPE:
+        case Zap.State.ON_GROUND:
+            float distToGround = 0.0f;
+            Transform groundUnderFeet2 = zap.checkGround(true, zap.layerIdGroundAllMask, ref distToGround);
+            if (groundUnderFeet2)
+            {
+                zap.touchStone(groundUnderFeet2);
+            }
+            else
+            {
+                zap.setState(Zap.State.IN_AIR);
+                setAction(Action.JUMP);
+                wantGetUp = false;
+            }
+
+            break;
+
+        case Zap.State.CLIMB_ROPE:
 			Vector3 linkPos = catchedRopeLink.transform.TransformPoint( new Vector3(0.0f, ropeLinkCatchOffset, 0.0f) );
 			transform.position = linkPos;
 			transform.rotation = catchedRopeLink.transform.rotation;
