@@ -897,7 +897,7 @@ public class Zap : MonoBehaviour {
 		
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
-		//stateJustChanged = false;
+		stateJustChanged = false;
 		currentStateTime += deltaTime;
 		currentActionTime += deltaTime;
 
@@ -1190,24 +1190,37 @@ public class Zap : MonoBehaviour {
 		}
 	}
 
-    public float checkLeft(float checkingDist)
+    public float checkLeft(float checkingDist, bool flying = false)
     {
-        int numRes = Physics2D.RaycastNonAlloc(sensorLeft1.position, -Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
-        for (int i = 0; i < numRes; ++i)
+        if (!stateJustChanged)
         {
-            hit = raycastHits[i];
-            float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
-            if (angle < -45.0f || angle > 45.0f)
-                return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+            if (flying)
+            {
+                hit = Physics2D.Raycast(sensorLeft1.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
+                if (hit.collider != null)
+                {
+                    return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                }
+            }
+            else
+            {
+                int numRes = Physics2D.RaycastNonAlloc(sensorLeft1.position, -Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+                for (int i = 0; i < numRes; ++i)
+                {
+                    hit = raycastHits[i];
+                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+                    if (angle < -45.0f || angle > 45.0f)
+                        return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                }
+            }
         }
-        
         hit = Physics2D.Raycast(sensorLeft2.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
             return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
         }
 
-        if (currentController.crouching() || currentController.isDodging())
+        if (!flying && ( currentController.crouching() || currentController.isDodging() ))
             return -1.0f;
 
         hit = Physics2D.Raycast(sensorLeft3.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
@@ -1218,24 +1231,37 @@ public class Zap : MonoBehaviour {
         return -1f;
     }
 
-    public float checkRight(float checkingDist)
+    public float checkRight(float checkingDist, bool flying = false)
     {
-        int numRes = Physics2D.RaycastNonAlloc(sensorRight1.position, Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
-        for (int i = 0; i < numRes; ++i)
+        if (!stateJustChanged)
         {
-            hit = raycastHits[i];
-            float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
-            if (angle < -45.0f || angle > 45.0f)
-                return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+            if (flying)
+            {
+                hit = Physics2D.Raycast(sensorRight1.position, Vector2.right, checkingDist, layerIdGroundAllMask);
+                if (hit.collider != null)
+                {
+                    return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                }
+            }
+            else
+            {
+                int numRes = Physics2D.RaycastNonAlloc(sensorRight1.position, Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+                for (int i = 0; i < numRes; ++i)
+                {
+                    hit = raycastHits[i];
+                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+                    if (angle < -45.0f || angle > 45.0f)
+                        return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                }
+            }
         }
-
         hit = Physics2D.Raycast(sensorRight2.position, Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
             return Mathf.Abs(hit.point.x - sensorRight2.position.x);
         }
 
-        if (currentController.crouching() || currentController.isDodging())
+        if (!flying && (currentController.crouching() || currentController.isDodging()))
             return -1.0f;
 
         hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundAllMask);
@@ -1406,8 +1432,8 @@ public class Zap : MonoBehaviour {
 		return state; 
 	}
 
-	//[HideInInspector]
-	//public bool stateJustChanged = false;
+	[HideInInspector]
+	public bool stateJustChanged = false;
 
 	public bool setState(State newState){
 
@@ -1415,7 +1441,7 @@ public class Zap : MonoBehaviour {
 			return false;
 
 		currentStateTime = 0.0f;
-		//stateJustChanged = true;
+		stateJustChanged = true;
 
 		state = newState;
 

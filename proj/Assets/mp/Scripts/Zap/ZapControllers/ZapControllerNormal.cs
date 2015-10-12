@@ -382,7 +382,7 @@ public class ZapControllerNormal : ZapController {
 			distToFall.x = zap.velocity.x * deltaTime;
 			
 			if( distToFall.x > 0.0f ){
-				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f);
+				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f, true);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = obstacleOnRoad;
@@ -390,7 +390,7 @@ public class ZapControllerNormal : ZapController {
 					}
 				}
 			}else if( distToFall.x < 0.0f ){
-				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f);
+				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f, true);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
