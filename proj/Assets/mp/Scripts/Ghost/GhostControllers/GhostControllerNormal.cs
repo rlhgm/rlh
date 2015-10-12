@@ -1666,11 +1666,12 @@ public class GhostControllerNormal : GhostController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        //		float distToGround = 0.0f;
-        //		bool groundUnderFeet = owner.checkGround (false, owner.layerIdLastGroundTypeTouchedMask, ref distToGround);
-        //		if (groundUnderFeet) {
-        //			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-        //		}
+        float distToGround = 0.0f;
+        bool groundUnderFeet = owner.checkGround(false, owner.layerIdLastGroundTypeTouchedMask, ref distToGround);
+        if (groundUnderFeet)
+        {
+            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        }
 
         return 0;
     }
