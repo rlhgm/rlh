@@ -1203,8 +1203,8 @@ public class Zap : MonoBehaviour {
  		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
 			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-			if( angle <= 0.0f || angle > 45.0f ) 
-				return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
+            if (angle < -45.0f || angle > 45.0f)
+                return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
 			else 
 			{
 				return -1.0f;
@@ -1245,7 +1245,6 @@ public class Zap : MonoBehaviour {
             float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
             if (angle < -45.0f || angle > 45.0f)
             {
-                print(angle);
                 return Mathf.Abs(hit.point.x - sensorRight1.position.x);
             }
             else return -1.0f;
@@ -1622,14 +1621,8 @@ public class Zap : MonoBehaviour {
 	//float climbDuration;
 	Vector2 climbDir;
 	
-
-	
-
-	
 	bool gamePaused = false;
-
-
-
+    
 	int playerCurrentLayer;
 
 	private State state;
