@@ -1352,7 +1352,9 @@ public class ZapControllerNormal : ZapController {
 			distToMove = distToObstacle;
 			setActionIdle();
 		}
-		
+
+        Debug.Log(distToObstacle);
+
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		

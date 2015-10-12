@@ -1106,10 +1106,7 @@ public class Zap : MonoBehaviour {
 			infoLabelSet = true;
 		}
 	}
-
-
-
-
+    
 	public bool checkObstacle(int dir, float distToCheck, ref float distToObstacle){
 		if (dir == 1) {
 			distToObstacle = checkRight (Mathf.Abs (distToCheck) + 0.01f);
@@ -1244,9 +1241,14 @@ public class Zap : MonoBehaviour {
 		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
-			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-			if( angle <= 0.0f || angle > 45.0f ) return Mathf.Abs (hit.point.x - sensorRight1.position.x);
-			else return -1.0f;
+            print(hit.collider);
+            float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+            if (angle < -45.0f || angle > 45.0f)
+            {
+                print(angle);
+                return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+            }
+            else return -1.0f;
 		} else {
             if (currentController.crouching() || currentController.isDodging())
                 return -1.0f;
