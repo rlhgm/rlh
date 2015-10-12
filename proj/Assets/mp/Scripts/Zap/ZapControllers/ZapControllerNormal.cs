@@ -382,7 +382,7 @@ public class ZapControllerNormal : ZapController {
 			distToFall.x = zap.velocity.x * deltaTime;
 			
 			if( distToFall.x > 0.0f ){
-				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f,!zap.stateJustChanged);
+				float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = obstacleOnRoad;
@@ -390,7 +390,7 @@ public class ZapControllerNormal : ZapController {
 					}
 				}
 			}else if( distToFall.x < 0.0f ){
-				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f,!zap.stateJustChanged);
+				float obstacleOnRoad = zap.checkLeft( Mathf.Abs(distToFall.x) + 0.01f);
 				if( obstacleOnRoad >= 0.0f ){
 					if( obstacleOnRoad < Mathf.Abs(distToFall.x) ){
 						distToFall.x = -obstacleOnRoad;
@@ -1357,13 +1357,14 @@ public class ZapControllerNormal : ZapController {
 
 		newPosX += distToMove;		
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
-		
-		float distToGround = 0.0f;
-		bool groundUnderFeet = zap.checkGround (false, zap.layerIdGroundAllMask, ref distToGround);
-		if (groundUnderFeet) {
-			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
-		}
-		return 0;
+
+        float distToGround = 0.0f;
+        bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+        if (groundUnderFeet)
+        {
+            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        }
+        return 0;
 	}
 	
 	int Action_RUN(int dir){

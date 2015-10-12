@@ -897,7 +897,7 @@ public class Zap : MonoBehaviour {
 		
 		SetImpulse(new Vector2(0.0f, 0.0f));
 
-		stateJustChanged = false;
+		//stateJustChanged = false;
 		currentStateTime += deltaTime;
 		currentActionTime += deltaTime;
 
@@ -1190,86 +1190,67 @@ public class Zap : MonoBehaviour {
 		}
 	}
 
-	public float checkLeft(float checkingDist, bool flying = false){
-		Vector2 rayOrigin;
-		if (flying) {
- 			rayOrigin = transform.position;
-			rayOrigin.x -= myHalfWidth;
-		} else {
-			rayOrigin = sensorLeft1.position; // new Vector2( sensorRight1.position.x, sensorRight1.position.y );
-		}
-
-		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
- 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundAllMask);
-		if (hit.collider != null) {
-			float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
+    public float checkLeft(float checkingDist)
+    {
+        int numRes = Physics2D.RaycastNonAlloc(sensorLeft1.position, Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+        for (int i = 0; i < numRes; ++i)
+        {
+            hit = raycastHits[i];
+            float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
             if (angle < -45.0f || angle > 45.0f)
-                return Mathf.Abs (hit.point.x - sensorLeft1.position.x);
-			else 
-			{
-				return -1.0f;
-			}
-		} else {
-            if (currentController.crouching() || currentController.isDodging())
-                return -1.0f;
+                return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+        }
 
-            rayOrigin = new Vector2( sensorLeft2.position.x, sensorLeft2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
-			if (hit.collider != null){
-				return Mathf.Abs (hit.point.x - sensorLeft2.position.x);
-			} else {
+        if (currentController.crouching() || currentController.isDodging())
+            return -1.0f;
 
-				rayOrigin = new Vector2( sensorLeft3.position.x, sensorLeft3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.right, checkingDist, layerIdGroundMask);
-				if (hit.collider != null){
-					return Mathf.Abs (hit.point.x - sensorLeft3.position.x);
-				} else {
-					return -1.0f;
-				}
-			}
-		}
-	}
-
-	public float checkRight(float checkingDist, bool flying = false){
-		Vector2 rayOrigin;
-		if (flying) {
-			rayOrigin = transform.position;
-			rayOrigin.x += myHalfWidth;
-		} else {
-			rayOrigin = sensorRight1.position; // new Vector2( sensorRight1.position.x, sensorRight1.position.y );
-		}
-		// ponizej robie layerIdGroundAllMask - aby wchodzil na platformy ze skosow nie bedzie sie dalo klasc jednej przepuszczalnej na drugiej ale trudno
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundAllMask);
-		if (hit.collider != null) {
-            print(hit.collider);
-            float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation );
-            if (angle < -45.0f || angle > 45.0f)
+        hit = Physics2D.Raycast(sensorLeft2.position, Vector2.right, checkingDist, layerIdGroundMask);
+        if (hit.collider != null)
+        {
+            return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(sensorLeft3.position, Vector2.right, checkingDist, layerIdGroundMask);
+            if (hit.collider != null)
             {
-                return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                return Mathf.Abs(hit.point.x - sensorLeft3.position.x);
             }
-            else return -1.0f;
-		} else {
-            if (currentController.crouching() || currentController.isDodging())
-                return -1.0f;
+        }
+        return -1f;
+    }
 
-            rayOrigin = new Vector2( sensorRight2.position.x, sensorRight2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
-			if (hit.collider != null){
-				return Mathf.Abs (hit.point.x - sensorRight2.position.x);
-			} else {
+    public float checkRight(float checkingDist)
+    {
+        int numRes = Physics2D.RaycastNonAlloc(sensorRight1.position, Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+        for (int i = 0; i < numRes; ++i)
+        {
+            hit = raycastHits[i];
+            float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+            if (angle < -45.0f || angle > 45.0f)
+                return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+        }
 
-				rayOrigin = new Vector2( sensorRight3.position.x, sensorRight3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, Vector2.right, checkingDist, layerIdGroundMask);
-				if (hit.collider != null){
-					return Mathf.Abs (hit.point.x - sensorRight3.position.x);
-				} else {
-					return -1.0f;
-				}
-			}
-		} 
-	}
+        if (currentController.crouching() || currentController.isDodging())
+            return -1.0f;
 
-	public float checkDown(float checkingDist){
+        hit = Physics2D.Raycast(sensorRight2.position, Vector2.right, checkingDist, layerIdGroundMask);
+        if (hit.collider != null)
+        {
+            return Mathf.Abs(hit.point.x - sensorRight2.position.x);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundMask);
+            if (hit.collider != null)
+            {
+                return Mathf.Abs(hit.point.x - sensorRight3.position.x);
+            }
+        }
+        return -1f;
+    }
+
+    public float checkDown(float checkingDist){
 
 		//int layerIdMask = layerIdGroundAllMask;
 		Vector3 rayOrigin = sensorDown1.position;
@@ -1429,8 +1410,8 @@ public class Zap : MonoBehaviour {
 		return state; 
 	}
 
-	[HideInInspector]
-	public bool stateJustChanged = false;
+	//[HideInInspector]
+	//public bool stateJustChanged = false;
 
 	public bool setState(State newState){
 
@@ -1438,7 +1419,7 @@ public class Zap : MonoBehaviour {
 			return false;
 
 		currentStateTime = 0.0f;
-		stateJustChanged = true;
+		//stateJustChanged = true;
 
 		state = newState;
 
@@ -1604,13 +1585,10 @@ public class Zap : MonoBehaviour {
 
 	[HideInInspector]
 	public int layerIdGroundMask;
-	//int layerIdGroundPermeableMask;
 	[HideInInspector]
 	public int layerIdGroundMoveableMask;
 	[HideInInspector]
 	public int layerIdGroundAllMask;
-	//[HideInInspector]
-	//public int layerIdLastGroundTypeTouchedMask;
 	[HideInInspector]
 	public int layerIdGroundHandlesMask;
 	[HideInInspector]
@@ -1618,7 +1596,6 @@ public class Zap : MonoBehaviour {
 	int layerIdMountMask;
 
 	float climbDistFromWall;
-	//float climbDuration;
 	Vector2 climbDir;
 	
 	bool gamePaused = false;
@@ -1626,4 +1603,6 @@ public class Zap : MonoBehaviour {
 	int playerCurrentLayer;
 
 	private State state;
+    RaycastHit2D[] raycastHits = new RaycastHit2D[10];
+    RaycastHit2D hit;
 }
