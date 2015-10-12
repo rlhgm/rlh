@@ -163,10 +163,10 @@ public class Zap : MonoBehaviour {
 		cameraTarget = transform.Find("cameraTarget").transform;
 
 		layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
-		layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
+		//layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
 		layerIdGroundMoveableMask = 1 << LayerMask.NameToLayer("GroundMoveable");
-		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundPermeableMask | layerIdGroundMoveableMask;
-		layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
+		layerIdGroundAllMask = layerIdGroundMask | layerIdGroundMoveableMask;
+		//layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
 		
 		layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
 		
@@ -1271,29 +1271,29 @@ public class Zap : MonoBehaviour {
 
 	public float checkDown(float checkingDist){
 
-		int layerIdMask = layerIdGroundAllMask;
+		//int layerIdMask = layerIdGroundAllMask;
 		Vector3 rayOrigin = sensorDown1.position;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundPermeableMask);
-		if (hit.collider) {// jesetem wewnatrz wskakiwalnej platformy ... nie moge sie zatrzymac..
-			layerIdMask = layerIdGroundMask;
-		}
+        //RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundPermeableMask);
+        //if (hit.collider) {// jesetem wewnatrz wskakiwalnej platformy ... nie moge sie zatrzymac..
+        //	layerIdMask = layerIdGroundMask;
+        //}
 
-		rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
-		hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdMask);
+        rayOrigin = new Vector2( sensorDown1.position.x, sensorDown1.position.y );
+        RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 		if (hit.collider != null) {
-			layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
+			//layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 			return Mathf.Abs (hit.point.y - sensorDown1.position.y);
 		} else {
 			rayOrigin = new Vector2( sensorDown2.position.x, sensorDown2.position.y );
-			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdMask);
+			hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 			if (hit.collider != null){
-				layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
+				//layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 				return Mathf.Abs (hit.point.y - sensorDown2.position.y);
 			} else {
 				rayOrigin = new Vector2( sensorDown3.position.x, sensorDown3.position.y );
-				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdMask);
+				hit = Physics2D.Raycast (rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllMask);
 				if (hit.collider != null){
-					layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
+					//layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
 					return Mathf.Abs (hit.point.y - sensorDown3.position.y);
 				} else {
 					return -1.0f;
@@ -1333,7 +1333,7 @@ public class Zap : MonoBehaviour {
 			dist1 = rayOrigin1.y - hit1.point.y;
 			groundUnderFeet = hit1.collider.transform;
 			distToGround = dist1;
-			layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
+			//layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
 		}
 		if (hit2.collider != null) {
 			dist2 = rayOrigin2.y - hit2.point.y;
@@ -1342,7 +1342,7 @@ public class Zap : MonoBehaviour {
 			}else{
 				groundUnderFeet = hit2.collider.transform;
 				distToGround = dist2;
-				layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
+				//layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
 			}
 		}
 		if (hit3.collider != null) {
@@ -1352,7 +1352,7 @@ public class Zap : MonoBehaviour {
 			}else{
 				groundUnderFeet = hit3.collider.transform;
 				distToGround = dist3;
-				layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
+				//layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
 			}
 		}
 
@@ -1604,13 +1604,13 @@ public class Zap : MonoBehaviour {
 
 	[HideInInspector]
 	public int layerIdGroundMask;
-	int layerIdGroundPermeableMask;
+	//int layerIdGroundPermeableMask;
 	[HideInInspector]
 	public int layerIdGroundMoveableMask;
 	[HideInInspector]
 	public int layerIdGroundAllMask;
-	[HideInInspector]
-	public int layerIdLastGroundTypeTouchedMask;
+	//[HideInInspector]
+	//public int layerIdLastGroundTypeTouchedMask;
 	[HideInInspector]
 	public int layerIdGroundHandlesMask;
 	[HideInInspector]

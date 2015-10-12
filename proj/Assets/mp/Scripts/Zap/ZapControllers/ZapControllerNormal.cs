@@ -1359,7 +1359,7 @@ public class ZapControllerNormal : ZapController {
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		
 		float distToGround = 0.0f;
-		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdGroundAllMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
@@ -1422,7 +1422,7 @@ public class ZapControllerNormal : ZapController {
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		
 		float distToGround = 0.0f;
-		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdGroundAllMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
@@ -1454,7 +1454,7 @@ public class ZapControllerNormal : ZapController {
 		transform.position = new Vector3 (newPosX, oldPos.y, 0.0f);
 		
 		float distToGround = 0.0f;
-		bool groundUnderFeet = zap.checkGround (false, zap.layerIdLastGroundTypeTouchedMask, ref distToGround);
+		bool groundUnderFeet = zap.checkGround (false, zap.layerIdGroundAllMask, ref distToGround);
 		if (groundUnderFeet) {
 			transform.position = new Vector3 (newPosX, oldPos.y + distToGround, 0.0f);
 		}
