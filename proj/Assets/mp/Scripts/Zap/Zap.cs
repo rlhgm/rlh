@@ -1208,12 +1208,23 @@ public class Zap : MonoBehaviour {
             }
             else
             {
-                int numRes = Physics2D.RaycastNonAlloc(sensorLeft1.position, -Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+                //hit = Physics2D.Raycast(sensorDown2.position, -Vector2.right, checkingDist+0.5f, layerIdGroundAllMask);
+                //if (hit.collider != null)
+                //{
+                //    print(hit.normal);
+                //}
+
+                int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, -Vector2.right, raycastHits, checkingDist+0.5f, layerIdGroundAllMask);
                 for (int i = 0; i < numRes; ++i)
                 {
                     hit = raycastHits[i];
-                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
-                    if (angle < -45.0f || angle > 45.0f)
+                    if (hit.fraction == 0f) continue;
+                    //float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
+                    //angle = angle % 90;
+                    //if (angle < -45.0f || angle > 45.0f)
+                    //    return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                    float angle = Vector2.Angle(Vector2.up,hit.normal);
+                    if (Mathf.Abs(angle) > 45.0f)
                         return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
                 }
             }
@@ -1249,12 +1260,20 @@ public class Zap : MonoBehaviour {
             }
             else
             {
-                int numRes = Physics2D.RaycastNonAlloc(sensorRight1.position, Vector2.right, raycastHits, checkingDist, layerIdGroundAllMask);
+                int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, Vector2.right, raycastHits, checkingDist+0.5f, layerIdGroundAllMask);
                 for (int i = 0; i < numRes; ++i)
                 {
+                    //hit = raycastHits[i];
+                    //float angle = hit.collider.transform.eulerAngles.z;
+                    ////float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+                    //angle = angle % 90;
+                    //if (angle < -45.0f || angle > 45.0f)
+                    //    return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+
                     hit = raycastHits[i];
-                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
-                    if (angle < -45.0f || angle > 45.0f)
+                    if (hit.fraction == 0f) continue;
+                    float angle = Vector2.Angle(Vector2.up, hit.normal);
+                    if (Mathf.Abs(angle) > 45.0f)
                         return Mathf.Abs(hit.point.x - sensorRight1.position.x);
                 }
             }
@@ -1631,4 +1650,6 @@ public class Zap : MonoBehaviour {
 	private State state;
     RaycastHit2D[] raycastHits = new RaycastHit2D[10];
     RaycastHit2D hit;
+
+    public Transform groundUnder = null;
 }
