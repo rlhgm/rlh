@@ -492,16 +492,16 @@ public class Zap : MonoBehaviour {
 
     public bool touchStone(Transform stone)
     {
-        return false;
+        //return false;
 
         Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D>();
         if (!stoneBody)
             return false;
 
         Vector2 touchedForce = new Vector2(0f, 0f);
-        touchedForce.y = mass + (velocity.y * mass);
-        touchedForce.y *= -1.0f;
-        stoneBody.AddForceAtPosition(touchedForce, transform.position, ForceMode2D.Impulse);
+        touchedForce.y = -10f; // + (velocity.y * mass);
+        //touchedForce.y *= -1.0f;
+        stoneBody.AddForceAtPosition(touchedForce, transform.position, ForceMode2D.Force);
         print(touchedForce);
 
         //if (currentController == zapControllerGravityGun)
@@ -1211,7 +1211,7 @@ public class Zap : MonoBehaviour {
                 for (int i = 0; i < numRes; ++i)
                 {
                     hit = raycastHits[i];
-                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
                     if (angle < -45.0f || angle > 45.0f)
                         return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
                 }
@@ -1252,7 +1252,7 @@ public class Zap : MonoBehaviour {
                 for (int i = 0; i < numRes; ++i)
                 {
                     hit = raycastHits[i];
-                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+                    float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
                     if (angle < -45.0f || angle > 45.0f)
                         return Mathf.Abs(hit.point.x - sensorRight1.position.x);
                 }
