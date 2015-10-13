@@ -492,13 +492,16 @@ public class Zap : MonoBehaviour {
 
     public bool touchStone(Transform stone)
     {
+        return false;
+
         Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D>();
         if (!stoneBody)
             return false;
 
-        Vector2 touchedForce = -transform.up;
-        touchedForce = touchedForce * mass + (touchedForce * velocity.y * mass);
-        stoneBody.AddForce(touchedForce, ForceMode2D.Force);
+        Vector2 touchedForce = new Vector2(0f, 0f);
+        touchedForce.y = mass + (velocity.y * mass);
+        touchedForce.y *= -1.0f;
+        stoneBody.AddForceAtPosition(touchedForce, transform.position, ForceMode2D.Impulse);
         print(touchedForce);
 
         //if (currentController == zapControllerGravityGun)
