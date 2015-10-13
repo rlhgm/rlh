@@ -1150,7 +1150,7 @@ MonoBehaviour:
   stoneDeadlyEnergy: 20
   stoneMinDeadySpeed: 1
   stoneMinDeadyMass: .5
-  mass: 85
+  pushedForce: -10
   jumpKeyPressed: 0
   stateJustChanged: 0
   sensorLeft1: {fileID: 0}

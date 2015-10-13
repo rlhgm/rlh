@@ -447,10 +447,11 @@ public class Zap : MonoBehaviour {
 	public float stoneMinDeadySpeed = 1f;
 	public float stoneMinDeadyMass = 0.5f;
 
-    public float mass = 5f;
+    //public float mass = 5f;
+    public float pushedForce = -10f;
 
 	bool hitByStone(Transform stone){
-        return false;
+        //return false;
 
 		Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D> ();
 		if (!stoneBody)
@@ -499,10 +500,10 @@ public class Zap : MonoBehaviour {
             return false;
 
         Vector2 touchedForce = new Vector2(0f, 0f);
-        touchedForce.y = -10f; // + (velocity.y * mass);
+        touchedForce.y = pushedForce; // + (velocity.y * mass);
         //touchedForce.y *= -1.0f;
         stoneBody.AddForceAtPosition(touchedForce, transform.position, ForceMode2D.Force);
-        print(touchedForce);
+        //print(touchedForce);
 
         //if (currentController == zapControllerGravityGun)
         //{
