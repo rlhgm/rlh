@@ -1370,6 +1370,7 @@ public class Zap : MonoBehaviour {
 
 	public void checkGround (/*bool fromFeet,*/ int layerIdMask, ref float distToGround){
 		Transform groundUnderFeet = null;
+        groundUnderAngle = 0f;
 
 		float th = 0.9f;
 		float checkingDist = th + 0.1f;
@@ -1391,7 +1392,23 @@ public class Zap : MonoBehaviour {
 		rayOrigin3.y += th;
 		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdMask);
 
-		float dist1;
+        //int closestSensor = 0;
+        RaycastHit2D closestHit = hit1;
+
+        if (hit2.collider != null)
+        {
+            if (closestHit.collider == null)
+            {
+                closestHit = hit2;
+            }
+            else
+            {
+               // if( hit2.distance < hit1.distance)
+            }
+        }
+
+
+        float dist1;
 		float dist2;
 		float dist3;
 
@@ -1399,12 +1416,14 @@ public class Zap : MonoBehaviour {
 			dist1 = rayOrigin1.y - hit1.point.y;
 			groundUnderFeet = hit1.collider.transform;
 			distToGround = dist1;
-			//layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
-		}
+            groundUnderAngle = Vector2.Angle(Vector2.up, hit.normal);
+            //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
+        }
 		if (hit2.collider != null) {
 			dist2 = rayOrigin2.y - hit2.point.y;
 			if( groundUnderFeet ){
-				if( distToGround > dist2) distToGround = dist2;
+				if( distToGround > dist2)
+                    distToGround = dist2;
 			}else{
 				groundUnderFeet = hit2.collider.transform;
 				distToGround = dist2;
@@ -1694,4 +1713,5 @@ public class Zap : MonoBehaviour {
     RaycastHit2D hit2;
 
     public Transform groundUnder = null;
+    public float groundUnderAngle = 0f;
 }
