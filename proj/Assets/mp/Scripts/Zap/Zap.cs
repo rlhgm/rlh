@@ -1234,8 +1234,8 @@ public class Zap : MonoBehaviour {
                     {
                         Vector2 ro = sensorDown2.position;
                         ro.x -= hit.distance;
-                        ro.y += 0.5f;
-                        int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.5f + 0.1f, layerIdGroundAllMask);
+                        ro.y += 0.2f;
+                        int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.2f + 0.1f, layerIdGroundAllMask);
                         for (int j = 0; j < numRes2; ++j)
                         {
                             hit2 = raycastHits2[j];
@@ -1300,9 +1300,9 @@ public class Zap : MonoBehaviour {
                     {
                         Vector2 ro = sensorDown2.position;
                         ro.x += hit.distance;
-                        ro.y += 0.5f;
+                        ro.y += 0.2f;
                         //bool hitObstacle = false;
-                        int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.5f+0.1f, layerIdGroundAllMask);
+                        int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.2f+0.1f, layerIdGroundAllMask);
                         for (int j = 0; j < numRes2; ++j)
                         {
                             hit2 = raycastHits2[j];

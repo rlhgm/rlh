@@ -1440,11 +1440,11 @@ public class ZapControllerNormal : ZapController
 
     bool canJump()
     {
-        if (zap.groundUnder == null) return false;
-        float groundUnderAngle = zap.groundUnder.eulerAngles.z % 90;
-        //float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
-        if (groundUnderAngle < -60.0f || groundUnderAngle > 60.0f)
-            return false;
+        //if (zap.groundUnder == null) return false;
+        //float groundUnderAngle = zap.groundUnder.eulerAngles.z % 90;
+        ////float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
+        //if (groundUnderAngle < -60.0f || groundUnderAngle > 60.0f)
+        //    return false;
         return true;
     }
 
