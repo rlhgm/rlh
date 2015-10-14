@@ -1368,27 +1368,27 @@ public class Zap : MonoBehaviour {
 		}  
 	}
 
-	public Transform checkGround (bool fromFeet, int layerIdMask, ref float distToGround){
+	public void checkGround (/*bool fromFeet,*/ int layerIdMask, ref float distToGround){
 		Transform groundUnderFeet = null;
 
 		float th = 0.9f;
-		float checkingDist = th + 0.5f;
-		if (fromFeet)
-			checkingDist = 0.5f;
+		float checkingDist = th + 0.1f;
+		//if (fromFeet)
+		//	checkingDist = 0.5f;
 
 		Vector2 rayOrigin1 = sensorDown1.position;
-		if( !fromFeet )
-			rayOrigin1.y += th;
+		//if( !fromFeet )
+		rayOrigin1.y += th;
 		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdMask);
 
 		Vector2 rayOrigin2 = sensorDown2.position;
-		if( !fromFeet )
-			rayOrigin2.y += th;
+		//if( !fromFeet )
+		rayOrigin2.y += th;
 		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdMask);
 
 		Vector2 rayOrigin3 = sensorDown3.position;
-		if( !fromFeet )
-			rayOrigin3.y += th;
+		//if( !fromFeet )
+		rayOrigin3.y += th;
 		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdMask);
 
 		float dist1;
@@ -1423,11 +1423,11 @@ public class Zap : MonoBehaviour {
 		}
 
 		if (groundUnderFeet) {
-			if( !fromFeet )
-				distToGround = th - distToGround;
+			//if( !fromFeet )
+			distToGround = th - distToGround;
 		}
 
-		return groundUnderFeet;
+		groundUnder = groundUnderFeet;
 	}
 
 	public bool checkMount(){

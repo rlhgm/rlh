@@ -657,9 +657,16 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Zap.State.ON_GROUND:
+                //float distToGround = 0.0f;
+                //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+                //if (groundUnderFeet)
+                //{
+                //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+                //}
+
                 float distToGround = 0.0f;
-                zap.groundUnder = zap.checkGround(true, zap.layerIdGroundAllMask, ref distToGround);
-                if (zap.groundUnder == null || distToGround > 0.1f)
+                zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
+                if (zap.groundUnder == null /*|| distToGround > 0.1f*/)
                 {
                     zap.setState(Zap.State.IN_AIR);
                     setAction(Action.JUMP);
@@ -667,13 +674,21 @@ public class ZapControllerNormal : ZapController
                 }
                 else if (zap.groundUnder)
                 {
-                    if (slideDown())
+                    if (distToGround != 0f)
                     {
+                        transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
                     }
                     else
                     {
                         zap.touchStone(zap.groundUnder);
                     }
+
+                    //if (slideDown())
+                    //{
+                    //}
+                    //else
+                    //{    
+                    //}
                 }
                 break;
 
@@ -1448,13 +1463,18 @@ public class ZapControllerNormal : ZapController
         return true;
     }
 
-    // 0 - -1 w lewo 0 - 1 w prawo 0 nie...
+    float getGroundUnderAngle()
+    {
+
+        return 0;
+    }
+    // <0;-1> w lewo <0;1> w prawo 0 nie...
     float shouldSlideDown()
     {
         if (zap.groundUnder == null) return 0f;
         int groundUnderAngleQuarter = (int)zap.groundUnder.eulerAngles.z / 90;
         //if (groundUnderAngle < -60.0f || groundUnderAngle > 60.0f)
-          //  return true;
+        //  return true;
 
 
         return 0;
@@ -1469,9 +1489,9 @@ public class ZapControllerNormal : ZapController
         switch (action)
         {
             case Action.IDLE:
-                if (isInState(Zap.State.ON_GROUND) )
+                if (isInState(Zap.State.ON_GROUND))
                 {
-                    if( canJump())
+                    if (canJump())
                         preparetojump();
                 }
                 break;
@@ -1594,12 +1614,12 @@ public class ZapControllerNormal : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        float distToGround = 0.0f;
-        bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        if (groundUnderFeet)
-        {
-            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        }
+        //float distToGround = 0.0f;
+        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+        //if (groundUnderFeet)
+        //{
+        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //}
         return 0;
     }
 
@@ -1666,12 +1686,12 @@ public class ZapControllerNormal : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        float distToGround = 0.0f;
-        bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        if (groundUnderFeet)
-        {
-            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        }
+        //float distToGround = 0.0f;
+        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+        //if (groundUnderFeet)
+        //{
+        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //}
 
         return 0;
     }
@@ -1703,19 +1723,18 @@ public class ZapControllerNormal : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        float distToGround = 0.0f;
-        bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        if (groundUnderFeet)
-        {
-            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        }
+        //float distToGround = 0.0f;
+        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+        //if (groundUnderFeet)
+        //{
+        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //}
 
         return retVal;
     }
 
     int Action_CROUCH_IN()
     {
-
         if (zap.currentActionTime >= CrouchInOutDuration)
         {
             crouch();
@@ -1725,7 +1744,6 @@ public class ZapControllerNormal : ZapController
 
     int Action_GET_UP()
     {
-
         if (zap.currentActionTime >= CrouchInOutDuration)
         {
             getUp();
@@ -1784,12 +1802,12 @@ public class ZapControllerNormal : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        float distToGround = 0.0f;
-        bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        if (groundUnderFeet)
-        {
-            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        }
+        //float distToGround = 0.0f;
+        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+        //if (groundUnderFeet)
+        //{
+        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //}
 
         return 0;
     }
@@ -1799,12 +1817,12 @@ public class ZapControllerNormal : ZapController
         float ssd = shouldSlideDown();
         if (ssd == 0f) return false;
 
-        float distToGround = 0.0f;
-        bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        if (groundUnderFeet)
-        {
-            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        }
+        //float distToGround = 0.0f;
+        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
+        //if (groundUnderFeet)
+        //{
+        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //}
 
         return true;
     }
