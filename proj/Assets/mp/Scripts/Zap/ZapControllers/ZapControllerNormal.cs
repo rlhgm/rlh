@@ -2930,11 +2930,12 @@ public class ZapControllerNormal : ZapController
     {
         if (zap.dir() == Vector2.right)
         {
-
+            float _speed = 0.5f;
             RaycastHit2D hit;
             if (fromGround)
             {
                 hit = Physics2D.Raycast(zap.sensorHandleR2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
+                _speed = 0.25f;
             }
             else
             {
@@ -2973,7 +2974,7 @@ public class ZapControllerNormal : ZapController
                     climbBeforePos = transform.position;
                     climbAfterPos = newPos;
                     climbDistToClimb = climbAfterPos - climbBeforePos;
-                    climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
+                    climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
                     zap.setState(Zap.State.CLIMB);
                     setAction(Action.CLIMB_JUMP_TO_CATCH);
@@ -2989,11 +2990,12 @@ public class ZapControllerNormal : ZapController
         }
         else
         {
-
+            float _speed = 0.5f;
             RaycastHit2D hit;
             if (fromGround)
             {
                 hit = Physics2D.Raycast(zap.sensorHandleL2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
+                _speed = 0.25f;
             }
             else
             {
@@ -3034,7 +3036,7 @@ public class ZapControllerNormal : ZapController
                     climbBeforePos = transform.position;
                     climbAfterPos = newPos;
                     climbDistToClimb = climbAfterPos - climbBeforePos;
-                    climbToJumpDuration = climbDistToClimb.magnitude * 0.5f;
+                    climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
                     zap.setState(Zap.State.CLIMB);
                     setAction(Action.CLIMB_JUMP_TO_CATCH);
