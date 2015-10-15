@@ -3313,7 +3313,7 @@ public class ZapControllerNormal : ZapController
         Vector2 rayOrigin = catchedClimbHandle.transform.parent.transform.position;
         rayOrigin.x += 0.5f;
         rayOrigin.y += 0.25f;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundAllMask);
         return !hit.collider;
     }
     bool canClimbPullUp2()
@@ -3325,7 +3325,7 @@ public class ZapControllerNormal : ZapController
         Vector2 rayOrigin = catchedClimbHandle.transform.position;
         rayOrigin.x += 0.5f;
         rayOrigin.y += 0.25f;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundAllMask);
         return !hit.collider;
     }
 
