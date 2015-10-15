@@ -1233,7 +1233,7 @@ public class Zap : MonoBehaviour {
                     if (Mathf.Abs(angle) > 45.0f)
                     {
                         Vector2 ro = sensorDown2.position;
-                        ro.x -= hit.distance;
+                        ro.x -= (hit.distance+0.01f);
                         ro.y += 0.2f;
                         int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.2f + 0.1f, layerIdGroundAllMask);
                         for (int j = 0; j < numRes2; ++j)
@@ -1299,7 +1299,7 @@ public class Zap : MonoBehaviour {
                     if (Mathf.Abs(angle) > 45.0f)
                     {
                         Vector2 ro = sensorDown2.position;
-                        ro.x += hit.distance;
+                        ro.x += (hit.distance + 0.01f);
                         ro.y += 0.2f;
                         //bool hitObstacle = false;
                         int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.2f+0.1f, layerIdGroundAllMask);
