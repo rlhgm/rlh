@@ -1473,6 +1473,12 @@ public class ZapControllerNormal : ZapController
         ////float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;
         //if (groundUnderAngle < -60.0f || groundUnderAngle > 60.0f)
         //    return false;
+        float distToCeil = 0.2f;
+        if( zap.checkCeil(ref distToCeil) )
+        {
+            return false;
+        }
+
         return true;
     }
 
@@ -1510,17 +1516,21 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.WALK_LEFT:
-                jumpLeft();
+                if (canJump())
+                    jumpLeft();
                 break;
             case Action.WALK_RIGHT:
-                jumpRight();
+                if (canJump())
+                    jumpRight();
                 break;
 
             case Action.RUN_LEFT:
-                jumpLongLeft();
+                if (canJump())
+                    jumpLongLeft();
                 break;
             case Action.RUN_RIGHT:
-                jumpLongRight();
+                if (canJump())
+                    jumpLongRight();
                 break;
 
             case Action.MOUNT_IDLE:
