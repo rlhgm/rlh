@@ -487,11 +487,14 @@ public class ZapControllerNormal : ZapController
 
                 bool justLanding = false;
 
+                
+
                 if (distToFall.y > 0.0f)
                 { // leci w gore
-                    //transform.position = transform.position + distToFall;
-                    float spaceToCeil = distToFall.y;
-                    if (zap.checkCeil(ref spaceToCeil))
+                  //transform.position = transform.position + distToFall;                
+                  //float spaceToCeil = distToFall.y;
+
+                    if (zap.checkCeil(ref distToFall.y))
                     {
                         zap.velocity.y = 0f;
                     }
