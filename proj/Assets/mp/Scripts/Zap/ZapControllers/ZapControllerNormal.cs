@@ -2989,7 +2989,14 @@ public class ZapControllerNormal : ZapController
 
             Vector2 _handle = new Vector2();
             Vector2 ro = transform.position;
-            ro.y += 2f;
+            if (fromGround)
+            {
+                ro.y += 2f;
+            }
+            else
+            {
+                ro.y += 2.4f;
+            }
             hit = Physics2D.Raycast(ro, Vector2.right, 1.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
@@ -3100,7 +3107,14 @@ public class ZapControllerNormal : ZapController
 
             Vector2 _handle = new Vector2();
             Vector2 ro = transform.position;
-            ro.y += 2f;
+            if (fromGround)
+            {
+                ro.y += 2f;
+            }
+            else
+            {
+                ro.y += 2.4f;
+            }         
             hit = Physics2D.Raycast(ro, Vector2.left, 1.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
