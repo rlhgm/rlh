@@ -1426,6 +1426,7 @@ public class ZapControllerGravityGun : ZapController
     void flashStone(Transform stone)
     {
         setStoneOpacity(stone, 0.5f);
+        stone.GetComponent<GroundMoveable>().printWorldVertices();
     }
     void unflashStone(Transform stone)
     {
