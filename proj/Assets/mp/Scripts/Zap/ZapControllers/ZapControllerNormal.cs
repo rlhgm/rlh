@@ -3001,7 +3001,7 @@ public class ZapControllerNormal : ZapController
             if (hit.collider)
             {
                 ro.x += 0.4f;
-                if (hit.collider.GetComponent<GroundMoveable>().handleTouched(ro, ref _handle))
+                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     //Debug.Log(_handle);
                     // tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
@@ -3119,7 +3119,7 @@ public class ZapControllerNormal : ZapController
             if (hit.collider)
             {
                 ro.x -= 0.4f;
-                if (hit.collider.GetComponent<GroundMoveable>().handleTouched(ro, ref _handle))
+                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     //Debug.Log(_handle);
                     // tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
