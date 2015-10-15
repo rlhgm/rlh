@@ -3020,12 +3020,6 @@ public class ZapControllerNormal : ZapController
                         newPos.x = handlePos.x - zap.getMyHalfWidth();
                         newPos.y = handlePos.y - 2.4f; //myHeight;
 
-                        canPullUp = canClimbPullUp2();
-
-                        if (canPullUp)
-                        {
-                        }
-
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
 
@@ -3035,6 +3029,11 @@ public class ZapControllerNormal : ZapController
                         climbDistToClimb = climbAfterPos - climbBeforePos;
                         climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
+                        canPullUp = canClimbPullUp2();
+                        if (canPullUp)
+                        {
+                        }
+                        
                         zap.setState(Zap.State.CLIMB);
                         setAction(Action.CLIMB_JUMP_TO_CATCH);
                         lastFrameHande = false;
@@ -3084,7 +3083,6 @@ public class ZapControllerNormal : ZapController
                     newPos.y = handlePos.y - 2.4f; //myHeight;
 
                     canPullUp = canClimbPullUp();
-
                     if (canPullUp)
                     {
                     }
@@ -3138,12 +3136,6 @@ public class ZapControllerNormal : ZapController
                         newPos.x = handlePos.x + zap.getMyHalfWidth();
                         newPos.y = handlePos.y - 2.4f; //myHeight;
 
-                        canPullUp = canClimbPullUp2();
-
-                        if (canPullUp)
-                        {
-                        }
-
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
 
@@ -3152,6 +3144,12 @@ public class ZapControllerNormal : ZapController
                         climbAfterPos2 = handlePos;
                         climbDistToClimb = climbAfterPos - climbBeforePos;
                         climbToJumpDuration = climbDistToClimb.magnitude * _speed;
+
+                        canPullUp = canClimbPullUp2();
+
+                        if (canPullUp)
+                        {
+                        }
 
                         zap.setState(Zap.State.CLIMB);
                         setAction(Action.CLIMB_JUMP_TO_CATCH);
@@ -3318,12 +3316,14 @@ public class ZapControllerNormal : ZapController
     }
     bool canClimbPullUp2()
     {
-
         if (!catchedClimbHandle)
             return false;
 
-        Vector2 rayOrigin = catchedClimbHandle.transform.position;
-        rayOrigin.x += 0.5f;
+        Vector2 rayOrigin = climbAfterPos2; // catchedClimbHandle.transform.position;
+        if( zap.dir() == Vector2.right)
+            rayOrigin.x += 0.5f;
+        else
+            rayOrigin.x -= 0.5f;
         rayOrigin.y += 0.25f;
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.5f, zap.layerIdGroundAllMask);
         return !hit.collider;
