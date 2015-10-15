@@ -2717,7 +2717,7 @@ public class ZapControllerNormal : ZapController
             zap.velocity.x = 0.0f;
             zap.velocity.y = 0.0f;
 
-            Vector3 handlePos = potCatchedClimbHandle.transform.position;
+            Vector3 handlePos = climbAfterPos2; //potCatchedClimbHandle.transform.position;
 
             climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
             if (zap.dir() == Vector2.right)
@@ -3340,6 +3340,20 @@ public class ZapControllerNormal : ZapController
         // 1: sytuacja gdy zap jest swoim srodkiem nad tilem
         // 2: sytuacja gdy zap jest swoim srodkiem juz poza tilem
 
+        if (zap.groundUnder)
+        {
+            GroundMoveable gm = zap.groundUnder.GetComponent<GroundMoveable>();
+            if( gm )
+            {
+                Vector2 _handle = new Vector2();
+                if( gm.handleToPullDownTouched(zap.dir(), transform.position, ref _handle, 5f, 0.51f) )
+                {
+                    climbAfterPos2 = _handle;
+                    return zap.groundUnder.gameObject;
+                }
+            }
+        }
+
         RaycastHit2D hit;
 
         if (zap.dir() == Vector2.right)
@@ -3351,6 +3365,7 @@ public class ZapControllerNormal : ZapController
 
                 if (Physics2D.Raycast(hit.collider.gameObject.transform.position, -Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
                 {
+                    climbAfterPos2 = hit.collider.transform.position;
                     return hit.collider.gameObject;
                 }
             }
@@ -3365,6 +3380,7 @@ public class ZapControllerNormal : ZapController
 
                 if (Physics2D.Raycast(hit.collider.gameObject.transform.position, Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
                 {
+                    climbAfterPos2 = hit.collider.transform.position;
                     return hit.collider.gameObject;
                 }
 
@@ -3385,8 +3401,11 @@ public class ZapControllerNormal : ZapController
                 // pod lewa noga musi byc przepasc
                 rayOrigin = zap.sensorDown1.position;
                 if (Physics2D.Raycast(rayOrigin, -Vector2.up, 0.5f, zap.layerIdGroundMask).collider) return null;
-                else return hit.collider.gameObject;
-
+                else
+                {
+                    climbAfterPos2 = hit.collider.transform.position;
+                    return hit.collider.gameObject;
+                }
             }
             else
             {
@@ -3394,8 +3413,11 @@ public class ZapControllerNormal : ZapController
                 // pod prawa noga musi byc przepasc
                 rayOrigin = zap.sensorDown3.position;
                 if (Physics2D.Raycast(rayOrigin, -Vector2.up, 0.5f, zap.layerIdGroundMask).collider) return null;
-                else return hit.collider.gameObject;
-
+                else
+                {
+                    climbAfterPos2 = hit.collider.transform.position;
+                    return hit.collider.gameObject;
+                }
             }
 
         }
