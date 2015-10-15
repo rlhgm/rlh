@@ -1368,7 +1368,7 @@ public class Zap : MonoBehaviour {
 		}  
 	}
 
-	public void checkGround (/*bool fromFeet,*/ int layerIdMask, ref float distToGround){
+	public void checkGround (ref float distToGround){
 		Transform groundUnderFeet = null;
         groundUnderAngle = 0f;
 
@@ -1380,17 +1380,17 @@ public class Zap : MonoBehaviour {
 		Vector2 rayOrigin1 = sensorDown1.position;
 		//if( !fromFeet )
 		rayOrigin1.y += th;
-		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdMask);
+		RaycastHit2D hit1 = Physics2D.Raycast (rayOrigin1, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
 		Vector2 rayOrigin2 = sensorDown2.position;
 		//if( !fromFeet )
 		rayOrigin2.y += th;
-		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdMask);
+		RaycastHit2D hit2 = Physics2D.Raycast (rayOrigin2, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
 		Vector2 rayOrigin3 = sensorDown3.position;
 		//if( !fromFeet )
 		rayOrigin3.y += th;
-		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdMask);
+		RaycastHit2D hit3 = Physics2D.Raycast (rayOrigin3, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
         //int closestSensor = 0;
         RaycastHit2D closestHit = hit1;
@@ -1449,7 +1449,100 @@ public class Zap : MonoBehaviour {
 		groundUnder = groundUnderFeet;
 	}
 
-	public bool checkMount(){
+    public bool checkCeil(ref float distToFly)
+    {
+        return false;
+        //Transform groundUnderFeet = null;
+        //groundUnderAngle = 0f;
+
+        //float th = 0.9f;
+        //float checkingDist = th + 0.1f;
+        ////if (fromFeet)
+        ////	checkingDist = 0.5f;
+
+        //Vector2 rayOrigin1 = sensorDown1.position;
+        ////if( !fromFeet )
+        //rayOrigin1.y += th;
+        //RaycastHit2D hit1 = Physics2D.Raycast(rayOrigin1, -Vector2.up, checkingDist, layerIdGroundAllMask);
+
+        //Vector2 rayOrigin2 = sensorDown2.position;
+        ////if( !fromFeet )
+        //rayOrigin2.y += th;
+        //RaycastHit2D hit2 = Physics2D.Raycast(rayOrigin2, -Vector2.up, checkingDist, layerIdGroundAllMask);
+
+        //Vector2 rayOrigin3 = sensorDown3.position;
+        ////if( !fromFeet )
+        //rayOrigin3.y += th;
+        //RaycastHit2D hit3 = Physics2D.Raycast(rayOrigin3, -Vector2.up, checkingDist, layerIdGroundAllMask);
+
+        ////int closestSensor = 0;
+        //RaycastHit2D closestHit = hit1;
+
+        //if (hit2.collider != null)
+        //{
+        //    if (closestHit.collider == null)
+        //    {
+        //        closestHit = hit2;
+        //    }
+        //    else
+        //    {
+        //        // if( hit2.distance < hit1.distance)
+        //    }
+        //}
+
+
+        //float dist1;
+        //float dist2;
+        //float dist3;
+
+        //if (hit1.collider != null)
+        //{
+        //    dist1 = rayOrigin1.y - hit1.point.y;
+        //    groundUnderFeet = hit1.collider.transform;
+        //    distToGround = dist1;
+        //    groundUnderAngle = Vector2.Angle(Vector2.up, hit.normal);
+        //    //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
+        //}
+        //if (hit2.collider != null)
+        //{
+        //    dist2 = rayOrigin2.y - hit2.point.y;
+        //    if (groundUnderFeet)
+        //    {
+        //        if (distToGround > dist2)
+        //            distToGround = dist2;
+        //    }
+        //    else
+        //    {
+        //        groundUnderFeet = hit2.collider.transform;
+        //        distToGround = dist2;
+        //        //layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
+        //    }
+        //}
+        //if (hit3.collider != null)
+        //{
+        //    dist3 = rayOrigin3.y - hit3.point.y;
+        //    if (groundUnderFeet)
+        //    {
+        //        if (distToGround > dist3) distToGround = dist3;
+        //    }
+        //    else
+        //    {
+        //        groundUnderFeet = hit3.collider.transform;
+        //        distToGround = dist3;
+        //        //layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
+        //    }
+        //}
+
+        //if (groundUnderFeet)
+        //{
+        //    //if( !fromFeet )
+        //    distToGround = th - distToGround;
+        //}
+
+        //groundUnder = groundUnderFeet;
+    }
+
+    public bool checkMount(){
 		Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
 		rayOrigin.y += 0.3f;
 		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdMountMask);

@@ -489,7 +489,12 @@ public class ZapControllerNormal : ZapController
 
                 if (distToFall.y > 0.0f)
                 { // leci w gore
-                  //transform.position = transform.position + distToFall;
+                    //transform.position = transform.position + distToFall;
+                    float spaceToCeil = distToFall.y;
+                    if (zap.checkCeil(ref spaceToCeil))
+                    {
+                        zap.velocity.y = 0f;
+                    }
                 }
                 else if (distToFall.y < 0.0f)
                 { // spada
@@ -666,7 +671,7 @@ public class ZapControllerNormal : ZapController
                 //}
 
                 float distToGround = 0.0f;
-                zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
+                zap.checkGround(ref distToGround);
                 if (zap.groundUnder == null /*|| distToGround > 0.1f*/)
                 {
                     zap.setState(Zap.State.IN_AIR);

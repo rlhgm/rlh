@@ -262,7 +262,7 @@ public class ZapControllerGravityGun : ZapController
 
             case Zap.State.ON_GROUND:
                 float distToGround = 0.0f;
-                zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
+                zap.checkGround(ref distToGround);
                 if (!zap.groundUnder)
                 {
                     zap.suddenlyInAir();
@@ -1049,12 +1049,12 @@ public class ZapControllerGravityGun : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        float distToGround = 0.0f;
-        zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
-        if (zap.groundUnder)
-        {
-            transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        }
+        //float distToGround = 0.0f;
+        //zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
+        //if (zap.groundUnder)
+        //{
+        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //}
         return 0;
     }
 

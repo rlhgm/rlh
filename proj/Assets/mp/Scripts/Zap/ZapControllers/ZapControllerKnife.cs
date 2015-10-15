@@ -194,7 +194,7 @@ public class ZapControllerKnife : ZapController
 
             case Zap.State.ON_GROUND:
                 float distToGround = 0.0f;
-                zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
+                zap.checkGround(ref distToGround);
                 if (!zap.groundUnder)
                 {
                     wantGetUp = false;
