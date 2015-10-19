@@ -3110,12 +3110,25 @@ public class ZapControllerNormal : ZapController
 
                     climbBeforePos = transform.position;
                     climbAfterPos = newPos;
+                    climbAfterPos2 = handlePos;
                     climbDistToClimb = climbAfterPos - climbBeforePos;
                     climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
                     zap.setState(Zap.State.CLIMB);
                     setAction(Action.CLIMB_JUMP_TO_CATCH);
                     lastFrameHande = false;
+
+                    //zap.velocity.x = 0.0f;
+                    //zap.velocity.y = 0.0f;
+
+                    //climbBeforePos = transform.position;
+                    //climbAfterPos = newPos;
+                    //climbDistToClimb = climbAfterPos - climbBeforePos;
+                    //climbToJumpDuration = climbDistToClimb.magnitude * _speed;
+
+                    //zap.setState(Zap.State.CLIMB);
+                    //setAction(Action.CLIMB_JUMP_TO_CATCH);
+                    //lastFrameHande = false;
 
                     return true;
                 }
