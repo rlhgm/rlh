@@ -58,6 +58,9 @@
      <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
+     <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
+     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
+     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerNormal.cs" />
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
@@ -85,18 +88,16 @@
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />
      <Compile Include="Assets\test.cs" />
+     <None Include="Assets\mp\mas\NewUnlitShader.shader" />
+     <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
+     <None Include="Assets\mp\mas\Slice.shader" />
+     <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
