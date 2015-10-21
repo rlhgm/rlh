@@ -105,6 +105,7 @@ public class NewRope : MonoBehaviour {
 			distJoint.anchor = new Vector2(0.0f,-0.5f);
 			distJoint.connectedAnchor = new Vector2(0f,0f);
 			distJoint.connectedBody = attachedStone;
+            //print(attachedStone.transform.parent);
 			attachedStone.transform.SetParent( lastLink.transform );
 			//attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
 			attachedStone.MovePosition( asp );
@@ -207,7 +208,19 @@ public class NewRope : MonoBehaviour {
 	}
 
 	public void cut(int linkIndex){
-		cutedLinkIndex = linkIndex;
+        if( attachedStone)
+        {
+            RopeLink lastLink = links[links.Length - 1];
+            DistanceJoint2D distJoint = lastLink.gameObject.AddComponent<DistanceJoint2D>();
+            distJoint.connectedBody = null;
+            distJoint.enabled = false;
+            //links[links.Length-1].con distJoint.connectedBody = attachedStone;
+            attachedStone.transform.SetParent(null);
+            //attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
+            //attachedStone.MovePosition(asp);
+            //attachedStone
+        }
+        cutedLinkIndex = linkIndex;
 		RopeLink weakLink = links [linkIndex];
 		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
 		weakHingeJoint.enabled = false;
