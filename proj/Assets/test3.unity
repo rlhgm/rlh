@@ -2223,7 +2223,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.60416651
+  orthographic size: 5.86458302
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -5057,6 +5057,10 @@ Prefab:
       propertyPath: markB
       value: 
       objectReference: {fileID: 608483205}
+    - target: {fileID: 11482878, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
+      propertyPath: JumpFailurePercent
+      value: 33
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
   m_IsPrefabParent: 0
@@ -12421,7 +12425,7 @@ Transform:
   m_GameObject: {fileID: 1038731992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.30316746, y: 1.30316746, z: 1.30316746}
+  m_LocalScale: {x: 1.0230906, y: 1.0230906, z: 1.0230906}
   m_Children:
   - {fileID: 1225409483}
   m_Father: {fileID: 1535172079}
@@ -12439,10 +12443,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 288
   preferUncropped: 0
-  screenPixelsY: 663
+  screenPixelsY: 563
   currentCropped: 0
-  screenRatio: 2.30208325
-  ratio: 1.30316746
+  screenRatio: 1.95486116
+  ratio: 1.0230906
   mainCamera: {fileID: 2143118006}
   touchCamera: {fileID: 214894816}
 --- !u!1001 &1039750996
@@ -16637,11 +16641,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -54.5
+      value: -118.5
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
