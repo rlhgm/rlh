@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.4699993, y: -9.27000046, z: 0}
+  m_LocalPosition: {x: -26, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489278}
@@ -471,7 +471,7 @@ MonoBehaviour:
   keyDown: 115
   keyJump: 32
   autoCatchEdges: 0
-  ghostControllerNormal:
+  ghostControllerByKeyTriggers:
     WalkSpeed: 2.5
     RunSpeed: 5.69999981
     JumpSpeed: 3.79999995
@@ -479,8 +479,8 @@ MonoBehaviour:
     CrouchSpeed: 1.79999995
     MountSpeed: 2
     MountJumpDist: 10
-    SpeedUpParam: 3
-    SlowDownParam: 3
+    SpeedUpParam: 10
+    SlowDownParam: 20
     FlyUserControlParam: 8
     FlyUpUserControlParam: 9
     FlySlowDownParam: 5

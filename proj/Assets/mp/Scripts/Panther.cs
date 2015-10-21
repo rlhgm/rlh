@@ -56,7 +56,7 @@ public class Panther : MonoBehaviour, IKnifeCutable {
 			GameObject[] targets = GameObject.FindGameObjectsWithTag("Player");
 			if( targets.Length == 1 ){
 				zap = targets[0].GetComponent<Zap>();
-				print ( this + " jest target");
+				//print ( this + " jest target");
 			}
 		}
 		startPos = transform.position;

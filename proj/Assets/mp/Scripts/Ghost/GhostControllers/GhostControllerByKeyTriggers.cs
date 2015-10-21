@@ -3,8 +3,15 @@ using System.Collections;
 using System; //This allows the IComparable Interface
 
 [Serializable]
-public class GhostControllerNormal : GhostController
+public class GhostControllerByKeyTriggers : GhostController
 {
+    //public KeyCode keyLeft = KeyCode.LeftArrow;
+    //public KeyCode keyRight = KeyCode.RightArrow;
+    //public KeyCode keyRun = KeyCode.LeftShift;
+    //public KeyCode keyUp = KeyCode.UpArrow;
+    //public KeyCode keyDown = KeyCode.DownArrow;
+    //public KeyCode keyJump = KeyCode.Space;
+    
     public float WalkSpeed = 2.5f;
     public float RunSpeed = 5.7f;
     public float JumpSpeed = 3.8f;
@@ -62,6 +69,82 @@ public class GhostControllerNormal : GhostController
     Vector3 lastHandlePos;
 
     float groundUnderFeet;
+
+    public override bool GlobalUpdate(float deltaTime)
+    {
+        //if (!userJumpKeyPressed)
+        //{
+        //    if (Input.GetKeyDown(keyJump))
+        //    {
+        //        timeFromJumpKeyPressed = 0.0f;
+        //        userJumpKeyPressed = true;
+        //    }
+        //}
+        //else
+        //{
+        //    timeFromJumpKeyPressed += deltaTime;
+        //    if (timeFromJumpKeyPressed >= 0.06f)
+        //    {
+        //        timeFromJumpKeyPressed = 0.0f;
+        //        userJumpKeyPressed = false;
+        //        jumpKeyPressed = true;
+
+        //        currentController.keyJumpDown();
+        //    }
+        //}
+
+        //if (Input.GetKeyDown(keyUp))
+        //{
+        //    currentController.keyUpDown();
+        //}
+        //if (Input.GetKeyUp(keyUp))
+        //{
+        //    currentController.keyUpUp();
+        //}
+        //if (Input.GetKeyDown(keyDown))
+        //{
+        //    currentController.keyDownDown();
+        //}
+        //if (Input.GetKeyUp(keyDown))
+        //{
+        //    currentController.keyDownUp();
+        //}
+
+        //if (Input.GetKeyUp(keyJump))
+        //{
+        //    jumpKeyPressed = false;
+        //    currentController.keyJumpUp();
+        //}
+
+        //if (Input.GetKeyDown(keyLeft))
+        //{
+        //    currentController.keyLeftDown();
+        //}
+        //if (Input.GetKeyDown(keyRight))
+        //{
+        //    currentController.keyRightDown();
+        //}
+
+        //if (Input.GetKeyUp(keyLeft))
+        //{
+        //    currentController.keyLeftUp();
+        //}
+        //if (Input.GetKeyUp(keyRight))
+        //{
+        //    currentController.keyRightUp();
+        //}
+
+        //if (Input.GetKeyDown(keyRun))
+        //{
+        //    currentController.keyRunDown();
+        //}
+        //else if (Input.GetKeyUp(keyRun))
+        //{
+        //    currentController.keyRunUp();
+        //}
+
+        return false;
+    }
 
     public override void MUpdate(float deltaTime)
     {
@@ -509,7 +592,7 @@ public class GhostControllerNormal : GhostController
 
                     if (fallDist.y >= VeryHardLandingHeight)
                     {
-                        owner.beforeFallController = null;
+                        //owner.beforeFallController = null;
                         owner.die(Ghost.DeathType.VERY_HARD_LANDING);
                     }
                     else if (fallDist.y >= HardLandingHeight)
@@ -524,15 +607,15 @@ public class GhostControllerNormal : GhostController
                     }
                     else
                     {
-                        if (owner.beforeFallController == null)
+                        //if (owner.beforeFallController == null)
                         {
                             resetActionAndState();
                         }
-                        else
-                        {
-                            owner.restoreBeforeFallController();
-                            //owner.beforeFallController = null;
-                        }
+                        //else
+                        //{
+                        //    owner.restoreBeforeFallController();
+                        //    //owner.beforeFallController = null;
+                        //}
                     }
                 }
 
@@ -662,7 +745,7 @@ public class GhostControllerNormal : GhostController
                 break;
         };
 
-        owner.sprRend.material.SetFloat("_ClipDist",  /*1.0f -*/ 0.5f * (owner.velocity.magnitude/RunSpeed) );
+        owner.sprRend.material.SetFloat("_ClipDist",  /*1.0f -*/ 0.5f * (owner.velocity.magnitude / RunSpeed));
 
         owner.lastVelocity = owner.velocity;
 
@@ -1898,15 +1981,15 @@ public class GhostControllerNormal : GhostController
     {
         if (owner.currentActionTime >= LANDING_HARD_DURATION)
         {
-            if (owner.beforeFallController == null)
+            //if (owner.beforeFallController == null)
             {
                 setAction(Action.IDLE);
                 resetActionAndState();
             }
-            else
-            {
-                owner.restoreBeforeFallController();
-            }
+            //else
+            //{
+            //    owner.restoreBeforeFallController();
+            //}
         }
 
         return 0;
@@ -2514,7 +2597,7 @@ public class GhostControllerNormal : GhostController
     {
         setAction(Action.DIE, (int)deathType);
     }
-    
+
     public override bool triggerEnter(Collider2D other)
     {
 

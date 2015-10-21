@@ -5,24 +5,18 @@ using UnityEngine.UI;
 
 public class Ghost : MonoBehaviour
 {
-    public KeyCode keyLeft = KeyCode.LeftArrow;
-    public KeyCode keyRight = KeyCode.RightArrow;
-    public KeyCode keyRun = KeyCode.LeftShift;
-    public KeyCode keyUp = KeyCode.UpArrow;
-    public KeyCode keyDown = KeyCode.DownArrow;
-    public KeyCode keyJump = KeyCode.Space;
-
+   
     Vector3 startPoint = new Vector3();
 
     public bool autoCatchEdges = false;
 
     [HideInInspector]
     public GhostController currentController;
-    [HideInInspector]
-    public GhostController beforeFallController;
-    [HideInInspector]
-    public GhostController choosenController;
-    public GhostControllerNormal ghostControllerNormal = new GhostControllerNormal();
+    //[HideInInspector]
+    //public GhostController beforeFallController;
+    //[HideInInspector]
+    //public GhostController choosenController;
+    public GhostControllerByKeyTriggers ghostControllerByKeyTriggers = new GhostControllerByKeyTriggers();
 
     //public void OnEnable()
     //{
@@ -37,10 +31,10 @@ public class Ghost : MonoBehaviour
     {
         coll = GetComponent<BoxCollider2D>();
         gfx = transform.Find("gfx").transform;
-        
+
         animatorBody = transform.Find("gfx").GetComponent<Animator>();
         sprRend = gfx.GetComponent<SpriteRenderer>();
-        print(sprRend.material.shader);
+        //print(sprRend.material.shader);
         //print(sprRend.material.GetFloat("_Frequency"));
         //sprRend.material.SetFloat("_Frequency", .5f);
         //print(sprRend.material.GetFloat("_Frequency"));
@@ -74,12 +68,12 @@ public class Ghost : MonoBehaviour
         //myHeight = coll.size.y;
         //myHalfHeight = myHeight * 0.5f;
         //ghostControllerNormal = ScriptableObject.CreateInstance<GhostControllerNormal>();
-        ghostControllerNormal.setOwner(this);
+        ghostControllerByKeyTriggers.setOwner(this);
     }
 
     void Start()
     {
-        setCurrentController(ghostControllerNormal);
+        setCurrentController(ghostControllerByKeyTriggers);
 
         velocity = new Vector3(0, 0, 0);
         impulse = new Vector3(0, 0, 0);
@@ -90,7 +84,7 @@ public class Ghost : MonoBehaviour
         currentController.activate();
 
         startPoint = transform.position;
-        beforeFallController = null;
+        //beforeFallController = null;
     }
 
     public void setCurrentController(GhostController newController, bool restore = false, bool crouch = false)
@@ -101,23 +95,23 @@ public class Ghost : MonoBehaviour
         currentController.activate(restore, crouch);
     }
 
-    public void suddenlyInAir()
-    {
-        //if (currentController != zapControllerNormal) {
-        //	beforeFallController = currentController;
-        //	setCurrentController(zapControllerNormal);
-        //	setState (Zap.State.IN_AIR);
-        //	zapControllerNormal.suddenlyInAir(); 
-        //}
-    }
-    public void restoreBeforeFallController()
-    {
-        if (beforeFallController != null)
-        {
-            setCurrentController(beforeFallController, true);
-            beforeFallController = null;
-        }
-    }
+    //public void suddenlyInAir()
+    //{
+    //    //if (currentController != zapControllerNormal) {
+    //    //	beforeFallController = currentController;
+    //    //	setCurrentController(zapControllerNormal);
+    //    //	setState (Zap.State.IN_AIR);
+    //    //	zapControllerNormal.suddenlyInAir(); 
+    //    //}
+    //}
+    //public void restoreBeforeFallController()
+    //{
+    //    if (beforeFallController != null)
+    //    {
+    //        setCurrentController(beforeFallController, true);
+    //        beforeFallController = null;
+    //    }
+    //}
 
     public void StateIdleExit()
     {
@@ -165,7 +159,7 @@ public class Ghost : MonoBehaviour
         POISON,
         STONE_HIT
     };
-    
+
     public void die(DeathType deathType)
     {
         velocity.x = 0.0f;
@@ -204,7 +198,7 @@ public class Ghost : MonoBehaviour
         Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D>();
         if (!stoneBody)
             return false;
-        
+
         float stoneSpeed = stoneBody.velocity.magnitude;
         if (stoneSpeed < stoneMinDeadySpeed)
         {
@@ -328,10 +322,10 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    bool userJumpKeyPressed = false;
-    float timeFromJumpKeyPressed = 0.0f;
-    [HideInInspector]
-    public bool jumpKeyPressed = false;
+    //bool userJumpKeyPressed = false;
+    //float timeFromJumpKeyPressed = 0.0f;
+    //[HideInInspector]
+    //public bool jumpKeyPressed = false;
 
     void FixedUpdate()
     {
@@ -357,8 +351,8 @@ public class Ghost : MonoBehaviour
     void Update()
     {
         float timeSinceLastFrame = Time.deltaTime;
-        
-        if (GlobalUpdate(timeSinceLastFrame)) return;
+
+        if ( currentController.GlobalUpdate(timeSinceLastFrame)) return;
 
         while (timeSinceLastFrame > ConstantFrameTime)
         {
@@ -369,61 +363,17 @@ public class Ghost : MonoBehaviour
         GhostUpdate(timeSinceLastFrame);
     }
 
-    bool GlobalUpdate(float deltaTime)
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            gamePaused = !gamePaused;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        { // left
-          //print ("left: " + Input.mousePosition);
-        }
-        if (Input.GetMouseButton(1))
-        { // right
-          //print ("right: " + Input.mousePosition);
-        }
-        //
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //setPrevWeapon();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //setNextWeapon();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //print ("Q");
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //print ("E");            
-        }
-
-        if (GamePausedUpdate(deltaTime))
-            return true;
-        
-        return false;
-    }
+    //bool GlobalUpdate(float deltaTime)
+    //{
+    //    currentController.GlobalUpdate(float)
+    //    return false;
+    //}
 
     void GhostUpdate(float deltaTime)
     {
         if (isDead())
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                return;
-            }
+            return;
         }
 
         CurrentDeltaTime = deltaTime;
@@ -433,110 +383,10 @@ public class Ghost : MonoBehaviour
         stateJustChanged = false;
         currentStateTime += deltaTime;
         currentActionTime += deltaTime;
-
-        if (!userJumpKeyPressed)
-        {
-            if (Input.GetKeyDown(keyJump))
-            {
-                timeFromJumpKeyPressed = 0.0f;
-                userJumpKeyPressed = true;
-            }
-        }
-        else
-        {
-            timeFromJumpKeyPressed += deltaTime;
-            if (timeFromJumpKeyPressed >= 0.06f)
-            {
-                timeFromJumpKeyPressed = 0.0f;
-                userJumpKeyPressed = false;
-                jumpKeyPressed = true;
-
-                currentController.keyJumpDown();
-            }
-        }
-
-        if (Input.GetKeyDown(keyUp))
-        {
-            currentController.keyUpDown();
-        }
-        if (Input.GetKeyUp(keyUp))
-        {
-            currentController.keyUpUp();
-        }
-        if (Input.GetKeyDown(keyDown))
-        {
-            currentController.keyDownDown();
-        }
-        if (Input.GetKeyUp(keyDown))
-        {
-            currentController.keyDownUp();
-        }
-
-        if (Input.GetKeyUp(keyJump))
-        {
-            jumpKeyPressed = false;
-            currentController.keyJumpUp();
-        }
-
-        if (Input.GetKeyDown(keyLeft))
-        {
-            currentController.keyLeftDown();
-        }
-        if (Input.GetKeyDown(keyRight))
-        {
-            currentController.keyRightDown();
-        }
-
-        if (Input.GetKeyUp(keyLeft))
-        {
-            currentController.keyLeftUp();
-        }
-        if (Input.GetKeyUp(keyRight))
-        {
-            currentController.keyRightUp();
-        }
-
-        if (Input.GetKeyDown(keyRun))
-        {
-            currentController.keyRunDown();
-        }
-        else if (Input.GetKeyUp(keyRun))
-        {
-            currentController.keyRunUp();
-        }
         
         currentController.MUpdate(CurrentDeltaTime);
     }
 
-    bool GamePausedUpdate(float deltaTime)
-    {
-        if (gamePaused)
-        {
-            if (Input.GetKey("f"))
-            {
-                transform.position = transform.position + new Vector3(-0.1f, 0.0f, 0.0f);
-                //showInfo("You press f",1f);
-            }
-            else if (Input.GetKey("h"))
-            {
-                transform.position = transform.position + new Vector3(0.1f, 0.0f, 0.0f);
-                //showInfo("You press h",2f);
-            }
-            else if (Input.GetKey("t"))
-            {
-                transform.position = transform.position + new Vector3(0.0f, 0.1f, 0.0f);
-                ///showInfo("You press t",3f);
-            }
-            else if (Input.GetKey("g"))
-            {
-                transform.position = transform.position + new Vector3(0.0f, -0.1f, 0.0f);
-                //showInfo("You press g",4f);
-            }
-            return true;
-        }
-        return false;
-    }
-    
     public bool checkObstacle(int dir, float distToCheck, ref float distToObstacle)
     {
         if (dir == 1)
@@ -570,10 +420,10 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    KeyCode getDirKey(int dir)
-    {
-        return dir == 1 ? keyRight : keyLeft;
-    }
+    //KeyCode getDirKey(int dir)
+    //{
+    //    return dir == 1 ? keyRight : keyLeft;
+    //}
 
     public void turnLeft()
     {
@@ -985,7 +835,7 @@ public class Ghost : MonoBehaviour
     public Transform sensorHandleR2;
 
     Transform gfx;
-    
+
     public SpriteRenderer sprRend = null;
     BoxCollider2D coll;
     Animator animatorBody;
