@@ -1452,11 +1452,13 @@ public class Zap : MonoBehaviour {
     public bool checkCeil(ref float distToFly)
     {
         Vector2 ro = sensorLeft3.position;
+        ro.x += 0.1f;
         ro.y += 0.1f;
-        RaycastHit2D hit1 = Physics2D.Raycast(sensorLeft3.position, Vector2.up, distToFly, layerIdGroundAllMask);
+        RaycastHit2D hit1 = Physics2D.Raycast(ro, Vector2.up, distToFly, layerIdGroundAllMask);
         ro = sensorRight3.position;
+        ro.x -= 0.1f;
         ro.y += 0.1f;
-        RaycastHit2D hit2 = Physics2D.Raycast(sensorRight3.position, Vector2.up, distToFly, layerIdGroundAllMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(ro, Vector2.up, distToFly, layerIdGroundAllMask);
 
         if (!hit1.collider && !hit2.collider) return false;
 
