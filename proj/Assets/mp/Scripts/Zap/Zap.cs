@@ -105,12 +105,15 @@ public class Zap : MonoBehaviour {
 		gfx  = transform.Find("gfx").transform;
 		gfxCollider = gfx.GetComponent<PolygonCollider2D> ();
         gfxLegs = transform.Find("gfxLegs").transform;
-
+        
 		animatorBody = transform.Find("gfx").GetComponent<Animator>();
 		sprRend = gfx.GetComponent<SpriteRenderer> ();
         animatorLegs = transform.Find("gfxLegs").GetComponent<Animator>();
 
 		shadowCenter = transform.Find ("shadowCenter");
+
+        mountAttackLeftCollider = transform.Find("mountAttackLeftCollider").gameObject;
+        mountAttackRightCollider = transform.Find("mountAttackRightCollider").gameObject;
 
         targeter = transform.Find("targeter");
         gravityGunBeam = transform.Find("GravityGunBeam");
@@ -1655,6 +1658,24 @@ public class Zap : MonoBehaviour {
 
     SpriteRenderer sprRend = null;
     BoxCollider2D coll;
+
+    GameObject mountAttackLeftCollider;
+    GameObject mountAttackRightCollider;
+    public GameObject MountAttackLeftCollider
+    {
+        get
+        {
+            return mountAttackLeftCollider;
+        }
+    }
+    public GameObject MountAttackRightCollider
+    {
+        get
+        {
+            return mountAttackRightCollider;
+        }
+    }
+
     //public Animator AnimatorBody
     //{
     //    return animator;

@@ -814,6 +814,9 @@ public class ZapControllerNormal : ZapController
         zap.resetCurrentActionTime();
         zap.AnimatorBody.speed = 1f;
 
+        zap.MountAttackLeftCollider.SetActive(false);
+        zap.MountAttackRightCollider.SetActive(false);
+
         switch (newAction)
         {
 
@@ -1008,32 +1011,35 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.MOUNT_ATTACK_LEFT:
-                Vector2 lCutBegin = zap.leftKnifeHitPointHigh1.position;
-                lCutBegin.x -= 0.5f;
-                lCutBegin.y += 1.3f;
-                Vector2 lCutEnd = zap.leftKnifeHitPointLow2.position;
-                cut(lCutBegin, lCutEnd);
+                //Vector2 lCutBegin = zap.leftKnifeHitPointHigh1.position;
+                //lCutBegin.x -= 0.5f;
+                //lCutBegin.y += 1.3f;
+                //Vector2 lCutEnd = zap.leftKnifeHitPointLow2.position;
+                //cut(lCutBegin, lCutEnd);
 
-                lCutBegin = zap.leftKnifeHitPointHigh2.position;
-                lCutBegin.y += 1.25f;
-                lCutEnd = zap.leftKnifeHitPointLow1.position;
-                cut(lCutBegin, lCutEnd);
+                //lCutBegin = zap.leftKnifeHitPointHigh2.position;
+                //lCutBegin.y += 1.25f;
+                //lCutEnd = zap.leftKnifeHitPointLow1.position;
+                //cut(lCutBegin, lCutEnd);
+
+                zap.MountAttackLeftCollider.SetActive(true);
 
                 zap.AnimatorBody.Play("Zap_climb_knife_attack");
                 break;
 
             case Action.MOUNT_ATTACK_RIGHT:
-                //cut(zap.rightKnifeHitPointHigh1.position,zap.rightKnifeHitPointHigh2.position);
-                Vector2 rCutBegin = zap.rightKnifeHitPointHigh2.position;
-                rCutBegin.x += 0.5f;
-                rCutBegin.y += 1.3f;
-                Vector2 rCutEnd = zap.rightKnifeHitPointLow1.position;
-                cut(rCutBegin, rCutEnd);
+                //Vector2 rCutBegin = zap.rightKnifeHitPointHigh2.position;
+                //rCutBegin.x += 0.5f;
+                //rCutBegin.y += 1.3f;
+                //Vector2 rCutEnd = zap.rightKnifeHitPointLow1.position;
+                //cut(rCutBegin, rCutEnd);
 
-                rCutBegin = zap.rightKnifeHitPointHigh1.position;
-                rCutBegin.y += 1.25f;
-                rCutEnd = zap.rightKnifeHitPointLow2.position;
-                cut(rCutBegin, rCutEnd);
+                //rCutBegin = zap.rightKnifeHitPointHigh1.position;
+                //rCutBegin.y += 1.25f;
+                //rCutEnd = zap.rightKnifeHitPointLow2.position;
+                //cut(rCutBegin, rCutEnd);
+
+                zap.MountAttackRightCollider.SetActive(true);
 
                 zap.AnimatorBody.Play("Zap_climb_knife_attack");
                 break;
@@ -1947,6 +1953,9 @@ public class ZapControllerNormal : ZapController
     {
         if (zap.currentActionTime >= MOUNT_ATTACK_DURATION)
         {
+            zap.MountAttackLeftCollider.SetActive(false);
+            zap.MountAttackRightCollider.SetActive(false);
+
             if (isInState(Zap.State.MOUNT))
             {
                 setAction(Action.MOUNT_IDLE);
