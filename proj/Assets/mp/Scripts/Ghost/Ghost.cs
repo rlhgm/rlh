@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Ghost : MonoBehaviour
 {
-   
     Vector3 startPoint = new Vector3();
 
     public bool autoCatchEdges = false;

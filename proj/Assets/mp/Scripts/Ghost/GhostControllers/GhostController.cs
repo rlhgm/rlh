@@ -5,7 +5,6 @@ using System; //This allows the IComparable Interface
 //[Serializable]
 public class GhostController
 {
-
     virtual public void setOwner(Ghost ghost)
     {
         owner = ghost;

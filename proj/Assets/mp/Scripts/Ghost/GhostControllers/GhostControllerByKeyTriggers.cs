@@ -1,17 +1,28 @@
 using UnityEngine;
-using System.Collections;
 using System; //This allows the IComparable Interface
+using System.Collections;
+using System.Collections.Generic;
 
 [Serializable]
 public class GhostControllerByKeyTriggers : GhostController
 {
-    //public KeyCode keyLeft = KeyCode.LeftArrow;
-    //public KeyCode keyRight = KeyCode.RightArrow;
-    //public KeyCode keyRun = KeyCode.LeftShift;
-    //public KeyCode keyUp = KeyCode.UpArrow;
-    //public KeyCode keyDown = KeyCode.DownArrow;
-    //public KeyCode keyJump = KeyCode.Space;
-    
+    KeyCode keyLeft = KeyCode.LeftArrow;
+    KeyCode keyRight = KeyCode.RightArrow;
+    KeyCode keyRun = KeyCode.LeftShift;
+    KeyCode keyUp = KeyCode.UpArrow;
+    KeyCode keyDown = KeyCode.DownArrow;
+    KeyCode keyJump = KeyCode.Space;
+
+    public enum TriggerKeyState
+    {
+        Default = 0,
+        Down,
+        Pressed,
+        Up
+    }
+
+    public Dictionary<KeyCode, TriggerKeyState> keysTriggers;
+
     public float WalkSpeed = 2.5f;
     public float RunSpeed = 5.7f;
     public float JumpSpeed = 3.8f;
@@ -69,6 +80,11 @@ public class GhostControllerByKeyTriggers : GhostController
     Vector3 lastHandlePos;
 
     float groundUnderFeet;
+
+    //GhostControllerByKeyTriggers()
+    //{
+
+    //}
 
     public override bool GlobalUpdate(float deltaTime)
     {
@@ -757,8 +773,15 @@ public class GhostControllerByKeyTriggers : GhostController
 
     public override void activateSpec(bool restore = false, bool crouch = false)
     {
-        //base.activate ();
-
+        keysTriggers.Clear();
+        
+        keysTriggers[keyLeft] = TriggerKeyState.Default;
+        keysTriggers[keyRight] = TriggerKeyState.Default;
+        keysTriggers[keyRun] = TriggerKeyState.Default;
+        keysTriggers[keyUp] = TriggerKeyState.Default;
+        keysTriggers[keyDown] = TriggerKeyState.Default;
+        keysTriggers[keyJump] = TriggerKeyState.Default;
+        
         setAction(Action.UNDEF);
         setAction(Action.IDLE);
         jumpFromMount = false;
