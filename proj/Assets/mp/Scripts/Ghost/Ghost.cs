@@ -11,11 +11,7 @@ public class Ghost : MonoBehaviour
 
     [HideInInspector]
     public GhostController currentController;
-    //[HideInInspector]
-    //public GhostController beforeFallController;
-    //[HideInInspector]
-    //public GhostController choosenController;
-    public GhostControllerByKeyTriggers ghostControllerByKeyTriggers = new GhostControllerByKeyTriggers();
+    //public GhostControllerByKeyTriggers ghostControllerByKeyTriggers = new GhostControllerByKeyTriggers();
 
     //public void OnEnable()
     //{
@@ -67,12 +63,13 @@ public class Ghost : MonoBehaviour
         //myHeight = coll.size.y;
         //myHalfHeight = myHeight * 0.5f;
         //ghostControllerNormal = ScriptableObject.CreateInstance<GhostControllerNormal>();
-        ghostControllerByKeyTriggers.setOwner(this);
+
+        //ghostControllerByKeyTriggers.setOwner(this);
     }
 
     void Start()
     {
-        setCurrentController(ghostControllerByKeyTriggers);
+        //setCurrentController(ghostControllerByKeyTriggers);
 
         velocity = new Vector3(0, 0, 0);
         impulse = new Vector3(0, 0, 0);
@@ -80,8 +77,10 @@ public class Ghost : MonoBehaviour
         startFallPos = transform.position;
 
         setState(State.ON_GROUND);
-        currentController.activate();
-
+        if (currentController != null)
+        {
+            currentController.activate();
+        }
         startPoint = transform.position;
         //beforeFallController = null;
     }
@@ -351,7 +350,10 @@ public class Ghost : MonoBehaviour
     {
         float timeSinceLastFrame = Time.deltaTime;
 
-        if ( currentController.GlobalUpdate(timeSinceLastFrame)) return;
+        if (currentController != null)
+        {
+            if (currentController.GlobalUpdate(timeSinceLastFrame)) return;
+        }
 
         while (timeSinceLastFrame > ConstantFrameTime)
         {
@@ -382,8 +384,11 @@ public class Ghost : MonoBehaviour
         stateJustChanged = false;
         currentStateTime += deltaTime;
         currentActionTime += deltaTime;
-        
-        currentController.MUpdate(CurrentDeltaTime);
+
+        if (currentController != null)
+        {
+            currentController.MUpdate(CurrentDeltaTime);
+        }
     }
 
     public bool checkObstacle(int dir, float distToCheck, ref float distToObstacle)
