@@ -5057,10 +5057,6 @@ Prefab:
       propertyPath: markB
       value: 
       objectReference: {fileID: 608483205}
-    - target: {fileID: 11482878, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
-      propertyPath: JumpFailurePercent
-      value: 33
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaf5e779c03537445a5d5487ae43fec1, type: 2}
   m_IsPrefabParent: 0

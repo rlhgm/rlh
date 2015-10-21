@@ -135,7 +135,7 @@ MonoBehaviour:
   markB: {fileID: 0}
   LongDistance: 4
   JumpDistance: 4
-  JumpFailurePercent: 100
+  JumpFailurePercent: 33
   RecoveryTime: 2
   IdleDistance: 6
   AttackDistance: 1.20000005

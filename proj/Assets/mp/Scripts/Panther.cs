@@ -11,6 +11,7 @@ public class Panther : MonoBehaviour, IKnifeCutable
     public float JumpDistance = 3f;
     public int JumpFailurePercent = 100; // Random.Range(2,5);
     public float RecoveryTime = 2f;
+    float currentRecoveryDuration = 0.0f;
     public float IdleDistance = 6f;
     public float AttackDistance = 1.2f;
     public float FightDistance = 8f; // ???
@@ -247,11 +248,15 @@ public class Panther : MonoBehaviour, IKnifeCutable
 
     public void Cut()
     {
-        currentLifePoints -= 1;
-        paintWithHP();
-        if (currentLifePoints <= 0)
+        if (isInAction(Action.RECOVERY))
         {
+            setAction(Action.HIT);
+            currentLifePoints -= 1;
+            paintWithHP();
+            if (currentLifePoints <= 0)
+            {
 
+            }
         }
     }
 
@@ -340,6 +345,7 @@ public class Panther : MonoBehaviour, IKnifeCutable
                 animator.Play("eat");
                 break;
             case Action.RECOVERY:
+                //currentRecoveryDuration = 0.0f;
                 animator.Play("recovery");
                 break;
             case Action.DYING:
@@ -682,15 +688,22 @@ public class Panther : MonoBehaviour, IKnifeCutable
 
         if (currentActionTime >= attackLandingFailureDuration)
         {
+            currentRecoveryDuration = 0.0f;
             setAction(Action.RECOVERY);
         }
     }
     void HIT()
     {
+        if( currentActionTime > 0.2f)
+        {
+            setAction(Action.RECOVERY);
+        }
     }
     void RECOVERY()
     {
-        if (currentActionTime >= RecoveryTime)
+        currentRecoveryDuration += Time.deltaTime;
+
+        if (currentRecoveryDuration >= RecoveryTime)
         {
             switch (state)
             {
