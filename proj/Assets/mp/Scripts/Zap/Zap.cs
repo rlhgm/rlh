@@ -378,6 +378,11 @@ public class Zap : MonoBehaviour
 
     public void die(DeathType deathType)
     {
+        if( lastTouchedCheckPointCandidate != null )
+        {
+            lastTouchedCheckPointCandidate = null;
+        }
+
         velocity.x = 0.0f;
         velocity.y = 0.0f;
         gfxCollider.enabled = false;
@@ -485,6 +490,8 @@ public class Zap : MonoBehaviour
         }
     }
     CheckPoint lastTouchedCheckPoint;
+    CheckPoint lastTouchedCheckPointCandidate;
+    float lastTouchedCheckPointApproveTime = 0f;
 
     public bool canBeFuddleFromBird = true;
     bool fuddledFromBrid = false;
@@ -701,12 +708,16 @@ public class Zap : MonoBehaviour
 
         if (other.gameObject.tag == "CheckPoint")
         {
-            lastTouchedCheckPoint = other.GetComponent<CheckPoint>();
-            // zatwierdzam wszystkie zdobyte kawalki mapy...
-            collectedMapParts.Clear();
-            // zatwierdzam zdobycie noza i/lub gravityguna
-            _haveKnife = HaveKnife;
-            _haveGravityGun = HaveGravityGun;
+            lastTouchedCheckPointCandidate = other.GetComponent<CheckPoint>();
+            lastTouchedCheckPointApproveTime = 1f;
+
+            //lastTouchedCheckPoint = other.GetComponent<CheckPoint>();
+            //// zatwierdzam wszystkie zdobyte kawalki mapy...
+            //collectedMapParts.Clear();
+            //// zatwierdzam zdobycie noza i/lub gravityguna
+            //_haveKnife = HaveKnife;
+            //_haveGravityGun = HaveGravityGun;
+
             return;
         }
         if (other.gameObject.tag == "KillerPhysic")
@@ -906,6 +917,20 @@ public class Zap : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             gamePaused = !gamePaused;
+        }
+
+        if (lastTouchedCheckPointCandidate != null)
+        {
+            if ((lastTouchedCheckPointApproveTime -= deltaTime) <= 0f)
+            {
+                lastTouchedCheckPoint = lastTouchedCheckPointCandidate;
+                lastTouchedCheckPointCandidate = null;
+                // zatwierdzam wszystkie zdobyte kawalki mapy...
+                collectedMapParts.Clear();
+                // zatwierdzam zdobycie noza i/lub gravityguna
+                _haveKnife = HaveKnife;
+                _haveGravityGun = HaveGravityGun;
+            }
         }
 
         if (Input.GetMouseButtonDown(0))
