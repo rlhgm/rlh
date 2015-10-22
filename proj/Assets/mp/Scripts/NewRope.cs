@@ -29,12 +29,17 @@ public class NewRope : MonoBehaviour {
 		transform.localScale = new Vector3 (1, 1, 1);
 		links = new RopeLink[numberOfLinks];
 
-		//float linkLimitRest = 15.0f / numberOfLinks;
+        //float linkLimitRest = 15.0f / numberOfLinks;
 
-		//if (transform.childCount == 1) {
-		//	attachedStone = transform.GetChild(0);
-		//}
+        //if (transform.childCount == 1) {
+        //	attachedStone = transform.GetChild(0);
+        //}
 
+        if (attachedStone)
+        {
+            asp = attachedStone.position;
+            asr = attachedStone.rotation;
+        }
 		createLinks ();
 	}
 
@@ -77,28 +82,28 @@ public class NewRope : MonoBehaviour {
 		weakLinkTimeToBreakUp = weakLinkBreakUpDuration;
 
 		if (attachedStone) {
-//			RopeLink specialLink = Instantiate<RopeLink>(ropeLinkPrefab);
-//			specialLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
-//			specialLink.rope = this;
-//			specialLink.GetComponent<Rigidbody2D>().mass = linkMass;
-//
-//
-//			Rigidbody2D lastRigidBody = lastLink.GetComponent<Rigidbody2D>();
-//			hingeJoint.connectedBody = attachedStone.GetComponent<Rigidbody2D>();
-//			newLink.transform.SetParent( lastLink.transform );
-//			hingeJoint.connectedAnchor = new Vector2(0f,-0.55f);
-//			newLink.transform.position = lastLink.transform.position + new Vector3(0f,-0.5f);
-//
-//			attachedStone.SetParent( links[numberOfLinks-1].transform );
-//			attachedStone.position = new Vector3(0f,0f,0f);
+            //			RopeLink specialLink = Instantiate<RopeLink>(ropeLinkPrefab);
+            //			specialLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
+            //			specialLink.rope = this;
+            //			specialLink.GetComponent<Rigidbody2D>().mass = linkMass;
+            //
+            //
+            //			Rigidbody2D lastRigidBody = lastLink.GetComponent<Rigidbody2D>();
+            //			hingeJoint.connectedBody = attachedStone.GetComponent<Rigidbody2D>();
+            //			newLink.transform.SetParent( lastLink.transform );
+            //			hingeJoint.connectedAnchor = new Vector2(0f,-0.55f);
+            //			newLink.transform.position = lastLink.transform.position + new Vector3(0f,-0.5f);
+            //
+            //			attachedStone.SetParent( links[numberOfLinks-1].transform );
+            //			attachedStone.position = new Vector3(0f,0f,0f);
 
-			//DistanceJoint2D distJoint = Instantiate<DistanceJoint2D>();
-			//distJoint.distance = 0.5f;
-			//distJoint.enableCollision = false;
-			//distJoint.
+            //DistanceJoint2D distJoint = Instantiate<DistanceJoint2D>();
+            //distJoint.distance = 0.5f;
+            //distJoint.enableCollision = false;
+            //distJoint.
 
-			asp = attachedStone.position;
-
+            //asp = attachedStone.position;
+            
 			DistanceJoint2D distJoint = lastLink.gameObject.AddComponent<DistanceJoint2D>();
 			distJoint.distance = 0.1f;
 			distJoint.enableCollision = false;
@@ -256,6 +261,8 @@ public class NewRope : MonoBehaviour {
 	}
 
 	Vector3 asp;
+    float asr;
+
 	bool fasp = true;
 
 	void FixedUpdate(){
@@ -321,7 +328,24 @@ public class NewRope : MonoBehaviour {
 
 	public void reset(){
 
-		for (int i = 0; i < links.Length; ++i) {
+        if( attachedStone)
+        {
+            RopeLink lastLink = links[links.Length - 1];
+            DistanceJoint2D distJoint = lastLink.gameObject.AddComponent<DistanceJoint2D>();
+            distJoint.connectedBody = null;
+            distJoint.enabled = false;
+            //links[links.Length-1].con distJoint.connectedBody = attachedStone;
+            attachedStone.transform.SetParent(null);
+            //attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
+            //attachedStone.MovePosition(asp);
+            //attachedStone
+
+            attachedStone.velocity = new Vector2(0f, 0f);
+            attachedStone.position = asp;
+            attachedStone.rotation = asr;
+        }
+
+        for (int i = 0; i < links.Length; ++i) {
 			Destroy(links[i].gameObject);
 			links[i] = null;
 //			HingeJoint2D hingeJoint = links [i].GetComponent<HingeJoint2D> ();
@@ -330,8 +354,8 @@ public class NewRope : MonoBehaviour {
 //				hingeJoint.connectedBody.angularVelocity = 0f;
 //			}
 		}
-
-		createLinks ();
+        
+        createLinks();
 	}
 
 }
