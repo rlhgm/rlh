@@ -1050,10 +1050,13 @@ public class Zap : MonoBehaviour
 
         if (isDead())
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (currentStateTime > 1f)
             {
-                reborn();
-                return;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    reborn();
+                    return;
+                }
             }
         }
 
