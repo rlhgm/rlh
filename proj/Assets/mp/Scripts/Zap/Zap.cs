@@ -675,6 +675,12 @@ public class Zap : MonoBehaviour
         if (currentController.triggerEnter(other))
             return;
 
+        if (other.gameObject.tag == "KillerPhysic")
+        {
+            die(DeathType.POISON);
+            return;
+        }
+
         int lid = other.transform.gameObject.layer;
         int lid2 = LayerMask.NameToLayer("GroundMoveable");
         if (lid == lid2)
@@ -720,11 +726,7 @@ public class Zap : MonoBehaviour
 
             return;
         }
-        if (other.gameObject.tag == "KillerPhysic")
-        {
-            die(DeathType.POISON);
-            return;
-        }
+       
         if (other.gameObject.tag == "Crocodile")
         {
             die(DeathType.CROCODILE);
