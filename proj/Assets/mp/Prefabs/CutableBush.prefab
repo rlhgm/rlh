@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6132862}
   - 114: {fileID: 11495906}
   - 50: {fileID: 5011630}
-  m_Layer: 24
+  m_Layer: 8
   m_Name: CutableBush
   m_TagString: KillerPhysic
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 24
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
