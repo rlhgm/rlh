@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 56feeb4475fd5a14f8577aec58341912
-timeCreated: 1439551873
+timeCreated: 1445633853
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -39,6 +39,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -55,21 +56,21 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 7
+        y: 8
         width: 64
-        height: 50
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_walk_back_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 7
+        y: 8
         width: 64
-        height: 50
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

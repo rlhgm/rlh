@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3c5b8282375daed44851ee94a4f7d6cd
-timeCreated: 1439549067
+timeCreated: 1445633343
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -45,6 +45,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -61,81 +62,81 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_5
       rect:
         serializedVersion: 2
         x: 320
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_6
       rect:
         serializedVersion: 2
         x: 384
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_R_7
       rect:
         serializedVersion: 2
         x: 448
-        y: 7
+        y: 8
         width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0, y: 0}
+        height: 49
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
