@@ -402,7 +402,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 209, y: 64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22406776}
@@ -521,7 +521,7 @@ Transform:
   m_GameObject: {fileID: 167780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.38683784, y: 1.38683784, z: 1.38683784}
+  m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
   m_Children:
   - {fileID: 493604}
   m_Father: {fileID: 443758}
@@ -582,7 +582,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.32638884
+  orthographic size: 6.25
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
@@ -762,10 +762,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 336
   preferUncropped: 0
-  screenPixelsY: 623
+  screenPixelsY: 600
   currentCropped: 0
-  screenRatio: 2.16319442
-  ratio: 1.38683784
+  screenRatio: 1.78571427
+  ratio: 1.12
   mainCamera: {fileID: 2079806}
   touchCamera: {fileID: 2015612}
 --- !u!114 &11411998
