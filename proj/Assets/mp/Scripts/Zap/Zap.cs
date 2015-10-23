@@ -1066,12 +1066,13 @@ public class Zap : MonoBehaviour
         return false;
     }
 
+    public float afterDeathPauseDuration = 0f;
+
     void ZapUpdate(float deltaTime)
     {
-
         if (isDead())
         {
-            if (currentStateTime > 1f)
+            if (currentStateTime > afterDeathPauseDuration)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
