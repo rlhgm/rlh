@@ -7,12 +7,18 @@ public class SmashStoneActivator : MonoBehaviour
     /// bla bla bal
     /// </summary>
     public Collider2D targetStone;
+    Vector3 targetStoneStartPos;
+
     public Pickable pickablePrefab;
+    Pickable newPickable = null;
 
     // Use this for initialization
     void Start()
     {
-
+        if( targetStone )
+        {
+            targetStoneStartPos = targetStone.transform.position;
+        }
     }
 
     // Update is called once per frame
@@ -29,9 +35,11 @@ public class SmashStoneActivator : MonoBehaviour
             //print("ssa::OnTriggerEnter2D(Collider2D other)");
             if( pickablePrefab )
             {
-                Pickable newPickable = Instantiate<Pickable>(pickablePrefab);
+                newPickable = Instantiate<Pickable>(pickablePrefab);
                 Vector3 startPos = transform.position;
                 newPickable.transform.position = startPos;
+
+                targetStone.gameObject.SetActive(false);
 
                 //DestroyObject()
             }
@@ -58,5 +66,21 @@ public class SmashStoneActivator : MonoBehaviour
         //    }
         //    return;
         //}
+    }
+
+    public void reset()
+    {
+        if( targetStone )
+        {
+            if(!targetStone.gameObject.activeSelf)
+            {
+                targetStone.transform.position = targetStoneStartPos;
+                targetStone.gameObject.SetActive(true);
+            }
+            if( newPickable != null)
+            {
+                Destroy(newPickable.gameObject);
+            }
+        }
     }
 }

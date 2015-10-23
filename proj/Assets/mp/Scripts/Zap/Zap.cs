@@ -480,6 +480,11 @@ public class Zap : MonoBehaviour
         {
             birdEmiter.reset();
         }
+        SmashStoneActivator[] smashStoneActivators = FindObjectsOfType(typeof(SmashStoneActivator)) as SmashStoneActivator[];
+        foreach (SmashStoneActivator smashStoneActivator in smashStoneActivators)
+        {
+            smashStoneActivator.reset();
+        }
     }
 
     public CheckPoint LastTouchedCheckPoint
