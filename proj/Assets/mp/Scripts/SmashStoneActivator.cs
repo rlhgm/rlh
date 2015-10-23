@@ -15,10 +15,11 @@ public class SmashStoneActivator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if( targetStone )
+        if (targetStone)
         {
             targetStoneStartPos = targetStone.transform.position;
         }
+        activated = false;
     }
 
     // Update is called once per frame
@@ -30,56 +31,54 @@ public class SmashStoneActivator : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //print("ssa::OnTriggerEnter2D(Collider2D other)");
-        if( other == targetStone )
+        if (other == targetStone)
         {
             //print("ssa::OnTriggerEnter2D(Collider2D other)");
-            if( pickablePrefab )
+            if (pickablePrefab)
             {
                 newPickable = Instantiate<Pickable>(pickablePrefab);
                 Vector3 startPos = transform.position;
                 newPickable.transform.position = startPos;
 
                 targetStone.gameObject.SetActive(false);
-
+                activated = true;
                 //DestroyObject()
             }
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    //void OnTriggerStay2D(Collider2D other)
+    //{
+    //}
+
+    public void checkPointReached()
     {
-        //print("ssa::OnTriggerStay2D(Collider2D other)");
-
-        //if (isDead())
-        //    return;
-
-        //int lid = other.transform.gameObject.layer;
-        //if (lid == LayerMask.NameToLayer("GroundMoveable"))
-        //{ // layerIdGroundMoveableMask) { // to jest kamien 
-        //    if (hitByStone(other.transform))
-        //    {
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        //touchStone(other.transform);
-        //    }
-        //    return;
-        //}
+        if (activated)
+        {
+            deactivatedPremanently = true;
+        }
     }
+
+    bool activated = false;
+    bool deactivatedPremanently = false;
 
     public void reset()
     {
-        if( targetStone )
+        if (deactivatedPremanently) return;
+
+        if (activated)
         {
-            if(!targetStone.gameObject.activeSelf)
+            if (targetStone)
             {
-                targetStone.transform.position = targetStoneStartPos;
-                targetStone.gameObject.SetActive(true);
-            }
-            if( newPickable != null)
-            {
-                Destroy(newPickable.gameObject);
+                if (!targetStone.gameObject.activeSelf)
+                {
+                    targetStone.transform.position = targetStoneStartPos;
+                    targetStone.gameObject.SetActive(true);
+                }
+                if (newPickable != null)
+                {
+                    Destroy(newPickable.gameObject);
+                }
             }
         }
     }

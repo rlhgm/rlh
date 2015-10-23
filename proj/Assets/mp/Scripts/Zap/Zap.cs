@@ -455,6 +455,11 @@ public class Zap : MonoBehaviour
 
         resetInfo();
 
+        Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
+        foreach (Pickable pickable in pickables)
+        {
+            pickable.activate();
+        }
         SmashStoneActivator[] smashStoneActivators = FindObjectsOfType(typeof(SmashStoneActivator)) as SmashStoneActivator[];
         foreach (SmashStoneActivator smashStoneActivator in smashStoneActivators)
         {
@@ -476,11 +481,7 @@ public class Zap : MonoBehaviour
         {
             panther.reset();
         }
-        Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
-        foreach (Pickable pickable in pickables)
-        {
-            pickable.activate();
-        }
+        
         BirdEmiter[] birdEmiters = FindObjectsOfType(typeof(BirdEmiter)) as BirdEmiter[];
         foreach (BirdEmiter birdEmiter in birdEmiters)
         {
@@ -939,6 +940,12 @@ public class Zap : MonoBehaviour
                 // zatwierdzam zdobycie noza i/lub gravityguna
                 _haveKnife = HaveKnife;
                 _haveGravityGun = HaveGravityGun;
+
+                SmashStoneActivator[] smashStoneActivators = FindObjectsOfType(typeof(SmashStoneActivator)) as SmashStoneActivator[];
+                foreach (SmashStoneActivator smashStoneActivator in smashStoneActivators)
+                {
+                    smashStoneActivator.checkPointReached();
+                }
             }
         }
 
