@@ -458,7 +458,7 @@ public class Zap : MonoBehaviour
         Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
         foreach (Pickable pickable in pickables)
         {
-            pickable.activate();
+            pickable.reset();
         }
         SmashStoneActivator[] smashStoneActivators = FindObjectsOfType(typeof(SmashStoneActivator)) as SmashStoneActivator[];
         foreach (SmashStoneActivator smashStoneActivator in smashStoneActivators)
@@ -777,7 +777,7 @@ public class Zap : MonoBehaviour
         {
             //print("znalazlem.... pickabla " + other.name);
             Pickable pickable = other.GetComponent<Pickable>();
-            if (pickable.isActive)
+            //if (pickable.isActive)
             {
                 switch (pickable.type)
                 {
@@ -801,7 +801,7 @@ public class Zap : MonoBehaviour
                         }
                         break;
                 }
-                pickable.deactivate();
+                pickable.activate();
             }
         }
     }
@@ -941,6 +941,11 @@ public class Zap : MonoBehaviour
                 _haveKnife = HaveKnife;
                 _haveGravityGun = HaveGravityGun;
 
+                Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
+                foreach (Pickable pickable in pickables)
+                {
+                    pickable.checkPointReached();
+                }
                 SmashStoneActivator[] smashStoneActivators = FindObjectsOfType(typeof(SmashStoneActivator)) as SmashStoneActivator[];
                 foreach (SmashStoneActivator smashStoneActivator in smashStoneActivators)
                 {
