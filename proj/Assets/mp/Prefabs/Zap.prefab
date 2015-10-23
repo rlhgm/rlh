@@ -1240,6 +1240,7 @@ MonoBehaviour:
   stoneMinDeadyMass: .5
   pushedForce: -10
   jumpKeyPressed: 0
+  afterDeathPauseDuration: 0
   stateJustChanged: 0
   sensorLeft1: {fileID: 0}
   sensorLeft2: {fileID: 0}
