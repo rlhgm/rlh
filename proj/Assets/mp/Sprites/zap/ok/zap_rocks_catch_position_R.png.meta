@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 286dd7fbfd6748f4a93f7f2dd202d0eb
-timeCreated: 1445583689
+timeCreated: 1445584743
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -62,41 +62,41 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 12
         width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 74
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: zap_rocks_catch_position_R_1
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 12
         width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 74
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: zap_rocks_catch_position_R_2
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
+        y: 12
         width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 74
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: zap_rocks_catch_position_R_3
       rect:
         serializedVersion: 2
         x: 288
-        y: 0
+        y: 12
         width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 74
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

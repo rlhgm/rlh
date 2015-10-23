@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1f0b216dcba14184d872b0d893a5661c
-timeCreated: 1445583657
+timeCreated: 1445584787
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -58,21 +58,21 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 18
         width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 68
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: zap_rocks_climb_L_1
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 18
         width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 68
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
