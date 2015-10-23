@@ -23,6 +23,7 @@ TagManager:
   - Panther
   - PantherHitRegion
   - Pickable
+  - SmashStoneActivator
   layers:
   - Default
   - TransparentFX

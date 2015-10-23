@@ -11,9 +11,10 @@ GameObject:
   - 212: {fileID: 21268534}
   - 61: {fileID: 6171866}
   - 50: {fileID: 5021706}
+  - 114: {fileID: 11415220}
   m_Layer: 8
   m_Name: KillerPhysic
-  m_TagString: KillerPhysic
+  m_TagString: SmashStoneActivator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 1}
+  m_LocalPosition: {x: -51, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,11 +55,24 @@ BoxCollider2D:
   m_GameObject: {fileID: 130810}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .5}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &11415220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf3cacd2b1181ac45b9887beb2d0543f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetStone: {fileID: 0}
+  pickablePrefab: {fileID: 11405790, guid: 86ccab0e21c14c045a5d704cc0f2d5bc, type: 2}
 --- !u!212 &21268534
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -84,7 +98,7 @@ SpriteRenderer:
   m_SortingLayerID: -644166221
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 29aff0eba10a8a54199bdb6be475e887, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: .958620548, b: 1, a: .591000021}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
