@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: eca9614d3d0ecda4f9f1d81e33491538
-timeCreated: 1445634128
+timeCreated: 1445634913
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -86,7 +86,7 @@ TextureImporter:
         width: 64
         height: 49
       alignment: 9
-      pivot: {x: .449999988, y: .200000003}
+      pivot: {x: .460953712, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_L_3
       rect:
