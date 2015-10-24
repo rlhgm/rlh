@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 47f133dbebc28d24ea38ab652fd4087f
-timeCreated: 1445645735
+timeCreated: 1445646007
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,7 +66,7 @@ TextureImporter:
         width: 96
         height: 70
       alignment: 9
-      pivot: {x: .5, y: .300000012}
+      pivot: {x: .449999988, y: .200000003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: zap_rocks_catch_position_L_1
       rect:
@@ -76,7 +76,7 @@ TextureImporter:
         width: 96
         height: 70
       alignment: 9
-      pivot: {x: .474999994, y: .300000012}
+      pivot: {x: .449999988, y: .25}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: zap_rocks_catch_position_L_2
       rect:
