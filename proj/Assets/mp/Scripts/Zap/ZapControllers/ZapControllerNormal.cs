@@ -991,13 +991,13 @@ public class ZapControllerNormal : ZapController
                     if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R_2");
                     else zap.AnimatorBody.Play("zap_rocks_catch_position_L_2");
                 }
-                //else if (param == 1)
-                //{
-                //    // tu juz jest we wlasciwej klatce
-                //    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_rev_R");
-                //    else zap.AnimatorBody.Play("zap_rocks_catch_position_rev_L");
-                //    zap.AnimatorBody.speed = 0.0f;
-                //}
+                else if (param == 10)
+                {
+                    // tu juz jest we wlasciwej klatce
+                    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_rev_R");
+                    else zap.AnimatorBody.Play("zap_rocks_catch_position_rev_L");
+                    zap.AnimatorBody.speed = 0.0f;
+                }
 
                 if (zap.catchSounds.Length != 0)
                     zap.getAudioSource().PlayOneShot(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)], 0.7F);
@@ -2119,7 +2119,7 @@ public class ZapControllerNormal : ZapController
     {
         if (zap.currentActionTime >= CLIMBDUR_CLIMB)
         {
-            setAction(Action.CLIMB_CATCH, 1);
+            setAction(Action.CLIMB_CATCH, 10);
             zap.setState(Zap.State.CLIMB);
             canPullUp = true;
             transform.position = climbAfterPos;
