@@ -2739,7 +2739,12 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
                 setAction(Action.JUMP);
-                zap.setState(Zap.State.IN_AIR);
+                //zap.setState(Zap.State.IN_AIR);
+
+                if( isInState(Zap.State.CLIMB_ROPE) )
+                {
+                    releaseRope();
+                }
 
                 if (zap.canBeFuddleFromBird)
                     zap.FuddleFromBird = true;
@@ -2890,10 +2895,8 @@ public class ZapControllerNormal : ZapController
 
     int tryJumpFromRope(bool forceJumpOff = false)
     {
-
         if (Input.GetKeyDown(zap.keyJump) || forceJumpOff)
         {
-
             float ropeSpeed = catchedRope.firstLinkSpeed;
             float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
             int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
@@ -2943,22 +2946,9 @@ public class ZapControllerNormal : ZapController
                 catchedRope.breakUp();
             }
 
-            Vector3 _oldPos = transform.position;
-            _oldPos.y -= 1.65f;
-            transform.position = _oldPos;
+           
 
-            justJumpedRope = catchedRope;
-
-            catchedRope.resetDiver();
-            catchedRope = null;
-            catchedRopeLink = null;
-
-            Quaternion quat = new Quaternion();
-            quat.eulerAngles = new Vector3(0f, 0f, 0f);
-            transform.rotation = quat;
-
-            zap.setState(Zap.State.IN_AIR);
-
+            releaseRope();
             //Quaternion quat = new Quaternion ();
             //quat.eulerAngles = new Vector3 (0f, 0f, 0f);
             //weaponText.rotation = quat;
@@ -3303,6 +3293,9 @@ public class ZapControllerNormal : ZapController
         }
     }
 
+    Vector2 beforeRopeCollOffset = new Vector2();
+    Vector2 beforeRopeGfxCollOffset = new Vector2();
+
     void catchRope()
     {
         catchedRope = catchedRopeLink.rope;
@@ -3330,13 +3323,40 @@ public class ZapControllerNormal : ZapController
         transform.rotation = catchedRopeLink.transform.rotation;
 
         ropeLinkCatchOffset = 0.0f;
+
+        beforeRopeCollOffset = zap.Coll.offset;
+        beforeRopeGfxCollOffset = zap.GfxCollider.offset;
+
+        zap.Coll.offset = new Vector2(0f,-1f);
+        zap.GfxCollider.offset = new Vector2(0f, -2f);
+    }
+
+    void releaseRope()
+    {
+        Vector3 _oldPos = transform.position;
+        _oldPos.y -= 1.65f;
+        transform.position = _oldPos;
+
+        justJumpedRope = catchedRope;
+
+        catchedRope.resetDiver();
+        catchedRope = null;
+        catchedRopeLink = null;
+
+        Quaternion quat = new Quaternion();
+        quat.eulerAngles = new Vector3(0f, 0f, 0f);
+        transform.rotation = quat;
+
+        zap.Coll.offset = beforeRopeCollOffset;
+        zap.GfxCollider.offset = beforeRopeGfxCollOffset;
+
+        zap.setState(Zap.State.IN_AIR);
     }
 
     float ropeLinkCatchOffset = 0.0f;
 
     bool canClimbPullUp()
     {
-
         if (!catchedClimbHandle)
             return false;
 

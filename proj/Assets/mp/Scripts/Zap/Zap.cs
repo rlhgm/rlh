@@ -186,7 +186,7 @@ public class Zap : MonoBehaviour
         layerIdMountMask = 1 << LayerMask.NameToLayer("Mount");
         layerIdRopesMask = 1 << LayerMask.NameToLayer("Ropes");
 
-        myWidth = coll.size.x;
+        myWidth = Coll.size.x;
         myHalfWidth = myWidth * 0.5f;
         //myHeight = coll.size.y;
         //myHalfHeight = myHeight * 0.5f;
@@ -1980,6 +1980,22 @@ public class Zap : MonoBehaviour
         get
         {
             return animatorBody;
+        }
+    }
+
+    public BoxCollider2D Coll
+    {
+        get
+        {
+            return coll;
+        }
+    }
+
+    public PolygonCollider2D GfxCollider
+    {
+        get
+        {
+            return gfxCollider;
         }
     }
 
