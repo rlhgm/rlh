@@ -283,13 +283,13 @@ public class NewRope : MonoBehaviour {
 			return false;
 
 		if (currentLink) {
-			//currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
+			currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
 			currentLink.GetComponent<Rigidbody2D> ().mass = linkMass;
 			//currentLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
 
 			if( currentLink.transform.childCount > 0 ) {
 				Transform nextLink = currentLink.transform.GetChild(0);
-				//nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
+				nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
 				nextLink.GetComponent<Rigidbody2D> ().mass = linkMass;
 				//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
 			}
@@ -297,13 +297,13 @@ public class NewRope : MonoBehaviour {
 
 		currentLink = newLink;
 
-		//newLink.GetComponent<SpriteRenderer> ().color = Color.blue;
+		newLink.GetComponent<SpriteRenderer> ().color = Color.red;
 		newLink.GetComponent<Rigidbody2D> ().mass = firstDriverLinkMass;
 		//newLink.GetComponent<Rigidbody2D> ().gravityScale = 1.5f;
 
 		if( currentLink.transform.childCount > 0 ) {
 			Transform nextLink = currentLink.transform.GetChild(0);
-			//nextLink.GetComponent<SpriteRenderer> ().color = Color.blue;
+			nextLink.GetComponent<SpriteRenderer> ().color = Color.red;
 			nextLink.GetComponent<Rigidbody2D> ().mass = secondDriverLinkMass;
 			//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.25f;
 		}
@@ -313,12 +313,12 @@ public class NewRope : MonoBehaviour {
 
 	public void resetDiver(){
 		if (currentLink) {
-			//currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
+			currentLink.GetComponent<SpriteRenderer> ().color = Color.white;
 			currentLink.GetComponent<Rigidbody2D> ().mass = linkMass;
 			
 			if( currentLink.transform.childCount > 0 ) {
 				Transform nextLink = currentLink.transform.GetChild(0);
-				//nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
+				nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
 				nextLink.GetComponent<Rigidbody2D> ().mass = linkMass;
 			}
 		}
