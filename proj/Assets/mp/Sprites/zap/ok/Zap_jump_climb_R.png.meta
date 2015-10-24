@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dcc6ebad5ddf3964a91ac6206a05b193
-timeCreated: 1445649569
+timeCreated: 1445649749
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -97,7 +97,7 @@ TextureImporter:
         width: 92
         height: 92
       alignment: 9
-      pivot: {x: .5, y: .200000003}
+      pivot: {x: .5, y: .224999994}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_R_3
       rect:
@@ -107,7 +107,7 @@ TextureImporter:
         width: 92
         height: 92
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .275000006}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_jump_climb_R_4
       rect:
