@@ -2126,6 +2126,8 @@ public class ZapControllerNormal : ZapController
         }
         else
         {
+            float ratio = zap.currentActionTime / CLIMBDUR_CLIMB;
+            transform.position = climbBeforePos + climbDistToClimb * ratio;
         }
 
         return 0;
@@ -2758,7 +2760,6 @@ public class ZapControllerNormal : ZapController
         GameObject potCatchedClimbHandle = canClimbPullDown();
         if (potCatchedClimbHandle)
         {
-
             catchedClimbHandle = potCatchedClimbHandle;
 
             zap.velocity.x = 0.0f;
@@ -2766,7 +2767,7 @@ public class ZapControllerNormal : ZapController
 
             Vector3 handlePos = climbAfterPos2; //potCatchedClimbHandle.transform.position;
 
-            climbAfterPos.y = handlePos.y - 2.4f; //myHeight;
+            climbAfterPos.y = handlePos.y - 1.75f; //myHeight;
             if (zap.dir() == Vector2.right)
             {
                 climbAfterPos.x = handlePos.x - zap.getMyHalfWidth();
