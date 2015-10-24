@@ -487,7 +487,7 @@ public class ZapControllerNormal : ZapController
 
                 bool justLanding = false;
 
-                
+
 
                 if (distToFall.y > 0.0f)
                 { // leci w gore
@@ -986,7 +986,7 @@ public class ZapControllerNormal : ZapController
                     if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R");
                     else zap.AnimatorBody.Play("zap_rocks_catch_position_L");
                 }
-                else if( param == 1)
+                else if (param == 1)
                 {
                     if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R_2");
                     else zap.AnimatorBody.Play("zap_rocks_catch_position_L_2");
@@ -1149,7 +1149,7 @@ public class ZapControllerNormal : ZapController
                 zap.setState(Zap.State.MOUNT);
                 return 1;
             }
-            if( tryCatchHandle(true) )
+            if (tryCatchHandle(true))
             {
                 return 1;
             }
@@ -1500,7 +1500,7 @@ public class ZapControllerNormal : ZapController
         //if (groundUnderAngle < -60.0f || groundUnderAngle > 60.0f)
         //    return false;
         float distToCeil = 0.2f;
-        if( zap.checkCeil(ref distToCeil) )
+        if (zap.checkCeil(ref distToCeil))
         {
             return false;
         }
@@ -3081,7 +3081,7 @@ public class ZapControllerNormal : ZapController
                         if (canPullUp)
                         {
                         }
-                        
+
                         zap.setState(Zap.State.CLIMB);
                         setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
                         lastFrameHande = false;
@@ -3173,7 +3173,7 @@ public class ZapControllerNormal : ZapController
             else
             {
                 ro.y += 2.4f;
-            }         
+            }
             hit = Physics2D.Raycast(ro, Vector2.left, 1.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
@@ -3227,11 +3227,8 @@ public class ZapControllerNormal : ZapController
 
     bool tryCatchRope()
     {
-
         if (zap.dir() == Vector2.right)
         {
-
-
             RaycastHit2D hit;
             if (lastFrameHande)
                 hit = Physics2D.Linecast(lastHandlePos, zap.sensorHandleR2.position, zap.layerIdRopesMask);
@@ -3250,7 +3247,6 @@ public class ZapControllerNormal : ZapController
 
                 if (_canCatch)
                 {
-
                     catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
 
                     if (justJumpedRope == catchedRopeLink.rope)
@@ -3259,34 +3255,7 @@ public class ZapControllerNormal : ZapController
                         lastHandlePos = zap.sensorHandleR2.position;
                         return false;
                     }
-
-                    catchedRope = catchedRopeLink.rope;
-
-                    catchedRope.chooseDriver(catchedRopeLink.transform);
-
-                    float forceRatio = Mathf.Abs(zap.velocity.x) / JumpLongSpeed;
-                    float force = RopeSwingForce * forceRatio;
-
-                    if (zap.velocity.x < 0f)
-                    {
-                        catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
-                    }
-                    else if (zap.velocity.x > 0)
-                    {
-                        catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
-                    }
-
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = 0.0f;
-
-                    zap.setState(Zap.State.CLIMB_ROPE);
-                    setAction(Action.ROPECLIMB_IDLE);
-
-                    transform.position = catchedRopeLink.transform.position;
-                    transform.rotation = catchedRopeLink.transform.rotation;
-
-                    ropeLinkCatchOffset = 0.0f;
-
+                    catchRope();
                     return true;
                 }
             }
@@ -3316,7 +3285,6 @@ public class ZapControllerNormal : ZapController
                 bool _canCatch = true;
                 if (_canCatch)
                 {
-
                     catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
 
                     if (justJumpedRope == catchedRopeLink.rope)
@@ -3325,33 +3293,7 @@ public class ZapControllerNormal : ZapController
                         lastHandlePos = zap.sensorHandleL2.position;
                         return false;
                     }
-
-                    catchedRope = catchedRopeLink.rope;
-
-                    catchedRope.chooseDriver(catchedRopeLink.transform);
-
-                    float forceRatio = Mathf.Abs(zap.velocity.x) / JumpLongSpeed;
-                    float force = RopeSwingForce * forceRatio;
-
-                    if (zap.velocity.x < 0f)
-                    {
-                        catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
-                    }
-                    else if (zap.velocity.x > 0)
-                    {
-                        catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
-                    }
-
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = 0.0f;
-
-                    zap.setState(Zap.State.CLIMB_ROPE);
-                    setAction(Action.ROPECLIMB_IDLE);
-
-                    transform.position = catchedRopeLink.transform.position;
-                    transform.rotation = catchedRopeLink.transform.rotation;
-
-                    ropeLinkCatchOffset = 0.0f;
+                    catchRope();
                     return true;
                 }
             }
@@ -3359,6 +3301,35 @@ public class ZapControllerNormal : ZapController
             lastHandlePos = zap.sensorHandleL2.position;
             return false;
         }
+    }
+
+    void catchRope()
+    {
+        catchedRope = catchedRopeLink.rope;
+        catchedRope.chooseDriver(catchedRopeLink.transform);
+
+        float forceRatio = Mathf.Abs(zap.velocity.x) / JumpLongSpeed;
+        float force = RopeSwingForce * forceRatio;
+
+        if (zap.velocity.x < 0f)
+        {
+            catchedRope.setSwingMotor(-Vector2.right, force, 0.25f);
+        }
+        else if (zap.velocity.x > 0)
+        {
+            catchedRope.setSwingMotor(Vector2.right, force, 0.25f);
+        }
+
+        zap.velocity.x = 0.0f;
+        zap.velocity.y = 0.0f;
+
+        zap.setState(Zap.State.CLIMB_ROPE);
+        setAction(Action.ROPECLIMB_IDLE);
+
+        transform.position = catchedRopeLink.transform.position;
+        transform.rotation = catchedRopeLink.transform.rotation;
+
+        ropeLinkCatchOffset = 0.0f;
     }
 
     float ropeLinkCatchOffset = 0.0f;
@@ -3381,7 +3352,7 @@ public class ZapControllerNormal : ZapController
             return false;
 
         Vector2 rayOrigin = climbAfterPos2; // catchedClimbHandle.transform.position;
-        if( zap.dir() == Vector2.right)
+        if (zap.dir() == Vector2.right)
             rayOrigin.x += 0.5f;
         else
             rayOrigin.x -= 0.5f;
@@ -3404,10 +3375,10 @@ public class ZapControllerNormal : ZapController
         if (zap.groundUnder)
         {
             GroundMoveable gm = zap.groundUnder.GetComponent<GroundMoveable>();
-            if( gm )
+            if (gm)
             {
                 Vector2 _handle = new Vector2();
-                if( gm.handleToPullDownTouched(zap.dir(), transform.position, ref _handle, 5f, 0.51f) )
+                if (gm.handleToPullDownTouched(zap.dir(), transform.position, ref _handle, 5f, 0.51f))
                 {
                     climbAfterPos2 = _handle;
                     return zap.groundUnder.gameObject;
