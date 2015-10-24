@@ -963,6 +963,9 @@ public class ZapControllerNormal : ZapController
             case Action.CLIMB_PREPARE_TO_JUMP:
                 break;
             case Action.CLIMB_JUMP_TO_CATCH:
+                if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R");
+                else zap.AnimatorBody.Play("zap_rocks_catch_position_L");
+                zap.AnimatorBody.speed = 0f;
                 break;
             case Action.CLIMB_CATCH:
                 if (param == 0)
@@ -2958,7 +2961,7 @@ public class ZapControllerNormal : ZapController
     {
         if (zap.dir() == Vector2.right)
         {
-            float _speed = 0.5f;
+            float _speed = 0.2f;
             RaycastHit2D hit;
             if (fromGround)
             {
@@ -2987,8 +2990,8 @@ public class ZapControllerNormal : ZapController
 
                     Vector3 handlePos = catchedClimbHandle.transform.position;
                     Vector3 newPos = new Vector3();
-                    newPos.x = handlePos.x - zap.getMyHalfWidth();
-                    newPos.y = handlePos.y - 2.4f; //myHeight;
+                    newPos.x = handlePos.x - zap.getMyHalfWidth() + 0.2f;
+                    newPos.y = handlePos.y - 1.75f; //myHeight;
 
                     canPullUp = canClimbPullUp();
 
