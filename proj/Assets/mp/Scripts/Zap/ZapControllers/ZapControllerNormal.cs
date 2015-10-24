@@ -804,6 +804,9 @@ public class ZapControllerNormal : ZapController
     {
         return action;
     }
+
+    int lastActionParam = 0;
+
     bool setAction(Action newAction, int param = 0)
     {
 
@@ -816,6 +819,8 @@ public class ZapControllerNormal : ZapController
 
         zap.MountAttackLeftCollider.SetActive(false);
         zap.MountAttackRightCollider.SetActive(false);
+
+        lastActionParam = param;
 
         switch (newAction)
         {
@@ -963,8 +968,16 @@ public class ZapControllerNormal : ZapController
             case Action.CLIMB_PREPARE_TO_JUMP:
                 break;
             case Action.CLIMB_JUMP_TO_CATCH:
-                if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R");
-                else zap.AnimatorBody.Play("zap_rocks_catch_position_L");
+                if (param == 1)
+                {
+                    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R_2");
+                    else zap.AnimatorBody.Play("zap_rocks_catch_position_L_2");
+                }
+                else
+                {
+                    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R");
+                    else zap.AnimatorBody.Play("zap_rocks_catch_position_L");
+                }
                 zap.AnimatorBody.speed = 0f;
                 break;
             case Action.CLIMB_CATCH:
@@ -972,15 +985,19 @@ public class ZapControllerNormal : ZapController
                 {
                     if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R");
                     else zap.AnimatorBody.Play("zap_rocks_catch_position_L");
-
                 }
-                else if (param == 1)
+                else if( param == 1)
                 {
-                    // tu juz jest we wlasciwej klatce
-                    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_rev_R");
-                    else zap.AnimatorBody.Play("zap_rocks_catch_position_rev_L");
-                    zap.AnimatorBody.speed = 0.0f;
+                    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_R_2");
+                    else zap.AnimatorBody.Play("zap_rocks_catch_position_L_2");
                 }
+                //else if (param == 1)
+                //{
+                //    // tu juz jest we wlasciwej klatce
+                //    if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_catch_position_rev_R");
+                //    else zap.AnimatorBody.Play("zap_rocks_catch_position_rev_L");
+                //    zap.AnimatorBody.speed = 0.0f;
+                //}
 
                 if (zap.catchSounds.Length != 0)
                     zap.getAudioSource().PlayOneShot(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)], 0.7F);
@@ -2119,7 +2136,7 @@ public class ZapControllerNormal : ZapController
         // dociaganie do punktu:
         if (zap.currentActionTime >= climbToJumpDuration)
         {
-            setAction(Action.CLIMB_CATCH);
+            setAction(Action.CLIMB_CATCH, lastActionParam);
             transform.position = climbAfterPos;
         }
         else
@@ -2966,7 +2983,7 @@ public class ZapControllerNormal : ZapController
             if (fromGround)
             {
                 hit = Physics2D.Raycast(zap.sensorHandleR2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
-                _speed = 0.25f;
+                _speed = 0.2f;
             }
             else
             {
@@ -3009,7 +3026,7 @@ public class ZapControllerNormal : ZapController
                     climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
                     zap.setState(Zap.State.CLIMB);
-                    setAction(Action.CLIMB_JUMP_TO_CATCH);
+                    setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
                     lastFrameHande = false;
 
                     return true;
@@ -3048,7 +3065,7 @@ public class ZapControllerNormal : ZapController
                         Vector3 handlePos = _handle; //catchedClimbHandle.transform.position;
                         Vector3 newPos = new Vector3();
                         newPos.x = handlePos.x - zap.getMyHalfWidth();
-                        newPos.y = handlePos.y - 2.4f; //myHeight;
+                        newPos.y = handlePos.y - 1.75f; //myHeight;
 
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
@@ -3065,7 +3082,7 @@ public class ZapControllerNormal : ZapController
                         }
                         
                         zap.setState(Zap.State.CLIMB);
-                        setAction(Action.CLIMB_JUMP_TO_CATCH);
+                        setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
                         lastFrameHande = false;
                         return true;
                     }
@@ -3083,7 +3100,7 @@ public class ZapControllerNormal : ZapController
             if (fromGround)
             {
                 hit = Physics2D.Raycast(zap.sensorHandleL2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
-                _speed = 0.25f;
+                _speed = 0.2f;
             }
             else
             {
@@ -3127,7 +3144,7 @@ public class ZapControllerNormal : ZapController
                     climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
                     zap.setState(Zap.State.CLIMB);
-                    setAction(Action.CLIMB_JUMP_TO_CATCH);
+                    setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
                     lastFrameHande = false;
 
                     //zap.velocity.x = 0.0f;
@@ -3177,7 +3194,7 @@ public class ZapControllerNormal : ZapController
                         Vector3 handlePos = _handle; //catchedClimbHandle.transform.position;
                         Vector3 newPos = new Vector3();
                         newPos.x = handlePos.x + zap.getMyHalfWidth();
-                        newPos.y = handlePos.y - 2.4f; //myHeight;
+                        newPos.y = handlePos.y - 1.75f; //myHeight;
 
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
@@ -3195,7 +3212,7 @@ public class ZapControllerNormal : ZapController
                         }
 
                         zap.setState(Zap.State.CLIMB);
-                        setAction(Action.CLIMB_JUMP_TO_CATCH);
+                        setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
                         lastFrameHande = false;
                         return true;
                     }
