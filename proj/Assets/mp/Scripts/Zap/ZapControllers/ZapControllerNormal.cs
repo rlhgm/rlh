@@ -2990,7 +2990,7 @@ public class ZapControllerNormal : ZapController
 
                     Vector3 handlePos = catchedClimbHandle.transform.position;
                     Vector3 newPos = new Vector3();
-                    newPos.x = handlePos.x - zap.getMyHalfWidth() + 0.2f;
+                    newPos.x = handlePos.x - zap.getMyHalfWidth();// + 0.2f;
                     newPos.y = handlePos.y - 1.75f; //myHeight;
 
                     canPullUp = canClimbPullUp();
@@ -3078,7 +3078,7 @@ public class ZapControllerNormal : ZapController
         }
         else
         {
-            float _speed = 0.5f;
+            float _speed = 0.2f;
             RaycastHit2D hit;
             if (fromGround)
             {
@@ -3110,7 +3110,7 @@ public class ZapControllerNormal : ZapController
                     Vector3 handlePos = catchedClimbHandle.transform.position;
                     Vector3 newPos = new Vector3();
                     newPos.x = handlePos.x + zap.getMyHalfWidth();
-                    newPos.y = handlePos.y - 2.4f; //myHeight;
+                    newPos.y = handlePos.y - 1.75f; //myHeight;
 
                     canPullUp = canClimbPullUp();
                     if (canPullUp)
