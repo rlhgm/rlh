@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 56feeb4475fd5a14f8577aec58341912
-timeCreated: 1445633853
+guid: 2fd62e6ee875e6547b174c5709ef5f90
+timeCreated: 1445685976
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Zap_walk_back_0
-    21300002: Zap_walk_back_1
+    21300000: Zap_walk_back_R_0
+    21300002: Zap_walk_back_R_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -52,23 +52,23 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Zap_walk_back_0
+    - name: Zap_walk_back_R_0
       rect:
         serializedVersion: 2
         x: 0
         y: 8
         width: 64
-        height: 49
+        height: 48
       alignment: 9
       pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_walk_back_1
+    - name: Zap_walk_back_R_1
       rect:
         serializedVersion: 2
         x: 64
         y: 8
         width: 64
-        height: 49
+        height: 48
       alignment: 9
       pivot: {x: .449999988, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
