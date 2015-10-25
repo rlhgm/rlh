@@ -15,6 +15,7 @@ MonoBehaviour:
   RunSpeed: 5.69999981
   JumpSpeed: 3.79999995
   JumpLongSpeed: 4.9000001
+  FromClimbJumpSpeed: 5.5
   CrouchSpeed: 1.79999995
   MountSpeed: 2
   MountJumpDist: 10
@@ -25,6 +26,8 @@ MonoBehaviour:
   FlySlowDownParam: 5
   JumpImpulse: 7
   JumpLongImpulse: 7.1500001
+  FromClimbJumpImpulse: 5
+  FromClimbJumpSideImpulse: 5
   GravityForce: -20
   MaxSpeedY: 15
   HardLandingHeight: 2
