@@ -2783,11 +2783,14 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
                 setAction(Action.JUMP);
-                //zap.setState(Zap.State.IN_AIR);
-
+                
                 if( isInState(Zap.State.CLIMB_ROPE) )
                 {
                     releaseRope();
+                }
+                else
+                {
+                    zap.setState(Zap.State.IN_AIR);
                 }
 
                 if (zap.canBeFuddleFromBird)
