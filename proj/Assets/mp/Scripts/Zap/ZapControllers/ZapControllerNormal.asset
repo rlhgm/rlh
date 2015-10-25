@@ -15,7 +15,7 @@ MonoBehaviour:
   RunSpeed: 5.69999981
   JumpSpeed: 3.79999995
   JumpLongSpeed: 4.9000001
-  FromClimbJumpSpeed: 5.5
+  FromClimbJumpSpeed: 4
   CrouchSpeed: 1.79999995
   MountSpeed: 2
   MountJumpDist: 10
