@@ -11,13 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2af7cdfa8f3434495b15874764b2e4, type: 3}
   m_Name: ZapControllerNormal
   m_EditorClassIdentifier: 
-  WalkSpeed: 2.5
-  RunSpeed: 5.69999981
+  WalkSpeed: 3
+  RunSpeed: 6
   JumpSpeed: 3.79999995
   JumpLongSpeed: 4.9000001
   FromClimbJumpSpeed: 4
-  CrouchSpeed: 1.79999995
-  MountSpeed: 2
+  CrouchSpeed: 2.29999995
+  MountSpeed: 2.5
   MountJumpDist: 10
   SpeedUpParam: 10
   SlowDownParam: 20
@@ -26,22 +26,22 @@ MonoBehaviour:
   FlySlowDownParam: 5
   JumpImpulse: 7
   JumpLongImpulse: 7.1500001
-  FromClimbJumpImpulse: 5
-  FromClimbJumpSideImpulse: 5
+  FromClimbJumpImpulse: 3.5
+  FromClimbJumpSideImpulse: 5.69999981
   GravityForce: -20
   MaxSpeedY: 15
   HardLandingHeight: 2
   VeryHardLandingHeight: 6
-  MaxFallDistToCatch: 6
-  RopeSwingForce: 4250
-  RopeClimbSpeedUp: 1
-  RopeClimbSpeedDown: 3
+  MaxFallDistToCatch: 999
+  RopeSwingForce: 4400
+  RopeClimbSpeedUp: 2.5
+  RopeClimbSpeedDown: 4
   CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
   CLIMBDUR_CATCH: .5
   LANDING_HARD_DURATION: .300000012
-  TURN_LEFTRIGHT_DURATION: .200000003
+  TURN_LEFTRIGHT_DURATION: .0500000007
   MOUNT_ATTACK_DURATION: .5
-  ClimbPullDownRange: .510999978
-  CrouchInOutDuration: .200000003
+  ClimbPullDownRange: .550000012
+  CrouchInOutDuration: .100000001
