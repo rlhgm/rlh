@@ -227,36 +227,58 @@ public class ZapController : ScriptableObject
             {
                 //Debug.Log( "trafionione : " + hits[i].collider.name );
                 cutRopeLink.cut();
-                return;
+                continue;
             }
 
-            Snake cutSnake = coll.GetComponent<Snake>();
-            if (cutSnake)
+            //Snake cutSnake = coll.GetComponent<Snake>();
+            //if (cutSnake)
+            //{
+            //    cutSnake.cut();
+            //    return;
+            //}
+            
+            if (coll.tag == "SnakeHitRegion")
             {
-                cutSnake.cut();
-                return;
+                IKnifeCutable snakecutable = coll.transform.GetComponent<IKnifeCutable>();
+                if (snakecutable != null)
+                {
+                    snakecutable.Cut();
+                    continue;
+                }
+                //Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
+                //if( cutPanther ){
+                //	cutPanther.Cut();
+                //	return;
+                //}
             }
+
+
+            //IKnifeCutable cutable = coll.transform.GetComponent<IKnifeCutable>();
+            //if (cutable != null)
+            //{
+            //    cutable.Cut();
+            //}
 
             CutableBush cutBush = coll.GetComponent<CutableBush>();
             if (cutBush)
             {
                 cutBush.cut();
-                return;
+                continue;
             }
 
             Bird cutBird = coll.GetComponent<Bird>();
             if (cutBird)
             {
                 cutBird.cut();
-                return;
+                continue;
             }
 
             if (coll.tag == "PantherHitRegion")
             {
-                IKnifeCutable cutable = coll.transform.parent.GetComponent<IKnifeCutable>();
-                if (cutable != null)
+                IKnifeCutable cutablePanthi = coll.transform.parent.GetComponent<IKnifeCutable>();
+                if (cutablePanthi != null)
                 {
-                    cutable.Cut();
+                    cutablePanthi.Cut();
                 }
                 //Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
                 //if( cutPanther ){
