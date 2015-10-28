@@ -2763,6 +2763,12 @@ public class ZapControllerNormal : ZapController
     }
     public override void zapDie(Zap.DeathType deathType)
     {
+        if (zap.isInState(Zap.State.CLIMB_ROPE))
+        {
+            releaseRope();
+            catchedRope = null;
+            justJumpedRope = null;
+        }
         setAction(Action.DIE, (int)deathType);
     }
     public override void reborn()
@@ -3387,11 +3393,15 @@ public class ZapControllerNormal : ZapController
         _oldPos.y -= 1.65f;
         transform.position = _oldPos;
 
-        justJumpedRope = catchedRope;
+        
+        if (catchedRope)
+        {
+            justJumpedRope = catchedRope;
 
-        catchedRope.resetDiver();
-        catchedRope = null;
-        catchedRopeLink = null;
+            catchedRope.resetDiver();
+            catchedRope = null;
+            catchedRopeLink = null;
+        }
 
         Quaternion quat = new Quaternion();
         quat.eulerAngles = new Vector3(0f, 0f, 0f);

@@ -1835,6 +1835,28 @@ public class Zap : MonoBehaviour
     [HideInInspector]
     public bool stateJustChanged = false;
 
+    //void releaseRope()
+    //{
+    //    Vector3 _oldPos = transform.position;
+    //    _oldPos.y -= 1.65f;
+    //    transform.position = _oldPos;
+
+    //    justJumpedRope = catchedRope;
+
+    //    catchedRope.resetDiver();
+    //    catchedRope = null;
+    //    catchedRopeLink = null;
+
+    //    Quaternion quat = new Quaternion();
+    //    quat.eulerAngles = new Vector3(0f, 0f, 0f);
+    //    transform.rotation = quat;
+
+    //    zap.Coll.offset = beforeRopeCollOffset;
+    //    zap.GfxCollider.offset = beforeRopeGfxCollOffset;
+
+    //    zap.setState(Zap.State.IN_AIR);
+    //}
+
     public bool setState(State newState)
     {
 
