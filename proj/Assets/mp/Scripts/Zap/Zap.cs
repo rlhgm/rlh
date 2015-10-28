@@ -419,6 +419,8 @@ public class Zap : MonoBehaviour
         //setAction (Action.IDLE);
 
 
+        currentController.beforeReborn();
+
         HaveKnife = _haveKnife;
         HaveGravityGun = _haveGravityGun;
         if (HaveKnife)

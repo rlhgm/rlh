@@ -186,6 +186,9 @@ public class ZapController : ScriptableObject
         if (weaponMenuItem)
             weaponMenuItem.setState(WeaponMenuItem.State.ON);
     }
+    public virtual void beforeReborn()
+    {
+    }
     public virtual void reborn()
     {
         if (zap.LastTouchedCheckPoint != null)

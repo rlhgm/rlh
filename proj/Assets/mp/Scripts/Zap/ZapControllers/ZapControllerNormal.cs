@@ -2771,6 +2771,15 @@ public class ZapControllerNormal : ZapController
         }
         setAction(Action.DIE, (int)deathType);
     }
+    public override void beforeReborn()
+    {
+        if (zap.isInState(Zap.State.CLIMB_ROPE))
+        {
+            releaseRope();
+            catchedRope = null;
+            justJumpedRope = null;
+        }
+    }
     public override void reborn()
     {
         if (zap.LastTouchedCheckPoint)
