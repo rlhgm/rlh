@@ -48,7 +48,7 @@ public class Camera2DFollow : MonoBehaviour
         //float s_baseOrthographicSize = Screen.height / 64.0f / 2.0f;
         //Camera.main.orthographicSize = s_baseOrthographicSize;
 
-        print("Camera2DFollow::Awake()");
+        //print("Camera2DFollow::Awake()");
 
         for (int i = 0; i < backgroundsNodes.Length; ++i)
         {

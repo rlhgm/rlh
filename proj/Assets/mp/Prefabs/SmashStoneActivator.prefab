@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6195470}
   - 50: {fileID: 5061862}
   - 114: {fileID: 11473730}
-  m_Layer: 8
+  m_Layer: 24
   m_Name: SmashStoneActivator
   m_TagString: SmashStoneActivator
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -50.9799995, y: 3.17000008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
