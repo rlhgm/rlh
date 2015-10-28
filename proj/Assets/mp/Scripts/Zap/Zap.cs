@@ -997,17 +997,17 @@ public class Zap : MonoBehaviour
             if (choosenController == zapControllerKnife)
             {
                 //print ("set choosen gravitygun");
-                if (HaveGravityGun)
-                {
-                    if (choosenController == currentController && choosenController.tryDeactiveate())
-                    {
-                        chooseController(zapControllerGravityGun);
-                    }
-                    else
-                    {
-                        chooseController(zapControllerGravityGun);
-                    }
-                }
+                //if (HaveGravityGun)
+                //{
+                //    if (choosenController == currentController && choosenController.tryDeactiveate())
+                //    {
+                //        chooseController(zapControllerGravityGun);
+                //    }
+                //    else
+                //    {
+                //        chooseController(zapControllerGravityGun);
+                //    }
+                //}
             }
             else if (choosenController == zapControllerGravityGun)
             {
@@ -1047,18 +1047,18 @@ public class Zap : MonoBehaviour
             }
             else if (choosenController == zapControllerGravityGun)
             {
-                //print ("set choosen knife");
-                if (HaveKnife)
-                {
-                    if (choosenController == currentController && choosenController.tryDeactiveate())
-                    {
-                        chooseController(zapControllerKnife);
-                    }
-                    else
-                    {
-                        chooseController(zapControllerKnife);
-                    }
-                }
+                ////print ("set choosen knife");
+                //if (HaveKnife)
+                //{
+                //    if (choosenController == currentController && choosenController.tryDeactiveate())
+                //    {
+                //        chooseController(zapControllerKnife);
+                //    }
+                //    else
+                //    {
+                //        chooseController(zapControllerKnife);
+                //    }
+                //}
             }
         }
 
