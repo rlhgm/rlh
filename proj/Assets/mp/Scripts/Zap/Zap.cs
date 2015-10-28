@@ -496,7 +496,11 @@ public class Zap : MonoBehaviour
         {
             birdEmiter.reset();
         }
-        
+        Bird[] birds = FindObjectsOfType(typeof(Bird)) as Bird[];
+        foreach (Bird bird in birds)
+        {
+            Destroy(bird.gameObject);
+        }
     }
 
     public CheckPoint LastTouchedCheckPoint
