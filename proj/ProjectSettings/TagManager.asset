@@ -79,20 +79,26 @@ TagManager:
   - name: Mount
     uniqueID: 750122625
     locked: 0
-  - name: Mount_walk
-    uniqueID: 3735367181
-    locked: 0
   - name: Trees
     uniqueID: 1753939559
     locked: 0
+  - name: Mount_walk
+    uniqueID: 3735367181
+    locked: 0
   - name: Foreground
     uniqueID: 1024582385
+    locked: 0
+  - name: Climbers
+    uniqueID: 719274669
     locked: 0
   - name: UI
     uniqueID: 149272721
     locked: 0
   - name: GroundFar
     uniqueID: 2324740603
+    locked: 0
+  - name: Rope
+    uniqueID: 3210177077
     locked: 0
   - name: PlayerFar
     uniqueID: 2850176481
@@ -106,9 +112,6 @@ TagManager:
   - name: LA_GROUND
     uniqueID: 1991621873
     locked: 0
-  - name: Climbers
-    uniqueID: 719274669
-    locked: 0
   - name: Plants
     uniqueID: 3554617925
     locked: 0
@@ -120,7 +123,4 @@ TagManager:
     locked: 0
   - name: WaterFront
     uniqueID: 3650801075
-    locked: 0
-  - name: New Layer
-    uniqueID: 3210177077
     locked: 0
