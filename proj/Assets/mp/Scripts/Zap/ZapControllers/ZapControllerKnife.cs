@@ -1427,7 +1427,15 @@ public class ZapControllerKnife : ZapController
             {
                 if (isInState(Zap.State.ON_GROUND))
                 {
-                    setActionIdle();
+                    if (crouching())
+                    {
+                        if (zap.canGetUp())
+                            setActionIdle();
+                    }
+                    else
+                    {
+                        setActionIdle();
+                    }
                 }
             }
         }
