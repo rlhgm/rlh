@@ -259,20 +259,42 @@ public class ZapControllerGravityGun : ZapController
         {
 
             case Zap.State.ON_GROUND:
+                //float distToGround = 0.0f;
+                //zap.checkGround(ref distToGround);
+                //if (!zap.groundUnder)
+                //{
+                //    zap.suddenlyInAir();
+                //}
+                //else
+                //{
+
+                //    //wantGetUp = false;
+                //    //zap.hideChoosenWeapon();
+                //    //zap.setState(Zap.State.IN_AIR);
+                //    //setAction(Action.JUMP);
+
+                //}
+
                 float distToGround = 0.0f;
                 zap.checkGround(ref distToGround);
-                if (!zap.groundUnder)
+                if (zap.groundUnder == null)
                 {
-                    zap.suddenlyInAir();
-                }
-                else
-                {
-
-                    //wantGetUp = false;
-                    //zap.hideChoosenWeapon();
                     //zap.setState(Zap.State.IN_AIR);
                     //setAction(Action.JUMP);
-
+                    //wantGetUp = false;
+                    //wantGetUp = false;
+                    zap.suddenlyInAir();
+                }
+                else if (zap.groundUnder)
+                {
+                    if (distToGround != 0f)
+                    {
+                        transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+                    }
+                    else
+                    {
+                        zap.touchStone(zap.groundUnder);
+                    }
                 }
 
                 break;

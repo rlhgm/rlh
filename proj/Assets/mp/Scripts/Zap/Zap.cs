@@ -248,7 +248,7 @@ public class Zap : MonoBehaviour
         beforeFallController = null;
 
         allStones = FindObjectsOfType(typeof(GroundMoveable)) as GroundMoveable[];
-        print(allStones.Length);
+        //print(allStones.Length);
     }
 
     public void chooseController(ZapController newController)

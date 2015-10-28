@@ -672,16 +672,9 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Zap.State.ON_GROUND:
-                //float distToGround = 0.0f;
-                //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-                //if (groundUnderFeet)
-                //{
-                //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-                //}
-
                 float distToGround = 0.0f;
                 zap.checkGround(ref distToGround);
-                if (zap.groundUnder == null /*|| distToGround > 0.1f*/)
+                if (zap.groundUnder == null)
                 {
                     zap.setState(Zap.State.IN_AIR);
                     setAction(Action.JUMP);
@@ -697,13 +690,6 @@ public class ZapControllerNormal : ZapController
                     {
                         zap.touchStone(zap.groundUnder);
                     }
-
-                    //if (slideDown())
-                    //{
-                    //}
-                    //else
-                    //{    
-                    //}
                 }
                 break;
 
