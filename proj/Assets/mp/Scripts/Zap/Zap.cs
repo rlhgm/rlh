@@ -963,6 +963,11 @@ public class Zap : MonoBehaviour
                 _haveKnife = HaveKnife;
                 _haveGravityGun = HaveGravityGun;
 
+                foreach(GroundMoveable gm in allStones)
+                {
+                    gm.SaveResets();
+                }
+
                 Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
                 foreach (Pickable pickable in pickables)
                 {

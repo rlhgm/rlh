@@ -6,6 +6,7 @@ public class GroundMoveable : MonoBehaviour
     Vector2 resetPosition;
     float resetRotation;
     Vector2 resetVelocity;
+    float resetAngularVelocity;
     BoxCollider2D boxCollider = null;
     Rigidbody2D physic = null;
 
@@ -33,11 +34,14 @@ public class GroundMoveable : MonoBehaviour
         resetPosition = physic.position; // transform.position;
         resetRotation = physic.rotation; // transform.rotation;      
         resetVelocity = physic.velocity;
+        resetAngularVelocity = physic.angularVelocity;
     }
     public void Reset()
     {
         physic.position = resetPosition;
         physic.rotation = resetRotation;
+        physic.velocity = resetVelocity;
+        physic.angularVelocity = resetAngularVelocity;
     }
 
     void OnMouseOver()
