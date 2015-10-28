@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+//[ExecuteInEditMode]
 public class Camera2DFollow : MonoBehaviour
 {
     //public Transform target;
@@ -36,6 +37,8 @@ public class Camera2DFollow : MonoBehaviour
 
     public Camera myCamera;
 
+    Parallaxed[] parallaxedObjects;
+
     void Awake()
     {
         //public GameObject[] backgroundsBackgrounds;
@@ -44,7 +47,6 @@ public class Camera2DFollow : MonoBehaviour
         //to niby ma robic ze wszystkie pixele maja taki sam rozmiar w kamerze
         //float s_baseOrthographicSize = Screen.height / 64.0f / 2.0f;
         //Camera.main.orthographicSize = s_baseOrthographicSize;
-
 
         for (int i = 0; i < backgroundsNodes.Length; ++i)
         {
@@ -92,6 +94,8 @@ public class Camera2DFollow : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        parallaxedObjects = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
+        
         Zap[] zappers = FindObjectsOfType(typeof(Zap)) as Zap[];
         if( zappers.Length == 1)
         {
@@ -142,6 +146,13 @@ public class Camera2DFollow : MonoBehaviour
         //			
         //			print ("---------------------------------------");
         //Vector3 oldPos = transform.position;
+
+        //parallaxedObjects = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
+        foreach (Parallaxed parallaxed in parallaxedObjects)
+        {
+            parallaxed.PUpdate(myCamera.transform.position);
+        }
+
 
         targetStage = getTargetStage();
 
