@@ -3,18 +3,41 @@ using System.Collections;
 
 public class GroundMoveable : MonoBehaviour
 {
+    Vector2 resetPosition;
+    float resetRotation;
+    Vector2 resetVelocity;
+    BoxCollider2D boxCollider = null;
+    Rigidbody2D physic = null;
 
-    BoxCollider2D physic = null;
+    void Awake()
+    {
+        physic = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        SaveResets();
+    }
+
     // Use this for initialization
     void Start()
     {
-        physic = GetComponent<BoxCollider2D>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void SaveResets()
+    {
+        resetPosition = physic.position; // transform.position;
+        resetRotation = physic.rotation; // transform.rotation;      
+        resetVelocity = physic.velocity;
+    }
+    public void Reset()
+    {
+        physic.position = resetPosition;
+        physic.rotation = resetRotation;
     }
 
     void OnMouseOver()
@@ -27,10 +50,10 @@ public class GroundMoveable : MonoBehaviour
 
     public void printWorldVertices()
     {
-        float top = physic.offset.y + (physic.size.y * 0.5f);
-        float btm = physic.offset.y - (physic.size.y * 0.5f);
-        float left = physic.offset.x - (physic.size.x * 0.5f);
-        float right = physic.offset.x + (physic.size.x * 0.5f);
+        float top = boxCollider.offset.y + (boxCollider.size.y * 0.5f);
+        float btm = boxCollider.offset.y - (boxCollider.size.y * 0.5f);
+        float left = boxCollider.offset.x - (boxCollider.size.x * 0.5f);
+        float right = boxCollider.offset.x + (boxCollider.size.x * 0.5f);
 
         Vector3 topLeft = transform.TransformPoint(new Vector3(left, top, 0f));
         Vector3 topRight = transform.TransformPoint(new Vector3(right, top, 0f));
@@ -46,10 +69,10 @@ public class GroundMoveable : MonoBehaviour
     {
         float rot = transform.rotation.eulerAngles.z;
 
-        float top = physic.offset.y + (physic.size.y * 0.5f);
-        float btm = physic.offset.y - (physic.size.y * 0.5f);
-        float left = physic.offset.x - (physic.size.x * 0.5f);
-        float right = physic.offset.x + (physic.size.x * 0.5f);
+        float top = boxCollider.offset.y + (boxCollider.size.y * 0.5f);
+        float btm = boxCollider.offset.y - (boxCollider.size.y * 0.5f);
+        float left = boxCollider.offset.x - (boxCollider.size.x * 0.5f);
+        float right = boxCollider.offset.x + (boxCollider.size.x * 0.5f);
 
         Vector3 topLeft = transform.TransformPoint(new Vector3(left, top, 0f));
         Vector3 topRight = transform.TransformPoint(new Vector3(right, top, 0f));
@@ -144,10 +167,10 @@ public class GroundMoveable : MonoBehaviour
     {
         float rot = transform.rotation.eulerAngles.z;
 
-        float top = physic.offset.y + (physic.size.y * 0.5f);
-        float btm = physic.offset.y - (physic.size.y * 0.5f);
-        float left = physic.offset.x - (physic.size.x * 0.5f);
-        float right = physic.offset.x + (physic.size.x * 0.5f);
+        float top = boxCollider.offset.y + (boxCollider.size.y * 0.5f);
+        float btm = boxCollider.offset.y - (boxCollider.size.y * 0.5f);
+        float left = boxCollider.offset.x - (boxCollider.size.x * 0.5f);
+        float right = boxCollider.offset.x + (boxCollider.size.x * 0.5f);
 
         Vector3 topLeft = transform.TransformPoint(new Vector3(left, top, 0f));
         Vector3 topRight = transform.TransformPoint(new Vector3(right, top, 0f));

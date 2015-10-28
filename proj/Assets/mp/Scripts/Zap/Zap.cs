@@ -204,6 +204,8 @@ public class Zap : MonoBehaviour
         zapControllerGravityGun.setZap(this);
     }
 
+    GroundMoveable[] allStones;
+
     void Start()
     {
         //currentController = zapControllerNormal;
@@ -244,6 +246,9 @@ public class Zap : MonoBehaviour
 
         startPoint = transform.position;
         beforeFallController = null;
+
+        allStones = FindObjectsOfType(typeof(GroundMoveable)) as GroundMoveable[];
+        print(allStones.Length);
     }
 
     public void chooseController(ZapController newController)
@@ -457,6 +462,11 @@ public class Zap : MonoBehaviour
         currentController.reborn();
 
         resetInfo();
+        
+        foreach (GroundMoveable gm in allStones)
+        {
+            gm.Reset();
+        }
 
         ShowInfoTrigger[] sits = FindObjectsOfType(typeof(ShowInfoTrigger)) as ShowInfoTrigger[];
         foreach (ShowInfoTrigger sit in sits)
