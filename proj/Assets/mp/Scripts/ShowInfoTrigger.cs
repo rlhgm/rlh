@@ -8,6 +8,11 @@ public class ShowInfoTrigger : MonoBehaviour {
 	public bool OnlyFirstTime = true;
 	public bool used = false;
 
+    public void reset()
+    {
+        used = false;
+    }
+
 //	// Use this for initialization
 //	void Start () {
 //	

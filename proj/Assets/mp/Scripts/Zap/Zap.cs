@@ -455,6 +455,12 @@ public class Zap : MonoBehaviour
 
         resetInfo();
 
+        ShowInfoTrigger[] sits = FindObjectsOfType(typeof(ShowInfoTrigger)) as ShowInfoTrigger[];
+        foreach (ShowInfoTrigger sit in sits)
+        {
+            sit.reset();
+        }
+
         Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
         foreach (Pickable pickable in pickables)
         {
@@ -758,11 +764,10 @@ public class Zap : MonoBehaviour
         }
         if (other.gameObject.tag == "ShowInfoTrigger")
         {
-            print("ShowInfoTrigger");
+            //print("ShowInfoTrigger");
             ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
             if (!sit.used)
             {
-
                 showInfo(sit.Info, sit.ShowDuration);
                 if (sit.OnlyFirstTime) sit.used = true;
             }
