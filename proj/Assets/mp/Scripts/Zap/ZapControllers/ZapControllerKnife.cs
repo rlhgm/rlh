@@ -996,7 +996,12 @@ public class ZapControllerKnife : ZapController
     {
         if (zap.currentActionTime > ATTACK_DURATION)
         {
-
+            if(zap.choosenController != this )
+            {
+                // kontroler zostal zmieniony....
+                setAction(Action.HIDE_KNIFE);
+                return 0;
+            }
             if (!checkDir())
             {
                 setAction(Action.ATTACK_JUST_FINISHED);
