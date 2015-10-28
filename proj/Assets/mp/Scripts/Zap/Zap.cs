@@ -49,6 +49,7 @@ public class Zap : MonoBehaviour
     }
 
     public bool autoCatchEdges = false;
+    public bool canJumpBackFromRope = true;
     public float maxHandStoneTilt = 5f;
 
     //Transform shadowTransform;

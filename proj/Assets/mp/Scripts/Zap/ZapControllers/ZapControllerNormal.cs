@@ -2967,7 +2967,9 @@ public class ZapControllerNormal : ZapController
             int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
             float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
 
-            if (Input.GetKey(zap.keyLeft) && !forceJumpOff)
+            int zapDir = zap.dir2();
+
+            if (Input.GetKey(zap.keyLeft) && (zap.canJumpBackFromRope || zapDir == -1) && !forceJumpOff)
             { //skacze w lewo
                 zap.turnLeft();
 
@@ -2981,7 +2983,7 @@ public class ZapControllerNormal : ZapController
                     jumpLeft();
                 }
             }
-            else if (Input.GetKey(zap.keyRight) && !forceJumpOff)
+            else if (Input.GetKey(zap.keyRight) && (zap.canJumpBackFromRope || zapDir == 1) && !forceJumpOff)
             { //skacze w prawo
                 zap.turnRight();
 
