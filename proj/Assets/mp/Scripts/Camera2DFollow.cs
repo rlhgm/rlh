@@ -48,6 +48,8 @@ public class Camera2DFollow : MonoBehaviour
         //float s_baseOrthographicSize = Screen.height / 64.0f / 2.0f;
         //Camera.main.orthographicSize = s_baseOrthographicSize;
 
+        print("Camera2DFollow::Awake()");
+
         for (int i = 0; i < backgroundsNodes.Length; ++i)
         {
             if (backgroundsNodes[i] == null) continue;
@@ -83,7 +85,7 @@ public class Camera2DFollow : MonoBehaviour
             {
                 //c = 1;
                 bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
-                bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x, 0f, 0f);
+                bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x, 1f, 0f);
                 bckg.transform.parent = backgroundsNodes[i];
                 bckgDist = -bckgItemSize.x - c * (bckgItemSize.x * 2);
                 c += 1;
