@@ -419,17 +419,16 @@ public class Zap : MonoBehaviour
         velocity.x = 0.0f;
         velocity.y = 0.0f;
         //setAction (Action.IDLE);
-
-
+        
         currentController.beforeReborn();
 
         HaveKnife = _haveKnife;
         HaveGravityGun = _haveGravityGun;
-        if (HaveKnife)
+        if (HaveKnife && choosenController == zapControllerKnife)
         {
             chooseController(zapControllerKnife);
         }
-        else if (HaveGravityGun)
+        else if (HaveGravityGun && choosenController == zapControllerGravityGun)
         {
             chooseController(zapControllerGravityGun);
         }
