@@ -1208,12 +1208,9 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.ON_GROUND))
         {
-
             if (tryStartClimbPullDown())
             {
-
                 return 1;
-
             }
             else
             {
@@ -1832,6 +1829,12 @@ public class ZapControllerNormal : ZapController
 
     int Action_CROUCH_LEFTRIGHT(int dir)
     {
+        if (Input.GetKey(zap.keyDown))
+        {
+            if( tryStartClimbPullDown() )
+                return 0;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             return zap.pullChoosenWeapon(true);
@@ -3433,7 +3436,7 @@ public class ZapControllerNormal : ZapController
     GameObject canClimbPullDown()
     {
 
-        if (!isInState(Zap.State.ON_GROUND) || !(isInAction(Action.IDLE) || isInAction(Action.CROUCH_IDLE)))
+        if (!isInState(Zap.State.ON_GROUND) || !(isInAction(Action.IDLE) || crouching()))
             return null;
 
         // 1: sytuacja gdy zap jest swoim srodkiem nad tilem
