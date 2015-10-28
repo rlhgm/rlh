@@ -1,24 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GroundMoveable : MonoBehaviour {
+public class GroundMoveable : MonoBehaviour
+{
 
     BoxCollider2D physic = null;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         physic = GetComponent<BoxCollider2D>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 
-	void OnMouseOver(){
-		if( Input.GetMouseButtonDown(0) ){
-			//print("GetMouseButtonDown");
-		}
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //print("GetMouseButtonDown");
+        }
+    }
 
     public void printWorldVertices()
     {

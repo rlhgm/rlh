@@ -125,7 +125,7 @@ public class Zap : MonoBehaviour
         targeter = transform.Find("targeter");
         gravityGunBeam = transform.Find("GravityGunBeam");
         gravityGunBeam.GetComponent<LineRenderer>().sortingLayerName = "Player";
-        gravityGunBeam.GetComponent<LineRenderer>().sortingOrder = -1;
+        gravityGunBeam.GetComponent<LineRenderer>().sortingOrder = 1;
 
         if (shadowCenter)
         {

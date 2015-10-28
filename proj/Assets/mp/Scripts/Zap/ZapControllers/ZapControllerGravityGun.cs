@@ -149,11 +149,9 @@ public class ZapControllerGravityGun : ZapController
 
             if (canBeDragged(draggedStone))
             {
-
                 Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
                 tsrb.gravityScale = 0f;
                 flashStone(draggedStone);
-
             }
             else
             {
@@ -1425,12 +1423,18 @@ public class ZapControllerGravityGun : ZapController
 
     void flashStone(Transform stone)
     {
-        setStoneOpacity(stone, 0.5f);
-        stone.GetComponent<GroundMoveable>().printWorldVertices();
+        //setStoneOpacity(stone, 0.5f);
+        //stone.GetComponent<GroundMoveable>().printWorldVertices();
+
+        Color c = new Color(0f, 1f, 1f);
+        setStoneColor(stone, c);
     }
     void unflashStone(Transform stone)
     {
-        setStoneOpacity(stone, 1.0f);
+        //00FFFFFF
+        //setStoneOpacity(stone, 1.0f);
+        Color c = new Color(1f, 1f, 1f);
+        setStoneColor(stone, c);
     }
     void setStoneOpacity(Transform stone, float newOpacity)
     {
@@ -1442,7 +1446,16 @@ public class ZapControllerGravityGun : ZapController
         stoneColor.a = newOpacity;
         sr.color = stoneColor;
     }
+    void setStoneColor(Transform stone, Color newColor)
+    {
+        if (stone.childCount != 1) return;
 
+        SpriteRenderer sr = stone.GetChild(0).GetComponent<SpriteRenderer>();
+        if (sr)
+        {
+            sr.color = newColor;
+        }
+    }
 
     bool canBeDragged(Transform stone, Vector2 stoneTargetPlace)
     {
