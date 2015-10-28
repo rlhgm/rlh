@@ -42,8 +42,9 @@ public class Snake : MonoBehaviour {
 	}
 
 	public void cut(){
-		animator.SetTrigger("gets_down");
-		turnTime = 0f;
+        //animator.SetTrigger("gets_down");
+        animator.Play("die");
+        turnTime = 0f;
 		state = State.DEAD;
 	}
 
