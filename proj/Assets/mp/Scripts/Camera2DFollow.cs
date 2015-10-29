@@ -179,13 +179,13 @@ public class Camera2DFollow : MonoBehaviour
 
             float pdm = posDiff.magnitude;
 
-            if (pdm > 0.35f)
-                pdm = 0.35f;
+            //if (pdm > 0.35f)
+            //    pdm = 0.35f;
 
-            if (pdm > 0.1f)
+            if (pdm < 0.1f)
                 pdm = (pdm * pdm);
-            else
-                pdm = 1f;
+            //else
+            //    pdm = 1f;
 
             transform.position = transform.position + posDiff * pdm;
 
