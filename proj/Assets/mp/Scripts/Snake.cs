@@ -11,8 +11,9 @@ public class Snake : MonoBehaviour {
 	GameObject target;
 	Transform attackPoint;
 	int layerIdPlayerMask;
+    bool permanentlyDead = false;
 
-	public enum State{
+    public enum State{
 		ACTIVE = 1,
 		SLEEP = 2,
 		TURN = 3,
@@ -50,11 +51,22 @@ public class Snake : MonoBehaviour {
 
     public void reset()
     {
-        state = State.SLEEP;
+        if (!permanentlyDead)
+        {
+            state = State.SLEEP;
+        }
     }
 
-	// Update is called once per frame
-	void Update () {
+    public void checkPointReached()
+    {
+        if( state == State.DEAD)
+        {
+            permanentlyDead = true;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 		turnTime+=Time.deltaTime;
 

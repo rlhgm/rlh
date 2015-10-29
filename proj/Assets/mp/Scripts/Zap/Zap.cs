@@ -1016,6 +1016,11 @@ public class Zap : MonoBehaviour
                 {
                     gm.SaveResets();
                 }
+                Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
+                foreach (Snake snake in snakes)
+                {
+                    snake.checkPointReached();
+                }
 
                 Pickable[] pickables = FindObjectsOfType(typeof(Pickable)) as Pickable[];
                 foreach (Pickable pickable in pickables)
