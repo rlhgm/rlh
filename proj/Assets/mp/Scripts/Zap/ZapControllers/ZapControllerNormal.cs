@@ -3446,18 +3446,18 @@ public class ZapControllerNormal : ZapController
         Vector2 rayOrigin = climbAfterPos2; // catchedClimbHandle.transform.position;
         rayOrigin.y += 0.14f;
 
-        if (zap.dir() == Vector2.right) rayOrigin.x += 0.5f;
-        else rayOrigin.x -= 0.5f;
+        //if (zap.dir() == Vector2.right) rayOrigin.x += 0.5f;
+        //else rayOrigin.x -= 0.5f;
         
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.85f, zap.layerIdGroundAllMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
         if (hit.collider) return false;
 
         rayOrigin.x -= 0.5f;
-        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.85f, zap.layerIdGroundAllMask);
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
         if (hit.collider) return false;
 
         rayOrigin.x += 1.0f;
-        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.85f, zap.layerIdGroundAllMask);
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
         if (hit.collider) return false;
 
         return true;
