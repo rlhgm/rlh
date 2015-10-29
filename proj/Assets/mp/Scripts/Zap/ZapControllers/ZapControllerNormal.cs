@@ -2839,8 +2839,47 @@ public class ZapControllerNormal : ZapController
                 climbAfterPos.x = handlePos.x + zap.getMyHalfWidth();
             }
 
+            //canClimbPullUp2();
             climbBeforePos = transform.position;
             climbDistToClimb = climbAfterPos - climbBeforePos;
+
+            //if (!catchedClimbHandle)
+            //    return false;
+
+            Vector2 rayOrigin = climbAfterPos; // catchedClimbHandle.transform.position;
+            //rayOrigin.y += 0.14f;
+
+            ////if (zap.dir() == Vector2.right) rayOrigin.x += 0.5f;
+            ////else rayOrigin.x -= 0.5f;
+            //float dtf = 0.5f;
+            //if (zap.checkCeil(ref dtf)) return false;
+
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.75f + 0.5f, zap.layerIdGroundAllMask);
+            if (hit.collider) return false;
+
+            if (zap.dir() == Vector2.right)
+            {
+                rayOrigin.x -= 0.25f; //zap.getMyHalfWidth();
+                hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.75f + 0.5f, zap.layerIdGroundAllMask);
+                if (hit.collider) return false;
+
+            }
+            else
+            {
+                rayOrigin.x += 0.25f; //zap.getMyHalfWidth();
+                hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.75f + 0.5f, zap.layerIdGroundAllMask);
+                if (hit.collider) return false;
+            }
+
+            //rayOrigin.x -= 0.5f;
+            //hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
+            //if (hit.collider) return false;
+
+            //rayOrigin.x += 1.0f;
+            //hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
+            //if (hit.collider) return false;
+
+            //return true;
 
             wantGetUp = false;
             setAction(Action.CLIMB_PULLDOWN);
@@ -3498,7 +3537,6 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.Raycast(zap.sensorDown2.position, -Vector2.right, ClimbPullDownRange, zap.layerIdGroundHandlesMask);
             if (hit.collider)
             {
-
                 if (Physics2D.Raycast(hit.collider.gameObject.transform.position, -Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
                 {
                     climbAfterPos2 = hit.collider.transform.position;
