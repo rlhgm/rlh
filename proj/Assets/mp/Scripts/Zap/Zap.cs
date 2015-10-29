@@ -109,7 +109,7 @@ public class Zap : MonoBehaviour
                 }
             }
         }
-
+        
         coll = GetComponent<BoxCollider2D>();
         gfx = transform.Find("gfx").transform;
         gfxCollider = gfx.GetComponent<PolygonCollider2D>();
@@ -202,6 +202,12 @@ public class Zap : MonoBehaviour
         zapControllerNormal.setZap(this);
         zapControllerKnife.setZap(this);
         zapControllerGravityGun.setZap(this);
+
+        RLHScene[] rlhScenes = FindObjectsOfType(typeof(RLHScene)) as RLHScene[];
+        if (rlhScenes.Length == 1)
+        {
+            rlhScene = rlhScenes[0];
+        }
     }
 
     GroundMoveable[] allStones;
@@ -2008,6 +2014,8 @@ public class Zap : MonoBehaviour
             return mountAttackRightCollider;
         }
     }
+
+    RLHScene rlhScene = null;
 
     //public Animator AnimatorBody
     //{
