@@ -34,7 +34,7 @@ MonoBehaviour:
   VeryHardLandingHeight: 6
   MaxFallDistToCatch: 999
   RopeSwingForce: 4400
-  RopeClimbSpeedUp: 2.5
+  RopeClimbSpeedUp: 1.5
   RopeClimbSpeedDown: 4
   CLIMB_DURATION: 1.5
   CLIMBDUR_PREPARE_TO_JUMP: .5
