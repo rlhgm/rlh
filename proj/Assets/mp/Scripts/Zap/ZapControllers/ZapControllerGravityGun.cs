@@ -316,7 +316,7 @@ public class ZapControllerGravityGun : ZapController
                 Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
                 if (rb)
                 {
-                    rb.angularVelocity = 0;
+                    //rb.angularVelocity = 0;
                 }
             }
 
@@ -326,7 +326,6 @@ public class ZapControllerGravityGun : ZapController
                 Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
                 if (rb)
                 {
-
                     if (rb.angularVelocity < 180)
                         rb.angularVelocity += (fDeltaTime * userStoneRotateSpeed);
 
@@ -341,7 +340,6 @@ public class ZapControllerGravityGun : ZapController
                 Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
                 if (rb)
                 {
-
                     if (rb.angularVelocity > -180)
                         rb.angularVelocity -= (fDeltaTime * userStoneRotateSpeed);
 
