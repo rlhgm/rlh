@@ -9,6 +9,7 @@ public class Water : MonoBehaviour {
 	float tm;
 	Vector3 front1StartPos;
 	Vector3 front2StartPos;
+    public GameObject splashParticles = null;
 
 	void Awake(){
 		coll = GetComponent<BoxCollider2D> ();
@@ -50,4 +51,24 @@ public class Water : MonoBehaviour {
 	public Vector2 getSize(){
 		return new Vector2 (getWidth (), getDepth ());;
 	}
+
+    void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        //
+        if (otherCollider.gameObject.tag == "Player")
+        {
+            //print("OnTriggerEnter2D");
+            ////Instantiate(object,transform.position,Quaternion.EulerAngles(270,0,0));
+            //Instantiate(particles, Vector3(coll.gameObject.transform.position.x, transform.position.y), Quaternion.Euler(270, 0, 0));
+            if (splashParticles)
+            {
+                Instantiate(splashParticles, otherCollider.transform.position, Quaternion.Euler(270, 0, 0));
+            }
+            AudioSource audio = GetComponent<AudioSource>();
+            if (audio)
+            {
+                audio.Play();
+            }
+        }
+    }
 }
