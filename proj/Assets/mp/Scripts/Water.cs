@@ -62,12 +62,13 @@ public class Water : MonoBehaviour {
             //Instantiate(particles, Vector3(coll.gameObject.transform.position.x, transform.position.y), Quaternion.Euler(270, 0, 0));
             if (splashParticles)
             {
-                Instantiate(splashParticles, otherCollider.transform.position, Quaternion.Euler(270, 0, 0));
-            }
-            AudioSource audio = GetComponent<AudioSource>();
-            if (audio)
-            {
-                audio.Play();
+                Object newParticleObject = Instantiate(splashParticles, otherCollider.transform.position, Quaternion.Euler(270, 0, 0));
+                Destroy(newParticleObject, 2.0f);
+                AudioSource audio = GetComponent<AudioSource>();
+                if (audio)
+                {
+                    audio.Play();
+                }
             }
         }
     }
