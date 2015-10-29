@@ -3448,7 +3448,9 @@ public class ZapControllerNormal : ZapController
 
         //if (zap.dir() == Vector2.right) rayOrigin.x += 0.5f;
         //else rayOrigin.x -= 0.5f;
-        
+        float dtf = 0.5f;
+        if (zap.checkCeil(ref dtf)) return false;
+
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
         if (hit.collider) return false;
 
