@@ -48,6 +48,11 @@ public class Snake : MonoBehaviour {
 		state = State.DEAD;
 	}
 
+    public void reset()
+    {
+        state = State.SLEEP;
+    }
+
 	// Update is called once per frame
 	void Update () {
 

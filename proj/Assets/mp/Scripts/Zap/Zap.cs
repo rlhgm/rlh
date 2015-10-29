@@ -511,6 +511,12 @@ public class Zap : MonoBehaviour
             gm.Reset();
         }
 
+        Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
+        foreach (Snake snake in snakes)
+        {
+            snake.reset();
+        }
+
         ShowInfoTrigger[] sits = FindObjectsOfType(typeof(ShowInfoTrigger)) as ShowInfoTrigger[];
         foreach (ShowInfoTrigger sit in sits)
         {
