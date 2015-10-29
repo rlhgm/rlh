@@ -229,6 +229,7 @@ public class NewRope : MonoBehaviour {
 		RopeLink weakLink = links [linkIndex];
 		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
 		weakHingeJoint.enabled = false;
+        weakLink.transform.parent = null;
 	}
 
 	public void swing (Vector2 dir, float force){
