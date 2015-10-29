@@ -452,26 +452,42 @@ public class Zap : MonoBehaviour
         
         currentController.beforeReborn();
 
-        HaveKnife = _haveKnife;
-        HaveGravityGun = _haveGravityGun;
-        if (HaveKnife && choosenController == zapControllerKnife)
+        if (rlhScene)
         {
+            HaveKnife = true;
+            HaveGravityGun = false;
+
             chooseController(zapControllerKnife);
-        }
-        else if (HaveGravityGun && choosenController == zapControllerGravityGun)
-        {
-            chooseController(zapControllerGravityGun);
+            
+            zapControllerKnife.SetCtrlEnabled(false);
+            zapControllerGravityGun.SetCtrlEnabled(false);
+
+            currentController = zapControllerKnife;
+            //setCurrentController(zapControllerKnife);
         }
         else
         {
-            choosenController = null;
+            HaveKnife = _haveKnife;
+            HaveGravityGun = _haveGravityGun;
+            if (HaveKnife && choosenController == zapControllerKnife)
+            {
+                chooseController(zapControllerKnife);
+            }
+            else if (HaveGravityGun && choosenController == zapControllerGravityGun)
+            {
+                chooseController(zapControllerGravityGun);
+            }
+            else
+            {
+                choosenController = null;
+            }
+
+            zapControllerKnife.SetCtrlEnabled(HaveKnife);
+            zapControllerGravityGun.SetCtrlEnabled(HaveGravityGun);
+
+            currentController = zapControllerNormal;
         }
 
-        zapControllerKnife.SetCtrlEnabled(HaveKnife);
-        zapControllerGravityGun.SetCtrlEnabled(HaveGravityGun);
-
-
-        currentController = zapControllerNormal;
         setState(State.ON_GROUND);
         currentController.activate();
 
