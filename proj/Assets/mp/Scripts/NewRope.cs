@@ -234,9 +234,18 @@ public class NewRope : MonoBehaviour {
 
         for(int i = cutedLinkIndex; i < links.Length; ++i)
         {
-            RopeLink cutoffLink = links[cutedLinkIndex];
+            RopeLink cutoffLink = links[i];
+            //print(cutoffLink.name);
             HingeJoint2D cutoffLinkHingeJoint = cutoffLink.GetComponent<HingeJoint2D>();
-            cutoffLinkHingeJoint.useLimits = false;
+            //cutoffLinkHingeJoint.useLimits = false;
+            JointAngleLimits2D nl = new JointAngleLimits2D();
+            nl.min = -60f;
+            nl.max = 60f;
+            cutoffLinkHingeJoint.limits = nl;
+            //cutoffLinkHingeJoint.limits.min = -60f;
+            //cutoffLinkHingeJoint.limits.max = 60f;
+            //cutoffLinkHingeJoint.enabled = false;
+            //cutoffLink.transform.parent = null;
         }
 	}
 

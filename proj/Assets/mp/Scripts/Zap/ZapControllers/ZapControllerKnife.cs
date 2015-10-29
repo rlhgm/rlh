@@ -378,17 +378,17 @@ public class ZapControllerKnife : ZapController
                 }
                 cut(cutStart, cutEnd);
 
-                //if (zap.faceRight())
-                //{
-                //    cutStart = zap.rightKnifeHitPointLow1.position;
-                //    cutEnd = zap.rightKnifeHitPointLow2.position;
-                //}
-                //else
-                //{
-                //    cutStart = zap.leftKnifeHitPointLow1.position;
-                //    cutEnd = zap.leftKnifeHitPointLow2.position;
-                //}
-                //cut(cutStart, cutEnd);
+                if (zap.faceRight())
+                {
+                    cutStart = zap.rightKnifeHitPointLow1.position;
+                    cutEnd = zap.rightKnifeHitPointLow2.position;
+                }
+                else
+                {
+                    cutStart = zap.leftKnifeHitPointLow1.position;
+                    cutEnd = zap.leftKnifeHitPointLow2.position;
+                }
+                cut(cutStart, cutEnd);
 
                 break;
 
