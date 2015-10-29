@@ -8696,7 +8696,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -41.6100006
+      value: -53.6100006
       objectReference: {fileID: 0}
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8729,6 +8729,10 @@ Prefab:
     - target: {fileID: 145792, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_Name
       value: newrope 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
+      propertyPath: weakLinkIndex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
@@ -21314,11 +21318,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -45.9000015
+      value: -53.9000015
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z

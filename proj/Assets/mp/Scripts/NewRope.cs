@@ -55,7 +55,12 @@ public class NewRope : MonoBehaviour {
 			newLink.rope = this;
 			newLink.GetComponent<Rigidbody2D>().mass = linkMass;
 
-			HingeJoint2D hingeJoint = newLink.GetComponent<HingeJoint2D>();
+            if (weakLinkIndex >= 0)
+            {
+                newLink.GetComponent<SpriteRenderer>().color = new Color(1.0f,0.6f,0.8f);
+            }
+
+            HingeJoint2D hingeJoint = newLink.GetComponent<HingeJoint2D>();
 			
 			hingeJoint.anchor = new Vector2(0f,0f);
 			
