@@ -3,6 +3,8 @@ using System.Collections;
 
 public class RLHScene : MonoBehaviour
 {
+    public bool onlyKnife = false;
+
     void Awake()
     {
         transform.position = new Vector3(0f,0f,0f);

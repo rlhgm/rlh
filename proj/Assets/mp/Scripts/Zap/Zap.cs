@@ -208,6 +208,8 @@ public class Zap : MonoBehaviour
         {
             rlhScene = rlhScenes[0];
         }
+
+
     }
 
     GroundMoveable[] allStones;
@@ -223,23 +225,40 @@ public class Zap : MonoBehaviour
         //			zapControllerKnife.SetCtrlEnabled(
         //		}
 
-        _haveKnife = HaveKnife;
-        _haveGravityGun = HaveGravityGun;
-        if (HaveKnife)
+        if (rlhScene.onlyKnife)
         {
+            HaveKnife = true;
+            HaveGravityGun = false;
+
+            _haveKnife = HaveKnife;
+            _haveGravityGun = HaveGravityGun;
+
             chooseController(zapControllerKnife);
+
+            zapControllerKnife.SetCtrlEnabled(false);
+            zapControllerGravityGun.SetCtrlEnabled(false);
+
+            setCurrentController(zapControllerKnife);
         }
-        else if (HaveGravityGun)
+        else
         {
-            chooseController(zapControllerGravityGun);
+            _haveKnife = HaveKnife;
+            _haveGravityGun = HaveGravityGun;
+            if (HaveKnife)
+            {
+                chooseController(zapControllerKnife);
+            }
+            else if (HaveGravityGun)
+            {
+                chooseController(zapControllerGravityGun);
+            }
+
+            zapControllerKnife.SetCtrlEnabled(HaveKnife);
+            zapControllerGravityGun.SetCtrlEnabled(HaveGravityGun);
+
+            setCurrentController(zapControllerNormal);
         }
-
-        zapControllerKnife.SetCtrlEnabled(HaveKnife);
-        zapControllerGravityGun.SetCtrlEnabled(HaveGravityGun);
-
-        setCurrentController(zapControllerNormal);
-
-
+        
         velocity = new Vector3(0, 0, 0);
         impulse = new Vector3(0, 0, 0);
 
