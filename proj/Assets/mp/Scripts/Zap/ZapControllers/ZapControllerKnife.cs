@@ -698,7 +698,7 @@ public class ZapControllerKnife : ZapController
                 return 1;
             }
         }
-        else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
+        else if (crouching() && isInState(Zap.State.ON_GROUND))
         {
             if (zap.checkLeft(0.1f) >= 0.0f)
             {
@@ -746,7 +746,7 @@ public class ZapControllerKnife : ZapController
                 return 1;
             }
         }
-        else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
+        else if (crouching() && isInState(Zap.State.ON_GROUND))
         {
             if (zap.checkRight(0.1f) >= 0.0f)
             {
@@ -1106,8 +1106,15 @@ public class ZapControllerKnife : ZapController
 
         if (zap.currentActionTime >= rollDuration)
         {
-            setAction(Action.IDLE);
-            resetActionAndState();
+            //if (zap.canGetUp())
+            //{
+                setAction(Action.CROUCH_IDLE);
+                resetActionAndState();
+            //}
+            //else
+            //{
+
+            //}
             return 0;
         }
 
@@ -1453,7 +1460,14 @@ public class ZapControllerKnife : ZapController
                     }
                     else
                     {
-                        setActionIdle();
+                        if (zap.canGetUp())
+                        {
+                            setActionIdle();
+                        }
+                        else
+                        {
+                            setActionCrouchIdle();
+                        }
                     }
                 }
             }
