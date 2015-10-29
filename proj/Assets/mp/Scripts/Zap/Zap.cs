@@ -123,6 +123,8 @@ public class Zap : MonoBehaviour
 
         mountAttackLeftCollider = transform.Find("mountAttackLeftCollider").gameObject;
         mountAttackRightCollider = transform.Find("mountAttackRightCollider").gameObject;
+        mountAttackLeftCollider.SetActive(false);
+        mountAttackRightCollider.SetActive(false);
 
         targeter = transform.Find("targeter");
         gravityGunBeam = transform.Find("GravityGunBeam");
