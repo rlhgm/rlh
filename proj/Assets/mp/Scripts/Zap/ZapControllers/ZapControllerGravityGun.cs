@@ -25,6 +25,9 @@ public class ZapControllerGravityGun : ZapController
     public float HIDE_GRAVITYGUN_DURATION = 0.35f;
     public float CROUCHINOUT_DURATION = 0.1f;
 
+    public float RotateMaxStoneMass = 30f;
+    public float RotateMassInteriaCoef = 300f;
+
     public Transform draggedStone = null;
     public Transform lastFlashStone = null;
     //public int layerIdGroundMoveableMask = 0;
@@ -327,8 +330,12 @@ public class ZapControllerGravityGun : ZapController
                 if (rb)
                 {
                     if (rb.angularVelocity < 180)
-                        rb.angularVelocity += (fDeltaTime * userStoneRotateSpeed);
-
+                    {
+                        float velocityGrowth = fDeltaTime * userStoneRotateSpeed;
+                        float massInteriaCoef = (rb.mass / RotateMaxStoneMass) * RotateMassInteriaCoef * fDeltaTime;
+                        if (massInteriaCoef > velocityGrowth) massInteriaCoef = velocityGrowth;
+                        rb.angularVelocity += ( velocityGrowth - massInteriaCoef);
+                    }
                     rb.angularVelocity = Mathf.Min(rb.angularVelocity, 180f);
 
                     //rb.rotation += ( fDeltaTime * userStoneRotateSpeed );
@@ -341,8 +348,13 @@ public class ZapControllerGravityGun : ZapController
                 if (rb)
                 {
                     if (rb.angularVelocity > -180)
-                        rb.angularVelocity -= (fDeltaTime * userStoneRotateSpeed);
-
+                    {
+                        //rb.angularVelocity -= ((fDeltaTime * userStoneRotateSpeed) + (rb.mass / RotateMaxStoneMass) * RotateMassInteriaCoef);
+                        float velocityGrowth = fDeltaTime * userStoneRotateSpeed;
+                        float massInteriaCoef = (rb.mass / RotateMaxStoneMass) * RotateMassInteriaCoef * fDeltaTime;
+                        if (massInteriaCoef > velocityGrowth) massInteriaCoef = velocityGrowth;
+                        rb.angularVelocity -= (velocityGrowth - massInteriaCoef);
+                    }
                     rb.angularVelocity = Mathf.Max(rb.angularVelocity, -180f);
 
                     //rb.rotation -= ( fDeltaTime * userStoneRotateSpeed );

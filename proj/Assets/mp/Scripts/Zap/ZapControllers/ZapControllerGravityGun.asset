@@ -25,6 +25,8 @@ MonoBehaviour:
   PULLOUT_GRAVITYGUN_DURATION: .300000012
   HIDE_GRAVITYGUN_DURATION: .349999994
   CROUCHINOUT_DURATION: .100000001
+  RotateMaxStoneMass: 30
+  RotateMassInteriaCoef: 150
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036
