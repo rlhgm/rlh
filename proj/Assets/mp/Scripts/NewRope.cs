@@ -49,6 +49,7 @@ public class NewRope : MonoBehaviour {
 		RopeLink lastLink = null;
 		for (int i = 0; i < numberOfLinks; ++i) {
 			RopeLink newLink = Instantiate<RopeLink>(ropeLinkPrefab);
+            newLink.name += i; 
 			newLink.idn = i+1;
 			newLink.transform.gameObject.layer = LayerMask.NameToLayer("Ropes");
 			newLink.rope = this;
@@ -230,6 +231,13 @@ public class NewRope : MonoBehaviour {
 		HingeJoint2D weakHingeJoint = weakLink.GetComponent<HingeJoint2D>();
 		weakHingeJoint.enabled = false;
         weakLink.transform.parent = null;
+
+        for(int i = cutedLinkIndex; i < links.Length; ++i)
+        {
+            RopeLink cutoffLink = links[cutedLinkIndex];
+            HingeJoint2D cutoffLinkHingeJoint = cutoffLink.GetComponent<HingeJoint2D>();
+            cutoffLinkHingeJoint.useLimits = false;
+        }
 	}
 
 	public void swing (Vector2 dir, float force){
