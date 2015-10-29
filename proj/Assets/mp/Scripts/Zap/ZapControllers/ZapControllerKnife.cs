@@ -57,19 +57,10 @@ public class ZapControllerKnife : ZapController
         }
     }
 
-    bool canPullUp;
-
     float distToMove;
     Vector3 oldPos;
     float newPosX;
-
-    Vector3 climbBeforePos;
-    Vector3 climbAfterPos;
-    Vector3 climbDistToClimb;
-    float climbToJumpDuration;
-
-    float groundUnderFeet;
-
+    
     public override void MUpdate(float deltaTime)
     {
         //Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
@@ -248,7 +239,6 @@ public class ZapControllerKnife : ZapController
         {
             setAction(Action.CROUCH_ATTACK);
         }
-        canPullUp = false;
         desiredSpeedX = 0.0f;
     }
     public override void deactivate()

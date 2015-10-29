@@ -68,14 +68,7 @@ public class ZapControllerGravityGun : ZapController
     float distToMove;
     Vector3 oldPos;
     float newPosX;
-
-    Vector3 climbBeforePos;
-    Vector3 climbAfterPos;
-    Vector3 climbDistToClimb;
-    float climbToJumpDuration;
-
-    float groundUnderFeet;
-
+    
     void leftMouseNotPressed()
     {
 
@@ -451,7 +444,6 @@ public class ZapControllerGravityGun : ZapController
         zap.GfxLegs.gameObject.SetActive(false);
         zap.GravityGunBeam.gameObject.SetActive(false);
         setAction(Action.PULLOUT_GRAVITYGUN);
-        //canPullUp = false;
         desiredSpeedX = 0.0f;
         shooting = false;
     }
