@@ -696,10 +696,11 @@ public class ZapControllerNormal : ZapController
             case Zap.State.CLIMB_ROPE:
                 Vector3 linkPos = catchedRopeLink.transform.TransformPoint(new Vector3(0.0f, ropeLinkCatchOffset, 0.0f));
                 transform.position = linkPos;
-                transform.rotation = catchedRopeLink.transform.rotation;
+                transform.rotation = Quaternion.Lerp(transform.rotation, catchedRopeLink.transform.rotation, 0.1f);
+                //transform.rotation = catchedRopeLink.transform.rotation;
 
-                Quaternion quat = new Quaternion();
-                quat.eulerAngles = new Vector3(0f, 0f, 0f);
+                //Quaternion quat = new Quaternion();
+                //quat.eulerAngles = new Vector3(0f, 0f, 0f);
                 //weaponText.rotation = quat;
 
                 break;

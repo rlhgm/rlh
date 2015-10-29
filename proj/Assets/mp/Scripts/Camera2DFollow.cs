@@ -177,18 +177,19 @@ public class Camera2DFollow : MonoBehaviour
         if (target.isInState(Zap.State.CLIMB_ROPE))
         {
 
-            float pdm = posDiff.magnitude;
+            //float pdm = posDiff.magnitude;
 
             //if (pdm > 0.35f)
             //    pdm = 0.35f;
 
-            if (pdm < 0.1f)
-                pdm = (pdm * pdm);
+            //if (pdm < 0.1f)
+            //    pdm = (pdm * pdm);
             //else
             //    pdm = 1f;
 
-            transform.position = transform.position + posDiff * pdm;
+            //transform.position = transform.position + posDiff * pdm;
 
+            transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, 0.1f);
         }
         else
         {
