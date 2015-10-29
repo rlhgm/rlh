@@ -454,7 +454,7 @@ public class Zap : MonoBehaviour
         
         currentController.beforeReborn();
 
-        if (rlhScene)
+        if (rlhScene.onlyKnife)
         {
             HaveKnife = true;
             HaveGravityGun = false;
