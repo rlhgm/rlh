@@ -2091,6 +2091,14 @@ public class Zap : MonoBehaviour
         }
     }
 
+    public RLHScene RlhScene
+    {
+        get
+        {
+            return rlhScene;
+        }
+    }
+
     [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]

@@ -971,16 +971,15 @@ public class ZapControllerKnife : ZapController
 
     int Action_IDLE()
     {
-
         if (Input.GetMouseButtonDown(1))
         {
-            //			zap._hideKnife();
-            //			return 1;
-
-            setAction(Action.HIDE_KNIFE);
-            return 0;
+            if (!zap.RlhScene.onlyKnife)
+            {
+                setAction(Action.HIDE_KNIFE);
+                return 0;
+            }
         }
-
+        
         checkDir();
 
         return 0;
@@ -1043,7 +1042,6 @@ public class ZapControllerKnife : ZapController
     {
         if (zap.currentActionTime > ATTACK_DURATION)
         {
-
             setAction(Action.ATTACK_JUST_FINISHED);
             if (!checkStartCrouchAttack())
             {
@@ -1060,8 +1058,11 @@ public class ZapControllerKnife : ZapController
 
         if (Input.GetMouseButtonDown(1))
         {
-            setAction(Action.HIDE_KNIFE);
-            return 0;
+            if (!zap.RlhScene.onlyKnife)
+            {
+                setAction(Action.HIDE_KNIFE);
+                return 0;
+            }
         }
 
         bool dirChanged = checkDir();
