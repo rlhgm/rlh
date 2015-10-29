@@ -1201,8 +1201,11 @@ public class ZapControllerNormal : ZapController
             }
             else
             {
-                setAction(Action.CROUCH_IN);
-                return 1;
+                if (!crouching())
+                {
+                    setAction(Action.CROUCH_IN);
+                    return 1;
+                }
             }
         }
 
