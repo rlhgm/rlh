@@ -1,12 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\RLHEditor.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\particle.js">
     <Files>
-      <File FileName="proj.sln" Line="1" Column="1" />
-      <File FileName="Assets\particle.js" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Camera2DFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Editor\RLHEditor.cs" Line="47" Column="1" />
+      <File FileName="Assets\particle.js" Line="12" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
