@@ -42,4 +42,9 @@ public class Parallaxed : MonoBehaviour
         newPos.y += diff.y * parallaxRatio.y;
         transform.position = newPos;
     }
+
+    public void reset()
+    {
+        transform.position = startPosition;
+    }
 }

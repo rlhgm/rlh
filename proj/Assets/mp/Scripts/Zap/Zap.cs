@@ -513,6 +513,12 @@ public class Zap : MonoBehaviour
             gm.Reset();
         }
 
+        Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
+        foreach (Parallaxed px in pxs)
+        {
+            px.reset();
+        }
+
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)
         {
