@@ -1012,6 +1012,9 @@ public class Zap : MonoBehaviour
         ZapUpdate(timeSinceLastFrame);
     }
 
+    float GlobalResetDestTime = 0f;
+    bool GlobalResetStarted = false;
+
     bool GlobalUpdate(float deltaTime)
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -1075,6 +1078,25 @@ public class Zap : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             reborn();
+            GlobalResetDestTime = Time.time + 2f;
+            GlobalResetStarted = true;
+        }
+        if( Input.GetKey(KeyCode.R))
+        {
+            if (GlobalResetStarted)
+            {
+                if (GlobalResetDestTime < Time.time)
+                {
+                    GlobalResetStarted = false;
+                    print("level restart");
+                    Application.LoadLevel(Application.loadedLevel);
+                }
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            GlobalResetDestTime = 0f;
+            GlobalResetStarted = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))

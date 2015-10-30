@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//[ExecuteInEditMode]
 public class Parallaxed : MonoBehaviour
 {
     public Vector2 parallaxRatio = new Vector2(0f, 0f);
@@ -31,6 +32,7 @@ public class Parallaxed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //PUpdate(Camera.main.transform.position);
     }
 
     public void PUpdate(Vector3 cameraPos)
