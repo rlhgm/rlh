@@ -218,6 +218,35 @@ public class ZapController : ScriptableObject
         touchCamera = newTC;
     }
 
+    public void cutHigh()
+    {
+        Vector2 cutStart;
+        Vector2 cutEnd;
+
+        if (zap.faceRight())
+        {
+            cutStart = zap.rightKnifeHitPointHigh1.position;
+            cutEnd = zap.rightKnifeHitPointHigh2.position;
+        }
+        else
+        {
+            cutStart = zap.leftKnifeHitPointHigh1.position;
+            cutEnd = zap.leftKnifeHitPointHigh2.position;
+        }
+        cut(cutStart, cutEnd);
+
+        if (zap.faceRight())
+        {
+            cutStart = zap.rightKnifeHitPointLow1.position;
+            cutEnd = zap.rightKnifeHitPointLow2.position;
+        }
+        else
+        {
+            cutStart = zap.leftKnifeHitPointLow1.position;
+            cutEnd = zap.leftKnifeHitPointLow2.position;
+        }
+        cut(cutStart, cutEnd);
+    }
     public void cut(Vector2 cutStart, Vector2 cutEnd)
     {
         RaycastHit2D[] hits = Physics2D.LinecastAll(cutStart, cutEnd);

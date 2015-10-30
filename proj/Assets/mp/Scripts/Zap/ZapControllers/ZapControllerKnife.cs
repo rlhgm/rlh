@@ -89,7 +89,8 @@ public class ZapControllerKnife : ZapController
                 Action_HIDE_KNIFE();
                 break;
 
-            case Action.ATTACK:
+            case Action.ATTACK1:
+            case Action.ATTACK2:
                 Action_ATTACK();
                 break;
 
@@ -278,7 +279,8 @@ public class ZapControllerKnife : ZapController
         WALKBACK_RIGHT,
         TURN_STAND_LEFT,
         TURN_STAND_RIGHT,
-        ATTACK,
+        ATTACK1,
+        ATTACK2,
         ATTACK_JUST_FINISHED,
         PREPARE_TO_JUMP,
         //JUMP,
@@ -343,43 +345,14 @@ public class ZapControllerKnife : ZapController
                 else zap.AnimatorBody.Play("Zap_knife_hide");
                 break;
 
-            case Action.ATTACK:
-                string animName = "Zap_knife_attack_0";
-                if (param == 0)
-                {
-                    if (Random.Range(0, 2) == 1)
-                        animName = "Zap_knife_attack_1";
-                }
-                //Debug.Log( animName );
-                zap.AnimatorBody.Play(animName, -1, 0f);
+            case Action.ATTACK1:
+                zap.AnimatorBody.Play("Zap_knife_attack_0", -1, 0f);
+                cutHigh();
+                break;
 
-                Vector2 cutStart;
-                Vector2 cutEnd;
-
-                if (zap.faceRight())
-                {
-                    cutStart = zap.rightKnifeHitPointHigh1.position;
-                    cutEnd = zap.rightKnifeHitPointHigh2.position;
-                }
-                else
-                {
-                    cutStart = zap.leftKnifeHitPointHigh1.position;
-                    cutEnd = zap.leftKnifeHitPointHigh2.position;
-                }
-                cut(cutStart, cutEnd);
-
-                if (zap.faceRight())
-                {
-                    cutStart = zap.rightKnifeHitPointLow1.position;
-                    cutEnd = zap.rightKnifeHitPointLow2.position;
-                }
-                else
-                {
-                    cutStart = zap.leftKnifeHitPointLow1.position;
-                    cutEnd = zap.leftKnifeHitPointLow2.position;
-                }
-                cut(cutStart, cutEnd);
-
+            case Action.ATTACK2:
+                zap.AnimatorBody.Play("Zap_knife_attack_1", -1, 0f);
+                cutHigh();
                 break;
 
             case Action.DIE:
@@ -944,9 +917,9 @@ public class ZapControllerKnife : ZapController
     {
         if (isInAction(Action.IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || walking() != 0)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {  //|| Input.GetMouseButtonDown(0)) {
-                setAction(Action.ATTACK);
+                setAction(Action.ATTACK1);
                 return true;
             }
         }
@@ -956,7 +929,7 @@ public class ZapControllerKnife : ZapController
     {
         if (isInAction(Action.CROUCH_IDLE) || isInAction(Action.ATTACK_JUST_FINISHED) || crouching())
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             { //|| Input.GetMouseButtonDown(0)) {
                 setAction(Action.CROUCH_ATTACK);
                 return true;
@@ -987,7 +960,7 @@ public class ZapControllerKnife : ZapController
         {
             if (!restored)
             {
-                setAction(Action.ATTACK, 1);
+                setAction(Action.ATTACK1, 1);
             }
             else
             {
