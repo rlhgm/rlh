@@ -24,7 +24,7 @@ public class RLHScene : MonoBehaviour
                 ShowInfoTriggersControlls[sit.controlValues[i]] = false;
             }
         }
-        print(ShowInfoTriggersControlls);
+        //print(ShowInfoTriggersControlls);
     }
 
     public void activateShowInfoTriggerController(ShowInfoTriggerController sitc)
@@ -50,6 +50,22 @@ public class RLHScene : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void printShowInfoTriggersControlls()
+    {
+        //Dictionary<int,bool>.Enumerator e = ShowInfoTriggersControlls.GetEnumerator();
+        //while
+        string s = "SITC values : ";
+        foreach (KeyValuePair<int, bool> v in ShowInfoTriggersControlls)
+        {
+            s += "[";
+            s += v.Key;
+            s += "=>";
+            s += v.Value;
+            s += "], ";
+        }
+        print(s);
     }
 
     // Update is called once per frame

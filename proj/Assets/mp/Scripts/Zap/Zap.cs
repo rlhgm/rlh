@@ -1021,6 +1021,10 @@ public class Zap : MonoBehaviour
         {
             gamePaused = !gamePaused;
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            rlhScene.printShowInfoTriggersControlls();
+        }
 
         if (lastTouchedCheckPointCandidate != null)
         {
