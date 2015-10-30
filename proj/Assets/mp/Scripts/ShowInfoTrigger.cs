@@ -16,6 +16,12 @@ public class ShowInfoTrigger : MonoBehaviour {
         used = false;
     }
 
+    public int getNumberOfInfos()
+    {
+        if (Infos.Length != ShowDurations.Length) return 0;
+        return Infos.Length;
+    }
+
 //	// Use this for initialization
 //	void Start () {
 //	

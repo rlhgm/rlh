@@ -4222,6 +4222,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 208528338}
     m_Modifications:
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: Infos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: ShowDurations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -7.44000006
@@ -4264,6 +4272,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: ShowDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: Infos.Array.data[0]
+      value: tylko raz przez 2s
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: ShowDurations.Array.data[0]
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -22046,8 +22062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce4d17850a7f9e4c9d1a33d8040ab49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Info: some info once
-  ShowDuration: 1
   Infos: []
   ShowDurations: []
   OnlyFirstTime: 1

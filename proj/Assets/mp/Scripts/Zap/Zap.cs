@@ -832,12 +832,9 @@ public class Zap : MonoBehaviour
         }
         if (other.gameObject.tag == "ShowInfoTrigger")
         {
-            //print("ShowInfoTrigger");
             ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
             if (!sit.used)
             {
-                //showInfo(sit.Info, sit.ShowDuration);
-                //if (sit.OnlyFirstTime) sit.used = true;
                 showInfo(sit);
             }
             return;
@@ -1336,20 +1333,6 @@ public class Zap : MonoBehaviour
         return false;
     }
 
-    void InfoLabelUpdate(float deltaTime)
-    {
-        if (showedSIT != null)
-        {
-            if (infoLabelShowDuration > 0)
-            {
-                if ((infoLabelShowTime += deltaTime) > infoLabelShowDuration)
-                {
-                    infoLabel.text = "";
-                }
-            }
-        }
-    }
-
     void updateShadow()
     {
         if (!shadowCenter)
@@ -1411,26 +1394,26 @@ public class Zap : MonoBehaviour
 
     float infoLabelShowDuration = 0f;
     float infoLabelShowTime = 0f;
-    //bool infoLabelSet = false;
-
+    
     ShowInfoTrigger showedSIT = null;
     int showSITIndex = 0;
 
     void showInfo(ShowInfoTrigger newSIT)
     {
+        if (newSIT.getNumberOfInfos() == 0) return;
+
         showedSIT = newSIT;
         showSITIndex = 0;
         if (showedSIT.OnlyFirstTime) showedSIT.used = true;
-
-        if( showedSIT.Infos.Length != showedSIT.ShowDurations.Length || showedSIT.Infos.Length == 0)
-        {
-            showedSIT = null;
-            return;
-        }
-
-        showInfo(showedSIT.Infos[0], showedSIT.ShowDurations[0]);
+        
+        showInfo();
     }
 
+    public void showInfo()
+    {
+        if (showedSIT == null) return;
+        showInfo(showedSIT.Infos[showSITIndex], showedSIT.ShowDurations[showSITIndex]);
+    }
     public void showInfo(string newInfo, float duration)
     {
         if (infoLabel)
@@ -1443,12 +1426,32 @@ public class Zap : MonoBehaviour
     }
     public void resetInfo()
     {
+        showedSIT = null;
+        showSITIndex = 0;
+        infoLabelShowTime = 0f;
+        infoLabelShowDuration = 1f;
+
         if (infoLabel)
         {
             infoLabel.text = "";
-            infoLabelShowTime = 0f;
-            infoLabelShowDuration = 1f;
-            //infoLabelSet = true;
+        }
+    }
+    void InfoLabelUpdate(float deltaTime)
+    {
+        if (showedSIT != null)
+        {
+            if ((infoLabelShowTime += deltaTime) > infoLabelShowDuration)
+            {
+                showSITIndex += 1;
+                if (showedSIT.getNumberOfInfos() > showSITIndex)
+                {
+                    showInfo();
+                }
+                else
+                {
+                    resetInfo();
+                }
+            }
         }
     }
 
