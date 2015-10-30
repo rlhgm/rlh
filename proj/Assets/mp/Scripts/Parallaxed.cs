@@ -43,8 +43,8 @@ public class Parallaxed : MonoBehaviour
         transform.position = newPos;
     }
 
-    public void reset()
-    {
-        transform.position = startPosition;
-    }
+    //public void reset()
+    //{
+    //    transform.position = startPosition;
+    //}
 }

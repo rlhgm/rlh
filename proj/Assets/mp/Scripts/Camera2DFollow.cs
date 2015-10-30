@@ -135,6 +135,10 @@ public class Camera2DFollow : MonoBehaviour
         //lastPos = transform.position;
     }
 
+    //public void resetPosToTarget()
+    //{
+    //    Update();
+    //}
 
     // Update is called once per frame
     private void Update()
@@ -150,10 +154,7 @@ public class Camera2DFollow : MonoBehaviour
         //Vector3 oldPos = transform.position;
 
         //parallaxedObjects = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
-        foreach (Parallaxed parallaxed in parallaxedObjects)
-        {
-            parallaxed.PUpdate(myCamera.transform.position);
-        }
+        
 
 
         targetStage = getTargetStage();
@@ -210,6 +211,14 @@ public class Camera2DFollow : MonoBehaviour
             pos.x = transform.position.x * backgroundsRatios[i].x;
             pos.y = 1.0f + transform.position.y * backgroundsRatios[i].y;
             backgroundsNodes[i].position = pos;
+        }
+
+        foreach (Parallaxed parallaxed in parallaxedObjects)
+        {
+            if (parallaxed.enabled)
+            {
+                parallaxed.PUpdate(transform.position);
+            }
         }
 
         //lastPos = transform.position;

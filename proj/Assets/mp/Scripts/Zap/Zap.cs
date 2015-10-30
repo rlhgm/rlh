@@ -448,6 +448,12 @@ public class Zap : MonoBehaviour
 
     public void reborn()
     {
+        //Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
+        //foreach (Parallaxed px in pxs)
+        //{
+        //    if (px.enabled) px.reset();
+        //}
+
         sprRend.enabled = true;
         gfxCollider.enabled = true;
         velocity.x = 0.0f;
@@ -504,6 +510,12 @@ public class Zap : MonoBehaviour
             transform.position = startPoint;// respawnPoint.position;
         }
 
+        //Camera2DFollow[] c2dfs = FindObjectsOfType(typeof(Camera2DFollow)) as Camera2DFollow[];
+        //if (c2dfs.Length == 1)
+        //{
+        //    c2dfs[0].resetPosToTarget();
+        //}
+
         currentController.reborn();
 
         resetInfo();
@@ -513,11 +525,7 @@ public class Zap : MonoBehaviour
             gm.Reset();
         }
 
-        Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
-        foreach (Parallaxed px in pxs)
-        {
-            px.reset();
-        }
+        
 
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)

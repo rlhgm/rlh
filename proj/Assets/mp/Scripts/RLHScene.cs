@@ -10,6 +10,7 @@ public class RLHScene : MonoBehaviour
     void Awake()
     {
         transform.position = new Vector3(0f,0f,0f);
+        Application.targetFrameRate = 15;
     }
 
     // Use this for initialization
