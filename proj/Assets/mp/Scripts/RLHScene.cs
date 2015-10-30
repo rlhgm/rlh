@@ -10,7 +10,7 @@ public class RLHScene : MonoBehaviour
     void Awake()
     {
         transform.position = new Vector3(0f,0f,0f);
-        Application.targetFrameRate = 15;
+        Application.targetFrameRate = -1;
     }
 
     // Use this for initialization
@@ -37,6 +37,12 @@ public class RLHScene : MonoBehaviour
 
     public bool isActiveShowInfoTrigger(ShowInfoTrigger sit)
     {
+        for (int i = 0; i < sit.controlValuesNeg.Length; ++i)
+        {
+            if (ShowInfoTriggersControlls[sit.controlValuesNeg[i]] == true)
+                return false;
+        }
+
         for (int i = 0; i < sit.controlValues.Length; ++i)
         {
             if (ShowInfoTriggersControlls[sit.controlValues[i]] == false)

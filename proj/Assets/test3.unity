@@ -18597,11 +18597,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 40
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -19150,6 +19150,7 @@ MonoBehaviour:
   OnlyFirstTime: 1
   used: 0
   controlValues: 
+  controlValuesNeg: 
 --- !u!50 &1565472030
 Rigidbody2D:
   serializedVersion: 2
@@ -20692,6 +20693,10 @@ Prefab:
       propertyPath: controlValues.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: controlValuesNeg.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -13.3000002
@@ -20767,6 +20772,10 @@ Prefab:
     - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: controlValues.Array.data[0]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: controlValuesNeg.Array.data[0]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1223556702733394c80261a51d1dc9bc, type: 2}

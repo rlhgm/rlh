@@ -11,6 +11,7 @@ public class ShowInfoTrigger : MonoBehaviour {
 	public bool OnlyFirstTime = true;
 	public bool used = false;
     public int[] controlValues;
+    public int[] controlValuesNeg;
 
     public void reset()
     {
