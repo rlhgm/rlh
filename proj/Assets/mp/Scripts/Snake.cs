@@ -91,7 +91,7 @@ public class Snake : MonoBehaviour {
 		}
 
 		if (state == State.BITTING) {
-			if( turnTime > 0.35f ){
+			if( turnTime > 0.3f ){
 				bite ();
 			}
 		}
