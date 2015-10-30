@@ -35,7 +35,7 @@ public class Parallaxed : MonoBehaviour
 
     public void PUpdate(Vector3 cameraPos)
     {
-        cameraPos -= spriteSize;
+        cameraPos.x -= spriteSize.x;
         diff = cameraPos - startPosition;
         newPos = startPosition;
         newPos.x += diff.x * parallaxRatio.x;
