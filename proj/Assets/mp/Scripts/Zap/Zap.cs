@@ -830,6 +830,10 @@ public class Zap : MonoBehaviour
             }
             return;
         }
+        if( other.gameObject.tag == "ShowInfoTriggerController")
+        {
+            return;
+        }
         if (other.gameObject.tag == "ShowInfoTrigger")
         {
             ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();

@@ -95,6 +95,7 @@
     <Compile Include="Assets\mp\Scripts\Rope.cs" />
     <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
     <Compile Include="Assets\mp\Scripts\ShowInfoTrigger.cs" />
+    <Compile Include="Assets\mp\Scripts\ShowInfoTriggerController.cs" />
     <Compile Include="Assets\mp\Scripts\SmashStoneActivator.cs" />
     <Compile Include="Assets\mp\Scripts\Snake.cs" />
     <Compile Include="Assets\mp\Scripts\SnakeCollider.cs" />
