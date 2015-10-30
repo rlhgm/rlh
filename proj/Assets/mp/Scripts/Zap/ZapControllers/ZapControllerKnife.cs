@@ -60,7 +60,8 @@ public class ZapControllerKnife : ZapController
     float distToMove;
     Vector3 oldPos;
     float newPosX;
-    
+    //bool just;
+
     public override void MUpdate(float deltaTime)
     {
         //Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
@@ -71,7 +72,7 @@ public class ZapControllerKnife : ZapController
         newPosX = oldPos.x;
         distToMove = 0.0f;
 
-        checkStartAttack();
+        justStartAttack = checkStartAttack();
         checkStartCrouchAttack();
 
         switch (action)
@@ -322,6 +323,7 @@ public class ZapControllerKnife : ZapController
         action = newAction;
         zap.resetCurrentActionTime();
         zap.AnimatorBody.speed = 1f;
+        continueAttack = false;
 
         switch (newAction)
         {
@@ -983,6 +985,9 @@ public class ZapControllerKnife : ZapController
         return 0;
     }
 
+    bool continueAttack = false;
+    bool justStartAttack = false;
+
     int Action_ATTACK()
     {
         if (zap.currentActionTime > ATTACK_DURATION)
@@ -995,13 +1000,35 @@ public class ZapControllerKnife : ZapController
             }
             if (!checkDir())
             {
-                setAction(Action.ATTACK_JUST_FINISHED);
-                if (!checkStartAttack())
+                if( continueAttack )
+                {
+                    if (isInAction(Action.ATTACK1))
+                    {
+                        setAction(Action.ATTACK_JUST_FINISHED);
+                        setAction(Action.ATTACK2);
+                    }
+                    else if(isInAction(Action.ATTACK2))
+                    {
+                        setAction(Action.ATTACK_JUST_FINISHED);
+                        setAction(Action.ATTACK1);
+                    }
+                }
+                else if (!checkStartAttack())
                 {
                     setActionIdle();
                     resetActionAndState();
                 }
                 return 1;
+            }
+        }
+        else
+        {
+            if (!justStartAttack) // aby nie uruchamiala sie sekwencja od razu po nacisnieciu
+            {
+                if (!continueAttack)
+                {
+                    continueAttack = Input.GetMouseButtonDown(0);
+                }
             }
         }
         return 0;
