@@ -399,7 +399,8 @@ public class Zap : MonoBehaviour
         CROCODILE,
         PANTHER,
         POISON,
-        STONE_HIT
+        STONE_HIT,
+        DRAGGED_STONE_HIT
     };
 
     public string DeathByVeryHardLandingText = "rozjeb... sie o skale. press space";
@@ -408,6 +409,7 @@ public class Zap : MonoBehaviour
     public string DeathByPantherText = "zjadla cie pantera. press space";
     public string DeathByPoisonText = "zatrules sie. press space";
     public string DeathByStoneHitText = "pierdolnela cie skala. press space";
+    public string DeathByDraggedStoneHitText = "porazila cie energia z przenoszonej skaly.";
     public string DeathByDefaultText = "zginales defaultowa smiercia. press space";
 
     public void die(DeathType deathType)
@@ -608,7 +610,7 @@ public class Zap : MonoBehaviour
         {
             if (zapControllerGravityGun.draggedStone == stone)
             {
-                die(DeathType.STONE_HIT);
+                die(DeathType.DRAGGED_STONE_HIT);
                 return true;
             }
         }

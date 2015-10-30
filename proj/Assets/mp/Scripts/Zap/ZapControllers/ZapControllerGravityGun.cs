@@ -677,6 +677,12 @@ public class ZapControllerGravityGun : ZapController
                         msgInfo = zap.DeathByStoneHitText;
                         break;
 
+                    case Zap.DeathType.DRAGGED_STONE_HIT:
+                        if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_stonehit_R");
+                        else zap.AnimatorBody.Play("Zap_death_stonehit_L");
+                        msgInfo = zap.DeathByDraggedStoneHitText;
+                        break;
+
                     case Zap.DeathType.VERY_HARD_LANDING:
                         if (zap.faceRight()) zap.AnimatorBody.Play("Zap_death_hitground_R");
                         else zap.AnimatorBody.Play("Zap_death_hitground_L");
