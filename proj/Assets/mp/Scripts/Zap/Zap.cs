@@ -836,8 +836,9 @@ public class Zap : MonoBehaviour
             ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
             if (!sit.used)
             {
-                showInfo(sit.Info, sit.ShowDuration);
-                if (sit.OnlyFirstTime) sit.used = true;
+                //showInfo(sit.Info, sit.ShowDuration);
+                //if (sit.OnlyFirstTime) sit.used = true;
+                showInfo(sit);
             }
             return;
         }
@@ -1337,13 +1338,12 @@ public class Zap : MonoBehaviour
 
     void InfoLabelUpdate(float deltaTime)
     {
-        if (infoLabelSet)
+        if (showedSIT != null)
         {
             if (infoLabelShowDuration > 0)
             {
                 if ((infoLabelShowTime += deltaTime) > infoLabelShowDuration)
                 {
-                    infoLabelSet = false;
                     infoLabel.text = "";
                 }
             }
@@ -1411,7 +1411,25 @@ public class Zap : MonoBehaviour
 
     float infoLabelShowDuration = 0f;
     float infoLabelShowTime = 0f;
-    bool infoLabelSet = false;
+    //bool infoLabelSet = false;
+
+    ShowInfoTrigger showedSIT = null;
+    int showSITIndex = 0;
+
+    void showInfo(ShowInfoTrigger newSIT)
+    {
+        showedSIT = newSIT;
+        showSITIndex = 0;
+        if (showedSIT.OnlyFirstTime) showedSIT.used = true;
+
+        if( showedSIT.Infos.Length != showedSIT.ShowDurations.Length || showedSIT.Infos.Length == 0)
+        {
+            showedSIT = null;
+            return;
+        }
+
+        showInfo(showedSIT.Infos[0], showedSIT.ShowDurations[0]);
+    }
 
     public void showInfo(string newInfo, float duration)
     {
@@ -1420,7 +1438,7 @@ public class Zap : MonoBehaviour
             infoLabel.text = newInfo;
             infoLabelShowTime = 0f;
             infoLabelShowDuration = duration;
-            infoLabelSet = true;
+            //infoLabelSet = true;
         }
     }
     public void resetInfo()
@@ -1430,7 +1448,7 @@ public class Zap : MonoBehaviour
             infoLabel.text = "";
             infoLabelShowTime = 0f;
             infoLabelShowDuration = 1f;
-            infoLabelSet = true;
+            //infoLabelSet = true;
         }
     }
 

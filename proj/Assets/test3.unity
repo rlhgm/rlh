@@ -4224,11 +4224,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.4410553
+      value: -7.44000006
       objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.0949049
+      value: -7.09000015
       objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9362,11 +9362,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.64466095
+      value: -3.6400001
       objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.92505169
+      value: -8.93000031
       objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -21318,11 +21318,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -28.7999992
+      value: -15.8000002
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -22048,6 +22048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Info: some info once
   ShowDuration: 1
+  Infos: []
+  ShowDurations: []
   OnlyFirstTime: 1
   used: 0
 --- !u!50 &1565472030
@@ -23688,9 +23690,17 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 208528338}
     m_Modifications:
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: Infos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: ShowDurations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -16.2999992
+      value: -11.3000002
       objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.y
@@ -23726,7 +23736,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: Info
-      value: another info always
+      value: another info always - part i
       objectReference: {fileID: 0}
     - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: OnlyFirstTime
@@ -23735,6 +23745,30 @@ Prefab:
     - target: {fileID: 6127964, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: Infos.Array.data[0]
+      value: another info always - part i
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: Infos.Array.data[1]
+      value: another info always - part ii
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: Infos.Array.data[2]
+      value: another info always - part iii
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: ShowDurations.Array.data[0]
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: ShowDurations.Array.data[1]
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: ShowDurations.Array.data[2]
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
