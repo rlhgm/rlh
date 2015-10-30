@@ -1114,8 +1114,19 @@ public class ZapControllerKnife : ZapController
         {
             //if (zap.canGetUp())
             //{
+            if (Input.GetKey(zap.keyDown))
+            {
                 setAction(Action.CROUCH_IDLE);
-                resetActionAndState();
+            }
+            else
+            {
+                if (zap.canGetUp())
+                    setAction(Action.IDLE);
+                else
+                    setAction(Action.CROUCH_IDLE);
+            }
+
+            resetActionAndState();
             //}
             //else
             //{
