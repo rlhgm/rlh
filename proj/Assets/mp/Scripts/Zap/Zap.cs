@@ -519,14 +519,14 @@ public class Zap : MonoBehaviour
         currentController.reborn();
 
         resetInfo();
-        
+
+        rlhScene.reset();
+
         foreach (GroundMoveable gm in allStones)
         {
             gm.Reset();
         }
-
         
-
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)
         {
@@ -1038,7 +1038,9 @@ public class Zap : MonoBehaviour
                 _haveKnife = HaveKnife;
                 _haveGravityGun = HaveGravityGun;
 
-                foreach(GroundMoveable gm in allStones)
+                rlhScene.checkPointReached();
+
+                foreach (GroundMoveable gm in allStones)
                 {
                     gm.SaveResets();
                 }

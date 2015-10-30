@@ -6,6 +6,7 @@ public class RLHScene : MonoBehaviour
 {
     public bool onlyKnife = false;
     public Dictionary<int, bool> ShowInfoTriggersControlls = new Dictionary<int, bool>();
+    public Dictionary<int, bool> ShowInfoTriggersControllsApproved = new Dictionary<int, bool>();
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class RLHScene : MonoBehaviour
                 ShowInfoTriggersControlls[sit.controlValues[i]] = false;
             }
         }
+        ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
         //print(ShowInfoTriggersControlls);
     }
 
@@ -71,6 +73,15 @@ public class RLHScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
 
+    public void reset()
+    {
+        ShowInfoTriggersControlls = new Dictionary<int, bool>( ShowInfoTriggersControllsApproved );
+    }
+
+    public void checkPointReached()
+    {
+        ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
     }
 }
