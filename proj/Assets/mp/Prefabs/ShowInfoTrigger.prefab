@@ -71,10 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce4d17850a7f9e4c9d1a33d8040ab49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Info: hold SPACE to catch ledge while jumping
-  ShowDuration: 3
+  Infos: []
+  ShowDurations: []
   OnlyFirstTime: 1
   used: 0
+  controlValues: 
 --- !u!212 &21290686
 SpriteRenderer:
   m_ObjectHideFlags: 1
