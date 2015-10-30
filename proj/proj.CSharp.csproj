@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-    <Compile Include="Assets\Materials\RLHScene.cs" />
     <Compile Include="Assets\mp\Scripts\Bird.cs" />
     <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
     <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />
     <Compile Include="Assets\mp\Scripts\Pickable.cs" />
     <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
+    <Compile Include="Assets\mp\Scripts\RLHScene.cs" />
     <Compile Include="Assets\mp\Scripts\Rope.cs" />
     <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
     <Compile Include="Assets\mp\Scripts\ShowInfoTrigger.cs" />

@@ -10,6 +10,7 @@ public class ShowInfoTrigger : MonoBehaviour {
 	public float[] ShowDurations;
 	public bool OnlyFirstTime = true;
 	public bool used = false;
+    public int[] controlValues;
 
     public void reset()
     {

@@ -12962,6 +12962,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11490948, guid: e26509290810bc3468044bb0a07521fc, type: 2}
+      propertyPath: controlValues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 413152, guid: e26509290810bc3468044bb0a07521fc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -19.6200008
@@ -12993,6 +12997,14 @@ Prefab:
     - target: {fileID: 413152, guid: e26509290810bc3468044bb0a07521fc, type: 2}
       propertyPath: m_RootOrder
       value: 132
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093134, guid: e26509290810bc3468044bb0a07521fc, type: 2}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490948, guid: e26509290810bc3468044bb0a07521fc, type: 2}
+      propertyPath: controlValues.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e26509290810bc3468044bb0a07521fc, type: 2}
@@ -22108,6 +22120,7 @@ MonoBehaviour:
   ShowDurations: []
   OnlyFirstTime: 1
   used: 0
+  controlValues: 
 --- !u!50 &1565472030
 Rigidbody2D:
   serializedVersion: 2
@@ -23754,6 +23767,10 @@ Prefab:
       propertyPath: ShowDurations.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: controlValues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 493316, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -11.3000002
@@ -23825,6 +23842,10 @@ Prefab:
     - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
       propertyPath: ShowDurations.Array.data[2]
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453920, guid: 1223556702733394c80261a51d1dc9bc, type: 2}
+      propertyPath: controlValues.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1223556702733394c80261a51d1dc9bc, type: 2}

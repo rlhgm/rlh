@@ -832,14 +832,18 @@ public class Zap : MonoBehaviour
         }
         if( other.gameObject.tag == "ShowInfoTriggerController")
         {
+            rlhScene.activateShowInfoTriggerController(other.GetComponent<ShowInfoTriggerController>());
             return;
         }
         if (other.gameObject.tag == "ShowInfoTrigger")
         {
-            ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
-            if (!sit.used)
+            if (rlhScene.isActiveShowInfoTrigger(other.GetComponent<ShowInfoTrigger>()))
             {
-                showInfo(sit);
+                ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
+                if (!sit.used)
+                {
+                    showInfo(sit);
+                }
             }
             return;
         }
