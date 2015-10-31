@@ -680,6 +680,12 @@ public class ZapControllerGravityGun : ZapController
 
                 beamMeltOrigin = beamOrigin;
                 beamMeltTarget = beamTarget;
+
+                RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
+                if( hit.collider )
+                {
+                    stopShoot();
+                }
             }
 
             Vector2 beamDist = beamTarget - beamOrigin;
