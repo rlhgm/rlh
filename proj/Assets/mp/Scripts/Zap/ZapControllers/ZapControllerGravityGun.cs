@@ -377,7 +377,22 @@ public class ZapControllerGravityGun : ZapController
                         else
                         {
                             //toCenterDist.normalized * fDeltaTime *CenterOnBeamSpeed;
-                            draggedStoneHitPos += (toCenter.normalized * fromTimeShiftDist);
+                            Vector2 newDraggedStoneHitPos = draggedStoneHitPos + (toCenter.normalized * fromTimeShiftDist);
+                            //draggedStoneHitPos += (toCenter.normalized * fromTimeShiftDist);
+
+                            //beamMeltOrigin = beamOrigin;
+                            //beamMeltTarget = beamTarget;
+
+                            RaycastHit2D hit = Physics2D.Linecast(beamMeltOrigin, beamMeltTarget, zap.layerIdGroundAllMask);
+                            if (hit.collider)
+                            {
+                                if (hit.collider.transform == draggedStone)
+                                    draggedStoneHitPos = newDraggedStoneHitPos;
+                            }
+                            else
+                            {
+                                draggedStoneHitPos = newDraggedStoneHitPos;
+                            }
                         }
                         
                         stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
@@ -1361,34 +1376,33 @@ public class ZapControllerGravityGun : ZapController
         return canBeDragged(stone);
     }
 
-    bool canBeDragged(Transform stone)
+    bool canBeDragged(Transform stone/*, bool testLinecast*/)
     {
-
         Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
         if (!rb)
             return false;
 
-        Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
-        Vector3 _df = rb.worldCenterOfMass - rayOrigin;
+        Vector3 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+        Vector3 _df = draggedStone.TransformPoint(draggedStoneHitPos) - rayOrigin;
 
         if (_df.magnitude > maxDistance)
         {
-
             return false;
-
         }
         else
         {
-
-            RaycastHit2D hit = Physics2D.Linecast(rayOrigin, rb.worldCenterOfMass, zap.layerIdGroundAllMask);
-            if (hit.collider)
-            {
-                if (hit.collider.transform != draggedStone)
+            //if (testLinecast)
+            //{
+                RaycastHit2D hit = Physics2D.Linecast(rayOrigin, draggedStone.TransformPoint(draggedStoneHitPos), zap.layerIdGroundAllMask);
+                if (hit.collider)
                 {
-                    stopShoot();
-                    return false;
+                    if (hit.collider.transform != draggedStone)
+                    {
+                        stopShoot();
+                        return false;
+                    }
                 }
-            }
+            //}
         }
 
         return true;
