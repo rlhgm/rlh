@@ -1345,14 +1345,15 @@ public class ZapControllerGravityGun : ZapController
         }
     }
 
-    bool canBeDragged(Transform stone, Vector2 stoneTargetPlace)
+    bool canBeDragged(Transform stone, Vector3 stoneTargetPlace)
     {
 
         Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
         if (!rb)
             return false;
 
-        if ((rb.worldCenterOfMass - stoneTargetPlace).magnitude > 5f)
+        //if ((rb.worldCenterOfMass - stoneTargetPlace).magnitude > 5f)
+        if( (draggedStone.TransformPoint(draggedStoneHitPos) - stoneTargetPlace).magnitude > 5f)
         {
             return false;
         }
