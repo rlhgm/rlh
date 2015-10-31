@@ -60,7 +60,8 @@ public class ZapControllerGravityGun : ZapController
     float distToMove;
     Vector3 oldPos;
     float newPosX;
-    
+    RaycastHit2D hit;
+
     void leftMouseNotPressed()
     {
 
@@ -84,7 +85,7 @@ public class ZapControllerGravityGun : ZapController
             if (_df.magnitude <= maxDistance)
             {
 
-                RaycastHit2D hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
+                hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
                 if (hit.collider)
                 {
 
@@ -380,7 +381,7 @@ public class ZapControllerGravityGun : ZapController
                         {
                             Vector2 newDraggedStoneHitPos = draggedStoneHitPos + (toCenter.normalized * fromTimeShiftDist);
                             
-                            RaycastHit2D hit = Physics2D.Linecast(beamMeltOrigin, beamMeltTarget, zap.layerIdGroundAllMask);
+                            hit = Physics2D.Linecast(beamMeltOrigin, beamMeltTarget, zap.layerIdGroundAllMask);
                             if (hit.collider)
                             {
                                 if (hit.collider.transform == draggedStone)
@@ -592,7 +593,7 @@ public class ZapControllerGravityGun : ZapController
                 }
                 beamTarget = beamOrigin + (beamNorm * beamLength);
 
-                RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
+                hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
                 if( hit.collider )
                 {
                     GroundMoveable newDraggedGroundMoveable = hit.collider.GetComponent<GroundMoveable>();
@@ -1386,7 +1387,7 @@ public class ZapControllerGravityGun : ZapController
         {
             if (testLinecast)
             {
-                RaycastHit2D hit = Physics2D.Linecast(rayOrigin, draggedStone.TransformPoint(draggedStoneHitPos), zap.layerIdGroundAllMask);
+                hit = Physics2D.Linecast(rayOrigin, draggedStone.TransformPoint(draggedStoneHitPos), zap.layerIdGroundAllMask);
                 if (hit.collider)
                 {
                     if (hit.collider.transform != draggedStone)
