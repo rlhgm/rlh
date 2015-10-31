@@ -142,11 +142,11 @@ Material:
       data:
         first:
           name: _sx
-        second: 3
+        second: 1
       data:
         first:
           name: _sy
-        second: 3
+        second: 1
       data:
         first:
           name: _speedX

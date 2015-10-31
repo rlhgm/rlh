@@ -485,7 +485,24 @@ public class ZapControllerGravityGun : ZapController
                     {
                         releaseStone();
                     }
-
+                    else
+                    {
+                        if (draggedStone.childCount == 1)
+                        {
+                            SpriteRenderer sprRend = draggedStone.GetComponentInChildren<SpriteRenderer>();
+                            if (sprRend)
+                            {
+                                //_speedX("speedX", Range(0, 0.3)) = 0
+                                //_speedY("speedY", Range(0, 0.3)) = 0
+                                Vector2 rbv = rb.velocity;
+                                float _speedX = Mathf.Clamp((Mathf.Min(2.0f, rbv.x) / 2.0f) * 0.15f, 0.0f, 0.15f);
+                                float _speedY = Mathf.Clamp((Mathf.Min(2.0f, rbv.y) / 2.0f) * 0.15f, 0.0f, 0.15f);
+                                sprRend.material.SetFloat("_speedX", _speedX);
+                                sprRend.material.SetFloat("_speedY", _speedY);
+                                //Debug.Log(rbv + " " + _speedX + " " +_speedY);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1402,6 +1419,9 @@ public class ZapControllerGravityGun : ZapController
         }
     }
 
+    public Material draggedStoneMaterial = null;
+    public Material normalMaterial = null;
+
     void flashStone(Transform stone)
     {
         //setStoneOpacity(stone, 0.5f);
@@ -1422,10 +1442,32 @@ public class ZapControllerGravityGun : ZapController
             SpriteRenderer sprRend = stone.GetComponentInChildren<SpriteRenderer>();
             if( sprRend )
             {
-                Material newMat = Resources.Load("Assests/Materials/DraggedStone", typeof(Material)) as Material;
+                //Material myNewMaterial = new Material("My/DraggedStone");
+                //if( myNewMaterial )
+                //{
+                //    Debug.Log("JEST W KONCU KURWA MATERIAL");
+                //    sprRend.material = myNewMaterial;
+                //}
+                //Material newMat = Resources.Load("Assets/Materials/DraggedStone",typeof(Material)) as Material;
+                //Instantiate<dragged>()
+                //Debug.Log(sprRend.material);
+                Material newMat = Instantiate<Material>(draggedStoneMaterial);
+                Debug.Log(newMat);
+                //Object newMat = Resources.Load("Materials/DraggedStone");
                 if (newMat)
                 {
+                    //Debug.Log("JEST W KONCU KURWA MATERIAL");
                     sprRend.material = newMat;
+                    //_sx("sx", Range(0, 20)) = 1
+                    //_sy("sy", Range(0, 20)) = 1
+                    //_speedX("speedX", Range(0, 0.3)) = 0
+                    //_speedY("speedY", Range(0, 0.3)) = 0
+                    BoxCollider2D sbc = stone.GetComponent<BoxCollider2D>();
+                    if (sbc != null)
+                    {
+                        sprRend.material.SetFloat("sx", sbc.size.x);
+                        sprRend.material.SetFloat("sy", sbc.size.y);
+                    }
                 }
             }
         }
@@ -1449,11 +1491,20 @@ public class ZapControllerGravityGun : ZapController
             SpriteRenderer sprRend = stone.GetComponentInChildren<SpriteRenderer>();
             if (sprRend)
             {
-                Material newMat = Resources.Load("PixelSnap", typeof(Material)) as Material;
-                if (newMat)
+                Material newMat = Instantiate<Material>(normalMaterial);
+                //Debug.Log(newMat);
+                //Object newMat = Resources.Load("Materials/DraggedStone");
+                if (normalMaterial)
                 {
-                    sprRend.material = newMat;
+                    //Debug.Log("JEST W KONCU KURWA MATERIAL");
+                    sprRend.material = normalMaterial;
                 }
+                 
+                ////Material newMat = Resources.Load("Assets/Materials/PixelSnap", typeof(Material)) as Material;
+                //if (newMat)
+                //{
+                //    sprRend.material = newMat;
+                //}
             }
         }
     }
