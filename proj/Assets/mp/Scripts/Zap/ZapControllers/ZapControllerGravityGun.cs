@@ -33,28 +33,15 @@ public class ZapControllerGravityGun : ZapController
 
     public Transform draggedStone = null;
     public Transform lastFlashStone = null;
-    //public int layerIdGroundMoveableMask = 0;
-    //public int layerIdGroundMask = 0;
-
+    
     Vector2 T;          // sila ciagu
     public float inertiaFactor = 0.09f;         // wspolczynnik oporu - u mnie raczej bezwladnosci
                                                 //public float inertiaFactor2 = 0.03f; 	// wspolczynnik bezwladnosci jak gracz na siebie chce skierowac kamien
     public float maxDistance = 8f;
-    //public float minDistance = 2f;
-    //public float pushOutForce = 2f;
-    //public float pushOutMassFactor = 10f;
-
-    //List<Rigidbody2D> droppedStones = new List<Rigidbody2D> ();
-
+    
     Vector2 V;          // predkosc
     public static float userStoneRotateSpeed = 180f;
-
-    //	public ZapControllerGravityGun () 
-    //		: base("GravityGun")
-    //	{
-    //		//zap.layer
-    //	}
-
+    
     public override void setZap(Zap playerController)
     {
         base.setZap(playerController);
@@ -86,8 +73,7 @@ public class ZapControllerGravityGun : ZapController
                 unflashStone(lastFlashStone);
                 lastFlashStone = null;
             }
-            //Camera.main.
-
+            
             Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
 
             Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
@@ -106,9 +92,6 @@ public class ZapControllerGravityGun : ZapController
                         Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
                         if (tsrb)
                         {
-
-                            //rayOrigin = player.dir() == Vector2.right ? player.sensorRight2.position : player.sensorLeft2.position;
-
                             hit = Physics2D.Linecast(rayOrigin, tsrb.worldCenterOfMass, zap.layerIdGroundMask);
                             if (hit.collider)
                             {
@@ -141,25 +124,6 @@ public class ZapControllerGravityGun : ZapController
         beamMissed = false;
         shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
-
-        //Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-
-        //RaycastHit2D hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
-        //if (hit.collider)
-        //{
-        //    draggedStone = hit.collider.gameObject.transform;
-
-        //    if (canBeDragged(draggedStone))
-        //    {
-        //        Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
-        //        tsrb.gravityScale = 0f;
-        //        flashStone(draggedStone);
-        //    }
-        //    else
-        //    {
-        //        draggedStone = null;
-        //    }
-        //}
     }
     
     void stopShoot()
@@ -213,19 +177,12 @@ public class ZapControllerGravityGun : ZapController
     float currentDeltaTime = 0f;
     public override void MUpdate(float deltaTime)
     {
-        //Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
-
-        //currentActionTime = zap.getCurrentActionTime();
-
         currentDeltaTime = deltaTime;
 
         oldPos = transform.position;
         newPosX = oldPos.x;
         distToMove = 0.0f;
-
-        //checkStartAttack ();
-        //checkStartCrouchAttack ();
-
+        
         beamMelt();
 
         if (!Input.GetMouseButton(0))
@@ -307,30 +264,10 @@ public class ZapControllerGravityGun : ZapController
         {
 
             case Zap.State.ON_GROUND:
-                //float distToGround = 0.0f;
-                //zap.checkGround(ref distToGround);
-                //if (!zap.groundUnder)
-                //{
-                //    zap.suddenlyInAir();
-                //}
-                //else
-                //{
-
-                //    //wantGetUp = false;
-                //    //zap.hideChoosenWeapon();
-                //    //zap.setState(Zap.State.IN_AIR);
-                //    //setAction(Action.JUMP);
-
-                //}
-
                 float distToGround = 0.0f;
                 zap.checkGround(ref distToGround);
                 if (zap.groundUnder == null)
                 {
-                    //zap.setState(Zap.State.IN_AIR);
-                    //setAction(Action.JUMP);
-                    //wantGetUp = false;
-                    //wantGetUp = false;
                     zap.suddenlyInAir();
                 }
                 else if (zap.groundUnder)
@@ -382,8 +319,6 @@ public class ZapControllerGravityGun : ZapController
                         rb.angularVelocity += ( velocityGrowth - massInteriaCoef);
                     }
                     rb.angularVelocity = Mathf.Min(rb.angularVelocity, 180f);
-
-                    //rb.rotation += ( fDeltaTime * userStoneRotateSpeed );
                 }
             }
             else if (Input.GetKey(KeyCode.X))
@@ -394,48 +329,19 @@ public class ZapControllerGravityGun : ZapController
                 {
                     if (rb.angularVelocity > -180)
                     {
-                        //rb.angularVelocity -= ((fDeltaTime * userStoneRotateSpeed) + (rb.mass / RotateMaxStoneMass) * RotateMassInteriaCoef);
                         float velocityGrowth = fDeltaTime * userStoneRotateSpeed;
                         float massInteriaCoef = (rb.mass / RotateMaxStoneMass) * RotateMassInteriaCoef * fDeltaTime;
                         if (massInteriaCoef > velocityGrowth) massInteriaCoef = velocityGrowth;
                         rb.angularVelocity -= (velocityGrowth - massInteriaCoef);
                     }
                     rb.angularVelocity = Mathf.Max(rb.angularVelocity, -180f);
-
-                    //rb.rotation -= ( fDeltaTime * userStoneRotateSpeed );
                 }
 
             }
         }
 
         Vector3 currentMousePosition = Input.mousePosition;
-
-        //		for (int i = 0 ; i < droppedStones.Count; ++i) {
-        //			Rigidbody2D rb = droppedStones[i];
-        //			if( rb.IsSleeping() ){
-        //				//Debug.Log ( "remove dropped stone: " + rb ); 
-        //				droppedStones.Remove(rb);
-        //			}
-        ////			}else{
-        ////				Vector2 playerCenterPos = zap.transform.position;
-        ////				playerCenterPos.y += 1f;
-        ////				Vector2 stoneCenterPos = rb.worldCenterOfMass;
-        ////						
-        ////				Vector2 diff = stoneCenterPos - playerCenterPos;
-        ////				Vector2 F = new Vector2(0f,0f);
-        ////				float diffMagnitude = diff.magnitude;
-        ////						
-        ////				if( diffMagnitude < minDistance+0.25f ){
-        ////					//F = diff + diff * pushOutForce * (rb.mass / pushOutMassFactor);
-        ////					//F = diff.normalized * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
-        ////
-        ////					// im blizej srodka i im szybciej tym mocniej wypycha
-        ////					F = diff * (diffMagnitude/minDistance) * (rb.velocity.magnitude / 10f) * 20f * (rb.mass / pushOutMassFactor);
-        ////					rb.AddForce(F,ForceMode2D.Impulse);
-        ////				}
-        ////			}
-        //		}
-
+        
         if (Input.GetMouseButton(0))
         {
             Vector3 touchInScene = touchCamera.ScreenToWorldPoint(currentMousePosition);
@@ -454,28 +360,14 @@ public class ZapControllerGravityGun : ZapController
                     Vector2 F = new Vector2(0f, 0f);
 
                     float diffMagnitude = diff.magnitude;
-                    //if( diffMagnitude < minDistance+0.25f ){
-                    //	F = diff + diff * ( diffMagnitude / minDistance ) * pushOutForce * (rb.mass / pushOutMassFactor);
-                    //}else{
                     Vector2 diff2 = tis - playerCenterPos;
                     float diffMagnitude2 = diff2.magnitude;
-
-                    //if( diffMagnitude2 > minDistance ){
 
                     T = (tis - stoneCenterPos);
                     V = rb.velocity;
 
                     F = T - (inertiaFactor * V);
-                    //}
-                    //						}else{ // jednak musi przyciagac ale slabiej albo do granicy a nie 
-                    //							T = (tis - stoneCenterPos);
-                    //							V = rb.velocity;							
-                    //							F = T - (inertiaFactor2 * V) ;
-                    //							F *= (rb.mass / pushOutMassFactor);
-                    //						}
-                    //}
-
-                    //Debug.Log("F : " + rb.velocity);
+                
                     rb.AddForce(F, ForceMode2D.Impulse);
 
                     if (!canBeDragged(draggedStone, tis))
@@ -487,7 +379,6 @@ public class ZapControllerGravityGun : ZapController
             }
         }
     }
-    //bool restored = false;
 
     public override void activateSpec(bool restore = false, bool crouch = false)
     {
@@ -618,24 +509,6 @@ public class ZapControllerGravityGun : ZapController
                     }
                 }
                 break;
-
-                //case Action.WALK_LEFT:
-                //    break;
-
-                //case Action.WALK_RIGHT:
-                //    break;
-
-                //case Action.WALKBACK_LEFT:
-                //    break;
-
-                //case Action.WALKBACK_RIGHT:
-                //    break;
-
-                //case Action.at:
-                //    break;
-
-                //case Action.STOP_WALK:
-                //  break;
         }
 
         if (shoot)
@@ -649,14 +522,10 @@ public class ZapControllerGravityGun : ZapController
             Vector2 beamTarget;
             if (draggedStone != null)
             {
-                //line.SetPosition(1, draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass);
                 beamTarget = draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass;
-                //float 
             }
             else
             {
-                //line.SetPosition(1, mouseInScene);
-                //beamTarget = mouseInScene;
                 Vector2 beamAll = mouseInScene - beamOrigin;
                 Vector2 beamNorm = beamAll.normalized;
                 float beamLengthFromTime = shootingDuration* BeamSpeed;
@@ -696,24 +565,6 @@ public class ZapControllerGravityGun : ZapController
                     {
                         stopShoot();
                     }
-
-                    //if ( hit.collider.GetComponent<GroundMoveable> )
-                    //Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-
-                    //RaycastHit2D hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
-                    //if (hit.collider)
-                    //{
-                    //    draggedStone = hit.collider.gameObject.transform;
-
-                    //    if (canBeDragged(draggedStone))
-                    //    {
-                    //        
-                    //    }
-                    //    else
-                    //    {
-                    //        draggedStone = null;
-                    //    }
-                    //}
                 }
             }
 
@@ -729,10 +580,6 @@ public class ZapControllerGravityGun : ZapController
             beam.SetColors(beamOriginColor, beamTargetColor);
             beam.SetWidth(0.1f, 0.5f * (beamDistMag / maxDistance));
         }
-        //else
-        //{
-
-        //}
     }
 
     Color beamOriginColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
@@ -1029,10 +876,6 @@ public class ZapControllerGravityGun : ZapController
 
     public override int keyJumpDown()
     {
-
-        //Debug.Log ("ZapControllerNormal::keyJumpDown()");
-        //jumpKeyPressed = true;
-
         switch (action)
         {
             case Action.IDLE:
@@ -1189,12 +1032,6 @@ public class ZapControllerGravityGun : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        //float distToGround = 0.0f;
-        //zap.checkGround(zap.layerIdGroundAllMask, ref distToGround);
-        //if (zap.groundUnder)
-        //{
-        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        //}
         return 0;
     }
 
@@ -1219,12 +1056,6 @@ public class ZapControllerGravityGun : ZapController
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
 
-        //float distToGround = 0.0f;
-        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        //if (groundUnderFeet)
-        //{
-        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        //}
         return 0;
     }
 
@@ -1272,11 +1103,8 @@ public class ZapControllerGravityGun : ZapController
 
         if (wantJumpAfter)
         {
-            //jumpLeft();
-
             if (Input.GetKey(zap.keyJump))
                 canJumpAfter = false;
-
         }
         else
         {
@@ -1290,12 +1118,8 @@ public class ZapControllerGravityGun : ZapController
 
         if (wantJumpAfter)
         {
-            //jumpRight();
-
             if (Input.GetKey(zap.keyJump))
                 canJumpAfter = false;
-
-
         }
         else
         {
@@ -1363,7 +1187,6 @@ public class ZapControllerGravityGun : ZapController
     }
     bool jumping()
     {
-        //return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_RIGHT);
         return false;
     }
     public override void zapDie(Zap.DeathType deathType)
@@ -1372,30 +1195,9 @@ public class ZapControllerGravityGun : ZapController
         releaseStone();
         setAction(Action.DIE, (int)deathType);
     }
-    //	public override void reborn(){
-    //		if (zap.getLastTouchedCheckPoint().GetComponent<CheckPoint> ().startMounted) {
-    //			zap.setState(Zap.State.MOUNT);
-    //		}
-    //	}
+    
     public override bool triggerEnter(Collider2D other)
     {
-
-        //		if (other.gameObject.tag == "Bird") {
-        //			if( isInState(Zap.State.MOUNT) ){
-        //				zap.velocity.x = 0.0f;
-        //				zap.velocity.y = 0.0f;
-        //				setAction(Action.JUMP);
-        //				zap.setState(Zap.State.IN_AIR);
-        //				
-        //				if( zap.canBeFuddleFromBird )
-        //					zap.setFuddledFromBrid(true);
-        //				
-        //			} else if( isInState(Zap.State.IN_AIR) ) {
-        //				zap.velocity.x = 0.0f;
-        //			}
-        //			return true;
-        //		}
-
         return false;
     }
 
