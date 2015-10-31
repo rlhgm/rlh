@@ -384,14 +384,32 @@ public class ZapControllerGravityGun : ZapController
                         {
                             fromTimeShiftDist = toCenterDist;
 
-                            draggedStoneHitPos = rb.centerOfMass;
-                            draggedStoneCentered = true;
+                            //draggedStoneHitPos = rb.centerOfMass;
+                            //draggedStoneCentered = true;
+                            Vector2 newDraggedStoneHitPos = rb.centerOfMass;
+
+                            hit = Physics2D.Linecast(beamMeltOrigin, draggedStone.TransformPoint(newDraggedStoneHitPos), zap.layerIdGroundAllMask);
+                            if (hit.collider)
+                            {
+                                if (hit.collider.transform == draggedStone)
+                                {
+                                    draggedStoneHitPos = newDraggedStoneHitPos;
+                                    tlc = false;        // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
+                                    draggedStoneCentered = true;
+                                }
+                            }
+                            else
+                            {
+                                draggedStoneHitPos = newDraggedStoneHitPos;
+                                tlc = false;            // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
+                                draggedStoneCentered = true;
+                            }
                         }
                         else
                         {
                             Vector2 newDraggedStoneHitPos = draggedStoneHitPos + (toCenter.normalized * fromTimeShiftDist);
                             
-                            hit = Physics2D.Linecast(beamMeltOrigin, beamMeltTarget, zap.layerIdGroundAllMask);
+                            hit = Physics2D.Linecast(beamMeltOrigin, draggedStone.TransformPoint(newDraggedStoneHitPos), zap.layerIdGroundAllMask);
                             if (hit.collider)
                             {
                                 if (hit.collider.transform == draggedStone)
