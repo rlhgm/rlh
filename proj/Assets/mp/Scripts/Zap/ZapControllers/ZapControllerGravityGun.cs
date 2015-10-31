@@ -1633,10 +1633,14 @@ public class ZapControllerGravityGun : ZapController
         else
         {
 
-            RaycastHit2D hit = Physics2D.Linecast(rayOrigin, rb.worldCenterOfMass, zap.layerIdGroundMask);
+            RaycastHit2D hit = Physics2D.Linecast(rayOrigin, rb.worldCenterOfMass, zap.layerIdGroundAllMask);
             if (hit.collider)
             {
-                return false;
+                if (hit.collider.transform != draggedStone)
+                {
+                    stopShoot();
+                    return false;
+                }
             }
         }
 
