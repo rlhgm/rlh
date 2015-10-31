@@ -7978,13 +7978,17 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 28681306}
     m_Modifications:
+    - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
+      propertyPath: controlValues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -53.6100006
+      value: -14.9799995
       objectReference: {fileID: 0}
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 12.4899998
+      value: -1.19000006
       objectReference: {fileID: 0}
     - target: {fileID: 446478, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8017,6 +8021,10 @@ Prefab:
     - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: weakLinkIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
+      propertyPath: controlValues.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
@@ -18597,7 +18605,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -17
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
