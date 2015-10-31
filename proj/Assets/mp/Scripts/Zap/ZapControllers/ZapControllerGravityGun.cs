@@ -1452,7 +1452,7 @@ public class ZapControllerGravityGun : ZapController
                 //Instantiate<dragged>()
                 //Debug.Log(sprRend.material);
                 Material newMat = Instantiate<Material>(draggedStoneMaterial);
-                Debug.Log(newMat);
+                //Debug.Log(newMat);
                 //Object newMat = Resources.Load("Materials/DraggedStone");
                 if (newMat)
                 {
