@@ -82,37 +82,47 @@ public class ZapControllerGravityGun : ZapController
             Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
             Vector3 _df = mouseInScene - rayOrigin;
 
-            if (_df.magnitude <= maxDistance)
+            //_df.normalized
+
+            hit = Physics2D.Linecast(rayOrigin, mouseInScene, zap.layerIdGroundMoveableMask);
+            if (hit.collider)
             {
-
-                hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
-                if (hit.collider)
+                if (hit.distance < maxDistance)
                 {
-
-                    lastFlashStone = hit.collider.gameObject.transform;
-                    if (lastFlashStone)
-                    {
-                        Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
-                        if (tsrb)
-                        {
-                            hit = Physics2D.Linecast(rayOrigin, tsrb.worldCenterOfMass, zap.layerIdGroundMask);
-                            if (hit.collider)
-                            {
-                                lastFlashStone = null;
-                            }
-                            else
-                            {
-                                flashStone(lastFlashStone);
-                            }
-
-                        }
-                        else
-                        {
-                            lastFlashStone = null;
-                        }
-                    }
+                    lastFlashStone = hit.collider.transform;
+                    flashStone(lastFlashStone);
                 }
             }
+
+            //if (_df.magnitude <= maxDistance)
+            //{
+            //    hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
+            //    if (hit.collider)
+            //    {
+            //        lastFlashStone = hit.collider.gameObject.transform;
+            //        if (lastFlashStone)
+            //        {
+            //            Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
+            //            if (tsrb)
+            //            {
+            //                hit = Physics2D.Linecast(rayOrigin, tsrb.worldCenterOfMass, zap.layerIdGroundMask);
+            //                if (hit.collider)
+            //                {
+            //                    lastFlashStone = null;
+            //                }
+            //                else
+            //                {
+            //                    flashStone(lastFlashStone);
+            //                }
+
+            //            }
+            //            else
+            //            {
+            //                lastFlashStone = null;
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 
