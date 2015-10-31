@@ -28,6 +28,8 @@ public class ZapControllerGravityGun : ZapController
     public float RotateMaxStoneMass = 30f;
     public float RotateMassInteriaCoef = 300f;
 
+    public float BeamSpeed = 20f;
+
     public Transform draggedStone = null;
     public Transform lastFlashStone = null;
     //public int layerIdGroundMoveableMask = 0;
@@ -134,6 +136,7 @@ public class ZapControllerGravityGun : ZapController
 
         draggedStone = null;
         shooting = true;
+        shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
 
         Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -163,11 +166,14 @@ public class ZapControllerGravityGun : ZapController
         releaseStone();
     }
 
+    float currentDeltaTime = 0f;
     public override void MUpdate(float deltaTime)
     {
         //Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 
         //currentActionTime = zap.getCurrentActionTime();
+
+        currentDeltaTime = deltaTime;
 
         oldPos = transform.position;
         newPosX = oldPos.x;
@@ -474,6 +480,7 @@ public class ZapControllerGravityGun : ZapController
     }
 
     bool shooting = false;
+    float shootingDuration = 0f;
 
     public enum Action
     {
@@ -587,6 +594,8 @@ public class ZapControllerGravityGun : ZapController
 
         if (shoot)
         {
+            shootingDuration += currentDeltaTime;
+
             LineRenderer beam = zap.GravityGunBeam.GetComponent<LineRenderer>();
             Vector2 beamOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
             //if (shoot) { }
@@ -602,6 +611,8 @@ public class ZapControllerGravityGun : ZapController
             {
                 //line.SetPosition(1, mouseInScene);
                 beamTarget = mouseInScene;
+                Vector2 beamDir = (mouseInScene - beamOrigin).normalized;
+                beamTarget = beamOrigin + (beamDir * shootingDuration * BeamSpeed);
             }
 
             Vector2 beamDist = beamTarget - beamOrigin;
@@ -1009,9 +1020,6 @@ public class ZapControllerGravityGun : ZapController
 
         if (Input.GetMouseButtonDown(1))
         {
-            //			zap._hideKnife();
-            //			return 1;
-
             setAction(Action.HIDE_GRAVITYGUN);
             return 0;
         }
@@ -1025,7 +1033,6 @@ public class ZapControllerGravityGun : ZapController
     {
         if (zap.currentActionTime > PULLOUT_GRAVITYGUN_DURATION)
         {
-            //setAction(Action.ATTACK,1);
             setActionIdle();
             return 1;
         }
@@ -1036,7 +1043,6 @@ public class ZapControllerGravityGun : ZapController
     {
         if (zap.currentActionTime > HIDE_GRAVITYGUN_DURATION)
         {
-            //zap._hideGravityGun();
             zap.hideChoosenWeapon();
             return 1;
         }
