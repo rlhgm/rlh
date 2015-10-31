@@ -143,11 +143,13 @@ public class ZapControllerGravityGun : ZapController
     bool beamMissed = false;
     float beamMissedDuration = 0f;
 
+    Vector2 draggedStoneHitPos = new Vector2();
+
     void beamMelt()
     {
         if (!beamMelting) return;
 
-        Debug.Log("beamMelt");
+        //Debug.Log("beamMelt");
 
         beamMeltingDuration += currentDeltaTime;
 
@@ -557,6 +559,9 @@ public class ZapControllerGravityGun : ZapController
                         Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
                         tsrb.gravityScale = 0f;
                         flashStone(draggedStone);
+
+                        //Debug.Log(draggedStone.InverseTransformPoint(hit.point));
+                        draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
                     }
                     else
                     {
@@ -1256,90 +1261,7 @@ public class ZapControllerGravityGun : ZapController
         //aa
         return false;
     }
-
-
-    void getUp()
-    {
-        setAction(Action.IDLE);
-        resetActionAndState();
-    }
-
-    public float ClimbPullDownRange = 0.511f;
-
-    GameObject canClimbPullDown()
-    {
-
-        if (!isInState(Zap.State.ON_GROUND) || !(isInAction(Action.IDLE))) //|| isInAction(Action.CROUCH_IDLE)) )
-            return null;
-
-        // 1: sytuacja gdy zap jest swoim srodkiem nad tilem
-        // 2: sytuacja gdy zap jest swoim srodkiem juz poza tilem
-
-        RaycastHit2D hit;
-
-        if (zap.dir() == Vector2.right)
-        { //
-
-            hit = Physics2D.Raycast(zap.sensorDown2.position, -Vector2.right, ClimbPullDownRange, zap.layerIdGroundHandlesMask);
-            if (hit.collider)
-            {
-
-                if (Physics2D.Raycast(hit.collider.gameObject.transform.position, -Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
-                {
-                    return hit.collider.gameObject;
-                }
-            }
-
-        }
-        else
-        {
-
-            hit = Physics2D.Raycast(zap.sensorDown2.position, Vector2.right, ClimbPullDownRange, zap.layerIdGroundHandlesMask);
-            if (hit.collider)
-            {
-
-                if (Physics2D.Raycast(hit.collider.gameObject.transform.position, Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
-                {
-                    return hit.collider.gameObject;
-                }
-
-            }
-        }
-
-        // to jest ta druga sytuacja ...
-
-        Vector2 rayOrigin = zap.sensorDown1.position;
-        hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.getMyWidth(), zap.layerIdGroundHandlesMask);
-
-        if (hit.collider)
-        {
-            // badam czy stoje na krawedzi odpowiednio zwrocony
-            if (zap.dir() == Vector2.right)
-            { //
-
-                // pod lewa noga musi byc przepasc
-                rayOrigin = zap.sensorDown1.position;
-                if (Physics2D.Raycast(rayOrigin, -Vector2.up, 0.5f, zap.layerIdGroundMask).collider) return null;
-                else return hit.collider.gameObject;
-
-            }
-            else
-            {
-
-                // pod prawa noga musi byc przepasc
-                rayOrigin = zap.sensorDown3.position;
-                if (Physics2D.Raycast(rayOrigin, -Vector2.up, 0.5f, zap.layerIdGroundMask).collider) return null;
-                else return hit.collider.gameObject;
-
-            }
-
-        }
-        else
-        {
-            return null;
-        }
-    }
-
+    
     bool catchStone(Transform stone)
     {
         return false;
