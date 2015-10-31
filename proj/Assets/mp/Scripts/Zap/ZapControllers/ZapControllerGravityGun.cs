@@ -77,52 +77,65 @@ public class ZapControllerGravityGun : ZapController
                 lastFlashStone = null;
             }
             
-            Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+        //    Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
-            Vector3 _df = mouseInScene - rayOrigin;
+        //    Vector2 beamOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+        //    Vector2 beamAll = mouseInScene - beamOrigin;
+        //    Vector2 beamNorm = beamAll.normalized;
+        //    //float beamLengthFromTime = shootingDuration * BeamSpeed;
+        //    //float beamLengthMax = beamAll.magnitude;
+        //    float beamLength = maxDistance;
+        //    if (beamLength > beamLengthMax)
+        //    {
+        //        beamLength = beamLengthMax;
+        //        if (!beamMissed)
+        //        {
+        //            beamMissed = true;
+        //            beamMissedDuration = 0f;
+        //        }
+        //        beamMissedDuration += currentDeltaTime;
+        //        if (beamMissedDuration >= MissedBeamDuration)
+        //        {
+        //            stopShoot();
+        //        }
+        //    }
+        //    beamTarget = beamOrigin + (beamNorm * beamLength);
 
-            //_df.normalized
+        //    hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
+        //    if (hit.collider)
+        //    {
+        //        GroundMoveable newDraggedGroundMoveable = hit.collider.GetComponent<GroundMoveable>();
+        //        if (newDraggedGroundMoveable)
+        //        {
+        //            draggedStone = hit.collider.transform;
+        //            Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+        //            tsrb.gravityScale = 0f;
+        //            flashStone(draggedStone);
 
-            hit = Physics2D.Linecast(rayOrigin, mouseInScene, zap.layerIdGroundMoveableMask);
-            if (hit.collider)
-            {
-                if (hit.distance < maxDistance)
-                {
-                    lastFlashStone = hit.collider.transform;
-                    flashStone(lastFlashStone);
-                }
-            }
+        //            //Debug.Log(draggedStone.InverseTransformPoint(hit.point));
+        //            draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
+        //            draggedStoneCentered = false;
+        //        }
+        //        else
+        //        {
+        //            stopShoot();
+        //        }
+        //    }
 
-            //if (_df.magnitude <= maxDistance)
-            //{
-            //    hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
-            //    if (hit.collider)
-            //    {
-            //        lastFlashStone = hit.collider.gameObject.transform;
-            //        if (lastFlashStone)
-            //        {
-            //            Rigidbody2D tsrb = lastFlashStone.GetComponent<Rigidbody2D>();
-            //            if (tsrb)
-            //            {
-            //                hit = Physics2D.Linecast(rayOrigin, tsrb.worldCenterOfMass, zap.layerIdGroundMask);
-            //                if (hit.collider)
-            //                {
-            //                    lastFlashStone = null;
-            //                }
-            //                else
-            //                {
-            //                    flashStone(lastFlashStone);
-            //                }
+        //    hit = Physics2D.Raycast(rayOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
 
-            //            }
-            //            else
-            //            {
-            //                lastFlashStone = null;
-            //            }
-            //        }
-            //    }
-            //}
+        //    hit = Physics2D.Linecast(rayOrigin, mouseInScene, zap.layerIdGroundAllMask);
+        //    if (hit.collider)
+        //    {
+        //        if (hit.collider.GetComponent<GroundMoveable>())
+        //        {
+        //            if (hit.distance < maxDistance)
+        //            {
+        //                lastFlashStone = hit.collider.transform;
+        //                flashStone(lastFlashStone);
+        //            }
+        //        }
+        //    }
         }
     }
 
@@ -396,6 +409,7 @@ public class ZapControllerGravityGun : ZapController
                                     draggedStoneHitPos = newDraggedStoneHitPos;
                                     tlc = false;        // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
                                     draggedStoneCentered = true;
+                                    Debug.Log("centruje");
                                 }
                             }
                             else
@@ -403,6 +417,7 @@ public class ZapControllerGravityGun : ZapController
                                 draggedStoneHitPos = newDraggedStoneHitPos;
                                 tlc = false;            // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
                                 draggedStoneCentered = true;
+                                Debug.Log("centruje");
                             }
                         }
                         else
@@ -416,12 +431,14 @@ public class ZapControllerGravityGun : ZapController
                                 {
                                     draggedStoneHitPos = newDraggedStoneHitPos;
                                     tlc = false;        // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
+                                    Debug.Log("centruje");
                                 }
                             }
                             else
                             {
                                 draggedStoneHitPos = newDraggedStoneHitPos;
                                 tlc = false;            // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
+                                Debug.Log("centruje");
                             }
                         }
                         
@@ -592,11 +609,21 @@ public class ZapControllerGravityGun : ZapController
             //if (shoot) { }
             beam.SetPosition(0, beamOrigin);
             Vector2 beamTarget;
+            float beamLength;
             if (draggedStone != null)
             {
                 //beamTarget = draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass;
                 //draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
                 beamTarget = draggedStone.TransformPoint(draggedStoneHitPos);
+                beamLength = (beamTarget - beamOrigin).magnitude;
+
+                //Vector2 beamDist = beamTarget - beamOrigin;
+                //float beamDistMag = beamDist.magnitude;
+                //if (beamDistMag > maxDistance)
+                //{
+                //    beamTarget = beamOrigin + (beamDist.normalized * maxDistance);
+                //    beamDistMag = maxDistance;
+                //}
             }
             else
             {
@@ -604,7 +631,7 @@ public class ZapControllerGravityGun : ZapController
                 Vector2 beamNorm = beamAll.normalized;
                 float beamLengthFromTime = shootingDuration* BeamSpeed;
                 float beamLengthMax = beamAll.magnitude;
-                float beamLength = beamLengthFromTime;
+                beamLength = beamLengthFromTime;
                 if( beamLength > beamLengthMax )
                 {
                     beamLength = beamLengthMax;
@@ -619,6 +646,11 @@ public class ZapControllerGravityGun : ZapController
                         stopShoot();
                     }
                 }
+                if( beamLength > maxDistance )
+                {
+                    beamLength = maxDistance;
+                }
+
                 beamTarget = beamOrigin + (beamNorm * beamLength);
 
                 hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
@@ -643,17 +675,17 @@ public class ZapControllerGravityGun : ZapController
                 }
             }
 
-            Vector2 beamDist = beamTarget - beamOrigin;
-            float beamDistMag = beamDist.magnitude;
-            if (beamDistMag > maxDistance)
-            {
-                beamTarget = beamOrigin + (beamDist.normalized * maxDistance);
-                beamDistMag = maxDistance;
-            }
+            //Vector2 beamDist = beamTarget - beamOrigin;
+            //float beamDistMag = beamDist.magnitude;
+            //if (beamDistMag > maxDistance)
+            //{
+            //    beamTarget = beamOrigin + (beamDist.normalized * maxDistance);
+            //    beamDistMag = maxDistance;
+            //}
             beam.SetPosition(1, beamTarget);
-            beamTargetColor.a = 1f - (beamDistMag / maxDistance);
+            beamTargetColor.a = 1f - (beamLength / maxDistance);
             beam.SetColors(beamOriginColor, beamTargetColor);
-            beam.SetWidth(0.1f, 0.5f * (beamDistMag / maxDistance));
+            beam.SetWidth(0.1f, 0.5f * (beamLength / maxDistance));
             
             beamMeltOrigin = beamOrigin;
             beamMeltTarget = beamTarget;
@@ -1334,6 +1366,7 @@ public class ZapControllerGravityGun : ZapController
     {
         if (draggedStone)
         {
+            //Debug.Log("releaseStone");
             Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
             if (tsrb)
             {

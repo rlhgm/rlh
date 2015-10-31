@@ -28,8 +28,9 @@ MonoBehaviour:
   RotateMaxStoneMass: 30
   RotateMassInteriaCoef: 150
   BeamSpeed: 50
+  MissedBeamDuration: 1
+  CenterOnBeamSpeed: 1
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036
   maxDistance: 10
-  ClimbPullDownRange: .510999978
