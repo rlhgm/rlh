@@ -28,7 +28,8 @@ public class ZapControllerGravityGun : ZapController
     public float RotateMaxStoneMass = 30f;
     public float RotateMassInteriaCoef = 300f;
 
-    public float BeamSpeed = 20f;
+    public float BeamSpeed = 50f;
+    public float MissedBeamDuration = 1f;
 
     public Transform draggedStone = null;
     public Transform lastFlashStone = null;
@@ -137,6 +138,7 @@ public class ZapControllerGravityGun : ZapController
         draggedStone = null;
         shooting = true;
         beamMelting = false;
+        beamMissed = false;
         shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
 
@@ -174,6 +176,9 @@ public class ZapControllerGravityGun : ZapController
     Vector2 beamMeltOrigin = new Vector2();
     Vector2 beamMeltTarget = new Vector2();
 
+    bool beamMissed = false;
+    float beamMissedDuration = 0f;
+
     void beamMelt()
     {
         if (!beamMelting) return;
@@ -203,52 +208,6 @@ public class ZapControllerGravityGun : ZapController
         Vector2 beamOrigin = beamMeltTarget + (beamNorm * beamLength);
         
         beam.SetPosition(0, beamOrigin);
-
-        //beamTargetColor.a = 1f - (beamDistMag / maxDistance);
-        //beam.SetColors(beamOriginColor, beamTargetColor);
-        //beam.SetWidth(0.1f, 0.5f * (beamDistMag / maxDistance));
-
-        //beamTarget = beamOrigin + (beamNorm * beamLength);
-
-
-        //Vector2 beamOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
-        ////if (shoot) { }
-        //beam.SetPosition(0, beamOrigin);
-        //Vector2 beamTarget;
-        //if (draggedStone != null)
-        //{
-        //    //line.SetPosition(1, draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass);
-        //    beamTarget = draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass;
-        //    //float 
-        //}
-        //else
-        //{
-        //    //line.SetPosition(1, mouseInScene);
-        //    //beamTarget = mouseInScene;
-        //    Vector2 beamAll = mouseInScene - beamOrigin;
-        //    Vector2 beamNorm = beamAll.normalized;
-        //    float beamLengthFromTime = shootingDuration * BeamSpeed;
-        //    float beamLengthMax = beamAll.magnitude;
-        //    float beamLength = beamLengthFromTime;
-        //    if (beamLength > beamLengthMax)
-        //    {
-        //        beamLength = beamLengthMax;
-        //        stopShoot();
-        //    }
-        //    beamTarget = beamOrigin + (beamNorm * beamLength);
-        //}
-
-        //Vector2 beamDist = beamTarget - beamOrigin;
-        //float beamDistMag = beamDist.magnitude;
-        //if (beamDistMag > maxDistance)
-        //{
-        //    beamTarget = beamOrigin + (beamDist.normalized * maxDistance);
-        //    beamDistMag = maxDistance;
-        //}
-        //beam.SetPosition(1, beamTarget);
-        //beamTargetColor.a = 1f - (beamDistMag / maxDistance);
-        //beam.SetColors(beamOriginColor, beamTargetColor);
-        //beam.SetWidth(0.1f, 0.5f * (beamDistMag / maxDistance));
     }
 
     float currentDeltaTime = 0f;
@@ -706,7 +665,16 @@ public class ZapControllerGravityGun : ZapController
                 if( beamLength > beamLengthMax )
                 {
                     beamLength = beamLengthMax;
-                    stopShoot();
+                    if( !beamMissed )
+                    {
+                        beamMissed = true;
+                        beamMissedDuration = 0f;
+                    }
+                    beamMissedDuration += currentDeltaTime;
+                    if (beamMissedDuration >= MissedBeamDuration)
+                    {
+                        stopShoot();
+                    }
                 }
                 beamTarget = beamOrigin + (beamNorm * beamLength);
 
@@ -726,6 +694,10 @@ public class ZapControllerGravityGun : ZapController
             beam.SetColors(beamOriginColor, beamTargetColor);
             beam.SetWidth(0.1f, 0.5f * (beamDistMag / maxDistance));
         }
+        //else
+        //{
+
+        //}
     }
 
     Color beamOriginColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
