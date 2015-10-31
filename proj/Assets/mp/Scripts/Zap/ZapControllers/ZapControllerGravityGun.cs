@@ -547,9 +547,6 @@ public class ZapControllerGravityGun : ZapController
                 }
                 beamTarget = beamOrigin + (beamNorm * beamLength);
 
-                beamMeltOrigin = beamOrigin;
-                beamMeltTarget = beamTarget;
-
                 RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
                 if( hit.collider )
                 {
@@ -579,6 +576,9 @@ public class ZapControllerGravityGun : ZapController
             beamTargetColor.a = 1f - (beamDistMag / maxDistance);
             beam.SetColors(beamOriginColor, beamTargetColor);
             beam.SetWidth(0.1f, 0.5f * (beamDistMag / maxDistance));
+            
+            beamMeltOrigin = beamOrigin;
+            beamMeltTarget = beamTarget;
         }
     }
 
