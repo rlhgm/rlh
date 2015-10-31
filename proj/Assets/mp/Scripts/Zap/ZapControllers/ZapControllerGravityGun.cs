@@ -357,6 +357,8 @@ public class ZapControllerGravityGun : ZapController
                 Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
                 if (rb)
                 {
+                    bool tlc = true;
+
                     Vector2 playerCenterPos = zap.transform.position;
                     playerCenterPos.y += 1f;
                     Vector2 stoneCenterPos = rb.worldCenterOfMass;
@@ -376,35 +378,27 @@ public class ZapControllerGravityGun : ZapController
                         }
                         else
                         {
-                            //toCenterDist.normalized * fDeltaTime *CenterOnBeamSpeed;
                             Vector2 newDraggedStoneHitPos = draggedStoneHitPos + (toCenter.normalized * fromTimeShiftDist);
-                            //draggedStoneHitPos += (toCenter.normalized * fromTimeShiftDist);
-
-                            //beamMeltOrigin = beamOrigin;
-                            //beamMeltTarget = beamTarget;
-
+                            
                             RaycastHit2D hit = Physics2D.Linecast(beamMeltOrigin, beamMeltTarget, zap.layerIdGroundAllMask);
                             if (hit.collider)
                             {
                                 if (hit.collider.transform == draggedStone)
+                                {
                                     draggedStoneHitPos = newDraggedStoneHitPos;
+                                    tlc = false;        // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
+                                }
                             }
                             else
                             {
                                 draggedStoneHitPos = newDraggedStoneHitPos;
+                                tlc = false;            // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
                             }
                         }
                         
                         stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
-                        //if ( (stoneCenterPos - rb.worldCenterOfMass).magnitude < 0.1f )
-                        //{
-                        //    draggedStoneHitPos = rb.centerOfMass;
-                        //    draggedStoneCentered = true;
-                        //}
                     }
-
-                    //Vector2 stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
-
+                    
                     Vector2 diff = stoneCenterPos - playerCenterPos;
                     Vector2 F = new Vector2(0f, 0f);
 
@@ -419,7 +413,7 @@ public class ZapControllerGravityGun : ZapController
                 
                     rb.AddForce(F, ForceMode2D.Impulse);
 
-                    if (!canBeDragged(draggedStone, tis))
+                    if (!canBeDragged(draggedStone, tis, tlc))
                     {
                         releaseStone();
                     }
@@ -1360,9 +1354,8 @@ public class ZapControllerGravityGun : ZapController
         }
     }
 
-    bool canBeDragged(Transform stone, Vector3 stoneTargetPlace)
+    bool canBeDragged(Transform stone, Vector3 stoneTargetPlace, bool testLinecast)
     {
-
         Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
         if (!rb)
             return false;
@@ -1373,10 +1366,10 @@ public class ZapControllerGravityGun : ZapController
             return false;
         }
 
-        return canBeDragged(stone);
+        return canBeDragged(stone,testLinecast);
     }
 
-    bool canBeDragged(Transform stone/*, bool testLinecast*/)
+    bool canBeDragged(Transform stone, bool testLinecast)
     {
         Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
         if (!rb)
@@ -1391,8 +1384,8 @@ public class ZapControllerGravityGun : ZapController
         }
         else
         {
-            //if (testLinecast)
-            //{
+            if (testLinecast)
+            {
                 RaycastHit2D hit = Physics2D.Linecast(rayOrigin, draggedStone.TransformPoint(draggedStoneHitPos), zap.layerIdGroundAllMask);
                 if (hit.collider)
                 {
@@ -1402,7 +1395,7 @@ public class ZapControllerGravityGun : ZapController
                         return false;
                     }
                 }
-            //}
+            }
         }
 
         return true;
