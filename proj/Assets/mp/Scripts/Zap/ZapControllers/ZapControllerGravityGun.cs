@@ -1388,7 +1388,7 @@ public class ZapControllerGravityGun : ZapController
     {
         if (draggedStone)
         {
-            Debug.Log("releaseStone");
+            //Debug.Log("releaseStone");
             Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
             if (tsrb)
             {
