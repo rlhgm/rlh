@@ -59,9 +59,9 @@
 			{
 				v2f OUT;
 				OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
-				OUT.lvertex = mul(_Object2World, IN.vertex);
+				//OUT.lvertex = mul(_Object2World, IN.vertex);
 				//OUT.lvertex = mul(UNITY_MATRIX_MV, IN.vertex);
-				//OUT.lvertex = IN.vertex;
+				OUT.lvertex = IN.vertex;
 				OUT.texcoord = IN.texcoord;
 				OUT.color = IN.color *_Color;
 			#ifdef PIXELSNAP_ON
@@ -77,7 +77,8 @@
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				fixed2 f2 = fixed2(IN.vertex.xy / _ScreenParams.xy);
+				//fixed2 f2 = fixed2(IN.vertex.xy / _ScreenParams.xy);
+				fixed2 f2 = fixed2(IN.lvertex.xy / _ScreenParams.xy);
 				//clip(frac((IN.lvertex.x + _Offset) * _Frequency) - 0.5);
 				//clip(frac(f2 + _Frequency) - 0.5);
 				//clip(frac((_ScreenParams.xy + _Offset) * _Frequency) - 0.5);

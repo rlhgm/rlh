@@ -133,6 +133,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
+    <None Include="Assets\mp\mas\DraggedStone.shader" />
+    <None Include="Assets\mp\mas\DraggedStone2.shader" />
     <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
     <None Include="Assets\mp\mas\NewUnlitShader.shader" />
     <None Include="Assets\mp\mas\Slice.shader" />

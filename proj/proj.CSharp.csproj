@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -118,6 +120,8 @@
     <Compile Include="Assets\test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\mp\mas\DraggedStone2.shader" />
+    <None Include="Assets\mp\mas\DraggedStone.shader" />
     <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
     <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
     <None Include="Assets\mp\mas\NewUnlitShader.shader" />

@@ -684,7 +684,7 @@ public class ZapControllerGravityGun : ZapController
                         draggedStone = hit.collider.transform;
                         Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
                         tsrb.gravityScale = 0f;
-                        flashStone(draggedStone);
+                        flashStone2(draggedStone);
 
                         //Debug.Log(draggedStone.InverseTransformPoint(hit.point));
                         draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
@@ -1394,7 +1394,7 @@ public class ZapControllerGravityGun : ZapController
             {
                 tsrb.gravityScale = 1f;
             }
-            unflashStone(draggedStone);
+            unflashStone2(draggedStone);
 
             //Debug.Log ( "add dropped stone: " + tsrb );
             //droppedStones.Add( tsrb );
@@ -1410,12 +1410,52 @@ public class ZapControllerGravityGun : ZapController
         Color c = new Color(0f, 1f, 1f);
         setStoneColor(stone, c);
     }
+    void flashStone2(Transform stone)
+    {
+        //setStoneOpacity(stone, 0.5f);
+        //stone.GetComponent<GroundMoveable>().printWorldVertices();
+        Color c = new Color(0f, 1f, 1f);
+        setStoneColor(stone, c);
+
+        if( stone.childCount == 1 )
+        {
+            SpriteRenderer sprRend = stone.GetComponentInChildren<SpriteRenderer>();
+            if( sprRend )
+            {
+                Material newMat = Resources.Load("Assests/Materials/DraggedStone", typeof(Material)) as Material;
+                if (newMat)
+                {
+                    sprRend.material = newMat;
+                }
+            }
+        }
+    }
     void unflashStone(Transform stone)
     {
         //00FFFFFF
         //setStoneOpacity(stone, 1.0f);
         Color c = new Color(1f, 1f, 1f);
         setStoneColor(stone, c);
+    }
+    void unflashStone2(Transform stone)
+    {
+        //00FFFFFF
+        //setStoneOpacity(stone, 1.0f);
+        Color c = new Color(1f, 1f, 1f);
+        setStoneColor(stone, c);
+
+        if (stone.childCount == 1)
+        {
+            SpriteRenderer sprRend = stone.GetComponentInChildren<SpriteRenderer>();
+            if (sprRend)
+            {
+                Material newMat = Resources.Load("PixelSnap", typeof(Material)) as Material;
+                if (newMat)
+                {
+                    sprRend.material = newMat;
+                }
+            }
+        }
     }
     void setStoneOpacity(Transform stone, float newOpacity)
     {
