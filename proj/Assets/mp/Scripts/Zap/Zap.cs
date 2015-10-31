@@ -757,6 +757,23 @@ public class Zap : MonoBehaviour
             }
             return;
         }
+
+        if (other.gameObject.tag == "ShowInfoTrigger")
+        {
+            ShowInfoTrigger touchedSIT = other.GetComponent<ShowInfoTrigger>();
+            if (showedSIT != touchedSIT)
+            {
+                if (rlhScene.isActiveShowInfoTrigger(touchedSIT))
+                {
+                    //ShowInfoTrigger sit = other.gameObject.GetComponent<ShowInfoTrigger>();
+                    if (!touchedSIT.used)
+                    {
+                        showInfo(touchedSIT);
+                    }
+                }
+            }
+            return;
+        }
     }
     //void OnCollisionEnter2D(Collision2D c)
     //{
