@@ -610,9 +610,13 @@ public class ZapControllerGravityGun : ZapController
             else
             {
                 //line.SetPosition(1, mouseInScene);
-                beamTarget = mouseInScene;
-                Vector2 beamDir = (mouseInScene - beamOrigin).normalized;
-                beamTarget = beamOrigin + (beamDir * shootingDuration * BeamSpeed);
+                //beamTarget = mouseInScene;
+                Vector2 beamAll = mouseInScene - beamOrigin;
+                Vector2 beamNorm = beamAll.normalized;
+                float beamLengthFromTime = shootingDuration* BeamSpeed;
+                float beamLengthMax = beamAll.magnitude;
+                float beamLength = Mathf.Min(beamLengthFromTime, beamLengthMax);
+                beamTarget = beamOrigin + (beamNorm * beamLength);
             }
 
             Vector2 beamDist = beamTarget - beamOrigin;
