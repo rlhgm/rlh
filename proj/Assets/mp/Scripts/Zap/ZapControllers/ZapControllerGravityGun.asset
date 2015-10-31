@@ -27,6 +27,7 @@ MonoBehaviour:
   CROUCHINOUT_DURATION: .100000001
   RotateMaxStoneMass: 30
   RotateMassInteriaCoef: 150
+  BeamSpeed: 50
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036

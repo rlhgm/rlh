@@ -22,7 +22,9 @@ public class NewRope : MonoBehaviour {
 
 	public int cutedLinkIndex = -1;
 
-	void Awake(){
+    public int[] controlValues;
+
+    void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
 		Destroy (spriteRenderer);
 		int numberOfLinks = (int)Mathf.Floor(transform.localScale.y) * 2;

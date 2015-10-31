@@ -2992,6 +2992,7 @@ public class ZapControllerNormal : ZapController
             if (catchedRopeLink.rope.breakUpStep(catchedRopeLink.idn, deltaTime))
             {
                 tryJumpFromRope(true);
+                zap.RlhScene.ropeBreakOff(catchedRopeLink.rope);
                 return false;
             }
         }

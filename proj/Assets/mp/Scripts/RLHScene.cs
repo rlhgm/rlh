@@ -36,6 +36,13 @@ public class RLHScene : MonoBehaviour
             ShowInfoTriggersControlls[sitc.controlValues[i]] = true;
         }
     }
+    public void ropeBreakOff(NewRope cuttedRope)
+    {
+        for (int i = 0; i < cuttedRope.controlValues.Length; ++i)
+        {
+            ShowInfoTriggersControlls[cuttedRope.controlValues[i]] = true;
+        }
+    }
 
     public bool isActiveShowInfoTrigger(ShowInfoTrigger sit)
     {
