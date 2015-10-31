@@ -142,24 +142,24 @@ public class ZapControllerGravityGun : ZapController
         shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
 
-        Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
 
-        RaycastHit2D hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
-        if (hit.collider)
-        {
-            draggedStone = hit.collider.gameObject.transform;
+        //RaycastHit2D hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
+        //if (hit.collider)
+        //{
+        //    draggedStone = hit.collider.gameObject.transform;
 
-            if (canBeDragged(draggedStone))
-            {
-                Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
-                tsrb.gravityScale = 0f;
-                flashStone(draggedStone);
-            }
-            else
-            {
-                draggedStone = null;
-            }
-        }
+        //    if (canBeDragged(draggedStone))
+        //    {
+        //        Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+        //        tsrb.gravityScale = 0f;
+        //        flashStone(draggedStone);
+        //    }
+        //    else
+        //    {
+        //        draggedStone = null;
+        //    }
+        //}
     }
     
     void stopShoot()
@@ -684,7 +684,36 @@ public class ZapControllerGravityGun : ZapController
                 RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
                 if( hit.collider )
                 {
-                    stopShoot();
+                    GroundMoveable newDraggedGroundMoveable = hit.collider.GetComponent<GroundMoveable>();
+                    if( newDraggedGroundMoveable )
+                    {
+                        draggedStone = hit.collider.transform;
+                        Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
+                        tsrb.gravityScale = 0f;
+                        flashStone(draggedStone);
+                    }
+                    else
+                    {
+                        stopShoot();
+                    }
+
+                    //if ( hit.collider.GetComponent<GroundMoveable> )
+                    //Vector3 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+
+                    //RaycastHit2D hit = Physics2D.Linecast(mouseInScene, mouseInScene, zap.layerIdGroundMoveableMask);
+                    //if (hit.collider)
+                    //{
+                    //    draggedStone = hit.collider.gameObject.transform;
+
+                    //    if (canBeDragged(draggedStone))
+                    //    {
+                    //        
+                    //    }
+                    //    else
+                    //    {
+                    //        draggedStone = null;
+                    //    }
+                    //}
                 }
             }
 
