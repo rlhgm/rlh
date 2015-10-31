@@ -25,6 +25,14 @@ public class RLHScene : MonoBehaviour
                 ShowInfoTriggersControlls[sit.controlValues[i]] = false;
             }
         }
+        NewRope[] ropes = FindObjectsOfType(typeof(NewRope)) as NewRope[];
+        foreach (NewRope rope in ropes)
+        {
+            for (int i = 0; i < rope.controlValues.Length; ++i)
+            {
+                ShowInfoTriggersControlls[rope.controlValues[i]] = false;
+            }
+        }
         ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
         //print(ShowInfoTriggersControlls);
     }
