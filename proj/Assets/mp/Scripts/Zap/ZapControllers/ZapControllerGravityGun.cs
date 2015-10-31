@@ -31,6 +31,8 @@ public class ZapControllerGravityGun : ZapController
     public float BeamSpeed = 50f;
     public float MissedBeamDuration = 1f;
 
+    public float CenterOnBeamSpeed = 1f;
+
     public Transform draggedStone = null;
     public Transform lastFlashStone = null;
     
@@ -144,6 +146,7 @@ public class ZapControllerGravityGun : ZapController
     float beamMissedDuration = 0f;
 
     Vector2 draggedStoneHitPos = new Vector2();
+    bool draggedStoneCentered = false;
 
     void beamMelt()
     {
@@ -357,6 +360,35 @@ public class ZapControllerGravityGun : ZapController
                     Vector2 playerCenterPos = zap.transform.position;
                     playerCenterPos.y += 1f;
                     Vector2 stoneCenterPos = rb.worldCenterOfMass;
+                    //Vector2 stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
+                    if (!draggedStoneCentered)
+                    {
+                        Vector2 toCenter = rb.centerOfMass - draggedStoneHitPos;
+                        float toCenterDist = toCenter.magnitude;
+                        float fromTimeShiftDist = fDeltaTime * CenterOnBeamSpeed;
+                        //float finalShift = f
+                        if (fromTimeShiftDist > toCenterDist)
+                        {
+                            fromTimeShiftDist = toCenterDist;
+
+                            draggedStoneHitPos = rb.centerOfMass;
+                            draggedStoneCentered = true;
+                        }
+                        else
+                        {
+                            //toCenterDist.normalized * fDeltaTime *CenterOnBeamSpeed;
+                            draggedStoneHitPos += (toCenter.normalized * fromTimeShiftDist);
+                        }
+                        
+                        stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
+                        //if ( (stoneCenterPos - rb.worldCenterOfMass).magnitude < 0.1f )
+                        //{
+                        //    draggedStoneHitPos = rb.centerOfMass;
+                        //    draggedStoneCentered = true;
+                        //}
+                    }
+
+                    //Vector2 stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
 
                     Vector2 diff = stoneCenterPos - playerCenterPos;
                     Vector2 F = new Vector2(0f, 0f);
@@ -524,7 +556,9 @@ public class ZapControllerGravityGun : ZapController
             Vector2 beamTarget;
             if (draggedStone != null)
             {
-                beamTarget = draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass;
+                //beamTarget = draggedStone.GetComponent<Rigidbody2D>().worldCenterOfMass;
+                //draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
+                beamTarget = draggedStone.TransformPoint(draggedStoneHitPos);
             }
             else
             {
@@ -562,6 +596,7 @@ public class ZapControllerGravityGun : ZapController
 
                         //Debug.Log(draggedStone.InverseTransformPoint(hit.point));
                         draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
+                        draggedStoneCentered = false;
                     }
                     else
                     {
@@ -881,16 +916,6 @@ public class ZapControllerGravityGun : ZapController
 
     public override int keyJumpDown()
     {
-        switch (action)
-        {
-            case Action.IDLE:
-                if (isInState(Zap.State.ON_GROUND))
-                {
-                    //preparetojump ();
-                }
-                break;
-        }
-
         if (isNotInState(Zap.State.ON_GROUND))
             return 0;
 
@@ -1274,10 +1299,7 @@ public class ZapControllerGravityGun : ZapController
             Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
             if (tsrb)
             {
-
-                //Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
                 tsrb.gravityScale = 1f;
-                //rb.AddForce( lastToMoveDist, ForceMode2D.Impulse );
             }
             unflashStone(draggedStone);
 
