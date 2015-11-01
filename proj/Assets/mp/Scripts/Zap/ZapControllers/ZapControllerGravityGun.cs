@@ -168,6 +168,8 @@ public class ZapControllerGravityGun : ZapController
     float currentDeltaTime = 0f;
     public override void MUpdate(float deltaTime)
     {
+        staticInit();
+
         zapTargeterPos = zap.Targeter.position;
 
         currentDeltaTime = deltaTime;
@@ -421,9 +423,17 @@ public class ZapControllerGravityGun : ZapController
                             {
                                 //_speedX("speedX", Range(0, 0.3)) = 0
                                 //_speedY("speedY", Range(0, 0.3)) = 0
-                                Vector2 rbv = rb.velocity;
-                                float _speedX = Mathf.Clamp((Mathf.Min(2.0f, rbv.x) / 2.0f) * 0.15f, 0.0f, 0.15f);
-                                float _speedY = Mathf.Clamp((Mathf.Min(2.0f, rbv.y) / 2.0f) * 0.15f, 0.0f, 0.15f);
+                                float rbvx = Mathf.Abs(rb.velocity.x);
+                                float rbvy = Mathf.Abs(rb.velocity.y);
+
+                                float _speedX = Mathf.Clamp((Mathf.Min(4.0f, rbvx) / 4.0f) * 0.2f, 0.0f, 0.2f);
+                                float _speedY = Mathf.Clamp((Mathf.Min(4.0f, rbvy) / 4.0f) * 0.2f, 0.0f, 0.2f);
+
+                                
+                                float _fav = Mathf.Abs(rb.angularVelocity / 180f) * 0.2f;
+                                _speedX += _fav;
+                                _speedY += _fav;
+
                                 sprRend.material.SetFloat("_speedX", _speedX);
                                 sprRend.material.SetFloat("_speedY", _speedY);
                                 //Debug.Log(rbv + " " + _speedX + " " +_speedY);
