@@ -43,5 +43,9 @@ MonoBehaviour:
   LANDING_HARD_DURATION: .300000012
   TURN_LEFTRIGHT_DURATION: .0500000007
   MOUNT_ATTACK_DURATION: .5
+  ropeCatchSound: {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
+  ropeSwingSound: {fileID: 8300000, guid: 370b9322875306946b9eeaf85899f11b, type: 3}
+  mountCatchSound: {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
+  mountClimbSound: {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
   ClimbPullDownRange: .550000012
   CrouchInOutDuration: .100000001

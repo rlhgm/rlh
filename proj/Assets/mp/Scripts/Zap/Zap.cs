@@ -349,10 +349,10 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public AudioSource getAudioSource()
-    {
-        return myAudio;
-    }
+    //public AudioSource getAudioSource()
+    //{
+    //    return myAudio;
+    //}
     public Transform getCameraTarget()
     {
         return cameraTarget;
@@ -2203,6 +2203,19 @@ public class Zap : MonoBehaviour
         {
             return rlhScene;
         }
+    }
+
+    public AudioSource MyAudio
+    {
+        get
+        {
+            return myAudio;
+        }
+
+        //set
+        //{
+        //    myAudio = value;
+        //}
     }
 
     [HideInInspector]

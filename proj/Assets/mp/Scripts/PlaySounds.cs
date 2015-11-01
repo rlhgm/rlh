@@ -69,7 +69,7 @@ public class PlaySounds : StateMachineBehaviour {
 			if( played[s] ) continue;
 
 			if( NormTimes[s] <= animNormTime ) { //gramy dzwiek
-				zap.getAudioSource().PlayOneShot( sounds[s] );
+				zap.MyAudio.PlayOneShot( sounds[s] );
 				played[s] = true;
 			}
 		}

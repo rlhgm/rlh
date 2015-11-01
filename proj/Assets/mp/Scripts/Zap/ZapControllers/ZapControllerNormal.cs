@@ -51,7 +51,7 @@ public class ZapControllerNormal : ZapController
     public AudioClip mountCatchSound = null;
     public AudioClip mountClimbSound = null;
 
-    public AudioClip landingSnd = null;
+    //public AudioClip landingSnd = null;
     
 
     //	public ZapControllerNormal (Zap zapPlayer) 
@@ -542,7 +542,7 @@ public class ZapControllerNormal : ZapController
                 {
 
                     if (zap.landingSound)
-                        zap.getAudioSource().PlayOneShot(zap.landingSound);
+                        audio.PlayOneShot(zap.landingSound);
 
                     zap.FuddleFromBird = false;
 
@@ -888,7 +888,7 @@ public class ZapControllerNormal : ZapController
                 zap.showInfo(msgInfo, -1);
 
                 if (zap.dieSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
+                    audio.PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
                 break;
 
             case Action.WALK_LEFT:
@@ -919,14 +919,14 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.Play("Zap_runback_L");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
+                    audio.PlayOneShot(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
             case Action.TURN_RUN_RIGHT:
                 zap.AnimatorBody.Play("Zap_runback_R");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
+                    audio.PlayOneShot(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
             case Action.PREPARE_TO_JUMP:
@@ -947,7 +947,7 @@ public class ZapControllerNormal : ZapController
                     else zap.AnimatorBody.Play("zap_rocks_climb_L");
                 }
                 if (zap.jumpSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
+                    audio.PlayOneShot(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
             case Action.JUMP_LEFT:
@@ -958,7 +958,7 @@ public class ZapControllerNormal : ZapController
                 else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 
                 if (zap.jumpSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
+                    audio.PlayOneShot(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
             case Action.JUMP_LEFT_LONG:
@@ -969,7 +969,7 @@ public class ZapControllerNormal : ZapController
                 else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 
                 if (zap.jumpSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
+                    audio.PlayOneShot(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
             case Action.LANDING_HARD:
@@ -977,7 +977,7 @@ public class ZapControllerNormal : ZapController
                 else zap.AnimatorBody.Play("Zap_landing_hard_L");
 
                 if (zap.landingSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.landingSounds[Random.Range(0, zap.landingSounds.Length)]);
+                    audio.PlayOneShot(zap.landingSounds[Random.Range(0, zap.landingSounds.Length)]);
                 break;
 
             case Action.CLIMB_PREPARE_TO_JUMP:
@@ -1015,7 +1015,7 @@ public class ZapControllerNormal : ZapController
                 }
 
                 if (zap.catchSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)]);
+                    audio.PlayOneShot(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)]);
                 break;
             case Action.CLIMB_CLIMB:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_climb_R");
@@ -2052,6 +2052,13 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.speed = 1f;
 
             }
+
+            //if (ropeSwingSound != null)
+            //{
+            //    zap.getAudioSource().clip = ropeSwingSound;
+            //    zap.getAudioSource().isPlaying();
+            //}
+
             //}
         }
         else if (Input.GetKey(zap.keyRight))
@@ -3445,7 +3452,10 @@ public class ZapControllerNormal : ZapController
         zap.GfxCollider.offset = new Vector2(0f, -2f);
 
         if (ropeCatchSound != null)
-            zap.getAudioSource().PlayOneShot(ropeCatchSound);
+        {
+
+            audio.PlayOneShot(ropeCatchSound);
+        }
     }
 
     void releaseRope()
@@ -3462,6 +3472,11 @@ public class ZapControllerNormal : ZapController
             catchedRope.resetDiver();
             catchedRope = null;
             catchedRopeLink = null;
+
+            if (ropeSwingSound != null)
+            {
+                audio.Stop();
+            }
         }
 
         Quaternion quat = new Quaternion();

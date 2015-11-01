@@ -42,6 +42,10 @@ public class ZapControllerGravityGun : ZapController
     
     Vector2 V;          // predkosc
     public static float userStoneRotateSpeed = 180f;
+
+    public AudioClip beginShootSound = null;
+    public AudioClip finishShootSound = null;
+    public AudioClip shootSound = null;
     
     public override void setZap(Zap playerController)
     {
@@ -105,6 +109,11 @@ public class ZapControllerGravityGun : ZapController
         beamMissed = false;
         shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
+
+        if (beginShootSound != null)
+        {
+            audio.PlayOneShot(beginShootSound);
+        }
     }
     
     void stopShoot()
@@ -114,6 +123,11 @@ public class ZapControllerGravityGun : ZapController
         releaseStone();
         beamMelting = true;
         beamMeltingDuration = 0f;
+
+        if (finishShootSound != null)
+        {
+            audio.PlayOneShot(finishShootSound);
+        }
     }
 
     bool beamMelting = false;
@@ -788,7 +802,7 @@ public class ZapControllerGravityGun : ZapController
                 zap.showInfo(msgInfo, -1);
 
                 if (zap.dieSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
+                    audio.PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
                 break;
 
             case Action.WALK_LEFT:

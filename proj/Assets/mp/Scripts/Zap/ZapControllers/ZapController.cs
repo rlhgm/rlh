@@ -46,6 +46,8 @@ public class ZapController : ScriptableObject
     {
         zap = playerController;
         transform = zap.transform;
+        audio = zap.MyAudio;
+
         if (weaponMenuItem)
         {
             weaponMenuItem.setState(WeaponMenuItem.State.OFF);
@@ -326,6 +328,7 @@ public class ZapController : ScriptableObject
     //protected string name;
     protected Zap zap = null;
     protected Transform transform = null;
+    protected AudioSource audio = null;
     protected Camera touchCamera;
     protected bool ctrlEnabled;
 }
