@@ -440,6 +440,8 @@ public class ZapControllerGravityGun : ZapController
                                 sprRend.material.SetFloat("_rpx", draggedStoneHitPos.x);
                                 sprRend.material.SetFloat("_rpy", draggedStoneHitPos.y);
 
+                                draggedDuration += fDeltaTime;
+                                sprRend.material.SetFloat("_draggedDuration", draggedDuration);
                                 //Debug.Log(rbv + " " + _speedX + " " +_speedY);
                             }
                         }
@@ -1381,6 +1383,7 @@ public class ZapControllerGravityGun : ZapController
         Color c = new Color(0f, 1f, 1f);
         setStoneColor(stone, c);
     }
+    float draggedDuration = 0;
     void flashStone2(Transform stone)
     {
         //setStoneOpacity(stone, 0.5f);
@@ -1413,11 +1416,13 @@ public class ZapControllerGravityGun : ZapController
                     //_sy("sy", Range(0, 20)) = 1
                     //_speedX("speedX", Range(0, 0.3)) = 0
                     //_speedY("speedY", Range(0, 0.3)) = 0
+                    draggedDuration = 0f; // (Mathf.PI * 0.5f) / 1.5f;
                     BoxCollider2D sbc = stone.GetComponent<BoxCollider2D>();
                     if (sbc != null)
                     {
                         sprRend.material.SetFloat("_sx", sbc.size.x);
                         sprRend.material.SetFloat("_sy", sbc.size.y);
+                        sprRend.material.SetFloat("_draggedDuration", draggedDuration);
                     }
                 }
             }
