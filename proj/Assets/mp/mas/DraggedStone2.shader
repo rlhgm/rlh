@@ -2,8 +2,13 @@
 {
 	Properties
 	{
+		//Color beamOriginColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
+		//Color beamTargetColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
+
+
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-		_Color("Tint", Color) = (1,1,1,1)
+		_Color("Tint", Color) = (0,0.1,1,0.79)
+			_BeamColor("_BeamColor", Color) = (1,1,1,1)
 			//_BumpMap ("Bumpmap", 2D) = "bump" {}
 			[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 
@@ -58,6 +63,7 @@
 				};
 
 				fixed4 _Color;
+				fixed4 _BeamColor;
 				float _sx;
 				float _sy;
 				float _rpx;
@@ -80,9 +86,7 @@
 				}
 
 				sampler2D _MainTex;
-				float _Frequency;
-				float _ClipDist;
-
+				
 				float rand(float3 myVector) {
 					return frac(sin(dot(myVector, float3(12.9898, 78.233, 45.5432))) * 43758.5453);
 				}
@@ -92,106 +96,46 @@
 
 				fixed4 frag(v2f IN) : SV_Target
 				{
-					//fixed2 f2 = fixed2(IN.vertex.xy / _ScreenParams.xy);
-					//fixed2 f2 = fixed2(IN.lvertex.xy / _ScreenParams.xy);
 					fixed2 f2 = IN.lvertex.xy ;
-				//clip(frac((IN.lvertex.x + _Offset) * _Frequency) - 0.5);
-				//clip(frac(f2 + _Frequency) - 0.5);
-				//clip(frac((_ScreenParams.xy + _Offset) * _Frequency) - 0.5);
-				//clip(1);
-				//clip(frac((IN.vertex.y + _Offset) * _Frequency) - 0.5);
-				//clip(frac(IN.vertex.y)-0.5);
-
-				//frac((IN.vertex.y + _Offset) * _Frequency);
-
-				//fixed4 c = tex2D(_MainTex, IN.texcoord);
-
-				//clip(frac(IN.lvertex.x * 8) - _ClipDist);
-				//clip(frac(IN.lvertex.y * 8) - _ClipDist);
-
-				//fixed4 c = fixed4(1,1,1,1);// tex2D(_MainTex, IN.texcoord) * IN.color;
-				//float3 r;
-				//r.x = _SinTime.w;
-				//r.y = _CosTime.w;
-				//r.z = 0.30;
-				//_t2 = abs(_t2);
-				//IN.texcoord.x = clamp(_t2, 0.1, 0.95); //rand2(r2)/10.0f;
-				//IN.texcoord.y += rand2(r2)/10.0f;
-				//IN.color.b = 1;// rand2(r);
-				//IN.texcoord.x = (IN.texcoord.x + _t2 * 0.05);
-
-				//float _s = abs(sin(_Time.y)) * 2.0;
-				//float _px = abs(sin(_Time.y)) * 0.15;
-				//float _py = abs(sin(_Time.y)) * 0.15;
-				//float _t = f2.x / _sx * 3.14159 * _s;// +_Time.y; // *abs(_SinTime.w) * 4;
-				//float _t2 = sin(_t);
-				////IN.texcoord.x = (IN.texcoord.x + _t2 * _px);
-				////IN.texcoord.x = clamp(IN.texcoord.x, 0.0, 1.0); //rand2(r2)/10.0f;
-				//IN.color.r = abs(_t2); //clamp(_t2, 0.0, 1.0);
-
-				//_t = f2.y / _sy * 3.14159 * _s;// +_Time.y; // *abs(_SinTime.w) * 4;
-				//_t2 = sin(_t);
-				////IN.texcoord.y = (IN.texcoord.y + _t2 * _py);
-				////IN.texcoord.y = clamp(IN.texcoord.y, 0.0, 1.0); //rand2(r2)/10.0f;
-				////IN.color.g = abs(_t2); // IN.lvertex.y / 255.0; // IN.lvertex.y; //rand(r);
-
-				////IN.color.r = _t2; // f2.x; //IN.lvertex.x / 255.0; //rand(r);
-				////if (IN.color.r > 1) IN.color.r = 1;
-				//
-				//
 				
 				fixed2 center = fixed2(_rpx, _rpy);
 				float _d = length(center - f2);
-				float _t = abs(_SinTime.w) * 1.5;
+				//float _t = abs(_SinTime.w) * 1.5;
+				float _t = abs(tan(_Time.y*1.5));
 				float _c = (1.0 - abs(_d - _t));
-				_c = pow(_c, 3);
-				_c = clamp(_c,0,1);
-
-				IN.color.r = 0;
-				IN.color.g = 0;
-				IN.color.b = 1;
-				IN.color.a = 1;
+				//_c = pow(_c, 3);
+				_c = clamp(_c,0,1) * 0.4;
 
 				
-				//IN.texcoord.x += sin(IN.texcoord.x) / 10;// _SinTime.w / 10; // (rand2(r) - 0.5) / 100; //0.0; // 0.1;// rand(r);
-				//IN.texcoord.y = rand(r);
-				
-				//IN.texcoord.x += rand2(r);// _SinTime.w / 10; // (rand2(r) - 0.5) / 100; //0.0; // 0.1;// rand(r);
-				//IN.texcoord.y += rand2(r) / 10;
+				//IN.color.r = 0.2;
+				//IN.color.g = 0.2;
+				//IN.color.b = 0.8;
+				//IN.color.a = 0.25;
 
-				//IN.color.r = rand2(r);// IN.lvertex.x; // f2.x;
-				//IN.color.g = 1;// IN.lvertex.y; // f2.y;
-				//IN.color.b = 1;
-
-				//IN.texcoord.x = f2.x * f2.y;
-				//IN.texcoord.y = f2.y * f2.y;
-
-				//IN.texcoord.x += sin(IN.texcoord.x / 3.14159) ;
+				//_Color("Tint", Color) = (0, 0.1, 1, 0.79)
+				_BeamColor.r = 0;
+				_BeamColor.g = 0.1;
+				_BeamColor.b = 1.0;
+				_BeamColor.a = 0.79;
 
 				fixed4 texCol = tex2D(_MainTex, IN.texcoord); // *(IN.color * _c);
 				float a = texCol.a;
 				texCol = texCol * (1.0 - _c); // *(IN.color * _c);
+				texCol.a = a;// (1.0 - _c);
 
-				fixed4 colCol = IN.color * _c;
-				colCol.a = a;
+				//_BeamColor.a = 0.1 * a;
+
+				fixed4 colCol = _BeamColor * _c;
+				//colCol.a = a;
+				
+				//c.rgb *= (_BeamColor.rgb * (1-_c));
+				//c.a = 0.2;
+				//fixed4 c = texCol;
 				fixed4 c = texCol + colCol;
 				//fixed4 c = IN.color;
 
-				//c.rgb *= _Offset;
-				//c.r = abs(IN.lvertex.x); // IN.vertex.x;
-				//c.g = frac(IN.lvertex.y); // IN.vertex.x;
-				//c.g = 0.0; // frac(IN.vertex.y);
-				//c.r = 0.0; // IN.vertex.x / _ScreenParams.x;
-				//c.r = IN.lvertex.y / _ScreenParams.y;
-				//c.b = 0.0;
-				c.rgb *= c.a;
+				c.rgb *= a;
 				return c;
-
-				//return fixed4(IN.vertex.xy / _ScreenParams.xy,0.0,1.0);
-
-				//float2 wcoord = IN.vertex.xy / _ScreenParams.xy;
-				//float vig = clamp(3.0*length(wcoord - 0.5),0.0,1.0);
-				//return lerp(fixed4(wcoord,0.0,1.0),fixed4(0.3,0.3,0.3,1.0),vig);
 			}
 			ENDCG
 		}
