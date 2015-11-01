@@ -116,14 +116,19 @@ public class ZapControllerGravityGun : ZapController
     
     void stopShoot()
     {
+        if (shooting)
+        {
+            zap.playSound(finishShootSound);
+            zap.stopSoundLooped(shootSound);
+        }
+
         shooting = false;
         //zap.GravityGunBeam.gameObject.SetActive(false);
         releaseStone();
         beamMelting = true;
         beamMeltingDuration = 0f;
         
-        zap.playSound(finishShootSound);
-        zap.stopSoundLooped(shootSound);
+        
     }
 
     bool beamMelting = false;
