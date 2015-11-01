@@ -74,15 +74,8 @@ public class ZapControllerGravityGun : ZapController
 
         if (draggedStone == null)
         {
-
-            if (lastFlashStone)
-            {
-                unflashStone(lastFlashStone);
-                lastFlashStone = null;
-            }
-            
             Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 rayOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+            Vector2 rayOrigin = zapTargeterPos; // zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
             hit = Physics2D.Linecast(rayOrigin, mouseInScene, zap.layerIdGroundAllMask);
             if (hit.collider)
             {
@@ -90,9 +83,20 @@ public class ZapControllerGravityGun : ZapController
                 {
                     if (hit.distance < maxDistance)
                     {
-                        lastFlashStone = hit.collider.transform;
-                        flashStone(lastFlashStone);
+                        if (lastFlashStone != hit.collider.transform)
+                        {
+                            lastFlashStone = hit.collider.transform;
+                            flashStone(lastFlashStone);
+                        }
                     }
+                }
+            }
+            else
+            {
+                if (lastFlashStone)
+                {
+                    unflashStone(lastFlashStone);
+                    lastFlashStone = null;
                 }
             }
         }
@@ -590,6 +594,8 @@ public class ZapControllerGravityGun : ZapController
 
         if (shoot)
         {
+            leftMouseNotPressed();
+
             shootingDuration += currentDeltaTime;
 
             LineRenderer beam = zap.GravityGunBeam.GetComponent<LineRenderer>();
