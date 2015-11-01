@@ -600,7 +600,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33, y: 23, z: 0}
+  m_LocalPosition: {x: -52.6500015, y: 7.21999979, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447238}
@@ -1285,8 +1285,8 @@ MonoBehaviour:
   dieSounds:
   - {fileID: 8300000, guid: 420182c3f3d22e64c83a441b914ffdd2, type: 3}
   landingSound: {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
-  ropeBreakOffSound: {fileID: 0}
-  ropeCutSound: {fileID: 0}
+  ropeBreakOffSound: {fileID: 8300000, guid: 8b5cb264c6cf65944b4d2bfdedf9e3c8, type: 3}
+  ropeCutSound: {fileID: 8300000, guid: c8988bc04c153904b94684b2f1ec29e3, type: 3}
   autoCatchEdges: 0
   canJumpBackFromRope: 0
   maxHandStoneTilt: 15

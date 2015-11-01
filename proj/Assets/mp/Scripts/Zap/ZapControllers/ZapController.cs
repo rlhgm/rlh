@@ -262,6 +262,7 @@ public class ZapController : ScriptableObject
                 //Debug.Log( "trafionione : " + hits[i].collider.name );
                 cutRopeLink.cut();
                 zap.RlhScene.ropeBreakOff(cutRopeLink.rope);
+                zap.playSound(zap.ropeCutSound);
                 continue;
             }
 
