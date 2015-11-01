@@ -55,14 +55,13 @@
      <Compile Include="Assets\Resources\Editor\CM Tools\TileMaster\TileMaster.cs" />
      <None Include="Assets\mp\mas\NewUnlitShader.shader" />
      <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
+     <None Include="Assets\mp\mas\DraggedStone.shader" />
      <None Include="Assets\mp\mas\Slice.shader" />
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
+     <None Include="Assets\mp\mas\DraggedStone2.shader" />
  <Reference Include="Assembly-UnityScript">
  <HintPath>C:/rlh/rlh/proj/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -78,9 +77,6 @@
  </Reference>
  <Reference Include="UnityEditor.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>

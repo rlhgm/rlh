@@ -94,6 +94,9 @@ TagManager:
   - name: Climbers
     uniqueID: 719274669
     locked: 0
+  - name: WaterTiles
+    uniqueID: 1224992041
+    locked: 0
   - name: UI
     uniqueID: 149272721
     locked: 0
@@ -108,9 +111,6 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2103364729
-    locked: 0
-  - name: WaterTiles
-    uniqueID: 1224992041
     locked: 0
   - name: LA_GROUND
     uniqueID: 1991621873

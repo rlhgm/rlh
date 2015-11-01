@@ -95,20 +95,16 @@
      <Compile Include="Assets\test.cs" />
      <None Include="Assets\mp\mas\NewUnlitShader.shader" />
      <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
+     <None Include="Assets\mp\mas\DraggedStone.shader" />
      <None Include="Assets\mp\mas\Slice.shader" />
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
+     <None Include="Assets\mp\mas\DraggedStone2.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
