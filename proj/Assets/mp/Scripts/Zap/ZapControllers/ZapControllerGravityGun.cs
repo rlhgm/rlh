@@ -343,19 +343,15 @@ public class ZapControllerGravityGun : ZapController
                     Vector2 playerCenterPos = zap.transform.position;
                     playerCenterPos.y += 1f;
                     Vector2 stoneCenterPos = rb.worldCenterOfMass;
-                    //Vector2 stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
                     if (!draggedStoneCentered)
                     {
                         Vector2 toCenter = rb.centerOfMass - draggedStoneHitPos;
                         float toCenterDist = toCenter.magnitude;
                         float fromTimeShiftDist = fDeltaTime * CenterOnBeamSpeed;
-                        //float finalShift = f
                         if (fromTimeShiftDist > toCenterDist)
                         {
                             fromTimeShiftDist = toCenterDist;
 
-                            //draggedStoneHitPos = rb.centerOfMass;
-                            //draggedStoneCentered = true;
                             Vector2 newDraggedStoneHitPos = rb.centerOfMass;
 
                             Vector3 _beamMeltOrigin = beamMeltOrigin;
@@ -574,6 +570,7 @@ public class ZapControllerGravityGun : ZapController
 
         staticInitialized = true;
     }
+    
 
     void trackCursor(Action act, bool shoot)
     {
@@ -606,9 +603,12 @@ public class ZapControllerGravityGun : ZapController
             shootingDuration += currentDeltaTime;
 
             LineRenderer beam = zap.GravityGunBeam.GetComponent<LineRenderer>();
-            Vector2 beamOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
-            //if (shoot) { }
+            //Vector2 beamOrigin = zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+            Vector2 beamOrigin = beamOrigins[indexOfAngle];
+            if (zap.faceLeft()) beamOrigin.x *= -1f;
+            beamOrigin = transform.TransformPoint(beamOrigin);
             beam.SetPosition(0, beamOrigin);
+
             Vector2 beamTarget;
             float beamLength;
             if (draggedStone != null)
