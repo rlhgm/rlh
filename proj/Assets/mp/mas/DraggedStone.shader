@@ -123,7 +123,7 @@
 				texCol = texCol * (1.0 - _c);
 				texCol.a = a;
 
-				_BeamColor = fixed4(0,0.1,1.0,0.79);
+				//_BeamColor = fixed4(0,0.1,1.0,0.79);
 				//_BeamColor.g = 0.1;
 				//_BeamColor.b = 1.0;
 				//_BeamColor.a = 0.79;

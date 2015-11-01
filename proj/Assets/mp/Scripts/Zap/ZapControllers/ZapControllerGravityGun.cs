@@ -436,6 +436,10 @@ public class ZapControllerGravityGun : ZapController
 
                                 sprRend.material.SetFloat("_speedX", _speedX);
                                 sprRend.material.SetFloat("_speedY", _speedY);
+
+                                sprRend.material.SetFloat("_rpx", draggedStoneHitPos.x);
+                                sprRend.material.SetFloat("_rpy", draggedStoneHitPos.y);
+
                                 //Debug.Log(rbv + " " + _speedX + " " +_speedY);
                             }
                         }
@@ -1381,7 +1385,7 @@ public class ZapControllerGravityGun : ZapController
     {
         //setStoneOpacity(stone, 0.5f);
         //stone.GetComponent<GroundMoveable>().printWorldVertices();
-        Color c = new Color(0f, 1f, 1f);
+        Color c = new Color(1f, 1f, 1f);
         setStoneColor(stone, c);
 
         if( stone.childCount == 1 )

@@ -142,7 +142,7 @@ Material:
       data:
         first:
           name: _rpx
-        second: 1.5
+        second: .899999976
       data:
         first:
           name: _rpy
@@ -156,3 +156,7 @@ Material:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _BeamColor
+        second: {r: .91911763, g: .0135164484, b: .0135164484, a: 1}
