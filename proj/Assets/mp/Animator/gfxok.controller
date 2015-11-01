@@ -362,7 +362,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_body_walk_turnback_GG_normal
+  m_Name: Zap_body_walk_turnback_GG_1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2019,7 +2019,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_body_walk_turnback_GG_up
+  m_Name: Zap_body_walk_turnback_GG_2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -2088,7 +2088,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Zap_body_walk_turnback_GG_down
+  m_Name: Zap_body_walk_turnback_GG_0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

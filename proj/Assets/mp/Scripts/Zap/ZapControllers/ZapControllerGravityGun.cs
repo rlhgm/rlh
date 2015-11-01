@@ -595,7 +595,8 @@ public class ZapControllerGravityGun : ZapController
         //Vector2 angleFrom = zapTargeterPos;
         //Vector2 angleTo = mouseInScene;
 
-        int indexOfAngle; // = getIndexOfAngle(angleFrom, angleTo);
+        bool cursorTooClose = false;
+        int indexOfAngle = 0; // = getIndexOfAngle(angleFrom, angleTo);
 
         if (shoot)
         {
@@ -614,20 +615,35 @@ public class ZapControllerGravityGun : ZapController
             {
                 beamTargetOK_2 = draggedStone.TransformPoint(draggedStoneHitPos);
 
-                indexOfAngle = getIndexOfAngle(zapTargeterPos, beamTargetOK_2);
-
-                beamOriginOK_2 = beamOrigins[indexOfAngle];
-                if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
-                beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
-
+                Vector2 _tmpZTP = zapTargeterPos;
+                if (Vector2.Distance(_tmpZTP, beamTargetOK_2) > 0.5f)
+                {
+                    indexOfAngle = getIndexOfAngle(zapTargeterPos, beamTargetOK_2);
+                    beamOriginOK_2 = beamOrigins[indexOfAngle];
+                    if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
+                    beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+                }
+                else
+                {
+                    cursorTooClose = true;
+                }
+                
                 beamLength = (beamTargetOK_2 - beamOriginOK_2).magnitude;
             }
             else
             {
-                indexOfAngle = getIndexOfAngle(zapTargeterPos, mouseInScene);
-                beamOriginOK_2 = beamOrigins[indexOfAngle];
-                if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
-                beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+                Vector2 _tmpZTP = zapTargeterPos;
+                if (Vector2.Distance(_tmpZTP, mouseInScene) > 0.5f)
+                {
+                    indexOfAngle = getIndexOfAngle(zapTargeterPos, mouseInScene);
+                    beamOriginOK_2 = beamOrigins[indexOfAngle];
+                    if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
+                    beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+                }
+                else
+                {
+                    cursorTooClose = true;
+                }
 
                 Vector2 ztp = new Vector2(zapTargeterPos.x, zapTargeterPos.y);
                 Vector2 beamAll = mouseInScene - ztp;
@@ -686,28 +702,38 @@ public class ZapControllerGravityGun : ZapController
         }
         else
         {
-            indexOfAngle = getIndexOfAngle(zapTargeterPos, mouseInScene);
+            Vector2 _tmpZTP = zapTargeterPos;
+            if (Vector2.Distance(_tmpZTP, mouseInScene) > 0.5f)
+            {
+                indexOfAngle = getIndexOfAngle(zapTargeterPos, mouseInScene);
+            }
+            else
+            {
+                cursorTooClose = true;
+            }
         }
 
-        switch (act)
+        if (!cursorTooClose)
         {
-            case Action.IDLE:
-            case Action.WALK_LEFT:
-            case Action.WALK_RIGHT:
-            case Action.WALKBACK_LEFT:
-            case Action.WALKBACK_RIGHT:
-                if (indexOfAngle < 0) break;
-                if (shoot)
-                {
-                    zap.AnimatorBody.Play("Zap_body_fire_GG_" + indexOfAngle);
-                }
-                else
-                {
-                    zap.AnimatorBody.Play("Zap_body_walk_GG_" + indexOfAngle);
-                }
-                break;
+            switch (act)
+            {
+                case Action.IDLE:
+                case Action.WALK_LEFT:
+                case Action.WALK_RIGHT:
+                case Action.WALKBACK_LEFT:
+                case Action.WALKBACK_RIGHT:
+                    if (indexOfAngle < 0) break;
+                    if (shoot)
+                    {
+                        zap.AnimatorBody.Play("Zap_body_fire_GG_" + indexOfAngle);
+                    }
+                    else
+                    {
+                        zap.AnimatorBody.Play("Zap_body_walk_GG_" + indexOfAngle);
+                    }
+                    break;
+            }
         }
-
     }
 
     Color beamOriginColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
@@ -849,7 +875,7 @@ public class ZapControllerGravityGun : ZapController
                 //zap.AnimatorBody.Play("Zap_knife_turnleft");
                 //getIndexOfAngle(zapTargeterPos,mouse)
                 zap.GfxLegs.gameObject.SetActive(true);
-                zap.AnimatorBody.Play("Zap_body_walk_turnback_GG_normal");
+                zap.AnimatorBody.Play("Zap_body_walk_turnback_GG_"+param);
                 zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 wantJumpAfter = false;
                 break;
@@ -857,7 +883,7 @@ public class ZapControllerGravityGun : ZapController
             case Action.TURN_STAND_RIGHT:
                 //zap.AnimatorBody.Play("Zap_knife_turnright");
                 zap.GfxLegs.gameObject.SetActive(true);
-                zap.AnimatorBody.Play("Zap_body_walk_turnback_GG_normal");
+                zap.AnimatorBody.Play("Zap_body_walk_turnback_GG_"+param);
                 zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 wantJumpAfter = false;
                 break;
@@ -1069,11 +1095,14 @@ public class ZapControllerGravityGun : ZapController
             sightTarget = touchCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
+        if (Vector2.Distance(zapTargeterPos, sightTarget) < 0.5f)
+            return false;
+
         int angleAnimIndex = getIndexOfAngle(zapTargeterPos, sightTarget, 3);
 
         if (zap.faceRight())
         {
-            if (transform.position.x > sightTarget.x)
+            if (transform.position.x > (sightTarget.x+0.5f))
             {
                 setAction(Action.TURN_STAND_LEFT, angleAnimIndex);
                 return true;
@@ -1081,7 +1110,7 @@ public class ZapControllerGravityGun : ZapController
         }
         else
         {
-            if (transform.position.x < sightTarget.x)
+            if (transform.position.x < (sightTarget.x-0.5f))
             {
                 setAction(Action.TURN_STAND_RIGHT, angleAnimIndex);
                 return true;
