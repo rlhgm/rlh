@@ -552,12 +552,10 @@ public class ZapControllerGravityGun : ZapController
     void trackCursor(Action act, bool shoot)
     {
         Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 angleFrom = zapTargeterPos;
-        Vector2 angleTo = mouseInScene;
+        //Vector2 angleFrom = zapTargeterPos;
+        //Vector2 angleTo = mouseInScene;
 
-        int indexOfAngle = getIndexOfAngle(angleFrom, angleTo);
-
-
+        int indexOfAngle; // = getIndexOfAngle(angleFrom, angleTo);
 
         if (shoot)
         {
@@ -565,21 +563,30 @@ public class ZapControllerGravityGun : ZapController
 
             LineRenderer beam = zap.GravityGunBeam.GetComponent<LineRenderer>();
 
-            beamOriginOK_2 = beamOrigins[indexOfAngle];
-            if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
-            beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
-            beam.SetPosition(0, beamOriginOK_2);
-            //Vector2 beamTargetOK;
+            //if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
+            //beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+            //beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
 
             float beamLength;
-
             if (draggedStone != null)
             {
                 beamTargetOK_2 = draggedStone.TransformPoint(draggedStoneHitPos);
+
+                indexOfAngle = getIndexOfAngle(zapTargeterPos, beamTargetOK_2);
+
+                beamOriginOK_2 = beamOrigins[indexOfAngle];
+                if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
+                beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+
                 beamLength = (beamTargetOK_2 - beamOriginOK_2).magnitude;
             }
             else
             {
+                indexOfAngle = getIndexOfAngle(zapTargeterPos, mouseInScene);
+                beamOriginOK_2 = beamOrigins[indexOfAngle];
+                if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
+                beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+
                 Vector2 ztp = new Vector2(zapTargeterPos.x, zapTargeterPos.y);
                 Vector2 beamAll = mouseInScene - ztp;
                 Vector2 beamNorm = beamAll.normalized;
@@ -628,10 +635,16 @@ public class ZapControllerGravityGun : ZapController
                 }
             }
 
+            
+            beam.SetPosition(0, beamOriginOK_2);
             beam.SetPosition(1, beamTargetOK_2);
             beamTargetColor.a = 1f - (beamLength / maxDistance);
             beam.SetColors(beamOriginColor, beamTargetColor);
             beam.SetWidth(0.1f, 0.5f * (beamLength / maxDistance));
+        }
+        else
+        {
+            indexOfAngle = getIndexOfAngle(zapTargeterPos, mouseInScene);
         }
 
         switch (act)
