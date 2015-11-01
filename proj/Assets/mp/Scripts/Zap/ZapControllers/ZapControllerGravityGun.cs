@@ -575,13 +575,13 @@ public class ZapControllerGravityGun : ZapController
         return action;
     }
 
-    void trackCursor(Action act, bool shoot)
+    int getIndexOfAngle(int numberOfAnimations)
     {
         Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 rayOrigin = zap.Targeter.position; // zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
         Vector3 df = mouseInScene - rayOrigin;
-
         float deg = Mathf.Rad2Deg * Mathf.Atan2(df.y, df.x);
+
         if (zap.faceLeft())
         {
             if (deg > 0)
@@ -593,7 +593,37 @@ public class ZapControllerGravityGun : ZapController
                 deg = -180f - deg;
             }
         }
-        //Debug.Log("trackCursor : " + deg);
+
+        deg += 90f;
+        deg = Mathf.Clamp(deg, 0f, 180f);
+
+        float oneAnimRange = 180.0f / (float)numberOfAnimations;
+        
+        //return (int)deg;
+        return Mathf.Min( (int)(deg / oneAnimRange), numberOfAnimations-1 );
+    }
+
+    void trackCursor(Action act, bool shoot)
+    {
+        //Debug.Log(getIndexOfAngle(8));
+
+        Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 rayOrigin = zap.Targeter.position; // zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+        //Vector3 df = mouseInScene - rayOrigin;
+
+        //float deg = Mathf.Rad2Deg * Mathf.Atan2(df.y, df.x);
+        //if (zap.faceLeft())
+        //{
+        //    if (deg > 0)
+        //    {
+        //        deg = 180f - deg;
+        //    }
+        //    else
+        //    {
+        //        deg = -180f - deg;
+        //    }
+        //}
+        ////Debug.Log("trackCursor : " + deg);
 
 
         switch (act)
@@ -603,39 +633,49 @@ public class ZapControllerGravityGun : ZapController
             case Action.WALK_RIGHT:
             case Action.WALKBACK_LEFT:
             case Action.WALKBACK_RIGHT:
-                if (deg < -45)
+                int indexOfAngle = getIndexOfAngle(8);
+                if (shoot)
                 {
-                    if (shoot)
-                    {
-                        zap.AnimatorBody.Play("Zap_gg_body_fire_-45");
-                    }
-                    else
-                    {
-                        zap.AnimatorBody.Play("Zap_gg_body_walk_-45");
-                    }
-                }
-                else if (deg < 45)
-                {
-                    if (shoot)
-                    {
-                        zap.AnimatorBody.Play("Zap_gg_body_fire_0");
-                    }
-                    else
-                    {
-                        zap.AnimatorBody.Play("Zap_gg_body_walk_0");
-                    }
+                    zap.AnimatorBody.Play("Zap_body_fire_GG_"+indexOfAngle);
                 }
                 else
                 {
-                    if (shoot)
-                    {
-                        zap.AnimatorBody.Play("Zap_gg_body_fire_45");
-                    }
-                    else
-                    {
-                        zap.AnimatorBody.Play("Zap_gg_body_walk_45");
-                    }
+                    zap.AnimatorBody.Play("Zap_body_walk_GG_"+indexOfAngle);
                 }
+
+                //if (deg < -45)
+                //{
+                //    if (shoot)
+                //    {
+                //        zap.AnimatorBody.Play("Zap_gg_body_fire_-45");
+                //    }
+                //    else
+                //    {
+                //        zap.AnimatorBody.Play("Zap_gg_body_walk_-45");
+                //    }
+                //}
+                //else if (deg < 45)
+                //{
+                //    if (shoot)
+                //    {
+                //        zap.AnimatorBody.Play("Zap_gg_body_fire_0");
+                //    }
+                //    else
+                //    {
+                //        zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                //    }
+                //}
+                //else
+                //{
+                //    if (shoot)
+                //    {
+                //        zap.AnimatorBody.Play("Zap_gg_body_fire_45");
+                //    }
+                //    else
+                //    {
+                //        zap.AnimatorBody.Play("Zap_gg_body_walk_45");
+                //    }
+                //}
                 break;
         }
 
