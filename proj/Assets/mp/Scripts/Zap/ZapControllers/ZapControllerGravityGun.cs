@@ -569,6 +569,33 @@ public class ZapControllerGravityGun : ZapController
         return Mathf.Min( (int)(deg / oneAnimRange), numberOfAnimations-1 );
     }
 
+    //int getIndexOfAngle2(Vector2 from, Vector2 to, int numberOfAnimations = 8)
+    //{
+    //    //Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+    //    //Vector2 rayOrigin = zap.Targeter.position; // zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
+    //    Vector3 df = to - from; //mouseInScene - rayOrigin;
+    //    float deg = Mathf.Rad2Deg * Mathf.Atan2(df.y, df.x);
+
+    //    if (zap.faceLeft())
+    //    {
+    //        if (deg > 0)
+    //        {
+    //            deg = 180f - deg;
+    //        }
+    //        else
+    //        {
+    //            deg = -180f - deg;
+    //        }
+    //    }
+
+    //    float oneAnimRange = 180.0f / (float)numberOfAnimations;
+    //    deg += (90f - oneAnimRange * 0.5f);
+    //    deg = Mathf.Clamp(deg, 0f, 180f);
+
+    //    //return (int)deg;
+    //    return Mathf.Min((int)(deg / oneAnimRange), numberOfAnimations - 1);
+    //}
+
     static Vector2[] beamOrigins;
     static bool staticInitialized = false;
     static void staticInit()
@@ -1095,14 +1122,17 @@ public class ZapControllerGravityGun : ZapController
             sightTarget = touchCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if (Vector2.Distance(zapTargeterPos, sightTarget) < 0.5f)
-            return false;
+        //if (Vector2.Distance(zapTargeterPos, sightTarget) < 0.5f)
+        //    return false;
 
-        int angleAnimIndex = getIndexOfAngle(zapTargeterPos, sightTarget, 3);
+        float yd = sightTarget.y - zapTargeterPos.y;
+        int angleAnimIndex = 1; // getIndexOfAngle(zapTargeterPos, sightTarget, 3);
+        if (yd > 0.5f) angleAnimIndex = 2;
+        else if (yd < -0.5f) angleAnimIndex = 0;
 
         if (zap.faceRight())
         {
-            if (transform.position.x > (sightTarget.x+0.5f))
+            if (transform.position.x > (sightTarget.x/*+0.5f*/))
             {
                 setAction(Action.TURN_STAND_LEFT, angleAnimIndex);
                 return true;
@@ -1110,7 +1140,7 @@ public class ZapControllerGravityGun : ZapController
         }
         else
         {
-            if (transform.position.x < (sightTarget.x-0.5f))
+            if (transform.position.x < (sightTarget.x/*-0.5f*/))
             {
                 setAction(Action.TURN_STAND_RIGHT, angleAnimIndex);
                 return true;
