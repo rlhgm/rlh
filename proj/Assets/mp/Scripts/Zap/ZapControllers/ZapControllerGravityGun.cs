@@ -594,10 +594,9 @@ public class ZapControllerGravityGun : ZapController
             }
         }
 
-        deg += 90f;
-        deg = Mathf.Clamp(deg, 0f, 180f);
-
         float oneAnimRange = 180.0f / (float)numberOfAnimations;
+        deg += (90f - oneAnimRange*0.5f);
+        deg = Mathf.Clamp(deg, 0f, 180f);
         
         //return (int)deg;
         return Mathf.Min( (int)(deg / oneAnimRange), numberOfAnimations-1 );
