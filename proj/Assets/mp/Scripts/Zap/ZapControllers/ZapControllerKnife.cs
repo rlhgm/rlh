@@ -415,7 +415,7 @@ public class ZapControllerKnife : ZapController
                 zap.showInfo(msgInfo, -1);
 
                 if (zap.dieSounds.Length != 0)
-                    zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)], 0.3F);
+                    zap.getAudioSource().PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
                 break;
 
             case Action.WALK_LEFT:

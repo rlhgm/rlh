@@ -29,7 +29,10 @@ public class Zap : MonoBehaviour
     public AudioClip[] dieSounds;
 
     public AudioClip landingSound;
-    public AudioClip ropeCatchSound;
+    //public AudioClip ropeCatchSound;
+
+    public AudioClip ropeBreakOffSound = null;
+    public AudioClip ropeCutSound = null;
 
     AudioSource myAudio;
 
