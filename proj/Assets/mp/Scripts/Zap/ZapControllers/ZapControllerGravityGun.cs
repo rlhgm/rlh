@@ -18,7 +18,7 @@ public class ZapControllerGravityGun : ZapController
     public float SpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
     public float SlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
 
-    public float TURN_LEFTRIGHT_DURATION = 0.2f;
+    public float TURN_LEFTRIGHT_DURATION = 0.33f;
     public float ATTACK_DURATION = 0.5f;
     public float PULLOUT_GRAVITYGUN_DURATION = 0.3f;
     public float HIDE_GRAVITYGUN_DURATION = 0.35f;
@@ -846,12 +846,19 @@ public class ZapControllerGravityGun : ZapController
                 break;
 
             case Action.TURN_STAND_LEFT:
-                zap.AnimatorBody.Play("Zap_knife_turnleft");
+                //zap.AnimatorBody.Play("Zap_knife_turnleft");
+                //getIndexOfAngle(zapTargeterPos,mouse)
+                zap.GfxLegs.gameObject.SetActive(true);
+                zap.AnimatorBody.Play("Zap_body_walk_turnback_GG_normal");
+                zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 wantJumpAfter = false;
                 break;
 
             case Action.TURN_STAND_RIGHT:
-                zap.AnimatorBody.Play("Zap_knife_turnright");
+                //zap.AnimatorBody.Play("Zap_knife_turnright");
+                zap.GfxLegs.gameObject.SetActive(true);
+                zap.AnimatorBody.Play("Zap_body_walk_turnback_GG_normal");
+                zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 wantJumpAfter = false;
                 break;
 
@@ -1062,11 +1069,13 @@ public class ZapControllerGravityGun : ZapController
             sightTarget = touchCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
+        int angleAnimIndex = getIndexOfAngle(zapTargeterPos, sightTarget, 3);
+
         if (zap.faceRight())
         {
             if (transform.position.x > sightTarget.x)
             {
-                setAction(Action.TURN_STAND_LEFT);
+                setAction(Action.TURN_STAND_LEFT, angleAnimIndex);
                 return true;
             }
         }
@@ -1074,7 +1083,7 @@ public class ZapControllerGravityGun : ZapController
         {
             if (transform.position.x < sightTarget.x)
             {
-                setAction(Action.TURN_STAND_RIGHT);
+                setAction(Action.TURN_STAND_RIGHT, angleAnimIndex);
                 return true;
             }
         }
@@ -1209,21 +1218,21 @@ public class ZapControllerGravityGun : ZapController
             setAction(Action.ROLL_RIGHT_BACK);
     }
 
-    void turnLeftStart()
-    {
-        setAction(Action.TURN_STAND_LEFT);
+    //void turnLeftStart()
+    //{
+    //    setAction(Action.TURN_STAND_LEFT);
 
-        if (Input.GetKeyDown(zap.keyJump) || (Input.GetKey(zap.keyJump) && canJumpAfter))
-            wantJumpAfter = true;
-    }
+    //    if (Input.GetKeyDown(zap.keyJump) || (Input.GetKey(zap.keyJump) && canJumpAfter))
+    //        wantJumpAfter = true;
+    //}
 
-    void turnRightStart()
-    {
-        setAction(Action.TURN_STAND_RIGHT);
+    //void turnRightStart()
+    //{
+    //    setAction(Action.TURN_STAND_RIGHT);
 
-        if (Input.GetKeyDown(zap.keyJump) || (Input.GetKey(zap.keyJump) && canJumpAfter))
-            wantJumpAfter = true;
-    }
+    //    if (Input.GetKeyDown(zap.keyJump) || (Input.GetKey(zap.keyJump) && canJumpAfter))
+    //        wantJumpAfter = true;
+    //}
 
     void turnLeftFinish()
     {
