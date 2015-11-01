@@ -1092,6 +1092,12 @@ public class ZapControllerGravityGun : ZapController
 
     int Action_HIDE_GRAVITYGUN()
     {
+        if (lastFlashStone)
+        {
+            unflashStone(lastFlashStone);
+            lastFlashStone = null;
+        }
+
         if (zap.currentActionTime > HIDE_GRAVITYGUN_DURATION)
         {
             zap.hideChoosenWeapon();
