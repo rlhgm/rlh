@@ -29,7 +29,7 @@ MonoBehaviour:
   RotateMassInteriaCoef: 150
   BeamSpeed: 50
   MissedBeamDuration: 1
-  CenterOnBeamSpeed: 1
+  CenterOnBeamSpeed: 10
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036

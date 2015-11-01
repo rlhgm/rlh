@@ -31,7 +31,7 @@ public class ZapControllerGravityGun : ZapController
     public float BeamSpeed = 50f;
     public float MissedBeamDuration = 1f;
 
-    public float CenterOnBeamSpeed = 1f;
+    public float CenterOnBeamSpeed = 10f;
 
     public Transform draggedStone = null;
     public Transform lastFlashStone = null;
