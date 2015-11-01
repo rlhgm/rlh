@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: 85f5be3f19f879245ab6f842a3639daa
-timeCreated: 1446367676
+timeCreated: 1446367869
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Zap_body_fire_GG_0_0
+    21300002: Zap_body_fire_GG_0_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,7 +51,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Zap_body_fire_GG_0_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_body_fire_GG_0_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
