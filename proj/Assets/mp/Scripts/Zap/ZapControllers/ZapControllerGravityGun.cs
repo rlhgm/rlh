@@ -67,7 +67,7 @@ public class ZapControllerGravityGun : ZapController
     float newPosX;
     RaycastHit2D hit;
 
-    void leftMouseNotPressed()
+    public void leftMouseNotPressed()
     {
         if (zap.isDead())
             return;
@@ -85,6 +85,11 @@ public class ZapControllerGravityGun : ZapController
                     {
                         if (lastFlashStone != hit.collider.transform)
                         {
+                            if (lastFlashStone)
+                            {
+                                unflashStone(lastFlashStone);
+                            }
+
                             lastFlashStone = hit.collider.transform;
                             flashStone(lastFlashStone);
                         }

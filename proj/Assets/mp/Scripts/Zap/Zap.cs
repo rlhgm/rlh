@@ -1368,10 +1368,11 @@ public class Zap : MonoBehaviour
         {
             currentController.keyRunUp();
         }
-
-
-
-
+        
+        if( currentController != zapControllerGravityGun && zapControllerGravityGun == choosenController )
+        {
+            zapControllerGravityGun.leftMouseNotPressed();
+        }
 
         currentController.MUpdate(CurrentDeltaTime);
 
