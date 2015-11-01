@@ -1096,6 +1096,10 @@ public class ZapControllerGravityGun : ZapController
         if (zap.currentActionTime > PULLOUT_GRAVITYGUN_DURATION)
         {
             setActionIdle();
+            if( Input.GetMouseButton(0) )
+            {
+                leftMouseButtonClicked();
+            }
             return 1;
         }
         return 0;
