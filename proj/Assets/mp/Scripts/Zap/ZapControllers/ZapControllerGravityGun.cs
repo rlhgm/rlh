@@ -66,7 +66,6 @@ public class ZapControllerGravityGun : ZapController
 
     void leftMouseNotPressed()
     {
-
         if (zap.isDead())
             return;
 
@@ -582,6 +581,8 @@ public class ZapControllerGravityGun : ZapController
     static bool staticInitialized = false;
     static void staticInit()
     {
+        if (staticInitialized) return;
+
         beamOrigins = new Vector2[8];
 
         beamOrigins[0] = new Vector2(0.156f, 0.614f);
@@ -666,7 +667,7 @@ public class ZapControllerGravityGun : ZapController
                     beamLength = maxDistance;
                 }
 
-                beamTargetOK_2 = beamOriginOK_2 + (beamNorm * beamLength);
+                beamTargetOK_2 = ztp + (beamNorm * beamLength);
 
                 hit = Physics2D.Linecast(zapTargeterPos, beamTargetOK_2, zap.layerIdGroundAllMask);
                 if( hit.collider )
