@@ -599,8 +599,6 @@ public class ZapControllerGravityGun : ZapController
     void trackCursor(Action act, bool shoot)
     {
         Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-        //Vector2 rayOrigin = zap.Targeter.position;
-
         int indexOfAngle = getIndexOfAngle(8);
 
         switch (act)
@@ -628,22 +626,23 @@ public class ZapControllerGravityGun : ZapController
 
             LineRenderer beam = zap.GravityGunBeam.GetComponent<LineRenderer>();
             
-            Vector2 beamOriginOK = beamOrigins[indexOfAngle];
-            if (zap.faceLeft()) beamOriginOK.x *= -1f;
-            beamOriginOK = transform.TransformPoint(beamOriginOK);
-            beam.SetPosition(0, beamOriginOK);
-            Vector2 beamTargetOK;
+            beamOriginOK_2 = beamOrigins[indexOfAngle];
+            if (zap.faceLeft()) beamOriginOK_2.x *= -1f;
+            beamOriginOK_2 = transform.TransformPoint(beamOriginOK_2);
+            beam.SetPosition(0, beamOriginOK_2);
+            //Vector2 beamTargetOK;
             
             float beamLength;
 
             if (draggedStone != null)
             {
-                beamTargetOK = draggedStone.TransformPoint(draggedStoneHitPos);
-                beamLength = (beamTarget - beamOrigin).magnitude;
+                beamTargetOK_2 = draggedStone.TransformPoint(draggedStoneHitPos);
+                beamLength = (beamTargetOK_2 - beamOriginOK_2).magnitude;
             }
             else
             {
-                Vector2 beamAll = mouseInScene - beamOrigin;
+                Vector2 ztp = new Vector2(zapTargeterPos.x, zapTargeterPos.y);
+                Vector2 beamAll = mouseInScene - ztp;
                 Vector2 beamNorm = beamAll.normalized;
                 float beamLengthFromTime = shootingDuration* BeamSpeed;
                 float beamLengthMax = beamAll.magnitude;
@@ -667,9 +666,9 @@ public class ZapControllerGravityGun : ZapController
                     beamLength = maxDistance;
                 }
 
-                beamTarget = beamOrigin + (beamNorm * beamLength);
+                beamTargetOK_2 = beamOriginOK_2 + (beamNorm * beamLength);
 
-                hit = Physics2D.Raycast(beamOrigin, beamNorm, beamLength, zap.layerIdGroundAllMask);
+                hit = Physics2D.Linecast(zapTargeterPos, beamTargetOK_2, zap.layerIdGroundAllMask);
                 if( hit.collider )
                 {
                     GroundMoveable newDraggedGroundMoveable = hit.collider.GetComponent<GroundMoveable>();
@@ -690,13 +689,13 @@ public class ZapControllerGravityGun : ZapController
                 }
             }
             
-            beam.SetPosition(1, beamTarget);
+            beam.SetPosition(1, beamTargetOK_2);
             beamTargetColor.a = 1f - (beamLength / maxDistance);
             beam.SetColors(beamOriginColor, beamTargetColor);
             beam.SetWidth(0.1f, 0.5f * (beamLength / maxDistance));
             
-            beamMeltOrigin = beamOriginOK;
-            beamMeltTarget = beamTarget;
+            //beamMeltOrigin = beamOriginOK;
+            //beamMeltTarget = beamTarget;
         }
     }
 
@@ -1518,9 +1517,6 @@ public class ZapControllerGravityGun : ZapController
         Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
         if (!rb)
             return false;
-
-        //Vector3 rayOrigin = zapTargeterPos;
-        Vector3 _df = draggedStone.TransformPoint(draggedStoneHitPos) - zapTargeterPos;
 
         if (Vector3.Distance(draggedStone.TransformPoint(draggedStoneHitPos), zapTargeterPos) > maxDistance)
         {
