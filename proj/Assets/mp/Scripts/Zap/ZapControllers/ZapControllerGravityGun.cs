@@ -110,10 +110,8 @@ public class ZapControllerGravityGun : ZapController
         shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
 
-        if (beginShootSound != null)
-        {
-            audio.PlayOneShot(beginShootSound);
-        }
+        zap.playSound(beginShootSound);
+        zap.playSoundLooped(shootSound);
     }
     
     void stopShoot()
@@ -123,11 +121,9 @@ public class ZapControllerGravityGun : ZapController
         releaseStone();
         beamMelting = true;
         beamMeltingDuration = 0f;
-
-        if (finishShootSound != null)
-        {
-            audio.PlayOneShot(finishShootSound);
-        }
+        
+        zap.playSound(finishShootSound);
+        zap.stopSoundLooped(shootSound);
     }
 
     bool beamMelting = false;
@@ -802,7 +798,7 @@ public class ZapControllerGravityGun : ZapController
                 zap.showInfo(msgInfo, -1);
 
                 if (zap.dieSounds.Length != 0)
-                    audio.PlayOneShot(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
+                    zap.playSound(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
                 break;
 
             case Action.WALK_LEFT:

@@ -34,7 +34,40 @@ public class Zap : MonoBehaviour
     public AudioClip ropeBreakOffSound = null;
     public AudioClip ropeCutSound = null;
 
-    AudioSource myAudio;
+    AudioSource myAudioSource = null;
+    AudioSource myAudioSourceLooped = null;
+
+    public bool playSound(AudioClip clip, bool forceStart = true)
+    {
+        if (!clip || (myAudioSource.isPlaying && !forceStart)) return false;
+        myAudioSource.PlayOneShot(clip);
+        return true;
+    }
+    public bool playSoundLooped(AudioClip clip, bool forceStart = true)
+    {
+        if (!clip || (myAudioSourceLooped.isPlaying && !forceStart)) return false;
+        myAudioSourceLooped.clip = clip;
+        myAudioSourceLooped.Play();
+        return true;
+    }
+    public bool stopSoundLooped(AudioClip clip = null)
+    {
+        if( clip )
+        {
+            if( myAudioSourceLooped.clip == clip )
+            {
+                myAudioSourceLooped.Stop();
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            myAudioSourceLooped.Stop();
+            return true;
+        }
+        return true;
+    }
 
     //[HideInInspector]
     //public Camera mainCamera;
@@ -150,7 +183,31 @@ public class Zap : MonoBehaviour
             behs[b].playerController = this;
         }
 
-        myAudio = GetComponent<AudioSource>();
+        AudioSource[] audios = GetComponents<AudioSource>();
+        if (audios.Length == 2)
+        {
+            if( audios[0].loop )
+            {
+                myAudioSourceLooped = audios[0];
+                myAudioSource = audios[1];
+                if(myAudioSource.loop )
+                {
+                    Debug.LogError("ZAP => nie ma nielooped AudioSource'a");
+                }
+            }
+            else
+            {
+                myAudioSource = audios[0];
+                myAudioSourceLooped = audios[1];
+                if (!myAudioSourceLooped.loop)
+                {
+                    Debug.LogError("ZAP => nie ma looped AudioSource'a");
+                }
+            }
+            //myAudio = GetComponent<AudioSource>(); asdf asdf
+            //Debug.LogError("raf error");
+        }
+
 
         PlaySounds[] pss = animatorBody.GetBehaviours<PlaySounds>();
         for (int b = 0; b < pss.Length; ++b)
@@ -2205,18 +2262,18 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public AudioSource MyAudio
-    {
-        get
-        {
-            return myAudio;
-        }
+    //public AudioSource MyAudio
+    //{
+    //    get
+    //    {
+    //        return myAudio;
+    //    }
 
-        //set
-        //{
-        //    myAudio = value;
-        //}
-    }
+    //    //set
+    //    //{
+    //    //    myAudio = value;
+    //    //}
+    //}
 
     [HideInInspector]
     public Vector3 velocity;
