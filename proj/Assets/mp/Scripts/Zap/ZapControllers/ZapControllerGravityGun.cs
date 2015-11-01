@@ -605,27 +605,9 @@ public class ZapControllerGravityGun : ZapController
 
     void trackCursor(Action act, bool shoot)
     {
-        //Debug.Log(getIndexOfAngle(8));
-
         Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 rayOrigin = zap.Targeter.position; // zap.dir() == Vector2.right ? zap.sensorRight2.position : zap.sensorLeft2.position;
-        //Vector3 df = mouseInScene - rayOrigin;
-
-        //float deg = Mathf.Rad2Deg * Mathf.Atan2(df.y, df.x);
-        //if (zap.faceLeft())
-        //{
-        //    if (deg > 0)
-        //    {
-        //        deg = 180f - deg;
-        //    }
-        //    else
-        //    {
-        //        deg = -180f - deg;
-        //    }
-        //}
-        ////Debug.Log("trackCursor : " + deg);
-
-
+        
         switch (act)
         {
             case Action.IDLE:
@@ -634,6 +616,7 @@ public class ZapControllerGravityGun : ZapController
             case Action.WALKBACK_LEFT:
             case Action.WALKBACK_RIGHT:
                 int indexOfAngle = getIndexOfAngle(8);
+                if (indexOfAngle < 0) break;
                 if (shoot)
                 {
                     zap.AnimatorBody.Play("Zap_body_fire_GG_"+indexOfAngle);
@@ -642,40 +625,6 @@ public class ZapControllerGravityGun : ZapController
                 {
                     zap.AnimatorBody.Play("Zap_body_walk_GG_"+indexOfAngle);
                 }
-
-                //if (deg < -45)
-                //{
-                //    if (shoot)
-                //    {
-                //        zap.AnimatorBody.Play("Zap_gg_body_fire_-45");
-                //    }
-                //    else
-                //    {
-                //        zap.AnimatorBody.Play("Zap_gg_body_walk_-45");
-                //    }
-                //}
-                //else if (deg < 45)
-                //{
-                //    if (shoot)
-                //    {
-                //        zap.AnimatorBody.Play("Zap_gg_body_fire_0");
-                //    }
-                //    else
-                //    {
-                //        zap.AnimatorBody.Play("Zap_gg_body_walk_0");
-                //    }
-                //}
-                //else
-                //{
-                //    if (shoot)
-                //    {
-                //        zap.AnimatorBody.Play("Zap_gg_body_fire_45");
-                //    }
-                //    else
-                //    {
-                //        zap.AnimatorBody.Play("Zap_gg_body_walk_45");
-                //    }
-                //}
                 break;
         }
 
@@ -794,12 +743,12 @@ public class ZapControllerGravityGun : ZapController
                 zap.GfxLegs.gameObject.SetActive(true);
                 if (zap.faceRight())
                 {
-                    zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                    zap.AnimatorBody.Play("Zap_body_walk_GG_3");
                     zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 }
                 else
                 {
-                    zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                    zap.AnimatorBody.Play("Zap_body_walk_GG_3");
                     zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 }
                 zap.AnimatorLegs.speed = 0f;
@@ -881,7 +830,7 @@ public class ZapControllerGravityGun : ZapController
             case Action.WALK_LEFT:
                 //zap.AnimatorBody.Play("Zap_knife_walk");
                 zap.GfxLegs.gameObject.SetActive(true);
-                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorBody.Play("Zap_body_walk_GG_3");
                 zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 //zap.AnimatorLegs.speed = 0f;
                 //zap.AnimatorBody.speed = 0f;
@@ -889,20 +838,20 @@ public class ZapControllerGravityGun : ZapController
             case Action.WALK_RIGHT:
                 //zap.AnimatorBody.Play("Zap_knife_walk");
                 zap.GfxLegs.gameObject.SetActive(true);
-                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorBody.Play("Zap_body_walk_GG_3");
                 zap.AnimatorLegs.Play("Zap_gg_legs_walk");
                 break;
 
             case Action.WALKBACK_LEFT:
                 //zap.AnimatorBody.Play("Zap_knife_walkback");
                 zap.GfxLegs.gameObject.SetActive(true);
-                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorBody.Play("Zap_body_walk_GG_3");
                 zap.AnimatorLegs.Play("Zap_gg_legs_walkback");
                 break;
             case Action.WALKBACK_RIGHT:
                 //zap.AnimatorBody.Play("Zap_knife_walkback");
                 zap.GfxLegs.gameObject.SetActive(true);
-                zap.AnimatorBody.Play("Zap_gg_body_walk_0");
+                zap.AnimatorBody.Play("Zap_body_walk_GG_3");
                 zap.AnimatorLegs.Play("Zap_gg_legs_walkback");
                 break;
 
