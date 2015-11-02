@@ -1154,7 +1154,7 @@ public class ZapControllerNormal : ZapController
 
     public override int keyUpDown()
     {
-        if (isInState(Zap.State.MOUNT))
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
             if (!mounting())
             {
@@ -1206,7 +1206,7 @@ public class ZapControllerNormal : ZapController
 
     public override int keyDownDown()
     {
-        if (isInState(Zap.State.MOUNT))
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
             if (!mounting())
             {
@@ -1364,7 +1364,7 @@ public class ZapControllerNormal : ZapController
                 return 1;
             }
         }
-        else if (isInState(Zap.State.MOUNT))
+        else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
             if (!mounting())
             {
@@ -1433,7 +1433,7 @@ public class ZapControllerNormal : ZapController
                 return 1;
             }
         }
-        else if (isInState(Zap.State.MOUNT))
+        else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
             if (!mounting())
             {
@@ -1918,7 +1918,7 @@ public class ZapControllerNormal : ZapController
 
     bool tryMountAttackStart()
     {
-        if (zap.HaveKnife && Input.GetMouseButtonDown(0))
+        if ( isNotInAction(Action.MOUNT_BIRDHIT) && zap.HaveKnife && Input.GetMouseButtonDown(0))
         {
             Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
             if (mouseInScene.x < transform.position.x)
@@ -2681,7 +2681,7 @@ public class ZapControllerNormal : ZapController
     }
     bool setMountIdle()
     {
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_ATTACK_LEFT) && isNotInAction(Action.MOUNT_ATTACK_RIGHT))
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) && isNotInAction(Action.MOUNT_ATTACK_LEFT) && isNotInAction(Action.MOUNT_ATTACK_RIGHT))
         {
             zap.velocity.x = 0.0f;
             zap.velocity.y = 0.0f;
