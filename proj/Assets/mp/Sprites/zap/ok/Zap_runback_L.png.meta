@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: affcd3cc342ebaf41a0c522046b6b68b
-timeCreated: 1437745458
+timeCreated: 1446466422
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -17,6 +17,19 @@ TextureImporter:
     21300020: Zap_runback_10
     21300022: Zap_runback_11
     21300024: Zap_runback_12
+    21300026: Zap_runback_L_0
+    21300028: Zap_runback_L_1
+    21300030: Zap_runback_L_2
+    21300032: Zap_runback_L_3
+    21300034: Zap_runback_L_4
+    21300036: Zap_runback_L_5
+    21300038: Zap_runback_L_6
+    21300040: Zap_runback_L_7
+    21300042: Zap_runback_L_8
+    21300044: Zap_runback_L_9
+    21300046: Zap_runback_L_10
+    21300048: Zap_runback_L_11
+    21300050: Zap_runback_L_12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -63,135 +76,135 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Zap_runback_0
+    - name: Zap_runback_L_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_1
+    - name: Zap_runback_L_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .550000012, y: 0}
+        x: 96
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_3
+    - name: Zap_runback_L_2
       rect:
         serializedVersion: 2
         x: 192
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_4
+    - name: Zap_runback_L_3
       rect:
         serializedVersion: 2
-        x: 256
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        x: 288
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_6
+    - name: Zap_runback_L_4
       rect:
         serializedVersion: 2
         x: 384
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_7
+    - name: Zap_runback_L_5
       rect:
         serializedVersion: 2
-        x: 448
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        x: 480
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_8
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_9
+    - name: Zap_runback_L_6
       rect:
         serializedVersion: 2
         x: 576
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_10
+    - name: Zap_runback_L_7
       rect:
         serializedVersion: 2
-        x: 640
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        x: 672
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_11
-      rect:
-        serializedVersion: 2
-        x: 704
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zap_runback_12
+    - name: Zap_runback_L_8
       rect:
         serializedVersion: 2
         x: 768
-        y: 10
-        width: 64
-        height: 54
-      alignment: 9
-      pivot: {x: .600000024, y: 0}
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_runback_L_9
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_runback_L_10
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_runback_L_11
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_runback_L_12
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 17
+        width: 96
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
