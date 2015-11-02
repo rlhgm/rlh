@@ -200,6 +200,8 @@ public class Camera2DFollow : MonoBehaviour
             transform.position = transform.position + posDiff;
         }
 
+        fitPosToSceneBounds();
+
         int numberOfBackgrounds = backgroundsNodes.Length;
 
         if (numberOfBackgrounds != backgroundsRatios.Length)
@@ -225,6 +227,39 @@ public class Camera2DFollow : MonoBehaviour
         }
 
         //lastPos = transform.position;
+    }
+
+    void fitPosToSceneBounds()
+    {
+        Vector3 newPos = transform.position;
+
+        if ((transform.position.x - hms.x) < rlhScene.levelBounds.SceneMin.x)
+        {
+            newPos.x = rlhScene.levelBounds.SceneMin.x + hms.x;
+        }
+        if ((transform.position.y - hms.y) < rlhScene.levelBounds.SceneMin.y)
+        {
+            newPos.y = rlhScene.levelBounds.SceneMin.y + hms.y;
+        }
+
+        if ((transform.position.x + hms.x) > rlhScene.levelBounds.SceneMax.x)
+        {
+            newPos.x = rlhScene.levelBounds.SceneMax.x - hms.x;
+        }
+        if ((transform.position.y + hms.y) > rlhScene.levelBounds.SceneMax.y)
+        {
+            newPos.y = rlhScene.levelBounds.SceneMax.y - hms.y;
+        }
+
+        //if ((transform.position.y - hms.y) < rlhScene.levelBounds.SceneMin.y)
+        //{
+        //    newPos.y = rlhScene.levelBounds.SceneMin.y + hms.y;
+        //}
+
+        //newPos = Vector3.Max(newPos - hms, rlhScene.levelBounds.SceneMin + hms);
+        //newPos = Vector3.Min(newPos + hms, rlhScene.levelBounds.SceneMax - hms);
+
+        transform.position = newPos;
     }
 
     Vector2 getTargetStage()

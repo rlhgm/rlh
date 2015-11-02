@@ -49,9 +49,12 @@ public class LevelBounds : MonoBehaviour
         //Vector3 btmRight = transform.TransformPoint(new Vector3(right, btm, 0f));
 
         //Vector3 topLeft = transform.TransformPoint(new Vector3(left, top, 0f));
-        sceneMin = transform.TransformPoint(new Vector3(right, top, 0f));
-        sceneMax = transform.TransformPoint(new Vector3(left, btm, 0f));
-        //sceneMinMax.x
+        sceneMax = transform.TransformPoint(new Vector3(right, top, 0f));
+        sceneMin = transform.TransformPoint(new Vector3(left, btm, 0f));
+        sceneMinMax.x = SceneMin.x;
+        sceneMinMax.y = SceneMin.y;
+        sceneMinMax.z = SceneMin.x;
+        sceneMinMax.w = SceneMin.y;
         //Vector3 btmRight = transform.TransformPoint(new Vector3(right, btm, 0f));
     }
 
