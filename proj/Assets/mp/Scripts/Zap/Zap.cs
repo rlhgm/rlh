@@ -1164,7 +1164,18 @@ public class Zap : MonoBehaviour
             GlobalResetDestTime = Time.time + 2f;
             GlobalResetStarted = true;
         }
-        if( Input.GetKey(KeyCode.R))
+        if (isDead())
+        {
+            if (currentStateTime > afterDeathPauseDuration)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    reborn();
+                    return true;
+                }
+            }
+        }
+        if ( Input.GetKey(KeyCode.R))
         {
             if (GlobalResetStarted)
             {
@@ -1284,17 +1295,7 @@ public class Zap : MonoBehaviour
 
     void ZapUpdate(float deltaTime)
     {
-        if (isDead())
-        {
-            if (currentStateTime > afterDeathPauseDuration)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    reborn();
-                    return;
-                }
-            }
-        }
+        
 
         CurrentDeltaTime = deltaTime;
 
