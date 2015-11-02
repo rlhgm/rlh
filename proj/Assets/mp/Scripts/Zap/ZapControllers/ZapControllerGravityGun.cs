@@ -120,7 +120,6 @@ public class ZapControllerGravityGun : ZapController
         zap.GravityGunBeam.gameObject.SetActive(true);
 
         zap.playSound(beginShootSound);
-        zap.playSoundLooped(shootSound);
     }
     
     void stopShoot()
@@ -705,6 +704,8 @@ public class ZapControllerGravityGun : ZapController
                     GroundMoveable newDraggedGroundMoveable = hit.collider.GetComponent<GroundMoveable>();
                     if (newDraggedGroundMoveable)
                     {
+                        zap.playSoundLooped(shootSound);
+
                         draggedStone = hit.collider.transform;
                         Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
                         tsrb.gravityScale = 0f;

@@ -1279,7 +1279,7 @@ MonoBehaviour:
   landingSounds:
   - {fileID: 8300000, guid: 025c0911b4b188d49914a87f901f9cac, type: 3}
   turnRunSounds:
-  - {fileID: 8300000, guid: 370b9322875306946b9eeaf85899f11b, type: 3}
+  - {fileID: 8300000, guid: 68cd5b53aad9b554b9fa436333f42eeb, type: 3}
   catchSounds:
   - {fileID: 8300000, guid: acc641b33be9fca459a4548bd8ea37cc, type: 3}
   dieSounds:
@@ -2679,6 +2679,10 @@ Prefab:
       propertyPath: DeathByVeryHardLandingText
       value: You've crushed your bones from fall. press space.
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: turnRunSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 68cd5b53aad9b554b9fa436333f42eeb, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112758}
