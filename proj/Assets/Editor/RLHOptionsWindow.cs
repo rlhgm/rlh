@@ -19,12 +19,15 @@ public class RLHOptionsWindow : EditorWindow{
 	static string KillerPhysicPrefabPath = "Assets/mp/Prefabs/KillerPhysic.prefab";
 	static string ShowInfoTriggerPrefabPath = "Assets/mp/Prefabs/ShowInfoTrigger.prefab";
 
-	//public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
-	//public static float gravityGunMaxDist = GravityGun.maxDistance;
+    static string ShowInfoTriggerControllerPrefabPath = "Assets/mp/Prefabs/ShowInfoTriggerController.prefab";
+    static string SmashStoneActivatorPrefabPath = "Assets/mp/Prefabs/SmashStoneActivator.prefab";
+
+    //public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
+    //public static float gravityGunMaxDist = GravityGun.maxDistance;
 
 
 
-	[MenuItem ("Window/RLH Options")]
+    [MenuItem ("Window/RLH Options")]
 	public static void  ShowWindow () {
 		EditorWindow.GetWindow(typeof(RLHOptionsWindow));
 		//Debug.Log( "show RLHOptionsWindow" );
@@ -149,9 +152,19 @@ public class RLHOptionsWindow : EditorWindow{
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(KillerPhysicPrefabPath);
 		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
-		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
+        prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
+        prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerControllerPrefabPath);
 		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
-	}
+
+        prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(SmashStoneActivatorPrefabPath);
+        prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //static string ShowInfoTriggerControllerPrefabPath = "Assets/mp/Prefabs/ShowInfoTriggerController.prefab";
+        //static string SmashStoneActivatorPrefabPath = "Assets/mp/Prefabs/SmashStoneActivator.prefab";
+
+    }
 
 	void setLevelArtVisibility(bool newVisibility){
 		if (LevelArtGameObject != null) {
