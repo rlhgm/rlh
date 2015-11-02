@@ -7,6 +7,7 @@ public class CutableBush : MonoBehaviour {
 	int currentLifePoints;
 
     public GameObject cutParticles = null;
+    public Sprite[] lifePointsSprites;
 
     // Use this for initialization
     void Start () {
@@ -21,9 +22,16 @@ public class CutableBush : MonoBehaviour {
 
 	public void reset(){
 		currentLifePoints = LifePoints;
-		setAlpha ();
+		setAlpha (1.0f);
 		GetComponent<BoxCollider2D> ().enabled = true;
-	}
+        GetComponent<SpriteRenderer>().enabled = true;
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (lifePointsSprites.Length == LifePoints && lifePointsSprites[currentLifePoints - 1])
+        {
+            sr.sprite = lifePointsSprites[currentLifePoints - 1];
+        }
+    }
 
 	public void cut(){
 		if (currentLifePoints == 0)
@@ -32,11 +40,18 @@ public class CutableBush : MonoBehaviour {
 		currentLifePoints -= 1;
 
 		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
-		Color c = sr.color;
-		c.a = (float)currentLifePoints / (float)LifePoints;
-		sr.color = c;
+        if (lifePointsSprites.Length == LifePoints && lifePointsSprites[currentLifePoints-1])
+        {
+            sr.sprite = lifePointsSprites[currentLifePoints-1];
+            setAlpha(1.0f);
+        }
+        else
+        {
+            setAlpha();
+        }
 
 		if (currentLifePoints == 0) {
+            sr.enabled = false;
 			GetComponent<BoxCollider2D> ().enabled = false;
 		}
 
@@ -53,9 +68,13 @@ public class CutableBush : MonoBehaviour {
     }
 
 	void setAlpha(){
-		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
-		Color c = sr.color;
-		c.a = currentLifePoints / LifePoints;
-		sr.color = c;
+		setAlpha( (float)currentLifePoints / (float)LifePoints );
 	}
+    void setAlpha(float newAlpha)
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color c = sr.color;
+        c.a = newAlpha;
+        sr.color = c;
+    }
 }
