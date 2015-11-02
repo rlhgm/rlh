@@ -811,6 +811,8 @@ public class ZapControllerNormal : ZapController
         if (action == newAction)
             return false;
 
+        
+
         action = newAction;
         zap.resetCurrentActionTime();
         zap.AnimatorBody.speed = 1f;
@@ -820,6 +822,8 @@ public class ZapControllerNormal : ZapController
 
         lastActionParam = param;
         maxJumpSpeed = 0f;
+
+        //Debug.Log(action);
 
         switch (newAction)
         {
@@ -900,7 +904,7 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.Play("Zap_run_L");
                 break;
             case Action.RUN_RIGHT:
-                zap.AnimatorBody.Play("Zap_run_L");
+                zap.AnimatorBody.Play("Zap_run_R");
                 break;
 
             case Action.TURN_STAND_LEFT:
@@ -1844,6 +1848,7 @@ public class ZapControllerNormal : ZapController
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
         {
+            //Debug.Log("speedReached => " + zap.velocity.x);
             setActionCrouchIdle();
             if (crouching())
             {
@@ -1863,9 +1868,12 @@ public class ZapControllerNormal : ZapController
         float distToObstacle = 0.0f;
         if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
         {
+            //Debug.Log("obstacle -> " + distToObstacle);
             distToMove = distToObstacle;
             setActionCrouchIdle();
         }
+
+        //Debug.Log("zap.velocity.x :  " + zap.velocity.x);
 
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
