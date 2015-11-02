@@ -17,20 +17,26 @@ public class BirdEmiterActivator : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			//print ("BirdEmiterActivator::OnTriggerEnter2D");
-			for( int i = 0 ; i < birdEmitters.Length ; ++i ){
-				birdEmitters[i].OnOff = true;
-			}
-		}
-	}
+            //print ("BirdEmiterActivator::OnTriggerEnter2D");
+            for (int i = 0; i < birdEmitters.Length; ++i)
+            {
+                if (birdEmitters[i])
+                    birdEmitters[i].OnOff = true;
+            }
+        }
+    }
 
-	void  OnTriggerExit2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
-			//print ("BirdEmiterActivator::OnTriggerEnter2D");
-			for( int i = 0 ; i < birdEmitters.Length ; ++i ){
-				birdEmitters[i].OnOff = false;
-			}
-		}
-	}
-
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            //print ("BirdEmiterActivator::OnTriggerEnter2D");
+            for (int i = 0; i < birdEmitters.Length; ++i)
+            {
+                if (birdEmitters[i])
+                    birdEmitters[i].OnOff = false;
+            }
+        }
+    }
 }
+ 
