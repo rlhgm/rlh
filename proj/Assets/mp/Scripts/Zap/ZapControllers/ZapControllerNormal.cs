@@ -2202,9 +2202,11 @@ public class ZapControllerNormal : ZapController
                 setAction(Action.CLIMB_CLIMB);
                 catchedClimbHandle = null;
                 lastCatchedClimbHandle = null;
+                return 0;
             }
         }
-        else if (Input.GetKeyDown(zap.keyJump))
+
+        if (Input.GetKeyDown(zap.keyJump))
         {
             if (zap.dir() == Vector2.right && Input.GetKey(zap.keyLeft))
             {
