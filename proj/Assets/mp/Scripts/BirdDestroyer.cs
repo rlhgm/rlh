@@ -18,7 +18,19 @@ public class BirdDestroyer : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		//print( "BirdDestroyer OnTriggerEnter" );
 		if (other.gameObject.tag == "Bird") {
-			Destroy(other.gameObject);
+
+            if (transform.parent)
+            {
+                if (transform.parent.tag == "Player")
+                {
+                    Bird birdToDestroy = other.GetComponent<Bird>();
+                    birdToDestroy.cut();
+                }
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
 		}
 	}
 

@@ -6,7 +6,9 @@ public class Bird : MonoBehaviour {
 	Vector3 dir;
 	float speed;
 
-	void Awake(){
+    public GameObject cutParticles = null;
+
+    void Awake(){
 		dir = new Vector2(0,0);
 		speed = 0.0f;
 	}
@@ -50,8 +52,19 @@ public class Bird : MonoBehaviour {
 		transform.localScale = scl;
 	}
 
-	public void cut(){
-		GetComponent<SpriteRenderer> ().enabled = false;
-		GetComponent<Collider2D> ().enabled = false;
-	}
+    public void cut()
+    {
+        if (cutParticles)
+        {
+            Object newParticleObject = Instantiate(cutParticles, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(newParticleObject, 2.0f);
+            //AudioSource audio = GetComponent<AudioSource>();
+            //if (audio)
+            //{
+            //    audio.Play();
+            //}
+        }
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+    }
 }
