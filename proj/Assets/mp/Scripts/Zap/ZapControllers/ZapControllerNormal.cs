@@ -46,6 +46,8 @@ public class ZapControllerNormal : ZapController
     public float TURN_LEFTRIGHT_DURATION = 0.2f;
     public float MOUNT_ATTACK_DURATION = 0.5f;
 
+    public float BIRD_HIT_DURATION = 0.33f;
+
     public AudioClip ropeCatchSound = null;
     public AudioClip ropeSwingSound = null;
     public AudioClip mountCatchSound = null;
@@ -254,6 +256,10 @@ public class ZapControllerNormal : ZapController
 
             case Action.MOUNT_IDLE:
                 Action_MOUNT_IDLE();
+                break;
+
+            case Action.MOUNT_BIRDHIT:
+                Action_MOUNT_BIRDHIT();
                 break;
 
             case Action.MOUNT_LEFT:
@@ -793,6 +799,7 @@ public class ZapControllerNormal : ZapController
         MOUNT_DOWN,
         MOUNT_ATTACK_LEFT,
         MOUNT_ATTACK_RIGHT,
+        MOUNT_BIRDHIT,
         ROPECLIMB_IDLE,
         ROPECLIMB_UP,
         ROPECLIMB_DOWN,
@@ -1936,6 +1943,11 @@ public class ZapControllerNormal : ZapController
         {
             return 0;
         }
+        return 0;
+    }
+
+    int Action_MOUNT_BIRDHIT()
+    {
         return 0;
     }
 
