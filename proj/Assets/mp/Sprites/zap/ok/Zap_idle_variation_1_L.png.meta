@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 10bd1ca5d2ed6f441a572cbd396b2ce2
-timeCreated: 1446467140
+timeCreated: 1446468230
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,121 +66,121 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_5
       rect:
         serializedVersion: 2
         x: 320
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_6
       rect:
         serializedVersion: 2
         x: 384
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_7
       rect:
         serializedVersion: 2
         x: 448
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_8
       rect:
         serializedVersion: 2
         x: 512
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_9
       rect:
         serializedVersion: 2
         x: 576
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_10
       rect:
         serializedVersion: 2
         x: 640
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_1_L_11
       rect:
         serializedVersion: 2
         x: 704
-        y: 8
+        y: 0
         width: 64
-        height: 48
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .449999988, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
