@@ -44,55 +44,54 @@ public class Camera2DFollow : MonoBehaviour
     void Awake()
     {
         //public GameObject[] backgroundsBackgrounds;
-
-
         //to niby ma robic ze wszystkie pixele maja taki sam rozmiar w kamerze
         //float s_baseOrthographicSize = Screen.height / 64.0f / 2.0f;
         //Camera.main.orthographicSize = s_baseOrthographicSize;
-
         //print("Camera2DFollow::Awake()");
 
-        for (int i = 0; i < backgroundsNodes.Length; ++i)
-        {
-            if (backgroundsNodes[i] == null) continue;
-            if (backgroundsBackgrounds[i] == null) continue;
 
-            GameObject bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
-            bckg.transform.position = new Vector3(0f, 1f, 0f);
-            bckg.transform.parent = backgroundsNodes[i];
 
-            SpriteRenderer bckgSpriteRend = bckg.GetComponent<SpriteRenderer>();
-            //print(bckgSpriteRend.bounds);
-            //print(bckgSpriteRend.sprite.border);
+        //for (int i = 0; i < backgroundsNodes.Length; ++i)
+        //{
+        //    if (backgroundsNodes[i] == null) continue;
+        //    if (backgroundsBackgrounds[i] == null) continue;
 
-            Vector3 bckgItemSize = bckgSpriteRend.bounds.extents;
+        //    GameObject bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+        //    bckg.transform.position = new Vector3(0f, 1f, 0f);
+        //    bckg.transform.parent = backgroundsNodes[i];
 
-            float bckgDist = bckgItemSize.x;
-            int c = 1;
+        //    SpriteRenderer bckgSpriteRend = bckg.GetComponent<SpriteRenderer>();
+        //    //print(bckgSpriteRend.bounds);
+        //    //print(bckgSpriteRend.sprite.border);
 
-            while (bckgDist < backgroundLimits.y)
-            {
-                //c = 1;
-                bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
-                bckg.transform.position = new Vector3(bckgDist + bckgItemSize.x, 1f, 0f);
-                bckg.transform.parent = backgroundsNodes[i];
-                bckgDist = bckgItemSize.x + c * (bckgItemSize.x * 2);
-                c += 1;
-            }
+        //    Vector3 bckgItemSize = bckgSpriteRend.bounds.extents;
 
-            bckgDist = -bckgItemSize.x;
-            c = 1;
+        //    float bckgDist = bckgItemSize.x;
+        //    int c = 1;
 
-            while (bckgDist > backgroundLimits.x)
-            {
-                //c = 1;
-                bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
-                bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x, 1f, 0f);
-                bckg.transform.parent = backgroundsNodes[i];
-                bckgDist = -bckgItemSize.x - c * (bckgItemSize.x * 2);
-                c += 1;
-            }
-        }
+        //    while (bckgDist < backgroundLimits.y)
+        //    {
+        //        //c = 1;
+        //        bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+        //        bckg.transform.position = new Vector3(bckgDist + bckgItemSize.x, 1f, 0f);
+        //        bckg.transform.parent = backgroundsNodes[i];
+        //        bckgDist = bckgItemSize.x + c * (bckgItemSize.x * 2);
+        //        c += 1;
+        //    }
+
+        //    bckgDist = -bckgItemSize.x;
+        //    c = 1;
+
+        //    while (bckgDist > backgroundLimits.x)
+        //    {
+        //        //c = 1;
+        //        bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+        //        bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x, 1f, 0f);
+        //        bckg.transform.parent = backgroundsNodes[i];
+        //        bckgDist = -bckgItemSize.x - c * (bckgItemSize.x * 2);
+        //        c += 1;
+        //    }
+        //}
     }
 
     // Use this for initialization
@@ -136,6 +135,78 @@ public class Camera2DFollow : MonoBehaviour
 
         rlhScene = target.RlhScene;
         //lastPos = transform.position;
+
+        for (int i = 0; i < backgroundsNodes.Length; ++i)
+        {
+            //if (i > 1) continue;
+
+            if (backgroundsNodes[i] == null) continue;
+            if (backgroundsBackgrounds[i] == null) continue;
+
+            backgroundsNodes[i].position = rlhScene.transform.InverseTransformPoint(rlhScene.levelBounds.Center3);
+
+            GameObject bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+            bckg.transform.parent = backgroundsNodes[i];
+            bckg.transform.localPosition = ( new Vector3(0f, 1f, 0f) );
+            
+
+            SpriteRenderer bckgSpriteRend = bckg.GetComponent<SpriteRenderer>();
+            //print(bckgSpriteRend.bounds);
+            //print(bckgSpriteRend.sprite.border);
+
+            Vector3 bckgItemSize = bckgSpriteRend.bounds.extents;
+
+            float bckgDist = -bckgItemSize.x * 2;// bckgItemSize.x;
+            //int c = 1;
+            while (bckgDist > -rlhScene.levelBounds.SceneSize.x * 0.5f - (bckgItemSize.x * 2) ) // (rlhScene.levelBounds.SceneMin.x - (bckgItemSize.x * 2)))
+            {
+                //c = 1;
+                bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+                bckg.transform.parent = backgroundsNodes[i];
+                bckg.transform.localPosition = (new Vector3(bckgDist, 1f, 0f));
+                bckgDist -= bckgItemSize.x * 2; // + c * (bckgItemSize.x * 2);
+                                                //    c += 1;
+            }
+
+            bckgDist = bckgItemSize.x * 2;// bckgItemSize.x;
+            //int c = 1;
+            while (bckgDist < rlhScene.levelBounds.SceneSize.x*0.5f + (bckgItemSize.x * 2))
+            {
+                //c = 1;
+                bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+                bckg.transform.parent = backgroundsNodes[i];
+                bckg.transform.localPosition = (new Vector3(bckgDist, 1f, 0f));
+                bckgDist += bckgItemSize.x * 2; // + c * (bckgItemSize.x * 2);
+                                                //    c += 1;
+            }
+            //bckgDist = -bckgItemSize.x;
+            //c = 1;
+
+            //float sceneRangeX = rlhScene.levelBounds.SceneMin.x; ///Mathf.Max(rlhScene.levelBounds.SceneMin.x, rlhScene.levelBounds.SceneMax.x);
+
+            //while (bckgDist > sceneRangeX) // backgroundLimits.x)
+            //{
+            //    //c = 1;
+            //    bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+            //    bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x, 1f, 0f);
+            //    bckg.transform.parent = backgroundsNodes[i];
+            //    bckgDist = -bckgItemSize.x - c * (bckgItemSize.x * 2);
+            //    c += 1;
+            //}
+
+            //float sceneRangeX = rlhScene.levelBounds.SceneMax.x - rlhScene.levelBounds.SceneMin.x; ///Mathf.Max(rlhScene.levelBounds.SceneMin.x, rlhScene.levelBounds.SceneMax.x);
+
+            //c = 0;
+            //while (bckgDist > sceneRangeX) // backgroundLimits.x)
+            //{
+            //    //c = 1;
+            //    bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
+            //    bckg.transform.position = new Vector3(bckgDist - bckgItemSize.x, 1f, 0f);
+            //    bckg.transform.parent = backgroundsNodes[i];
+            //    bckgDist = -bckgItemSize.x - c * (bckgItemSize.x * 2);
+            //    c += 1;
+            //}
+        }
     }
 
     //public void resetPosToTarget()
@@ -210,11 +281,17 @@ public class Camera2DFollow : MonoBehaviour
             return;
         }
 
+        Vector3 _cd = transform.position - rlhScene.levelBounds.Center3;
+
         for (int i = 0; i < numberOfBackgrounds; ++i)
         {
-            Vector3 pos = backgroundsNodes[i].position;
-            pos.x = transform.position.x * backgroundsRatios[i].x;
-            pos.y = 1.0f + transform.position.y * backgroundsRatios[i].y;
+            //Vector3 br = backgroundsRatios[i];
+            Vector3 pos = rlhScene.levelBounds.Center3;
+            pos.x += backgroundsRatios[i].x * _cd.x;
+            pos.y += backgroundsRatios[i].y * _cd.y;
+            //Vector3 pos = backgroundsNodes[i].position;
+            //pos.x = transform.position.x * backgroundsRatios[i].x;
+            //pos.y = 1.0f + transform.position.y * backgroundsRatios[i].y;
             backgroundsNodes[i].position = pos;
         }
 
