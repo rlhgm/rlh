@@ -1755,7 +1755,7 @@ public class Zap : MonoBehaviour
             return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
         }
 
-        if (!flying && (currentController.crouching() || currentController.isDodging()))
+        if (!flying && (currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
             return -1.0f;
 
         hit = Physics2D.Raycast(sensorLeft3.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
@@ -1823,7 +1823,7 @@ public class Zap : MonoBehaviour
             return Mathf.Abs(hit.point.x - sensorRight2.position.x);
         }
 
-        if (!flying && (currentController.crouching() || currentController.isDodging()))
+        if (!flying && (currentController.crouching() || (currentController!=zapControllerGravityGun && currentController.isDodging())))
             return -1.0f;
 
         hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundAllMask);
