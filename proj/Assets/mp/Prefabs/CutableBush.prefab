@@ -74,9 +74,9 @@ MonoBehaviour:
   LifePoints: 3
   cutParticles: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
   lifePointsSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: a7492da8053cad44e820c62843c42fb1, type: 3}
+  - {fileID: 21300000, guid: 318643af380e5684f8e1adca04bc7761, type: 3}
+  - {fileID: 21300000, guid: b2c11702f566f5741a1869eb0bbf4d24, type: 3}
 --- !u!212 &21209386
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -130,6 +130,21 @@ Prefab:
       propertyPath: cutParticles
       value: 
       objectReference: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
+    - target: {fileID: 0}
+      propertyPath: lifePointsSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: a7492da8053cad44e820c62843c42fb1,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: lifePointsSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 318643af380e5684f8e1adca04bc7761,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: lifePointsSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: b2c11702f566f5741a1869eb0bbf4d24,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 191912}

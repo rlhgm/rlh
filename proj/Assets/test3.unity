@@ -3359,6 +3359,21 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 11495906, guid: 86c06cc4a4622034c9f326c621538832, type: 2}
+      propertyPath: lifePointsSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: a7492da8053cad44e820c62843c42fb1,
+        type: 3}
+    - target: {fileID: 11495906, guid: 86c06cc4a4622034c9f326c621538832, type: 2}
+      propertyPath: lifePointsSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 318643af380e5684f8e1adca04bc7761,
+        type: 3}
+    - target: {fileID: 11495906, guid: 86c06cc4a4622034c9f326c621538832, type: 2}
+      propertyPath: lifePointsSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: b2c11702f566f5741a1869eb0bbf4d24,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86c06cc4a4622034c9f326c621538832, type: 2}
   m_IsPrefabParent: 0
