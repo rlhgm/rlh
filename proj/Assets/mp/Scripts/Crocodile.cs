@@ -25,6 +25,8 @@ public class Crocodile : MonoBehaviour {
 	public Vector3 T1 = new Vector3();
 	public Vector3 T2 = new Vector3();
 
+    bool haveWater = false;
+
 	void Awake(){
 		coll = GetComponent<BoxCollider2D> ();
 		mySize = new Vector2 (coll.size.x * transform.localScale.x, coll.size.y * transform.localScale.y);
@@ -39,15 +41,27 @@ public class Crocodile : MonoBehaviour {
 
 		//print (water);
 		if (water) {
-			//print (water.getSize ());
+            //print (water.getSize ());
+            haveWater = true;
 		}
 
 		//print (player);
 		if (player) {
 			//print (player.transform.position);
 		}
+        if (player == null)
+        {
+            Zap[] targets = GameObject.FindObjectsOfType<Zap>();
+            if (targets.Length == 1)
+            {
+                player = targets[0];
+                //print ( this + " jest target");
+            }
+        }
 
-		swingTargetLimits.x = water.getWidth () - mySize.x;
+        if (!haveWater) return;
+
+        swingTargetLimits.x = water.getWidth () - mySize.x;
 		swingTargetLimits.y = water.getDepth () - mySize.y;
 
 		Vector3 startPos = new Vector3 ();
