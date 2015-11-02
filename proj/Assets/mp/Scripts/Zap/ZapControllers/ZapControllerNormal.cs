@@ -1042,6 +1042,11 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.speed = 0.0f;
                 break;
 
+            case Action.MOUNT_BIRDHIT:
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_birdhit_R");
+                else zap.AnimatorBody.Play("Zap_birdhit_L");
+                break;
+
             case Action.MOUNT_LEFT:
                 zap.AnimatorBody.Play("Zap_climbmove_left");
                 break;
@@ -1948,6 +1953,16 @@ public class ZapControllerNormal : ZapController
 
     int Action_MOUNT_BIRDHIT()
     {
+        if( zap.currentActionTime > BIRD_HIT_DURATION )
+        {
+            zap.velocity.x = 0.0f;
+            zap.velocity.y = 0.0f;
+            setAction(Action.JUMP);
+            zap.setState(Zap.State.IN_AIR);
+
+            if (zap.canBeFuddleFromBird)
+                zap.FuddleFromBird = true;
+        }
         return 0;
     }
 
@@ -2832,24 +2847,20 @@ public class ZapControllerNormal : ZapController
 
         if (other.gameObject.tag == "Bird")
         {
-            if (isInState(Zap.State.MOUNT) || isInState(Zap.State.CLIMB_ROPE))
+            if (isInState(Zap.State.CLIMB_ROPE))
             {
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
                 setAction(Action.JUMP);
                 
-                if( isInState(Zap.State.CLIMB_ROPE) )
-                {
-                    releaseRope();
-                }
-                else
-                {
-                    zap.setState(Zap.State.IN_AIR);
-                }
-
+                releaseRope();
+                
                 if (zap.canBeFuddleFromBird)
                     zap.FuddleFromBird = true;
-
+            }
+            else if (isInState(Zap.State.MOUNT))
+            {
+                setAction(Action.MOUNT_BIRDHIT);
             }
             else if (isInState(Zap.State.IN_AIR))
             {
