@@ -86,6 +86,7 @@
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
     <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
     <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
+    <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
     <Compile Include="Assets\mp\Scripts\NewRope.cs" />
     <Compile Include="Assets\mp\Scripts\Panther.cs" />
     <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />

@@ -8,6 +8,8 @@ public class RLHScene : MonoBehaviour
     public Dictionary<int, bool> ShowInfoTriggersControlls = new Dictionary<int, bool>();
     public Dictionary<int, bool> ShowInfoTriggersControllsApproved = new Dictionary<int, bool>();
 
+    public LevelBounds levelBounds = null;
+
     void Awake()
     {
         transform.position = new Vector3(0f,0f,0f);
