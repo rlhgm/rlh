@@ -918,14 +918,14 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.TURN_RUN_LEFT:
-                zap.AnimatorBody.Play("Zap_runback_L");
+                zap.AnimatorBody.Play("Zap_runback_R");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
                     zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
             case Action.TURN_RUN_RIGHT:
-                zap.AnimatorBody.Play("Zap_runback_R");
+                zap.AnimatorBody.Play("Zap_runback_L");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
                     zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
