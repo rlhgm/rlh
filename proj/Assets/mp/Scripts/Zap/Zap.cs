@@ -434,20 +434,26 @@ public class Zap : MonoBehaviour
                 else animatorBody.Play("Zap_idle_L");
                 break;
             case 0:
-                if (IdleAnimFreq >= 3)
-                {
-                    int r = Random.Range(0, IdleAnimFreq);
-                    if (r == 0)
-                    {
-                        if (faceRight()) animatorBody.Play("Zap_idle_variation_1_R");
-                        else animatorBody.Play("Zap_idle_variation_1_L");
-                    }
-                    else if (r == 1)
-                    {
-                        if (faceRight()) animatorBody.Play("Zap_idle_variation_2_R");
-                        else animatorBody.Play("Zap_idle_variation_2_L");
-                    }
-                }
+                if (faceRight()) animatorBody.Play("Zap_idle_variation_2_R");
+                else animatorBody.Play("Zap_idle_variation_2_L");
+
+                //if (faceRight()) animatorBody.Play("Zap_idle_variation_1_R");
+                //else animatorBody.Play("Zap_idle_variation_1_L");
+
+                //if (IdleAnimFreq >= 3)
+                //{
+                //    int r = Random.Range(0, IdleAnimFreq);
+                //    if (r == 0)
+                //    {
+                //        if (faceRight()) animatorBody.Play("Zap_idle_variation_1_R");
+                //        else animatorBody.Play("Zap_idle_variation_1_L");
+                //    }
+                //    else if (r == 1)
+                //    {
+                //        if (faceRight()) animatorBody.Play("Zap_idle_variation_2_R");
+                //        else animatorBody.Play("Zap_idle_variation_2_L");
+                //    }
+                //}
                 break;
         }
     }

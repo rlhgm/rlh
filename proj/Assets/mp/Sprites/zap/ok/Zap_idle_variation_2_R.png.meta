@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0fe990660c02c354d8cdebb4ae35af85
-timeCreated: 1446467227
+timeCreated: 1446467716
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,101 +64,101 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_5
       rect:
         serializedVersion: 2
         x: 320
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_6
       rect:
         serializedVersion: 2
         x: 384
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_7
       rect:
         serializedVersion: 2
         x: 448
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_8
       rect:
         serializedVersion: 2
         x: 512
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zap_idle_variation_2_R_9
       rect:
         serializedVersion: 2
         x: 576
-        y: 8
+        y: 0
         width: 64
-        height: 53
+        height: 64
       alignment: 9
-      pivot: {x: .449999988, y: 0}
+      pivot: {x: .469999999, y: .129999995}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
