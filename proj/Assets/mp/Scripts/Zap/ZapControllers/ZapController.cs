@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System; //This allows the IComparable Interface
+using System.Collections.Generic;
 
 //[System.Serializable]
 //[Serializable]
@@ -220,8 +221,13 @@ public class ZapController : ScriptableObject
         touchCamera = newTC;
     }
 
+    //ArrayList lastCuttedObjects = new ArrayList();
+    HashSet<GameObject> lastCuttedObjects = new HashSet<GameObject>();
+
     public void cutHigh()
     {
+        lastCuttedObjects.Clear();
+
         Vector2 cutStart;
         Vector2 cutEnd;
 
@@ -248,22 +254,28 @@ public class ZapController : ScriptableObject
             cutEnd = zap.leftKnifeHitPointLow2.position;
         }
         cut(cutStart, cutEnd);
+
+        lastCuttedObjects.Clear();
     }
     public void cut(Vector2 cutStart, Vector2 cutEnd)
     {
         RaycastHit2D[] hits = Physics2D.LinecastAll(cutStart, cutEnd);
         for (int i = 0; i < hits.Length; ++i)
         {
-
             Collider2D coll = hits[i].collider;
             RopeLink cutRopeLink = coll.GetComponent<RopeLink>();
             if (cutRopeLink)
             {
-                //Debug.Log( "trafionione : " + hits[i].collider.name );
-                cutRopeLink.cut();
-                zap.RlhScene.ropeBreakOff(cutRopeLink.rope);
-                zap.playSound(zap.ropeCutSound);
-                continue;
+                if (!lastCuttedObjects.Contains(cutRopeLink.gameObject))
+                {
+                    //Debug.Log( "trafionione : " + hits[i].collider.name );
+                    cutRopeLink.cut();
+                    zap.RlhScene.ropeBreakOff(cutRopeLink.rope);
+                    zap.playSound(zap.ropeCutSound);
+
+                    lastCuttedObjects.Add(cutRopeLink.gameObject);
+                    continue;
+                }
             }
 
             //Snake cutSnake = coll.GetComponent<Snake>();
@@ -272,41 +284,52 @@ public class ZapController : ScriptableObject
             //    cutSnake.cut();
             //    return;
             //}
-            
+
             if (coll.tag == "SnakeHitRegion")
             {
-                IKnifeCutable snakecutable = coll.transform.GetComponent<IKnifeCutable>();
-                if (snakecutable != null)
+                if (!lastCuttedObjects.Contains(coll.gameObject))
                 {
-                    snakecutable.Cut();
-                    continue;
+                    IKnifeCutable snakecutable = coll.transform.GetComponent<IKnifeCutable>();
+                    if (snakecutable != null)
+                    {
+                        snakecutable.Cut();
+                        lastCuttedObjects.Add(coll.gameObject);
+                        continue;
+                    }
+                    //Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
+                    //if( cutPanther ){
+                    //	cutPanther.Cut();
+                    //	return;
+                    //}
                 }
-                //Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
-                //if( cutPanther ){
-                //	cutPanther.Cut();
-                //	return;
-                //}
             }
 
-
-            //IKnifeCutable cutable = coll.transform.GetComponent<IKnifeCutable>();
-            //if (cutable != null)
-            //{
-            //    cutable.Cut();
-            //}
+                //IKnifeCutable cutable = coll.transform.GetComponent<IKnifeCutable>();
+                //if (cutable != null)
+                //{
+                //    cutable.Cut();
+                //}
 
             CutableBush cutBush = coll.GetComponent<CutableBush>();
             if (cutBush)
             {
-                cutBush.cut();
-                continue;
+                if (!lastCuttedObjects.Contains(cutBush.gameObject))
+                {
+                    cutBush.cut();
+                    lastCuttedObjects.Add(cutBush.gameObject);
+                    continue;
+                }
             }
 
             Bird cutBird = coll.GetComponent<Bird>();
             if (cutBird)
             {
-                cutBird.cut();
-                continue;
+                if (!lastCuttedObjects.Contains(cutBird.gameObject))
+                {
+                    cutBird.cut();
+                    lastCuttedObjects.Add(cutBird.gameObject);
+                    continue;
+                }
             }
 
             if (coll.tag == "PantherHitRegion")
@@ -314,7 +337,12 @@ public class ZapController : ScriptableObject
                 IKnifeCutable cutablePanthi = coll.transform.parent.GetComponent<IKnifeCutable>();
                 if (cutablePanthi != null)
                 {
-                    cutablePanthi.Cut();
+                    if (!lastCuttedObjects.Contains(coll.gameObject))
+                    {
+                        lastCuttedObjects.Add(coll.gameObject);
+                        cutablePanthi.Cut();
+                        continue;
+                    }
                 }
                 //Panther cutPanther = coll.transform.parent.GetComponent<Panther>();
                 //if( cutPanther ){
