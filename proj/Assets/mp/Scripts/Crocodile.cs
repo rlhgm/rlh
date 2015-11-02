@@ -97,18 +97,50 @@ public class Crocodile : MonoBehaviour
     //		WAIT
     //	};
 
+    //bool turning = false;
+    //int turnDir = 0;
+    //float turnTime = 0f;
+
+    //void turnLeftStart()
+    //{
+    //    animator.Play("crock_turnback");
+
+    //    turning = true;
+    //    turnTime = 0f;
+    //    turnDir = -1;
+    //}
+    //void turnRightStart()
+    //{
+    //    animator.Play("crock_turnback");
+
+    //    turning = true;
+    //    turnTime = 0f;
+    //    turnDir = 1;
+    //}
+
     void turnLeft()
     {
+        //turning = false;
+        //turnTime = 0f;
+        //turnDir = 0;
+
         Vector3 scl = transform.localScale;
         scl.x = Mathf.Abs(scl.x) * 1.0f;
         transform.localScale = scl;
 
+        //animator.Play("croc_swim_idle");
     }
     void turnRight()
     {
+        //turning = false;
+        //turnTime = 0f;
+        //turnDir = 0;
+
         Vector3 scl = transform.localScale;
         scl.x = Mathf.Abs(scl.x) * -1.0f;
         transform.localScale = scl;
+
+        //animator.Play("croc_swim_idle");
     }
 
     // Update is called once per frame
@@ -158,20 +190,36 @@ public class Crocodile : MonoBehaviour
 
             Vector3 dts = distToSwim.normalized * (AttackSpeed * Time.deltaTime);
 
-            transform.position = transform.position + dts;
-
-            if (fromLastFlipTime > 0.5f)
+            //if (turnDir == 0)
             {
-                if (lastPos.x > transform.position.x)
+                transform.position = transform.position + dts;
+
+                if (fromLastFlipTime > 1.5f)
                 {
-                    turnLeft();
+                    if (lastPos.x > transform.position.x)
+                    {
+                        //turnRightStart();
+                        turnLeft();
+                    }
+                    else
+                    {
+                        //turnLeftStart();
+                        turnRight();
+                    }
+                    fromLastFlipTime = 0.0f;
                 }
-                else
-                {
-                    turnRight();
-                }
-                fromLastFlipTime = 0.0f;
             }
+            //else
+            //{
+            //    turnTime += Time.deltaTime;
+            //    if( turnTime > 1.0f )
+            //    {
+            //        if (turnDir < 0)
+            //            turnLeft();
+            //        else
+            //            turnRight();
+            //    }
+            //}
         }
         else
         {
@@ -181,6 +229,8 @@ public class Crocodile : MonoBehaviour
         }
 
         //lastPlayerPos = player.transform.position;
+
+
         lastPos = transform.position;
     }
 
