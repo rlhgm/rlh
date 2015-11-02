@@ -189,7 +189,7 @@ public class ZapControllerGravityGun : ZapController
     }
 
     float currentDeltaTime = 0f;
-    public override void MUpdate(float deltaTime)
+    public override void MUpdate(float deltaTime, bool firstUpdateInFrame)
     {
         staticInit();
 

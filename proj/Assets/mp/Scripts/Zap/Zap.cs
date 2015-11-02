@@ -1086,13 +1086,15 @@ public class Zap : MonoBehaviour
 
         if (GlobalUpdate(timeSinceLastFrame)) return;
 
+        bool firstUpdateInFrame = true;
         while (timeSinceLastFrame > ConstantFrameTime)
         {
-            ZapUpdate(ConstantFrameTime);
+            ZapUpdate(ConstantFrameTime, firstUpdateInFrame);
+            firstUpdateInFrame = false;
             timeSinceLastFrame -= ConstantFrameTime;
         }
 
-        ZapUpdate(timeSinceLastFrame);
+        ZapUpdate(timeSinceLastFrame, firstUpdateInFrame);
     }
 
     float GlobalResetDestTime = 0f;
@@ -1293,7 +1295,7 @@ public class Zap : MonoBehaviour
 
     public float afterDeathPauseDuration = 0f;
 
-    void ZapUpdate(float deltaTime)
+    void ZapUpdate(float deltaTime, bool firstUpdateInFrame)
     {
         
 
@@ -1381,7 +1383,7 @@ public class Zap : MonoBehaviour
             zapControllerGravityGun.leftMouseNotPressed();
         }
 
-        currentController.MUpdate(CurrentDeltaTime);
+        currentController.MUpdate(CurrentDeltaTime, firstUpdateInFrame);
 
         updateShadow();
     }

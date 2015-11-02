@@ -62,11 +62,12 @@ public class ZapControllerKnife : ZapController
     float newPosX;
     //bool just;
 
-    public override void MUpdate(float deltaTime)
+    public override void MUpdate(float deltaTime, bool firstUpdate)
     {
         //Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 
         //currentActionTime = zap.getCurrentActionTime();
+        firstUpdateInFrame = firstUpdate;
 
         oldPos = transform.position;
         newPosX = oldPos.x;
@@ -1027,7 +1028,7 @@ public class ZapControllerKnife : ZapController
             {
                 if (!continueAttack)
                 {
-                    continueAttack = Input.GetMouseButtonDown(0);
+                    continueAttack = firstUpdateInFrame && Input.GetMouseButtonDown(0);
                 }
             }
         }

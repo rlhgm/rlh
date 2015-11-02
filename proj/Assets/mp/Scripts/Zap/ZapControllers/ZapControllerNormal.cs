@@ -85,8 +85,9 @@ public class ZapControllerNormal : ZapController
 
     float groundUnderFeet;
 
-    public override void MUpdate(float deltaTime)
+    public override void MUpdate(float deltaTime, bool firstUpdate)
     {
+        firstUpdateInFrame = firstUpdate;
 
         //Debug.Log ("ZapContrllerNormal::Update : " + deltaTime);
 

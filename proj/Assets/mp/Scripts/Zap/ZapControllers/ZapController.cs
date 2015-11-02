@@ -54,7 +54,7 @@ public class ZapController : ScriptableObject
         }
     }
 
-    public virtual void MUpdate(float deltaTime)
+    public virtual void MUpdate(float deltaTime, bool firstUpdateInFrame)
     {
     }
 
@@ -332,4 +332,5 @@ public class ZapController : ScriptableObject
     //protected AudioSource audio = null;
     protected Camera touchCamera;
     protected bool ctrlEnabled;
+    protected bool firstUpdateInFrame;
 }
