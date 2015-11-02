@@ -34,9 +34,9 @@ MonoBehaviour:
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036
   maxDistance: 10
-  beginShootSound: {fileID: 8300000, guid: c8988bc04c153904b94684b2f1ec29e3, type: 3}
-  finishShootSound: {fileID: 8300000, guid: c8988bc04c153904b94684b2f1ec29e3, type: 3}
-  shootSound: {fileID: 8300000, guid: 984239d82baf42e4fb51000617507d98, type: 3}
+  beginShootSound: {fileID: 8300000, guid: a5b9458529a693c4aaafadb4920021a9, type: 3}
+  finishShootSound: {fileID: 8300000, guid: 68cd5b53aad9b554b9fa436333f42eeb, type: 3}
+  shootSound: {fileID: 8300000, guid: 4ca3693e4b5a195418bc64aee7f2e490, type: 3}
   draggedStoneMaterial: {fileID: 2100000, guid: b58e12e0896d8f445abbfcb621c67d3a,
     type: 2}
   normalMaterial: {fileID: 2100000, guid: fd12fed1ea997384d8e49281c9e0b3df, type: 2}
