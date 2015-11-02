@@ -39,31 +39,34 @@ public class CutableBush : MonoBehaviour {
 
 		currentLifePoints -= 1;
 
-		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
-        if (lifePointsSprites.Length == LifePoints && lifePointsSprites[currentLifePoints-1])
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (currentLifePoints == 0)
         {
-            sr.sprite = lifePointsSprites[currentLifePoints-1];
-            setAlpha(1.0f);
+            sr.enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
         }
         else
         {
-            setAlpha();
-        }
+            if (lifePointsSprites.Length == LifePoints && lifePointsSprites[currentLifePoints - 1])
+            {
+                sr.sprite = lifePointsSprites[currentLifePoints - 1];
+                setAlpha(1.0f);
+            }
+            else
+            {
+                setAlpha();
+            }
 
-		if (currentLifePoints == 0) {
-            sr.enabled = false;
-			GetComponent<BoxCollider2D> ().enabled = false;
-		}
-
-        if (cutParticles)
-        {
-            Object newParticleObject = Instantiate(cutParticles, transform.position, Quaternion.Euler(0, 0, 0));
-            Destroy(newParticleObject, 2.0f);
-            //AudioSource audio = GetComponent<AudioSource>();
-            //if (audio)
-            //{
-            //    audio.Play();
-            //}
+            if (cutParticles)
+            {
+                Object newParticleObject = Instantiate(cutParticles, transform.position, Quaternion.Euler(0, 0, 0));
+                Destroy(newParticleObject, 2.0f);
+                //AudioSource audio = GetComponent<AudioSource>();
+                //if (audio)
+                //{
+                //    audio.Play();
+                //}
+            }
         }
     }
 

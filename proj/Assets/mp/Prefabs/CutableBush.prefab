@@ -73,6 +73,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LifePoints: 3
   cutParticles: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
+  lifePointsSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &21209386
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -106,6 +110,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: lifePointsSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
