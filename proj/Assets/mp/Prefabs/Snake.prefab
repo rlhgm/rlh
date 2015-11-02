@@ -245,6 +245,7 @@ MonoBehaviour:
   getUpDistance: 5
   getDownDistance: 6
   state: 0
+  cutParticles: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
 --- !u!212 &21258080
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -303,6 +304,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cutParticles
+      value: 
+      objectReference: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130130}

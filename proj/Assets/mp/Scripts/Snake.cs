@@ -13,6 +13,8 @@ public class Snake : MonoBehaviour {
 	int layerIdPlayerMask;
     bool permanentlyDead = false;
 
+    public GameObject cutParticles = null;
+
     public enum State{
 		ACTIVE = 1,
 		SLEEP = 2,
@@ -44,10 +46,25 @@ public class Snake : MonoBehaviour {
 
 	public void cut(){
         //animator.SetTrigger("gets_down");
-        animator.Play("die");
-        turnTime = 0f;
-		state = State.DEAD;
-	}
+        if (state != State.DEAD)
+        {
+            animator.Play("die");
+            turnTime = 0f;
+            state = State.DEAD;
+
+            if (cutParticles)
+            {
+                Object newParticleObject = Instantiate(cutParticles, transform.position, Quaternion.Euler(0, 0, 0));
+                Destroy(newParticleObject, 2.0f);
+                //AudioSource audio = GetComponent<AudioSource>();
+                //if (audio)
+                //{
+                //    audio.Play();
+                //}
+            }
+        }
+    }
+
 
     public void reset()
     {
