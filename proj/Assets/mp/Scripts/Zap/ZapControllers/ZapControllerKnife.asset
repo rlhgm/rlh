@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3658526fafb4ace4788715770043fd17, type: 3}
   m_Name: ZapControllerKnife
   m_EditorClassIdentifier: 
-  WalkSpeed: 1.5
-  WalkBackSpeed: 1.5
+  WalkSpeed: 2.5
+  WalkBackSpeed: 2.5
   JumpSpeed: 5.80000019
   JumpImpulse: 5
   rollSpeed: 4.80000019

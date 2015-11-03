@@ -19,5 +19,9 @@ EditorBuildSettings:
     path: Assets/level2.unity
   - enabled: 0
     path: Assets/level4.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/lvl1.unity
+  - enabled: 0
+    path: Assets/boss_pathi.unity
+  - enabled: 1
+    path: Assets/2.1.unity

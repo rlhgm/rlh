@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875f76fb2769443439ca052ac8327906, type: 3}
   m_Name: ZapControllerGravityGun
   m_EditorClassIdentifier: 
-  WalkSpeed: 1.25
-  WalkBackSpeed: 1.25
+  WalkSpeed: 2.5
+  WalkBackSpeed: 2.5
   rollSpeed: 3
   rollDuration: .600000024
   rollMaxDist: 3

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: acc7ea47a386be048b246b4baff74f93
-timeCreated: 1438691974
+timeCreated: 1446506273
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,90 +64,90 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 24
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 72
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_5
       rect:
         serializedVersion: 2
-        x: 80
+        x: 120
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 144
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_7
       rect:
         serializedVersion: 2
-        x: 112
+        x: 168
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Comic_page_8
       rect:
         serializedVersion: 2
-        x: 128
+        x: 192
         y: 0
-        width: 16
-        height: 16
+        width: 24
+        height: 23
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
