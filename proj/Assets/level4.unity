@@ -6043,7 +6043,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -84.1900024
+      value: -59.7999992
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6071,7 +6071,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 19914804, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_Materials.Array.data[0]
@@ -6083,7 +6083,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: HaveGravityGun
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
@@ -29869,15 +29869,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: weakLinkIndex
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: alwaysBreakOff
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11430770, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
       propertyPath: weakLinkBreakUpDuration
-      value: 5
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
@@ -33022,7 +33022,7 @@ Transform:
   m_GameObject: {fileID: 631309633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.32806325, y: 1.32806325, z: 1.32806325}
+  m_LocalScale: {x: 1.49665916, y: 1.49665916, z: 1.49665916}
   m_Children:
   - {fileID: 1829311585}
   m_Father: {fileID: 493676493}
@@ -33041,10 +33041,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 336
   preferUncropped: 0
-  screenPixelsY: 506
+  screenPixelsY: 449
   currentCropped: 0
-  screenRatio: 1.50595236
-  ratio: 1.32806325
+  screenRatio: 1.33630955
+  ratio: 1.49665916
   mainCamera: {fileID: 595893286}
   touchCamera: {fileID: 1111160111}
 --- !u!1 &631584435
@@ -55393,7 +55393,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.27083349
+  orthographic size: 4.67708349
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
