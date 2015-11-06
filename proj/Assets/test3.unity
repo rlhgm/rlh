@@ -14892,6 +14892,7 @@ GameObject:
   - 4: {fileID: 1161096939}
   - 212: {fileID: 1161096941}
   - 95: {fileID: 1161096940}
+  - 114: {fileID: 1161096942}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Untagged
@@ -14954,6 +14955,17 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e90faec25e6f797468660e47958c59f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1161096942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1161096938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a272c0d511c29e48820c5b391ad5ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1161367147 stripped
 Transform:
   m_PrefabParentObject: {fileID: 478980, guid: 8ce78a11cfa7fba40aef87e1e8560483, type: 2}
