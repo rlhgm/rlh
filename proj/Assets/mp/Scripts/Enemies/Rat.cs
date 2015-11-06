@@ -41,23 +41,26 @@ public class Rat : MonoBehaviour
                 break;
 
             case Action.WALK_LEFT:
-                Action_WALK_LEFT();
+                Action_WALK(-1);
                 break;
             case Action.WALK_RIGHT:
-                Action_WALK_RIGHT();
+                Action_WALK(1);
                 break;
+
             case Action.RUN_LEFT:
-                Action_RUN_LEFT();
+                Action_RUN(-1);
                 break;
             case Action.RUN_RIGHT:
-                Action_RUN_RIGHT();
+                Action_RUN(1);
                 break;
+
             case Action.TURNBACK_LEFT:
                 Action_TURNBACK_LEFT();
                 break;
             case Action.TURNBACK_RIGHT:
                 Action_TURNBACK_RIGHT();
                 break;
+
             case Action.DIE:
                 Action_DIE();
                 break;
@@ -66,7 +69,7 @@ public class Rat : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+        print("Rat::OnTriggerEnter2D" + other.name);
     }
 
     public enum State
@@ -229,19 +232,11 @@ public class Rat : MonoBehaviour
     {
 
     }
-    void Action_WALK_LEFT()
+    void Action_WALK(int dir)
     {
 
     }
-    void Action_WALK_RIGHT()
-    {
-
-    }
-    void Action_RUN_LEFT()
-    {
-
-    }
-    void Action_RUN_RIGHT()
+    void Action_RUN(int dir)
     {
 
     }
