@@ -2,32 +2,41 @@
 using System.Collections;
 
 public class Rat : MonoBehaviour
-{ 
+{
+    public float WalkSpeed = 2f;
+    public float RunSpeed = 5f;
+
     // Use this for initialization
     void Awake()
     {
         staticInit();
-        myAnimator = GetComponent<Animator>();
+        myGfx = transform.Find("gfx");
+        myAnimator = myGfx.GetComponent<Animator>();
     }
     void Start()
     {
         setState(State.ON_GROUND);
         setAction(Action.IDLE);
+
+        //zap = RLHScene.Instance.Zap;
+        //if (zap == null)
+        //{
+        //    zap = FindObjectOfType<Zap>();
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dt = Time.deltaTime;
+        currentDeltaTime = Time.deltaTime;
 
         stateJustChanged = false;
-        currentStateTime += dt;
-        currentActionTime += dt;
+        currentStateTime += currentDeltaTime;
+        currentActionTime += currentDeltaTime;
 
-        //oldPos = transform.position;
-        //newPosX = oldPos.x;
-        //distToMove = 0.0f;
-
+        lastPos = transform.position;
+        lastVelocity = velocity;
+        
         switch (action)
         {
             case Action.IDLE:
@@ -69,7 +78,7 @@ public class Rat : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        print("Rat::OnTriggerEnter2D" + other.name);
+        //print("Rat::OnTriggerEnter2D" + other.name);
     }
 
     public enum State
@@ -108,8 +117,17 @@ public class Rat : MonoBehaviour
     float currentActionTime = 0.0f;
     bool stateJustChanged = false;
     bool actionJustChanged = false;
+    Transform myGfx;
     Animator myAnimator;
+    //Zap zap;
 
+    Vector2 velocity = new Vector2(0f,0f);
+    Vector2 lastVelocity = new Vector2(0f, 0f);
+    Vector3 lastPos = new Vector3(0f, 0f, 0f);
+    float distToMove = 0;
+
+    float currentDeltaTime = 0f;
+    
     public bool setState(State newState)
     {
         if (state == newState)
@@ -234,7 +252,31 @@ public class Rat : MonoBehaviour
     }
     void Action_WALK(int dir)
     {
+        //bool speedReached = checkSpeed(dir);
+        //if (speedReached && desiredSpeedX == 0.0f)
+        //{
+        //    setAction(Action.IDLE);
+        //    resetActionAndState();
+        //    return 0;
+        //}
 
+        //float distToMove = velocity.x * currentDeltaTime;
+
+        ////zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
+
+        //float distToObstacle = 0.0f;
+        ////if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        ////{
+        ////    distToMove = distToObstacle;
+        ////    setActionIdle();
+        ////}
+
+        //////Debug.Log(distToObstacle);
+
+        //newPosX += distToMove;
+        //transform.position.Set(newPosX, lastPos.y, lastPos.z);
+        
+        //return 0;
     }
     void Action_RUN(int dir)
     {
@@ -252,4 +294,23 @@ public class Rat : MonoBehaviour
     {
 
     }
+
+    public Vector2 dir()
+    {
+        return myGfx.localScale.x < 0.0f ? Vector2.right : -Vector2.right;
+    }
+    public int dir2()
+    {
+        return myGfx.localScale.x < 0f ? (int)1f : (int)-1f;
+    }
+
+    public bool turnLeft()
+    {
+        return myGfx.localScale.x > 0f;
+    }
+    public bool turnRight()
+    {
+        return myGfx.localScale.x < 0f;
+    }
+    
 }

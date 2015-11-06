@@ -10,8 +10,24 @@ public class RLHScene : MonoBehaviour
 
     public LevelBounds levelBounds = null;
 
+    private static RLHScene _scene = null;
+
+    Zap zap = null;
+
+    public static RLHScene Instance
+    {
+        // zakladam ze RLHScene::Awake  zawsze jest wolane jako pierwsze... (z ustawien projektu Unity)
+        get { return _scene; }
+    }
+
+    public Zap Zap
+    {
+        get { return zap; }
+    }
+
     void Awake()
     {
+        _scene = this;
         transform.position = new Vector3(0f,0f,0f);
         Application.targetFrameRate = -1;
     }
@@ -19,6 +35,14 @@ public class RLHScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (zap == null)
+        {
+            zap = FindObjectOfType<Zap>();
+            print("RLHScene::Start");
+            if( zap == null )
+                Debug.LogWarning("RLHScene::Zap == null");
+        }
+
         ShowInfoTrigger[] sits = FindObjectsOfType(typeof(ShowInfoTrigger)) as ShowInfoTrigger[];
         foreach (ShowInfoTrigger sit in sits)
         {
