@@ -468,6 +468,8 @@ public class ZapControllerGravityGun : ZapController
                                 draggedDuration += fDeltaTime;
                                 sprRend.material.SetFloat("_draggedDuration", draggedDuration);
                                 //Debug.Log(rbv + " " + _speedX + " " +_speedY);
+
+                                zap.MyAudioSourceLooped.pitch = _speedX + _speedY;
                             }
                         }
                     }

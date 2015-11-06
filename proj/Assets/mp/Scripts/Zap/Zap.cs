@@ -2272,6 +2272,14 @@ public class Zap : MonoBehaviour
         }
     }
 
+    public AudioSource MyAudioSourceLooped
+    {
+        get
+        {
+            return myAudioSourceLooped;
+        }
+    }
+
     //public AudioSource MyAudio
     //{
     //    get
