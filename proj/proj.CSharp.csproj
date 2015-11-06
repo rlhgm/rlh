@@ -82,6 +82,7 @@
     <Compile Include="Assets\mp\Scripts\CreepingAIController.cs" />
     <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
     <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
+    <Compile Include="Assets\mp\Scripts\Enemies\CreepingAITrigger.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
