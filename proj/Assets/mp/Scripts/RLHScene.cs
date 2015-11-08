@@ -163,7 +163,7 @@ public class RLHScene : MonoBehaviour
             distToGround = _hit.distance;
             groundAngle = Vector2.Angle(Vector2.up, _hit.normal);
         }
-        return _hit.collider.transform;
+        return _hit.collider;
     }
 
 

@@ -371,13 +371,24 @@ public class Rat : MonoBehaviour
         distToMove = WalkSpeed * /*moveDir **/ currentDeltaTime;
 
         //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
-        
+
         if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle - myHalfSize.x;
             //setAction(Action.IDLE_IN);
             turnbackStart();
             //nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
+        }
+        else
+        {
+            Vector2 testGroundPos = mySensor.position;
+            testGroundPos.x += ( (distToMove+0.5f) * moveDir);
+
+            if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
+            {
+                distToMove = 0.0f;
+                turnbackStart();                
+            }
         }
 
         newPos.x += (distToMove * moveDir);
@@ -406,6 +417,17 @@ public class Rat : MonoBehaviour
             //setAction(Action.IDLE_IN);
             turnbackStart();
             //nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
+        }
+        else
+        {
+            Vector2 testGroundPos = mySensor.position;
+            testGroundPos.x += ((distToMove + 0.5f) * moveDir);
+
+            if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
+            {
+                distToMove = 0.0f;
+                turnbackStart();
+            }
         }
 
         newPos.x += (distToMove * moveDir);
