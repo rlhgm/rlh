@@ -299,7 +299,7 @@ public class Rat : MonoBehaviour
         //}
 
         //float distToMove = velocity.x * currentDeltaTime;
-        distToMove = WalkSpeed * moveDir * currentDeltaTime;
+        distToMove = WalkSpeed * /*moveDir **/ currentDeltaTime;
 
         //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
         
@@ -309,7 +309,7 @@ public class Rat : MonoBehaviour
             setAction(Action.IDLE_IN);
         }
 
-        newPos.x += distToMove;
+        newPos.x += (distToMove * moveDir);
         transform.position = newPos;
 
         //return false;
@@ -325,7 +325,7 @@ public class Rat : MonoBehaviour
         //}
 
         //float distToMove = velocity.x * currentDeltaTime;
-        distToMove = RunSpeed * moveDir * currentDeltaTime;
+        distToMove = RunSpeed * /*moveDir **/ currentDeltaTime;
 
         //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
 
@@ -335,7 +335,7 @@ public class Rat : MonoBehaviour
             setAction(Action.IDLE_IN);
         }
 
-        newPos.x += distToMove;
+        newPos.x += (distToMove * moveDir);
         transform.position = newPos;
 
         //return false;
