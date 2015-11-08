@@ -6,17 +6,25 @@ public class Rat : MonoBehaviour
     public float WalkSpeed = 2f;
     public float RunSpeed = 5f;
 
+    public float IdleInDuration = 0.25f;
+    public float IdleOutDuration = 0.25f;
+
     // Use this for initialization
     void Awake()
     {
         staticInit();
         myGfx = transform.Find("gfx");
+        mySensor = transform.Find("sensor");
         myAnimator = myGfx.GetComponent<Animator>();
+
+        myCollider = GetComponent<BoxCollider2D>();
+        mySize = myCollider.size;
+        myHalfSize = mySize * 0.5f;
     }
     void Start()
     {
         setState(State.ON_GROUND);
-        setAction(Action.IDLE);
+        setAction(Action.WALK_LEFT);
 
         //zap = RLHScene.Instance.Zap;
         //if (zap == null)
@@ -35,8 +43,10 @@ public class Rat : MonoBehaviour
         currentActionTime += currentDeltaTime;
 
         lastPos = transform.position;
+        newPos = transform.position;
         lastVelocity = velocity;
-        
+        newVelocity = velocity;
+
         switch (action)
         {
             case Action.IDLE:
@@ -72,6 +82,22 @@ public class Rat : MonoBehaviour
 
             case Action.DIE:
                 Action_DIE();
+                break;
+        }
+
+        switch (state)
+        {
+            case State.ON_GROUND:
+                if (RLHScene.Instance.checkGround(mySensor.position, 1.0f, ref distToObstacle, ref groundAngle))
+                {
+                    newPos.y += (distToObstacle - myHalfSize.y);
+                    transform.position = newPos;
+                }
+                else
+                {
+                    setState(State.IN_AIR);
+                    setAction(Action.UNDEF);
+                }
                 break;
         }
     }
@@ -113,18 +139,28 @@ public class Rat : MonoBehaviour
 
     State state;
     Action action;
+    Action nextAction;
     float currentStateTime = 0.0f;
     float currentActionTime = 0.0f;
     bool stateJustChanged = false;
     bool actionJustChanged = false;
     Transform myGfx;
+    Transform mySensor;
     Animator myAnimator;
+    BoxCollider2D myCollider;
+    Vector2 mySize;
+    Vector2 myHalfSize;
+
     //Zap zap;
 
     Vector2 velocity = new Vector2(0f,0f);
     Vector2 lastVelocity = new Vector2(0f, 0f);
+    Vector2 newVelocity = new Vector2(0f, 0f);
     Vector3 lastPos = new Vector3(0f, 0f, 0f);
+    Vector3 newPos = new Vector3(0f, 0f, 0f);
     float distToMove = 0;
+    float distToObstacle = 0.0f;
+    float groundAngle = 0.0f;
 
     float currentDeltaTime = 0f;
     
@@ -157,7 +193,7 @@ public class Rat : MonoBehaviour
         actionJustChanged = true;
         action = newAction;
 
-        switch (newAction)
+        switch (action)
         {
             case Action.IDLE:
                 myAnimator.Play(idleAnimStateHash);
@@ -244,13 +280,15 @@ public class Rat : MonoBehaviour
     }
     void Action_IDLE_IN()
     {
-
+        if (currentActionTime >= IdleInDuration)
+            setAction(Action.IDLE);
     }
     void Action_IDLE_OUT()
     {
-
+        if (currentActionTime >= IdleInDuration)
+            setAction(nextAction);
     }
-    void Action_WALK(int dir)
+    void Action_WALK(int moveDir)
     {
         //bool speedReached = checkSpeed(dir);
         //if (speedReached && desiredSpeedX == 0.0f)
@@ -261,26 +299,46 @@ public class Rat : MonoBehaviour
         //}
 
         //float distToMove = velocity.x * currentDeltaTime;
+        distToMove = WalkSpeed * moveDir * currentDeltaTime;
 
-        ////zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
-
-        //float distToObstacle = 0.0f;
-        ////if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
-        ////{
-        ////    distToMove = distToObstacle;
-        ////    setActionIdle();
-        ////}
-
-        //////Debug.Log(distToObstacle);
-
-        //newPosX += distToMove;
-        //transform.position.Set(newPosX, lastPos.y, lastPos.z);
+        //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
         
-        //return 0;
-    }
-    void Action_RUN(int dir)
-    {
+        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
+        {
+            distToMove = distToObstacle-myHalfSize.x;
+            setAction(Action.IDLE_IN);
+        }
 
+        newPos.x += distToMove;
+        transform.position = newPos;
+
+        //return false;
+    }
+    void Action_RUN(int moveDir)
+    {
+        //bool speedReached = checkSpeed(dir);
+        //if (speedReached && desiredSpeedX == 0.0f)
+        //{
+        //    setAction(Action.IDLE);
+        //    resetActionAndState();
+        //    return 0;
+        //}
+
+        //float distToMove = velocity.x * currentDeltaTime;
+        distToMove = RunSpeed * moveDir * currentDeltaTime;
+
+        //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
+
+        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove, ref distToObstacle, 45f))
+        {
+            distToMove = distToObstacle;
+            setAction(Action.IDLE_IN);
+        }
+
+        newPos.x += distToMove;
+        transform.position = newPos;
+
+        //return false;
     }
     void Action_TURNBACK_LEFT()
     {
@@ -304,7 +362,7 @@ public class Rat : MonoBehaviour
         return myGfx.localScale.x < 0f ? (int)1f : (int)-1f;
     }
 
-    public bool turnLeft()
+    public bool faceLeft()
     {
         return myGfx.localScale.x > 0f;
     }

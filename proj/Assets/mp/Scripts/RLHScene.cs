@@ -30,6 +30,10 @@ public class RLHScene : MonoBehaviour
         _scene = this;
         transform.position = new Vector3(0f,0f,0f);
         Application.targetFrameRate = -1;
+
+        layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
+        layerIdGroundMoveableMask = 1 << LayerMask.NameToLayer("GroundMoveable");
+        layerIdGroundAllMask = layerIdGroundMask | layerIdGroundMoveableMask;
     }
 
     // Use this for initialization
@@ -125,4 +129,104 @@ public class RLHScene : MonoBehaviour
     {
         ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
     }
+
+
+    RaycastHit2D _hit;
+    public int layerIdGroundMask;
+    [HideInInspector]
+    public int layerIdGroundMoveableMask;
+    [HideInInspector]
+    public int layerIdGroundAllMask;
+
+    public bool checkObstacle(Vector2 from, Vector2 dir, float distToCheck, ref float distToObstacle, float maxTilt)
+    {
+        _hit = Physics2D.Raycast(from, dir, distToCheck, layerIdGroundAllMask);
+        if (_hit.collider != null)
+        {
+            distToObstacle = _hit.distance;
+            return Vector2.Angle(Vector2.up, _hit.normal) > maxTilt;
+        }
+        return false;
+    }
+
+    public bool checkGround(Vector2 from, float distToCheck, ref float distToGround, ref float groundAngle)
+    {
+        _hit = Physics2D.Raycast(from, Vector2.down, distToCheck, layerIdGroundAllMask);
+        if (_hit.collider != null)
+        {
+            distToGround = _hit.distance;
+            groundAngle = Vector2.Angle(Vector2.up, _hit.normal);
+        }
+        return _hit.collider.transform;
+    }
+
+
+    //public float checkRight(float checkingDist, bool flying = false)
+    //{
+    //    if (!stateJustChanged)
+    //    {
+    //        if (flying)
+    //        {
+    //            hit = Physics2D.Raycast(sensorRight1.position, Vector2.right, checkingDist, layerIdGroundAllMask);
+    //            if (hit.collider != null)
+    //            {
+    //                return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+    //            }
+    //        }
+    //        else
+    //        {
+    //            //Vector2 ro = sensorDown2.position;
+    //            //ro.y += 0.1f;
+    //            int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, Vector2.right, raycastHits, checkingDist + 0.5f, layerIdGroundAllMask);
+    //            for (int i = 0; i < numRes; ++i)
+    //            {
+    //                //hit = raycastHits[i];
+    //                //float angle = hit.collider.transform.eulerAngles.z;
+    //                ////float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
+    //                //angle = angle % 90;
+    //                //if (angle < -45.0f || angle > 45.0f)
+    //                //    return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+
+    //                hit = raycastHits[i];
+    //                if (hit.fraction == 0f) continue;
+    //                float angle = Vector2.Angle(Vector2.up, hit.normal);
+    //                if (Mathf.Abs(angle) > 45.0f)
+    //                {
+    //                    Vector2 ro = sensorDown2.position;
+    //                    ro.x += (hit.distance + 0.01f);
+    //                    ro.y += 0.2f;
+    //                    //bool hitObstacle = false;
+    //                    int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.2f + 0.1f, layerIdGroundAllMask);
+    //                    for (int j = 0; j < numRes2; ++j)
+    //                    {
+    //                        hit2 = raycastHits2[j];
+    //                        if (hit2.collider != hit.collider) continue;
+
+    //                        if (hit2.fraction == 0f) return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+    //                        float angle2 = Vector2.Angle(Vector2.up, hit2.normal);
+    //                        if (Mathf.Abs(angle2) > 45.0f) return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+    //                    }
+
+    //                    //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+    //                }
+    //            }
+    //        }
+    //    }
+    //    hit = Physics2D.Raycast(sensorRight2.position, Vector2.right, checkingDist, layerIdGroundAllMask);
+    //    if (hit.collider != null)
+    //    {
+    //        return Mathf.Abs(hit.point.x - sensorRight2.position.x);
+    //    }
+
+    //    if (!flying && (currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
+    //        return -1.0f;
+
+    //    hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundAllMask);
+    //    if (hit.collider != null)
+    //    {
+    //        return Mathf.Abs(hit.point.x - sensorRight3.position.x);
+    //    }
+    //    return -1f;
+    //}
+
 }
