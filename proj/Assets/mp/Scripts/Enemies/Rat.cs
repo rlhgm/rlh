@@ -8,6 +8,7 @@ public class Rat : MonoBehaviour
 
     public float IdleInDuration = 0.25f;
     public float IdleOutDuration = 0.25f;
+    public float turnbackDuration = 0.5f;
 
     // Use this for initialization
     void Awake()
@@ -38,7 +39,11 @@ public class Rat : MonoBehaviour
     {
         currentDeltaTime = Time.deltaTime;
 
+        modeJustChanged = false;
         stateJustChanged = false;
+        actionJustChanged = false;
+
+        currentModeTime += currentDeltaTime;
         currentStateTime += currentDeltaTime;
         currentActionTime += currentDeltaTime;
 
@@ -108,6 +113,13 @@ public class Rat : MonoBehaviour
         //print("Rat::OnTriggerEnter2D" + other.name);
     }
 
+    public enum Mode
+    {
+        UNDEF = 0,
+        NORMAL,
+        FIGHT
+    };
+
     public enum State
     {
         UNDEF = 0,
@@ -138,11 +150,14 @@ public class Rat : MonoBehaviour
         get { return currentStateTime; }
     }
 
+    Mode mode;
     State state;
     Action action;
     Action nextAction;
+    float currentModeTime = 0.0f;
     float currentStateTime = 0.0f;
     float currentActionTime = 0.0f;
+    bool modeJustChanged = false;
     bool stateJustChanged = false;
     bool actionJustChanged = false;
     Transform myGfx;
@@ -250,6 +265,37 @@ public class Rat : MonoBehaviour
         return action != test;
     }
 
+    bool setMode(Mode newMode, int param = 0)
+    {
+        if (mode == newMode)
+            return false;
+
+        currentModeTime = 0f;
+        modeJustChanged = true;
+        mode = newMode;
+
+        switch (mode)
+        {
+            case Mode.NORMAL:
+                break;
+
+            case Mode.FIGHT:
+                break;
+        }
+
+        return true;
+    }
+
+    public bool isInMode(Mode test)
+    {
+        return mode == test;
+    }
+
+    public bool isNotInMode(Mode test)
+    {
+        return mode != test;
+    }
+
     static bool staticInitiated = false;
     static int idleAnimStateHash;
     static int idleInAnimStateHash;
@@ -307,7 +353,9 @@ public class Rat : MonoBehaviour
         if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle-myHalfSize.x;
-            setAction(Action.IDLE_IN);
+            //setAction(Action.IDLE_IN);
+            turnbackStart();
+            nextAction = Action.IDLE_IN;
         }
 
         newPos.x += (distToMove * moveDir);
@@ -333,7 +381,8 @@ public class Rat : MonoBehaviour
         if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle;
-            setAction(Action.IDLE_IN);
+            //setAction(Action.IDLE_IN);
+            turnbackStart();
         }
 
         newPos.x += (distToMove * moveDir);
@@ -343,15 +392,52 @@ public class Rat : MonoBehaviour
     }
     void Action_TURNBACK_LEFT()
     {
-
+        Action_TURNBACK();
     }
     void Action_TURNBACK_RIGHT()
     {
-
+        Action_TURNBACK();
     }
+    void Action_TURNBACK()
+    {
+        if( currentActionTime >= turnbackDuration)
+        {
+            turnback();
+            setAction(nextAction);
+        }
+    }
+
     void Action_DIE()
     {
 
+    }
+
+    void turnbackStart()
+    {
+        if (faceRight())
+            setAction(Action.TURNBACK_LEFT);
+        else
+            setAction(Action.TURNBACK_RIGHT);
+    }
+    void turnback()
+    {
+        //Vector3 scl = myGfx.localScale;
+        //scl.x = scl.x * -1.0f;
+        //myGfx.localScale = scl;
+        if (faceRight()) turnLeft();
+        else turnRight();
+    }
+    public void turnLeft()
+    {
+        Vector3 scl = myGfx.localScale;
+        scl.x = Mathf.Abs(scl.x) * 1.0f;
+        myGfx.localScale = scl;
+    }
+    public void turnRight()
+    {
+        Vector3 scl = myGfx.localScale;
+        scl.x = Mathf.Abs(scl.x) * -1.0f;
+        myGfx.localScale = scl;
     }
 
     public Vector2 dir()
@@ -367,7 +453,7 @@ public class Rat : MonoBehaviour
     {
         return myGfx.localScale.x > 0f;
     }
-    public bool turnRight()
+    public bool faceRight()
     {
         return myGfx.localScale.x < 0f;
     }
