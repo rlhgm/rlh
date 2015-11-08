@@ -90,7 +90,8 @@ public class Rat : MonoBehaviour
             case State.ON_GROUND:
                 if (RLHScene.Instance.checkGround(mySensor.position, 1.0f, ref distToObstacle, ref groundAngle))
                 {
-                    newPos.y += (distToObstacle - myHalfSize.y);
+                    newPos.y += (myHalfSize.y - distToObstacle);
+                    //transform.rotation.z = groundAngle
                     transform.position = newPos;
                 }
                 else
