@@ -3,12 +3,14 @@ using System.Collections;
 
 public class Rat : MonoBehaviour
 {
+    public int ControlID = 0;
+
     public float WalkSpeed = 2f;
     public float RunSpeed = 5f;
 
     public float IdleInDuration = 0.25f;
     public float IdleOutDuration = 0.25f;
-    public float turnbackDuration = 0.5f;
+    public float TurnbackDuration = 0.5f;
 
     // Use this for initialization
     void Awake()
@@ -25,7 +27,7 @@ public class Rat : MonoBehaviour
     void Start()
     {
         setState(State.ON_GROUND);
-        setAction(Action.WALK_LEFT);
+        setAction(Action.RUN_LEFT);
 
         //zap = RLHScene.Instance.Zap;
         //if (zap == null)
@@ -110,7 +112,7 @@ public class Rat : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //print("Rat::OnTriggerEnter2D" + other.name);
+        print("Rat::OnTriggerEnter2D" + other.name);
     }
 
     public enum Mode
@@ -350,12 +352,12 @@ public class Rat : MonoBehaviour
 
         //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
         
-        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
+        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
         {
-            distToMove = distToObstacle-myHalfSize.x;
+            distToMove = distToObstacle - myHalfSize.x;
             //setAction(Action.IDLE_IN);
             turnbackStart();
-            nextAction = Action.IDLE_IN;
+            nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
         }
 
         newPos.x += (distToMove * moveDir);
@@ -378,11 +380,12 @@ public class Rat : MonoBehaviour
 
         //zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
 
-        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove, ref distToObstacle, 45f))
+        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
         {
-            distToMove = distToObstacle;
+            distToMove = distToObstacle - myHalfSize.x;
             //setAction(Action.IDLE_IN);
             turnbackStart();
+            nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
         }
 
         newPos.x += (distToMove * moveDir);
@@ -400,7 +403,7 @@ public class Rat : MonoBehaviour
     }
     void Action_TURNBACK()
     {
-        if( currentActionTime >= turnbackDuration)
+        if (currentActionTime >= TurnbackDuration)
         {
             turnback();
             setAction(nextAction);

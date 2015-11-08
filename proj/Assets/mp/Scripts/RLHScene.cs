@@ -36,6 +36,12 @@ public class RLHScene : MonoBehaviour
         layerIdGroundAllMask = layerIdGroundMask | layerIdGroundMoveableMask;
     }
 
+    void OnEnable()
+    {
+        //print("RLHScene::OnEnabled ble ble ble");    
+        _scene = this;
+    }
+
     // Use this for initialization
     void Start()
     {
