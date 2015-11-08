@@ -24,6 +24,13 @@ public class Rat : MonoBehaviour
         mySize = myCollider.size;
         myHalfSize = mySize * 0.5f;
     }
+
+    void OnEnable()
+    {
+        print("Rat::OnEnabled");    
+        staticInit();
+    }
+
     void Start()
     {
         setState(State.ON_GROUND);
