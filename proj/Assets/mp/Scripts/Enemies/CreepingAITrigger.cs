@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CreepingAITrigger : MonoBehaviour
 {
+    public int controlID = 0;
 
     // Use this for initialization
     void Start()
@@ -30,7 +31,7 @@ public class CreepingAITrigger : MonoBehaviour
     {
         get { return currentStateTime; }
     }
-
+    
     public enum State
     {
         ON_GROUND = 0,

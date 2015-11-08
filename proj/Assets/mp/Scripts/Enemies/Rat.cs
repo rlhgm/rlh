@@ -27,7 +27,7 @@ public class Rat : MonoBehaviour
 
     void OnEnable()
     {
-        print("Rat::OnEnabled");    
+        //print("Rat::OnEnabled");    
         staticInit();
     }
 
@@ -119,7 +119,15 @@ public class Rat : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        print("Rat::OnTriggerEnter2D" + other.name);
+        //print("Rat::OnTriggerEnter2D" + other.name);
+        CreepingAITrigger cait = other.GetComponent<CreepingAITrigger>();
+        if (cait)
+        {
+            if (ControlID == cait.controlID)
+            {
+                turnbackStart(Action.NEXT_WALK);
+            }
+        }
     }
 
     public enum Mode
@@ -151,9 +159,14 @@ public class Rat : MonoBehaviour
         TURNBACK_LEFT,
         TURNBACK_RIGHT,
         
-        DIE
-    };
+        DIE,
 
+        // next actions:
+        NEXT_IDLE,
+        NEXT_WALK,
+        NEXT_RUN
+    };
+    
     public float CurrentStateTime
     {
         get { return currentStateTime; }
@@ -364,7 +377,7 @@ public class Rat : MonoBehaviour
             distToMove = distToObstacle - myHalfSize.x;
             //setAction(Action.IDLE_IN);
             turnbackStart();
-            nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
+            //nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
         }
 
         newPos.x += (distToMove * moveDir);
@@ -392,7 +405,7 @@ public class Rat : MonoBehaviour
             distToMove = distToObstacle - myHalfSize.x;
             //setAction(Action.IDLE_IN);
             turnbackStart();
-            nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
+            //nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
         }
 
         newPos.x += (distToMove * moveDir);
@@ -413,7 +426,24 @@ public class Rat : MonoBehaviour
         if (currentActionTime >= TurnbackDuration)
         {
             turnback();
-            setAction(nextAction);
+            switch (nextAction)
+            {
+                case Action.NEXT_IDLE:
+                    setAction(Action.IDLE_IN);
+                    break;
+
+                case Action.NEXT_WALK:
+                    walkStart();
+                    break;
+
+                case Action.NEXT_RUN:
+                    runStart();
+                    break;
+
+                default:
+                    setAction(nextAction);
+                    break;
+            }
         }
     }
 
@@ -421,9 +451,43 @@ public class Rat : MonoBehaviour
     {
 
     }
-
-    void turnbackStart()
+    
+    void walkStart()
     {
+        if (faceRight())
+            setAction(Action.WALK_RIGHT);
+        else
+            setAction(Action.WALK_LEFT);
+    }
+
+    void runStart()
+    {
+        if (faceRight())
+            setAction(Action.RUN_RIGHT);
+        else
+            setAction(Action.RUN_LEFT);
+    }
+
+    void turnbackStart(Action next = Action.UNDEF)
+    {
+        if(next == Action.UNDEF)
+        {
+            if (walking())
+            {
+                //nextAction = Action.NA_WALK;
+                nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
+            }
+            else if (running())
+            {
+                //nextAction = Action.NA_RUN;
+                nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
+            }
+        }
+        else
+        {
+            nextAction = next;
+        }
+
         if (faceRight())
             setAction(Action.TURNBACK_LEFT);
         else
@@ -468,4 +532,16 @@ public class Rat : MonoBehaviour
         return myGfx.localScale.x < 0f;
     }
     
+    bool walking()
+    {
+        return isInAction(Action.WALK_LEFT) || isInAction(Action.WALK_RIGHT);
+    }
+    bool running()
+    {
+        return isInAction(Action.RUN_LEFT) || isInAction(Action.RUN_RIGHT);
+    }
+    bool moving()
+    {
+        return walking() || running();
+    }
 }
