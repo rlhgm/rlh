@@ -697,6 +697,7 @@ public class ZapControllerNormal : ZapController
                     if (distToGround != 0f)
                     {
                         transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+                        zap.touchStone(zap.groundUnder);
                     }
                     else
                     {
