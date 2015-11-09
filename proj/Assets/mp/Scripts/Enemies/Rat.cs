@@ -39,8 +39,8 @@ public class Rat : MonoBehaviour
     {
         startPos = transform.position;
 
-        SetMode(Mode.NORMAL);
-        SetState(State.ON_GROUND);
+        SetMode(Mode.Normal);
+        SetState(State.OnGround);
         WalkStart();
     }
 
@@ -64,45 +64,45 @@ public class Rat : MonoBehaviour
 
         switch (action)
         {
-            case Action.IDLE:
+            case Action.Idle:
                 Action_IDLE();
                 break;
-            case Action.IDLE_IN:
+            case Action.IdleIn:
                 Action_IDLE_IN();
                 break;
-            case Action.IDLE_OUT:
+            case Action.IdleOut:
                 Action_IDLE_OUT();
                 break;
 
-            case Action.WALK_LEFT:
+            case Action.WalkLeft:
                 Action_WALK(-1);
                 break;
-            case Action.WALK_RIGHT:
+            case Action.WalkRight:
                 Action_WALK(1);
                 break;
 
-            case Action.RUN_LEFT:
+            case Action.RunLeft:
                 Action_RUN(-1);
                 break;
-            case Action.RUN_RIGHT:
+            case Action.RunRight:
                 Action_RUN(1);
                 break;
 
-            case Action.TURNBACK_LEFT:
+            case Action.TurnbackLeft:
                 Action_TURNBACK_LEFT();
                 break;
-            case Action.TURNBACK_RIGHT:
+            case Action.TurnbackRight:
                 Action_TURNBACK_RIGHT();
                 break;
 
-            case Action.DIE:
+            case Action.Die:
                 Action_DIE();
                 break;
         }
 
         switch (state)
         {
-            case State.ON_GROUND:
+            case State.OnGround:
                 if (RLHScene.Instance.checkGround(mySensor.position, 1.0f, ref distToObstacle, ref groundAngle))
                 {
                     newPos.y += (myHalfSize.y - distToObstacle);
@@ -111,8 +111,8 @@ public class Rat : MonoBehaviour
                 }
                 else
                 {
-                    SetState(State.IN_AIR);
-                    SetAction(Action.UNDEF);
+                    SetState(State.InAir);
+                    SetAction(Action.Undef);
                 }
                 break;
         }
@@ -126,47 +126,48 @@ public class Rat : MonoBehaviour
         {
             if (ControlID == cait.controlID)
             {
-                TurnbackStart(/*Action.NEXT_WALK*/);
+                TurnbackStart();
             }
         }
     }
 
     public enum Mode
     {
-        UNDEF = 0,
-        NORMAL,
-        FIGHT_CHASE_TARGET,
-        FIGHT_CANT_REACH_TARGET
+        Undef = 0,
+        Normal,
+        FightChaseTarget,
+        FightCantReachTarget,
+        BackToNormal
     };
 
     public enum State
     {
-        UNDEF = 0,
-        ON_GROUND,
-        IN_AIR,
-        DEAD,
+        Undef = 0,
+        OnGround,
+        InAir,
+        Dead,
     };
 
     public enum Action
     {
-        UNDEF = 0,
-        IDLE,
-        IDLE_IN,
-        IDLE_OUT,
+        Undef = 0,
+        Idle,
+        IdleIn,
+        IdleOut,
 
-        WALK_LEFT,
-        WALK_RIGHT,
-        RUN_LEFT,
-        RUN_RIGHT,
-        TURNBACK_LEFT,
-        TURNBACK_RIGHT,
+        WalkLeft,
+        WalkRight,
+        RunLeft,
+        RunRight,
+        TurnbackLeft,
+        TurnbackRight,
         
-        DIE,
+        Die,
 
         // next actions:
-        NEXT_IDLE,
-        NEXT_WALK,
-        NEXT_RUN
+        NextIdle,
+        NextWalk,
+        NextRun
     };
     
     public float CurrentStateTime
@@ -242,43 +243,43 @@ public class Rat : MonoBehaviour
 
         switch (action)
         {
-            case Action.IDLE:
+            case Action.Idle:
                 myAnimator.Play(idleAnimStateHash);
                 break;
 
-            case Action.IDLE_IN:
+            case Action.IdleIn:
                 myAnimator.Play(idleInAnimStateHash);
                 break;
 
-            case Action.IDLE_OUT:
+            case Action.IdleOut:
                 myAnimator.Play(idleOutAnimStateHash);
                 break;
 
-            case Action.WALK_LEFT:
+            case Action.WalkLeft:
                 myAnimator.Play(walkAnimStateHash);
                 break;
 
-            case Action.WALK_RIGHT:
+            case Action.WalkRight:
                 myAnimator.Play(walkAnimStateHash);
                 break;
 
-            case Action.RUN_LEFT:
+            case Action.RunLeft:
                 myAnimator.Play(runAnimStateHash);
                 break;
 
-            case Action.RUN_RIGHT:
+            case Action.RunRight:
                 myAnimator.Play(runAnimStateHash);
                 break;
 
-            case Action.TURNBACK_LEFT:
+            case Action.TurnbackLeft:
                 myAnimator.Play(turnbackAnimStateHash);
                 break;
 
-            case Action.TURNBACK_RIGHT:
+            case Action.TurnbackRight:
                 myAnimator.Play(turnbackAnimStateHash);
                 break;
 
-            case Action.DIE:
+            case Action.Die:
                 myAnimator.Play(dieAnimStateHash);
                 break;
         }
@@ -303,27 +304,50 @@ public class Rat : MonoBehaviour
 
         switch (mode)
         {
-            case Mode.NORMAL:
+            case Mode.Normal:
                 if (distToTarget < FightModeDistance)
                 {
-                    SetMode(Mode.FIGHT_CHASE_TARGET);
-
-                    if( transform.position.x < targetPos.x)
+                    SetMode(Mode.FightChaseTarget);
+                    Think();
+                    return;
+                }
+                else
+                {
+                    if (TurningBack())
                     {
-                        if (FaceLeft()) TurnbackStart();
+                        WalkStart();
+                    }
+                }
+                break;
+
+           case Mode.FightChaseTarget:
+                if (transform.position.x < targetPos.x)
+                {
+                    if (FaceLeft())
+                    {
+                        TurnbackStart();
+                        return;
                     }
                     else
                     {
-                        if (FaceRight()) TurnbackStart();
+                        SetAction(Action.RunRight);
+                        return;
                     }
                 }
                 else
                 {
-
+                    if (FaceRight())
+                    {
+                        TurnbackStart();
+                        return;
+                    }
+                    else
+                    {
+                        SetAction(Action.RunLeft);
+                        return;
+                    }
                 }
-                break;
 
-           case Mode.FIGHT_CHASE_TARGET:
                 break;
         }
     }
@@ -331,7 +355,7 @@ public class Rat : MonoBehaviour
     Action Think_MustTurnBack()
     {
 
-        return Action.UNDEF;
+        return Action.Undef;
     }
     //void determineNext()
     //{
@@ -350,7 +374,7 @@ public class Rat : MonoBehaviour
 
         switch (mode)
         {
-            case Mode.NORMAL:
+            case Mode.Normal:
                 break;
 
             //case Mode.FIGHT:
@@ -403,7 +427,7 @@ public class Rat : MonoBehaviour
     {
         if (currentActionTime >= IdleInDuration)
         {
-            SetAction(Action.IDLE);
+            SetAction(Action.Idle);
         }
     }
     void Action_IDLE_OUT()
@@ -416,36 +440,70 @@ public class Rat : MonoBehaviour
     }
     void Action_WALK(int moveDir)
     {
-        distToMove = WalkSpeed * currentDeltaTime;
-        
-        if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
-        {
-            distToMove = distToObstacle - myHalfSize.x;
-            TurnbackStart();
-        }
-        else
-        {
-            Vector2 testGroundPos = mySensor.position;
-            testGroundPos.x += ( (distToMove+0.5f) * moveDir);
+        //distToMove = WalkSpeed * currentDeltaTime;
 
-            if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
-            {
-                distToMove = 0.0f;
-                TurnbackStart();                
-            }
-        }
+        //if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
+        //{
+        //    distToMove = distToObstacle - myHalfSize.x;
+        //    TurnbackStart();
+        //}
+        //else
+        //{
+        //    Vector2 testGroundPos = mySensor.position;
+        //    testGroundPos.x += ( (distToMove+0.5f) * moveDir);
 
-        newPos.x += (distToMove * moveDir);
-        transform.position = newPos;
+        //    if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
+        //    {
+        //        distToMove = 0.0f;
+        //        TurnbackStart();                
+        //    }
+        //}
+
+        //newPos.x += (distToMove * moveDir);
+        //transform.position = newPos;
+        ActionMove(moveDir, WalkSpeed);
     }
     void Action_RUN(int moveDir)
     {
-        distToMove = RunSpeed * currentDeltaTime;
+        //distToMove = RunSpeed * currentDeltaTime;
 
-        if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
+        //if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
+        //{
+        //    distToMove = distToObstacle - myHalfSize.x;
+        //    TurnbackStart();
+        //}
+        //else
+        //{
+        //    Vector2 testGroundPos = mySensor.position;
+        //    testGroundPos.x += ((distToMove + 0.5f) * moveDir);
+
+        //    if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
+        //    {
+        //        distToMove = 0.0f;
+        //        TurnbackStart();
+        //    }
+        //}
+
+        //newPos.x += (distToMove * moveDir);
+        //transform.position = newPos;
+        ActionMove(moveDir, RunSpeed);
+    }
+    void ActionMove(int moveDir, float speed)
+    {
+        distToMove = speed * currentDeltaTime;
+
+        if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle - myHalfSize.x;
-            TurnbackStart();
+            if (IsInMode(Mode.Normal) )
+            {
+                TurnbackStart();
+            }
+            else if( IsInMode(Mode.FightChaseTarget) )
+            {
+                SetMode(Mode.FightCantReachTarget);
+                Think();
+            }
         }
         else
         {
@@ -475,24 +533,6 @@ public class Rat : MonoBehaviour
         if (currentActionTime >= TurnbackDuration)
         {
             Turnback();
-            //switch (nextAction)
-            //{
-            //    case Action.NEXT_IDLE:
-            //        setAction(Action.IDLE_IN);
-            //        break;
-
-            //    case Action.NEXT_WALK:
-            //        walkStart();
-            //        break;
-
-            //    case Action.NEXT_RUN:
-            //        runStart();
-            //        break;
-
-            //    default:
-            //        setAction(nextAction);
-            //        break;
-            //}
             Think();
         }
     }
@@ -504,47 +544,28 @@ public class Rat : MonoBehaviour
     void WalkStart()
     {
         if (FaceRight())
-            SetAction(Action.WALK_RIGHT);
+            SetAction(Action.WalkRight);
         else
-            SetAction(Action.WALK_LEFT);
+            SetAction(Action.WalkLeft);
     }
 
     void RunStart()
     {
         if (FaceRight())
-            SetAction(Action.RUN_RIGHT);
+            SetAction(Action.RunRight);
         else
-            SetAction(Action.RUN_LEFT);
+            SetAction(Action.RunLeft);
     }
 
-    void TurnbackStart(/*Action next = Action.UNDEF*/)
+    void TurnbackStart()
     {
-        //if(next == Action.UNDEF)
-        //{
-        //    if (walking())
-        //    {
-        //        nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
-        //    }
-        //    else if (running())
-        //    {
-        //        nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
-        //    }
-        //}
-        //else
-        //{
-        //    nextAction = next;
-        //}
-
         if (FaceRight())
-            SetAction(Action.TURNBACK_LEFT);
+            SetAction(Action.TurnbackLeft);
         else
-            SetAction(Action.TURNBACK_RIGHT);
+            SetAction(Action.TurnbackRight);
     }
     void Turnback()
     {
-        //Vector3 scl = myGfx.localScale;
-        //scl.x = scl.x * -1.0f;
-        //myGfx.localScale = scl;
         if (FaceRight()) TurnLeft();
         else TurnRight();
     }
@@ -581,14 +602,26 @@ public class Rat : MonoBehaviour
     
     bool Walking()
     {
-        return IsInAction(Action.WALK_LEFT) || IsInAction(Action.WALK_RIGHT);
+        return IsInAction(Action.WalkLeft) || IsInAction(Action.WalkRight);
     }
     bool Running()
     {
-        return IsInAction(Action.RUN_LEFT) || IsInAction(Action.RUN_RIGHT);
+        return IsInAction(Action.RunLeft) || IsInAction(Action.RunRight);
     }
     bool Moving()
     {
         return Walking() || Running();
     }
+    bool TurningBack()
+    {
+        return IsInAction(Action.TurnbackLeft) || IsInAction(Action.TurnbackRight);
+    }
+    //bool NormalMode()
+    //{
+    //    return IsInMode(Mode.Normal);
+    //}
+    //bool FightingMode()
+    //{
+    //    return IsInMode(Mode.)
+    //}
 }
