@@ -385,7 +385,14 @@ public class Rat : MonoBehaviour
             case ThinkCause.FinishAction:
                 if (TurningBack())
                 {
+                    helpDuration1 = Random.Range(1.5f, 3f);
                     WalkStart();
+                }
+                else if( Walking() )
+                {
+                    SetAction(Action.IdleIn);
+                    nextAction = Random.Range(0,2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                    helpDuration1 = Random.Range(0.5f, 2f);
                 }
                 else if (IsInAction(Action.IdleOut))
                 {
@@ -523,6 +530,14 @@ public class Rat : MonoBehaviour
     }
     void ActionWalk(int moveDir)
     {
+        if( IsInMode(Mode.Normal))
+        {
+            if( currentActionTime >= helpDuration1)
+            {
+                ThinkNormal(ThinkCause.FinishAction);
+            }
+        }
+
         ActionMove(moveDir, WalkSpeed);
     }
     void ActionRun(int moveDir)
