@@ -18,7 +18,8 @@ public class Rat : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        staticInit();
+        StaticInit();
+
         myGfx = transform.Find("gfx");
         mySensor = transform.Find("sensor");
         myAnimator = myGfx.GetComponent<Animator>();
@@ -31,16 +32,16 @@ public class Rat : MonoBehaviour
     void OnEnable()
     {
         //print("Rat::OnEnabled");    
-        staticInit();
+        StaticInit();
     }
 
     void Start()
     {
         startPos = transform.position;
 
-        setMode(Mode.NORMAL);
-        setState(State.ON_GROUND);
-        setAction(Action.WALK_LEFT);
+        SetMode(Mode.NORMAL);
+        SetState(State.ON_GROUND);
+        WalkStart();
     }
 
     // Update is called once per frame
@@ -110,8 +111,8 @@ public class Rat : MonoBehaviour
                 }
                 else
                 {
-                    setState(State.IN_AIR);
-                    setAction(Action.UNDEF);
+                    SetState(State.IN_AIR);
+                    SetAction(Action.UNDEF);
                 }
                 break;
         }
@@ -125,7 +126,7 @@ public class Rat : MonoBehaviour
         {
             if (ControlID == cait.controlID)
             {
-                turnbackStart(/*Action.NEXT_WALK*/);
+                TurnbackStart(/*Action.NEXT_WALK*/);
             }
         }
     }
@@ -176,7 +177,7 @@ public class Rat : MonoBehaviour
     Mode mode;
     State state;
     Action action;
-    Action nextAction;
+    //Action nextAction;
     float currentModeTime = 0.0f;
     float currentStateTime = 0.0f;
     float currentActionTime = 0.0f;
@@ -208,7 +209,7 @@ public class Rat : MonoBehaviour
 
     float currentDeltaTime = 0f;
     
-    public bool setState(State newState)
+    public bool SetState(State newState)
     {
         if (state == newState)
             return false;
@@ -220,16 +221,16 @@ public class Rat : MonoBehaviour
 
         return true;
     }
-    public bool isInState(State test)
+    public bool IsInState(State test)
     {
         return state == test;
     }
-    public bool isNotInState(State test)
+    public bool IsNotInState(State test)
     {
         return state != test;
     }
 
-    bool setAction(Action newAction, int param = 0)
+    bool SetAction(Action newAction, int param = 0)
     {
         if (action == newAction)
             return false;
@@ -285,17 +286,17 @@ public class Rat : MonoBehaviour
         return true;
     }
 
-    public bool isInAction(Action test)
+    public bool IsInAction(Action test)
     {
         return action == test;
     }
 
-    public bool isNotInAction(Action test)
+    public bool IsNotInAction(Action test)
     {
         return action != test;
     }
 
-    void think()
+    void Think()
     {
         Vector3 targetPos = RLHScene.Instance.Zap.transform.position;
         float distToTarget = Vector3.Distance(transform.position, targetPos);
@@ -305,15 +306,15 @@ public class Rat : MonoBehaviour
             case Mode.NORMAL:
                 if (distToTarget < FightModeDistance)
                 {
-                    setMode(Mode.FIGHT_CHASE_TARGET);
+                    SetMode(Mode.FIGHT_CHASE_TARGET);
 
                     if( transform.position.x < targetPos.x)
                     {
-                        if (faceLeft()) turnbackStart();
+                        if (FaceLeft()) TurnbackStart();
                     }
                     else
                     {
-                        if (faceRight()) turnbackStart();
+                        if (FaceRight()) TurnbackStart();
                     }
                 }
                 else
@@ -322,17 +323,22 @@ public class Rat : MonoBehaviour
                 }
                 break;
 
-                //case Mode.FIGHT:
-                //    break;
+           case Mode.FIGHT_CHASE_TARGET:
+                break;
         }
     }
 
+    Action Think_MustTurnBack()
+    {
+
+        return Action.UNDEF;
+    }
     //void determineNext()
     //{
 
     //}
 
-    bool setMode(Mode newMode, int param = 0)
+    bool SetMode(Mode newMode, int param = 0)
     {
         if (mode == newMode)
             return false;
@@ -354,12 +360,12 @@ public class Rat : MonoBehaviour
         return true;
     }
 
-    public bool isInMode(Mode test)
+    public bool IsInMode(Mode test)
     {
         return mode == test;
     }
 
-    public bool isNotInMode(Mode test)
+    public bool IsNotInMode(Mode test)
     {
         return mode != test;
     }
@@ -373,7 +379,7 @@ public class Rat : MonoBehaviour
     static int turnbackAnimStateHash;
     static int dieAnimStateHash;
 
-    static bool staticInit()
+    static bool StaticInit()
     {
         if (staticInitiated) return false;
 
@@ -396,21 +402,26 @@ public class Rat : MonoBehaviour
     void Action_IDLE_IN()
     {
         if (currentActionTime >= IdleInDuration)
-            setAction(Action.IDLE);
+        {
+            SetAction(Action.IDLE);
+        }
     }
     void Action_IDLE_OUT()
     {
         if (currentActionTime >= IdleInDuration)
-            setAction(nextAction);
+        {
+            //setAction(nextAction);
+            Think();
+        }
     }
     void Action_WALK(int moveDir)
     {
         distToMove = WalkSpeed * currentDeltaTime;
         
-        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
+        if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle - myHalfSize.x;
-            turnbackStart();
+            TurnbackStart();
         }
         else
         {
@@ -420,7 +431,7 @@ public class Rat : MonoBehaviour
             if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
             {
                 distToMove = 0.0f;
-                turnbackStart();                
+                TurnbackStart();                
             }
         }
 
@@ -431,10 +442,10 @@ public class Rat : MonoBehaviour
     {
         distToMove = RunSpeed * currentDeltaTime;
 
-        if (RLHScene.Instance.checkObstacle(mySensor.position, dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
+        if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove+myHalfSize.x, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle - myHalfSize.x;
-            turnbackStart();
+            TurnbackStart();
         }
         else
         {
@@ -444,7 +455,7 @@ public class Rat : MonoBehaviour
             if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
             {
                 distToMove = 0.0f;
-                turnbackStart();
+                TurnbackStart();
             }
         }
 
@@ -463,25 +474,26 @@ public class Rat : MonoBehaviour
     {
         if (currentActionTime >= TurnbackDuration)
         {
-            turnback();
-            switch (nextAction)
-            {
-                case Action.NEXT_IDLE:
-                    setAction(Action.IDLE_IN);
-                    break;
+            Turnback();
+            //switch (nextAction)
+            //{
+            //    case Action.NEXT_IDLE:
+            //        setAction(Action.IDLE_IN);
+            //        break;
 
-                case Action.NEXT_WALK:
-                    walkStart();
-                    break;
+            //    case Action.NEXT_WALK:
+            //        walkStart();
+            //        break;
 
-                case Action.NEXT_RUN:
-                    runStart();
-                    break;
+            //    case Action.NEXT_RUN:
+            //        runStart();
+            //        break;
 
-                default:
-                    setAction(nextAction);
-                    break;
-            }
+            //    default:
+            //        setAction(nextAction);
+            //        break;
+            //}
+            Think();
         }
     }
 
@@ -489,94 +501,94 @@ public class Rat : MonoBehaviour
     {
     }
     
-    void walkStart()
+    void WalkStart()
     {
-        if (faceRight())
-            setAction(Action.WALK_RIGHT);
+        if (FaceRight())
+            SetAction(Action.WALK_RIGHT);
         else
-            setAction(Action.WALK_LEFT);
+            SetAction(Action.WALK_LEFT);
     }
 
-    void runStart()
+    void RunStart()
     {
-        if (faceRight())
-            setAction(Action.RUN_RIGHT);
+        if (FaceRight())
+            SetAction(Action.RUN_RIGHT);
         else
-            setAction(Action.RUN_LEFT);
+            SetAction(Action.RUN_LEFT);
     }
 
-    void turnbackStart(Action next = Action.UNDEF)
+    void TurnbackStart(/*Action next = Action.UNDEF*/)
     {
-        if(next == Action.UNDEF)
-        {
-            if (walking())
-            {
-                nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
-            }
-            else if (running())
-            {
-                nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
-            }
-        }
-        else
-        {
-            nextAction = next;
-        }
+        //if(next == Action.UNDEF)
+        //{
+        //    if (walking())
+        //    {
+        //        nextAction = faceRight() ? Action.WALK_LEFT : Action.WALK_RIGHT;
+        //    }
+        //    else if (running())
+        //    {
+        //        nextAction = faceRight() ? Action.RUN_LEFT : Action.RUN_RIGHT;
+        //    }
+        //}
+        //else
+        //{
+        //    nextAction = next;
+        //}
 
-        if (faceRight())
-            setAction(Action.TURNBACK_LEFT);
+        if (FaceRight())
+            SetAction(Action.TURNBACK_LEFT);
         else
-            setAction(Action.TURNBACK_RIGHT);
+            SetAction(Action.TURNBACK_RIGHT);
     }
-    void turnback()
+    void Turnback()
     {
         //Vector3 scl = myGfx.localScale;
         //scl.x = scl.x * -1.0f;
         //myGfx.localScale = scl;
-        if (faceRight()) turnLeft();
-        else turnRight();
+        if (FaceRight()) TurnLeft();
+        else TurnRight();
     }
-    public void turnLeft()
+    public void TurnLeft()
     {
         Vector3 scl = myGfx.localScale;
         scl.x = Mathf.Abs(scl.x) * 1.0f;
         myGfx.localScale = scl;
     }
-    public void turnRight()
+    public void TurnRight()
     {
         Vector3 scl = myGfx.localScale;
         scl.x = Mathf.Abs(scl.x) * -1.0f;
         myGfx.localScale = scl;
     }
 
-    public Vector2 dir()
+    public Vector2 Dir()
     {
         return myGfx.localScale.x < 0.0f ? Vector2.right : -Vector2.right;
     }
-    public int dir2()
+    public int Dir2()
     {
         return myGfx.localScale.x < 0f ? (int)1f : (int)-1f;
     }
 
-    public bool faceLeft()
+    public bool FaceLeft()
     {
         return myGfx.localScale.x > 0f;
     }
-    public bool faceRight()
+    public bool FaceRight()
     {
         return myGfx.localScale.x < 0f;
     }
     
-    bool walking()
+    bool Walking()
     {
-        return isInAction(Action.WALK_LEFT) || isInAction(Action.WALK_RIGHT);
+        return IsInAction(Action.WALK_LEFT) || IsInAction(Action.WALK_RIGHT);
     }
-    bool running()
+    bool Running()
     {
-        return isInAction(Action.RUN_LEFT) || isInAction(Action.RUN_RIGHT);
+        return IsInAction(Action.RUN_LEFT) || IsInAction(Action.RUN_RIGHT);
     }
-    bool moving()
+    bool Moving()
     {
-        return walking() || running();
+        return Walking() || Running();
     }
 }
