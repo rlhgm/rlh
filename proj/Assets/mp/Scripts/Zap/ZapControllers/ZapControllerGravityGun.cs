@@ -295,10 +295,11 @@ public class ZapControllerGravityGun : ZapController
                     if (distToGround != 0f)
                     {
                         transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+                        zap.touchStone(zap.groundUnder, transform.position);
                     }
                     else
                     {
-                        zap.touchStone(zap.groundUnder);
+                        zap.touchStone(zap.groundUnder, transform.position);
                     }
                 }
 

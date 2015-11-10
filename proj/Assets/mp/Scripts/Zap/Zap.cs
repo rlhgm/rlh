@@ -729,6 +729,11 @@ public class Zap : MonoBehaviour
 
     public bool touchStone(Transform stone)
     {
+        return touchStone(stone, transform.position);
+    }
+
+    public bool touchStone(Transform stone, Vector2 forcePosition)
+    {
         //return false;
 
         //print(Physics2D.gravity);
@@ -741,7 +746,7 @@ public class Zap : MonoBehaviour
         touchedForce.y = mass * Physics2D.gravity.y; //pushedForce; // + (velocity.y * mass);
         
         //touchedForce.y *= -1.0f;
-        stoneBody.AddForceAtPosition(touchedForce, transform.position, ForceMode2D.Force);
+        stoneBody.AddForceAtPosition(touchedForce, forcePosition, ForceMode2D.Force);
         //stoneBody.
 
         //print(touchedForce);

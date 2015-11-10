@@ -2215,6 +2215,21 @@ public class ZapControllerNormal : ZapController
 
     int Action_CLIMB_CATCH()
     {
+        //if (zap.groundUnder)
+        //{
+        //    if (distToGround != 0f)
+        //    {
+        //        transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
+        //        zap.touchStone(zap.groundUnder);
+        //    }
+        //    else
+        //    {
+        //        zap.touchStone(zap.groundUnder);
+        //    }
+        //}
+        //Debug.Log(climbAfterPos2);
+        zap.touchStone(catchedClimbHandle.transform,climbAfterPos2);
+
         if ((Input.GetKeyDown(zap.keyUp) || Input.GetKey(zap.keyUp)) ) // && canPullUp)
         {
             if (canClimbPullUp2())
