@@ -175,6 +175,8 @@ public class Rat : MonoBehaviour
                             SetMode(Mode.BackToNormal);
                             SetState(State.OnGround);
                             SetAction(Action.Landing);
+
+                            velocity.y = 0f;
                         }
                         else
                         {
