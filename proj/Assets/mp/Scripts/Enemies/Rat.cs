@@ -66,6 +66,7 @@ public class Rat : MonoBehaviour
 
         targetPos = RLHScene.Instance.Zap.transform.position;
         distToTarget = Vector3.Distance(transform.position, targetPos);
+        distToTargetX = transform.position.x - targetPos.x;
 
         CheckMode();
 
@@ -223,6 +224,7 @@ public class Rat : MonoBehaviour
     float currentDeltaTime = 0f;
     Vector3 targetPos = new Vector3(0f,0f,0f);
     float distToTarget = 0f;
+    float distToTargetX = 0f;
 
     float helpDuration1 = 0f;
      
@@ -321,6 +323,8 @@ public class Rat : MonoBehaviour
         TurnbackTriggerEnter
     }
 
+    ThinkCause lastThinkCause = ThinkCause.Boredom;
+
     bool CheckMode()
     {
         switch(mode)
@@ -377,6 +381,8 @@ public class Rat : MonoBehaviour
                 ThinkBackToNormal(cause, param);
                 break;
         }
+
+        lastThinkCause = cause;
     }
 
     void ThinkNormal(ThinkCause cause, int param = 0)
@@ -405,7 +411,7 @@ public class Rat : MonoBehaviour
                     helpDuration1 = Random.Range(1.5f, 3f);
                     WalkStart();
                 }
-                else if( Walking() )
+                else if( Walking() || Running() )
                 {
                     SetAction(Action.IdleIn);
                     nextAction = Random.Range(0,2) == 1 ? Action.NextTurnback : Action.NextWalk;
@@ -444,7 +450,7 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.FinishAction:
-                if (IsInAction(Action.IdleOut) || Walking() )
+                if (IsInAction(Action.IdleOut) || Walking() || TurningBack())
                 {
                     if (SetFaceToTarget())
                     {
@@ -455,6 +461,13 @@ public class Rat : MonoBehaviour
                         RunStart();
                     }
                 }
+                else if( Running() )
+                {
+                    SetAction(Action.IdleIn);
+                    nextAction = Action.NextTurnback;
+                    helpDuration1 = -1;
+                }
+
                 break;
 
             case ThinkCause.TurnbackTriggerEnter:
@@ -473,22 +486,37 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.FinishAction:
-                if (TurningBack())
+                if( SetFaceToTarget(startPos.x) )
                 {
-                    //helpDuration1 = -1; Random.Range(1.5f, 3f);
+
+                }
+                else
+                {
                     WalkStart();
                 }
-                else if (IsInAction(Action.IdleOut))
-                {
-                    if (nextAction == Action.NextTurnback)
-                    {
-                        TurnbackStart();
-                    }
-                    else
-                    {
-                        WalkStart();
-                    }
-                }
+
+                //if (TurningBack())
+                //{
+                //    //helpDuration1 = -1; Random.Range(1.5f, 3f);
+                //    WalkStart();
+                //}
+                //else if (IsInAction(Action.IdleOut))
+                //{
+                //    if (nextAction == Action.NextTurnback)
+                //    {
+                //        TurnbackStart();
+                //    }
+                //    else
+                //    {
+                //        WalkStart();
+                //    }
+                //}
+                //else if (Running())
+                //{
+                //    //SetAction(Action.IdleIn);
+                //    //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                //    //helpDuration1 = Random.Range(0.5f, 2f);
+                //}
                 break;
 
             case ThinkCause.TurnbackTriggerEnter:
@@ -496,14 +524,25 @@ public class Rat : MonoBehaviour
         }
     }
 
-    bool SetFaceToTarget()
+    bool SetFaceToTarget(float targetPosX)
     {
-        if (((transform.position.x < targetPos.x) && FaceLeft()) || ((transform.position.x > targetPos.x) && FaceRight()))
+        if (((transform.position.x < targetPosX) && FaceLeft()) || ((transform.position.x > targetPosX) && FaceRight()))
         {
             TurnbackStart();
             return true;
         }
         return false;
+    }
+
+    bool SetFaceToTarget()
+    {
+        //if (((transform.position.x < targetPos.x) && FaceLeft()) || ((transform.position.x > targetPos.x) && FaceRight()))
+        //{
+        //    TurnbackStart();
+        //    return true;
+        //}
+        //return false;
+        return SetFaceToTarget(targetPos.x);
     }
 
     bool SetMode(Mode newMode, int param = 0)
@@ -565,19 +604,29 @@ public class Rat : MonoBehaviour
             
     void ActionIdle()
     {
-        if (helpDuration1 < 0f)
+        switch (mode)
         {
-            if (modeJustChanged && IsInMode(Mode.BackToNormal))
-            {
-                SetAction(Action.IdleOut);
-            }
-        }
-        else
-        {
-            if (currentActionTime >= helpDuration1 || (modeJustChanged && IsInMode(Mode.Fight)))
-            {
-                SetAction(Action.IdleOut);
-            }
+            case Mode.Normal:
+                if (currentActionTime >= helpDuration1 || (modeJustChanged && IsInMode(Mode.Fight)))
+                {
+                    SetAction(Action.IdleOut);
+                }
+                break;
+
+            case Mode.Fight:
+                //if ( Mathf.Abs(distToTargetX) > 1f ) //&& lastThinkCause != ThinkCause.CantGoFuther)
+                if ( (Mathf.Abs(distToTargetX) > 0.75f && lastThinkCause != ThinkCause.CantGoFuther)
+                    || ( (distToTargetX > 0 && FaceRight()) || (distToTargetX < 0 && FaceLeft())) )
+                {
+                    SetAction(Action.IdleOut);
+                    break; ;
+                }
+
+                if (modeJustChanged && IsInMode(Mode.BackToNormal))
+                {
+                    SetAction(Action.IdleOut);
+                }
+                break;
         }
     }
     void ActionIdleIn()
@@ -601,13 +650,13 @@ public class Rat : MonoBehaviour
             case Mode.Normal:
                 if (currentActionTime >= helpDuration1)
                 {
-                    ThinkNormal(ThinkCause.FinishAction);
+                    Think(ThinkCause.FinishAction);
                     return;
                 }
                 break;
 
             case Mode.Fight:
-                ThinkFight(ThinkCause.FinishAction);
+                Think(ThinkCause.FinishAction);
                 return;
 
             case Mode.BackToNormal:
@@ -618,6 +667,25 @@ public class Rat : MonoBehaviour
     }
     void ActionRun(int moveDir)
     {
+        switch (mode)
+        {
+            case Mode.Normal:
+                Think(ThinkCause.FinishAction);
+                return;
+                
+            case Mode.Fight:
+                if ( Mathf.Abs(distToTargetX) < 0.75f)
+                {
+                    Think(ThinkCause.FinishAction);
+                    return;
+                }
+                break;
+
+            case Mode.BackToNormal:
+                Think(ThinkCause.FinishAction);
+                break;
+        }
+
         ActionMove(moveDir, RunSpeed);
     }
     void ActionMove(int moveDir, float speed)
