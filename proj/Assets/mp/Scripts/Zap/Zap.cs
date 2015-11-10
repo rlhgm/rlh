@@ -695,6 +695,8 @@ public class Zap : MonoBehaviour
             }
         }
 
+        if (stone == groundUnder) return false;
+
         float stoneSpeed = stoneBody.velocity.magnitude;
         //		if (stoneSpeed > stoneDeadlySpeed) {
         //			die (DeathType.STONE_HIT);
