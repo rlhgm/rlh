@@ -115,6 +115,14 @@ public class Rat : MonoBehaviour
                 ActionJump();
                 break;
 
+            case Action.Landing:
+                ActionLanding();
+                break;
+
+            case Action.Fly:
+
+                break;
+
             case Action.Die:
                 ActionDie();
                 break;
@@ -131,9 +139,12 @@ public class Rat : MonoBehaviour
                 }
                 else
                 {
-                    //SetState(State.InAir);
-                    //SetAction(Action.Undef);
+                    SetState(State.InAir);
+                    SetAction(Action.Fly);
                 }
+                break;
+
+            case State.InAir:
                 break;
         }
 
@@ -280,6 +291,8 @@ public class Rat : MonoBehaviour
         actionJustChanged = true;
         action = newAction;
 
+        myAnimator.speed = 1f;
+
         switch (action)
         {
             case Action.Idle:
@@ -324,6 +337,15 @@ public class Rat : MonoBehaviour
 
             case Action.JumpRight:
                 myAnimator.Play(jumpAnimStateHash);
+                break;
+
+            case Action.Landing:
+                myAnimator.Play(landingAnimStateHash);
+                break;
+
+            case Action.Fly:
+                myAnimator.Play(flyAnimStateHash);
+                myAnimator.speed = 0f;
                 break;
 
             case Action.Die:
@@ -758,6 +780,8 @@ public class Rat : MonoBehaviour
     static int runAnimStateHash;
     static int turnbackAnimStateHash;
     static int jumpAnimStateHash;
+    static int landingAnimStateHash;
+    static int flyAnimStateHash;
     static int dieAnimStateHash;
 
     static bool StaticInit()
@@ -771,6 +795,8 @@ public class Rat : MonoBehaviour
         runAnimStateHash = Animator.StringToHash("Run");
         turnbackAnimStateHash = Animator.StringToHash("Turnback");
         jumpAnimStateHash = Animator.StringToHash("Jump");
+        landingAnimStateHash = Animator.StringToHash("Landing");
+        flyAnimStateHash = Animator.StringToHash("Fly");
         dieAnimStateHash = Animator.StringToHash("Die");
         
         staticInitiated = true;
@@ -965,7 +991,8 @@ public class Rat : MonoBehaviour
     {
         if( currentActionTime >= LandingDuration )
         {
-
+            SetMode(Mode.BackToNormal);
+            Think(ThinkCause.FinishAction);
         }
     }
 
