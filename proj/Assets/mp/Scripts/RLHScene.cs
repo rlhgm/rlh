@@ -13,6 +13,7 @@ public class RLHScene : MonoBehaviour
     private static RLHScene _scene = null;
 
     Zap zap = null;
+    Rat[] rats;
 
     public static RLHScene Instance
     {
@@ -71,6 +72,28 @@ public class RLHScene : MonoBehaviour
         }
         ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
         //print(ShowInfoTriggersControlls);
+
+        rats = FindObjectsOfType<Rat>();
+    }
+
+    public int getRatsOnPosition(Vector3 pos, float maxDist, int maxRats, ref ArrayList foundedRats)
+    {
+        //ArrayList foundedRats = new ArrayList(maxRats);
+        //fr.Add()
+        foundedRats.Clear();
+
+        foreach(Rat rat in rats )
+        {
+            if( Vector3.Distance(rat.transform.position, pos) < maxDist)
+            {
+                foundedRats.Add(rat);
+            }
+        }
+
+        return foundedRats.Count;
+
+        //Rat[] foundedRats = new Rat[maxRats];
+        //return foundedRats;
     }
 
     public void activateShowInfoTriggerController(ShowInfoTriggerController sitc)

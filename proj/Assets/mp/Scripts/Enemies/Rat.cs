@@ -228,7 +228,9 @@ public class Rat : MonoBehaviour
     float distToTargetX = 0f;
 
     float helpDuration1 = 0f;
-     
+
+    ArrayList _rats = new ArrayList(3);
+
     public bool SetState(State newState)
     {
         if (state == newState)
@@ -366,7 +368,7 @@ public class Rat : MonoBehaviour
             case Mode.PissedOff:
                 if (Mathf.Abs(modeChangedPos.x - transform.position.x) > helpDuration1)
                 {
-                    print("return to fight : " + modeChangedPos.x + " " + transform.position.x);
+                    //print("return to fight : " + modeChangedPos.x + " " + transform.position.x);
                     SetMode(Mode.Fight);
                     Think(ThinkCause.FinishAction);
                 }  
@@ -458,9 +460,27 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.CantGoFuther:
-                SetAction(Action.IdleIn);
-                nextAction = Action.NextTurnback;
-                helpDuration1 = Random.Range(0.5f, 2f);
+                //bool canIdled = true;
+                RLHScene.Instance.getRatsOnPosition(transform.position, 0.5f, 3, ref _rats);
+                for( int i = 0; i < _rats.Count; ++i)
+                {
+                    Rat brother = (Rat)_rats[i];
+                    if (brother == this) continue;
+                    if (brother.IsInAction(Action.Idle) || brother.IsInAction(Action.IdleIn))
+                    {
+                        //canIdled = false;
+                        SetMode(Mode.PissedOff);
+                        TurnbackStart();
+                        return;
+                    }
+                }
+
+                //if (canIdled)
+                //{
+                    SetAction(Action.IdleIn);
+                    nextAction = Action.NextTurnback;
+                    helpDuration1 = Random.Range(0.5f, 2f);
+                //}
                 break;
 
             case ThinkCause.FinishAction:
@@ -477,6 +497,30 @@ public class Rat : MonoBehaviour
                 }
                 else if( Running() )
                 {
+                    //bool canIdled = true;
+                    RLHScene.Instance.getRatsOnPosition(transform.position, 0.5f, 3, ref _rats);
+                    for (int i = 0; i < _rats.Count; ++i)
+                    {
+                        Rat brother = (Rat)_rats[i];
+                        if (brother == this) continue;
+                        if (brother.IsInAction(Action.Idle) || brother.IsInAction(Action.IdleIn))
+                        {
+                            //canIdled = false;
+                            SetMode(Mode.PissedOff);
+                            TurnbackStart();
+                            return;
+                        }
+                    }
+
+                    ////if (canIdled)
+                    ////{
+                    //SetAction(Action.IdleIn);
+                    //nextAction = Action.NextTurnback;
+                    //helpDuration1 = Random.Range(0.5f, 2f);
+                    ////}
+
+
+
                     SetAction(Action.IdleIn);
                     //nextAction = Action.NextTurnback;
                     //helpDuration1 = -1;
@@ -519,7 +563,7 @@ public class Rat : MonoBehaviour
                     }
                     else
                     {
-                        print("start walk pissed off");
+                        //print("start walk pissed off");
                         WalkStart();
                     }
                     //print("pissed off = > RunStart");
@@ -541,7 +585,7 @@ public class Rat : MonoBehaviour
                         }
                         else
                         {
-                            print("start walk pissed off");
+                            //print("start walk pissed off");
                             WalkStart();
                         }
                     }
@@ -634,7 +678,7 @@ public class Rat : MonoBehaviour
         modeJustChanged = true;
         mode = newMode;
 
-        print(mode);
+        //print(mode);
 
         //switch (mode)
         //{
