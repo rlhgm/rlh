@@ -16,7 +16,10 @@ public class Rat : MonoBehaviour
     public float JumpDuration = 0.5f;
 
     public float LandingDuration = 0.33f;
-    
+
+    public float GravityForce = -20f;
+    public float MaxSpeedY = 15.0f;
+
     // Use this for initialization
     void Awake()
     {
@@ -145,6 +148,41 @@ public class Rat : MonoBehaviour
                 break;
 
             case State.InAir:
+                if (!Jumping())
+                {
+                    velocity.y += GravityForce * currentDeltaTime;
+
+                    if (velocity.y > MaxSpeedY)
+                        velocity.y = MaxSpeedY;
+                    if (velocity.y < -MaxSpeedY)
+                        velocity.y = -MaxSpeedY;
+
+                    float distToFallY = velocity.y * currentDeltaTime;
+
+                    //bool justLanding = false;
+
+                    if (distToFallY > 0.0f)
+                    { // leci w gore
+                    }
+                    else if (distToFallY < 0.0f)
+                    { // spada
+                        if (RLHScene.Instance.checkGround(mySensor.position, myHalfSize.y + distToFallY, ref distToObstacle, ref groundAngle))
+                        {
+                            newPos.y += (myHalfSize.y - distToObstacle);
+                            //transform.rotation.z = groundAngle
+                            transform.position = newPos;
+
+                            SetMode(Mode.BackToNormal);
+                            SetState(State.OnGround);
+                            SetAction(Action.Landing);
+                        }
+                        else
+                        {
+                            newPos.y += distToFallY;
+                            transform.position = newPos;
+                        }
+                    }
+                }
                 break;
         }
 
@@ -795,7 +833,7 @@ public class Rat : MonoBehaviour
         runAnimStateHash = Animator.StringToHash("Run");
         turnbackAnimStateHash = Animator.StringToHash("Turnback");
         jumpAnimStateHash = Animator.StringToHash("Jump");
-        landingAnimStateHash = Animator.StringToHash("Landing");
+        landingAnimStateHash = Animator.StringToHash("Landing2");
         flyAnimStateHash = Animator.StringToHash("Fly");
         dieAnimStateHash = Animator.StringToHash("Die");
         
