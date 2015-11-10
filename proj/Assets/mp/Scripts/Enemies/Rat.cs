@@ -15,8 +15,8 @@ public class Rat : MonoBehaviour
     public float TurnbackDuration = 0.5f;
     public float JumpDuration = 0.5f;
 
-    public static int aaa = 0;
-
+    public float LandingDuration = 0.33f;
+    
     // Use this for initialization
     void Awake()
     {
@@ -191,6 +191,9 @@ public class Rat : MonoBehaviour
         JumpRight,
 
         Die,
+
+        Landing,
+        Fly,
 
         // next actions:
         NextIdle,
@@ -956,6 +959,19 @@ public class Rat : MonoBehaviour
 
     void ActionDie()
     {
+    }
+
+    void ActionLanding()
+    {
+        if( currentActionTime >= LandingDuration )
+        {
+
+        }
+    }
+
+    void ActionFly()
+    {
+
     }
     
     void JumpStart()
