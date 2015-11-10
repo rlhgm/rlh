@@ -189,6 +189,7 @@ public class RLHScene : MonoBehaviour
         return _hit.collider;
     }
 
+    
 
     //public float checkRight(float checkingDist, bool flying = false)
     //{

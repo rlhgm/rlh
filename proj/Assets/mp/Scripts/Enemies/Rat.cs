@@ -7,11 +7,13 @@ public class Rat : MonoBehaviour
 
     public float WalkSpeed = 2f;
     public float RunSpeed = 5f;
+    public float JumpSpeed = 1f;
 
     public float FightModeDistance = 5f;
     public float IdleInDuration = 0.25f;
     public float IdleOutDuration = 0.25f;
     public float TurnbackDuration = 0.5f;
+    public float JumpDuration = 0.5f;
 
     public static int aaa = 0;
 
@@ -44,6 +46,8 @@ public class Rat : MonoBehaviour
         //SetAction(Action.walk);
         //Think(ThinkCause.Boredom);
         WalkStart();
+
+        JumpSpeed = 2.0f / JumpDuration; // jumpdist
     }
 
     // Update is called once per frame
@@ -101,6 +105,14 @@ public class Rat : MonoBehaviour
                 break;
             case Action.TurnbackRight:
                 ActionTurnbackRight();
+                break;
+
+            case Action.JumpLeft:
+                ActionJump();
+                break;
+
+            case Action.JumpRight:
+                ActionJump();
                 break;
 
             case Action.Die:
@@ -175,6 +187,9 @@ public class Rat : MonoBehaviour
         TurnbackLeft,
         TurnbackRight,
         
+        JumpLeft,
+        JumpRight,
+
         Die,
 
         // next actions:
@@ -298,6 +313,14 @@ public class Rat : MonoBehaviour
 
             case Action.TurnbackRight:
                 myAnimator.Play(turnbackAnimStateHash);
+                break;
+
+            case Action.JumpLeft:
+                myAnimator.Play(jumpAnimStateHash);
+                break;
+
+            case Action.JumpRight:
+                myAnimator.Play(jumpAnimStateHash);
                 break;
 
             case Action.Die:
@@ -431,6 +454,13 @@ public class Rat : MonoBehaviour
                 {
                     SetAction(Action.IdleIn);
                     nextAction = Random.Range(0,2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                    helpDuration1 = Random.Range(0.5f, 2f);
+                }
+                else if( Jumping())
+                {
+                    SetAction(Action.IdleIn);
+                    //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                    nextAction = Action.NextWalk;
                     helpDuration1 = Random.Range(0.5f, 2f);
                 }
                 else if (IsInAction(Action.IdleOut))
@@ -709,6 +739,7 @@ public class Rat : MonoBehaviour
     static int walkAnimStateHash;
     static int runAnimStateHash;
     static int turnbackAnimStateHash;
+    static int jumpAnimStateHash;
     static int dieAnimStateHash;
 
     static bool StaticInit()
@@ -721,6 +752,7 @@ public class Rat : MonoBehaviour
         walkAnimStateHash = Animator.StringToHash("Walk");
         runAnimStateHash = Animator.StringToHash("Run");
         turnbackAnimStateHash = Animator.StringToHash("Turnback");
+        jumpAnimStateHash = Animator.StringToHash("Jump");
         dieAnimStateHash = Animator.StringToHash("Die");
         
         staticInitiated = true;
@@ -844,8 +876,18 @@ public class Rat : MonoBehaviour
 
             if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
             {
-                distToMove = 0.0f;
-                Think(ThinkCause.CantGoFuther,1);
+                if (canJump(mySensor.position, Dir()))
+                {
+                    print("can jump");
+                    JumpStart();
+                    //distToMove = 0.0f;
+                    //Think(ThinkCause.CantGoFuther, 1);
+                }
+                else
+                {
+                    distToMove = 0.0f;
+                    Think(ThinkCause.CantGoFuther, 1);
+                }
             }
         }
 
@@ -869,10 +911,72 @@ public class Rat : MonoBehaviour
         }
     }
 
+    void JumpLeft()
+    {
+        ActionJump();
+    }
+
+    void JumpRight()
+    {
+        ActionJump();
+    }
+
+    void ActionJump()
+    {
+        if( currentActionTime >= JumpDuration)
+        {
+            Vector3 finalPos = actionChangedPos;
+            finalPos.x += 2f * Dir2();
+            transform.position = finalPos;
+
+            Think(ThinkCause.FinishAction);
+        }
+
+        distToMove = JumpSpeed * currentDeltaTime;
+
+        //if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
+        //{
+        //    distToMove = distToObstacle - myHalfSize.x;
+        //    Think(ThinkCause.CantGoFuther);
+        //}
+        //else
+        //{
+        //    Vector2 testGroundPos = mySensor.position;
+        //    testGroundPos.x += ((distToMove + 0.5f) * moveDir);
+
+        //    if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
+        //    {
+        //        if (canJump(mySensor.position, Dir()))
+        //        {
+        //            print("can jump");
+        //            JumpStart();
+        //            //distToMove = 0.0f;
+        //            //Think(ThinkCause.CantGoFuther, 1);
+        //        }
+        //        else
+        //        {
+        //            distToMove = 0.0f;
+        //            Think(ThinkCause.CantGoFuther, 1);
+        //        }
+        //    }
+        //}
+
+        newPos.x += (distToMove * Dir2());
+        transform.position = newPos;
+    }
+
     void ActionDie()
     {
     }
     
+    void JumpStart()
+    {
+        if (FaceRight())
+            SetAction(Action.JumpRight);
+        else
+            SetAction(Action.JumpLeft);
+    }
+
     void WalkStart()
     {
         if (FaceRight())
@@ -944,10 +1048,42 @@ public class Rat : MonoBehaviour
     {
         return Walking() || Running();
     }
+    bool Jumping()
+    {
+        return IsInAction(Action.JumpLeft) || IsInAction(Action.JumpRight);
+    }
     bool TurningBack()
     {
         return IsInAction(Action.TurnbackLeft) || IsInAction(Action.TurnbackRight);
     }
+
+    RaycastHit2D _hit;
+    public bool canJump(Vector2 from, Vector2 dir)
+    {
+        _hit = Physics2D.Raycast(from, dir, 2.5f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider != null)
+        {
+            return false;
+        }
+
+        //Vector2 offset = new Vector2(dir.x * 1.75f, 0f);
+        from.x += dir.x * 1.75f;
+        _hit = Physics2D.Raycast(from, Vector2.down, 0.5f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider == null)
+        {
+            return false;
+        }
+
+        from.x += dir.x * 0.5f;
+        _hit = Physics2D.Raycast(from, Vector2.down, 0.5f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider == null)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+
     //bool NormalMode()
     //{
     //    return IsInMode(Mode.Normal);
