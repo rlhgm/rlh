@@ -228,6 +228,7 @@ public class Rat : MonoBehaviour
             if (canAttack())
             {
                 SetAction(Action.Attack);
+                zap.die(Zap.DeathType.PANTHER);
             }
             return;
         }
