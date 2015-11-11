@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: e8af58a7f53c3314588b242c500bba6b
+timeCreated: 1447121788
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Wood_set_0
+    21300002: Wood_set_1
+    21300004: Wood_set_2
+    21300006: Wood_set_3
+    21300008: Wood_set_4
+    21300010: Wood_set_5
+    21300012: Wood_set_6
+    21300014: Wood_set_7
+    21300016: Wood_set_8
+    21300018: Wood_set_9
+    21300020: Wood_set_10
+    21300022: Wood_set_11
+    21300024: Wood_set_12
+    21300026: Wood_set_13
+    21300028: Wood_set_14
+    21300030: Wood_set_15
+    21300032: Wood_set_16
+    21300034: Wood_set_17
+    21300036: Wood_set_18
+    21300038: Wood_set_19
+    21300040: Wood_set_20
+    21300042: Wood_set_21
+    21300044: Wood_set_22
+    21300046: Wood_set_23
+    21300048: Wood_set_24
+    21300050: Wood_set_25
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 24
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Wood_set_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 114
+        width: 45
+        height: 35
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 107
+        width: 34
+        height: 42
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_2
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 110
+        width: 41
+        height: 41
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 123
+        width: 42
+        height: 28
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_4
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 106
+        width: 35
+        height: 45
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_5
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 125
+        width: 45
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 107
+        width: 42
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_7
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 105
+        width: 10
+        height: 46
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_8
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 106
+        width: 14
+        height: 44
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_9
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 102
+        width: 19
+        height: 45
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 104
+        width: 23
+        height: 44
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_11
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 105
+        width: 26
+        height: 45
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 65
+        width: 28
+        height: 42
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_13
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 60
+        width: 41
+        height: 41
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_14
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 69
+        width: 42
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_15
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 54
+        width: 57
+        height: 49
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_16
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 54
+        width: 57
+        height: 49
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_17
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 55
+        width: 56
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_18
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 52
+        width: 57
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_19
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 44
+        width: 46
+        height: 10
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_20
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 40
+        width: 44
+        height: 14
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_21
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 4
+        width: 56
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_22
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 4
+        width: 57
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_23
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 3
+        width: 57
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_24
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 20
+        width: 45
+        height: 19
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wood_set_25
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 10
+        width: 44
+        height: 23
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
