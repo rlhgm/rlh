@@ -14,6 +14,9 @@ public class Rat : MonoBehaviour
     public float IdleOutDuration = 0.25f;
     public float TurnbackDuration = 0.5f;
     public float JumpDuration = 0.5f;
+    public float ClimbUpDuration = 0.83f;
+    public float ClimbDownDuration = 0.5f;
+    public float AttackDuration = 0.583f;
 
     public float LandingDuration = 0.33f;
 
@@ -125,6 +128,19 @@ public class Rat : MonoBehaviour
             case Action.Fly:
 
                 break;
+
+            case Action.ClimbUpLeft:
+                ActionClimbUp();
+                break;
+
+            case Action.ClimbUpRight:
+                ActionClimbUp();
+                break;
+
+            case Action.Attack:
+                ActionAttack();
+                break;
+
 
             case Action.Die:
                 ActionDie();
@@ -242,6 +258,10 @@ public class Rat : MonoBehaviour
         JumpRight,
 
         Die,
+
+        ClimbUpLeft,
+        ClimbUpRight,
+        Attack,
 
         Landing,
         Fly,
@@ -390,6 +410,18 @@ public class Rat : MonoBehaviour
 
             case Action.Die:
                 myAnimator.Play(dieAnimStateHash);
+                break;
+
+            case Action.ClimbUpLeft:
+                myAnimator.Play(climbUpAnimStateHash);
+                break;
+
+            case Action.ClimbUpRight:
+                myAnimator.Play(climbUpAnimStateHash);
+                break;
+
+            case Action.Attack:
+                myAnimator.Play(attackAnimStateHash);
                 break;
         }
          
@@ -823,7 +855,9 @@ public class Rat : MonoBehaviour
     static int landingAnimStateHash;
     static int flyAnimStateHash;
     static int dieAnimStateHash;
-
+    static int climbUpAnimStateHash;
+    static int attackAnimStateHash;
+    
     static bool StaticInit()
     {
         if (staticInitiated) return false;
@@ -838,7 +872,9 @@ public class Rat : MonoBehaviour
         landingAnimStateHash = Animator.StringToHash("Landing2");
         flyAnimStateHash = Animator.StringToHash("Fly");
         dieAnimStateHash = Animator.StringToHash("Die");
-        
+        climbUpAnimStateHash = Animator.StringToHash("ClimbUp");
+        attackAnimStateHash = Animator.StringToHash("Attack");
+
         staticInitiated = true;
         return true;
     } 
@@ -1040,6 +1076,24 @@ public class Rat : MonoBehaviour
     {
 
     }
+
+    void ActionClimbUp()
+    {
+        if (currentActionTime >= AttackDuration)
+        {
+            //SetMode(Mode.BackToNormal);
+            Think(ThinkCause.FinishAction);
+        }
+    }
+
+    void ActionAttack()
+    {
+        if (currentActionTime >= AttackDuration)
+        {
+            //SetMode(Mode.BackToNormal);
+            Think(ThinkCause.FinishAction);
+        }
+    }
     
     void JumpStart()
     {
@@ -1155,6 +1209,12 @@ public class Rat : MonoBehaviour
             return false;
         }
         
+        return true;
+    }
+
+    public bool canClimbUp()
+    {
+
         return true;
     }
 
