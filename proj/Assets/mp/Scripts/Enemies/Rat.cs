@@ -130,6 +130,11 @@ public class Rat : MonoBehaviour
 
                 break;
 
+            case Action.ClimbUpInLeft:
+            case Action.ClimbUpInRight:
+                ActionClimbUpIn();
+                break;
+                
             case Action.ClimbUpLeft:
                 ActionClimbUp();
                 break;
@@ -321,7 +326,7 @@ public class Rat : MonoBehaviour
     float distToTargetX = 0f;
 
     float helpDuration1 = 0f;
-
+    Vector3 helpPos1 = new Vector3(0f, 0f, 0f);
     ArrayList _rats = new ArrayList(3);
 
     public bool SetState(State newState)
@@ -1003,10 +1008,8 @@ public class Rat : MonoBehaviour
             distToMove = distToObstacle - myHalfSize.x;
             if (canClimbUp(false))
             {
-                print("can climbup");
-                //ClimbUpStart();
-                Think(ThinkCause.CantGoFuther);
-
+                //print("can climbup");
+                ClimbUpInStart();
             }
             else
             {
@@ -1103,17 +1106,32 @@ public class Rat : MonoBehaviour
     {
         if (currentActionTime >= ClimbUpInDuration)
         {
-            //SetMode(Mode.BackToNormal);
-            //Think(ThinkCause.FinishAction);
+            ClimbUpStart();
         }
     }
 
     void ActionClimbUp()
     {
-        if (currentActionTime >= AttackDuration)
+        float ratio = Mathf.Min(currentActionTime / ClimbUpDuration, 1f);
+        
+        if (ratio < 0.33f)
         {
-            //SetMode(Mode.BackToNormal);
-            Think(ThinkCause.FinishAction);
+            helpPos1 = actionChangedPos;
+            helpPos1.y += (ratio * 3);
+            helpPos1.x += ((ratio * 3) * Dir2() * myHalfSize.x);
+            transform.position = helpPos1;
+        }
+        else if (ratio > 0.75f)
+        {
+            _rayOrigin = helpPos1;
+            _rayOrigin.x += ((ratio - 0.75f) * Dir2());
+            transform.position = _rayOrigin;
+        }
+        
+        if (currentActionTime >= ClimbUpDuration)
+        {
+            SetState(State.OnGround);
+            SetAction(nextAction);
         }
     }
 
@@ -1134,6 +1152,15 @@ public class Rat : MonoBehaviour
             SetAction(Action.JumpLeft);
 
         SetState(State.InAir);
+    }
+
+    void ClimbUpInStart()
+    {
+        nextAction = action;
+        if (FaceRight())
+            SetAction(Action.ClimbUpInRight);
+        else
+            SetAction(Action.ClimbUpInLeft);
     }
 
     void ClimbUpStart()
@@ -1228,7 +1255,7 @@ public class Rat : MonoBehaviour
 
     RaycastHit2D _hit;
     Vector2 _rayOrigin = new Vector2(0f, 0f);
-
+    
     public bool canJump(Vector2 from, Vector2 dir)
     {
         _hit = Physics2D.Raycast(from, dir, 2.5f, RLHScene.Instance.layerIdGroundAllMask);
@@ -1274,7 +1301,7 @@ public class Rat : MonoBehaviour
         }
 
         _rayOrigin.y += 1.0f;
-        _hit = Physics2D.Raycast(_rayOrigin, Dir(), 1.0f, RLHScene.Instance.layerIdGroundAllMask);
+        _hit = Physics2D.Raycast(_rayOrigin, Dir(), myHalfSize.x+1.0f, RLHScene.Instance.layerIdGroundAllMask);
         if (_hit.collider != null)
         {
             return false;

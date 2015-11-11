@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4f8f4fd47981a6e4b871f62f87340722
-timeCreated: 1447265619
+timeCreated: 1447273304
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -88,7 +88,7 @@ TextureImporter:
         width: 37
         height: 28
       alignment: 9
-      pivot: {x: .449999988, y: .150000006}
+      pivot: {x: .381224155, y: .644803524}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: rat_jump_3
       rect:
@@ -98,7 +98,7 @@ TextureImporter:
         width: 37
         height: 28
       alignment: 9
-      pivot: {x: .54220295, y: .158010334}
+      pivot: {x: .397009552, y: .582127869}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: rat_jump_4
       rect:
@@ -108,7 +108,7 @@ TextureImporter:
         width: 37
         height: 28
       alignment: 9
-      pivot: {x: .387458175, y: .316020727}
+      pivot: {x: .40274173, y: .497785479}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: rat_jump_5
       rect:
@@ -118,7 +118,7 @@ TextureImporter:
         width: 37
         height: 28
       alignment: 9
-      pivot: {x: .443729311, y: .269547075}
+      pivot: {x: .436087519, y: .471507698}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: rat_jump_6
       rect:
@@ -128,7 +128,7 @@ TextureImporter:
         width: 37
         height: 28
       alignment: 9
-      pivot: {x: .521101654, y: .213778704}
+      pivot: {x: .467608899, y: .456131399}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: rat_jump_7
       rect:
