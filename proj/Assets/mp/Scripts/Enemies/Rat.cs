@@ -143,6 +143,11 @@ public class Rat : MonoBehaviour
                 ActionClimbUp();
                 break;
 
+            case Action.ClimbDownLeft:
+            case Action.ClimbDownRight:
+                ActionClimbDown();
+                break;
+
             case Action.Attack:
                 ActionAttack();
                 break;
@@ -270,6 +275,10 @@ public class Rat : MonoBehaviour
         ClimbUpRight,
         ClimbUpInLeft,
         ClimbUpInRight,
+
+        ClimbDownLeft,
+        ClimbDownRight,
+
         Attack,
 
         Landing,
@@ -435,6 +444,14 @@ public class Rat : MonoBehaviour
 
             case Action.ClimbUpInRight:
                 myAnimator.Play(climbUpInAnimStateHash);
+                break;
+
+            case Action.ClimbDownLeft:
+                myAnimator.Play(climbDownAnimStateHash);
+                break;
+
+            case Action.ClimbDownRight:
+                myAnimator.Play(climbDownAnimStateHash);
                 break;
 
             case Action.Attack:
@@ -899,6 +916,7 @@ public class Rat : MonoBehaviour
     static int dieAnimStateHash;
     static int climbUpAnimStateHash;
     static int climbUpInAnimStateHash;
+    static int climbDownAnimStateHash;
     static int attackAnimStateHash;
 
     static bool StaticInit()
@@ -917,6 +935,7 @@ public class Rat : MonoBehaviour
         dieAnimStateHash = Animator.StringToHash("Die");
         climbUpAnimStateHash = Animator.StringToHash("ClimbUp");
         climbUpInAnimStateHash = Animator.StringToHash("ClimbUpIn");
+        climbDownAnimStateHash = Animator.StringToHash("ClimbDown");
         attackAnimStateHash = Animator.StringToHash("Attack");
 
         staticInitiated = true;
@@ -1053,6 +1072,10 @@ public class Rat : MonoBehaviour
                     //print("can jump");
                     JumpStart();
                 }
+                else if (canClimbDown())
+                {
+                    ClimbDownStart();
+                }
                 else
                 {
                     distToMove = 0.0f;
@@ -1162,6 +1185,31 @@ public class Rat : MonoBehaviour
         }
     }
 
+    void ActionClimbDown()
+    {
+        float ratio = Mathf.Min(currentActionTime / ClimbDownDuration, 1f);
+
+        //if (ratio < 0.33f)
+        //{
+        //    helpPos1 = actionChangedPos;
+        //    helpPos1.y += (ratio * 3);
+        //    helpPos1.x += ((ratio * 3) * Dir2() * myHalfSize.x);
+        //    transform.position = helpPos1;
+        //}
+        //else if (ratio > 0.75f)
+        //{
+        //    _rayOrigin = helpPos1;
+        //    _rayOrigin.x += ((ratio - 0.75f) * Dir2());
+        //    transform.position = _rayOrigin;
+        //}
+
+        if (currentActionTime >= ClimbUpDuration)
+        {
+            SetState(State.OnGround);
+            Think(ThinkCause.FinishAction);
+        }
+    }
+
     void ActionAttack()
     {
         if (currentActionTime >= AttackDuration)
@@ -1198,6 +1246,16 @@ public class Rat : MonoBehaviour
             SetAction(Action.ClimbUpRight);
         else
             SetAction(Action.ClimbUpLeft);
+
+        SetState(State.Climb);
+    }
+
+    void ClimbDownStart()
+    {
+        if (FaceRight())
+            SetAction(Action.ClimbDownRight);
+        else
+            SetAction(Action.ClimbDownLeft);
 
         SetState(State.Climb);
     }
@@ -1338,6 +1396,12 @@ public class Rat : MonoBehaviour
         {
             return false;
         }
+
+        return true;
+    }
+
+    bool canClimbDown()
+    {
 
         return true;
     }
