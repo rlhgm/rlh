@@ -151,8 +151,7 @@ public class Rat : MonoBehaviour
             case Action.Attack:
                 ActionAttack();
                 break;
-
-
+                
             case Action.Die:
                 ActionDie();
                 break;
@@ -220,7 +219,19 @@ public class Rat : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //print("Rat::OnTriggerEnter2D" + other.name);
+        //print("Rat::OnTriggerEnter2D => " + other.name);
+
+        Zap zap = other.GetComponent<Zap>();
+        if ( zap /*other.gameObject.tag == "Player"*/)
+        {
+            //if (IsInMode(Mode.Fight) || IsInMode(Mode.PissedOff))
+            if (canAttack())
+            {
+                SetAction(Action.Attack);
+            }
+            return;
+        }
+
         CreepingAITrigger cait = other.GetComponent<CreepingAITrigger>();
         if (cait)
         {
@@ -497,7 +508,7 @@ public class Rat : MonoBehaviour
                 break;
 
             case Mode.Fight:
-                if (distToTarget > FightModeDistance)
+                if (IsNotInAction(Action.Attack) && (distToTarget > FightModeDistance))
                 {
                     SetMode(Mode.BackToNormal);
                     return true;
@@ -676,7 +687,7 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.FinishAction:
-                if (IsInAction(Action.IdleOut) || Walking() || TurningBack() /*|| Jumping()*/ )
+                if (IsInAction(Action.Attack) || IsInAction(Action.IdleOut) || Walking() || TurningBack() /*|| Jumping()*/ )
                 {
                     if (SetFaceToTarget())
                     {
@@ -746,7 +757,7 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.FinishAction:
-                if (TurningBack() || Climbing())
+                if (TurningBack() || Climbing() || IsInAction(Action.Attack))
                 {
                     //RunStart();
                     helpDuration1 = Random.Range(0.25f, 1.0f);
@@ -1228,7 +1239,6 @@ public class Rat : MonoBehaviour
     {
         if (currentActionTime >= AttackDuration)
         {
-            //SetMode(Mode.BackToNormal);
             Think(ThinkCause.FinishAction);
         }
     }
@@ -1440,6 +1450,18 @@ public class Rat : MonoBehaviour
         
         return true;
     }
+
+    bool canAttack()
+    {
+        // 1) musi byc w trybie walki - dla uproszczenia paru rzeczy
+        // 2) musi byc na glebie tylko
+        // 3) pewnie jeszcze trzeba by wybrac akcje
+        if (IsNotInMode(Mode.Fight) && IsNotInMode(Mode.PissedOff)) return false;
+        if (IsNotInState(State.OnGround)) return false;
+        
+        return true;
+    }
+    
 
     //bool NormalMode()
     //{

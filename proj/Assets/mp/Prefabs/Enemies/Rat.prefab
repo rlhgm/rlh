@@ -26,6 +26,7 @@ GameObject:
   - 61: {fileID: 6146862}
   - 114: {fileID: 11489140}
   - 114: {fileID: 11426584}
+  - 50: {fileID: 5050582}
   m_Layer: 26
   m_Name: Rat
   m_TagString: Untagged
@@ -88,6 +89,22 @@ Transform:
   - {fileID: 425590}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5050582
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129804}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6146862
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -96,7 +113,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 129804}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .25}
   serializedVersion: 2
@@ -132,9 +149,19 @@ MonoBehaviour:
   ControlID: 0
   WalkSpeed: 2
   RunSpeed: 5
+  JumpSpeed: 1
+  FightModeDistance: 5
   IdleInDuration: .25
   IdleOutDuration: .25
   TurnbackDuration: .5
+  JumpDuration: .5
+  ClimbUpDuration: .829999983
+  ClimbUpInDuration: .25
+  ClimbDownDuration: .5
+  AttackDuration: .583000004
+  LandingDuration: .330000013
+  GravityForce: -20
+  MaxSpeedY: 15
 --- !u!114 &11489140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +205,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 129804}
