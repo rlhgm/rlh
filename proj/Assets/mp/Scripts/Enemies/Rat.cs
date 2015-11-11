@@ -594,10 +594,19 @@ public class Rat : MonoBehaviour
                 }
                 else if (Jumping())
                 {
-                    SetAction(Action.IdleIn);
-                    //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
-                    nextAction = Action.NextWalk;
-                    helpDuration1 = Random.Range(0.5f, 2f);
+                    switch (Random.Range(0, 2))
+                    {
+                        case 0:
+                            SetAction(nextAction);
+                            break;
+
+                        case 1:
+                            SetAction(Action.IdleIn);
+                            //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                            nextAction = Action.NextWalk;
+                            helpDuration1 = Random.Range(0.5f, 2f);
+                            break;
+                    }                    
                 }
                 else if (IsInAction(Action.IdleOut))
                 {
@@ -691,17 +700,10 @@ public class Rat : MonoBehaviour
                 }
                 else if (Jumping())
                 {
+                    SetAction(nextAction);
+                    
                     //SetAction(Action.IdleIn);
-                    //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
-                    //nextAction = Action.NextWalk;
                     //helpDuration1 = Random.Range(0.5f, 2f);
-                    //RunStart();
-
-                    SetAction(Action.IdleIn);
-                    //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
-                    //nextAction = Action.NextWalk;
-                    helpDuration1 = Random.Range(0.5f, 2f);
-
                 }
 
                 break;
@@ -771,7 +773,6 @@ public class Rat : MonoBehaviour
                     SetAction(Action.IdleIn);
                     nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextRun;
                     helpDuration1 = Random.Range(0.5f, 2f);
-                    //Think(ThinkCause.FinishAction);
                 }
 
                 break;
@@ -1172,6 +1173,8 @@ public class Rat : MonoBehaviour
 
     void JumpStart()
     {
+        nextAction = action;
+
         if (FaceRight())
             SetAction(Action.JumpRight);
         else
