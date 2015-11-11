@@ -1070,24 +1070,25 @@ public class Rat : MonoBehaviour
                 testGroundPos.y -= 0.55f;
                 if ( RLHScene.Instance.checkObstacle(testGroundPos, -Dir(), distToMove, ref distToObstacle, 45f) )
                 {
-                    distToMove -= distToObstacle;
+                    if (canJump(mySensor.position, Dir()))
+                    {
+                        JumpStart();
+                    }
+                    else if (canClimbDown())
+                    {
+                        ClimbDownStart();
+                    }
+                    else
+                    {
+                        distToMove -= distToObstacle;
+                        Think(ThinkCause.CantGoFuther, 1);
+                    }
+                }
+                else
+                {
+                    distToMove = 0.0f;
                     Think(ThinkCause.CantGoFuther, 1);
                 }
-
-                //if (canJump(mySensor.position, Dir()))
-                //{
-                //    //print("can jump");
-                //    JumpStart();
-                //}
-                //else if (canClimbDown())
-                //{
-                //    ClimbDownStart();
-                //}
-                //else
-                //{
-                //    distToMove = 0.0f;
-                //    Think(ThinkCause.CantGoFuther, 1);
-                //}
             }
         }
 
@@ -1196,6 +1197,11 @@ public class Rat : MonoBehaviour
     {
         float ratio = Mathf.Min(currentActionTime / ClimbDownDuration, 1f);
 
+        helpPos1 = actionChangedPos;
+        helpPos1.y -= ratio;
+        helpPos1.x += (ratio * Dir2());
+        transform.position = helpPos1;
+
         //if (ratio < 0.33f)
         //{
         //    helpPos1 = actionChangedPos;
@@ -1209,6 +1215,7 @@ public class Rat : MonoBehaviour
         //    _rayOrigin.x += ((ratio - 0.75f) * Dir2());
         //    transform.position = _rayOrigin;
         //}
+
 
         if (currentActionTime >= ClimbUpDuration)
         {
@@ -1352,7 +1359,8 @@ public class Rat : MonoBehaviour
     }
     bool Climbing()
     {
-        return IsInAction(Action.ClimbUpLeft) || IsInAction(Action.ClimbUpRight);
+        return IsInAction(Action.ClimbUpLeft) || IsInAction(Action.ClimbUpRight)
+            || IsInAction(Action.ClimbDownLeft) || IsInAction(Action.ClimbDownRight);
     }
     RaycastHit2D _hit;
     Vector2 _rayOrigin = new Vector2(0f, 0f);
@@ -1413,7 +1421,22 @@ public class Rat : MonoBehaviour
 
     bool canClimbDown()
     {
+        _rayOrigin = mySensor.position;
+        _rayOrigin.x += ( (myHalfSize.x + 0.05f) * Dir2() );
+        _rayOrigin.y -= 1f;
 
+        _hit = Physics2D.Raycast(_rayOrigin, Vector2.down, 0.51f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider == null)
+        {
+            return false;
+        }
+
+        _hit = Physics2D.Raycast(_rayOrigin, Dir(), 0.9f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider != null)
+        {
+            return false;
+        }
+        
         return true;
     }
 
