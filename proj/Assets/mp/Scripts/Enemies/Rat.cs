@@ -227,8 +227,7 @@ public class Rat : MonoBehaviour
             //if (IsInMode(Mode.Fight) || IsInMode(Mode.PissedOff))
             if (canAttack())
             {
-                SetAction(Action.Attack);
-                zap.die(Zap.DeathType.PANTHER);
+                AttackStart(zap);
             }
             return;
         }
@@ -244,6 +243,18 @@ public class Rat : MonoBehaviour
         }
     }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        Zap zap = other.GetComponent<Zap>();
+        if (zap)
+        {
+            if (canAttack())
+            {
+                AttackStart(zap);
+            }
+            return;
+        }
+    }
     public enum Mode
     {
         Undef = 0,
@@ -1260,6 +1271,13 @@ public class Rat : MonoBehaviour
         }
     }
 
+    void AttackStart(Zap zap)
+    {
+        SetAction(Action.Attack);
+        zap.die(Zap.DeathType.PANTHER);
+        lastAttackTime = Time.time;
+    }
+
     void JumpStart()
     {
         nextAction = action;
@@ -1468,6 +1486,8 @@ public class Rat : MonoBehaviour
         return true;
     }
 
+    float lastAttackTime = 0f;
+
     bool canAttack()
     {
         // 1) musi byc w trybie walki - dla uproszczenia paru rzeczy
@@ -1475,6 +1495,11 @@ public class Rat : MonoBehaviour
         // 3) pewnie jeszcze trzeba by wybrac akcje
         if (IsNotInMode(Mode.Fight) && IsNotInMode(Mode.PissedOff)) return false;
         if (IsNotInState(State.OnGround)) return false;
+        if (IsInAction(Action.Attack)) return false;
+        
+        // ... i nawet atak po min time... chujowe to
+        //if (currentActionTime < 0.75f) return false;
+        if (Time.time - lastAttackTime < 1.5f) return false;
 
         return true;
     }
