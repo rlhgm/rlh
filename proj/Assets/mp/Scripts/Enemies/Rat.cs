@@ -1199,12 +1199,23 @@ public class Rat : MonoBehaviour
             _rayOrigin.x += ((ratio - 0.75f) * Dir2());
             transform.position = _rayOrigin;
         }
+        else
+        {
+            helpPos1 = actionChangedPos;
+            helpPos1.x += Dir2() * myHalfSize.x;
+            helpPos1.y += 1f;
+            transform.position = helpPos1;
+        }
 
         if (currentActionTime >= ClimbUpDuration)
         {
+            helpPos1 = actionChangedPos;
+            helpPos1.x += Dir2() * myHalfSize.x;
+            helpPos1.x += (0.25f * Dir2());
+            helpPos1.y += 1f;
+            transform.position = helpPos1;
+
             SetState(State.OnGround);
-            //SetAction(nextAction);
-            //helpDuration1 = Random.Range(0.5f, 2f);
             Think(ThinkCause.FinishAction);
         }
     }
