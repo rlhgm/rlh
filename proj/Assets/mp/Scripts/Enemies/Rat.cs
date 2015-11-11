@@ -566,6 +566,26 @@ public class Rat : MonoBehaviour
                     helpDuration1 = Random.Range(1.5f, 3f);
                     WalkStart();
                 }
+                else if (Climbing())
+                {
+                    switch (Random.Range(0, 3))
+                    {
+                        case 0:
+                            helpDuration1 = Random.Range(1.5f, 3f);
+                            WalkStart();
+                            break;
+
+                        case 1:
+                            SetAction(Action.IdleIn);
+                            nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                            helpDuration1 = Random.Range(0.5f, 2f);
+                            break;
+
+                        case 2:
+                            TurnbackStart();
+                            break;
+                    }
+                }
                 else if (Walking() || Running())
                 {
                     SetAction(Action.IdleIn);
@@ -641,6 +661,10 @@ public class Rat : MonoBehaviour
                         RunStart();
                     }
                 }
+                else if (Climbing())
+                {
+                    SetAction(nextAction);
+                }
                 else if (Running())
                 {
                     //bool canIdled = true;
@@ -703,7 +727,7 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.FinishAction:
-                if (TurningBack())
+                if (TurningBack() || Climbing())
                 {
                     //RunStart();
                     helpDuration1 = Random.Range(0.25f, 1.0f);
@@ -1131,7 +1155,9 @@ public class Rat : MonoBehaviour
         if (currentActionTime >= ClimbUpDuration)
         {
             SetState(State.OnGround);
-            SetAction(nextAction);
+            //SetAction(nextAction);
+            //helpDuration1 = Random.Range(0.5f, 2f);
+            Think(ThinkCause.FinishAction);
         }
     }
 
@@ -1252,7 +1278,10 @@ public class Rat : MonoBehaviour
     {
         return IsInAction(Action.TurnbackLeft) || IsInAction(Action.TurnbackRight);
     }
-
+    bool Climbing()
+    {
+        return IsInAction(Action.ClimbUpLeft) || IsInAction(Action.ClimbUpRight);
+    }
     RaycastHit2D _hit;
     Vector2 _rayOrigin = new Vector2(0f, 0f);
     
