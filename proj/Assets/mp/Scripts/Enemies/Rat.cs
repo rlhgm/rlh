@@ -15,6 +15,7 @@ public class Rat : MonoBehaviour
     public float TurnbackDuration = 0.5f;
     public float JumpDuration = 0.5f;
     public float ClimbUpDuration = 0.83f;
+    public float ClimbUpInDuration = 0.25f;
     public float ClimbDownDuration = 0.5f;
     public float AttackDuration = 0.583f;
 
@@ -204,7 +205,7 @@ public class Rat : MonoBehaviour
                 break;
         }
 
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -237,6 +238,7 @@ public class Rat : MonoBehaviour
         Undef = 0,
         OnGround,
         InAir,
+        Climb,
         Dead,
     };
 
@@ -253,7 +255,7 @@ public class Rat : MonoBehaviour
         RunRight,
         TurnbackLeft,
         TurnbackRight,
-        
+
         JumpLeft,
         JumpRight,
 
@@ -261,6 +263,8 @@ public class Rat : MonoBehaviour
 
         ClimbUpLeft,
         ClimbUpRight,
+        ClimbUpInLeft,
+        ClimbUpInRight,
         Attack,
 
         Landing,
@@ -272,7 +276,7 @@ public class Rat : MonoBehaviour
         NextRun,
         NextTurnback
     };
-    
+
     public float CurrentStateTime
     {
         get { return currentStateTime; }
@@ -296,13 +300,13 @@ public class Rat : MonoBehaviour
     Vector2 myHalfSize;
 
     Vector3 startPos = new Vector3(0f, 0f, 0f);
-    Vector3 modeChangedPos = new Vector3(0f,0f,0f);
+    Vector3 modeChangedPos = new Vector3(0f, 0f, 0f);
     Vector3 stateChangedPos = new Vector3(0f, 0f, 0f);
     Vector3 actionChangedPos = new Vector3(0f, 0f, 0f);
 
     //Zap zap;
 
-    Vector2 velocity = new Vector2(0f,0f);
+    Vector2 velocity = new Vector2(0f, 0f);
     Vector2 lastVelocity = new Vector2(0f, 0f);
     Vector2 newVelocity = new Vector2(0f, 0f);
     Vector3 lastPos = new Vector3(0f, 0f, 0f);
@@ -312,7 +316,7 @@ public class Rat : MonoBehaviour
     float groundAngle = 0.0f;
 
     float currentDeltaTime = 0f;
-    Vector3 targetPos = new Vector3(0f,0f,0f);
+    Vector3 targetPos = new Vector3(0f, 0f, 0f);
     float distToTarget = 0f;
     float distToTargetX = 0f;
 
@@ -420,11 +424,19 @@ public class Rat : MonoBehaviour
                 myAnimator.Play(climbUpAnimStateHash);
                 break;
 
+            case Action.ClimbUpInLeft:
+                myAnimator.Play(climbUpInAnimStateHash);
+                break;
+
+            case Action.ClimbUpInRight:
+                myAnimator.Play(climbUpInAnimStateHash);
+                break;
+
             case Action.Attack:
                 myAnimator.Play(attackAnimStateHash);
                 break;
         }
-         
+
         return true;
     }
 
@@ -452,7 +464,7 @@ public class Rat : MonoBehaviour
     {
         if (Jumping()) return false;
 
-        switch(mode)
+        switch (mode)
         {
             case Mode.Normal:
                 if (distToTarget <= FightModeDistance)
@@ -461,7 +473,7 @@ public class Rat : MonoBehaviour
                     return true;
                 }
                 break;
-                
+
             case Mode.Fight:
                 if (distToTarget > FightModeDistance)
                 {
@@ -493,7 +505,7 @@ public class Rat : MonoBehaviour
                     //print("return to fight : " + modeChangedPos.x + " " + transform.position.x);
                     SetMode(Mode.Fight);
                     Think(ThinkCause.FinishAction);
-                }  
+                }
                 break;
         }
         return false;
@@ -507,7 +519,7 @@ public class Rat : MonoBehaviour
                 ThinkNormal(cause, param);
                 break;
 
-           case Mode.Fight:
+            case Mode.Fight:
                 ThinkFight(cause, param);
                 break;
 
@@ -549,13 +561,13 @@ public class Rat : MonoBehaviour
                     helpDuration1 = Random.Range(1.5f, 3f);
                     WalkStart();
                 }
-                else if( Walking() || Running() )
+                else if (Walking() || Running())
                 {
                     SetAction(Action.IdleIn);
-                    nextAction = Random.Range(0,2) == 1 ? Action.NextTurnback : Action.NextWalk;
+                    nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
                     helpDuration1 = Random.Range(0.5f, 2f);
                 }
-                else if( Jumping())
+                else if (Jumping())
                 {
                     SetAction(Action.IdleIn);
                     //nextAction = Random.Range(0, 2) == 1 ? Action.NextTurnback : Action.NextWalk;
@@ -564,7 +576,7 @@ public class Rat : MonoBehaviour
                 }
                 else if (IsInAction(Action.IdleOut))
                 {
-                    if( nextAction == Action.NextTurnback)
+                    if (nextAction == Action.NextTurnback)
                     {
                         TurnbackStart();
                     }
@@ -591,7 +603,7 @@ public class Rat : MonoBehaviour
             case ThinkCause.CantGoFuther:
                 //bool canIdled = true;
                 RLHScene.Instance.getRatsOnPosition(transform.position, 0.5f, 3, ref _rats);
-                for( int i = 0; i < _rats.Count; ++i)
+                for (int i = 0; i < _rats.Count; ++i)
                 {
                     Rat brother = (Rat)_rats[i];
                     if (brother == this) continue;
@@ -606,9 +618,9 @@ public class Rat : MonoBehaviour
 
                 //if (canIdled)
                 //{
-                    SetAction(Action.IdleIn);
-                    nextAction = Action.NextTurnback;
-                    helpDuration1 = Random.Range(0.5f, 2f);
+                SetAction(Action.IdleIn);
+                nextAction = Action.NextTurnback;
+                helpDuration1 = Random.Range(0.5f, 2f);
                 //}
                 break;
 
@@ -624,7 +636,7 @@ public class Rat : MonoBehaviour
                         RunStart();
                     }
                 }
-                else if( Running() )
+                else if (Running())
                 {
                     //bool canIdled = true;
                     RLHScene.Instance.getRatsOnPosition(transform.position, 0.5f, 3, ref _rats);
@@ -640,7 +652,7 @@ public class Rat : MonoBehaviour
                             return;
                         }
                     }
-                    
+
                     SetAction(Action.IdleIn);
                     //nextAction = Action.NextTurnback;
                     //helpDuration1 = -1;
@@ -751,7 +763,7 @@ public class Rat : MonoBehaviour
                 break;
 
             case ThinkCause.FinishAction:
-                if( SetFaceToTarget(startPos.x) )
+                if (SetFaceToTarget(startPos.x))
                 {
 
                 }
@@ -856,8 +868,9 @@ public class Rat : MonoBehaviour
     static int flyAnimStateHash;
     static int dieAnimStateHash;
     static int climbUpAnimStateHash;
+    static int climbUpInAnimStateHash;
     static int attackAnimStateHash;
-    
+
     static bool StaticInit()
     {
         if (staticInitiated) return false;
@@ -873,12 +886,13 @@ public class Rat : MonoBehaviour
         flyAnimStateHash = Animator.StringToHash("Fly");
         dieAnimStateHash = Animator.StringToHash("Die");
         climbUpAnimStateHash = Animator.StringToHash("ClimbUp");
+        climbUpInAnimStateHash = Animator.StringToHash("ClimbUpIn");
         attackAnimStateHash = Animator.StringToHash("Attack");
 
         staticInitiated = true;
         return true;
-    } 
-            
+    }
+
     void ActionIdle()
     {
         switch (mode)
@@ -899,13 +913,13 @@ public class Rat : MonoBehaviour
 
             case Mode.Fight:
                 //if ( Mathf.Abs(distToTargetX) > 1f ) //&& lastThinkCause != ThinkCause.CantGoFuther)
-                if ( (Mathf.Abs(distToTargetX) > 0.75f && lastThinkCause != ThinkCause.CantGoFuther)
-                    || ( (distToTargetX > 0 && FaceRight()) || (distToTargetX < 0 && FaceLeft())) )
+                if ((Mathf.Abs(distToTargetX) > 0.75f && lastThinkCause != ThinkCause.CantGoFuther)
+                    || ((distToTargetX > 0 && FaceRight()) || (distToTargetX < 0 && FaceLeft())))
                 {
                     SetAction(Action.IdleOut);
                     break;
                 }
-                
+
                 if (modeJustChanged && IsInMode(Mode.BackToNormal))
                 {
                     SetAction(Action.IdleOut);
@@ -937,7 +951,7 @@ public class Rat : MonoBehaviour
     }
     void ActionWalk(int moveDir)
     {
-        switch( mode )
+        switch (mode)
         {
             case Mode.Normal:
                 if (currentActionTime >= helpDuration1)
@@ -964,9 +978,9 @@ public class Rat : MonoBehaviour
             case Mode.Normal:
                 Think(ThinkCause.FinishAction);
                 return;
-                
+
             case Mode.Fight:
-                if ( Mathf.Abs(distToTargetX) < 0.75f)
+                if (Mathf.Abs(distToTargetX) < 0.75f)
                 {
                     Think(ThinkCause.FinishAction);
                     return;
@@ -987,7 +1001,17 @@ public class Rat : MonoBehaviour
         if (RLHScene.Instance.checkObstacle(mySensor.position, Dir(), distToMove + myHalfSize.x, ref distToObstacle, 45f))
         {
             distToMove = distToObstacle - myHalfSize.x;
-            Think(ThinkCause.CantGoFuther);
+            if (canClimbUp(false))
+            {
+                print("can climbup");
+                //ClimbUpStart();
+                Think(ThinkCause.CantGoFuther);
+
+            }
+            else
+            {
+                Think(ThinkCause.CantGoFuther);
+            }
         }
         else
         {
@@ -1000,8 +1024,6 @@ public class Rat : MonoBehaviour
                 {
                     //print("can jump");
                     JumpStart();
-                    //distToMove = 0.0f;
-                    //Think(ThinkCause.CantGoFuther, 1);
                 }
                 else
                 {
@@ -1043,7 +1065,7 @@ public class Rat : MonoBehaviour
 
     void ActionJump()
     {
-        if( currentActionTime >= JumpDuration)
+        if (currentActionTime >= JumpDuration)
         {
             Vector3 finalPos = actionChangedPos;
             finalPos.x += 2f * Dir2();
@@ -1065,7 +1087,7 @@ public class Rat : MonoBehaviour
 
     void ActionLanding()
     {
-        if( currentActionTime >= LandingDuration )
+        if (currentActionTime >= LandingDuration)
         {
             SetMode(Mode.BackToNormal);
             Think(ThinkCause.FinishAction);
@@ -1075,6 +1097,15 @@ public class Rat : MonoBehaviour
     void ActionFly()
     {
 
+    }
+
+    void ActionClimbUpIn()
+    {
+        if (currentActionTime >= ClimbUpInDuration)
+        {
+            //SetMode(Mode.BackToNormal);
+            //Think(ThinkCause.FinishAction);
+        }
     }
 
     void ActionClimbUp()
@@ -1094,7 +1125,7 @@ public class Rat : MonoBehaviour
             Think(ThinkCause.FinishAction);
         }
     }
-    
+
     void JumpStart()
     {
         if (FaceRight())
@@ -1103,6 +1134,16 @@ public class Rat : MonoBehaviour
             SetAction(Action.JumpLeft);
 
         SetState(State.InAir);
+    }
+
+    void ClimbUpStart()
+    {
+        if (FaceRight())
+            SetAction(Action.ClimbUpRight);
+        else
+            SetAction(Action.ClimbUpLeft);
+
+        SetState(State.Climb);
     }
 
     void WalkStart()
@@ -1163,7 +1204,7 @@ public class Rat : MonoBehaviour
     {
         return myGfx.localScale.x < 0f;
     }
-    
+
     bool Walking()
     {
         return IsInAction(Action.WalkLeft) || IsInAction(Action.WalkRight);
@@ -1186,6 +1227,8 @@ public class Rat : MonoBehaviour
     }
 
     RaycastHit2D _hit;
+    Vector2 _rayOrigin = new Vector2(0f, 0f);
+
     public bool canJump(Vector2 from, Vector2 dir)
     {
         _hit = Physics2D.Raycast(from, dir, 2.5f, RLHScene.Instance.layerIdGroundAllMask);
@@ -1208,12 +1251,34 @@ public class Rat : MonoBehaviour
         {
             return false;
         }
-        
+
         return true;
     }
 
-    public bool canClimbUp()
+    public bool canClimbUp(bool checkObstacle)
     {
+        if (checkObstacle)
+        {
+            _hit = Physics2D.Raycast(mySensor.position, Dir(), myHalfSize.x + 0.1f, RLHScene.Instance.layerIdGroundAllMask);
+            if (_hit.collider == null)
+            {
+                return false;
+            }
+        }
+
+        _rayOrigin = mySensor.position;
+        _hit = Physics2D.Raycast(_rayOrigin, Vector2.up, 1.0f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider != null)
+        {
+            return false;
+        }
+
+        _rayOrigin.y += 1.0f;
+        _hit = Physics2D.Raycast(_rayOrigin, Dir(), 1.0f, RLHScene.Instance.layerIdGroundAllMask);
+        if (_hit.collider != null)
+        {
+            return false;
+        }
 
         return true;
     }
