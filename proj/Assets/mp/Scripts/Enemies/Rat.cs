@@ -1063,24 +1063,31 @@ public class Rat : MonoBehaviour
         else
         {
             Vector2 testGroundPos = mySensor.position;
-            testGroundPos.x += ((distToMove + 0.5f) * moveDir);
+            testGroundPos.x += ((distToMove + myHalfSize.x) * moveDir);
 
             if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
             {
-                if (canJump(mySensor.position, Dir()))
+                testGroundPos.y -= 0.55f;
+                if ( RLHScene.Instance.checkObstacle(testGroundPos, -Dir(), distToMove, ref distToObstacle, 45f) )
                 {
-                    //print("can jump");
-                    JumpStart();
-                }
-                else if (canClimbDown())
-                {
-                    ClimbDownStart();
-                }
-                else
-                {
-                    distToMove = 0.0f;
+                    distToMove -= distToObstacle;
                     Think(ThinkCause.CantGoFuther, 1);
                 }
+
+                //if (canJump(mySensor.position, Dir()))
+                //{
+                //    //print("can jump");
+                //    JumpStart();
+                //}
+                //else if (canClimbDown())
+                //{
+                //    ClimbDownStart();
+                //}
+                //else
+                //{
+                //    distToMove = 0.0f;
+                //    Think(ThinkCause.CantGoFuther, 1);
+                //}
             }
         }
 
@@ -1304,6 +1311,10 @@ public class Rat : MonoBehaviour
     public Vector2 Dir()
     {
         return myGfx.localScale.x < 0.0f ? Vector2.right : -Vector2.right;
+    }
+    public Vector2 DirN()
+    {
+        return myGfx.localScale.x < 0.0f ? -Vector2.right : Vector2.right;
     }
     public int Dir2()
     {
