@@ -1217,7 +1217,7 @@ public class Rat : MonoBehaviour
         //}
 
 
-        if (currentActionTime >= ClimbUpDuration)
+        if (currentActionTime >= ClimbDownDuration)
         {
             SetState(State.OnGround);
             Think(ThinkCause.FinishAction);
