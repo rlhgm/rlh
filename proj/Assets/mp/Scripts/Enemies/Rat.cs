@@ -134,7 +134,7 @@ public class Rat : MonoBehaviour
             case Action.ClimbUpInRight:
                 ActionClimbUpIn();
                 break;
-                
+
             case Action.ClimbUpLeft:
                 ActionClimbUp();
                 break;
@@ -151,7 +151,7 @@ public class Rat : MonoBehaviour
             case Action.Attack:
                 ActionAttack();
                 break;
-                
+
             case Action.Die:
                 ActionDie();
                 break;
@@ -222,7 +222,7 @@ public class Rat : MonoBehaviour
         //print("Rat::OnTriggerEnter2D => " + other.name);
 
         Zap zap = other.GetComponent<Zap>();
-        if ( zap /*other.gameObject.tag == "Player"*/)
+        if (zap /*other.gameObject.tag == "Player"*/)
         {
             //if (IsInMode(Mode.Fight) || IsInMode(Mode.PissedOff))
             if (canAttack())
@@ -497,6 +497,9 @@ public class Rat : MonoBehaviour
     {
         if (Jumping()) return false;
 
+        if (IsNotInState(State.OnGround))
+            return false;
+
         switch (mode)
         {
             case Mode.Normal:
@@ -634,7 +637,7 @@ public class Rat : MonoBehaviour
                             nextAction = Action.NextWalk;
                             helpDuration1 = Random.Range(0.5f, 2f);
                             break;
-                    }                    
+                    }
                 }
                 else if (IsInAction(Action.IdleOut))
                 {
@@ -729,7 +732,7 @@ public class Rat : MonoBehaviour
                 else if (Jumping())
                 {
                     SetAction(nextAction);
-                    
+
                     //SetAction(Action.IdleIn);
                     //helpDuration1 = Random.Range(0.5f, 2f);
                 }
@@ -1079,7 +1082,7 @@ public class Rat : MonoBehaviour
             if (!RLHScene.Instance.checkGround(testGroundPos, 1.0f, ref distToObstacle, ref groundAngle))
             {
                 testGroundPos.y -= 0.55f;
-                if ( RLHScene.Instance.checkObstacle(testGroundPos, -Dir(), distToMove, ref distToObstacle, 45f) )
+                if (RLHScene.Instance.checkObstacle(testGroundPos, -Dir(), distToMove, ref distToObstacle, 45f))
                 {
                     if (canJump(mySensor.position, Dir()))
                     {
@@ -1180,7 +1183,7 @@ public class Rat : MonoBehaviour
     void ActionClimbUp()
     {
         float ratio = Mathf.Min(currentActionTime / ClimbUpDuration, 1f);
-        
+
         if (ratio < 0.33f)
         {
             helpPos1 = actionChangedPos;
@@ -1194,7 +1197,7 @@ public class Rat : MonoBehaviour
             _rayOrigin.x += ((ratio - 0.75f) * Dir2());
             transform.position = _rayOrigin;
         }
-        
+
         if (currentActionTime >= ClimbUpDuration)
         {
             SetState(State.OnGround);
@@ -1375,7 +1378,7 @@ public class Rat : MonoBehaviour
     }
     RaycastHit2D _hit;
     Vector2 _rayOrigin = new Vector2(0f, 0f);
-    
+
     public bool canJump(Vector2 from, Vector2 dir)
     {
         _hit = Physics2D.Raycast(from, dir, 2.5f, RLHScene.Instance.layerIdGroundAllMask);
@@ -1421,7 +1424,7 @@ public class Rat : MonoBehaviour
         }
 
         _rayOrigin.y += 1.0f;
-        _hit = Physics2D.Raycast(_rayOrigin, Dir(), myHalfSize.x+1.0f, RLHScene.Instance.layerIdGroundAllMask);
+        _hit = Physics2D.Raycast(_rayOrigin, Dir(), myHalfSize.x + 1.0f, RLHScene.Instance.layerIdGroundAllMask);
         if (_hit.collider != null)
         {
             return false;
@@ -1433,7 +1436,7 @@ public class Rat : MonoBehaviour
     bool canClimbDown()
     {
         _rayOrigin = mySensor.position;
-        _rayOrigin.x += ( (myHalfSize.x + 0.05f) * Dir2() );
+        _rayOrigin.x += ((myHalfSize.x + 0.05f) * Dir2());
         _rayOrigin.y -= 1f;
 
         _hit = Physics2D.Raycast(_rayOrigin, Vector2.down, 0.51f, RLHScene.Instance.layerIdGroundAllMask);
@@ -1447,7 +1450,7 @@ public class Rat : MonoBehaviour
         {
             return false;
         }
-        
+
         return true;
     }
 
@@ -1458,10 +1461,10 @@ public class Rat : MonoBehaviour
         // 3) pewnie jeszcze trzeba by wybrac akcje
         if (IsNotInMode(Mode.Fight) && IsNotInMode(Mode.PissedOff)) return false;
         if (IsNotInState(State.OnGround)) return false;
-        
+
         return true;
     }
-    
+
 
     //bool NormalMode()
     //{
