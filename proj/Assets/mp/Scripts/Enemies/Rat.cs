@@ -1266,6 +1266,7 @@ public class Rat : MonoBehaviour
 
     void ClimbDownStart()
     {
+        nextAction = action;
         if (FaceRight())
             SetAction(Action.ClimbDownRight);
         else
