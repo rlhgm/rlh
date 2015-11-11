@@ -549,6 +549,8 @@ public class Rat : MonoBehaviour
 
     void Think(ThinkCause cause, int param = 0)
     {
+        if (IsNotInState(State.OnGround)) return;
+        
         switch (mode)
         {
             case Mode.Normal:
