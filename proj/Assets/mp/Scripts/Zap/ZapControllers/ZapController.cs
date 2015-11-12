@@ -332,6 +332,17 @@ public class ZapController : ScriptableObject
                 }
             }
 
+            Rat cutRat = coll.GetComponent<Rat>();
+            if (cutRat)
+            {
+                if (!lastCuttedObjects.Contains(cutRat.gameObject))
+                {
+                    cutRat.cut();
+                    lastCuttedObjects.Add(cutRat.gameObject);
+                    continue;
+                }
+            }
+
             if (coll.tag == "PantherHitRegion")
             {
                 IKnifeCutable cutablePanthi = coll.transform.parent.GetComponent<IKnifeCutable>();

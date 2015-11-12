@@ -1504,6 +1504,11 @@ public class Rat : MonoBehaviour
         return true;
     }
 
+    public void cut()
+    {
+        SetAction(Action.Die);
+        SetState(State.Dead);
+    }
 
     //bool NormalMode()
     //{
