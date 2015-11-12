@@ -861,7 +861,7 @@ public class ZapControllerNormal : ZapController
         lastActionParam = param;
         maxJumpSpeed = 0f;
 
-        //Debug.Log(action);
+        Debug.Log(action);
 
         switch (newAction)
         {
@@ -2439,7 +2439,7 @@ public class ZapControllerNormal : ZapController
             {
                 if( zap.faceRight() )
                 {
-                    if( Input.GetKeyDown(zap.keyLeft) )
+                    if( Input.GetKeyDown(zap.keyLeft) || Input.GetKey(zap.keyLeft))
                     {
                         obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
                         setAction(Action.PULL_LEFT);
@@ -2448,7 +2448,7 @@ public class ZapControllerNormal : ZapController
                 }
                 else
                 {
-                    if (Input.GetKeyDown(zap.keyRight))
+                    if (Input.GetKeyDown(zap.keyRight) || Input.GetKey(zap.keyRight))
                     {
                         obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
                         setAction(Action.PULL_RIGHT);
@@ -2467,7 +2467,7 @@ public class ZapControllerNormal : ZapController
                     return 1;
                 }
 
-                Debug.Log("Push : " + distToMove + " " + distToObstacle);
+                //Debug.Log("Push : " + distToMove + " " + distToObstacle);
 
                 if (Mathf.Abs(distToMove) < Mathf.Abs(distToObstacle))
                 {
