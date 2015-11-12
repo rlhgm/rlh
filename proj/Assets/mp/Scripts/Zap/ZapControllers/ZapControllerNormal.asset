@@ -24,6 +24,8 @@ MonoBehaviour:
   FlyUserControlParam: 8
   FlyUpUserControlParam: 9
   FlySlowDownParam: 5
+  PushMaxSpeed: 3
+  PullMaxSpeed: 3
   JumpImpulse: 7
   JumpLongImpulse: 7.1500001
   FromClimbJumpImpulse: 3.5
