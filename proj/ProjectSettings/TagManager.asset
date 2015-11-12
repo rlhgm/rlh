@@ -55,7 +55,7 @@ TagManager:
   - GroundMoveable
   - Chains
   - Enemies
-  - 
+  - ZapRigidBody
   - 
   - 
   - 
