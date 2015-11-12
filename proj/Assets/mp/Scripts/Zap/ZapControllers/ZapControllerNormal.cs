@@ -1380,19 +1380,23 @@ public class ZapControllerNormal : ZapController
     {
         if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.CheckLeft(0.1f) >= 0.0f)
+
+            if (zap.dir() == Vector2.right)
             {
-                if (zap.dir() == Vector2.right)
-                {
-                    turnLeftStart();
-                }
-                else
-                {
-                    setAction(Action.PUSH_LEFT);
-                }
+                turnLeftStart();
                 return 0;
             }
-
+            else
+            {
+                float dto = -1;
+                Transform obstacle = zap.CheckLeft(0.1f, ref dto);
+                if (obstacle)
+                {
+                    PushStart(obstacle);
+                    return 0;
+                }
+            }
+            
             if (zap.dir() == -Vector2.right)
             {
                 if (Input.GetKey(zap.keyRun))
@@ -1456,18 +1460,23 @@ public class ZapControllerNormal : ZapController
     {
         if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.CheckRight(0.1f) >= 0.0f)
+            if (zap.dir() == -Vector2.right)
             {
-                if (zap.dir() == -Vector2.right)
-                {
-                    turnRightStart();
-                }
-                else
-                {
-                    setAction(Action.PUSH_RIGHT);
-                }
+                turnRightStart();
                 return 0;
             }
+            else
+            {
+                //setAction(Action.PUSH_RIGHT);
+                float dto = -1;
+                Transform obstacle = zap.CheckRight(0.1f, ref dto);
+                if (obstacle)
+                {
+                    PushStart(obstacle);
+                    return 0;
+                }
+            }
+
             if (zap.dir() == Vector2.right)
             {
                 if (Input.GetKey(zap.keyRun))
