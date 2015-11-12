@@ -1728,7 +1728,7 @@ public class Zap : MonoBehaviour
         {
             if (flying)
             {
-                hit = Physics2D.Raycast(sensorLeft1.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
+                hit = Physics2D.Raycast(sensorLeft1.position, Vector2.left, checkingDist, layerIdGroundAllMask);
                 if (hit.collider != null)
                 {
                     //return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
@@ -1738,7 +1738,7 @@ public class Zap : MonoBehaviour
             }
             else
             {
-                int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, -Vector2.right, raycastHits, checkingDist + 0.5f, layerIdGroundAllMask);
+                int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, Vector2.left, raycastHits, checkingDist + 0.5f, layerIdGroundAllMask);
                 for (int i = 0; i < numRes; ++i)
                 {
                     hit = raycastHits[i];
@@ -1772,7 +1772,7 @@ public class Zap : MonoBehaviour
                 }
             }
         }
-        hit = Physics2D.Raycast(sensorLeft2.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
+        hit = Physics2D.Raycast(sensorLeft2.position, Vector2.left, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
             //return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
@@ -1787,7 +1787,7 @@ public class Zap : MonoBehaviour
             return null;
         }
 
-        hit = Physics2D.Raycast(sensorLeft3.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
+        hit = Physics2D.Raycast(sensorLeft3.position, Vector2.left, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
             //return Mathf.Abs(hit.point.x - sensorLeft3.position.x);

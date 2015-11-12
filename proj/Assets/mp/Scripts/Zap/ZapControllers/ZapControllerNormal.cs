@@ -2460,14 +2460,14 @@ public class ZapControllerNormal : ZapController
                 distToMove = zap.velocity.x * deltaTime;
                 
                 float distToObstacle = 0.0f;
-                Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove+0.2f, ref distToObstacle);
+                Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove+0.1f+zap.dir2(), ref distToObstacle);
                 if (obstacle != pushPullObstacle)
                 {
                     setActionIdle();
                     return 1;
                 }
 
-                //Debug.Log("Push : " + Mathf.Abs(distToMove) + " " + Mathf.Abs(distToObstacle));
+                Debug.Log("Push : " + distToMove + " " + distToObstacle);
 
                 if (Mathf.Abs(distToMove) < Mathf.Abs(distToObstacle))
                 {
@@ -2575,7 +2575,7 @@ public class ZapControllerNormal : ZapController
                         forcePos.x -= 0.4f;
                         forcePos.y -= 0.3f;
                     }
-                    //obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
+                    obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
                 }
 
                 //distToMove = Mathf.Min(distToMove,distToObstacle);

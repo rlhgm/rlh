@@ -53,4 +53,4 @@ MonoBehaviour:
   ClimbPullDownRange: .550000012
   CrouchInOutDuration: .100000001
   pushForce: 40
-  pullForce: 25
+  pullForce: 40
