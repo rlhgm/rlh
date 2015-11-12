@@ -288,6 +288,16 @@ public class ZapControllerNormal : ZapController
             case Action.ROPECLIMB_DOWN:
                 Action_ROPECLIMB_DOWN(deltaTime);
                 break;
+
+            case Action.PUSH_LEFT:
+            case Action.PUSH_RIGHT:
+                ActionPush(deltaTime);
+                break;
+
+            case Action.PULL_LEFT:
+            case Action.PULL_RIGHT:
+                ActionPull(deltaTime);
+                break;
         };
 
         if (wantGetUp)
@@ -1723,11 +1733,12 @@ public class ZapControllerNormal : ZapController
         zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
 
         float distToObstacle = 0.0f;
-        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
+        Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
+        if (obstacle)
         {
             distToMove = distToObstacle;
             //setActionIdle();
-            PushStart();
+            PushStart(obstacle);
         }
 
         //Debug.Log(distToObstacle);
@@ -1790,11 +1801,13 @@ public class ZapControllerNormal : ZapController
         zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / RunSpeed) * 0.5f;
 
         float distToObstacle = 0.0f;
-        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
+        //if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
+        Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
+        if( obstacle )
         {
             distToMove = distToObstacle;
             //setActionIdle();
-            PushStart();
+            PushStart(obstacle);
         }
 
         newPosX += distToMove;
@@ -2398,23 +2411,61 @@ public class ZapControllerNormal : ZapController
 
     int ActionPush(float deltaTime)
     {
+        if (pushPullObstacle)
+        {
+            Rigidbody2D obstacleBody = pushPullObstacle.GetComponent<Rigidbody2D>();
+            if (obstacleBody)
+            {
+                Vector2 force = new Vector2(0f, 0f);
+                Vector2 forcePos;
+                if( zap.faceRight())
+                {
+                    force.x = pushForce/* * deltaTime*/;
+                    forcePos = zap.sensorRight2.position;
+                }
+                else
+                {
+                    force.x = -pushForce/* * deltaTime*/;
+                    forcePos = zap.sensorLeft2.position;
+                }
+                obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
+            }
+        }
         return 0;
     }
     int ActionPull(float deltaTime)
     {
+        if (pushPullObstacle)
+        {
+
+        }
         return 0;
     }
-    void PushStart()
+    void PushStart(Transform obstacle)
     {
         zap.velocity.x = 0.0f;
+        pushPullObstacle = obstacle;
         if (zap.faceRight())
             setAction(Action.PUSH_RIGHT);
         else
             setAction(Action.PUSH_LEFT);
     }
-    void PullStart()
+    void PullStart(Transform obstacle)
     {
-
+        zap.velocity.x = 0.0f;
+        pushPullObstacle = obstacle;
+        if (zap.faceRight())
+            setAction(Action.PULL_RIGHT);
+        else
+            setAction(Action.PULL_LEFT);
+    }
+    void PushStop()
+    {
+        
+    }
+    void PullStop()
+    {
+        
     }
 
     int Action_ROPECLIMB_DOWN(float deltaTime)
@@ -3754,4 +3805,8 @@ public class ZapControllerNormal : ZapController
     //float currentActionTime = 0f;
     NewRope justJumpedRope = null;
     //Vector3 impulse;
+
+    Transform pushPullObstacle = null;
+    public float pushForce = 5.0f;
+    public float pullForce = 5.0f;
 }
