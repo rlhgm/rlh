@@ -1520,11 +1520,14 @@ public class ZapControllerNormal : ZapController
         {
             if (isInState(Zap.State.ON_GROUND))
             {
-                if (isInAction(Action.PUSH_LEFT))
+                if (isInAction(Action.PUSH_LEFT) || isInAction(Action.PULL_LEFT))
                 {
                     setActionIdle();
                 }
-                desiredSpeedX = 0.0f;
+                else
+                {
+                    desiredSpeedX = 0.0f;
+                }
             }
         }
         else
@@ -1549,11 +1552,14 @@ public class ZapControllerNormal : ZapController
         {
             if (isInState(Zap.State.ON_GROUND))
             {
-                if (isInAction(Action.PUSH_RIGHT))
+                if (isInAction(Action.PUSH_RIGHT) || isInAction(Action.PULL_RIGHT))
                 {
                     setActionIdle();
                 }
-                desiredSpeedX = 0.0f;
+                else
+                {
+                    desiredSpeedX = 0.0f;
+                }
             }
         }
         else
@@ -2448,7 +2454,7 @@ public class ZapControllerNormal : ZapController
                     return 1;
                 }
 
-                Debug.Log("Push : " + Mathf.Abs(distToMove) + " " + Mathf.Abs(distToObstacle));
+                //Debug.Log("Push : " + Mathf.Abs(distToMove) + " " + Mathf.Abs(distToObstacle));
 
                 if (Mathf.Abs(distToMove) < Mathf.Abs(distToObstacle))
                 {
@@ -2514,7 +2520,61 @@ public class ZapControllerNormal : ZapController
     {
         if (pushPullObstacle)
         {
+            Rigidbody2D obstacleBody = pushPullObstacle.GetComponent<Rigidbody2D>();
+            if (obstacleBody)
+            {
+                zap.velocity.x = PullMaxSpeed * zap.dir2() * -1f;
+                distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 
+                float distToObstacle = 0.0f;
+                Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove + 0.2f, ref distToObstacle);
+                if (obstacle != pushPullObstacle)
+                {
+                    setActionIdle();
+                    return 1;
+                }
+
+                //Debug.Log("Push : " + Mathf.Abs(distToMove) + " " + Mathf.Abs(distToObstacle));
+
+                if (Mathf.Abs(distToMove) < Mathf.Abs(distToObstacle))
+                {
+                    zap.velocity.x = distToMove / deltaTime;
+                }
+                else
+                {
+                    distToMove = distToObstacle;
+                    zap.velocity.x = distToMove / deltaTime;
+
+
+                    Vector2 force = new Vector2(0f, 0f);
+                    Vector2 forcePos;
+                    if (zap.faceRight())
+                    {
+                        force.x = -pushForce/* * deltaTime*/;
+                        forcePos = zap.sensorRight2.position;
+                        forcePos.x += 0.4f;
+                        forcePos.y -= 0.3f;
+                    }
+                    else
+                    {
+                        force.x = pushForce/* * deltaTime*/;
+                        forcePos = zap.sensorLeft2.position;
+                        forcePos.x -= 0.4f;
+                        forcePos.y -= 0.3f;
+                    }
+                    //obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
+                }
+
+                //distToMove = Mathf.Min(distToMove,distToObstacle);
+                //zap.velocity.x = distToMove / deltaTime;
+
+                //zap.velocity.x = Mathf.Min(Mathf.Abs(zap.velocity.x)) * zap.dir2();
+
+                zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
+
+                newPosX += distToMove;
+                transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
+            }
         }
         return 0;
     }
