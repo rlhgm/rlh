@@ -1052,7 +1052,8 @@ public class Zap : MonoBehaviour
     {
         if (currentController != null)
         {
-            currentController.FUpdate(Time.fixedDeltaTime);
+            //currentController.FUpdate(Time.fixedDeltaTime);
+            currentController.FUpdate(Time.deltaTime);
         }
     }
 

@@ -291,15 +291,15 @@ public class ZapControllerNormal : ZapController
                 Action_ROPECLIMB_DOWN(deltaTime);
                 break;
 
-            case Action.PUSH_LEFT:
-            case Action.PUSH_RIGHT:
-                ActionPush(deltaTime);
-                break;
+            //case Action.PUSH_LEFT:
+            //case Action.PUSH_RIGHT:
+            //    ActionPush(deltaTime);
+            //    break;
 
-            case Action.PULL_LEFT:
-            case Action.PULL_RIGHT:
-                ActionPull(deltaTime);
-                break;
+            //case Action.PULL_LEFT:
+            //case Action.PULL_RIGHT:
+            //    ActionPull(deltaTime);
+            //    break;
         };
 
         if (wantGetUp)
@@ -737,6 +737,19 @@ public class ZapControllerNormal : ZapController
 
     public override void FUpdate(float fDeltaTime)
     {
+        //Debug.Log("FUpdate : " + fDeltaTime);
+        switch(action)
+        {
+            case Action.PUSH_LEFT:
+            case Action.PUSH_RIGHT:
+                ActionPush(fDeltaTime);
+                break;
+
+            case Action.PULL_LEFT:
+            case Action.PULL_RIGHT:
+                ActionPull(fDeltaTime);
+                break;
+        }
     }
 
     public override void activateSpec(bool restore = false, bool crouch = false)
@@ -2444,7 +2457,7 @@ public class ZapControllerNormal : ZapController
                 }
 
                 zap.velocity.x = PushMaxSpeed * zap.dir2();
-                distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
+                distToMove = zap.velocity.x * deltaTime;
                 
                 float distToObstacle = 0.0f;
                 Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove+0.2f, ref distToObstacle);
@@ -2470,14 +2483,14 @@ public class ZapControllerNormal : ZapController
                     Vector2 forcePos;
                     if (zap.faceRight())
                     {
-                        force.x = pushForce/* * deltaTime*/;
+                        force.x = pushForce /** deltaTime*/;
                         forcePos = zap.sensorRight2.position;
                         forcePos.x += 0.4f;
                         forcePos.y -= 0.3f;
                     }
                     else
                     {
-                        force.x = -pushForce/* * deltaTime*/;
+                        force.x = -pushForce /** deltaTime*/;
                         forcePos = zap.sensorLeft2.position;
                         forcePos.x -= 0.4f;
                         forcePos.y -= 0.3f;
@@ -2490,7 +2503,7 @@ public class ZapControllerNormal : ZapController
 
                 //zap.velocity.x = Mathf.Min(Mathf.Abs(zap.velocity.x)) * zap.dir2();
 
-                zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
+                zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / PushMaxSpeed) * 0.5f;
                 
                 newPosX += distToMove;
                 transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
@@ -2524,7 +2537,7 @@ public class ZapControllerNormal : ZapController
             if (obstacleBody)
             {
                 zap.velocity.x = PullMaxSpeed * zap.dir2() * -1f;
-                distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
+                distToMove = zap.velocity.x * deltaTime; // zap.getCurrentDeltaTime();
 
                 float distToObstacle = 0.0f;
                 Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove + 0.2f, ref distToObstacle);

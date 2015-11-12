@@ -30,7 +30,7 @@ public class RLHScene : MonoBehaviour
     {
         _scene = this;
         transform.position = new Vector3(0f,0f,0f);
-        Application.targetFrameRate = /*10;*/  -1;
+        Application.targetFrameRate = -10;
 
         layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
         layerIdGroundMoveableMask = 1 << LayerMask.NameToLayer("GroundMoveable");
