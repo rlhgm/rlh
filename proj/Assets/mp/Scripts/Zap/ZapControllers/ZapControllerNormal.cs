@@ -1546,6 +1546,10 @@ public class ZapControllerNormal : ZapController
                 {
                     setActionIdle();
                 }
+                else if(isInAction(Action.PULL_LEFT))
+                {
+                    PullStop();
+                }
                 else
                 {
                     desiredSpeedX = 0.0f;
@@ -1574,9 +1578,13 @@ public class ZapControllerNormal : ZapController
         {
             if (isInState(Zap.State.ON_GROUND))
             {
-                if (isInAction(Action.PUSH_RIGHT) || isInAction(Action.PULL_RIGHT))
+                if (isInAction(Action.PUSH_RIGHT))
                 {
                     setActionIdle();
+                }
+                if (isInAction(Action.PULL_RIGHT))
+                {
+                    PullStop();
                 }
                 else
                 {
@@ -2566,7 +2574,6 @@ public class ZapControllerNormal : ZapController
                 if (obstacleOnRoad > 0f)
                 {
                     //transform.position = new Vector3(transform.position.x + _diffx, transform.position.y, 0.0f);
-                    obstacleBody.velocity = new Vector2(0f,0f);
                     PullStop();
                 }
                 else
@@ -2602,7 +2609,7 @@ public class ZapControllerNormal : ZapController
     }
     void PushStart(Transform obstacle)
     {
-        Debug.Log("PushStart : " + obstacle);
+        //Debug.Log("PushStart : " + obstacle);
         zap.velocity.x = 0.0f;
         pushPullObstacle = obstacle;
         if (zap.faceRight())
@@ -2625,6 +2632,14 @@ public class ZapControllerNormal : ZapController
     }
     void PullStop()
     {
+        if (pushPullObstacle)
+        {
+            Rigidbody2D obstacleBody = pushPullObstacle.GetComponent<Rigidbody2D>();
+            if (obstacleBody)
+            {
+                obstacleBody.velocity = new Vector2(0f, 0f);
+            }
+        }
         pushPullObstacle = null;
         setActionIdle();
     }
