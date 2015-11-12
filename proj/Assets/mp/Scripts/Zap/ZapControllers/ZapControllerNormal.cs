@@ -804,6 +804,10 @@ public class ZapControllerNormal : ZapController
         ROPECLIMB_IDLE,
         ROPECLIMB_UP,
         ROPECLIMB_DOWN,
+        PUSH_LEFT,
+        PUSH_RIGHT,
+        PULL_LEFT,
+        PULL_RIGHT,
         DIE
     };
 
@@ -1139,6 +1143,22 @@ public class ZapControllerNormal : ZapController
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_liana_slide_R");
                 else zap.AnimatorBody.Play("Zap_liana_slide_L");
                 break;
+
+            case Action.PUSH_LEFT:
+                zap.AnimatorBody.Play("Zap_push_L");
+                break;
+
+            case Action.PUSH_RIGHT:
+                zap.AnimatorBody.Play("Zap_push_R");
+                break;
+
+            case Action.PULL_LEFT:
+                zap.AnimatorBody.Play("Zap_pull_L");
+                break;
+
+            case Action.PULL_RIGHT:
+                zap.AnimatorBody.Play("Zap_pull_R");
+                break;
         };
 
         return true;
@@ -1338,7 +1358,13 @@ public class ZapControllerNormal : ZapController
             if (zap.checkLeft(0.1f) >= 0.0f)
             {
                 if (zap.dir() == Vector2.right)
+                {
                     turnLeftStart();
+                }
+                else
+                {
+                    setAction(Action.PUSH_LEFT);
+                }
                 return 0;
             }
 
@@ -1408,7 +1434,13 @@ public class ZapControllerNormal : ZapController
             if (zap.checkRight(0.1f) >= 0.0f)
             {
                 if (zap.dir() == -Vector2.right)
+                {
                     turnRightStart();
+                }
+                else
+                {
+                    setAction(Action.PUSH_RIGHT);
+                }
                 return 0;
             }
             if (zap.dir() == Vector2.right)
@@ -1472,11 +1504,14 @@ public class ZapControllerNormal : ZapController
 
     public override int keyLeftUp()
     {
-
         if (!setMountIdle())
         {
             if (isInState(Zap.State.ON_GROUND))
             {
+                if (isInAction(Action.PUSH_LEFT))
+                {
+                    setActionIdle();
+                }
                 desiredSpeedX = 0.0f;
             }
         }
@@ -1502,6 +1537,10 @@ public class ZapControllerNormal : ZapController
         {
             if (isInState(Zap.State.ON_GROUND))
             {
+                if (isInAction(Action.PUSH_RIGHT))
+                {
+                    setActionIdle();
+                }
                 desiredSpeedX = 0.0f;
             }
         }
@@ -1516,6 +1555,7 @@ public class ZapControllerNormal : ZapController
                 else if (Input.GetKey(zap.keyDown))
                     keyDownDown();
             }
+           
         }
 
         return 0;
@@ -1686,20 +1726,15 @@ public class ZapControllerNormal : ZapController
         if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
-            setActionIdle();
+            //setActionIdle();
+            PushStart();
         }
 
         //Debug.Log(distToObstacle);
 
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
-
-        //float distToGround = 0.0f;
-        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        //if (groundUnderFeet)
-        //{
-        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        //}
+        
         return 0;
     }
 
@@ -1747,9 +1782,7 @@ public class ZapControllerNormal : ZapController
                 {
                     setAction(Action.TURN_RUN_RIGHT);
                 }
-
             }
-
         }
 
         distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
@@ -1760,19 +1793,13 @@ public class ZapControllerNormal : ZapController
         if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
-            setActionIdle();
+            //setActionIdle();
+            PushStart();
         }
 
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
-
-        //float distToGround = 0.0f;
-        //bool groundUnderFeet = zap.checkGround(false, zap.layerIdGroundAllMask, ref distToGround);
-        //if (groundUnderFeet)
-        //{
-        //    transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        //}
-
+        
         return 0;
     }
 
@@ -2369,6 +2396,27 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
+    int ActionPush(float deltaTime)
+    {
+        return 0;
+    }
+    int ActionPull(float deltaTime)
+    {
+        return 0;
+    }
+    void PushStart()
+    {
+        zap.velocity.x = 0.0f;
+        if (zap.faceRight())
+            setAction(Action.PUSH_RIGHT);
+        else
+            setAction(Action.PUSH_LEFT);
+    }
+    void PullStart()
+    {
+
+    }
+
     int Action_ROPECLIMB_DOWN(float deltaTime)
     {
 
@@ -2793,6 +2841,7 @@ public class ZapControllerNormal : ZapController
         else
             return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
     }
+
     bool moving(int dir)
     {
         if (dir == 1)
@@ -2800,10 +2849,12 @@ public class ZapControllerNormal : ZapController
         else
             return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
     }
+
     bool jumping()
     {
         return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
     }
+
     bool jumping(int jumpdir)
     {
         if (jumpdir > 0)
@@ -2816,18 +2867,31 @@ public class ZapControllerNormal : ZapController
         }
         return false;
     }
+
     bool mounting()
     {
         return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT)
             || isInAction(Action.MOUNT_UP) || isInAction(Action.MOUNT_DOWN)
             || isInAction(Action.MOUNT_ATTACK_LEFT) || isInAction(Action.MOUNT_ATTACK_RIGHT);
     }
+
+    bool Pushing()
+    {
+        return isInAction(Action.PUSH_LEFT) || isInAction(Action.PUSH_RIGHT);
+    }
+
+    bool Pulling()
+    {
+        return isInAction(Action.PULL_LEFT) || isInAction(Action.PULL_RIGHT);
+    }
+
     public override bool crouching()
     {
         return isInAction(Action.CROUCH_IDLE) ||
             isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_LEFT_BACK) ||
                 isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
     }
+    
     public override void zapDie(Zap.DeathType deathType)
     {
         if (zap.isInState(Zap.State.CLIMB_ROPE))
