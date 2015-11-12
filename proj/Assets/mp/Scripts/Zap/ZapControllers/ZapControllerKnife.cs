@@ -655,7 +655,7 @@ public class ZapControllerKnife : ZapController
     {
         if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkLeft(0.1f) >= 0.0f)
+            if (zap.CheckLeft(0.1f) >= 0.0f)
             {
                 if (zap.dir() == Vector2.right)
                 {
@@ -683,7 +683,7 @@ public class ZapControllerKnife : ZapController
         }
         else if (crouching() && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkLeft(0.1f) >= 0.0f)
+            if (zap.CheckLeft(0.1f) >= 0.0f)
             {
                 return 0;
             }
@@ -705,7 +705,7 @@ public class ZapControllerKnife : ZapController
     {
         if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkRight(0.1f) >= 0.0f)
+            if (zap.CheckRight(0.1f) >= 0.0f)
             {
                 if (zap.dir() == -Vector2.right)
                 {
@@ -731,7 +731,7 @@ public class ZapControllerKnife : ZapController
         }
         else if (crouching() && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkRight(0.1f) >= 0.0f)
+            if (zap.CheckRight(0.1f) >= 0.0f)
             {
                 return 0;
             }
@@ -1084,7 +1084,7 @@ public class ZapControllerKnife : ZapController
         zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
             setActionIdle();
@@ -1140,7 +1140,7 @@ public class ZapControllerKnife : ZapController
         distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
             //setActionIdle();
@@ -1223,7 +1223,7 @@ public class ZapControllerKnife : ZapController
         distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
             setActionCrouchIdle();

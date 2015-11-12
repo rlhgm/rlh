@@ -1604,36 +1604,41 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public bool checkObstacle(int dir, float distToCheck, ref float distToObstacle)
+    public Transform CheckObstacle(int dir, float distToCheck, ref float distToObstacle)
     {
         if (dir == 1)
         {
-            distToObstacle = checkRight(Mathf.Abs(distToCheck) + 0.01f);
-            if (distToObstacle < 0.0f)
-                return false;
+            //distToObstacle = CheckRight(Mathf.Abs(distToCheck) + 0.01f,ref distToObstacle);
+            Transform obstacle = CheckRight(Mathf.Abs(distToCheck) + 0.01f, ref distToObstacle);
+            //if (distToObstacle < 0.0f)
+            if( !obstacle )
+                return null;
             if (distToObstacle < distToCheck)
             {
-                return true;
+                return obstacle;
             }
             else
-                return false;
+                return null;
         }
         else if (dir == -1)
         {
-            distToObstacle = checkLeft(Mathf.Abs(distToCheck) + 0.01f);
-            if (distToObstacle < 0.0f)
-                return false;
+            //distToObstacle = checkLeft(Mathf.Abs(distToCheck) + 0.01f);
+            Transform obstacle = CheckLeft(Mathf.Abs(distToCheck) + 0.01f, ref distToObstacle);
+            //if (distToObstacle < 0.0f)
+            //    return false;
+            if (!obstacle) return null;
             if (distToObstacle < Mathf.Abs(distToCheck))
             {
                 distToObstacle *= -1.0f;
-                return true;
+                //return true;
+                return obstacle;
             }
             else
-                return false;
+                return null;
         }
         else
         {
-            return false;
+            return null;
         }
     }
 
@@ -1709,7 +1714,14 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public float checkLeft(float checkingDist, bool flying = false)
+    public float CheckLeft(float checkingDist, bool flying = false)
+    {
+        float distToObstacle = -1f;
+        Transform obstacle = CheckLeft(checkingDist, ref distToObstacle, flying);
+        return distToObstacle;
+    }
+
+    public Transform CheckLeft(float checkingDist, ref float distToObstacle, bool flying = false)
     {
         if (!stateJustChanged)
         {
@@ -1718,26 +1730,16 @@ public class Zap : MonoBehaviour
                 hit = Physics2D.Raycast(sensorLeft1.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
                 if (hit.collider != null)
                 {
-                    return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                    //return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                    distToObstacle = hit.distance;
+                    return hit.transform;
                 }
             }
             else
             {
-                //hit = Physics2D.Raycast(sensorDown2.position, -Vector2.right, checkingDist+0.5f, layerIdGroundAllMask);
-                //if (hit.collider != null)
-                //{
-                //    print(hit.normal);
-                //}
-
                 int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, -Vector2.right, raycastHits, checkingDist + 0.5f, layerIdGroundAllMask);
                 for (int i = 0; i < numRes; ++i)
                 {
-                    //hit = raycastHits[i];
-                    //if (hit.fraction == 0f) continue;
-                    //float angle = Vector2.Angle(Vector2.up,hit.normal);
-                    //if (Mathf.Abs(angle) > 45.0f)
-                    //    return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
-
                     hit = raycastHits[i];
                     if (hit.fraction == 0f) continue;
                     float angle = Vector2.Angle(Vector2.up, hit.normal);
@@ -1751,12 +1753,20 @@ public class Zap : MonoBehaviour
                         {
                             hit2 = raycastHits2[j];
                             if (hit2.collider != hit.collider) continue;
-                            if (hit2.fraction == 0f) return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                            if (hit2.fraction == 0f)
+                            {
+                                //return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                                distToObstacle = hit.distance;
+                                return hit.transform;
+                            }
                             float angle2 = Vector2.Angle(Vector2.up, hit2.normal);
-                            if (Mathf.Abs(angle2) > 45.0f) return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                            if (Mathf.Abs(angle2) > 45.0f)
+                            {
+                                //return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                                distToObstacle = hit.distance;
+                                return hit.transform;
+                            }
                         }
-
-                        //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
                     }
                 }
             }
@@ -1764,21 +1774,37 @@ public class Zap : MonoBehaviour
         hit = Physics2D.Raycast(sensorLeft2.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
-            return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
+            //return Mathf.Abs(hit.point.x - sensorLeft2.position.x);
+            distToObstacle = hit.distance;
+            return hit.transform;
         }
 
         if (!flying && (currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
-            return -1.0f;
+        {
+            //return -1.0f;
+            distToObstacle = -1f;
+            return null;
+        }
 
         hit = Physics2D.Raycast(sensorLeft3.position, -Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
-            return Mathf.Abs(hit.point.x - sensorLeft3.position.x);
+            //return Mathf.Abs(hit.point.x - sensorLeft3.position.x);
+            distToObstacle = hit.distance;
+            return hit.transform;
         }
-        return -1f;
+        distToObstacle = -1f;
+        return null;
     }
 
-    public float checkRight(float checkingDist, bool flying = false)
+    public float CheckRight(float checkingDist, bool flying = false)
+    {
+        float distToObstacle = -1f;
+        Transform obstacle = CheckRight(checkingDist, ref distToObstacle, flying);
+        return distToObstacle;
+    }
+
+    public Transform CheckRight(float checkingDist, ref float distToObstacle, bool flying = false)
     {
         if (!stateJustChanged)
         {
@@ -1787,23 +1813,15 @@ public class Zap : MonoBehaviour
                 hit = Physics2D.Raycast(sensorRight1.position, Vector2.right, checkingDist, layerIdGroundAllMask);
                 if (hit.collider != null)
                 {
-                    return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                    distToObstacle = hit.distance;
+                    return hit.transform;
                 }
             }
             else
             {
-                //Vector2 ro = sensorDown2.position;
-                //ro.y += 0.1f;
                 int numRes = Physics2D.RaycastNonAlloc(sensorDown2.position, Vector2.right, raycastHits, checkingDist + 0.5f, layerIdGroundAllMask);
                 for (int i = 0; i < numRes; ++i)
                 {
-                    //hit = raycastHits[i];
-                    //float angle = hit.collider.transform.eulerAngles.z;
-                    ////float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation);
-                    //angle = angle % 90;
-                    //if (angle < -45.0f || angle > 45.0f)
-                    //    return Mathf.Abs(hit.point.x - sensorRight1.position.x);
-
                     hit = raycastHits[i];
                     if (hit.fraction == 0f) continue;
                     float angle = Vector2.Angle(Vector2.up, hit.normal);
@@ -1812,19 +1830,26 @@ public class Zap : MonoBehaviour
                         Vector2 ro = sensorDown2.position;
                         ro.x += (hit.distance + 0.01f);
                         ro.y += 0.2f;
-                        //bool hitObstacle = false;
                         int numRes2 = Physics2D.RaycastNonAlloc(ro, -Vector2.up, raycastHits2, 0.2f + 0.1f, layerIdGroundAllMask);
                         for (int j = 0; j < numRes2; ++j)
                         {
                             hit2 = raycastHits2[j];
                             if (hit2.collider != hit.collider) continue;
 
-                            if (hit2.fraction == 0f) return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                            if (hit2.fraction == 0f)
+                            {
+                                //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                                distToObstacle = hit.distance;
+                                return hit.transform;
+                            }
                             float angle2 = Vector2.Angle(Vector2.up, hit2.normal);
-                            if (Mathf.Abs(angle2) > 45.0f) return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                            if (Mathf.Abs(angle2) > 45.0f)
+                            {
+                                //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                                distToObstacle = hit.distance;
+                                return hit.transform;
+                            }
                         }
-
-                        //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
                     }
                 }
             }
@@ -1832,18 +1857,27 @@ public class Zap : MonoBehaviour
         hit = Physics2D.Raycast(sensorRight2.position, Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
-            return Mathf.Abs(hit.point.x - sensorRight2.position.x);
+            //return Mathf.Abs(hit.point.x - sensorRight2.position.x);
+            distToObstacle = hit.distance;
+            return hit.transform;
         }
 
-        if (!flying && (currentController.crouching() || (currentController!=zapControllerGravityGun && currentController.isDodging())))
-            return -1.0f;
+        if (!flying && (currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
+        {
+            //return -1.0f;
+            distToObstacle = -1f;
+            return null;
+        }
 
         hit = Physics2D.Raycast(sensorRight3.position, Vector2.right, checkingDist, layerIdGroundAllMask);
         if (hit.collider != null)
         {
-            return Mathf.Abs(hit.point.x - sensorRight3.position.x);
+            //return Mathf.Abs(hit.point.x - sensorRight3.position.x);
+            distToObstacle = hit.distance;
+            return hit.transform;
         }
-        return -1f;
+        distToObstacle = -1;
+        return null;
     }
 
     public float checkDown(float checkingDist)

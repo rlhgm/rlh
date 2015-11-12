@@ -471,7 +471,7 @@ public class ZapControllerNormal : ZapController
 
                 if (distToFall.x > 0.0f)
                 {
-                    float obstacleOnRoad = zap.checkRight(distToFall.x + 0.01f, true);
+                    float obstacleOnRoad = zap.CheckRight(distToFall.x + 0.01f, true);
                     if (obstacleOnRoad >= 0.0f)
                     {
                         if (obstacleOnRoad < Mathf.Abs(distToFall.x))
@@ -483,7 +483,7 @@ public class ZapControllerNormal : ZapController
                 }
                 else if (distToFall.x < 0.0f)
                 {
-                    float obstacleOnRoad = zap.checkLeft(Mathf.Abs(distToFall.x) + 0.01f, true);
+                    float obstacleOnRoad = zap.CheckLeft(Mathf.Abs(distToFall.x) + 0.01f, true);
                     if (obstacleOnRoad >= 0.0f)
                     {
                         if (obstacleOnRoad < Mathf.Abs(distToFall.x))
@@ -1355,7 +1355,7 @@ public class ZapControllerNormal : ZapController
     {
         if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkLeft(0.1f) >= 0.0f)
+            if (zap.CheckLeft(0.1f) >= 0.0f)
             {
                 if (zap.dir() == Vector2.right)
                 {
@@ -1409,7 +1409,7 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkLeft(0.1f) >= 0.0f)
+            if (zap.CheckLeft(0.1f) >= 0.0f)
             {
                 return 0;
             }
@@ -1431,7 +1431,7 @@ public class ZapControllerNormal : ZapController
     {
         if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkRight(0.1f) >= 0.0f)
+            if (zap.CheckRight(0.1f) >= 0.0f)
             {
                 if (zap.dir() == -Vector2.right)
                 {
@@ -1484,7 +1484,7 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkRight(0.1f) >= 0.0f)
+            if (zap.CheckRight(0.1f) >= 0.0f)
             {
                 return 0;
             }
@@ -1723,7 +1723,7 @@ public class ZapControllerNormal : ZapController
         zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
             //setActionIdle();
@@ -1790,7 +1790,7 @@ public class ZapControllerNormal : ZapController
         zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / RunSpeed) * 0.5f;
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
             //setActionIdle();
@@ -1821,7 +1821,7 @@ public class ZapControllerNormal : ZapController
         distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             distToMove = distToObstacle;
             retVal = 1;
@@ -1907,7 +1907,7 @@ public class ZapControllerNormal : ZapController
         distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 
         float distToObstacle = 0.0f;
-        if (zap.checkObstacle(dir, distToMove, ref distToObstacle))
+        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         {
             //Debug.Log("obstacle -> " + distToObstacle);
             distToMove = distToObstacle;
