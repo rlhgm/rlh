@@ -2418,6 +2418,25 @@ public class ZapControllerNormal : ZapController
             Rigidbody2D obstacleBody = pushPullObstacle.GetComponent<Rigidbody2D>();
             if (obstacleBody)
             {
+                if( zap.faceRight() )
+                {
+                    if( Input.GetKeyDown(zap.keyLeft) )
+                    {
+                        obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
+                        setAction(Action.PULL_LEFT);
+                        return 1;
+                    }
+                }
+                else
+                {
+                    if (Input.GetKeyDown(zap.keyRight))
+                    {
+                        obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
+                        setAction(Action.PULL_RIGHT);
+                        return 1;
+                    }
+                }
+
                 zap.velocity.x = PushMaxSpeed * zap.dir2();
                 distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
                 
@@ -2447,13 +2466,15 @@ public class ZapControllerNormal : ZapController
                     {
                         force.x = pushForce/* * deltaTime*/;
                         forcePos = zap.sensorRight2.position;
-                        //forcePos.x += 0.4f;
+                        forcePos.x += 0.4f;
+                        forcePos.y -= 0.3f;
                     }
                     else
                     {
                         force.x = -pushForce/* * deltaTime*/;
                         forcePos = zap.sensorLeft2.position;
-                        //forcePos.x -= 0.4f;
+                        forcePos.x -= 0.4f;
+                        forcePos.y -= 0.3f;
                     }
                     obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
                 }
