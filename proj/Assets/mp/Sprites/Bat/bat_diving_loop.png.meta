@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: 3a4e69115f05d2344b86228212427ba1
-timeCreated: 1446804710
+guid: c8b44b2e8deca37458d8e1b0a7cf79ca
+timeCreated: 1447426461
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: bat_diving_loop_0
+    21300002: bat_diving_loop_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,7 +51,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: bat_diving_loop_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 23
+        height: 25
+      alignment: 9
+      pivot: {x: .284538299, y: .257658839}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bat_diving_loop_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 0
+        width: 23
+        height: 25
+      alignment: 9
+      pivot: {x: .280422777, y: .254785419}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 04d6a1cbc1a03434d83266d0cb0aa88d
-timeCreated: 1447426368
+guid: bea904f2ca4fda1458bffc4bfb571076
+timeCreated: 1447426325
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bat_Fly_0
-    21300002: Bat_Fly_1
-    21300004: Bat_Fly_2
-    21300006: Bat_Fly_3
-    21300008: Bat_Fly_4
-    21300010: Bat_Fly_5
-    21300012: Bat_Fly_6
+    21300000: bat_attack_0
+    21300002: bat_attack_1
+    21300004: bat_attack_2
+    21300006: bat_attack_3
+    21300008: bat_attack_4
+    21300010: bat_attack_5
+    21300012: bat_attack_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,73 +57,73 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Bat_Fly_0
+    - name: bat_attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bat_Fly_1
+    - name: bat_attack_1
       rect:
         serializedVersion: 2
-        x: 35
+        x: 38
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bat_Fly_2
+    - name: bat_attack_2
       rect:
         serializedVersion: 2
-        x: 70
+        x: 76
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bat_Fly_3
+    - name: bat_attack_3
       rect:
         serializedVersion: 2
-        x: 105
+        x: 114
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bat_Fly_4
+    - name: bat_attack_4
       rect:
         serializedVersion: 2
-        x: 140
+        x: 152
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bat_Fly_5
+    - name: bat_attack_5
       rect:
         serializedVersion: 2
-        x: 175
+        x: 190
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bat_Fly_6
+    - name: bat_attack_6
       rect:
         serializedVersion: 2
-        x: 210
+        x: 228
         y: 0
-        width: 35
-        height: 26
+        width: 38
+        height: 28
       alignment: 9
       pivot: {x: .400000006, y: .400000006}
       border: {x: 0, y: 0, z: 0, w: 0}
