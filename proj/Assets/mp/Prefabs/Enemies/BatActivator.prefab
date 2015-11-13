@@ -25,6 +25,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 411854}
   - 61: {fileID: 6107010}
+  - 50: {fileID: 5044158}
+  - 114: {fileID: 11464078}
   m_Layer: 8
   m_Name: BatActivator
   m_TagString: Untagged
@@ -111,6 +113,22 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!50 &5044158
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141570}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6107010
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -145,6 +163,17 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278255379
+--- !u!114 &11464078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67fbb509abacb54ea30182ffe33f820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21285214
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -185,6 +214,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

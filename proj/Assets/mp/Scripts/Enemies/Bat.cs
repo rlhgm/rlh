@@ -36,6 +36,10 @@ public class Bat : MonoBehaviour
     {
         currentDeltaTime = Time.deltaTime;
         currentActionTime += currentDeltaTime;
+        currentStateTime += currentDeltaTime;
+
+        actionJustChanged = false;
+        stateJustChanged = false;
 
         lastVelocity = velocity;
         lastPos = transform.position;
@@ -215,11 +219,10 @@ public class Bat : MonoBehaviour
         Undef = 0,
         Fly,
         Turnback,
-        Attack
+        Attack,
     };
-
     Action action;
-
+    
     bool SetAction(Action newAction, int param = 0)
     {
         if (action == newAction)
@@ -262,6 +265,40 @@ public class Bat : MonoBehaviour
     public bool IsNotInAction(Action test)
     {
         return action != test;
+    }
+
+    public enum State
+    {
+        Undef = 0,
+        Fly,
+        Sleep,
+        WakeUp,
+        Bunk
+    }
+    State state;
+    Vector3 stateChangedPos = new Vector3(0f, 0f, 0f);
+    float currentStateTime = 0.0f;
+    bool stateJustChanged = false;
+
+    public bool SetState(State newState)
+    {
+        if (state == newState)
+            return false;
+
+        stateChangedPos = transform.position;
+        currentStateTime = 0f;
+        stateJustChanged = true;
+        state = newState;
+
+        return true;
+    }
+    public bool IsInState(State test)
+    {
+        return state == test;
+    }
+    public bool IsNotInState(State test)
+    {
+        return state != test;
     }
 
     void ActionTurnback()

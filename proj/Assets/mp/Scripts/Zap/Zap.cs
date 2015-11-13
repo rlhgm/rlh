@@ -872,6 +872,9 @@ public class Zap : MonoBehaviour
             return;
         }
 
+        //BatActivator  other.GetComponent<BatActivator>()
+        //if (  )
+
         int lid = other.transform.gameObject.layer;
         int lid2 = LayerMask.NameToLayer("GroundMoveable");
         if (lid == lid2)
