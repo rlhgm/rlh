@@ -542,11 +542,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.19000006
+      value: 7.0999999
       objectReference: {fileID: 0}
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 29.3199997
+      value: 28.6800003
       objectReference: {fileID: 0}
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9483,7 +9483,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.46000004
+      value: 8.46000004
       objectReference: {fileID: 0}
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -19052,6 +19052,56 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02b8597239712f14f83438b1e5af4f03, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1288775921
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 5.32000017
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 26.1700001
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_RootOrder
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 492878, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6e22002b455c03042aea230bd1ef7fa4, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1293916394
 Prefab:
   m_ObjectHideFlags: 0
@@ -21908,7 +21958,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -25698,11 +25748,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 9.48999977
       objectReference: {fileID: 0}
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 28
+      value: 28.7000008
       objectReference: {fileID: 0}
     - target: {fileID: 431526, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
       propertyPath: m_LocalPosition.z
