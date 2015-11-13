@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Bat : MonoBehaviour
 {
-    float quaverDuration = 4f;
+    float quaverDuration = 3f;
     float quaverTime = 0;
     Vector3 quaverStartPos;
     Vector3 quaverPos = new Vector3(0f, 0f, 0f);
     bool quavering = false;
 
-    float TurnbackDuration = 0.5f;
+    float TurnbackDuration = 0.25f;
 
     void Awake()
     {
@@ -48,8 +48,16 @@ public class Bat : MonoBehaviour
         else QuaverBegin();
 
         CalculateVelocity();
-        //print(velocity);
-        TurnAccordingVelocity();
+        
+        if( !TurnAccordingVelocity() )
+        {
+            //SetAnimatorSpeedAccordingVelocity();
+        }
+
+        if (IsInAction(Action.Fly))
+        {
+            SetAnimatorSpeedAccordingVelocity();
+        }
     }
 
     void CalculateVelocity()
@@ -57,16 +65,51 @@ public class Bat : MonoBehaviour
         _pos = transform.position - lastPos;
         velocity = _pos / currentDeltaTime;
     }
-    void TurnAccordingVelocity()
+    void SetAnimatorSpeedAccordingVelocity()
+    {
+        //float velocityDiff = velocity.magnitude - lastVelocity.magnitude;
+        float velocityDiff = 0f;
+        if( velocity.x > 0f )
+        {
+            velocityDiff += (velocity.x-lastVelocity.x);
+        }
+        else
+        {
+            velocityDiff += (lastVelocity.x-velocity.x);
+        }
+        //velocityDiff += (velocity.x-lastVelocity.x);
+        velocityDiff += (velocity.y - lastVelocity.y);
+        if (velocityDiff > 0)
+        {
+            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 3f);
+        }
+        else
+        {
+            myAnimator.speed = Mathf.Max(myAnimator.speed + velocityDiff, 1.0f);
+        }
+        print(velocityDiff + " " + myAnimator.speed);
+        //myAnimator.speed = 3f;
+    }
+    bool TurnAccordingVelocity()
     {
         if (velocity.x > 0f)
         {
-            if (FaceLeft()) TurnbackStart();
+            if (FaceLeft())
+            {
+                TurnbackStart();
+                return true;
+            }
         }
         else if (velocity.x < 0f)
         {
-            if (FaceRight()) TurnbackStart();
+            if (FaceRight())
+            {
+                TurnbackStart();
+                return true;
+            }
         }
+
+        return false;
     }
     void QuaverBegin()
     {
@@ -145,6 +188,8 @@ public class Bat : MonoBehaviour
         action = newAction;
 
         myAnimator.speed = 1f;
+
+        //print(action);
 
         //myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash;
 
