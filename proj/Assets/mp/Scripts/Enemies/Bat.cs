@@ -29,10 +29,10 @@ public class Bat : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //SetState(State.Sleep);
-        //SetAction(Action.GoSleep);
-        SetState(State.Fly);
-        SetAction(Action.Fly);
+        SetState(State.Sleep);
+        SetAction(Action.GoSleep);
+        //SetState(State.Fly);
+        //SetAction(Action.Fly);
 
         homePos = transform.position;
         lastPos = transform.position;
@@ -40,8 +40,8 @@ public class Bat : MonoBehaviour
         lastVelocity = new Vector2(0f, 0f);
         newVelocity = new Vector2(0f, 0f);
 
-        //if (Random.Range(0, 2) == 1)
-        //    Turnback();
+        if (Random.Range(0, 2) == 1)
+            Turnback();
     }
 
     // Update is called once per frame
@@ -91,7 +91,30 @@ public class Bat : MonoBehaviour
             case State.Sleep:
                 if( currentStateTime >= snoozeDuration)
                 {
+                    //SetState(State.WakeUp);
                     SetState(State.WakeUp);
+                    SetAction(Action.Fly);
+
+                    quaveringXY.x = FaceRight() ? 1 : -1;
+                    quaveringXY.y = -1;// FaceRight() ? 1 : -1;
+
+                    quavering = true;
+                    quaverTime = 0f;
+                    quaverStartPos = transform.position;
+
+                    quaverRange.x = Random.Range(1.0f, 2.0f);
+                    quaverRange.y = Random.Range(1.0f, 2.5f);
+                    quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
+                }
+                break;
+
+            case State.WakeUp:
+                QuaverStep();
+                if( currentStateTime > (quaverDuration*0.125f) )
+                {
+                    SetState(State.Fly);
+                    //QuaverFinish();
+                    QuaverBegin(true);
                 }
                 break;
         }
@@ -167,10 +190,11 @@ public class Bat : MonoBehaviour
 
         return false;
     }
-    void QuaverBegin()
+    void QuaverBegin(bool keepDirX = false)
     {
         //quavering = Random.Range(0,2) == 1 ? 1 : -1;
-        quaveringXY.x = Random.Range(0, 2) == 1 ? 1 : -1;
+        if( !keepDirX )
+            quaveringXY.x = Random.Range(0, 2) == 1 ? 1 : -1;
         quaveringXY.y = Random.Range(0, 2) == 1 ? 1 : -1;
         quavering = true;
         quaverTime = 0f;
@@ -342,7 +366,7 @@ public class Bat : MonoBehaviour
         switch(state)
         {
             case State.Sleep:
-                snoozeDuration = Random.Range(5f, 12f);
+                snoozeDuration = Random.Range(1f, 5f);
                 break;
         }
         return true;
