@@ -8,7 +8,8 @@ public class Bat : MonoBehaviour
     Vector3 quaverStartPos;
     Vector3 quaverPos = new Vector3(0f, 0f, 0f);
     Vector2 quaverRange = new Vector2(0f,0f);
-    bool quavering = false;
+    int quavering = 0;
+    float QuaverToZapSpeed = 0.5f;
     bool _gftTryIterrupt = false;
 
     float TurnbackDuration = 0.25f;
@@ -39,6 +40,8 @@ public class Bat : MonoBehaviour
         lastVelocity = velocity;
         lastPos = transform.position;
 
+        targetPos = RLHScene.Instance.Zap.Targeter.position;
+
         switch (action)
         {
             case Action.Turnback:
@@ -48,7 +51,7 @@ public class Bat : MonoBehaviour
 
         if (IsNotInAction(Action.Turnback))
         {
-            if (quavering) QuaverStep();
+            if (quavering != 0) QuaverStep();
             else QuaverBegin();
         }
 
@@ -128,7 +131,7 @@ public class Bat : MonoBehaviour
     }
     void QuaverBegin()
     {
-        quavering = true;
+        quavering = Random.Range(0,2) == 1 ? 1 : -1;
         quaverTime = 0f;
         quaverStartPos = transform.position;
 
@@ -143,11 +146,14 @@ public class Bat : MonoBehaviour
     void QuaverFinish()
     {
         _gftTryIterrupt = false;
-        quavering = false;
+        quavering = 0;
     }
 
     void QuaverStep()
     {
+        Vector3 toZap = quaverStartPos-targetPos;
+        quaverStartPos -= (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
+
         bool _quaverEnded = false;
         quaverTime += currentDeltaTime;
         if (quaverTime >= quaverDuration)
@@ -156,7 +162,15 @@ public class Bat : MonoBehaviour
             _quaverEnded = true;
         }
 
-        float timeRatio = quaverTime / quaverDuration;
+        float timeRatio;
+        if (quavering == 1)
+        {
+            timeRatio = quaverTime / quaverDuration;
+        }
+        else
+        {
+            timeRatio = 1f - (quaverTime / quaverDuration);
+        }
         //if( !_gftTryIterrupt && timeRatio > .25f)
         //{
         //    _gftTryIterrupt = true;
@@ -313,4 +327,6 @@ public class Bat : MonoBehaviour
     float currentDeltaTime = 0.0f;
     float currentActionTime = 0.0f;
     bool actionJustChanged = false;
+
+    Vector3 targetPos = new Vector3(0f, 0f, 0f);
 }
