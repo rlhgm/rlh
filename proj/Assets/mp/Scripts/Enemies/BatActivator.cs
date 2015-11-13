@@ -8,7 +8,10 @@ public class BatActivator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        foreach (Bat bat in bats)
+        {
+            bat.Activator = this;
+        }
     }
 
     // Update is called once per frame
@@ -19,6 +22,19 @@ public class BatActivator : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        print("BatActivator::OnTriggerEnter2D " + other.name);
+        //print("BatActivator::OnTriggerEnter2D " + other.name);
+        foreach( Bat bat in bats )
+        {
+            bat.ZapIsHere();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        //print("BatActivator::OnTriggerEnter2D " + other.name);
+        foreach (Bat bat in bats)
+        {
+            bat.ZapIsHere();
+        }
     }
 }

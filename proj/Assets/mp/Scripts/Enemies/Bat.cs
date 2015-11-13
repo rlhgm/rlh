@@ -3,12 +3,17 @@ using System.Collections;
 
 public class Bat : MonoBehaviour
 {
+    BatActivator activator;
+
+    Vector3 homePos;
+
     float quaverDuration = 3f;
     float quaverTime = 0;
     Vector3 quaverStartPos;
     Vector3 quaverPos = new Vector3(0f, 0f, 0f);
     Vector2 quaverRange = new Vector2(0f,0f);
-    int quavering = 0;
+    Vector2 quaveringXY = new Vector2(0f,0f);
+    bool quavering = false;
     float QuaverToZapSpeed = 0.5f;
     bool _gftTryIterrupt = false;
 
@@ -24,11 +29,19 @@ public class Bat : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //quaverBegin();
+        //SetState(State.Sleep);
+        //SetAction(Action.GoSleep);
+        SetState(State.Fly);
+        SetAction(Action.Fly);
+
+        homePos = transform.position;
         lastPos = transform.position;
         velocity = new Vector2(0f, 0f);
         lastVelocity = new Vector2(0f, 0f);
         newVelocity = new Vector2(0f, 0f);
+
+        //if (Random.Range(0, 2) == 1)
+        //    Turnback();
     }
 
     // Update is called once per frame
@@ -46,30 +59,51 @@ public class Bat : MonoBehaviour
 
         targetPos = RLHScene.Instance.Zap.Targeter.position;
 
-        switch (action)
+        switch (state)
         {
-            case Action.Turnback:
-                ActionTurnback();
+            case State.Fly:
+                switch (action)
+                {
+                    case Action.Turnback:
+                        ActionTurnback();
+                        break;
+                }
+
+                if (IsNotInAction(Action.Turnback))
+                {
+                    if (quavering) QuaverStep();
+                    else QuaverBegin();
+                }
+
+                CalculateVelocity();
+
+                if (!TurnAccordingVelocity())
+                {
+                    //SetAnimatorSpeedAccordingVelocity();
+                }
+
+                if (IsInAction(Action.Fly))
+                {
+                    SetAnimatorSpeedAccordingVelocity();
+                }
+                break;
+
+            case State.Sleep:
+                if( currentStateTime >= snoozeDuration)
+                {
+                    SetState(State.WakeUp);
+                }
                 break;
         }
+    }
 
-        if (IsNotInAction(Action.Turnback))
-        {
-            if (quavering != 0) QuaverStep();
-            else QuaverBegin();
-        }
+    public void ZapIsHere()
+    {
 
-        CalculateVelocity();
-        
-        if( !TurnAccordingVelocity() )
-        {
-            //SetAnimatorSpeedAccordingVelocity();
-        }
+    }
+    public void ZapEscape()
+    {
 
-        if (IsInAction(Action.Fly))
-        {
-            SetAnimatorSpeedAccordingVelocity();
-        }
     }
 
     void CalculateVelocity()
@@ -103,7 +137,7 @@ public class Bat : MonoBehaviour
 
         if (velocityDiff > 0)
         {
-            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 2.25f);
+            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 3.25f);
         }
         else
         {
@@ -135,12 +169,15 @@ public class Bat : MonoBehaviour
     }
     void QuaverBegin()
     {
-        quavering = Random.Range(0,2) == 1 ? 1 : -1;
+        //quavering = Random.Range(0,2) == 1 ? 1 : -1;
+        quaveringXY.x = 1f;
+        quaveringXY.y = -1f;
+        quavering = true;
         quaverTime = 0f;
         quaverStartPos = transform.position;
 
-        quaverRange.x = Random.Range(2.5f, 4f);
-        quaverRange.y = Random.Range(0.1f, 0.75f);
+        quaverRange.x = 3f; // Random.Range(2.5f, 4f);
+        quaverRange.y = 1f; // Random.Range(0.1f, 0.75f);
         quaverDuration = quaverRange.x - Random.Range(0f,1f);
 
         //print( myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash );
@@ -150,13 +187,15 @@ public class Bat : MonoBehaviour
     void QuaverFinish()
     {
         _gftTryIterrupt = false;
-        quavering = 0;
+        quaveringXY.x = 0f;
+        quaveringXY.y = 0f;
+        quavering = false;
     }
 
     void QuaverStep()
     {
         Vector3 toZap = quaverStartPos-targetPos;
-        quaverStartPos -= (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
+        //quaverStartPos -= (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
 
         bool _quaverEnded = false;
         quaverTime += currentDeltaTime;
@@ -166,15 +205,17 @@ public class Bat : MonoBehaviour
             _quaverEnded = true;
         }
 
-        float timeRatio;
-        if (quavering == 1)
-        {
-            timeRatio = quaverTime / quaverDuration;
-        }
+        Vector2 timeRatioXY = new Vector2();
+        if (quaveringXY.x == 1f)
+            timeRatioXY.x = quaverTime / quaverDuration;
         else
-        {
-            timeRatio = 1f - (quaverTime / quaverDuration);
-        }
+            timeRatioXY.x = 1f - (quaverTime / quaverDuration);
+
+        if (quaveringXY.y == 1f)
+            timeRatioXY.y = quaverTime / quaverDuration;
+        else
+            timeRatioXY.y = 1f - (quaverTime / quaverDuration);
+
         //if( !_gftTryIterrupt && timeRatio > .25f)
         //{
         //    _gftTryIterrupt = true;
@@ -185,8 +226,8 @@ public class Bat : MonoBehaviour
         //        return;
         //    }
         //}
-        quaverPos.x = Mathf.Sin(timeRatio * Mathf.PI * 2) * quaverRange.x;
-        quaverPos.y = Mathf.Sin(timeRatio * Mathf.PI * 4) * quaverRange.y;
+        quaverPos.x = Mathf.Sin(timeRatioXY.x * Mathf.PI * 2) * quaverRange.x;
+        quaverPos.y = Mathf.Sin(timeRatioXY.y * Mathf.PI * 4) * quaverRange.y;
 
         transform.position = quaverStartPos + quaverPos;
 
@@ -201,6 +242,7 @@ public class Bat : MonoBehaviour
     static int flyAnimStateHash;
     static int turnbackAnimStateHash;
     static int attackAnimStateHash;
+    static int goSleepAnimStateHash;
 
     static bool StaticInit()
     {
@@ -209,6 +251,7 @@ public class Bat : MonoBehaviour
         flyAnimStateHash = Animator.StringToHash("Fly");
         turnbackAnimStateHash = Animator.StringToHash("Turnback");
         attackAnimStateHash = Animator.StringToHash("Attack");
+        goSleepAnimStateHash = Animator.StringToHash("GoSleep");
 
         staticInitiated = true;
         return true;
@@ -219,7 +262,9 @@ public class Bat : MonoBehaviour
         Undef = 0,
         Fly,
         Turnback,
+        //WokeUp,
         Attack,
+        GoSleep
     };
     Action action;
     
@@ -251,6 +296,10 @@ public class Bat : MonoBehaviour
 
             case Action.Attack:
                 myAnimator.Play(attackAnimStateHash);
+                break;
+
+            case Action.GoSleep:
+                myAnimator.Play(goSleepAnimStateHash);
                 break;
         }
 
@@ -290,6 +339,12 @@ public class Bat : MonoBehaviour
         stateJustChanged = true;
         state = newState;
 
+        switch(state)
+        {
+            case State.Sleep:
+                snoozeDuration = Random.Range(5f, 12f);
+                break;
+        }
         return true;
     }
     public bool IsInState(State test)
@@ -366,4 +421,19 @@ public class Bat : MonoBehaviour
     bool actionJustChanged = false;
 
     Vector3 targetPos = new Vector3(0f, 0f, 0f);
+
+    float snoozeDuration = 5f;
+
+    public BatActivator Activator
+    {
+        get
+        {
+            return activator;
+        }
+
+        set
+        {
+            activator = value;
+        }
+    }
 }
