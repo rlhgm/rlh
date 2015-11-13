@@ -7,7 +7,9 @@ public class Bat : MonoBehaviour
     float quaverTime = 0;
     Vector3 quaverStartPos;
     Vector3 quaverPos = new Vector3(0f, 0f, 0f);
+    Vector2 quaverRange = new Vector2(0f,0f);
     bool quavering = false;
+    bool _gftTryIterrupt = false;
 
     float TurnbackDuration = 0.25f;
 
@@ -44,8 +46,11 @@ public class Bat : MonoBehaviour
                 break;
         }
 
-        if (quavering) QuaverStep();
-        else QuaverBegin();
+        if (IsNotInAction(Action.Turnback))
+        {
+            if (quavering) QuaverStep();
+            else QuaverBegin();
+        }
 
         CalculateVelocity();
         
@@ -67,28 +72,38 @@ public class Bat : MonoBehaviour
     }
     void SetAnimatorSpeedAccordingVelocity()
     {
+
+
+        // tu wersja dla przyspieszenia po x i y w gore....
         //float velocityDiff = velocity.magnitude - lastVelocity.magnitude;
+
         float velocityDiff = 0f;
-        if( velocity.x > 0f )
+        if (velocity.x > 0f)
         {
-            velocityDiff += (velocity.x-lastVelocity.x);
+            velocityDiff += (velocity.x - lastVelocity.x);
         }
         else
         {
-            velocityDiff += (lastVelocity.x-velocity.x);
+            velocityDiff += (lastVelocity.x - velocity.x);
         }
         //velocityDiff += (velocity.x-lastVelocity.x);
         velocityDiff += (velocity.y - lastVelocity.y);
+
+        // tu zrobie wersje ze jak predkosc nie zmienia sie to macha coraz wolniej... i odwrotnie
+        //float velocityDiff = velocity.magnitude - lastVelocity.magnitude;
+
+        //velocityDiff = Mathf.Abs(velocityDiff)
+
         if (velocityDiff > 0)
         {
-            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 3f);
+            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 2.25f);
         }
         else
         {
-            myAnimator.speed = Mathf.Max(myAnimator.speed + velocityDiff, 1.0f);
+            myAnimator.speed = Mathf.Max(myAnimator.speed + velocityDiff * 2, 1.0f);
         }
-        print(velocityDiff + " " + myAnimator.speed);
-        //myAnimator.speed = 3f;
+
+        //print(velocity + " " + velocityDiff + " " + myAnimator.speed);
     }
     bool TurnAccordingVelocity()
     {
@@ -117,12 +132,17 @@ public class Bat : MonoBehaviour
         quaverTime = 0f;
         quaverStartPos = transform.position;
 
+        quaverRange.x = Random.Range(2.5f, 4f);
+        quaverRange.y = Random.Range(0.1f, 0.75f);
+        quaverDuration = quaverRange.x - Random.Range(0f,1f);
+
         //print( myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash );
         //print(flyAnimStateHash);
     }
 
     void QuaverFinish()
     {
+        _gftTryIterrupt = false;
         quavering = false;
     }
 
@@ -137,9 +157,18 @@ public class Bat : MonoBehaviour
         }
 
         float timeRatio = quaverTime / quaverDuration;
+        //if( !_gftTryIterrupt && timeRatio > .25f)
+        //{
+        //    _gftTryIterrupt = true;
 
-        quaverPos.x = Mathf.Sin(timeRatio * Mathf.PI * 2) * 3.0f;
-        quaverPos.y = Mathf.Sin(timeRatio * Mathf.PI * 4) * 0.5f;
+        //    if (Random.Range(0, 2) == 1)
+        //    {
+        //        QuaverFinish();
+        //        return;
+        //    }
+        //}
+        quaverPos.x = Mathf.Sin(timeRatio * Mathf.PI * 2) * quaverRange.x;
+        quaverPos.y = Mathf.Sin(timeRatio * Mathf.PI * 4) * quaverRange.y;
 
         transform.position = quaverStartPos + quaverPos;
 
