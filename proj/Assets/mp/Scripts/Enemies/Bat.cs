@@ -170,14 +170,14 @@ public class Bat : MonoBehaviour
     void QuaverBegin()
     {
         //quavering = Random.Range(0,2) == 1 ? 1 : -1;
-        quaveringXY.x = 1f;
-        quaveringXY.y = -1f;
+        quaveringXY.x = Random.Range(0, 2) == 1 ? 1 : -1;
+        quaveringXY.y = Random.Range(0, 2) == 1 ? 1 : -1;
         quavering = true;
         quaverTime = 0f;
         quaverStartPos = transform.position;
 
-        quaverRange.x = 3f; // Random.Range(2.5f, 4f);
-        quaverRange.y = 1f; // Random.Range(0.1f, 0.75f);
+        quaverRange.x = Random.Range(2.5f, 4f);
+        quaverRange.y = Random.Range(0.1f, 0.75f);
         quaverDuration = quaverRange.x - Random.Range(0f,1f);
 
         //print( myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash );
