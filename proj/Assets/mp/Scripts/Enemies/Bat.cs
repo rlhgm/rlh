@@ -15,9 +15,13 @@ public class Bat : MonoBehaviour
     Vector2 quaveringXY = new Vector2(0f,0f);
     bool quavering = false;
     float QuaverToZapSpeed = 0.5f;
-    bool _gftTryIterrupt = false;
+    float QuaverToHomeSpeed = 1.0f;
+    //bool _gftTryIterrupt = false;
 
     float TurnbackDuration = 0.25f;
+
+    bool searchBed = false;
+    bool bedFound = false;
 
     void Awake()
     {
@@ -72,7 +76,10 @@ public class Bat : MonoBehaviour
                 if (IsNotInAction(Action.Turnback))
                 {
                     if (quavering) QuaverStep();
-                    else QuaverBegin();
+                    else
+                    {
+                        QuaverBegin();
+                    }
                 }
 
                 CalculateVelocity();
@@ -85,6 +92,15 @@ public class Bat : MonoBehaviour
                 if (IsInAction(Action.Fly))
                 {
                     SetAnimatorSpeedAccordingVelocity();
+                }
+
+                if( currentStateTime >= snoozeDuration)
+                {
+                    if (!searchBed)
+                    {
+                        searchBed = true;
+                        //print("szukam domu");
+                    }
                 }
                 break;
 
@@ -160,7 +176,7 @@ public class Bat : MonoBehaviour
 
         if (velocityDiff > 0)
         {
-            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 3.25f);
+            myAnimator.speed = Mathf.Min(myAnimator.speed + velocityDiff, 3.0f);
         }
         else
         {
@@ -200,8 +216,21 @@ public class Bat : MonoBehaviour
         quaverTime = 0f;
         quaverStartPos = transform.position;
 
-        quaverRange.x = Random.Range(2.5f, 4f);
-        quaverRange.y = Random.Range(0.1f, 0.75f);
+        if (searchBed)
+        {
+            quaverRange.x = Random.Range(1.5f, 2.5f);
+            quaverRange.y = Random.Range(0.1f, 0.5f);
+        }
+        else if( bedFound )
+        {
+            quaverRange.x = Random.Range(1.0f, 2f);
+            quaverRange.y = Random.Range(0.1f, 0.25f);
+        }
+        else
+        {
+            quaverRange.x = Random.Range(2.5f, 4f);
+            quaverRange.y = Random.Range(0.1f, 0.75f);
+        }
         quaverDuration = quaverRange.x - Random.Range(0f,1f);
 
         //print( myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash );
@@ -210,7 +239,8 @@ public class Bat : MonoBehaviour
 
     void QuaverFinish()
     {
-        _gftTryIterrupt = false;
+
+        //_gftTryIterrupt = false;
         quaveringXY.x = 0f;
         quaveringXY.y = 0f;
         quavering = false;
@@ -218,7 +248,25 @@ public class Bat : MonoBehaviour
 
     void QuaverStep()
     {
-        Vector3 toZap = quaverStartPos-targetPos;
+        if (searchBed)
+        {
+            Vector3 toTarget = homePos - quaverStartPos;
+            Vector3 distToDisplace = (toTarget.normalized * QuaverToHomeSpeed * currentDeltaTime);
+            if (distToDisplace.magnitude > toTarget.magnitude)
+            {
+                if (!bedFound)
+                {
+                    //print("znalazlem");
+                    quaverStartPos = homePos;
+                    bedFound = true;
+                }
+            }
+            else
+            {
+                quaverStartPos += distToDisplace;
+            }
+        }
+        //Vector3 toZap = quaverStartPos-targetPos;
         //quaverStartPos -= (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
 
         bool _quaverEnded = false;
@@ -256,7 +304,23 @@ public class Bat : MonoBehaviour
         transform.position = quaverStartPos + quaverPos;
 
         if (_quaverEnded)
-            QuaverFinish();
+        {
+            if (bedFound)
+            {
+                //print("ide spac");
+                QuaverFinish();
+                transform.position = homePos;
+                SetState(State.Sleep);
+                SetAction(Action.GoSleep);
+                bedFound = false;
+                searchBed = false;
+                //return;
+            }
+            else
+            {
+                QuaverFinish();
+            }
+        }
     }
 
     Transform myGfx = null;
@@ -301,7 +365,7 @@ public class Bat : MonoBehaviour
         currentActionTime = 0f;
         actionJustChanged = true;
         action = newAction;
-
+        
         myAnimator.speed = 1f;
 
         //print(action);
@@ -362,11 +426,18 @@ public class Bat : MonoBehaviour
         currentStateTime = 0f;
         stateJustChanged = true;
         state = newState;
-
-        switch(state)
+        
+        switch (state)
         {
             case State.Sleep:
-                snoozeDuration = Random.Range(1f, 5f);
+                snoozeDuration = Random.Range(3f, 7f);
+                myGfx.Rotate(0f,0f,FaceLeft() ? 90.0f : -90.0f);
+                //snoozeDuration = Random.Range(1f, 2f);
+                break;
+            case State.WakeUp:
+                snoozeDuration = Random.Range(2f, 4f);
+                myGfx.Rotate(0f, 0f, FaceLeft() ? -90.0f : 90.0f);
+                //snoozeDuration = Random.Range(1f, 2f);
                 break;
         }
         return true;
