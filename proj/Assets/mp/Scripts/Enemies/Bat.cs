@@ -378,17 +378,17 @@ public class Bat : MonoBehaviour
         toDiveTargetDiff = transform.position - attackTargetPos;
 
         //if (toDiveTargetDiff.x < 1.0f || toDiveTargetDiff.x > 2.0f) return false;
-        if (toDiveTargetDiff.y < 1.5f || toDiveTargetDiff.y > 2.5f) return false;
+        if (toDiveTargetDiff.y < 1.75f || toDiveTargetDiff.y > 2.5f) return false;
         
         if( FaceRight() )
         {
             if (toDiveTargetDiff.x > 0) return false;
-            if (toDiveTargetDiff.x < -1.0f || toDiveTargetDiff.x > -2.0f) return false;
+            if (toDiveTargetDiff.x < -1.5f || toDiveTargetDiff.x > -2.5f) return false;
         }
         else
         {
             if (toDiveTargetDiff.x < 0) return false;
-            if (toDiveTargetDiff.x < 1.0f || toDiveTargetDiff.x > 2.0f) return false;
+            if (toDiveTargetDiff.x < 1.5f || toDiveTargetDiff.x > 2.5f) return false;
         }
         
         return true;
