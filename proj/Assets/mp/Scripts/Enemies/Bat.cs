@@ -23,6 +23,7 @@ public class Bat : MonoBehaviour
     //bool flyingToTarget = false;
 
     float TurnbackDuration = 0.25f;
+    float DiveInDuration = 0.333f;
 
     bool searchBed = false;
     bool bedFound = false;
@@ -72,7 +73,9 @@ public class Bat : MonoBehaviour
         lastPos = transform.position;
 
         //if( Activator.ZapIn )
-        targetPos = RLHScene.Instance.Zap.Targeter.position;
+        attackTargetPos = RLHScene.Instance.Zap.Targeter.position;
+        quaverTargetPos = RLHScene.Instance.Zap.transform.position;
+        quaverTargetPos.y += 3f;
 
         switch (state)
         {
@@ -86,12 +89,48 @@ public class Bat : MonoBehaviour
 
                 if (IsNotInAction(Action.Turnback))
                 {
-                    if (quavering) QuaverStep();
+                    if (tryStartDive())
+                    {
+                        //quav
+                        //print("moge pikowac....");
+
+                        SetState(State.DiveIn);
+                        SetAction(Action.DiveIn);
+
+                        //SetState(State.WakeUp);
+                        //SetAction(Action.Fly);
+
+                        quaveringXY.x = FaceRight() ? 1 : -1;
+                        quaveringXY.y = -1;// FaceRight() ? 1 : -1;
+
+                        quavering = true;
+                        quaverTime = 0f;
+                        quaverStartPos = transform.position;
+
+                        //quaverRange.x = Random.Range(1.0f, 2.0f);
+                        //quaverRange.y = Random.Range(1.0f, 2.5f);
+                        //quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
+
+                        quaverRange.x = toDiveTargetDiff.x * 2f; 
+                        quaverRange.y = toDiveTargetDiff.y; 
+                        quaverDuration = 4f;
+                    }
                     else
                     {
-                        //if (flyingToTarget) FlyToTargetStep();
-                        //else
-                            QuaverBegin();
+                        if (quavering) QuaverStep();
+                        else
+                        {
+                            //if (flyingToTarget) FlyToTargetStep();
+                            //else
+
+                            //if (tryStartDive())
+                            //{
+                            //}
+                            //else
+                            //{
+                                QuaverBegin();
+                            //}
+                        }
                     }
                 }
 
@@ -173,6 +212,35 @@ public class Bat : MonoBehaviour
                     //{
                         QuaverBegin(true);
                     //}
+                }
+                break;
+
+            case State.DiveIn:
+                if (currentStateTime > DiveInDuration)
+                {
+                    SetState(State.Dive);
+                    SetAction(Action.Dive);
+                }
+                break;
+
+            case State.Dive:
+                QuaverStep();
+                if (currentStateTime > (quaverDuration * 0.125f))
+                {
+                    SetState(State.DiveOut);
+                    SetAction(Action.Fly);
+
+                    //QuaverBegin(true);
+                }
+                break;
+
+            case State.DiveOut:
+                QuaverStep();
+                if (currentStateTime > (quaverDuration * 0.125f))
+                {
+                    SetState(State.Fly);
+                    SetAction(Action.Fly);
+                    QuaverBegin(false);
                 }
                 break;
         }
@@ -305,6 +373,27 @@ public class Bat : MonoBehaviour
     //    }
     //}
 
+    bool tryStartDive()
+    {
+        toDiveTargetDiff = transform.position - attackTargetPos;
+
+        //if (toDiveTargetDiff.x < 1.0f || toDiveTargetDiff.x > 2.0f) return false;
+        if (toDiveTargetDiff.y < 1.5f || toDiveTargetDiff.y > 2.5f) return false;
+        
+        if( FaceRight() )
+        {
+            if (toDiveTargetDiff.x > 0) return false;
+            if (toDiveTargetDiff.x < -1.0f || toDiveTargetDiff.x > -2.0f) return false;
+        }
+        else
+        {
+            if (toDiveTargetDiff.x < 0) return false;
+            if (toDiveTargetDiff.x < 1.0f || toDiveTargetDiff.x > 2.0f) return false;
+        }
+        
+        return true;
+    }
+
     void QuaverBegin(bool keepDirX = false)
     {
         //quavering = Random.Range(0,2) == 1 ? 1 : -1;
@@ -367,7 +456,7 @@ public class Bat : MonoBehaviour
         }
         else if (Activator.ZapIn)
         {
-            Vector3 toZap = targetPos - quaverStartPos;
+            Vector3 toZap = quaverTargetPos - quaverStartPos;
             //Vector3 distToDisplace = (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
             //if (distToDisplace.magnitude > toZap.magnitude)
             //{
@@ -447,6 +536,8 @@ public class Bat : MonoBehaviour
     static int turnbackAnimStateHash;
     static int attackAnimStateHash;
     static int goSleepAnimStateHash;
+    static int diveInAnimStateHash;
+    static int diveAnimStateHash;
 
     static bool StaticInit()
     {
@@ -456,6 +547,8 @@ public class Bat : MonoBehaviour
         turnbackAnimStateHash = Animator.StringToHash("Turnback");
         attackAnimStateHash = Animator.StringToHash("Attack");
         goSleepAnimStateHash = Animator.StringToHash("GoSleep");
+        diveInAnimStateHash = Animator.StringToHash("DiveIn");
+        diveAnimStateHash = Animator.StringToHash("Dive");
 
         staticInitiated = true;
         return true;
@@ -465,12 +558,28 @@ public class Bat : MonoBehaviour
     {
         Undef = 0,
         Fly,
+        //Quaver,
         Turnback,
-        //WokeUp,
         Attack,
-        GoSleep
+        GoSleep,
+        DiveIn,
+        Dive,
+        WokeUp
     };
     Action action;
+
+    public enum State
+    {
+        Undef = 0,
+        Fly,
+        Sleep,
+        WakeUp,
+        DiveIn,
+        Dive,
+        DiveOut,
+        //Bunk
+    }
+    State state;
 
     bool SetAction(Action newAction, int param = 0)
     {
@@ -491,23 +600,46 @@ public class Bat : MonoBehaviour
         switch (action)
         {
             case Action.Fly:
-                myAnimator.Play(flyAnimStateHash);
+                //myAnimator.Play(flyAnimStateHash);
+                playAnim(flyAnimStateHash);
                 break;
 
+            //case Action.Quaver:
+            //    break;
+
             case Action.Turnback:
-                myAnimator.Play(turnbackAnimStateHash);
+                //myAnimator.Play(turnbackAnimStateHash);
+                playAnim(turnbackAnimStateHash);
                 break;
 
             case Action.Attack:
-                myAnimator.Play(attackAnimStateHash);
+                //myAnimator.Play(attackAnimStateHash);
+                playAnim(attackAnimStateHash);
                 break;
 
             case Action.GoSleep:
-                myAnimator.Play(goSleepAnimStateHash);
+                //myAnimator.Play(goSleepAnimStateHash);
+                playAnim(goSleepAnimStateHash);
+                break;
+
+            case Action.DiveIn:
+                //myAnimator.Play(diveInAnimStateHash);
+                playAnim(diveInAnimStateHash);
+                break;
+
+            case Action.Dive:
+                //myAnimator.Play(diveAnimStateHash);
+                playAnim(diveAnimStateHash);
                 break;
         }
 
         return true;
+    }
+
+    void playAnim(int animStateHash, bool forceRestart = false)
+    {
+        if (!forceRestart && myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash == animStateHash) return;
+        myAnimator.Play(animStateHash);
     }
 
     public bool IsInAction(Action test)
@@ -519,16 +651,7 @@ public class Bat : MonoBehaviour
     {
         return action != test;
     }
-
-    public enum State
-    {
-        Undef = 0,
-        Fly,
-        Sleep,
-        WakeUp,
-        Bunk
-    }
-    State state;
+    
     Vector3 stateChangedPos = new Vector3(0f, 0f, 0f);
     float currentStateTime = 0.0f;
     bool stateJustChanged = false;
@@ -563,6 +686,10 @@ public class Bat : MonoBehaviour
                 //myGfx.Rotate(0f, 0f, FaceLeft() ? -90.0f : 90.0f);
                 //snoozeDuration = Random.Range(1f, 2f);
                 break;
+
+            case State.Dive:
+                //toDiveTargetDiff;
+                break;
         }
         return true;
     }
@@ -582,6 +709,19 @@ public class Bat : MonoBehaviour
             Turnback();
             SetAction(Action.Fly);
         }
+    }
+
+    void ActionDiveIn()
+    {
+        if( currentActionTime >= DiveInDuration)
+        {
+            //SetAction(Action.Dive);
+        }
+    }
+
+    void ActionDive()
+    {
+
     }
 
     void TurnbackStart()
@@ -639,7 +779,9 @@ public class Bat : MonoBehaviour
     float currentActionTime = 0.0f;
     bool actionJustChanged = false;
 
-    Vector3 targetPos = new Vector3(0f, 0f, 0f);
+    Vector3 quaverTargetPos = new Vector3(0f, 0f, 0f);
+    Vector3 attackTargetPos = new Vector3(0f, 0f, 0f);
+    Vector3 toDiveTargetDiff = new Vector3();
     //Vector3 flyingToTargetPos = new Vector3(0f, 0f, 0f);
 
     float snoozeDuration = 5f;
