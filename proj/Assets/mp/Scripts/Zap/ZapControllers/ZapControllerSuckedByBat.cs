@@ -1818,14 +1818,14 @@ public class ZapControllerSuckedByBat : ZapController
     int Action_IDLE()
     {
 
-        if (Input.GetMouseButtonDown(0))
-        {
+        //if (Input.GetMouseButtonDown(0))
+        //{
 
-            //zap._pullOutKnife();
-            //zap._pullOutGravityGun();
-            return zap.pullChoosenWeapon();
-            //return 1;
-        }
+        //    //zap._pullOutKnife();
+        //    //zap._pullOutGravityGun();
+        //    return zap.pullChoosenWeapon();
+        //    //return 1;
+        //}
 
         return 0;
     }
@@ -1872,12 +1872,12 @@ public class ZapControllerSuckedByBat : ZapController
     int Action_RUN(int dir)
     {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            int pullRes = zap.pullChoosenWeapon();
-            if (pullRes != 0)
-                return pullRes;
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    int pullRes = zap.pullChoosenWeapon();
+        //    if (pullRes != 0)
+        //        return pullRes;
+        //}
 
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
@@ -1994,10 +1994,10 @@ public class ZapControllerSuckedByBat : ZapController
 
     int Action_CROUCH_IDLE()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            return zap.pullChoosenWeapon(true);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    return zap.pullChoosenWeapon(true);
+        //}
 
         if (Input.GetKey(zap.keyDown))
         {
@@ -2014,10 +2014,10 @@ public class ZapControllerSuckedByBat : ZapController
                 return 0;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            return zap.pullChoosenWeapon(true);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    return zap.pullChoosenWeapon(true);
+        //}
 
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
@@ -2079,27 +2079,27 @@ public class ZapControllerSuckedByBat : ZapController
 
     bool tryMountAttackStart()
     {
-        if (isNotInAction(Action.MOUNT_BIRDHIT) && zap.HaveKnife && Input.GetMouseButtonDown(0))
-        {
-            Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
-            if (mouseInScene.x < transform.position.x)
-            {
-                if (zap.faceRight())
-                {
-                    zap.turnLeft();
-                }
-                setAction(Action.MOUNT_ATTACK_LEFT);
-            }
-            else
-            {
-                if (!zap.faceRight())
-                {
-                    zap.turnRight();
-                }
-                setAction(Action.MOUNT_ATTACK_RIGHT);
-            }
-            return true;
-        }
+        //if (isNotInAction(Action.MOUNT_BIRDHIT) && zap.HaveKnife && Input.GetMouseButtonDown(0))
+        //{
+        //    Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
+        //    if (mouseInScene.x < transform.position.x)
+        //    {
+        //        if (zap.faceRight())
+        //        {
+        //            zap.turnLeft();
+        //        }
+        //        setAction(Action.MOUNT_ATTACK_LEFT);
+        //    }
+        //    else
+        //    {
+        //        if (!zap.faceRight())
+        //        {
+        //            zap.turnRight();
+        //        }
+        //        setAction(Action.MOUNT_ATTACK_RIGHT);
+        //    }
+        //    return true;
+        //}
         return false;
     }
 
