@@ -94,7 +94,7 @@ public class Bat : MonoBehaviour
                         //quav
                         //print("moge pikowac....");
 
-                        SetState(State.DiveIn);
+                        SetState(State.Dive);
                         SetAction(Action.DiveIn);
 
                         //SetState(State.WakeUp);
@@ -218,15 +218,21 @@ public class Bat : MonoBehaviour
                 }
                 break;
 
-            case State.DiveIn:
-                if (currentStateTime > DiveInDuration)
-                {
-                    SetState(State.Dive);
-                    SetAction(Action.Dive);
-                }
-                break;
+            //case State.DiveIn:
+            //    if (currentStateTime > DiveInDuration)
+            //    {
+            //        SetState(State.Dive);
+            //        SetAction(Action.Dive);
+            //    }
+            //    break;
 
             case State.Dive:
+                if (currentStateTime > DiveInDuration)
+                {
+                    //SetAction(Action.Dive);
+                    playAnim(diveAnimStateHash);
+                }
+                
                 QuaverStep();
                 CalculateVelocity();
                 SetAnimatorSpeedAccordingVelocity();
@@ -610,7 +616,7 @@ public class Bat : MonoBehaviour
         Fly,
         Sleep,
         WakeUp,
-        DiveIn,
+        //DiveIn,
         Dive,
         DiveOut,
         //Bunk
