@@ -3151,30 +3151,64 @@ public class ZapControllerNormal : ZapController
     }
     public override bool triggerEnter(Collider2D other)
     {
-
-        if (other.gameObject.tag == "Bird")
+        bool itsBat = (other.gameObject.tag == "Bat");
+        if ( itsBat || other.gameObject.tag == "Bird")
         {
+            //Debug.Log("Fuck! Its a bat!");
             if (isInState(Zap.State.CLIMB_ROPE))
             {
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
                 setAction(Action.JUMP);
-                
+
                 releaseRope();
-                
+
                 if (zap.canBeFuddleFromBird)
                     zap.FuddleFromBird = true;
+                return true;
             }
             else if (isInState(Zap.State.MOUNT))
             {
                 setAction(Action.MOUNT_BIRDHIT);
+                return true;
             }
             else if (isInState(Zap.State.IN_AIR))
             {
                 zap.velocity.x = 0.0f;
+                return true;
             }
-            return true;
+            // jesli to bat to trzeba szukac dalej....
+            if (itsBat)
+            {
+
+                return true;
+            }
+            return false;
         }
+
+        //if (other.gameObject.tag == "Bird")
+        //{
+        //    if (isInState(Zap.State.CLIMB_ROPE))
+        //    {
+        //        zap.velocity.x = 0.0f;
+        //        zap.velocity.y = 0.0f;
+        //        setAction(Action.JUMP);
+                
+        //        releaseRope();
+                
+        //        if (zap.canBeFuddleFromBird)
+        //            zap.FuddleFromBird = true;
+        //    }
+        //    else if (isInState(Zap.State.MOUNT))
+        //    {
+        //        setAction(Action.MOUNT_BIRDHIT);
+        //    }
+        //    else if (isInState(Zap.State.IN_AIR))
+        //    {
+        //        zap.velocity.x = 0.0f;
+        //    }
+        //    return true;
+        //}
 
         return false;
     }
