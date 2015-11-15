@@ -804,10 +804,33 @@ public class Zap : MonoBehaviour
     //		}
     //	}
 
+    bool BatAttack(Bat bat)
+    {
+        if (!bat.IsInState(Bat.State.Dive))
+        {
+            return false;
+        }
+        if (Mathf.Abs(targeter.position.y - bat.transform.position.y) < 0.5f)
+        {
+            die(DeathType.PANTHER);
+            return true;
+        }
+
+        return false;
+    }
+
     void OnTriggerStay2D(Collider2D other)
     {
         if (isDead())
             return;
+
+        if (other.gameObject.tag == "Bat")
+        {
+            //Debug.Log("Fuck! Its a bat!");
+            Bat bat = other.GetComponent<Bat>();
+            BatAttack(bat);
+            return;
+        }
 
         int lid = other.transform.gameObject.layer;
         if (lid == LayerMask.NameToLayer("GroundMoveable"))
@@ -865,6 +888,23 @@ public class Zap : MonoBehaviour
 
         if (currentController.triggerEnter(other))
             return;
+
+        if (other.gameObject.tag == "Bat")
+        {
+            //Debug.Log("Fuck! Its a bat!");
+
+            Bat bat = other.GetComponent<Bat>();
+            //if( !bat.IsInState(Bat.State.Dive))
+            //{
+            //    return;
+            //}
+            //if( Mathf.Abs(transform.position.y - bat.transform.position.y) < 0.5f )
+            //{
+            //    die(DeathType.PANTHER);
+            //}
+            BatAttack(bat);
+            return;
+        }
 
         if (other.gameObject.tag == "KillerPhysic")
         {

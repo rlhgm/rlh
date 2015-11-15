@@ -3181,7 +3181,7 @@ public class ZapControllerNormal : ZapController
             if (itsBat)
             {
 
-                return true;
+                //return true;
             }
             return false;
         }

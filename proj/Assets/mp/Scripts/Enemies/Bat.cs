@@ -496,7 +496,7 @@ public class Bat : MonoBehaviour
                 quaverStartPos += distToDisplace;
             }
         }
-        else if (Activator.ZapIn)
+        else if (Activator.ZapIn && IsNotInState(State.Dive) )
         {
             Vector3 toZap = quaverTargetPos - quaverStartPos;
             //Vector3 distToDisplace = (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
