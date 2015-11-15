@@ -100,7 +100,7 @@ public class Bat : MonoBehaviour
                         //SetState(State.WakeUp);
                         //SetAction(Action.Fly);
 
-                        quaveringXY.x = FaceRight() ? 1 : -1;
+                        quaveringXY.x = FaceRight() ? -1 : -1;
                         quaveringXY.y = -1;// FaceRight() ? 1 : -1;
 
                         quavering = true;
@@ -229,7 +229,7 @@ public class Bat : MonoBehaviour
                 {
                     SetState(State.DiveOut);
                     SetAction(Action.Fly);
-
+                    myAnimator.speed = 4f;
                     //QuaverBegin(true);
                 }
                 break;
@@ -383,7 +383,7 @@ public class Bat : MonoBehaviour
         if( FaceRight() )
         {
             if (toDiveTargetDiff.x > 0) return false;
-            if (toDiveTargetDiff.x < -1.5f || toDiveTargetDiff.x > -2.5f) return false;
+            if (toDiveTargetDiff.x > -1.5f || toDiveTargetDiff.x < -2.5f) return false;
         }
         else
         {
