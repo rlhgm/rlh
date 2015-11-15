@@ -33,7 +33,7 @@ public class BatActivator : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //print("BatActivator::OnTriggerEnter2D " + other.name);
+      //  print("BatActivator::OnTriggerEnter2D " + other.name);
         _zapIn = true;
         foreach( Bat bat in bats )
         {
@@ -47,7 +47,7 @@ public class BatActivator : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         _zapIn = false;
-        //print("BatActivator::OnTriggerEnter2D " + other.name);
+        //print("BatActivator::OnTriggerExit2D " + other.name);
         foreach (Bat bat in bats)
         {
             if (bat)

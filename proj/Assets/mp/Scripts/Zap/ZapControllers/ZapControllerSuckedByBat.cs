@@ -1231,7 +1231,7 @@ public class ZapControllerSuckedByBat : ZapController
 
         lastPressedKey = dirKey;
 
-        if (dirKeySequenceCounter >= 6)
+        if (dirKeySequenceCounter >= 4)
         {
             resetSequenceKeys();
             zap.restoreBeforeAttackByBatController();

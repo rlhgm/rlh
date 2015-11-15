@@ -311,7 +311,7 @@ public class Bat : MonoBehaviour
     }
     public void ZapEscape()
     {
-        searchBed = false;
+        searchBed = true;
     }
 
     void CalculateVelocity()
