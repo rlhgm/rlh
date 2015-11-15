@@ -810,7 +810,28 @@ public class Zap : MonoBehaviour
     //		}
     //	}
 
-    Bat suckMe = null;
+    Bat suckedMeBat = null;
+
+    public void suddenlyAttackByBat(Bat bat)
+    {
+        if (currentController != zapControllerSuckByBat)
+        {
+            beforeFallController = currentController;
+            setCurrentController(zapControllerSuckByBat);
+            //setState(Zap.State.IN_AIR);
+            //zapControllerNormal.suddenlyInAir();
+        }
+    }
+    public void restoreBeforeAttackByBatController()
+    {
+        suckedMeBat = null;
+
+        if (beforeFallController != null)
+        {
+            setCurrentController(beforeFallController, true);
+            beforeFallController = null;
+        }
+    }
 
     bool BatAttack(Bat bat)
     {
@@ -823,12 +844,14 @@ public class Zap : MonoBehaviour
 
         if (currentController.isDodging()) return false;
         if (isNotInState(State.ON_GROUND)) return false;
+        if (currentController == zapControllerSuckByBat) return false;
 
         if (Mathf.Abs(targeter.position.y - bat.transform.position.y) < 0.5f)
         {
             //die(DeathType.PANTHER);
             bat.StartSuckZap();
-            suckMe = bat;
+            //suckMe = bat;
+            suddenlyAttackByBat(bat);
 
             return true;
         }

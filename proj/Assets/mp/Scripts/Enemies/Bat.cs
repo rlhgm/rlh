@@ -432,6 +432,7 @@ public class Bat : MonoBehaviour
     bool TryStartDive()
     {
         if (RLHScene.Instance.Zap.isDead()) return false;
+        if (RLHScene.Instance.Zap.currentController == RLHScene.Instance.Zap.zapControllerSuckByBat) return false;
 
         toDiveTargetDiff = transform.position - attackTargetPos;
 

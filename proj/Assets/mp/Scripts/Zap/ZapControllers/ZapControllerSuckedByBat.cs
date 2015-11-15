@@ -1200,6 +1200,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyUpDown()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyUpDown()");
+        return 0;
+
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
             if (!mounting())
@@ -1235,6 +1238,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyUpUp()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyUpUp()");
+        return 0;
+
         if (setMountIdle())
         {
             if (isInState(Zap.State.MOUNT))
@@ -1252,6 +1258,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyDownDown()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyDownDown()");
+        return 0;
+
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
             if (!mounting())
@@ -1288,6 +1297,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyDownUp()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyDownUp()");
+        return 0;
+
         if (setMountIdle())
         {
             if (isInState(Zap.State.MOUNT))
@@ -1319,6 +1331,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRunDown()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyRunDown()");
+        return 0;
+
         switch (action)
         {
 
@@ -1344,6 +1359,8 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRunUp()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyRunUp()");
+        return 0;
 
         switch (action)
         {
@@ -1378,6 +1395,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyLeftDown()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyLeftDown()");
+        return 0;
+
         if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
 
@@ -1458,6 +1478,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRightDown()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyRightDown()");
+        return 0;
+
         if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
             if (zap.dir() == -Vector2.right)
@@ -1538,6 +1561,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyLeftUp()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyLeftUp()");
+        return 0;
+
         if (!setMountIdle())
         {
             if (isInState(Zap.State.ON_GROUND))
@@ -1574,6 +1600,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRightUp()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyRightUp()");
+        return 0;
+
         if (!setMountIdle())
         {
             if (isInState(Zap.State.ON_GROUND))
@@ -1646,6 +1675,8 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyJumpDown()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyJumpDown()");
+        return 0;
 
         //Debug.Log ("ZapControllerNormal::keyJumpDown()");
         //jumpKeyPressed = true;
@@ -1726,6 +1757,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyJumpUp()
     {
+        Debug.Log("ZapControllerSuckedByBat::keyJumpUp()");
+        return 0;
+
         //jumpKeyPressed = false;
         jumpFromMount = false;
         justJumpedRope = null;
@@ -2293,19 +2327,6 @@ public class ZapControllerSuckedByBat : ZapController
 
     int Action_CLIMB_CATCH()
     {
-        //if (zap.groundUnder)
-        //{
-        //    if (distToGround != 0f)
-        //    {
-        //        transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
-        //        zap.touchStone(zap.groundUnder);
-        //    }
-        //    else
-        //    {
-        //        zap.touchStone(zap.groundUnder);
-        //    }
-        //}
-        //Debug.Log(climbAfterPos2);
         zap.touchStone(catchedClimbHandle.transform, climbAfterPos2);
 
         if ((Input.GetKeyDown(zap.keyUp) || Input.GetKey(zap.keyUp))) // && canPullUp)
