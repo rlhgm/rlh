@@ -3791,6 +3791,7 @@ public class ZapControllerNormal : ZapController
         zap.Coll.offset = new Vector2(0f,-1f);
         zap.GfxCollider.offset = new Vector2(0f, -2f);
 
+        zap.Targeter.localPosition = new Vector3(0f, -1f, 0f);
         zap.playSound(ropeCatchSound);
     }
 
@@ -3818,6 +3819,8 @@ public class ZapControllerNormal : ZapController
 
         zap.Coll.offset = beforeRopeCollOffset;
         zap.GfxCollider.offset = beforeRopeGfxCollOffset;
+
+        zap.Targeter.localPosition = new Vector3(0f, 1f, 0f);
 
         zap.setState(Zap.State.IN_AIR);
     }
