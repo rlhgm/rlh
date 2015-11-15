@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyRemain : MonoBehaviour
 {
     Rigidbody2D myRigidBody = null;
-
+    Vector2 startVelocity;
     //public Rigidbody2D RigidBody
     //{
     //    get
@@ -17,6 +17,7 @@ public class EnemyRemain : MonoBehaviour
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
+        myRigidBody.velocity = startVelocity;
     }
 
     // Update is called once per frame
@@ -31,5 +32,6 @@ public class EnemyRemain : MonoBehaviour
     public void setVelocity(Vector2 newVelocity)
     {
         //myRigidBody.velocity = newVelocity;
+        startVelocity = newVelocity;
     }
 }

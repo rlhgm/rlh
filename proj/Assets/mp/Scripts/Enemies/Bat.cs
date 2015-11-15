@@ -865,7 +865,9 @@ public class Bat : MonoBehaviour
         {
             EnemyRemain newRemain = Instantiate<EnemyRemain>(remainHead);
             newRemain.transform.position = transform.Find("remainsHeadPos").position;
-            newRemain.setVelocity(velocity*1.25f);
+            Vector2 remainVelocity = velocity;
+            remainVelocity.y += 1f;
+            newRemain.setVelocity(remainVelocity*1.25f);
         }
         if (remainBody)
         {
