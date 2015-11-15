@@ -734,7 +734,7 @@ public class Bat : MonoBehaviour
         stateJustChanged = true;
         state = newState;
 
-        print(state);
+        //print(state);
 
         switch (state)
         {
