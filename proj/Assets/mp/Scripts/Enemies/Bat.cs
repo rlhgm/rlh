@@ -23,7 +23,7 @@ public class Bat : MonoBehaviour
     //bool flyingToTarget = false;
 
     float TurnbackDuration = 0.25f;
-    float DiveInDuration = 0.333f;
+    float DiveInDuration = 0.5f;
 
     bool searchBed = false;
     bool bedFound = false;
@@ -262,7 +262,7 @@ public class Bat : MonoBehaviour
                     quaveringXY.x = FaceRight() ? 1 : -1;
                     quaveringXY.y = 1;// FaceRight() ? 1 : -1;
 
-                    print("dive out finish " + quaveringXY);
+                    //print("dive out finish " + quaveringXY);
 
                     quavering = true;
                     quaverTime = 0f;
@@ -272,7 +272,7 @@ public class Bat : MonoBehaviour
                     //quaverRange.y = Random.Range(1.0f, 2.5f);
                     //quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
 
-                    quaverRange.x = toDiveTargetDiff.x * 1.5f;
+                    quaverRange.x = Mathf.Abs( toDiveTargetDiff.x * 1.5f );
                     quaverRange.y = toDiveTargetDiff.y * 0.25f;
                     quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
 
