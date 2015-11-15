@@ -23,7 +23,7 @@ public class Bat : MonoBehaviour
     //bool flyingToTarget = false;
 
     float TurnbackDuration = 0.25f;
-    float DiveInDuration = 0.5f;
+    float DiveInDuration = 0.3f;
 
     bool searchBed = false;
     bool bedFound = false;
@@ -165,7 +165,7 @@ public class Bat : MonoBehaviour
                 {
                     //SetState(State.WakeUp);
                     SetState(State.WakeUp);
-                    SetAction(Action.Fly);
+                    SetAction(Action.DiveIn);
 
                     quaveringXY.x = FaceRight() ? 1 : -1;
                     quaveringXY.y = -1;// FaceRight() ? 1 : -1;
@@ -185,9 +185,17 @@ public class Bat : MonoBehaviour
                 CalculateVelocity();
                 SetAnimatorSpeedAccordingVelocity();
 
+                if( currentActionTime > DiveInDuration )
+                {
+                    //SetAction(Action.Dive);
+                    print("setaction dive");
+                    playAnim(diveAnimStateHash);
+                }
+
                 if (currentStateTime > (quaverDuration * 0.125f))
                 {
                     SetState(State.Fly);
+                    playAnim(flyAnimStateHash);
                     //if (Activator.ZapIn)
                     //{
                     //    float distToZapX = transform.position.x - targetPos.x;
@@ -213,7 +221,7 @@ public class Bat : MonoBehaviour
                     //}
                     //else
                     //{
-                        QuaverBegin(true);
+                    QuaverBegin(true);
                     //}
                 }
                 break;
@@ -726,6 +734,8 @@ public class Bat : MonoBehaviour
         stateJustChanged = true;
         state = newState;
 
+        print(state);
+
         switch (state)
         {
             case State.Sleep:
@@ -745,6 +755,13 @@ public class Bat : MonoBehaviour
                 snoozeDuration = Random.Range(2f, 4f);
                 //myGfx.Rotate(0f, 0f, FaceLeft() ? -90.0f : 90.0f);
                 //snoozeDuration = Random.Range(1f, 2f);
+                break;
+
+            case State.Fly:
+                //snoozeDuration = Random.Range(2f, 4f);
+                //myGfx.Rotate(0f, 0f, FaceLeft() ? -90.0f : 90.0f);
+                //snoozeDuration = Random.Range(1f, 2f);
+                int ttt = 0;
                 break;
 
             case State.Dive:
