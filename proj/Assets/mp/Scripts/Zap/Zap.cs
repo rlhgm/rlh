@@ -82,6 +82,8 @@ public class Zap : MonoBehaviour
             zapControllerKnife.setTouchCamera(newTC);
         if (zapControllerGravityGun)
             zapControllerGravityGun.setTouchCamera(newTC);
+        if (zapControllerSuckByBat)
+            zapControllerSuckByBat.setTouchCamera(newTC);
     }
 
     public bool autoCatchEdges = false;
@@ -108,6 +110,7 @@ public class Zap : MonoBehaviour
     public ZapControllerNormal zapControllerNormal; // = ScriptableObject.CreateInstance<ZapControllerNormal>();
     public ZapControllerKnife zapControllerKnife; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
     public ZapControllerGravityGun zapControllerGravityGun; // = ScriptableObject.CreateInstance<ZapControllerKnife>();
+    public ZapControllerSuckedByBat zapControllerSuckByBat;
 
     public bool HaveKnife = false;
     public bool HaveGravityGun = false;
@@ -264,6 +267,7 @@ public class Zap : MonoBehaviour
         zapControllerNormal.setZap(this);
         zapControllerKnife.setZap(this);
         zapControllerGravityGun.setZap(this);
+        zapControllerSuckByBat.setZap(this);
 
         RLHScene[] rlhScenes = FindObjectsOfType(typeof(RLHScene)) as RLHScene[];
         if (rlhScenes.Length == 1)
@@ -299,6 +303,7 @@ public class Zap : MonoBehaviour
 
             zapControllerKnife.SetCtrlEnabled(false);
             zapControllerGravityGun.SetCtrlEnabled(false);
+            zapControllerSuckByBat.SetCtrlEnabled(false);
 
             setCurrentController(zapControllerKnife);
         }
@@ -317,6 +322,7 @@ public class Zap : MonoBehaviour
 
             zapControllerKnife.SetCtrlEnabled(HaveKnife);
             zapControllerGravityGun.SetCtrlEnabled(HaveGravityGun);
+            zapControllerSuckByBat.SetCtrlEnabled(false);
 
             setCurrentController(zapControllerNormal);
         }
@@ -804,15 +810,26 @@ public class Zap : MonoBehaviour
     //		}
     //	}
 
+    Bat suckMe = null;
+
     bool BatAttack(Bat bat)
     {
+        if (isDead()) return false;
+
         if (!bat.IsInState(Bat.State.Dive))
         {
             return false;
         }
+
+        if (currentController.isDodging()) return false;
+        if (isNotInState(State.ON_GROUND)) return false;
+
         if (Mathf.Abs(targeter.position.y - bat.transform.position.y) < 0.5f)
         {
-            die(DeathType.PANTHER);
+            //die(DeathType.PANTHER);
+            bat.StartSuckZap();
+            suckMe = bat;
+
             return true;
         }
 

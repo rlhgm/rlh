@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3757589061c6e6747809d18b3d2b2465, type: 3}
+  m_Name: ZapControllerSuckedByBat
+  m_EditorClassIdentifier: 
+  WalkSpeed: 2.5
+  RunSpeed: 5.69999981
+  JumpSpeed: 3.79999995
+  JumpLongSpeed: 4.9000001
+  FromClimbJumpSpeed: 5.5
+  CrouchSpeed: 1.79999995
+  MountSpeed: 2
+  MountJumpDist: 10
+  SpeedUpParam: 10
+  SlowDownParam: 20
+  FlyUserControlParam: 8
+  FlyUpUserControlParam: 9
+  FlySlowDownParam: 5
+  PushMaxSpeed: 2
+  PullMaxSpeed: 2
+  JumpImpulse: 7
+  JumpLongImpulse: 7.1500001
+  FromClimbJumpImpulse: 5
+  FromClimbJumpSideImpulse: 5
+  GravityForce: -20
+  MaxSpeedY: 15
+  HardLandingHeight: 2
+  VeryHardLandingHeight: 6
+  MaxFallDistToCatch: 6
+  RopeSwingForce: 4250
+  RopeClimbSpeedUp: 1
+  RopeClimbSpeedDown: 3
+  CLIMB_DURATION: 1.5
+  CLIMBDUR_PREPARE_TO_JUMP: .5
+  CLIMBDUR_JUMP_TO_CATCH: .200000003
+  CLIMBDUR_CATCH: .5
+  LANDING_HARD_DURATION: .300000012
+  TURN_LEFTRIGHT_DURATION: .200000003
+  MOUNT_ATTACK_DURATION: .5
+  BIRD_HIT_DURATION: .330000013
+  ropeCatchSound: {fileID: 0}
+  ropeSwingSound: {fileID: 0}
+  mountCatchSound: {fileID: 0}
+  mountClimbSound: {fileID: 0}
+  ClimbPullDownRange: .510999978
+  CrouchInOutDuration: .200000003
+  pushForce: 5
+  pullForce: 5

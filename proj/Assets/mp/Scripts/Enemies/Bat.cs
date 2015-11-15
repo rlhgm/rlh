@@ -89,7 +89,7 @@ public class Bat : MonoBehaviour
 
                 if (IsNotInAction(Action.Turnback))
                 {
-                    if (tryStartDive())
+                    if (TryStartDive())
                     {
                         //quav
                         //print("moge pikowac....");
@@ -285,6 +285,10 @@ public class Bat : MonoBehaviour
 
                 }
                 break;
+
+            case State.SuckZap:
+                transform.position = RLHScene.Instance.Zap.Targeter.position;
+                break;
         }
     }
 
@@ -415,8 +419,20 @@ public class Bat : MonoBehaviour
     //    }
     //}
 
-    bool tryStartDive()
+    public void StartSuckZap()
     {
+        SetState(State.SuckZap);
+    }
+    public void StopSuckZap()
+    {
+        SetState(State.Fly);
+        QuaverBegin(true);
+    }
+
+    bool TryStartDive()
+    {
+        if (RLHScene.Instance.Zap.isDead()) return false;
+
         toDiveTargetDiff = transform.position - attackTargetPos;
 
         //if (toDiveTargetDiff.x < 1.0f || toDiveTargetDiff.x > 2.0f) return false;
@@ -620,6 +636,7 @@ public class Bat : MonoBehaviour
         Dive,
         DiveOut,
         //Bunk
+        SuckZap
     }
     State state;
 
@@ -731,6 +748,11 @@ public class Bat : MonoBehaviour
 
             case State.Dive:
                 //toDiveTargetDiff;
+                break;
+
+            case State.SuckZap:
+                playAnim(flyAnimStateHash);
+                myAnimator.speed = 2f;
                 break;
         }
         return true;
