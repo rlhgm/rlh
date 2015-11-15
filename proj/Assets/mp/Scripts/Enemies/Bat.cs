@@ -182,6 +182,9 @@ public class Bat : MonoBehaviour
 
             case State.WakeUp:
                 QuaverStep();
+                CalculateVelocity();
+                SetAnimatorSpeedAccordingVelocity();
+
                 if (currentStateTime > (quaverDuration * 0.125f))
                 {
                     SetState(State.Fly);
@@ -225,6 +228,9 @@ public class Bat : MonoBehaviour
 
             case State.Dive:
                 QuaverStep();
+                CalculateVelocity();
+                SetAnimatorSpeedAccordingVelocity();
+
                 if (currentStateTime > (quaverDuration * 0.125f))
                 {
                     SetState(State.DiveOut);
@@ -236,11 +242,41 @@ public class Bat : MonoBehaviour
 
             case State.DiveOut:
                 QuaverStep();
-                if (currentStateTime > (quaverDuration * 0.125f))
+                CalculateVelocity();
+                SetAnimatorSpeedAccordingVelocity();
+
+                if (currentStateTime > (quaverDuration * (0.125f*0.75f) ))
                 {
+                    //print("dive out finish");
+
                     SetState(State.Fly);
                     SetAction(Action.Fly);
-                    QuaverBegin(false);
+                    //QuaverBegin(false);
+                    
+                    //SetState(State.DiveIn);
+                    //SetAction(Action.DiveIn);
+
+                    //SetState(State.WakeUp);
+                    //SetAction(Action.Fly);
+
+                    quaveringXY.x = FaceRight() ? 1 : -1;
+                    quaveringXY.y = 1;// FaceRight() ? 1 : -1;
+
+                    print("dive out finish " + quaveringXY);
+
+                    quavering = true;
+                    quaverTime = 0f;
+                    quaverStartPos = transform.position;
+
+                    //quaverRange.x = Random.Range(1.0f, 2.0f);
+                    //quaverRange.y = Random.Range(1.0f, 2.5f);
+                    //quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
+
+                    quaverRange.x = toDiveTargetDiff.x * 1.5f;
+                    quaverRange.y = toDiveTargetDiff.y * 0.25f;
+                    quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
+
+
                 }
                 break;
         }
