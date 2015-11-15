@@ -331,6 +331,16 @@ public class ZapController : ScriptableObject
                     continue;
                 }
             }
+            Bat cutBat = coll.GetComponent<Bat>();
+            if (cutBat)
+            {
+                if (!lastCuttedObjects.Contains(cutBat.gameObject))
+                {
+                    cutBat.cut();
+                    lastCuttedObjects.Add(cutBat.gameObject);
+                    continue;
+                }
+            }
 
             Rat cutRat = coll.GetComponent<Rat>();
             if (cutRat)
