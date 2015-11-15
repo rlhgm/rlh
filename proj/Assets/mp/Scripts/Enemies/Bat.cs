@@ -11,8 +11,8 @@ public class Bat : MonoBehaviour
     float quaverTime = 0;
     Vector3 quaverStartPos;
     Vector3 quaverPos = new Vector3(0f, 0f, 0f);
-    Vector2 quaverRange = new Vector2(0f,0f);
-    Vector2 quaveringXY = new Vector2(0f,0f);
+    Vector2 quaverRange = new Vector2(0f, 0f);
+    Vector2 quaveringXY = new Vector2(0f, 0f);
     bool quavering = false;
     float QuaverToZapSpeed = 0.5f;
     float QuaverToHomeSpeed = 1.0f;
@@ -28,11 +28,17 @@ public class Bat : MonoBehaviour
         StaticInit();
         myGfx = transform.Find("gfx");
         myAnimator = myGfx.GetComponent<Animator>();
+
     }
 
     // Use this for initialization
     void Start()
     {
+        if (!Activator)
+        {
+            Debug.LogError("Nietoperz : " + name + " nie jest przypisany do zadnego aktywatora!");
+        }
+
         SetState(State.Sleep);
         SetAction(Action.GoSleep);
         //SetState(State.Fly);
@@ -109,7 +115,7 @@ public class Bat : MonoBehaviour
                 break;
 
             case State.Sleep:
-                if( currentStateTime >= snoozeDuration)
+                if (currentStateTime >= snoozeDuration)
                 {
                     //SetState(State.WakeUp);
                     SetState(State.WakeUp);
@@ -130,7 +136,7 @@ public class Bat : MonoBehaviour
 
             case State.WakeUp:
                 QuaverStep();
-                if( currentStateTime > (quaverDuration*0.125f) )
+                if (currentStateTime > (quaverDuration * 0.125f))
                 {
                     SetState(State.Fly);
                     //QuaverFinish();
@@ -145,7 +151,7 @@ public class Bat : MonoBehaviour
         //print(name + " zapIsHere()");
         searchBed = false;
         bedFound = false;
-        if( IsInState(State.Sleep))
+        if (IsInState(State.Sleep))
         {
             //else if (param == 1) // krotka drzemka aby nie wszyskie wystartoway razem
             //{
@@ -224,7 +230,7 @@ public class Bat : MonoBehaviour
     void QuaverBegin(bool keepDirX = false)
     {
         //quavering = Random.Range(0,2) == 1 ? 1 : -1;
-        if( !keepDirX )
+        if (!keepDirX)
             quaveringXY.x = Random.Range(0, 2) == 1 ? 1 : -1;
         quaveringXY.y = Random.Range(0, 2) == 1 ? 1 : -1;
         quavering = true;
@@ -236,7 +242,7 @@ public class Bat : MonoBehaviour
             quaverRange.x = Random.Range(1.5f, 2.5f);
             quaverRange.y = Random.Range(0.1f, 0.5f);
         }
-        else if( bedFound )
+        else if (bedFound)
         {
             quaverRange.x = Random.Range(1.0f, 2f);
             quaverRange.y = Random.Range(0.1f, 0.25f);
@@ -246,7 +252,7 @@ public class Bat : MonoBehaviour
             quaverRange.x = Random.Range(2.5f, 4f);
             quaverRange.y = Random.Range(0.1f, 0.75f);
         }
-        quaverDuration = quaverRange.x - Random.Range(0f,1f);
+        quaverDuration = quaverRange.x - Random.Range(0f, 1f);
 
         //print( myAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash );
         //print(flyAnimStateHash);
@@ -283,7 +289,7 @@ public class Bat : MonoBehaviour
         }
         else if (Activator.ZapIn)
         {
-            Vector3 toZap = targetPos-quaverStartPos;
+            Vector3 toZap = targetPos - quaverStartPos;
             //Vector3 distToDisplace = (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
             //if (distToDisplace.magnitude > toZap.magnitude)
             //{
@@ -387,7 +393,7 @@ public class Bat : MonoBehaviour
         GoSleep
     };
     Action action;
-    
+
     bool SetAction(Action newAction, int param = 0)
     {
         if (action == newAction)
@@ -397,7 +403,7 @@ public class Bat : MonoBehaviour
         currentActionTime = 0f;
         actionJustChanged = true;
         action = newAction;
-        
+
         myAnimator.speed = 1f;
 
         //print(action);
@@ -458,13 +464,13 @@ public class Bat : MonoBehaviour
         currentStateTime = 0f;
         stateJustChanged = true;
         state = newState;
-        
+
         switch (state)
         {
             case State.Sleep:
                 //if (param == 0)
                 //{
-                    snoozeDuration = Random.Range(3f, 7f);
+                snoozeDuration = Random.Range(3f, 7f);
                 //}
                 //else if( param == 1) // krotka drzemka aby nie wszyskie wystartoway razem
                 //{
