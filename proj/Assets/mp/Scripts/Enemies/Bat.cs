@@ -16,7 +16,11 @@ public class Bat : MonoBehaviour
     bool quavering = false;
     float QuaverToZapSpeed = 0.5f;
     float QuaverToHomeSpeed = 1.0f;
+    //Vector2 FlyToTargetSpeedRange = new Vector2(2f,4f);
+    //float FlyToTargetSpeed = 0f;
     //bool _gftTryIterrupt = false;
+
+    //bool flyingToTarget = false;
 
     float TurnbackDuration = 0.25f;
 
@@ -85,7 +89,9 @@ public class Bat : MonoBehaviour
                     if (quavering) QuaverStep();
                     else
                     {
-                        QuaverBegin();
+                        //if (flyingToTarget) FlyToTargetStep();
+                        //else
+                            QuaverBegin();
                     }
                 }
 
@@ -107,6 +113,7 @@ public class Bat : MonoBehaviour
                     {
                         if (!searchBed)
                         {
+                            //flyingToTarget = false;
                             searchBed = true;
                             //print("szukam domu");
                         }
@@ -139,8 +146,33 @@ public class Bat : MonoBehaviour
                 if (currentStateTime > (quaverDuration * 0.125f))
                 {
                     SetState(State.Fly);
-                    //QuaverFinish();
-                    QuaverBegin(true);
+                    //if (Activator.ZapIn)
+                    //{
+                    //    float distToZapX = transform.position.x - targetPos.x;
+                    //    if (Mathf.Abs(distToZapX) > 2.5f)
+                    //    {
+                    //        flyingToTargetPos = transform.position;
+
+                    //        if (distToZapX > 0.0f) // jezeli zap na lewo ode mnie
+                    //        {
+                    //            flyingToTargetPos.x = targetPos.x + Random.Range(0f, 2.5f);
+                    //        }
+                    //        else
+                    //        {
+                    //            flyingToTargetPos.x = targetPos.x - Random.Range(0f, 2.5f);
+                    //        }
+
+                    //        FlyToTargetBegin();
+                    //    }
+                    //    else
+                    //    {
+                    //        QuaverBegin(true);
+                    //    }
+                    //}
+                    //else
+                    //{
+                        QuaverBegin(true);
+                    //}
                 }
                 break;
         }
@@ -227,6 +259,52 @@ public class Bat : MonoBehaviour
 
         return false;
     }
+
+    //void FlyToTargetBegin()
+    //{
+    //    print("FlyToTargetBegin() " + flyingToTargetPos);
+    //    flyingToTarget = true;
+    //    //actionChangedPos = transform.position;
+    //    stateChangedPos = transform.position;
+    //    FlyToTargetSpeed = Random.Range(FlyToTargetSpeedRange.x, FlyToTargetSpeedRange.y);
+    //    if( stateChangedPos.x > flyingToTargetPos.x )
+    //    {
+    //        FlyToTargetSpeed *= -1f;
+    //    }
+    //    print("FlyToTargetSpeed " + FlyToTargetSpeed);
+
+    //    // uzywam quaverStartPos bo teraz niepotrzebne a szkoda robic nowy wektor tylko po to
+    //    //quaverStartPos = flyingToTargetPos - stateChangedPos;
+    //}
+    //void FlyToTargetFinish()
+    //{
+    //    print("FlyToTargetFinish()");
+    //    flyingToTarget = false;
+    //    QuaverBegin(true);
+    //}
+    //void FlyToTargetStep()
+    //{
+    //    quaverPos.x = 0f;
+    //    quaverPos.y = 0f;
+    //    quaverPos.x = FlyToTargetSpeed * currentDeltaTime; 
+    //    transform.position += quaverPos;
+
+    //    if( stateChangedPos.x > flyingToTargetPos.x )
+    //    {
+    //        if (transform.position.x < flyingToTargetPos.x) // przelecial za target juz
+    //        {
+    //            FlyToTargetFinish();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (transform.position.x > flyingToTargetPos.x) // przelecial za target juz
+    //        {
+    //            FlyToTargetFinish();
+    //        }
+    //    }
+    //}
+
     void QuaverBegin(bool keepDirX = false)
     {
         //quavering = Random.Range(0,2) == 1 ? 1 : -1;
@@ -562,6 +640,7 @@ public class Bat : MonoBehaviour
     bool actionJustChanged = false;
 
     Vector3 targetPos = new Vector3(0f, 0f, 0f);
+    //Vector3 flyingToTargetPos = new Vector3(0f, 0f, 0f);
 
     float snoozeDuration = 5f;
 
