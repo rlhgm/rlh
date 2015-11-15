@@ -75,7 +75,7 @@ public class Bat : MonoBehaviour
         //if( Activator.ZapIn )
         attackTargetPos = RLHScene.Instance.Zap.Targeter.position;
         quaverTargetPos = RLHScene.Instance.Zap.transform.position;
-        quaverTargetPos.y += 3f;
+        quaverTargetPos.y += 3.5f;
 
         switch (state)
         {
@@ -414,7 +414,7 @@ public class Bat : MonoBehaviour
         toDiveTargetDiff = transform.position - attackTargetPos;
 
         //if (toDiveTargetDiff.x < 1.0f || toDiveTargetDiff.x > 2.0f) return false;
-        if (toDiveTargetDiff.y < 1.75f || toDiveTargetDiff.y > 2.5f) return false;
+        if (toDiveTargetDiff.y < 2.0f || toDiveTargetDiff.y > 3.0f) return false;
         
         if( FaceRight() )
         {
