@@ -189,7 +189,7 @@ public class RLHEditorWindow : EditorWindow{
 			}
 
 			if( Selection.activeGameObject ){
-				Object newObject = Instantiate( Selection.activeGameObject );
+				//Object newObject = Instantiate( Selection.activeGameObject );
 
 			}
 

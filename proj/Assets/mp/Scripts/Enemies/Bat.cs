@@ -61,6 +61,7 @@ public class Bat : MonoBehaviour
         lastVelocity = velocity;
         lastPos = transform.position;
 
+        //if( Activator.ZapIn )
         targetPos = RLHScene.Instance.Zap.Targeter.position;
 
         switch (state)
@@ -94,12 +95,15 @@ public class Bat : MonoBehaviour
                     SetAnimatorSpeedAccordingVelocity();
                 }
 
-                if( currentStateTime >= snoozeDuration)
+                if (!Activator.ZapIn)
                 {
-                    if (!searchBed)
+                    if (currentStateTime >= snoozeDuration)
                     {
-                        searchBed = true;
-                        //print("szukam domu");
+                        if (!searchBed)
+                        {
+                            searchBed = true;
+                            //print("szukam domu");
+                        }
                     }
                 }
                 break;
@@ -138,11 +142,24 @@ public class Bat : MonoBehaviour
 
     public void ZapIsHere()
     {
+        //print(name + " zapIsHere()");
+        searchBed = false;
+        bedFound = false;
+        if( IsInState(State.Sleep))
+        {
+            //else if (param == 1) // krotka drzemka aby nie wszyskie wystartoway razem
+            //{
+            snoozeDuration = Random.Range(0f, 1f);
+            currentStateTime = 0f;
+            //    print(name + " snoozeDuration " + snoozeDuration);
+            //}
 
+            //SetState(State.Sleep,1);
+        }
     }
     public void ZapEscape()
     {
-
+        searchBed = false;
     }
 
     void CalculateVelocity()
@@ -152,8 +169,6 @@ public class Bat : MonoBehaviour
     }
     void SetAnimatorSpeedAccordingVelocity()
     {
-
-
         // tu wersja dla przyspieszenia po x i y w gore....
         //float velocityDiff = velocity.magnitude - lastVelocity.magnitude;
 
@@ -266,8 +281,25 @@ public class Bat : MonoBehaviour
                 quaverStartPos += distToDisplace;
             }
         }
-        //Vector3 toZap = quaverStartPos-targetPos;
-        //quaverStartPos -= (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
+        else if (Activator.ZapIn)
+        {
+            Vector3 toZap = targetPos-quaverStartPos;
+            //Vector3 distToDisplace = (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
+            //if (distToDisplace.magnitude > toZap.magnitude)
+            //{
+            //    //if (!bedFound)
+            //    //{
+            //    //    //print("znalazlem");
+            //    //    quaverStartPos = homePos;
+            //    //    bedFound = true;
+            //    //}
+            //}
+            //else
+            //{
+            //    quaverStartPos += distToDisplace;
+            //}
+            quaverStartPos += (toZap.normalized * QuaverToZapSpeed * currentDeltaTime);
+        }
 
         bool _quaverEnded = false;
         quaverTime += currentDeltaTime;
@@ -417,7 +449,7 @@ public class Bat : MonoBehaviour
     float currentStateTime = 0.0f;
     bool stateJustChanged = false;
 
-    public bool SetState(State newState)
+    public bool SetState(State newState, int param = 0)
     {
         if (state == newState)
             return false;
@@ -430,7 +462,15 @@ public class Bat : MonoBehaviour
         switch (state)
         {
             case State.Sleep:
-                snoozeDuration = Random.Range(3f, 7f);
+                //if (param == 0)
+                //{
+                    snoozeDuration = Random.Range(3f, 7f);
+                //}
+                //else if( param == 1) // krotka drzemka aby nie wszyskie wystartoway razem
+                //{
+                //    snoozeDuration = Random.Range(0f, 1f);
+                //    print(name + " snoozeDuration " + snoozeDuration);
+                //}
                 //myGfx.Rotate(0f,0f,FaceLeft() ? 90.0f : -90.0f);
                 //snoozeDuration = Random.Range(1f, 2f);
                 break;
