@@ -63,6 +63,12 @@ public class ZapController : ScriptableObject
     {
     }
 
+    public virtual void CheckEnergy(float deltaTime)
+    {
+        if (zap.isDead()) return;
+        zap.MyEnergy = Mathf.Min(zap.MyEnergy + deltaTime, zap.MyMaxEnergy);
+    }
+
     public virtual void selected()
     {
         if (weaponMenuItem)

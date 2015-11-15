@@ -89,6 +89,18 @@ public class ZapControllerSuckedByBat : ZapController
 
     float groundUnderFeet;
 
+    public override void CheckEnergy(float deltaTime)
+    {
+        if (zap.isDead()) return;
+
+        zap.MyEnergy = zap.MyEnergy - deltaTime;
+        if( zap.MyEnergy <= 0.0f)
+        {
+            zap.restoreBeforeAttackByBatController();
+            zap.die(Zap.DeathType.PANTHER);
+        }
+    }
+
     public override void MUpdate(float deltaTime, bool firstUpdate)
     {
         firstUpdateInFrame = firstUpdate;
@@ -755,6 +767,7 @@ public class ZapControllerSuckedByBat : ZapController
     public override void activateSpec(bool restore = false, bool crouch = false)
     {
         //base.activate ();
+        resetSequenceKeys();
 
         setAction(Action.UNDEF);
         setAction(Action.IDLE);
@@ -1197,10 +1210,43 @@ public class ZapControllerSuckedByBat : ZapController
         return action != test;
     }
 
+    int lastPressedKey = 0;
+    int dirKeySequenceCounter = 0;
+    void dirKeyPressed(int dirKey)
+    {
+        //switch( lastPressedKey )
+        //{
+        //    case 0:
+        //        break;
+
+        //    case -1:
+        //        if (lastPressedKey != dirKey) dirKeySequenceCounter++;
+        //        break;
+
+        //    case 1:
+        //        break;
+        //}
+
+        dirKeySequenceCounter++;
+
+        lastPressedKey = dirKey;
+
+        if (dirKeySequenceCounter >= 6)
+        {
+            resetSequenceKeys();
+            zap.restoreBeforeAttackByBatController();
+        }
+    }
+       
+    /*public */void resetSequenceKeys()
+    {
+        lastPressedKey = 0;
+        dirKeySequenceCounter = 0;
+    }
 
     public override int keyUpDown()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyUpDown()");
+        //Debug.Log("ZapControllerSuckedByBat::keyUpDown()");
         return 0;
 
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
@@ -1238,7 +1284,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyUpUp()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyUpUp()");
+        //Debug.Log("ZapControllerSuckedByBat::keyUpUp()");
         return 0;
 
         if (setMountIdle())
@@ -1258,7 +1304,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyDownDown()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyDownDown()");
+        
         return 0;
 
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
@@ -1297,7 +1343,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyDownUp()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyDownUp()");
+        //Debug.Log("ZapControllerSuckedByBat::keyDownUp()");
         return 0;
 
         if (setMountIdle())
@@ -1331,7 +1377,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRunDown()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyRunDown()");
+        //Debug.Log("ZapControllerSuckedByBat::keyRunDown()");
         return 0;
 
         switch (action)
@@ -1359,7 +1405,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRunUp()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyRunUp()");
+        //Debug.Log("ZapControllerSuckedByBat::keyRunUp()");
         return 0;
 
         switch (action)
@@ -1395,7 +1441,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyLeftDown()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyLeftDown()");
+        dirKeyPressed(-1);
         return 0;
 
         if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
@@ -1478,7 +1524,9 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRightDown()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyRightDown()");
+        dirKeyPressed(1);
+        
+        //Debug.Log("ZapControllerSuckedByBat::keyDownDown()");
         return 0;
 
         if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
@@ -1561,7 +1609,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyLeftUp()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyLeftUp()");
+        //Debug.Log("ZapControllerSuckedByBat::keyLeftUp()");
         return 0;
 
         if (!setMountIdle())
@@ -1600,7 +1648,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyRightUp()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyRightUp()");
+        //Debug.Log("ZapControllerSuckedByBat::keyRightUp()");
         return 0;
 
         if (!setMountIdle())
@@ -1675,7 +1723,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyJumpDown()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyJumpDown()");
+        //Debug.Log("ZapControllerSuckedByBat::keyJumpDown()");
         return 0;
 
         //Debug.Log ("ZapControllerNormal::keyJumpDown()");
@@ -1757,7 +1805,7 @@ public class ZapControllerSuckedByBat : ZapController
 
     public override int keyJumpUp()
     {
-        Debug.Log("ZapControllerSuckedByBat::keyJumpUp()");
+        //Debug.Log("ZapControllerSuckedByBat::keyJumpUp()");
         return 0;
 
         //jumpKeyPressed = false;

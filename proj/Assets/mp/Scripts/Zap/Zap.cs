@@ -342,6 +342,8 @@ public class Zap : MonoBehaviour
 
         allStones = FindObjectsOfType(typeof(GroundMoveable)) as GroundMoveable[];
         //print(allStones.Length);
+
+        //zapControllerSuckByBat.resetSequenceKeys();
     }
 
     public void chooseController(ZapController newController)
@@ -486,7 +488,15 @@ public class Zap : MonoBehaviour
 
     public void die(DeathType deathType)
     {
-        if( lastTouchedCheckPointCandidate != null )
+        if( suckedMeBat )
+        {
+            suckedMeBat.StopSuckZap();
+            suckedMeBat = null;
+        }
+
+        //zapControllerSuckByBat.resetSequenceKeys();
+
+        if ( lastTouchedCheckPointCandidate != null )
         {
             lastTouchedCheckPointCandidate = null;
         }
@@ -525,6 +535,8 @@ public class Zap : MonoBehaviour
         //{
         //    if (px.enabled) px.reset();
         //}
+        myEnergy = myMaxEnergy;
+        //zapControllerSuckByBat.resetSequenceKeys();
 
         sprRend.enabled = true;
         gfxCollider.enabled = true;
@@ -811,12 +823,15 @@ public class Zap : MonoBehaviour
     //	}
 
     Bat suckedMeBat = null;
+    float myEnergy = 1f;
+    float myMaxEnergy = 1f;
 
     public void suddenlyAttackByBat(Bat bat)
     {
         if (currentController != zapControllerSuckByBat)
         {
-            beforeFallController = currentController;
+            suckedMeBat = bat;
+            //beforeFallController = currentController;
             setCurrentController(zapControllerSuckByBat);
             //setState(Zap.State.IN_AIR);
             //zapControllerNormal.suddenlyInAir();
@@ -824,13 +839,18 @@ public class Zap : MonoBehaviour
     }
     public void restoreBeforeAttackByBatController()
     {
+        if (suckedMeBat)
+        {
+            suckedMeBat.StopSuckZap();
+        }
         suckedMeBat = null;
 
-        if (beforeFallController != null)
-        {
-            setCurrentController(beforeFallController, true);
-            beforeFallController = null;
-        }
+        setCurrentController(zapControllerNormal, true);
+        //if (beforeFallController != null)
+        //{
+        //    setCurrentController(beforeFallController, true);
+        //    beforeFallController = null;
+        //}
     }
 
     bool BatAttack(Bat bat)
@@ -1481,6 +1501,8 @@ public class Zap : MonoBehaviour
 
         currentController.MUpdate(CurrentDeltaTime, firstUpdateInFrame);
 
+        currentController.CheckEnergy(CurrentDeltaTime);
+        
         updateShadow();
     }
 
@@ -2407,6 +2429,45 @@ public class Zap : MonoBehaviour
         get
         {
             return myAudioSourceLooped;
+        }
+    }
+
+    public float MyEnergy
+    {
+        get
+        {
+            return myEnergy;
+        }
+
+        set
+        {
+            myEnergy = value;
+        }
+    }
+
+    public float MyMaxEnergy
+    {
+        get
+        {
+            return myMaxEnergy;
+        }
+
+        set
+        {
+            myMaxEnergy = value;
+        }
+    }
+
+    public Bat SuckedMeBat
+    {
+        get
+        {
+            return suckedMeBat;
+        }
+
+        set
+        {
+            suckedMeBat = value;
         }
     }
 
