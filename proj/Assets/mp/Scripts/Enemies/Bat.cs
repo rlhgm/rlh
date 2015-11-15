@@ -842,15 +842,44 @@ public class Bat : MonoBehaviour
     }
 
     public GameObject cutParticles = null;
+    public EnemyRemain remainHead = null;
+    public EnemyRemain remainBody = null;
+    public EnemyRemain remainWings = null;
 
     public void cut()
     {
+        print(name + " cutted");
+
         if (cutParticles)
         {
             Object newParticleObject = Instantiate(cutParticles, transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(newParticleObject, 2.0f);
         }
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
+        //GetComponent<SpriteRenderer>().enabled = false;
+        //GetComponent<Collider2D>().enabled = false;
+
+        //, transform.position, Quaternion.Euler(0, 0, 0)
+        //remainsHeadPos
+
+        if (remainHead)
+        {
+            EnemyRemain newRemain = Instantiate<EnemyRemain>(remainHead);
+            newRemain.transform.position = transform.Find("remainsHeadPos").position;
+            newRemain.setVelocity(velocity*1.25f);
+        }
+        if (remainBody)
+        {
+            EnemyRemain newRemain = Instantiate<EnemyRemain>(remainBody);
+            newRemain.transform.position = transform.Find("remainsBodyPos").position;
+            newRemain.setVelocity(velocity * 0.75f);
+        }
+        if (remainHead)
+        {
+            EnemyRemain newRemain  = Instantiate<EnemyRemain>(remainWings);
+            newRemain.transform.position = transform.Find("remainsWingsPos").position;
+            newRemain.setVelocity(velocity * 1f);
+        }
+
+        Destroy(transform.gameObject);
     }
 }

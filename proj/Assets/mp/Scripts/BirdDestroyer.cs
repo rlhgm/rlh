@@ -39,6 +39,7 @@ public class BirdDestroyer : MonoBehaviour {
 
         if (other.gameObject.tag == "Bat")
         {
+            print("BirdDestroyer = > koliduje z nietoperzem");
             if (transform.parent)
             {
                 if (transform.parent.tag == "Player")
