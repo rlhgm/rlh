@@ -431,12 +431,12 @@ public class Bat : MonoBehaviour
         {
             case State.Sleep:
                 snoozeDuration = Random.Range(3f, 7f);
-                myGfx.Rotate(0f,0f,FaceLeft() ? 90.0f : -90.0f);
+                //myGfx.Rotate(0f,0f,FaceLeft() ? 90.0f : -90.0f);
                 //snoozeDuration = Random.Range(1f, 2f);
                 break;
             case State.WakeUp:
                 snoozeDuration = Random.Range(2f, 4f);
-                myGfx.Rotate(0f, 0f, FaceLeft() ? -90.0f : 90.0f);
+                //myGfx.Rotate(0f, 0f, FaceLeft() ? -90.0f : 90.0f);
                 //snoozeDuration = Random.Range(1f, 2f);
                 break;
         }
