@@ -16,7 +16,9 @@ public class BirdDestroyer : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		//print( "BirdDestroyer OnTriggerEnter" );
+
+        //print( "BirdDestroyer OnTriggerEnter : " + other.gameObject.tag + " " + other.gameObject.name);
+
 		if (other.gameObject.tag == "Bird") {
 
             if (transform.parent)
@@ -25,14 +27,33 @@ public class BirdDestroyer : MonoBehaviour {
                 {
                     Bird birdToDestroy = other.GetComponent<Bird>();
                     birdToDestroy.cut();
+                    return;
                 }
             }
             else
             {
                 Destroy(other.gameObject);
+                return;
             }
 		}
-	}
+
+        if (other.gameObject.tag == "Bat")
+        {
+            if (transform.parent)
+            {
+                if (transform.parent.tag == "Player")
+                {
+                    Bat batToDestroy = other.GetComponent<Bat>();
+                    batToDestroy.cut();
+                    return;
+                }
+            }
+            //else
+            //{
+            //    Destroy(other.gameObject);
+            //}
+        }
+    }
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		print( "BirdDestroyer colisionEnter" );

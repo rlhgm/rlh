@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4897a2e2d28d2a4086f6f72e723fc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutParticles: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
 --- !u!212 &21215570
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -149,7 +150,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: cutParticles
+      value: 
+      objectReference: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158772}

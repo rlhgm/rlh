@@ -840,4 +840,17 @@ public class Bat : MonoBehaviour
             activator = value;
         }
     }
+
+    public GameObject cutParticles = null;
+
+    public void cut()
+    {
+        if (cutParticles)
+        {
+            Object newParticleObject = Instantiate(cutParticles, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(newParticleObject, 2.0f);
+        }
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+    }
 }
