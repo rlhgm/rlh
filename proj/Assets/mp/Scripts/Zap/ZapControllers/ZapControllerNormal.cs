@@ -1401,14 +1401,29 @@ public class ZapControllerNormal : ZapController
                     Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
                     if (!obstacle2)
                     {
-                        setActionCrouchIdle();
-                        resetActionAndState();
+                        //setActionCrouchIdle();
+                        setAction(Action.CROUCH_LEFT);
+                        //resetActionAndState();
+                        zap.velocity.x = -CrouchSpeed;
+                        Action_CROUCH_LEFTRIGHT(-1);
                         wantGetUp = true;
                     }
                     else
                     {
                         PushStart(obstacle);
                     }
+
+                    //Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
+                    //if (!obstacle2)
+                    //{
+                    //    setActionCrouchIdle();
+                    //    resetActionAndState();
+                    //    wantGetUp = true;
+                    //}
+                    //else
+                    //{
+                    //    PushStart(obstacle);
+                    //}
                     
                     return 0;
                 }
@@ -1492,8 +1507,11 @@ public class ZapControllerNormal : ZapController
                     Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
                     if (!obstacle2)
                     {
-                        setActionCrouchIdle();
-                        resetActionAndState();
+                        //setActionCrouchIdle();
+                        setAction(Action.CROUCH_RIGHT);
+                        //resetActionAndState();
+                        zap.velocity.x = CrouchSpeed;
+                        Action_CROUCH_LEFTRIGHT(1);
                         wantGetUp = true;
                     }
                     else
