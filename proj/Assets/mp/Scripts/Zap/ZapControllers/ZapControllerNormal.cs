@@ -1066,6 +1066,9 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.CLIMB_PULLDOWN:
+                //Debug.Log(catchedClimbHandle);
+                //Debug.Log(lastCatchedClimbHandle);
+                zap.TrySetIgnoreCollisionWhit(catchedClimbHandle);
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_drop_R");
                 else zap.AnimatorBody.Play("Zap_drop_L");
                 break;
@@ -2263,6 +2266,7 @@ public class ZapControllerNormal : ZapController
     {
         if (zap.currentActionTime >= CLIMBDUR_CLIMB)
         {
+            zap.removeLastIgnoredCollision();
             setAction(Action.CLIMB_CATCH, 10);
             zap.setState(Zap.State.CLIMB);
             canPullUp = true;
