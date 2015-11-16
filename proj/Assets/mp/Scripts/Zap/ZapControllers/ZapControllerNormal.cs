@@ -1398,7 +1398,18 @@ public class ZapControllerNormal : ZapController
                 Transform obstacle = zap.CheckLeft(0.1f, ref dto);
                 if (obstacle)
                 {
-                    PushStart(obstacle);
+                    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
+                    if (!obstacle2)
+                    {
+                        setActionCrouchIdle();
+                        resetActionAndState();
+                        wantGetUp = true;
+                    }
+                    else
+                    {
+                        PushStart(obstacle);
+                    }
+                    
                     return 0;
                 }
             }
@@ -1478,7 +1489,18 @@ public class ZapControllerNormal : ZapController
                 Transform obstacle = zap.CheckRight(0.1f, ref dto);
                 if (obstacle)
                 {
-                    PushStart(obstacle);
+                    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
+                    if (!obstacle2)
+                    {
+                        setActionCrouchIdle();
+                        resetActionAndState();
+                        wantGetUp = true;
+                    }
+                    else
+                    {
+                        PushStart(obstacle);
+                    }
+
                     return 0;
                 }
             }
