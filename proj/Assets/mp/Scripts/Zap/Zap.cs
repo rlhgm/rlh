@@ -503,6 +503,7 @@ public class Zap : MonoBehaviour
 
         velocity.x = 0.0f;
         velocity.y = 0.0f;
+        removeLastIgnoredCollision();
         gfxCollider.enabled = false;
 
         currentController.zapDie(deathType);
@@ -537,6 +538,8 @@ public class Zap : MonoBehaviour
         //}
         myEnergy = myMaxEnergy;
         //zapControllerSuckByBat.resetSequenceKeys();
+
+        removeLastIgnoredCollision();
 
         sprRend.enabled = true;
         gfxCollider.enabled = true;
@@ -2471,6 +2474,44 @@ public class Zap : MonoBehaviour
         }
     }
 
+    public Collider2D TrySetIgnoreCollisionWhit(GameObject stone)
+    {
+        if (!stone.GetComponent<GroundMoveable>()) return null;
+
+        Collider2D stoneCollider = stone.GetComponent<Collider2D>();
+        //if (!stoneCollider) return stoneCollider;
+
+        LastIgnoredCollider = stoneCollider;
+
+        Physics2D.IgnoreCollision(gfxCollider, lastIgnoredCollider, true);
+
+        return LastIgnoredCollider;
+    }
+
+    public bool removeLastIgnoredCollision()
+    {
+        if( LastIgnoredCollider )
+        {
+            Physics2D.IgnoreCollision(gfxCollider, lastIgnoredCollider, false);
+            return true;
+        }
+
+        return false;
+    }
+
+    public Collider2D LastIgnoredCollider
+    {
+        get
+        {
+            return lastIgnoredCollider;
+        }
+
+        set
+        {
+            lastIgnoredCollider = value;
+        }
+    }
+
     //public AudioSource MyAudio
     //{
     //    get
@@ -2554,4 +2595,7 @@ public class Zap : MonoBehaviour
 
     public Transform groundUnder = null;
     public float groundUnderAngle = 0f;
+
+    Collider2D lastIgnoredCollider = null;
+
 }

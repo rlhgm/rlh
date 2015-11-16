@@ -1058,6 +1058,9 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)]);
                 break;
             case Action.CLIMB_CLIMB:
+                //Debug.Log(catchedClimbHandle);
+                //Debug.Log(lastCatchedClimbHandle);
+                zap.TrySetIgnoreCollisionWhit(catchedClimbHandle);
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_climb_R");
                 else zap.AnimatorBody.Play("Zap_jump_climb_L");
                 break;
@@ -2369,6 +2372,8 @@ public class ZapControllerNormal : ZapController
 
         if (zap.currentActionTime >= CLIMBDUR_CLIMB)
         {
+            zap.removeLastIgnoredCollision();
+
             zap.setState(Zap.State.ON_GROUND);
             transform.position = climbAfterPos2;
 
