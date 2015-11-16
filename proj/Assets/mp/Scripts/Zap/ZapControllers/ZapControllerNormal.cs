@@ -3176,6 +3176,15 @@ public class ZapControllerNormal : ZapController
                     zap.FuddleFromBird = true;
                 return true;
             }
+            else if( isInAction(Action.CLIMB_CATCH) )
+            {
+                zap.velocity.x = 0.0f;
+                zap.velocity.y = 0.0f;
+                zap.setState(Zap.State.IN_AIR);
+                setAction(Action.JUMP);
+                lastCatchedClimbHandle = catchedClimbHandle;
+                catchedClimbHandle = null;
+            }
             else if (isInState(Zap.State.MOUNT))
             {
                 setAction(Action.MOUNT_BIRDHIT);
