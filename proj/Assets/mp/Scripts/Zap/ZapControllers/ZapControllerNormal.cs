@@ -1504,7 +1504,7 @@ public class ZapControllerNormal : ZapController
                 Transform obstacle = zap.CheckRight(0.1f, ref dto);
                 if (obstacle)
                 {
-                    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
+                    Transform obstacle2 = zap.CheckRight(0.1f, ref dto, false, true);
                     if (!obstacle2)
                     {
                         //setActionCrouchIdle();
