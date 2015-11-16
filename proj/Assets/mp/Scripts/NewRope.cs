@@ -7,6 +7,7 @@ public class NewRope : MonoBehaviour {
 	//Rigidbody2D driverRigidBody;
 	public Transform currentLink;
 	public Rigidbody2D attachedStone;
+    public Vector2 attachedStoneAnchor;
 
 	RopeLink[] links;
 
@@ -118,6 +119,7 @@ public class NewRope : MonoBehaviour {
 			distJoint.anchor = new Vector2(0.0f,-0.5f);
 			distJoint.connectedAnchor = new Vector2(0f,0f);
 			distJoint.connectedBody = attachedStone;
+            distJoint.connectedAnchor = attachedStoneAnchor;
             //print(attachedStone.transform.parent);
 			attachedStone.transform.SetParent( lastLink.transform );
 			//attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
