@@ -939,6 +939,7 @@ public class Zap : MonoBehaviour
             return;
         }
     }
+
     //void OnCollisionEnter2D(Collision2D c)
     //{
     //    print(c);
@@ -971,7 +972,14 @@ public class Zap : MonoBehaviour
 
         if (other.gameObject.tag == "KillerPhysic")
         {
+            die(DeathType.POISON);
+            return;
+        }
+
+        if (other.gameObject.tag == "KillerPhysic2")
+        {
             //die(DeathType.POISON);
+            //print("KillerPhysic2");
             return;
         }
 

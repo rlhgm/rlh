@@ -28,6 +28,7 @@ TagManager:
   - SnakeCollider
   - ShowInfoTriggerController
   - Bat
+  - KillerPhysic2
   layers:
   - Default
   - TransparentFX
