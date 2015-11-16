@@ -2040,13 +2040,13 @@ public class ZapControllerNormal : ZapController
     {
         if( zap.currentActionTime > BIRD_HIT_DURATION )
         {
+            if (zap.canBeFuddleFromBird || lastActionParam == 1) // 1 oznacza ze bat to byl...
+                zap.FuddleFromBird = true;
+
             zap.velocity.x = 0.0f;
             zap.velocity.y = 0.0f;
             setAction(Action.JUMP);
-            zap.setState(Zap.State.IN_AIR);
-
-            if (zap.canBeFuddleFromBird)
-                zap.FuddleFromBird = true;
+            zap.setState(Zap.State.IN_AIR);           
         }
         return 0;
     }
@@ -3172,8 +3172,8 @@ public class ZapControllerNormal : ZapController
 
                 releaseRope();
 
-                if (zap.canBeFuddleFromBird)
-                    zap.FuddleFromBird = true;
+                //if (zap.canBeFuddleFromBird)
+                zap.FuddleFromBird = true;
                 return true;
             }
             else if( isInAction(Action.CLIMB_CATCH) )
@@ -3184,10 +3184,11 @@ public class ZapControllerNormal : ZapController
                 setAction(Action.JUMP);
                 lastCatchedClimbHandle = catchedClimbHandle;
                 catchedClimbHandle = null;
+                zap.FuddleFromBird = true;
             }
             else if (isInState(Zap.State.MOUNT))
             {
-                setAction(Action.MOUNT_BIRDHIT);
+                setAction(Action.MOUNT_BIRDHIT, itsBat ? 1 : 0);
                 return true;
             }
             else if (isInState(Zap.State.IN_AIR))
