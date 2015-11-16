@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SecretPlace : MonoBehaviour
 {
+    public float RevealOpacity = 0.3f;
 
     // Use this for initialization
     void Start()
@@ -20,7 +21,7 @@ public class SecretPlace : MonoBehaviour
     {
         if (other.GetComponent<Zap>())
         {
-            setChildenOpacity(transform, 0.3f);
+            setChildenOpacity(transform, RevealOpacity);
         }
     }
 
