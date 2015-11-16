@@ -1390,7 +1390,7 @@ public class ZapControllerNormal : ZapController
             if (zap.dir() == Vector2.right)
             {
                 turnLeftStart();
-                return 0;
+                return 1;
             }
             else
             {
@@ -1495,7 +1495,7 @@ public class ZapControllerNormal : ZapController
             if (zap.dir() == -Vector2.right)
             {
                 turnRightStart();
-                return 0;
+                return 1;
             }
             else
             {
