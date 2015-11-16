@@ -971,7 +971,7 @@ public class Zap : MonoBehaviour
 
         if (other.gameObject.tag == "KillerPhysic")
         {
-            die(DeathType.POISON);
+            //die(DeathType.POISON);
             return;
         }
 
