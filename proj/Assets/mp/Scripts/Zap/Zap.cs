@@ -1713,12 +1713,12 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public Transform CheckObstacle(int dir, float distToCheck, ref float distToObstacle)
+    public Transform CheckObstacle(int dir, float distToCheck, ref float distToObstacle, bool simulateCrouch = false)
     {
         if (dir == 1)
         {
             //distToObstacle = CheckRight(Mathf.Abs(distToCheck) + 0.01f,ref distToObstacle);
-            Transform obstacle = CheckRight(Mathf.Abs(distToCheck) + 0.01f, ref distToObstacle);
+            Transform obstacle = CheckRight(Mathf.Abs(distToCheck) + 0.01f, ref distToObstacle, false, simulateCrouch);
             //if (distToObstacle < 0.0f)
             if( !obstacle )
                 return null;
@@ -1732,7 +1732,7 @@ public class Zap : MonoBehaviour
         else if (dir == -1)
         {
             //distToObstacle = checkLeft(Mathf.Abs(distToCheck) + 0.01f);
-            Transform obstacle = CheckLeft(Mathf.Abs(distToCheck) + 0.01f, ref distToObstacle);
+            Transform obstacle = CheckLeft(Mathf.Abs(distToCheck) + 0.01f, ref distToObstacle, false, simulateCrouch);
             //if (distToObstacle < 0.0f)
             //    return false;
             if (!obstacle) return null;
@@ -1823,14 +1823,14 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public float CheckLeft(float checkingDist, bool flying = false)
+    public float CheckLeft(float checkingDist, bool flying = false, bool simulateCrouch = false)
     {
         float distToObstacle = -1f;
-        Transform obstacle = CheckLeft(checkingDist, ref distToObstacle, flying);
+        Transform obstacle = CheckLeft(checkingDist, ref distToObstacle, flying, simulateCrouch);
         return distToObstacle;
     }
 
-    public Transform CheckLeft(float checkingDist, ref float distToObstacle, bool flying = false)
+    public Transform CheckLeft(float checkingDist, ref float distToObstacle, bool flying = false, bool simulateCrouch = false)
     {
         if (!stateJustChanged)
         {
@@ -1888,7 +1888,7 @@ public class Zap : MonoBehaviour
             return hit.transform;
         }
 
-        if (!flying && (currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
+        if (!flying && (simulateCrouch || currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
         {
             //return -1.0f;
             distToObstacle = -1f;
@@ -1906,14 +1906,14 @@ public class Zap : MonoBehaviour
         return null;
     }
 
-    public float CheckRight(float checkingDist, bool flying = false)
+    public float CheckRight(float checkingDist, bool flying = false, bool simulateCrouch = false)
     {
         float distToObstacle = -1f;
-        Transform obstacle = CheckRight(checkingDist, ref distToObstacle, flying);
+        Transform obstacle = CheckRight(checkingDist, ref distToObstacle, flying, simulateCrouch);
         return distToObstacle;
     }
 
-    public Transform CheckRight(float checkingDist, ref float distToObstacle, bool flying = false)
+    public Transform CheckRight(float checkingDist, ref float distToObstacle, bool flying = false, bool simulateCrouch = false)
     {
         if (!stateJustChanged)
         {
@@ -1971,7 +1971,7 @@ public class Zap : MonoBehaviour
             return hit.transform;
         }
 
-        if (!flying && (currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
+        if (!flying && (simulateCrouch || currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
         {
             //return -1.0f;
             distToObstacle = -1f;

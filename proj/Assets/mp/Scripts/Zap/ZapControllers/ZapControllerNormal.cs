@@ -1780,9 +1780,19 @@ public class ZapControllerNormal : ZapController
         Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
         if (obstacle)
         {
-            distToMove = distToObstacle;
-            //setActionIdle();
-            PushStart(obstacle);
+            Transform obstacle2 = zap.CheckObstacle(dir, distToMove, ref distToObstacle, true);
+            if (!obstacle2)
+            {
+                setActionCrouchIdle();
+                resetActionAndState();
+                wantGetUp = true;
+            }
+            else
+            {
+                distToMove = distToObstacle;
+                //setActionIdle();
+                PushStart(obstacle);
+            }
         }
 
         //Debug.Log(distToObstacle);
@@ -1849,9 +1859,23 @@ public class ZapControllerNormal : ZapController
         Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
         if( obstacle )
         {
-            distToMove = distToObstacle;
-            //setActionIdle();
-            PushStart(obstacle);
+            //distToMove = distToObstacle;
+            ////setActionIdle();
+            //PushStart(obstacle);
+
+            Transform obstacle2 = zap.CheckObstacle(dir, distToMove, ref distToObstacle, true);
+            if (!obstacle2)
+            {
+                setActionCrouchIdle();
+                resetActionAndState();
+                wantGetUp = true;
+            }
+            else
+            {
+                distToMove = distToObstacle;
+                //setActionIdle();
+                PushStart(obstacle);
+            }
         }
 
         newPosX += distToMove;
