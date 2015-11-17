@@ -979,7 +979,7 @@ public class Zap : MonoBehaviour
         if (other.gameObject.tag == "KillerPhysic2")
         {
             //die(DeathType.POISON);
-            //print("KillerPhysic2");
+            print("KillerPhysic2 : " + velocity + " " + lastVelocity + " " + gfx.GetComponent<Rigidbody2D>().velocity);
             return;
         }
 
