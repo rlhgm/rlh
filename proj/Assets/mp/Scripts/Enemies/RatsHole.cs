@@ -3,6 +3,7 @@ using System.Collections;
 
 public class RatsHole : MonoBehaviour
 {
+    public RatsHole ExitHole = null;
 
     // Use this for initialization
     void Start()

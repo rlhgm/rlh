@@ -13692,9 +13692,19 @@ Prefab:
       propertyPath: m_Name
       value: RatsHole (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11487748, guid: c5270b5b144f342409479203ba9c72bd, type: 2}
+      propertyPath: ExitHole
+      value: 
+      objectReference: {fileID: 1113204781}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5270b5b144f342409479203ba9c72bd, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &922266475 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11487748, guid: c5270b5b144f342409479203ba9c72bd,
+    type: 2}
+  m_PrefabInternal: {fileID: 922266474}
+  m_Script: {fileID: 11500000, guid: e0a0dbe8512729643b9cffa30591b284, type: 3}
 --- !u!1001 &924977469
 Prefab:
   m_ObjectHideFlags: 0
@@ -17379,9 +17389,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11487748, guid: c5270b5b144f342409479203ba9c72bd, type: 2}
+      propertyPath: ExitHole
+      value: 
+      objectReference: {fileID: 922266475}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5270b5b144f342409479203ba9c72bd, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1113204781 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11487748, guid: c5270b5b144f342409479203ba9c72bd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1113204780}
+  m_Script: {fileID: 11500000, guid: e0a0dbe8512729643b9cffa30591b284, type: 3}
 --- !u!1001 &1114385007
 Prefab:
   m_ObjectHideFlags: 0
