@@ -620,18 +620,24 @@ public class Zap : MonoBehaviour
         //    resetable.IReset();
         //}
 
-        Rat[] rats = FindObjectsOfType(typeof(Rat)) as Rat[];
-        foreach (Rat rat in rats)
-        {
-            rat.Reset();
-        }
+        //Rat[] rats = FindObjectsOfType(typeof(Rat)) as Rat[];
+        //foreach (Rat rat in rats)
+        //{
+        //    rat.Reset();
+        //}
 
-        Bat[] bats = FindObjectsOfType(typeof(Bat)) as Bat[];
-        foreach (Bat bat in bats)
-        {
-            bat.Reset();
-        }
+        //Bat[] bats = FindObjectsOfType(typeof(Bat)) as Bat[];
+        //foreach (Bat bat in bats)
+        //{
+        //    bat.Reset();
+        //}
 
+        Enemy[] enemies = FindObjectsOfType(typeof(Enemy)) as Enemy[];
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.Reset();
+        }
+        
 
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)

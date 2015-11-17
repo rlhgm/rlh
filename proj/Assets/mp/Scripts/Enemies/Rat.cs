@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rat : MonoBehaviour//, IResetable
+public class Rat : Enemy // MonoBehaviour//, IResetable
 {
     public int ControlID = 0;
 
@@ -44,7 +44,7 @@ public class Rat : MonoBehaviour//, IResetable
         StaticInit();
     }
 
-    public void Reset()
+    public override void Reset()
     {
         transform.position = startPos;
 

@@ -85,6 +85,7 @@
     <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\Bat.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\BatActivator.cs" />
+    <Compile Include="Assets\mp\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\CreepingAIController.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\CreepingAITrigger.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\EnemyRemain.cs" />

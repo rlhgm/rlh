@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bat : MonoBehaviour
+public class Bat : Enemy //MonoBehaviour
 {
     BatActivator activator;
 
@@ -36,7 +36,7 @@ public class Bat : MonoBehaviour
 
     }
 
-    public void Reset()
+    public override void Reset()
     {
         //gameObject.(true);
         GetComponent<BoxCollider2D>().enabled = true;
