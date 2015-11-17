@@ -1830,7 +1830,7 @@ public class ZapControllerNormal : ZapController
             else
             {
                 distToMove = distToObstacle;
-                setActionIdle();
+                //setActionIdle();
                 PushStart(obstacle);
             }
         }

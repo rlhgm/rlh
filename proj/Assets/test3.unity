@@ -696,19 +696,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2015612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: orthographic size
-      value: 6.98958302
+      value: 6.70833349
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.00149035
+      value: 1.04347825
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.00149035
+      value: 1.04347825
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.00149035
+      value: 1.04347825
       objectReference: {fileID: 0}
     - target: {fileID: 8177612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_Enabled

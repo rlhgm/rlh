@@ -1736,7 +1736,7 @@ public class Zap : MonoBehaviour
             }
             else
             {
-                print("jest obstacle ale : distToObstacle > distToCheck : " + distToObstacle + " > " + distToCheck);
+                //print("jest obstacle ale : distToObstacle > distToCheck : " + distToObstacle + " > " + distToCheck);
                 return null;
             }
         }
