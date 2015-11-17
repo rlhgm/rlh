@@ -9,30 +9,20 @@ public class EnemiesSpawner : MonoBehaviour
     public int MaxSpawned = 3;
 
     float toSpawnTimer = 0.0f;
-    //int spawnedCounter = 0;
-
-    List<Enemy> spawnedEnemies;// = new ArrayList();
+    List<Enemy> spawnedEnemies;
 
     // Use this for initialization
     void Start()
     {
         spawnedEnemies = new List<Enemy>(MaxSpawned);
-        
         ResetSpawTimer();
-        //spawnedCounter = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         toSpawnTimer -= Time.deltaTime;
-        if( toSpawnTimer <= 0f )
-        {
-            if( spawnedEnemies.Count < MaxSpawned)
-            {
-                Spawn();
-            }
-        }
+        if (CanSpawnNext()) Spawn();
     }
 
     Enemy Spawn()
@@ -42,8 +32,22 @@ public class EnemiesSpawner : MonoBehaviour
         newEnemy.transform.position = transform.position;
         spawnedEnemies.Add(newEnemy);
         ResetSpawTimer();
+        RLHScene.Instance.RatBorn(newEnemy.GetComponent<Rat>());
         return newEnemy;
     }
+
+    bool CanSpawnNext()
+    {
+        if (toSpawnTimer > 0f) return false;
+        if (spawnedEnemies.Count >= MaxSpawned) return false;
+        if (!CheckExitIsOpen()) return false;
+        return true;
+    }
+
+    bool CheckExitIsOpen()
+    {
+        return true;
+    } 
 
     void ResetSpawTimer()
     {
@@ -62,6 +66,8 @@ public class EnemiesSpawner : MonoBehaviour
         {
             Destroy(enemy.gameObject);
         }
+        // to w sumie wolane jest juz z zapa...
+        //RLHScene.Instance.ResetRats();
         spawnedEnemies.Clear();
         ResetSpawTimer();
     }

@@ -384,6 +384,13 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         stateJustChanged = true;
         state = newState;
 
+        switch (state)
+        {
+            case State.Dead:
+                RLHScene.Instance.RatDie(this);
+                if (spawner) spawner.NurslingFall(this);
+                break;
+        }
         return true;
     }
     public bool IsInState(State test)
@@ -1521,7 +1528,6 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
     {
         SetAction(Action.Die);
         SetState(State.Dead);
-        if (spawner) spawner.NurslingFall(this);
     }
 
     //bool NormalMode()

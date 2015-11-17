@@ -643,7 +643,8 @@ public class Zap : MonoBehaviour
         {
             spawner.Reset();
         }
-        
+        RlhScene.ResetRats();
+
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)
         {
