@@ -46,6 +46,8 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
 
     public override void Reset()
     {
+        if (spawner) return;
+
         transform.position = startPos;
 
         SetMode(Mode.Normal);

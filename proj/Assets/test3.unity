@@ -10979,6 +10979,11 @@ Prefab:
       propertyPath: m_Name
       value: EnemySpawnerRats
       objectReference: {fileID: 0}
+    - target: {fileID: 11423682, guid: 13ab3d9de14a8a04797bd2617761dbb3, type: 2}
+      propertyPath: EnemyPrefab
+      value: 
+      objectReference: {fileID: 11426584, guid: 61285364668affe4098748c946ae2077,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13ab3d9de14a8a04797bd2617761dbb3, type: 2}
   m_IsPrefabParent: 0

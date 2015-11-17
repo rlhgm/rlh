@@ -637,8 +637,13 @@ public class Zap : MonoBehaviour
         {
             enemy.Reset();
         }
-        
 
+        EnemiesSpawner[] spawners = FindObjectsOfType(typeof(EnemiesSpawner)) as EnemiesSpawner[];
+        foreach (EnemiesSpawner spawner in spawners)
+        {
+            spawner.Reset();
+        }
+        
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)
         {
