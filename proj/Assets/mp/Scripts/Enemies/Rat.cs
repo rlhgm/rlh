@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rat : MonoBehaviour
+public class Rat : MonoBehaviour//, IResetable
 {
     public int ControlID = 0;
 
@@ -42,6 +42,17 @@ public class Rat : MonoBehaviour
     {
         //print("Rat::OnEnabled");    
         StaticInit();
+    }
+
+    public void Reset()
+    {
+        transform.position = startPos;
+
+        SetMode(Mode.Normal);
+        SetState(State.OnGround);
+        WalkStart();
+
+        JumpSpeed = 2.0f / JumpDuration;
     }
 
     void Start()

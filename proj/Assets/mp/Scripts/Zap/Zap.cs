@@ -613,7 +613,19 @@ public class Zap : MonoBehaviour
         {
             gm.Reset();
         }
-        
+
+        //IResetable[] resetables = FindObjectsOfType(typeof(IResetable)) as IResetable[];
+        //foreach (IResetable resetable in resetables)
+        //{
+        //    resetable.IReset();
+        //}
+
+        Rat[] rats = FindObjectsOfType(typeof(Rat)) as Rat[];
+        foreach (Rat rat in rats)
+        {
+            rat.Reset();
+        }
+
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)
         {
