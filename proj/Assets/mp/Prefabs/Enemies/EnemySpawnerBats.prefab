@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 439138}
   - 212: {fileID: 21294968}
   - 114: {fileID: 11423682}
+  - 61: {fileID: 6148490}
   m_Layer: 0
   m_Name: EnemySpawnerBats
   m_TagString: Untagged
@@ -29,6 +30,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6148490
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135572}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: .25}
+  serializedVersion: 2
+  m_Size: {x: .5, y: .5}
 --- !u!114 &11423682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,8 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96324d850a335a47b89d337d4325347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 11423468, guid: d9a102e3aa8104e4bad8468e0cd590d0, type: 2}
-  SpawnDurationMinMax: {x: 2, y: 5}
+  EnemyPrefab: {fileID: 11426584, guid: 61285364668affe4098748c946ae2077, type: 2}
+  SpawnIntervalMinMax: {x: 56, y: 80}
   MaxSpawned: 3
 --- !u!212 &21294968
 SpriteRenderer:
