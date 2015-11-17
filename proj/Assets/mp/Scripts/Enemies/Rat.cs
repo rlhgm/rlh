@@ -305,7 +305,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
                 {
                     //print("wlaze do dziury : " + collHole.name);
                     myCollider.enabled = false;
-                    //myGfx.gameObject.SetActive(false);
+                    myGfx.gameObject.SetActive(false);
                     insideHole = collHole;
                     float holeDist = (collHole.transform.position - collHole.ExitHole.transform.position).magnitude;
                     helpDuration1 = holeDist / HoleWalkSpeed;
@@ -1292,7 +1292,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
             {
                 toNextHoleTravel = 3f;
                 myCollider.enabled = true;
-                //myGfx.gameObject.SetActive(true);
+                myGfx.gameObject.SetActive(true);
                 //print("before pos = " + transform.position);
                 transform.position = insideHole.ExitHole.transform.position;
                 newPos = transform.position;
@@ -1307,7 +1307,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
                 currentActionTime = 0f;
                 //print("wlaze do dziury : " + collHole.name);
                 myCollider.enabled = false;
-                //myGfx.gameObject.SetActive(false);
+                myGfx.gameObject.SetActive(false);
                 insideHole = insideHole.ExitHole;
                 float holeDist = (insideHole.transform.position - insideHole.ExitHole.transform.position).magnitude;
                 helpDuration1 = holeDist / HoleWalkSpeed;
