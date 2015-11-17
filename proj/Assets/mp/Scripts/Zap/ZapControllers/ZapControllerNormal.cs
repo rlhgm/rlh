@@ -2556,7 +2556,7 @@ public class ZapControllerNormal : ZapController
                 distToMove = zap.velocity.x * deltaTime;
                 
                 float distToObstacle = 0.0f;
-                Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove + 0.1f + zap.dir2(), ref distToObstacle);
+                Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove + 0.1f * zap.dir2(), ref distToObstacle);
                 if (obstacle != pushPullObstacle)
                 {
                     setActionIdle();
