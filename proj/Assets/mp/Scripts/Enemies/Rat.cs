@@ -1521,6 +1521,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
     {
         SetAction(Action.Die);
         SetState(State.Dead);
+        if (spawner) spawner.NurslingFall(this);
     }
 
     //bool NormalMode()

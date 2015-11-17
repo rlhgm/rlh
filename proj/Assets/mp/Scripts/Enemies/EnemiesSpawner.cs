@@ -9,7 +9,7 @@ public class EnemiesSpawner : MonoBehaviour
     public int MaxSpawned = 3;
 
     float toSpawnTimer = 0.0f;
-    int spawnedCounter = 0;
+    //int spawnedCounter = 0;
 
     List<Enemy> spawnedEnemies;// = new ArrayList();
 
@@ -19,7 +19,7 @@ public class EnemiesSpawner : MonoBehaviour
         spawnedEnemies = new List<Enemy>(MaxSpawned);
         
         ResetSpawTimer();
-        spawnedCounter = 0;
+        //spawnedCounter = 0;
     }
 
     // Update is called once per frame
@@ -52,6 +52,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     public void NurslingFall(Enemy zombie)
     {
+        Destroy(zombie.gameObject,2f);
         spawnedEnemies.Remove(zombie);
     }
 
