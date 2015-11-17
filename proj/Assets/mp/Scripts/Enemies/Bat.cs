@@ -38,6 +38,10 @@ public class Bat : MonoBehaviour
 
     public void Reset()
     {
+        //gameObject.(true);
+        GetComponent<BoxCollider2D>().enabled = true;
+        myGfx.gameObject.SetActive(true);
+
         if (!Activator)
         {
             Debug.LogError("Nietoperz : " + name + " nie jest przypisany do zadnego aktywatora!");
@@ -674,7 +678,8 @@ public class Bat : MonoBehaviour
         Dive,
         DiveOut,
         //Bunk
-        SuckZap
+        SuckZap,
+        Dead
     }
     State state;
 
@@ -800,6 +805,12 @@ public class Bat : MonoBehaviour
             case State.SuckZap:
                 playAnim(flyAnimStateHash);
                 myAnimator.speed = 2f;
+                break;
+
+            case State.Dead:
+                //gameObject.SetActive(false);
+                GetComponent<BoxCollider2D>().enabled = false;
+                myGfx.gameObject.SetActive(false);
                 break;
         }
         return true;
@@ -951,6 +962,7 @@ public class Bat : MonoBehaviour
             newRemain.setVelocity(velocity * 1f);
         }
 
-        Destroy(transform.gameObject);
+        SetState(State.Dead);
+        //Destroy(transform.gameObject);
     }
 }
