@@ -57,14 +57,18 @@ public class EnemiesSpawner : MonoBehaviour
     public void NurslingFall(Enemy zombie)
     {
         Destroy(zombie.gameObject,2f);
-        spawnedEnemies.Remove(zombie);
+        spawnedEnemies.RemoveAt(spawnedEnemies.IndexOf(zombie));
     }
 
     public void Reset()
     {
         foreach (Enemy enemy in spawnedEnemies)
         {
-            Destroy(enemy.gameObject);
+            if (enemy)
+            {
+                RLHScene.Instance.RatDie(enemy.GetComponent<Rat>());
+                Destroy(enemy.gameObject);
+            }
         }
         // to w sumie wolane jest juz z zapa...
         //RLHScene.Instance.ResetRats();
