@@ -80,19 +80,19 @@ public class RLHScene : MonoBehaviour
     public void RatBorn(Rat rat)
     {
         rats.Add(rat);
-        print("RatBorn " + rats.Count);
+        //print("RatBorn " + rats.Count);
     }
     public void RatDie(Rat rat)
     {
         rats.RemoveAt(rats.IndexOf(rat));
-        print("RatDie " + rats.Count);
+        //print("RatDie " + rats.Count);
     }
     public void ResetRats()
     {
         rats.Clear();
         Rat[] _rats = FindObjectsOfType<Rat>();
         rats.AddRange(_rats);
-        print("ResetRats " + rats.Count);
+        //print("ResetRats " + rats.Count);
     }
 
     public int getRatsOnPosition(Vector3 pos, float maxDist, int maxRats, ref ArrayList foundedRats)
