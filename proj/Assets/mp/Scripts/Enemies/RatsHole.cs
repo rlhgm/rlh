@@ -61,10 +61,13 @@ public class RatsHole : MonoBehaviour
         float left = exitBoxCollider.offset.x - (exitBoxCollider.size.x * 0.5f);
         float right = exitBoxCollider.offset.x + (exitBoxCollider.size.x * 0.5f);
 
-        exitTopLeft = transform.TransformPoint(new Vector3(left, top, 0f));
-        exitTopRight = transform.TransformPoint(new Vector3(right, top, 0f));
-        exitBtmLeft = transform.TransformPoint(new Vector3(left, btm, 0f));
-        exitBtmRight = transform.TransformPoint(new Vector3(right, btm, 0f));
+        exitTopLeft = ExitHole.transform.TransformPoint(new Vector3(left, top, 0f));
+        exitTopRight = ExitHole.transform.TransformPoint(new Vector3(right, top, 0f));
+        exitBtmLeft = ExitHole.transform.TransformPoint(new Vector3(left, btm, 0f));
+        exitBtmRight = ExitHole.transform.TransformPoint(new Vector3(right, btm, 0f));
+
+
+        //Debug.Log(topLeft + " " + topRight + " " + btmLeft + " " + btmRight);
 
         top = boxCollider.offset.y + (boxCollider.size.y * 0.5f);
         btm = boxCollider.offset.y - (boxCollider.size.y * 0.5f);
@@ -75,5 +78,7 @@ public class RatsHole : MonoBehaviour
         topRight = transform.TransformPoint(new Vector3(right, top, 0f));
         btmLeft = transform.TransformPoint(new Vector3(left, btm, 0f));
         btmRight = transform.TransformPoint(new Vector3(right, btm, 0f));
+
+        //Debug.Log(topLeft + " " + topRight + " " + btmLeft + " " + btmRight);
     }
 }

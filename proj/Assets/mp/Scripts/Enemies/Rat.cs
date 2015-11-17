@@ -1266,17 +1266,55 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         }
         else
         {
-            toNextHoleTravel = 3f;
-            myCollider.enabled = true;
-            //myGfx.gameObject.SetActive(true);
-            //print("before pos = " + transform.position);
-            transform.position = insideHole.ExitHole.transform.position;
-            newPos = transform.position;
-            //print("after pos = " + transform.position);
-            SetState(State.OnGround);
-            SetMode(Mode.Normal);
-            SetAction(Action.IdleIn);
-            insideHole = null;
+            //RatsHole collHole = other.GetComponent<RatsHole>();
+            //if (collHole)
+            //{
+            //    if (IsInState(State.OnGround) && IsInMode(Mode.Normal) && toNextHoleTravel < 0f && collHole.EntryIsOpen())
+            //    {
+            //        // if( Random.Range(0,2) == 1 )
+            //        {
+            //            //print("wlaze do dziury : " + collHole.name);
+            //            myCollider.enabled = false;
+            //            //myGfx.gameObject.SetActive(false);
+            //            insideHole = collHole;
+            //            float holeDist = (collHole.transform.position - collHole.ExitHole.transform.position).magnitude;
+            //            helpDuration1 = holeDist / HoleWalkSpeed;
+            //            //print("travel time : " + helpDuration1);
+            //            SetState(State.InHole);
+            //            SetAction(Action.HoleWalk);
+            //            return true;
+            //        }
+            //    }
+            //}
+            //return false;
+
+            if (insideHole.ExitIsOpen())
+            {
+                toNextHoleTravel = 3f;
+                myCollider.enabled = true;
+                //myGfx.gameObject.SetActive(true);
+                //print("before pos = " + transform.position);
+                transform.position = insideHole.ExitHole.transform.position;
+                newPos = transform.position;
+                //print("after pos = " + transform.position);
+                SetState(State.OnGround);
+                SetMode(Mode.Normal);
+                SetAction(Action.IdleIn);
+                insideHole = null;
+            }
+            else
+            {
+                currentActionTime = 0f;
+                //print("wlaze do dziury : " + collHole.name);
+                myCollider.enabled = false;
+                //myGfx.gameObject.SetActive(false);
+                insideHole = insideHole.ExitHole;
+                float holeDist = (insideHole.transform.position - insideHole.ExitHole.transform.position).magnitude;
+                helpDuration1 = holeDist / HoleWalkSpeed;
+                //print("travel time : " + helpDuration1);
+                SetState(State.InHole);
+                SetAction(Action.HoleWalk);
+            }
         }
         //if ( currentActionTime > helpDuration1)
         //{
