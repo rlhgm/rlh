@@ -1735,7 +1735,10 @@ public class Zap : MonoBehaviour
                 return obstacle;
             }
             else
+            {
+                print("jest obstacle ale : distToObstacle > distToCheck : " + distToObstacle + " > " + distToCheck);
                 return null;
+            }
         }
         else if (dir == -1)
         {
@@ -1873,14 +1876,16 @@ public class Zap : MonoBehaviour
                             if (hit2.fraction == 0f)
                             {
                                 //return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
-                                distToObstacle = hit.distance;
+                                distToObstacle = Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                                //distToObstacle = hit.distance;
                                 return hit.transform;
                             }
                             float angle2 = Vector2.Angle(Vector2.up, hit2.normal);
                             if (Mathf.Abs(angle2) > 45.0f)
                             {
                                 //return Mathf.Abs(hit.point.x - sensorLeft1.position.x);
-                                distToObstacle = hit.distance;
+                                distToObstacle = Mathf.Abs(hit.point.x - sensorLeft1.position.x);
+                                //distToObstacle = hit.distance;
                                 return hit.transform;
                             }
                         }
@@ -1956,14 +1961,16 @@ public class Zap : MonoBehaviour
                             if (hit2.fraction == 0f)
                             {
                                 //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
-                                distToObstacle = hit.distance;
+                                distToObstacle = Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                                //distToObstacle = hit.distance;
                                 return hit.transform;
                             }
                             float angle2 = Vector2.Angle(Vector2.up, hit2.normal);
                             if (Mathf.Abs(angle2) > 45.0f)
                             {
                                 //return Mathf.Abs(hit.point.x - sensorRight1.position.x);
-                                distToObstacle = hit.distance;
+                                distToObstacle = Mathf.Abs(hit.point.x - sensorRight1.position.x);
+                                //distToObstacle = hit.distance;
                                 return hit.transform;
                             }
                         }
