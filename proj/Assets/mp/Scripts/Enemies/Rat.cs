@@ -8,6 +8,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
     public float WalkSpeed = 2f;
     public float RunSpeed = 5f;
     public float JumpSpeed = 1f;
+    public float HoleWalkSpeed = 5f;
 
     public float FightModeDistance = 5f;
     public float IdleInDuration = 0.25f;
@@ -92,6 +93,8 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         distToTarget = Vector3.Distance(transform.position, targetPos);
         distToTargetX = transform.position.x - targetPos.x;
 
+        toNextHoleTravel -= currentDeltaTime;
+
         CheckMode();
 
         switch (action)
@@ -165,13 +168,21 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
                 ActionAttack();
                 break;
 
+            case Action.HoleWalk:
+                ActionHoleWalk();
+                break;
+
             case Action.Die:
                 ActionDie();
-                break;
+                break;            
         }
 
         switch (state)
         {
+            case State.InHole:
+
+                break;
+
             case State.OnGround:
                 if (RLHScene.Instance.checkGround(mySensor.position, 1.0f, ref distToObstacle, ref groundAngle))
                 {
@@ -254,10 +265,19 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
                 Think(ThinkCause.TurnbackTriggerEnter);
             }
         }
+
+        if (TryStartHoleTravel(other)) return;
+
     }
+
+    RatsHole insideHole = null;
+    float toNextHoleTravel = 0f;
+    //float toNextConsiderTravel = 0f;
 
     void OnTriggerStay2D(Collider2D other)
     {
+        //if (TryStartHoleTravel(other)) return;
+
         Zap zap = other.GetComponent<Zap>();
         if (zap)
         {
@@ -268,6 +288,36 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
             return;
         }
     }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+
+    }
+
+    bool TryStartHoleTravel(Collider2D other)
+    {
+        RatsHole collHole = other.GetComponent<RatsHole>();
+        if (collHole)
+        {
+            if (IsInState(State.OnGround) && IsInMode(Mode.Normal) && toNextHoleTravel < 0f)
+            {
+                if( Random.Range(0,2) == 1 )
+                {
+                    //print("wlaze do dziury : " + collHole.name);
+                    myCollider.enabled = false;
+                    insideHole = collHole;
+                    float holeDist = (collHole.transform.position - collHole.ExitHole.transform.position).magnitude;
+                    helpDuration1 = holeDist / HoleWalkSpeed;
+                    //print("travel time : " + helpDuration1);
+                    SetState(State.InHole);
+                    SetAction(Action.HoleWalk);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     public enum Mode
     {
         Undef = 0,
@@ -285,6 +335,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         OnGround,
         InAir,
         Climb,
+        InHole,
         Dead,
     };
 
@@ -319,6 +370,10 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
 
         Landing,
         Fly,
+
+        HoleEnter,
+        HoleWalk,
+        HoleExit,
 
         // next actions:
         NextIdle,
@@ -389,6 +444,9 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
             case State.Dead:
                 RLHScene.Instance.RatDie(this);
                 if (spawner) spawner.NurslingFall(this);
+                break;
+
+            case State.InHole:
                 break;
         }
         return true;
@@ -499,6 +557,10 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
 
             case Action.Attack:
                 myAnimator.Play(attackAnimStateHash);
+                break;
+
+            case Action.HoleWalk:
+                myAnimator.Play(walkAnimStateHash);
                 break;
         }
 
@@ -1188,6 +1250,44 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         transform.position = newPos;
     }
 
+    void ActionHoleWalk()
+    {
+        float travelRatio = currentActionTime / helpDuration1;
+        if( travelRatio < 1.0f )
+        {
+            Vector3 travelRoute = insideHole.ExitHole.transform.position - insideHole.transform.position;
+            transform.position = insideHole.transform.position + travelRoute * travelRatio;
+            //    newPos = transform.position;
+            //    //print("after pos = " + transform.position);
+            //    SetState(State.OnGround);
+            //    SetMode(Mode.Normal);
+            //    SetAction(Action.IdleIn);
+        }
+        else
+        {
+            toNextHoleTravel = 3f;
+            myCollider.enabled = true;
+            //print("before pos = " + transform.position);
+            transform.position = insideHole.ExitHole.transform.position;
+            newPos = transform.position;
+            //print("after pos = " + transform.position);
+            SetState(State.OnGround);
+            SetMode(Mode.Normal);
+            SetAction(Action.IdleIn);
+            insideHole = null;
+        }
+        //if ( currentActionTime > helpDuration1)
+        //{
+        //    //print("before pos = " + transform.position);
+        //    transform.position = insideHole.ExitHole.transform.position;
+        //    newPos = transform.position;
+        //    //print("after pos = " + transform.position);
+        //    SetState(State.OnGround);
+        //    SetMode(Mode.Normal);
+        //    SetAction(Action.IdleIn);
+        //}
+    }
+
     void ActionDie()
     {
     }
@@ -1526,6 +1626,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
 
     public void cut()
     {
+        //if (IsInState(State.InHole)) return;
         SetAction(Action.Die);
         SetState(State.Dead);
     }

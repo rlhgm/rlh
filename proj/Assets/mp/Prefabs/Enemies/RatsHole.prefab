@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21260494}
   - 61: {fileID: 6148366}
   - 114: {fileID: 11487748}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: RatsHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a0dbe8512729643b9cffa30591b284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExitHole: {fileID: 0}
 --- !u!212 &21260494
 SpriteRenderer:
   m_ObjectHideFlags: 1

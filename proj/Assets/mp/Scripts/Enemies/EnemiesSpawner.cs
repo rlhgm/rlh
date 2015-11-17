@@ -7,6 +7,7 @@ public class EnemiesSpawner : MonoBehaviour
     public Enemy EnemyPrefab = null;
     public Vector2 SpawnIntervalMinMax = new Vector2(1f, 5f);
     public int MaxSpawned = 3;
+    public bool On = true;
 
     float toSpawnTimer = 0.0f;
     List<Enemy> spawnedEnemies;
@@ -46,6 +47,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     bool CanSpawnNext()
     {
+        if (!On) return false;
         if (toSpawnTimer > 0f) return false;
         if (spawnedEnemies.Count >= MaxSpawned) return false;
         if (!CheckExitIsOpen()) return false;

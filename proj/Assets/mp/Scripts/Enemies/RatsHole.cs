@@ -8,7 +8,10 @@ public class RatsHole : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        if (!ExitHole)
+        {
+            Debug.LogError("RatsHole : " + name + " nie ma zdefiniowanego wyjscia!");
+        }
     }
 
     // Update is called once per frame
