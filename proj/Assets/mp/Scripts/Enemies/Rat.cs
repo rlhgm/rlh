@@ -299,7 +299,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         RatsHole collHole = other.GetComponent<RatsHole>();
         if (collHole)
         {
-            if (IsInState(State.OnGround) && IsInMode(Mode.Normal) && toNextHoleTravel < 0f)
+            if (IsInState(State.OnGround) && IsInMode(Mode.Normal) && toNextHoleTravel < 0f && collHole.EntryIsOpen() )
             {
                // if( Random.Range(0,2) == 1 )
                 {
