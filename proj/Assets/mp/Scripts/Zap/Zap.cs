@@ -626,6 +626,13 @@ public class Zap : MonoBehaviour
             rat.Reset();
         }
 
+        Bat[] bats = FindObjectsOfType(typeof(Bat)) as Bat[];
+        foreach (Bat bat in bats)
+        {
+            bat.Reset();
+        }
+
+
         Snake[] snakes = FindObjectsOfType(typeof(Snake)) as Snake[];
         foreach (Snake snake in snakes)
         {

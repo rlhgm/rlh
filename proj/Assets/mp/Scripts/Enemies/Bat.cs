@@ -36,9 +36,37 @@ public class Bat : MonoBehaviour
 
     }
 
+    public void Reset()
+    {
+        if (!Activator)
+        {
+            Debug.LogError("Nietoperz : " + name + " nie jest przypisany do zadnego aktywatora!");
+        }
+
+        SetState(State.Sleep);
+        SetAction(Action.GoSleep);
+        
+        transform.position = homePos;
+        lastPos = transform.position;
+        velocity = new Vector2(0f, 0f);
+        lastVelocity = new Vector2(0f, 0f);
+        newVelocity = new Vector2(0f, 0f);
+
+       // print("Bat -> Reset -> " + homePos + " " + transform.position);
+
+        if (Random.Range(0, 2) == 1)
+            Turnback();
+
+
+        searchBed = false;
+        bedFound = false;
+        quavering = false;
+    }
+
     // Use this for initialization
     void Start()
     {
+        
         if (!Activator)
         {
             Debug.LogError("Nietoperz : " + name + " nie jest przypisany do zadnego aktywatora!");
@@ -51,6 +79,7 @@ public class Bat : MonoBehaviour
 
         homePos = transform.position;
         lastPos = transform.position;
+        //print("Bat -> Start -> " + homePos);
         velocity = new Vector2(0f, 0f);
         lastVelocity = new Vector2(0f, 0f);
         newVelocity = new Vector2(0f, 0f);
