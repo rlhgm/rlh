@@ -52,6 +52,7 @@
      <Compile Include="Assets\Editor\ZapControllerGravityGunCreateAsset.cs" />
      <Compile Include="Assets\Editor\ZapControllerKnifeCreateAsset.cs" />
      <Compile Include="Assets\Editor\ZapControllerNormalCreateAsset.cs" />
+     <Compile Include="Assets\Editor\ZapControllerSuckByBatCreateAsset.cs" />
      <Compile Include="Assets\Resources\Editor\CM Tools\TileMaster\TileMaster.cs" />
      <None Include="Assets\mp\mas\NewUnlitShader.shader" />
      <None Include="Assets\mp\mas\NewSurfaceShader.shader" />

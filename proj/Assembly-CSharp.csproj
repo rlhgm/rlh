@@ -58,6 +58,12 @@
      <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\Bat.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\BatActivator.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\CreepingAIController.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\CreepingAITrigger.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\EnemyRemain.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\Rat.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
@@ -72,6 +78,7 @@
      <Compile Include="Assets\mp\Scripts\RLHScene.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
+     <Compile Include="Assets\mp\Scripts\SecretPlace.cs" />
      <Compile Include="Assets\mp\Scripts\ShowInfoTrigger.cs" />
      <Compile Include="Assets\mp\Scripts\ShowInfoTriggerController.cs" />
      <Compile Include="Assets\mp\Scripts\SmashStoneActivator.cs" />
@@ -91,6 +98,7 @@
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerGravityGun.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" />
+     <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerSuckedByBat.cs" />
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />
      <Compile Include="Assets\test.cs" />
