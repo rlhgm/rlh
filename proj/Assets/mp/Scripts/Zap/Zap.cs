@@ -1830,7 +1830,11 @@ public class Zap : MonoBehaviour
     }
     public int dir2()
     {
-        return gfx.localScale.x > 0f ? (int)1f : (int)-1f;
+        return gfx.localScale.x > 0f ? 1 : -1;
+    }
+    public int dir2N()
+    {
+        return gfx.localScale.x > 0f ? -1 : 1;
     }
     public bool faceRight()
     {

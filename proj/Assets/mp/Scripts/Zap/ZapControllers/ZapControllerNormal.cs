@@ -21,6 +21,7 @@ public class ZapControllerNormal : ZapController
     public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
     public float PushMaxSpeed = 2f;
     public float PullMaxSpeed = 2f;
+    public float PushbackMaxSpeed = 1f;
 
     public float JumpImpulse = 7.0f;
     public float JumpLongImpulse = 7.15f;
@@ -2011,6 +2012,55 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
+    int _Action_WALK(int dir)
+    {
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            int pullRes = zap.pullChoosenWeapon();
+            if (pullRes != 0)
+                return pullRes;
+        }
+
+        bool speedReached = checkSpeed(dir);
+        if (speedReached && desiredSpeedX == 0.0f)
+        {
+            setAction(Action.IDLE);
+            resetActionAndState();
+            return 0;
+        }
+
+        distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
+
+        zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / WalkSpeed) * 0.5f;
+
+        float distToObstacle = 0.0f;
+        Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
+        if (obstacle)
+        {
+            Transform obstacle2 = zap.CheckObstacle(dir, distToMove, ref distToObstacle, true);
+            if (!obstacle2)
+            {
+                setActionCrouchIdle();
+                resetActionAndState();
+                wantGetUp = true;
+            }
+            else
+            {
+                distToMove = distToObstacle;
+                //setActionIdle();
+                PushStart(obstacle);
+            }
+        }
+
+        //Debug.Log(distToObstacle);
+
+        newPosX += distToMove;
+        transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
+
+        return 0;
+    }
+
     int Action_CROUCH_LEFTRIGHT(int dir)
     {
         if (Input.GetKey(zap.keyDown))
@@ -2044,12 +2094,46 @@ public class ZapControllerNormal : ZapController
 
         distToMove = zap.velocity.x * zap.getCurrentDeltaTime();
 
+        //float distToObstacle = 0.0f;
+        //Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
+        //if (obstacle)
+        //{
+        //    Transform obstacle2 = zap.CheckObstacle(dir, distToMove, ref distToObstacle, true);
+        //    if (!obstacle2)
+        //    {
+        //        setActionCrouchIdle();
+        //        resetActionAndState();
+        //        wantGetUp = true;
+        //    }
+        //    else
+        //    {
+        //        distToMove = distToObstacle;
+        //        //setActionIdle();
+        //        PushStart(obstacle);
+        //    }
+        //}
+
         float distToObstacle = 0.0f;
-        if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
+        Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
+        if (obstacle)
         {
             //Debug.Log("obstacle -> " + distToObstacle);
             distToMove = distToObstacle;
-            setActionCrouchIdle();
+            //setActionCrouchIdle();
+            if (dir == 1 && isInAction(Action.CROUCH_RIGHT_BACK))
+            {
+                //Debug.Log(action);
+                PushbackStart(obstacle);
+            }
+            else if( dir == -1 && isInAction(Action.CROUCH_LEFT_BACK))
+            {
+                //Debug.Log(action);
+                PushbackStart(obstacle);
+            }
+            else
+            {
+                setActionCrouchIdle();
+            }
         }
 
         //Debug.Log("zap.velocity.x :  " + zap.velocity.x);
@@ -2715,60 +2799,134 @@ public class ZapControllerNormal : ZapController
 
     int ActionPushback(float deltaTime)
     {
+        //Debug.Log("ActionPush : " + pushPullObstacle);
+
         if (pushPullObstacle)
         {
             Rigidbody2D obstacleBody = pushPullObstacle.GetComponent<Rigidbody2D>();
             if (obstacleBody)
             {
-                //newPosX += distToMove;
-                float _diffx = obstacleBody.position.x - lastPulledObstaclePos.x;
-                float obstacleOnRoad = -1;
-                if (zap.faceRight())
+                //if (zap.faceRight())
+                //{
+                //    if (Input.GetKeyDown(zap.keyLeft) || Input.GetKey(zap.keyLeft))
+                //    {
+                //        obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
+                //        lastPulledObstaclePos = obstacleBody.position;
+                //        setAction(Action.PULL_LEFT);
+                //        return 1;
+                //    }
+                //}
+                //else
+                //{
+                //    if (Input.GetKeyDown(zap.keyRight) || Input.GetKey(zap.keyRight))
+                //    {
+                //        obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
+                //        lastPulledObstaclePos = obstacleBody.position;
+                //        setAction(Action.PULL_RIGHT);
+                //        return 1;
+                //    }
+                //}
+
+                zap.velocity.x = PushbackMaxSpeed * zap.dir2N();
+                distToMove = zap.velocity.x * deltaTime;
+
+                float distToObstacle = 0.0f;
+                Transform obstacle = zap.CheckObstacle(zap.dir2N(), distToMove + 0.1f * zap.dir2N(), ref distToObstacle);
+                if (obstacle != pushPullObstacle)
                 {
-                    obstacleOnRoad = zap.CheckLeft(Mathf.Abs(_diffx) + 0.1f);
+                    setActionCrouchIdle();
+                    return 1;
+                }
+
+                //Debug.Log("Push : " + distToMove + " " + distToObstacle);
+
+                if (Mathf.Abs(distToMove) < Mathf.Abs(distToObstacle))
+                {
+                    zap.velocity.x = distToMove / deltaTime;
+                    //zap.velocity.x = 0.0f;
                 }
                 else
                 {
-                    obstacleOnRoad = zap.CheckRight(Mathf.Abs(_diffx) + 0.1f);
-                }
+                    distToMove = distToObstacle;
+                    zap.velocity.x = distToMove / deltaTime;
 
-                if (obstacleOnRoad > 0f)
-                {
-                    //transform.position = new Vector3(transform.position.x + _diffx, transform.position.y, 0.0f);
-                    PullStop();
-                }
-                else
-                {
-                    transform.position = new Vector3(transform.position.x + _diffx, transform.position.y, 0.0f);
 
-                    if (Mathf.Abs(obstacleBody.velocity.x) < PullMaxSpeed)
+                    Vector2 force = new Vector2(0f, 0f);
+                    Vector2 forcePos;
+                    if (zap.faceRight())
                     {
-                        Vector2 force = new Vector2(0f, 0f);
-                        Vector2 forcePos;
-                        if (zap.faceRight())
-                        {
-                            force.x = -pullForce/* * deltaTime*/;
-                            forcePos = zap.sensorRight2.position;
-                            forcePos.x += 0.4f;
-                            forcePos.y -= 0.3f;
-                        }
-                        else
-                        {
-                            force.x = pullForce/* * deltaTime*/;
-                            forcePos = zap.sensorLeft2.position;
-                            forcePos.x -= 0.4f;
-                            forcePos.y -= 0.3f;
-                        }
-                        obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
+                        force.x = -pushForce /** deltaTime*/;
+                        forcePos = zap.sensorLeft2.position;
+                        forcePos.x -= 0.4f;
+                        forcePos.y -= 0.3f;
                     }
-
-                    lastPulledObstaclePos = obstacleBody.position;
+                    else
+                    {
+                        force.x = pushForce /** deltaTime*/;
+                        forcePos = zap.sensorRight2.position;
+                        forcePos.x += 0.4f;
+                        forcePos.y -= 0.3f;
+                    }
+                    obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
                 }
+
+                //distToMove = Mathf.Min(distToMove,distToObstacle);
+                //zap.velocity.x = distToMove / deltaTime;
+
+                //zap.velocity.x = Mathf.Min(Mathf.Abs(zap.velocity.x)) * zap.dir2();
+
+                if (Mathf.Abs(zap.velocity.x) < 0.01f)
+                {
+                    zap.AnimatorBody.speed = 0.0f;
+                }
+                else
+                {
+                    zap.AnimatorBody.speed = 0.25f + (Mathf.Abs(zap.velocity.x) / PushMaxSpeed) * 0.75f;
+                    //zap.AnimatorBody.speed = Mathf.Min(Mathf.Abs(zap.velocity.x) / PushMaxSpeed, 1f);
+                }
+
+                newPosX += distToMove;
+                transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
+
+                //if (distToObstacle < 0.15f)
+                //{
+                //    Vector2 force = new Vector2(0f, 0f);
+                //    Vector2 forcePos;
+                //    if (zap.faceRight())
+                //    {
+                //        force.x = pushForce/* * deltaTime*/;
+                //        forcePos = zap.sensorRight2.position;
+                //    }
+                //    else
+                //    {
+                //        force.x = -pushForce/* * deltaTime*/;
+                //        forcePos = zap.sensorLeft2.position;
+                //    }
+                //    obstacleBody.AddForceAtPosition(force, forcePos, ForceMode2D.Force);
+                //}
+                //return 0;
+            }
+            else
+            {
+                zap.AnimatorBody.speed = 0.0f;
             }
         }
+
         return 0;
     }
 
+    void PushbackStart(Transform obstacle)
+    {
+        //Debug.Log("PushStart : " + obstacle);
+        zap.velocity.x = 0.0f;
+        pushPullObstacle = obstacle;
+        if (zap.faceRight())
+            setAction(Action.PUSHBACK_LEFT);
+        else
+            setAction(Action.PUSHBACK_RIGHT);
+
+        //Debug.Log(action);
+    }
     void PushStart(Transform obstacle)
     {
         //Debug.Log("PushStart : " + obstacle);
