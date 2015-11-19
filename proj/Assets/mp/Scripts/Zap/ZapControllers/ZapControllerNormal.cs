@@ -3488,40 +3488,43 @@ public class ZapControllerNormal : ZapController
     {
         if (Input.GetKeyDown(zap.keyJump) || forceJumpOff)
         {
-            float ropeSpeed = catchedRope.firstLinkSpeed;
-            float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
-            int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
-            float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
+            //float ropeSpeed = catchedRope.firstLinkSpeed;
+            //float ropeSpeedRad = ropeSpeed * Mathf.Deg2Rad;
+            //int crl_idn = catchedRope.currentLink.GetComponent<RopeLink>().idn;
+            //float ps = ropeSpeedRad * (crl_idn + 1) * 0.5f;
 
             int zapDir = zap.dir2();
 
             if (Input.GetKey(zap.keyLeft) && (zap.canJumpBackFromRope || zapDir == -1) && !forceJumpOff)
             { //skacze w lewo
                 zap.turnLeft();
+                jumpLongLeft();
 
-                if (ropeSpeed > 0f)
-                { // lina tez leci w lewo
-                    jumpLongLeft();
-                    zap.velocity.x -= ps;
-                }
-                else
-                {
-                    jumpLeft();
-                }
+                //if (ropeSpeed > 0f)
+                //{ // lina tez leci w lewo
+                //    jumpLongLeft();
+                //    zap.velocity.x -= ps;
+                //}
+                //else
+                //{
+                //    jumpLeft();
+                //}
             }
             else if (Input.GetKey(zap.keyRight) && (zap.canJumpBackFromRope || zapDir == 1) && !forceJumpOff)
             { //skacze w prawo
                 zap.turnRight();
+                jumpLongRight();
+                //jumpRight();
 
-                if (ropeSpeed < 0f)
-                { // lina tez leci w prawo
-                    jumpLongRight();
-                    zap.velocity.y += ps;
-                }
-                else
-                {
-                    jumpRight();
-                }
+                //if (ropeSpeed < 0f)
+                //{ // lina tez leci w prawo
+                //    jumpLongRight();
+                //    zap.velocity.y += ps;
+                //}
+                //else
+                //{
+                //    jumpRight();
+                //}
             }
             else if (Input.GetKeyDown(zap.keyDown) || Input.GetKey(zap.keyDown) || forceJumpOff)
             {
