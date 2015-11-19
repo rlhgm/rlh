@@ -1,7 +1,7 @@
 ﻿do jutra zrobie () :
 - cos z nietoperzami - te ataki - JEST
 - animacje + stany zapa z walce nietoperzami - JEST
-- nie wiem czy nie przerobić tego ciecia... głównie aby dalo się latwiej zabijac nietoperze 
+- nie wiem czy nie przerobić tego ciecia... głównie aby dalo się latwiej zabijac nietoperze - JEST
 - niech się nie rusza przy pchaniu , gdy nie może przesunąć - JEST
 - prefab skrzynki - kamienie, których nie można rozwalić i złapać GG - powinno byc
 - killerphysics2 - zabija powyżej jakiejś szybkości - raczej nie zrobie
