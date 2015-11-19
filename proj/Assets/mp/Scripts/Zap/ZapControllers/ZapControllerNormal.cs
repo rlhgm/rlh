@@ -1430,19 +1430,6 @@ public class ZapControllerNormal : ZapController
                     {
                         PushStart(obstacle);
                     }
-
-                    //Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
-                    //if (!obstacle2)
-                    //{
-                    //    setActionCrouchIdle();
-                    //    resetActionAndState();
-                    //    wantGetUp = true;
-                    //}
-                    //else
-                    //{
-                    //    PushStart(obstacle);
-                    //}
-                    
                     return 0;
                 }
             }
@@ -1488,8 +1475,53 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.CheckLeft(0.1f) >= 0.0f)
+            //float dto = -1;
+            //Transform obstacle = zap.CheckLeft(0.1f, ref dto);
+            //if (obstacle)
+            //{
+            //    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
+            //    if (!obstacle2)
+            //    {
+            //        //setActionCrouchIdle();
+            //        setAction(Action.CROUCH_LEFT);
+            //        //resetActionAndState();
+            //        zap.velocity.x = -CrouchSpeed;
+            //        Action_CROUCH_LEFTRIGHT(-1);
+            //        wantGetUp = true;
+            //    }
+            //    else
+            //    {
+            //        PushStart(obstacle);
+            //    }
+            //    return 0;
+            //}
+
+            float dto = -1;
+            Transform obstacle = zap.CheckLeft(0.1f, ref dto);
+            if (obstacle)
             {
+                PushbackStart(obstacle);
+                ////return 0;
+                ////float dto = -1;
+                ////Transform obstacle = zap.CheckLeft(0.1f, ref dto);
+                ////if (obstacle)
+                //{
+                //    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
+                //    if (!obstacle2)
+                //    {
+                //        //setActionCrouchIdle();
+                //        setAction(Action.CROUCH_LEFT);
+                //        //resetActionAndState();
+                //        zap.velocity.x = -CrouchSpeed;
+                //        Action_CROUCH_LEFTRIGHT(-1);
+                //        wantGetUp = true;
+                //    }
+                //    else
+                //    {
+                //        PushStart(obstacle);
+                //    }
+                //    return 0;
+                //}
                 return 0;
             }
             desiredSpeedX = CrouchSpeed;
@@ -1582,10 +1614,18 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
         {
-            if (zap.CheckRight(0.1f) >= 0.0f)
+            //if (zap.CheckRight(0.1f) >= 0.0f)
+            //{
+            //    return 0;
+            //}
+            float dto = -1;
+            Transform obstacle = zap.CheckRight(0.1f, ref dto);
+            if (obstacle)
             {
+                PushbackStart(obstacle);
                 return 0;
             }
+
             desiredSpeedX = CrouchSpeed;
             if (zap.dir() == Vector2.right)
             {
@@ -1613,6 +1653,18 @@ public class ZapControllerNormal : ZapController
                 else if(isInAction(Action.PULL_LEFT))
                 {
                     PullStop();
+                }
+                else if( isInAction(Action.PUSHBACK_LEFT))
+                {
+                    if (Input.GetKey(zap.keyDown))
+                    {
+                        setActionCrouchIdle();
+                    }
+                    else
+                    {
+                        if( zap.canGetUp()) setActionIdle();
+                        else setActionCrouchIdle();
+                    }
                 }
                 else
                 {
@@ -1649,6 +1701,18 @@ public class ZapControllerNormal : ZapController
                 if (isInAction(Action.PULL_RIGHT))
                 {
                     PullStop();
+                }
+                else if (isInAction(Action.PUSHBACK_RIGHT))
+                {
+                    if (Input.GetKey(zap.keyDown))
+                    {
+                        setActionCrouchIdle();
+                    }
+                    else
+                    {
+                        if (zap.canGetUp()) setActionIdle();
+                        else setActionCrouchIdle();
+                    }
                 }
                 else
                 {
