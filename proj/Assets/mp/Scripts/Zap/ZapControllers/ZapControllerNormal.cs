@@ -2568,6 +2568,7 @@ public class ZapControllerNormal : ZapController
                 if (Mathf.Abs(distToMove) < Mathf.Abs(distToObstacle))
                 {
                     zap.velocity.x = distToMove / deltaTime;
+                    //zap.velocity.x = 0.0f;
                 }
                 else
                 {
@@ -2630,7 +2631,12 @@ public class ZapControllerNormal : ZapController
                 //}
                 //return 0;
             }
+            else
+            {
+                zap.AnimatorBody.speed = 0.0f;
+            }
         }
+        
         return 0;
     }
     int ActionPull(float deltaTime)
