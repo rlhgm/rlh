@@ -945,6 +945,8 @@ public class Bat : Enemy //MonoBehaviour
 
     public void cut()
     {
+        if (IsInState(State.Dead)) return;
+
         print(name + " cutted");
 
         if (cutParticles)

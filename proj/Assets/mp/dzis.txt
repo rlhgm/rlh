@@ -5,11 +5,11 @@
 - niech się nie rusza przy pchaniu , gdy nie może przesunąć - JEST
 - prefab skrzynki - kamienie, których nie można rozwalić i złapać GG - powinno byc
 - killerphysics2 - zabija powyżej jakiejś szybkości - raczej nie zrobie
-- spadanie z lian w dół - zobacze
+- spadanie z lian w dół - zobacze - JEST
 - winda - napisy po naciśnięciu W w zależności od ilości kluczy - mocno uproszczone
 
 deski rozwalalne GG - nie wiem
 
 nie zrobie:
 - interakcja szczurów z kamieniami/skrzynkami
-- Możliwość podłączenia liany do kamienia - generalnie liana jest nie do naprawienia - to rozpadanie się jej
+- Możliwość podłączenia liany do kamienia - generalnie liana jest nie do naprawienia - to rozpadanie się jej - SAMO PODŁACZENIE ZROBILEM
