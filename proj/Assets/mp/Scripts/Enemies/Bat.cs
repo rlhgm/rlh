@@ -146,11 +146,11 @@ public class Bat : Enemy //MonoBehaviour
                         //quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
 
                         //toDiveTargetDiff = transform.position - attackTargetPos;
-                        Vector3 tdtd = toDiveTargetDiff.normalized;
+                        Vector3 tdtd2 = toDiveTargetDiff.normalized;
                         //stateChangedPos
 
-                        quaverRange.x = (toDiveTargetDiff.x+tdtd.x) * 2f; 
-                        quaverRange.y = (toDiveTargetDiff.y+tdtd.y); 
+                        quaverRange.x = (toDiveTargetDiff.x+tdtd2.x) * 2f; 
+                        quaverRange.y = (toDiveTargetDiff.y+tdtd2.y); 
                         quaverDuration = 4f;
                     }
                     else
