@@ -1552,6 +1552,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onlyKnife: 1
   levelBounds: {fileID: 191899825}
+  layerIdGroundMask: 0
+  layerIdGroundMoveableMask: 0
+  layerIdGroundAllMask: 0
 --- !u!1001 &109290012
 Prefab:
   m_ObjectHideFlags: 0
@@ -2069,7 +2072,7 @@ Transform:
   m_GameObject: {fileID: 194293792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.11074376, y: 1.11074376, z: 1.11074376}
+  m_LocalScale: {x: 1.26078796, y: 1.26078796, z: 1.26078796}
   m_Children:
   - {fileID: 451468347}
   m_Father: {fileID: 1029295368}
@@ -2088,10 +2091,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenVerticalPixels: 336
   preferUncropped: 0
-  screenPixelsY: 506
+  screenPixelsY: 533
   currentCropped: 0
-  screenRatio: 1.50595236
-  ratio: 1.32806325
+  screenRatio: 1.58630955
+  ratio: 1.26078796
   mainCamera: {fileID: 1952848710}
   touchCamera: {fileID: 1132154040}
 --- !u!1 &208528337
@@ -11051,7 +11054,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.30208349
+  orthographic size: 5.55208349
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2

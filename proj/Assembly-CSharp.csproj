@@ -62,13 +62,17 @@
      <Compile Include="Assets\mp\Scripts\Enemies\BatActivator.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\CreepingAIController.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\CreepingAITrigger.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\EnemiesSpawner.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\EnemyRemain.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\Rat.cs" />
+     <Compile Include="Assets\mp\Scripts\Enemies\RatsHole.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
      <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
+     <Compile Include="Assets\mp\Scripts\IResetable.cs" />
      <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\Panther.cs" />

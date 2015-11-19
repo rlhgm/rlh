@@ -257,7 +257,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_crouch_tumbleback
-  m_Speed: 1
+  m_Speed: 1.20000005
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -534,7 +534,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_crouch_walkback
-  m_Speed: -1
+  m_Speed: -1.60000002
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -649,7 +649,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_crouch_attack
-  m_Speed: 1
+  m_Speed: 1.29999995
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -718,7 +718,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_attack_1
-  m_Speed: 1
+  m_Speed: 1.79999995
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1178,7 +1178,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_attack_0
-  m_Speed: 1
+  m_Speed: 1.79999995
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1224,7 +1224,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_walkback
-  m_Speed: -1
+  m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1548,7 +1548,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_crouch_walk
-  m_Speed: 1
+  m_Speed: 1.60000002
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1963,7 +1963,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_walk
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -3094,7 +3094,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_knife_crouch_tumblefront
-  m_Speed: 1
+  m_Speed: 1.20000005
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
