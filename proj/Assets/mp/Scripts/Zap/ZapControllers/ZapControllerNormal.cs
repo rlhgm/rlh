@@ -23,6 +23,8 @@ public class ZapControllerNormal : ZapController
     public float PullMaxSpeed = 2f;
     public float PushbackMaxSpeed = 1f;
 
+    public float PushbackInDuration = 0.08f;
+
     public float JumpImpulse = 7.0f;
     public float JumpLongImpulse = 7.15f;
     public float FromClimbJumpImpulse = 5.0f;
@@ -57,7 +59,7 @@ public class ZapControllerNormal : ZapController
     public AudioClip mountClimbSound = null;
 
     //public AudioClip landingSnd = null;
-    
+
 
     //	public ZapControllerNormal (Zap zapPlayer) 
     //		: base(zapPlayer,"Normal")
@@ -292,15 +294,15 @@ public class ZapControllerNormal : ZapController
                 Action_ROPECLIMB_DOWN(deltaTime);
                 break;
 
-            //case Action.PUSH_LEFT:
-            //case Action.PUSH_RIGHT:
-            //    ActionPush(deltaTime);
-            //    break;
+                //case Action.PUSH_LEFT:
+                //case Action.PUSH_RIGHT:
+                //    ActionPush(deltaTime);
+                //    break;
 
-            //case Action.PULL_LEFT:
-            //case Action.PULL_RIGHT:
-            //    ActionPull(deltaTime);
-            //    break;
+                //case Action.PULL_LEFT:
+                //case Action.PULL_RIGHT:
+                //    ActionPull(deltaTime);
+                //    break;
         };
 
         if (wantGetUp)
@@ -402,7 +404,7 @@ public class ZapControllerNormal : ZapController
 
                 zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
 
-                if ( jumping(-1) ) //isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG))
+                if (jumping(-1)) //isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG))
                 {
                     if (Input.GetKey(zap.keyLeft))
                     {
@@ -428,7 +430,7 @@ public class ZapControllerNormal : ZapController
                         if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
                     }
                 }
-                else if ( jumping(1) ) // (isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG))
+                else if (jumping(1)) // (isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG))
                 {
                     if (Input.GetKey(zap.keyRight))
                     {
@@ -739,7 +741,7 @@ public class ZapControllerNormal : ZapController
     public override void FUpdate(float fDeltaTime)
     {
         //Debug.Log("FUpdate : " + fDeltaTime);
-        switch(action)
+        switch (action)
         {
             case Action.PUSH_LEFT:
             case Action.PUSH_RIGHT:
@@ -841,6 +843,8 @@ public class ZapControllerNormal : ZapController
         PULL_RIGHT,
         PUSHBACK_LEFT,
         PUSHBACK_RIGHT,
+        PUSHBACKIN_LEFT,
+        PUSHBACKIN_RIGHT,
         DIE
     };
 
@@ -857,7 +861,7 @@ public class ZapControllerNormal : ZapController
         if (action == newAction)
             return false;
 
-        
+
 
         action = newAction;
         zap.resetCurrentActionTime();
@@ -1208,6 +1212,14 @@ public class ZapControllerNormal : ZapController
             case Action.PUSHBACK_RIGHT:
                 zap.AnimatorBody.Play("Zap_pushback");
                 break;
+
+            case Action.PUSHBACKIN_LEFT:
+                zap.AnimatorBody.Play("Zap_pushback_in");
+                break;
+
+            case Action.PUSHBACKIN_RIGHT:
+                zap.AnimatorBody.Play("Zap_pushback_in");
+                break;
         };
 
         return true;
@@ -1433,7 +1445,7 @@ public class ZapControllerNormal : ZapController
                     return 0;
                 }
             }
-            
+
             if (zap.dir() == -Vector2.right)
             {
                 if (Input.GetKey(zap.keyRun))
@@ -1650,11 +1662,11 @@ public class ZapControllerNormal : ZapController
                 {
                     setActionIdle();
                 }
-                else if(isInAction(Action.PULL_LEFT))
+                else if (isInAction(Action.PULL_LEFT))
                 {
                     PullStop();
                 }
-                else if( isInAction(Action.PUSHBACK_LEFT))
+                else if (isInAction(Action.PUSHBACK_LEFT))
                 {
                     if (Input.GetKey(zap.keyDown))
                     {
@@ -1662,7 +1674,7 @@ public class ZapControllerNormal : ZapController
                     }
                     else
                     {
-                        if( zap.canGetUp()) setActionIdle();
+                        if (zap.canGetUp()) setActionIdle();
                         else setActionCrouchIdle();
                     }
                 }
@@ -1731,7 +1743,7 @@ public class ZapControllerNormal : ZapController
                 else if (Input.GetKey(zap.keyDown))
                     keyDownDown();
             }
-           
+
         }
 
         return 0;
@@ -1921,7 +1933,7 @@ public class ZapControllerNormal : ZapController
 
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
-        
+
         return 0;
     }
 
@@ -1979,7 +1991,7 @@ public class ZapControllerNormal : ZapController
         float distToObstacle = 0.0f;
         //if (zap.CheckObstacle(dir, distToMove, ref distToObstacle))
         Transform obstacle = zap.CheckObstacle(dir, distToMove, ref distToObstacle);
-        if( obstacle )
+        if (obstacle)
         {
             //distToMove = distToObstacle;
             ////setActionIdle();
@@ -2002,7 +2014,7 @@ public class ZapControllerNormal : ZapController
 
         newPosX += distToMove;
         transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
-        
+
         return 0;
     }
 
@@ -2129,7 +2141,7 @@ public class ZapControllerNormal : ZapController
     {
         if (Input.GetKey(zap.keyDown))
         {
-            if( tryStartClimbPullDown() )
+            if (tryStartClimbPullDown())
                 return 0;
         }
 
@@ -2189,7 +2201,7 @@ public class ZapControllerNormal : ZapController
                 //Debug.Log(action);
                 PushbackStart(obstacle);
             }
-            else if( dir == -1 && isInAction(Action.CROUCH_LEFT_BACK))
+            else if (dir == -1 && isInAction(Action.CROUCH_LEFT_BACK))
             {
                 //Debug.Log(action);
                 PushbackStart(obstacle);
@@ -2232,7 +2244,7 @@ public class ZapControllerNormal : ZapController
 
     bool tryMountAttackStart()
     {
-        if ( isNotInAction(Action.MOUNT_BIRDHIT) && zap.HaveKnife && Input.GetMouseButtonDown(0))
+        if (isNotInAction(Action.MOUNT_BIRDHIT) && zap.HaveKnife && Input.GetMouseButtonDown(0))
         {
             Vector2 mouseInScene = touchCamera.ScreenToWorldPoint(Input.mousePosition);
             if (mouseInScene.x < transform.position.x)
@@ -2267,7 +2279,7 @@ public class ZapControllerNormal : ZapController
 
     int Action_MOUNT_BIRDHIT()
     {
-        if( zap.currentActionTime > BIRD_HIT_DURATION )
+        if (zap.currentActionTime > BIRD_HIT_DURATION)
         {
             if (zap.canBeFuddleFromBird || lastActionParam == 1) // 1 oznacza ze bat to byl...
                 zap.FuddleFromBird = true;
@@ -2275,7 +2287,7 @@ public class ZapControllerNormal : ZapController
             zap.velocity.x = 0.0f;
             zap.velocity.y = 0.0f;
             setAction(Action.JUMP);
-            zap.setState(Zap.State.IN_AIR);           
+            zap.setState(Zap.State.IN_AIR);
         }
         return 0;
     }
@@ -2542,9 +2554,9 @@ public class ZapControllerNormal : ZapController
         //    }
         //}
         //Debug.Log(climbAfterPos2);
-        zap.touchStone(catchedClimbHandle.transform,climbAfterPos2);
+        zap.touchStone(catchedClimbHandle.transform, climbAfterPos2);
 
-        if ((Input.GetKeyDown(zap.keyUp) || Input.GetKey(zap.keyUp)) ) // && canPullUp)
+        if ((Input.GetKeyDown(zap.keyUp) || Input.GetKey(zap.keyUp))) // && canPullUp)
         {
             if (canClimbPullUp2())
             {
@@ -2696,9 +2708,9 @@ public class ZapControllerNormal : ZapController
             Rigidbody2D obstacleBody = pushPullObstacle.GetComponent<Rigidbody2D>();
             if (obstacleBody)
             {
-                if( zap.faceRight() )
+                if (zap.faceRight())
                 {
-                    if( Input.GetKeyDown(zap.keyLeft) || Input.GetKey(zap.keyLeft))
+                    if (Input.GetKeyDown(zap.keyLeft) || Input.GetKey(zap.keyLeft))
                     {
                         obstacleBody.velocity = new Vector2(0f, obstacleBody.velocity.y);
                         lastPulledObstaclePos = obstacleBody.position;
@@ -2719,7 +2731,7 @@ public class ZapControllerNormal : ZapController
 
                 zap.velocity.x = PushMaxSpeed * zap.dir2();
                 distToMove = zap.velocity.x * deltaTime;
-                
+
                 float distToObstacle = 0.0f;
                 Transform obstacle = zap.CheckObstacle(zap.dir2(), distToMove + 0.1f * zap.dir2(), ref distToObstacle);
                 if (obstacle != pushPullObstacle)
@@ -2777,7 +2789,7 @@ public class ZapControllerNormal : ZapController
 
                 newPosX += distToMove;
                 transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
-                
+
                 //if (distToObstacle < 0.15f)
                 //{
                 //    Vector2 force = new Vector2(0f, 0f);
@@ -2801,7 +2813,7 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.speed = 0.0f;
             }
         }
-        
+
         return 0;
     }
 
@@ -2813,7 +2825,7 @@ public class ZapControllerNormal : ZapController
             if (obstacleBody)
             {
                 //newPosX += distToMove;
-                float _diffx  = obstacleBody.position.x - lastPulledObstaclePos.x;
+                float _diffx = obstacleBody.position.x - lastPulledObstaclePos.x;
                 float obstacleOnRoad = -1;
                 if (zap.faceRight())
                 {
@@ -2832,7 +2844,7 @@ public class ZapControllerNormal : ZapController
                 else
                 {
                     transform.position = new Vector3(transform.position.x + _diffx, transform.position.y, 0.0f);
-                    
+
                     if (Mathf.Abs(obstacleBody.velocity.x) < PullMaxSpeed)
                     {
                         Vector2 force = new Vector2(0f, 0f);
@@ -2857,6 +2869,15 @@ public class ZapControllerNormal : ZapController
                     lastPulledObstaclePos = obstacleBody.position;
                 }
             }
+        }
+        return 0;
+    }
+
+    int ActionPushbackIn(float deltaTime)
+    {
+        if (zap.currentActionTime >= PushbackInDuration)
+        {
+            PushbackStart(pushPullObstacle);
         }
         return 0;
     }
@@ -2979,6 +3000,16 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
+    void PushbackInStart(Transform obstacle)
+    {
+        zap.velocity.x = 0.0f;
+        pushPullObstacle = obstacle;
+        if (zap.faceRight())
+            setAction(Action.PUSHBACKIN_LEFT);
+        else
+            setAction(Action.PUSHBACKIN_RIGHT);
+
+    }
     void PushbackStart(Transform obstacle)
     {
         //Debug.Log("PushStart : " + obstacle);
