@@ -23,7 +23,7 @@ public class ZapControllerNormal : ZapController
     public float PullMaxSpeed = 2f;
     public float PushbackMaxSpeed = 1f;
 
-    public float PushbackInDuration = 0.08f;
+    //public float PushbackInDuration = 0.09f;
 
     public float JumpImpulse = 7.0f;
     public float JumpLongImpulse = 7.15f;
@@ -292,6 +292,13 @@ public class ZapControllerNormal : ZapController
 
             case Action.ROPECLIMB_DOWN:
                 Action_ROPECLIMB_DOWN(deltaTime);
+                break;
+
+            case Action.PUSHBACKIN_LEFT:
+                ActionPushbackIn(deltaTime);
+                break;
+            case Action.PUSHBACKIN_RIGHT:
+                ActionPushbackIn(deltaTime);
                 break;
 
                 //case Action.PUSH_LEFT:
@@ -1486,64 +1493,37 @@ public class ZapControllerNormal : ZapController
             }
         }
         else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
-        {
-            //float dto = -1;
-            //Transform obstacle = zap.CheckLeft(0.1f, ref dto);
-            //if (obstacle)
-            //{
-            //    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
-            //    if (!obstacle2)
-            //    {
-            //        //setActionCrouchIdle();
-            //        setAction(Action.CROUCH_LEFT);
-            //        //resetActionAndState();
-            //        zap.velocity.x = -CrouchSpeed;
-            //        Action_CROUCH_LEFTRIGHT(-1);
-            //        wantGetUp = true;
-            //    }
-            //    else
-            //    {
-            //        PushStart(obstacle);
-            //    }
-            //    return 0;
-            //}
-
-            float dto = -1;
-            Transform obstacle = zap.CheckLeft(0.1f, ref dto);
-            if (obstacle)
-            {
-                PushbackStart(obstacle);
-                ////return 0;
-                ////float dto = -1;
-                ////Transform obstacle = zap.CheckLeft(0.1f, ref dto);
-                ////if (obstacle)
-                //{
-                //    Transform obstacle2 = zap.CheckLeft(0.1f, ref dto, false, true);
-                //    if (!obstacle2)
-                //    {
-                //        //setActionCrouchIdle();
-                //        setAction(Action.CROUCH_LEFT);
-                //        //resetActionAndState();
-                //        zap.velocity.x = -CrouchSpeed;
-                //        Action_CROUCH_LEFTRIGHT(-1);
-                //        wantGetUp = true;
-                //    }
-                //    else
-                //    {
-                //        PushStart(obstacle);
-                //    }
-                //    return 0;
-                //}
-                return 0;
-            }
-            desiredSpeedX = CrouchSpeed;
+        {               
             if (zap.dir() == -Vector2.right)
             {
-                setAction(Action.CROUCH_LEFT);
+                //float dto = -1;
+                //Transform obstacle = zap.CheckLeft(0.1f, ref dto);
+                //if (obstacle)
+                //{
+                //    //PushbackStart(obstacle);
+                //    PushbackInStart(obstacle);
+                //    return 0;
+                //}
+                //else
+                //{
+                    desiredSpeedX = CrouchSpeed;
+                    setAction(Action.CROUCH_LEFT);
+                //}
             }
             else
             {
-                setAction(Action.CROUCH_LEFT_BACK);
+                float dto = -1;
+                Transform obstacle = zap.CheckLeft(0.1f, ref dto);
+                if (obstacle)
+                {
+                    PushbackInStart(obstacle);
+                    return 0;
+                }
+                else
+                {
+                    desiredSpeedX = CrouchSpeed;
+                    setAction(Action.CROUCH_LEFT_BACK);
+                }
             }
             return 1;
         }
@@ -1630,22 +1610,34 @@ public class ZapControllerNormal : ZapController
             //{
             //    return 0;
             //}
-            float dto = -1;
-            Transform obstacle = zap.CheckRight(0.1f, ref dto);
-            if (obstacle)
-            {
-                PushbackStart(obstacle);
-                return 0;
-            }
+            //float dto = -1;
+            //Transform obstacle = zap.CheckRight(0.1f, ref dto);
+            //if (obstacle)
+            //{
+            //    PushbackInStart(obstacle);
+            //    return 0;
+            //}
 
-            desiredSpeedX = CrouchSpeed;
+            
             if (zap.dir() == Vector2.right)
             {
+                desiredSpeedX = CrouchSpeed;
                 setAction(Action.CROUCH_RIGHT);
             }
             else
             {
-                setAction(Action.CROUCH_RIGHT_BACK);
+                float dto = -1;
+                Transform obstacle = zap.CheckRight(0.1f, ref dto);
+                if (obstacle)
+                {
+                    PushbackInStart(obstacle);
+                    return 0;
+                }
+                else
+                {
+                    desiredSpeedX = CrouchSpeed;
+                    setAction(Action.CROUCH_RIGHT_BACK);
+                }
             }
             return 1;
         }
@@ -2199,12 +2191,12 @@ public class ZapControllerNormal : ZapController
             if (dir == 1 && isInAction(Action.CROUCH_RIGHT_BACK))
             {
                 //Debug.Log(action);
-                PushbackStart(obstacle);
+                PushbackInStart(obstacle);
             }
             else if (dir == -1 && isInAction(Action.CROUCH_LEFT_BACK))
             {
                 //Debug.Log(action);
-                PushbackStart(obstacle);
+                PushbackInStart(obstacle);
             }
             else
             {
@@ -2875,8 +2867,9 @@ public class ZapControllerNormal : ZapController
 
     int ActionPushbackIn(float deltaTime)
     {
-        if (zap.currentActionTime >= PushbackInDuration)
+        if (zap.currentActionTime >= 0.09f/*PushbackInDuration*/)
         {
+            Debug.Log("ActionPushbackIn : " + zap.currentActionTime );
             PushbackStart(pushPullObstacle);
         }
         return 0;
@@ -2884,7 +2877,7 @@ public class ZapControllerNormal : ZapController
 
     int ActionPushback(float deltaTime)
     {
-        //Debug.Log("ActionPush : " + pushPullObstacle);
+        
 
         if (pushPullObstacle)
         {
@@ -3002,6 +2995,7 @@ public class ZapControllerNormal : ZapController
 
     void PushbackInStart(Transform obstacle)
     {
+        Debug.Log("PushbackInStart : " + obstacle);
         zap.velocity.x = 0.0f;
         pushPullObstacle = obstacle;
         if (zap.faceRight())
