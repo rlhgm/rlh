@@ -165,6 +165,11 @@ public class Zap : MonoBehaviour
         mountAttackLeftCollider.SetActive(false);
         mountAttackRightCollider.SetActive(false);
 
+        batAttackLeftCollider = transform.Find("batAttackLeftCollider").gameObject;
+        batAttackRightCollider = transform.Find("batAttackRightCollider").gameObject;
+        batAttackLeftCollider.SetActive(false);
+        batAttackRightCollider.SetActive(false);
+
         targeter = transform.Find("targeter");
         gravityGunBeam = transform.Find("GravityGunBeam");
         gravityGunBeam.GetComponent<LineRenderer>().sortingLayerName = "Player";
@@ -2421,6 +2426,23 @@ public class Zap : MonoBehaviour
         get
         {
             return mountAttackRightCollider;
+        }
+    }
+
+    GameObject batAttackLeftCollider;
+    GameObject batAttackRightCollider;
+    public GameObject BatAttackLeftCollider
+    {
+        get
+        {
+            return batAttackLeftCollider;
+        }
+    }
+    public GameObject BatAttackRightCollider
+    {
+        get
+        {
+            return batAttackRightCollider;
         }
     }
 

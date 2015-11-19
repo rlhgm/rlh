@@ -75,7 +75,7 @@ public class ZapControllerKnife : ZapController
 
         justStartAttack = checkStartAttack();
         checkStartCrouchAttack();
-
+        
         switch (action)
         {
             case Action.IDLE:
@@ -247,6 +247,9 @@ public class ZapControllerKnife : ZapController
     }
     public override void deactivate()
     {
+        zap.BatAttackLeftCollider.SetActive(false);
+        zap.BatAttackRightCollider.SetActive(false);
+
         base.deactivate();
     }
 
@@ -327,6 +330,9 @@ public class ZapControllerKnife : ZapController
         zap.AnimatorBody.speed = 1f;
         continueAttack = false;
 
+        zap.BatAttackLeftCollider.SetActive(false);
+        zap.BatAttackRightCollider.SetActive(false);
+        
         switch (newAction)
         {
 
@@ -352,11 +358,19 @@ public class ZapControllerKnife : ZapController
             case Action.ATTACK1:
                 zap.AnimatorBody.Play("Zap_knife_attack_0", -1, 0f);
                 cutHigh();
+
+                if( zap.faceRight() ) zap.BatAttackRightCollider.SetActive(true);
+                else zap.BatAttackLeftCollider.SetActive(true);
+
                 break;
 
             case Action.ATTACK2:
                 zap.AnimatorBody.Play("Zap_knife_attack_1", -1, 0f);
                 cutHigh();
+
+                if (zap.faceRight()) zap.BatAttackRightCollider.SetActive(true);
+                else zap.BatAttackLeftCollider.SetActive(true);
+
                 break;
 
             case Action.DIE:
@@ -994,7 +1008,10 @@ public class ZapControllerKnife : ZapController
     {
         if (zap.currentActionTime > ATTACK_DURATION)
         {
-            if(zap.choosenController != this )
+            zap.BatAttackRightCollider.SetActive(false);
+            zap.BatAttackLeftCollider.SetActive(false);
+
+            if (zap.choosenController != this )
             {
                 // kontroler zostal zmieniony....
                 setAction(Action.HIDE_KNIFE);

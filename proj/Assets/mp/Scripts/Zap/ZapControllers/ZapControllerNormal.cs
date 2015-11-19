@@ -857,6 +857,8 @@ public class ZapControllerNormal : ZapController
 
         zap.MountAttackLeftCollider.SetActive(false);
         zap.MountAttackRightCollider.SetActive(false);
+        zap.BatAttackLeftCollider.SetActive(false);
+        zap.BatAttackRightCollider.SetActive(false);
 
         lastActionParam = param;
         maxJumpSpeed = 0f;
