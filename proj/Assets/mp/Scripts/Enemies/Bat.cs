@@ -144,8 +144,12 @@ public class Bat : Enemy //MonoBehaviour
                         //quaverRange.y = Random.Range(1.0f, 2.5f);
                         //quaverDuration = quaverRange.x - Random.Range(0f, 0.5f);
 
-                        quaverRange.x = toDiveTargetDiff.x * 2f; 
-                        quaverRange.y = toDiveTargetDiff.y; 
+                        //toDiveTargetDiff = transform.position - attackTargetPos;
+                        Vector3 tdtd = toDiveTargetDiff.normalized;
+                        //stateChangedPos
+
+                        quaverRange.x = (toDiveTargetDiff.x+tdtd.x) * 2f; 
+                        quaverRange.y = (toDiveTargetDiff.y+tdtd.y); 
                         quaverDuration = 4f;
                     }
                     else
@@ -260,10 +264,20 @@ public class Bat : Enemy //MonoBehaviour
                 break;
 
             case State.DiveIn:
-                if (currentStateTime > DiveInDuration)
+                float stateRatio = Mathf.Min(currentStateTime / DiveInDuration, 1f);
+
+                //toDiveTargetDiff = transform.position - attackTargetPos;
+                Vector3 tdtd = toDiveTargetDiff.normalized;
+                transform.position = stateChangedPos + tdtd * Mathf.Sin( stateRatio * (Mathf.PI * 0.5f) );
+
+                if (stateRatio >= 1)
                 {
                     SetState(State.Dive);
                     SetAction(Action.DiveIn);
+                }
+                else
+                {
+
                 }
                 break;
 
