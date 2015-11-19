@@ -9,6 +9,7 @@ public class GroundMoveable : MonoBehaviour
     float resetAngularVelocity;
     BoxCollider2D boxCollider = null;
     Rigidbody2D physic = null;
+    //NewRope connectedRope;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class GroundMoveable : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        //connectedRope 
     }
 
     // Update is called once per frame

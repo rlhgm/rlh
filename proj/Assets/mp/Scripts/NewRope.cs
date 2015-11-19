@@ -8,8 +8,9 @@ public class NewRope : MonoBehaviour {
 	public Transform currentLink;
 	public Rigidbody2D attachedStone;
     public Vector2 attachedStoneAnchor;
+    public GroundMoveable attachedToStone;
 
-	RopeLink[] links;
+    RopeLink[] links;
 
 	public float firstLinkSpeed;
 	public float firstLinkMaxSpeed;
@@ -132,32 +133,62 @@ public class NewRope : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		
-	}
+        if (attachedToStone)
+        {
+            links[0].transform.SetParent(attachedToStone.transform);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
-//		if (Input.GetKeyDown (KeyCode.Z)) {
-//			//joint.connectedAnchor
-//			//print(driverRigidBody.velocity);
-//			//driverRigidBody.AddForce( new Vector2(-500,0) );
-//			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(-500,0) );
-//		}
-//		
-//		if (Input.GetKeyDown (KeyCode.X)) {
-//			//print(driverRigidBody.velocity);
-//			//driverRigidBody.AddForce( new Vector2(500,0) );
-//			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(500,0) );
-//		}//aaa
-//
-//		if (Input.GetKeyDown (KeyCode.C)) {
-//			if( currentLink.parent ) chooseDriver(currentLink.parent);
-//		}
-//		
-//		if (Input.GetKeyDown (KeyCode.V)) {
-//			if( currentLink.childCount > 0 ) chooseDriver(currentLink.GetChild(0));
-//		}
-		if (links.Length == 0)
+        //		if (Input.GetKeyDown (KeyCode.Z)) {
+        //			//joint.connectedAnchor
+        //			//print(driverRigidBody.velocity);
+        //			//driverRigidBody.AddForce( new Vector2(-500,0) );
+        //			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(-500,0) );
+        //		}
+        //		
+        //		if (Input.GetKeyDown (KeyCode.X)) {
+        //			//print(driverRigidBody.velocity);
+        //			//driverRigidBody.AddForce( new Vector2(500,0) );
+        //			currentLink.GetComponent<Rigidbody2D>().AddForce( new Vector2(500,0) );
+        //		}//aaa
+        //
+        //		if (Input.GetKeyDown (KeyCode.C)) {
+        //			if( currentLink.parent ) chooseDriver(currentLink.parent);
+        //		}
+        //		
+        //		if (Input.GetKeyDown (KeyCode.V)) {
+        //			if( currentLink.childCount > 0 ) chooseDriver(currentLink.GetChild(0));
+        //		}
+
+        if (attachedToStone)
+        {
+            HingeJoint2D firstHingeJoint = links[0].GetComponent<HingeJoint2D>();
+            firstHingeJoint.connectedAnchor = attachedToStone.transform.position;
+            //newLink.transform.position = transform.position;
+
+            //hingeJoint.anchor = new Vector2(0f, 0f);
+
+            //if (lastLink)
+            //{
+            //    Rigidbody2D lastRigidBody = lastLink.GetComponent<Rigidbody2D>();
+            //    hingeJoint.connectedBody = lastRigidBody;
+            //    newLink.transform.SetParent(lastLink.transform);
+            //    hingeJoint.connectedAnchor = new Vector2(0f, -0.55f);
+            //    newLink.transform.position = lastLink.transform.position + new Vector3(0f, -0.5f);
+            //}
+            //else
+            //{
+            //    //newLink.transform.SetParent( transform );
+            //    hingeJoint.connectedAnchor = transform.position;
+            //    newLink.transform.position = transform.position;
+            //}
+
+            //links[0].hingeJoint  attachedToStone.transform;
+        }
+
+        if (links.Length == 0)
 			return;
 
 		if (links [0] == null)
