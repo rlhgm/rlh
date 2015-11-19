@@ -33,7 +33,7 @@ public class Bat : Enemy //MonoBehaviour
         StaticInit();
         myGfx = transform.Find("gfx");
         myAnimator = myGfx.GetComponent<Animator>();
-
+        myGfx.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public override void Reset()
@@ -41,6 +41,7 @@ public class Bat : Enemy //MonoBehaviour
         //gameObject.(true);
         GetComponent<BoxCollider2D>().enabled = true;
         myGfx.gameObject.SetActive(true);
+        myGfx.GetComponent<SpriteRenderer>().enabled = true;
 
         if (!Activator)
         {
@@ -477,11 +478,13 @@ public class Bat : Enemy //MonoBehaviour
     public void StartSuckZap()
     {
         SetState(State.SuckZap);
+        myGfx.GetComponent<SpriteRenderer>().enabled = false;
     }
     public void StopSuckZap()
     {
         SetState(State.Fly);
         QuaverBegin(true);
+        myGfx.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     bool TryStartDive()

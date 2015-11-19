@@ -134,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
-    <None Include="Assets\mp\TextFile1.txt" />
+    <None Include="Assets\mp\dzis.txt" />
     <None Include="Assets\mp\mas\DraggedStone.shader" />
     <None Include="Assets\mp\mas\DraggedStone2.shader" />
     <None Include="Assets\mp\mas\NewSurfaceShader.shader" />

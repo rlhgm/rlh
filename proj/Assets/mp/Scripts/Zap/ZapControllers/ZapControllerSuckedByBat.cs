@@ -879,8 +879,10 @@ public class ZapControllerSuckedByBat : ZapController
         switch (newAction)
         {
             case Action.IDLE:
-                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_idle_R");
-                else zap.AnimatorBody.Play("Zap_idle_L");
+                //if (zap.faceRight()) zap.AnimatorBody.Play("Zap_idle_R");
+                //else zap.AnimatorBody.Play("Zap_idle_L");
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_bat_attack");
+                else zap.AnimatorBody.Play("Zap_bat_attack");
                 break;
 
             case Action.DIE:
