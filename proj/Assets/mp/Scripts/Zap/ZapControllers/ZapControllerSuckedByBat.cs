@@ -115,6 +115,8 @@ public class ZapControllerSuckedByBat : ZapController
         newPosX = oldPos.x;
         distToMove = 0.0f;
 
+        fromLastDirKeyPressed += deltaTime;
+
         switch (action)
         {
             case Action.IDLE:
@@ -800,6 +802,8 @@ public class ZapControllerSuckedByBat : ZapController
     {
         UNDEF = 0,
         IDLE,
+        FIGHT_WITH_BAT,
+
         WALK_LEFT,
         WALK_RIGHT,
         RUN_LEFT,
@@ -883,6 +887,17 @@ public class ZapControllerSuckedByBat : ZapController
                 //else zap.AnimatorBody.Play("Zap_idle_L");
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_bat_attack");
                 else zap.AnimatorBody.Play("Zap_bat_attack");
+
+                fromLastDirKeyPressed = toBackToIdleAnimDuration;
+                break;
+
+            case Action.FIGHT_WITH_BAT:
+                //if (zap.faceRight()) zap.AnimatorBody.Play("Zap_idle_R");
+                //else zap.AnimatorBody.Play("Zap_idle_L");
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_bat_fight");
+                else zap.AnimatorBody.Play("Zap_bat_fight");
+
+                fromLastDirKeyPressed = 0f;
                 break;
 
             case Action.DIE:
@@ -1215,6 +1230,7 @@ public class ZapControllerSuckedByBat : ZapController
     int lastPressedKey = 0;
     int dirKeySequenceCounter = 0;
     float fromLastDirKeyPressed = 0f;
+    float toBackToIdleAnimDuration = 0.2f;
 
     void dirKeyPressed(int dirKey)
     {
@@ -1237,7 +1253,12 @@ public class ZapControllerSuckedByBat : ZapController
 
         lastPressedKey = dirKey;
 
-        fromLastDirKeyPressed = 0f;
+        if (isInAction(Action.IDLE))
+        {
+            setAction(Action.FIGHT_WITH_BAT);
+        }
+        //fromLastDirKeyPressed = 0f;
+        //Debug.Log(dirKeySequenceCounter);
 
         if (dirKeySequenceCounter >= 4)
         {
@@ -1834,7 +1855,17 @@ public class ZapControllerSuckedByBat : ZapController
         //    return zap.pullChoosenWeapon();
         //    //return 1;
         //}
+        
+        
+        return 0;
+    }
 
+    int Action_FIGHT_WITH_BAT()
+    {
+        if (fromLastDirKeyPressed > toBackToIdleAnimDuration)
+        {
+            setAction(Action.IDLE);
+        }
         return 0;
     }
 
