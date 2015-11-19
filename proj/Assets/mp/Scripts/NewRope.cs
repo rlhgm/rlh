@@ -9,6 +9,8 @@ public class NewRope : MonoBehaviour {
 	public Rigidbody2D attachedStone;
     public Vector2 attachedStoneAnchor;
     public GroundMoveable attachedToStone;
+    public Vector3 attachedToStoneOffset;
+    HingeJoint2D firstHingeJoint;
 
     RopeLink[] links;
 
@@ -65,8 +67,9 @@ public class NewRope : MonoBehaviour {
             }
 
             HingeJoint2D hingeJoint = newLink.GetComponent<HingeJoint2D>();
-			
-			hingeJoint.anchor = new Vector2(0f,0f);
+            if (i == 0) firstHingeJoint = hingeJoint;
+
+            hingeJoint.anchor = new Vector2(0f,0f);
 			
 			if( lastLink ){
 				Rigidbody2D lastRigidBody = lastLink.GetComponent<Rigidbody2D>();
@@ -136,6 +139,9 @@ public class NewRope : MonoBehaviour {
         if (attachedToStone)
         {
             links[0].transform.SetParent(attachedToStone.transform);
+
+            attachedToStoneOffset = attachedToStone.transform.InverseTransformPoint(transform.position);
+            //print("attachedToStoneOffset : " + attachedToStoneOffset);
         }
     }
 	
@@ -164,8 +170,8 @@ public class NewRope : MonoBehaviour {
 
         if (attachedToStone)
         {
-            HingeJoint2D firstHingeJoint = links[0].GetComponent<HingeJoint2D>();
-            firstHingeJoint.connectedAnchor = attachedToStone.transform.position;
+            firstHingeJoint.connectedAnchor = attachedToStone.transform.TransformPoint(attachedToStoneOffset);
+
             //newLink.transform.position = transform.position;
 
             //hingeJoint.anchor = new Vector2(0f, 0f);
