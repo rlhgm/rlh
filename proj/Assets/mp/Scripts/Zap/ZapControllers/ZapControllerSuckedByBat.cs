@@ -1214,6 +1214,8 @@ public class ZapControllerSuckedByBat : ZapController
 
     int lastPressedKey = 0;
     int dirKeySequenceCounter = 0;
+    float fromLastDirKeyPressed = 0f;
+
     void dirKeyPressed(int dirKey)
     {
         //switch( lastPressedKey )
@@ -1229,9 +1231,13 @@ public class ZapControllerSuckedByBat : ZapController
         //        break;
         //}
 
+        if (lastPressedKey == dirKey) return;
+
         dirKeySequenceCounter++;
 
         lastPressedKey = dirKey;
+
+        fromLastDirKeyPressed = 0f;
 
         if (dirKeySequenceCounter >= 4)
         {
