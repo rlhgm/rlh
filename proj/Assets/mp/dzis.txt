@@ -1,7 +1,6 @@
-﻿a o której?
-do jutra zrobie () :
+﻿do jutra zrobie () :
 - cos z nietoperzami - te ataki - JEST
-- podepnę animacje zapa z nietoperzami - 
+- animacje + stany zapa z walce nietoperzami - 
 - nie wiem czy nie przerobić tego ciecia... głównie aby dalo się latwiej zabijac nietoperze 
 - niech się nie rusza przy pchaniu , gdy nie może przesunąć - JEST
 - prefab skrzynki - kamienie, których nie można rozwalić i złapać GG - powinno byc
