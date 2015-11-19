@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -130,8 +128,8 @@
     <Compile Include="Assets\Editor\ScriptableObjectsUtility.cs" />
     <Compile Include="Assets\Editor\ZapControllerGravityGunCreateAsset.cs" />
     <Compile Include="Assets\Editor\ZapControllerKnifeCreateAsset.cs" />
-    <Compile Include="Assets\Editor\ZapControllerSuckByBatCreateAsset.cs" />
     <Compile Include="Assets\Editor\ZapControllerNormalCreateAsset.cs" />
+    <Compile Include="Assets\Editor\ZapControllerSuckByBatCreateAsset.cs" />
     <Compile Include="Assets\Resources\Editor\CM Tools\TileMaster\TileMaster.cs" />
   </ItemGroup>
   <ItemGroup>

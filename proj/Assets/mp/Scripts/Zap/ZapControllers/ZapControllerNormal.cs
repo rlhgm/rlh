@@ -2599,8 +2599,16 @@ public class ZapControllerNormal : ZapController
 
                 //zap.velocity.x = Mathf.Min(Mathf.Abs(zap.velocity.x)) * zap.dir2();
 
-                zap.AnimatorBody.speed = 0.5f + (Mathf.Abs(zap.velocity.x) / PushMaxSpeed) * 0.5f;
-                
+                if (Mathf.Abs(zap.velocity.x) < 0.01f)
+                {
+                    zap.AnimatorBody.speed = 0.0f;
+                }
+                else
+                {
+                    zap.AnimatorBody.speed = 0.25f + (Mathf.Abs(zap.velocity.x) / PushMaxSpeed) * 0.75f;
+                    //zap.AnimatorBody.speed = Mathf.Min(Mathf.Abs(zap.velocity.x) / PushMaxSpeed, 1f);
+                }
+
                 newPosX += distToMove;
                 transform.position = new Vector3(newPosX, oldPos.y, 0.0f);
                 
