@@ -23,7 +23,7 @@ public class Bat : Enemy //MonoBehaviour
     //bool flyingToTarget = false;
 
     float TurnbackDuration = 0.25f;
-    float DiveInDuration = 0.3f;
+    float DiveInDuration = 0.4125f;
 
     bool searchBed = false;
     bool bedFound = false;
@@ -127,7 +127,7 @@ public class Bat : Enemy //MonoBehaviour
                         //quav
                         //print("moge pikowac....");
 
-                        SetState(State.Dive);
+                        SetState(State.DiveIn);
                         SetAction(Action.DiveIn);
 
                         //SetState(State.WakeUp);
@@ -259,20 +259,20 @@ public class Bat : Enemy //MonoBehaviour
                 }
                 break;
 
-            //case State.DiveIn:
-            //    if (currentStateTime > DiveInDuration)
-            //    {
-            //        SetState(State.Dive);
-            //        SetAction(Action.Dive);
-            //    }
-            //    break;
-
-            case State.Dive:
+            case State.DiveIn:
                 if (currentStateTime > DiveInDuration)
                 {
-                    //SetAction(Action.Dive);
-                    playAnim(diveAnimStateHash);
+                    SetState(State.Dive);
+                    SetAction(Action.DiveIn);
                 }
+                break;
+
+            case State.Dive:
+                //if (currentStateTime > DiveInDuration)
+                //{
+                //    //SetAction(Action.Dive);
+                //    playAnim(diveAnimStateHash);
+                //}
                 
                 QuaverStep();
                 CalculateVelocity();
@@ -674,7 +674,7 @@ public class Bat : Enemy //MonoBehaviour
         Fly,
         Sleep,
         WakeUp,
-        //DiveIn,
+        DiveIn,
         Dive,
         DiveOut,
         //Bunk
