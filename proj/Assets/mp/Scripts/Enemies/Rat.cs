@@ -439,7 +439,7 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         if (state == newState)
             return false;
 
-        print(newState +  " " + currentStateTime);
+        //print(newState +  " " + currentStateTime);
 
         stateChangedPos = transform.position;
         currentStateTime = 0f;

@@ -28,7 +28,7 @@ MonoBehaviour:
   RotateMaxStoneMass: 30
   RotateMassInteriaCoef: 150
   BeamSpeed: 50
-  MissedBeamDuration: 1
+  MissedBeamDuration: 10
   CenterOnBeamSpeed: 10
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}

@@ -17,99 +17,16 @@ Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into 
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.043 seconds
+- Completed reload, in  0.042 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.Start () [0x00000] in <filename unknown>:0 
+RLHScene::Start
  
-(Filename:  Line: -1)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 468 -> priority: 1 
-  Thread -> id: 31e0 -> priority: 1 
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Pickable.soh () [0x00000] in <filename unknown>:0 
-  at Pickable.reset () [0x00000] in <filename unknown>:0 
-  at Zap.reborn () [0x00000] in <filename unknown>:0 
-  at Zap.GlobalUpdate (Single deltaTime) [0x00000] in <filename unknown>:0 
-  at Zap.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
+  Thread -> id: 27d4 -> priority: 1 
+  Thread -> id: 1748 -> priority: 1 

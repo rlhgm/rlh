@@ -28,7 +28,7 @@ public class ZapControllerGravityGun : ZapController
     public float RotateMassInteriaCoef = 300f;
 
     public float BeamSpeed = 50f;
-    public float MissedBeamDuration = 1f;
+    public float MissedBeamDuration = 10f;
 
     public float CenterOnBeamSpeed = 10f;
 
@@ -147,6 +147,7 @@ public class ZapControllerGravityGun : ZapController
     // grafika
     Vector2 beamOriginOK_2 = new Vector2();
     Vector2 beamTargetOK_2 = new Vector2();
+    Vector2 beamDiffOK_2 = new Vector2();
     // fizyka
     //Vector2 rayOriginOK_2 = new Vector2();
     //Vector2 rayTargetOK_2 = new Vector2();
@@ -658,8 +659,8 @@ public class ZapControllerGravityGun : ZapController
                 {
                     cursorTooClose = true;
                 }
-                
-                beamLength = (beamTargetOK_2 - beamOriginOK_2).magnitude;
+                beamDiffOK_2 = beamTargetOK_2 - beamOriginOK_2;
+                beamLength = beamDiffOK_2.magnitude;
             }
             else
             {
@@ -726,12 +727,38 @@ public class ZapControllerGravityGun : ZapController
                 }
             }
 
-            
+            //beam.lay
+            //Vector2.beamDiffOK_2
+            beamDiffOK_2 = beamTargetOK_2 - beamOriginOK_2;
+            float beamGranularity = 0.2f;
+            int numBeamVertices = (int)(beamLength / beamGranularity);
+            //Debug.Log(numBeamVertices);
+            beam.SetVertexCount(numBeamVertices);
+            Vector2 bdNor = beamDiffOK_2.normalized;
+            //Debug.Log(" " + beamDiffOK_2  + " " +  bdNor);
+            //Vector3.RotateTowards()
+            Vector2 bdNorPrepend = bdNor.Rotate(90);
             beam.SetPosition(0, beamOriginOK_2);
-            beam.SetPosition(1, beamTargetOK_2);
-            beamTargetColor.a = 1f - (beamLength / maxDistance);
+            for (int ib = 1; ib < numBeamVertices-1; ++ib)
+            {
+                Vector2 ibPos = beamOriginOK_2 + bdNor * ib * beamGranularity;
+                //ibPos.y += Mathf.Sin(ib*1f + Time.time)*0.5f;
+                //ibPos += (bdNorPrepend * Mathf.Sin((float)ib/(float)numBeamVertices*Mathf.PI) * Mathf.Sin(ib * Mathf.Sin(Time.time)*0.5f /*+ Time.time*/) * Mathf.Sin(Time.time)* 0.5f);
+                Vector2 _dr = Mathf.Sin(Time.time*4f) * (bdNorPrepend * Mathf.Sin((float)ib / (float)numBeamVertices * Mathf.PI));
+                //ibPos += _dr * Mathf.Sin(ib * Mathf.Sin(Time.time) * 0.5f /*+ Time.time*/) * Mathf.Sin(Time.time) * 0.5f);
+                ibPos += _dr * Mathf.Sin(ib * Mathf.Cos(Time.time * 1f) * 0.25f);
+                //ibPos += _dr * Mathf.Sin(Mathf.PerlinNoise(bdNor.x, bdNor.y) * Mathf.Cos(Time.time * 1f) * 0.5f);
+                beam.SetPosition(ib, ibPos);
+            }
+            beam.SetPosition(numBeamVertices-1, beamTargetOK_2);
+
+            //beamTargetColor.a = 1f - (beamLength / maxDistance);
+            //beam.SetColors(beamOriginColor, beamTargetColor);
+            //beam.SetWidth(0.1f, 0.5f * (beamLength / maxDistance));
+            beamOriginColor = new Color(1f, 1f, 1f, 1f);
+            beamTargetColor = new Color(1f, 1f, 1f, 1f);
             beam.SetColors(beamOriginColor, beamTargetColor);
-            beam.SetWidth(0.1f, 0.5f * (beamLength / maxDistance));
+            beam.SetWidth(0.3f, 0.3f);
         }
         else
         {
@@ -769,8 +796,10 @@ public class ZapControllerGravityGun : ZapController
         }
     }
 
-    Color beamOriginColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
-    Color beamTargetColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
+    //Color beamOriginColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
+    //Color beamTargetColor = new Color(0f, 23f / 255f, 1f, 200f / 255f);
+    Color beamOriginColor = new Color(1f, 1f, 1f, 1f);
+    Color beamTargetColor = new Color(1f, 1f, 1f, 1f);
 
     bool setAction(Action newAction, int param = 0)
     {

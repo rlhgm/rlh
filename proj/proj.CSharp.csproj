@@ -70,8 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GGRayTest1.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-    <Compile Include="Assets\mp\Scripts\SwingAlpha.cs" />
     <Compile Include="Assets\mp\Scripts\Bird.cs" />
     <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
     <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
@@ -80,6 +80,7 @@
     <Compile Include="Assets\mp\Scripts\CameraResizer.cs" />
     <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
     <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
+    <Compile Include="Assets\mp\Scripts\Vector2Extension.cs" />
     <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
     <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
     <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\mp\Scripts\Snake.cs" />
     <Compile Include="Assets\mp\Scripts\SnakeCollider.cs" />
     <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\mp\Scripts\SwingAlpha.cs" />
     <Compile Include="Assets\mp\Scripts\Twitchable.cs" />
     <Compile Include="Assets\mp\Scripts\Water.cs" />
     <Compile Include="Assets\mp\Scripts\WeaponMenu.cs" />
