@@ -26,6 +26,7 @@ MonoBehaviour:
   FlySlowDownParam: 5
   PushMaxSpeed: 3
   PullMaxSpeed: 3
+  PushbackMaxSpeed: 1
   JumpImpulse: 7
   JumpLongImpulse: 7.1500001
   FromClimbJumpImpulse: 3.5
@@ -38,7 +39,7 @@ MonoBehaviour:
   RopeSwingForce: 4400
   RopeClimbSpeedUp: 1.5
   RopeClimbSpeedDown: 4
-  CLIMB_DURATION: 1.5
+  CLIMB_DURATION: 1
   CLIMBDUR_PREPARE_TO_JUMP: .5
   CLIMBDUR_JUMP_TO_CATCH: .200000003
   CLIMBDUR_CATCH: .5

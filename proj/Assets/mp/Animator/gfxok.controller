@@ -2770,7 +2770,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zap_drop_L
-  m_Speed: 1
+  m_Speed: 1.29999995
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
