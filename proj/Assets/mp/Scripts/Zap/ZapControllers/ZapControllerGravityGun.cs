@@ -731,34 +731,78 @@ public class ZapControllerGravityGun : ZapController
             //Vector2.beamDiffOK_2
             beamDiffOK_2 = beamTargetOK_2 - beamOriginOK_2;
             float beamGranularity = 0.2f;
+            int numBundles = 4;
             int numBeamVertices = (int)(beamLength / beamGranularity);
             //Debug.Log(numBeamVertices);
-            beam.SetVertexCount(numBeamVertices);
+            beam.SetVertexCount(numBeamVertices * numBundles);
             Vector2 bdNor = beamDiffOK_2.normalized;
             //Debug.Log(" " + beamDiffOK_2  + " " +  bdNor);
             //Vector3.RotateTowards()
+
             Vector2 bdNorPrepend = bdNor.Rotate(90);
-            beam.SetPosition(0, beamOriginOK_2);
-            for (int ib = 1; ib < numBeamVertices-1; ++ib)
+            bool bundlesFocused = draggedStone != null;
+            float bundlesFocusedFocus = 0.3f;
+
+            for (int bb = 0; bb < numBundles; ++bb)
             {
-                Vector2 ibPos = beamOriginOK_2 + bdNor * ib * beamGranularity;
-                //ibPos.y += Mathf.Sin(ib*1f + Time.time)*0.5f;
-                //ibPos += (bdNorPrepend * Mathf.Sin((float)ib/(float)numBeamVertices*Mathf.PI) * Mathf.Sin(ib * Mathf.Sin(Time.time)*0.5f /*+ Time.time*/) * Mathf.Sin(Time.time)* 0.5f);
-                Vector2 _dr = Mathf.Sin(Time.time*4f) * (bdNorPrepend * Mathf.Sin((float)ib / (float)numBeamVertices * Mathf.PI));
-                //ibPos += _dr * Mathf.Sin(ib * Mathf.Sin(Time.time) * 0.5f /*+ Time.time*/) * Mathf.Sin(Time.time) * 0.5f);
-                ibPos += _dr * Mathf.Sin(ib * Mathf.Cos(Time.time * 1f) * 0.25f);
-                //ibPos += _dr * Mathf.Sin(Mathf.PerlinNoise(bdNor.x, bdNor.y) * Mathf.Cos(Time.time * 1f) * 0.5f);
-                beam.SetPosition(ib, ibPos);
+                if (bb % 2 == 0)
+                {
+                    beam.SetPosition(bb * numBeamVertices, beamOriginOK_2);
+
+                    for (int ib = 1; ib < numBeamVertices - 1; ++ib)
+                    {
+                        Vector2 ibPos = beamOriginOK_2 + bdNor * ib * beamGranularity;
+
+                        Vector2 _dr = bdNorPrepend;
+
+                        //ibPos.x += Mathf.PerlinNoise(ibPos.x, ibPos.y);
+                        //ibPos.y += Mathf.PerlinNoise(ibPos.x, ibPos.y);
+
+                        //ibPos.x += Mathf.PerlinNoise(ibPos.x*Time.time, ibPos.y) * beamGranularity;
+                        //ibPos.y += Mathf.PerlinNoise(ibPos.x, ibPos.y*Time.time) * beamGranularity;
+
+                        //ibPos.y += Mathf.PerlinNoise(ibPos.x, ibPos.y * Time.time) ;
+
+                        _dr.y *= (Mathf.PerlinNoise(ibPos.x + shootingDuration * bb, ibPos.y + shootingDuration * bb) * 2f - 1f) * (bundlesFocused ? bundlesFocusedFocus : 1f);
+                        //_dr.y *= (Mathf.PerlinNoise(Random.Range(0f,1f), Random.Range(0f, 1f)) * 2f - 1f) * (bundlesFocused ? bundlesFocusedFocus : 1f);
+                        //_dr.y *= (Mathf.PerlinNoise(shootingDuration * bb, shootingDuration * bb) * 2f - 1f) * (bundlesFocused ? bundlesFocusedFocus : 1f);
+
+                        ibPos += _dr;
+
+                        beam.SetPosition(bb * numBeamVertices + ib, ibPos);
+                    }
+
+                    beam.SetPosition((bb + 1) * numBeamVertices - 1, beamTargetOK_2);
+                }
+                else
+                {
+                    beam.SetPosition(bb * numBeamVertices, beamTargetOK_2);
+
+                    for (int ib = 1; ib < numBeamVertices - 1; ++ib)
+                    {
+                        Vector2 ibPos = beamTargetOK_2 - bdNor * ib * beamGranularity;
+
+                        Vector2 _dr = bdNorPrepend;
+
+                        _dr.y *= (Mathf.PerlinNoise(ibPos.y + shootingDuration * bb, ibPos.x + shootingDuration * bb) * 2f - 1f) * (bundlesFocused ? bundlesFocusedFocus : 1f);
+                        //_dr.y *= (Mathf.PerlinNoise(Random.Range(0f, 1f), Random.Range(0f, 1f)) * 2f - 1f) * (bundlesFocused ? bundlesFocusedFocus : 1f);
+
+                        ibPos += _dr;
+
+                        beam.SetPosition(bb * numBeamVertices + ib, ibPos);
+                    }
+
+                    beam.SetPosition((bb + 1) * numBeamVertices - 1, beamOriginOK_2);
+                }
             }
-            beam.SetPosition(numBeamVertices-1, beamTargetOK_2);
 
             //beamTargetColor.a = 1f - (beamLength / maxDistance);
             //beam.SetColors(beamOriginColor, beamTargetColor);
             //beam.SetWidth(0.1f, 0.5f * (beamLength / maxDistance));
-            beamOriginColor = new Color(1f, 1f, 1f, 1f);
-            beamTargetColor = new Color(1f, 1f, 1f, 1f);
+            //beamOriginColor = new Color(1f, 1f, 1f, 1f);
+            //beamTargetColor = new Color(1f, 1f, 1f, 1f);
             beam.SetColors(beamOriginColor, beamTargetColor);
-            beam.SetWidth(0.3f, 0.3f);
+            beam.SetWidth(0.1f, 0.1f);
         }
         else
         {
