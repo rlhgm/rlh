@@ -177,6 +177,10 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
                 break;            
         }
 
+        //Rigidbody2D body = GetComponent<Rigidbody2D>();
+        //print(body.velocity);
+        //body.velocity = new Vector2(0f, 0f);
+
         switch (state)
         {
             case State.InHole:
@@ -435,11 +439,13 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         if (state == newState)
             return false;
 
+        print(newState +  " " + currentStateTime);
+
         stateChangedPos = transform.position;
         currentStateTime = 0f;
         stateJustChanged = true;
         state = newState;
-
+        
         switch (state)
         {
             case State.Dead:

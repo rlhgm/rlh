@@ -59,7 +59,7 @@ TagManager:
   - Enemies
   - ZapRigidBody
   - EnemyRemains
-  - 
+  - EnemiesColl
   - 
   - 
   m_SortingLayers:
