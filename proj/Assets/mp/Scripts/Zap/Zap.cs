@@ -2313,6 +2313,18 @@ public class Zap : MonoBehaviour
     //    zap.setState(Zap.State.IN_AIR);
     //}
 
+    public void SetRotation(float newRotation)
+    {
+        Quaternion quat = transform.rotation;
+        quat.eulerAngles = new Vector3(0f, 0f, newRotation);
+        transform.rotation = quat;
+    }
+    public void SetGfxRotation(float newRotation)
+    {
+        Quaternion quat = gfx.rotation;
+        quat.eulerAngles = new Vector3(0f, 0f, newRotation);
+        gfx.rotation = quat;
+    }
     public bool setState(State newState)
     {
 
@@ -2324,9 +2336,12 @@ public class Zap : MonoBehaviour
 
         state = newState;
 
-        Quaternion quat = gfx.rotation;
-        quat.eulerAngles = new Vector3(0f, 0f, 0f);
-        gfx.rotation = quat;
+        //Quaternion quat = gfx.rotation;
+        //quat.eulerAngles = new Vector3(0f, 0f, 0f);
+        //gfx.rotation = quat;
+
+        //SetRotation(0f);
+        SetGfxRotation(0f);
 
         switch (state)
         {

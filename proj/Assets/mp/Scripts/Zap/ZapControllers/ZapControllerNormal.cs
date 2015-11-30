@@ -18,6 +18,8 @@ public class ZapControllerNormal : ZapController
     public float WalkSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float RunSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
     public float RunSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
+    public float CrouchSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
+    public float CrouchSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
     public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
@@ -720,15 +722,21 @@ public class ZapControllerNormal : ZapController
                 {
                     if (crouching())
                     {
-                        Quaternion quat = gfx.rotation;
-                        quat.eulerAngles = new Vector3(0f, 0f, zap.GroundUnderAngle);
-                        gfx.rotation = quat;
+                        //Quaternion quat = gfx.rotation;
+                        //quat.eulerAngles = new Vector3(0f, 0f, zap.GroundUnderAngle);
+                        //gfx.rotation = quat;
+
+                        //zap.SetRotation(zap.GroundUnderAngle);
+                        zap.SetGfxRotation(zap.GroundUnderAngle);
                     }
                     else
                     {
-                        Quaternion quat = gfx.rotation;
-                        quat.eulerAngles = new Vector3(0f, 0f, 0f);
-                        gfx.rotation = quat;
+                        //Quaternion quat = gfx.rotation;
+                        //quat.eulerAngles = new Vector3(0f, 0f, 0f);
+                        //gfx.rotation = quat;
+
+                        //zap.SetRotation(0f);
+                        zap.SetGfxRotation(0f);
                     }
 
                     if (distToGround != 0f)
@@ -743,9 +751,12 @@ public class ZapControllerNormal : ZapController
                 }
                 else
                 {
-                    Quaternion quat = gfx.rotation;
-                    quat.eulerAngles = new Vector3(0f, 0f, 0f);
-                    gfx.rotation = quat;
+                    //Quaternion quat = gfx.rotation;
+                    //quat.eulerAngles = new Vector3(0f, 0f, 0f);
+                    //gfx.rotation = quat;
+
+                    //zap.SetRotation(0f);
+                    zap.SetGfxRotation(0f);
                 }
                 break;
 
@@ -3733,13 +3744,17 @@ public class ZapControllerNormal : ZapController
         if (speedX < desiredSpeedX)
         { // trzeba przyspieszyc
 
-            float speedupParam = 0f;
+            float speedUpParam = 0f;
             if (walking() != 0)
-                speedupParam = WalkSpeedUpParam;
-            else if ( running() != 0)
-                speedupParam = RunSpeedUpParam;
+                speedUpParam = WalkSpeedUpParam;
+            else if (running() != 0)
+                speedUpParam = RunSpeedUpParam;
+            else if (crouching())
+                speedUpParam = CrouchSpeedUpParam;
+            else
+                Debug.LogError("checkSpeed");
 
-            float velocityDamp = speedupParam * zap.getCurrentDeltaTime();
+            float velocityDamp = speedUpParam * zap.getCurrentDeltaTime();
             speedX += velocityDamp;
             if (speedX > desiredSpeedX)
             {
@@ -3759,6 +3774,10 @@ public class ZapControllerNormal : ZapController
                 slowDownParam = WalkSlowDownParam;
             else if (running() != 0)
                 slowDownParam = RunSlowDownParam;
+            else if( crouching() )
+                slowDownParam = CrouchSlowDownParam;
+            else
+                Debug.LogError("checkSpeed");
 
             float velocityDamp = slowDownParam * zap.getCurrentDeltaTime();
             speedX -= velocityDamp;
