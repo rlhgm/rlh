@@ -58,7 +58,8 @@ public class ZapControllerNormal : ZapController
     float ClimbDurClimb = 0.65f;
     public float LandingHardDuration = 0.3f;
 
-    public float TurnLefRrightDuration = 0.2f;
+    public float TurnWalkDuration = 0.2f;
+    public float TurnRunDuration = 0.53f;
     public float MountAttackDuration = 0.5f;
 
     public float BirdHitDuration = 0.33f;
@@ -173,7 +174,7 @@ public class ZapControllerNormal : ZapController
                 {
                     wantJumpAfter = true;
                 }
-                if (zap.currentActionTime >= TurnLefRrightDuration)
+                if (zap.currentActionTime >= TurnWalkDuration)
                 {
                     zap.turnLeft();
                     turnLeftFinish();
@@ -185,7 +186,7 @@ public class ZapControllerNormal : ZapController
                 {
                     wantJumpAfter = true;
                 }
-                if (zap.currentActionTime >= TurnLefRrightDuration)
+                if (zap.currentActionTime >= TurnWalkDuration)
                 {
                     zap.turnRight();
                     turnRightFinish();
@@ -193,7 +194,7 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.TurnRunLeft:
-                if (zap.currentActionTime >= 0.85f)
+                if (zap.currentActionTime >= TurnRunDuration)
                 {
                     zap.turnLeft();
                     if (wantJumpAfter)
@@ -227,7 +228,7 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.TurnRunRight:
-                if (zap.currentActionTime >= 0.85f)
+                if (zap.currentActionTime >= TurnRunDuration)
                 {
                     zap.turnRight();
                     if (wantJumpAfter)
