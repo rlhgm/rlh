@@ -8,9 +8,14 @@ public class ZapControllerNormal : ZapController
 
     public float WalkSpeed = 2.5f;
     public float RunSpeed = 5.7f;
-    public float JumpSpeed = 3.8f;
-    public float JumpLongSpeed = 4.9f;
-    public float FromClimbJumpSpeed = 5.5f;
+    public float JumpWalkSpeed = 3.8f;
+    public float JumpWalkImpulse = 7.0f;
+    public float JumpRunMaxSpeed = 4.9f;
+    public float JumpRunImpulse = 7.15f;
+    public float JumpFromClimbSpeed = 5.5f;
+    public float JumpFromClimbImpulse = 5.0f;
+    public float JumpFromClimbSideImpulse = 5.0f;
+
     public float CrouchSpeed = 1.8f;
     public float MountSpeed = 2.0f; // ile na sek.
     public float MountJumpDist = 10.0f; // następnie naciskasz spacje a on skacze
@@ -20,19 +25,17 @@ public class ZapControllerNormal : ZapController
     public float RunSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float CrouchSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
     public float CrouchSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
-    public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
-    public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
-    public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
+    public float JumpLeftRightSlowDownParam = 8.0f; // ile przyspiesza na sekunde lecac
+    public float JumpUpControlParam = 9.0f; // ile przyspiesza na sekunde lecac
     public float PushMaxSpeed = 2f;
     public float PullMaxSpeed = 2f;
     public float PushbackMaxSpeed = 1f;
 
     //public float PushbackInDuration = 0.09f;
 
-    public float JumpImpulse = 7.0f;
-    public float JumpLongImpulse = 7.15f;
-    public float FromClimbJumpImpulse = 5.0f;
-    public float FromClimbJumpSideImpulse = 5.0f;
+    
+    
+    
     public float GravityForce = -20.0f;
     public float MaxSpeedY = 15.0f;
 
@@ -415,55 +418,19 @@ public class ZapControllerNormal : ZapController
 
                 zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
 
-                if (jumping(-1)) //isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG))
-                {
-                    if (Input.GetKey(zap.keyLeft))
-                    {
-                        zap.velocity.x -= (FlyUserControlParam * deltaTime);
-
-                        //if (isInAction(Action.JUMP_LEFT))
-                        //{
-                        //    if (Mathf.Abs(zap.velocity.x) > JumpSpeed)
-                        //        zap.velocity.x = -JumpSpeed;
-                        //}
-                        //else
-                        //{
-                        //    if (Mathf.Abs(zap.velocity.x) > JumpLongSpeed)
-                        //        zap.velocity.x = -JumpLongSpeed;
-                        //}
-
-                        if (Mathf.Abs(zap.velocity.x) > maxJumpSpeed)
-                            zap.velocity.x = -maxJumpSpeed;
-                    }
-                    else if (Input.GetKey(zap.keyRight))
-                    {
-                        zap.velocity.x += (FlyUserControlParam * deltaTime);
-                        if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
-                    }
-                }
-                else if (jumping(1)) // (isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG))
+                if (jumping(-1))
                 {
                     if (Input.GetKey(zap.keyRight))
                     {
-                        zap.velocity.x += (FlyUserControlParam * deltaTime);
-
-                        //if (isInAction(Action.JUMP_RIGHT))
-                        //{
-                        //    if (Mathf.Abs(zap.velocity.x) > JumpSpeed)
-                        //        zap.velocity.x = JumpSpeed;
-                        //}
-                        //else
-                        //{
-                        //    if (Mathf.Abs(zap.velocity.x) > JumpLongSpeed)
-                        //        zap.velocity.x = JumpLongSpeed;
-                        //}
-
-                        if (Mathf.Abs(zap.velocity.x) > maxJumpSpeed)
-                            zap.velocity.x = maxJumpSpeed;
+                        zap.velocity.x += (JumpLeftRightSlowDownParam * deltaTime);
+                        if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
                     }
-                    else if (Input.GetKey(zap.keyLeft))
+                }
+                else if (jumping(1))
+                {
+                    if (Input.GetKey(zap.keyLeft))
                     {
-                        zap.velocity.x -= (FlyUserControlParam * deltaTime);
+                        zap.velocity.x -= (JumpLeftRightSlowDownParam * deltaTime);
                         if (zap.velocity.x < 0.0f) zap.velocity.x = 0.0f;
                     }
                 }
@@ -471,15 +438,15 @@ public class ZapControllerNormal : ZapController
                 {
                     if (Input.GetKey(zap.keyLeft))
                     {
-                        zap.velocity.x -= (FlyUpUserControlParam * deltaTime);
-                        if (Mathf.Abs(zap.velocity.x) > JumpSpeed)
-                            zap.velocity.x = -JumpSpeed;
+                        zap.velocity.x -= (JumpUpControlParam * deltaTime);
+                        if (Mathf.Abs(zap.velocity.x) > JumpWalkSpeed)
+                            zap.velocity.x = -JumpWalkSpeed;
                     }
                     if (Input.GetKey(zap.keyRight))
                     {
-                        zap.velocity.x += (FlyUpUserControlParam * deltaTime);
-                        if (Mathf.Abs(zap.velocity.x) > JumpSpeed)
-                            zap.velocity.x = JumpSpeed;
+                        zap.velocity.x += (JumpUpControlParam * deltaTime);
+                        if (Mathf.Abs(zap.velocity.x) > JumpWalkSpeed)
+                            zap.velocity.x = JumpWalkSpeed;
                     }
 
                     if (zap.velocity.x > 0.0f)
@@ -844,10 +811,14 @@ public class ZapControllerNormal : ZapController
         TurnRunRight,
         PrepareToJump,
         Jump,
-        JumpLeft,
-        JumpLeftLong,
-        JumpRight,
-        JumpRightLong,
+        //JumpLeft,
+        //JumpLeftLong,
+        //JumpRight,
+        //JumpRightLong,
+        JumpWalkLeft,
+        JumpWalkRight,
+        JumpRunLeft,
+        JumpRunRight,
         CrouchIn,
         GetUp,
         CrouchIdle,
@@ -892,8 +863,7 @@ public class ZapControllerNormal : ZapController
     }
 
     int lastActionParam = 0;
-    float maxJumpSpeed = 0f;
-
+    
     bool setAction(Action newAction, int param = 0)
     {
         if (action == newAction)
@@ -911,8 +881,7 @@ public class ZapControllerNormal : ZapController
         zap.BatAttackRightCollider.SetActive(false);
 
         lastActionParam = param;
-        maxJumpSpeed = 0f;
-
+        
         //Debug.Log(action);
 
         switch (newAction)
@@ -1027,7 +996,6 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.Jump:
-                maxJumpSpeed = JumpLongSpeed;
                 if (param == 0)
                 {
                     if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_fly_R");
@@ -1042,10 +1010,8 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
-            case Action.JumpLeft:
-            case Action.JumpRight:
-                maxJumpSpeed = param == 1 ? FromClimbJumpSpeed : JumpSpeed;
-
+            case Action.JumpWalkLeft:
+            case Action.JumpWalkRight:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
                 else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 
@@ -1053,10 +1019,8 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
-            case Action.JumpLeftLong:
-            case Action.JumpRightLong:
-                maxJumpSpeed = JumpLongSpeed;
-
+            case Action.JumpRunLeft:
+            case Action.JumpRunRight:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
                 else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 
@@ -3193,8 +3157,8 @@ public class ZapControllerNormal : ZapController
 
                 case Action.WalkLeft:
                 case Action.RunLeft:
-                case Action.JumpLeft:
-                case Action.JumpLeftLong:
+                case Action.JumpWalkLeft:
+                case Action.JumpRunLeft:
                     if (Input.GetKey(zap.keyLeft))
                     {
                         zap.velocity.x = 0.0f;
@@ -3218,8 +3182,8 @@ public class ZapControllerNormal : ZapController
 
                 case Action.WalkRight:
                 case Action.RunRight:
-                case Action.JumpRight:
-                case Action.JumpRightLong:
+                case Action.JumpWalkRight:
+                case Action.JumpRunRight:
                     if (Input.GetKey(zap.keyRight))
                     {
                         zap.velocity.x = 0.0f;
@@ -3257,7 +3221,7 @@ public class ZapControllerNormal : ZapController
 
     void jump()
     {
-        zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
+        zap.AddImpulse(new Vector2(0.0f, JumpWalkImpulse));
         zap.setState(Zap.State.IN_AIR);
         setAction(Action.Jump);
 
@@ -3267,7 +3231,7 @@ public class ZapControllerNormal : ZapController
     void jumpFromClimb()
     {
         //zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
-        zap.AddImpulse(new Vector2(0.0f, FromClimbJumpImpulse));
+        zap.AddImpulse(new Vector2(0.0f, JumpFromClimbImpulse));
         zap.setState(Zap.State.IN_AIR);
         setAction(Action.Jump, 1);
         lastFrameHande = false;
@@ -3275,38 +3239,29 @@ public class ZapControllerNormal : ZapController
 
     void jumpLeft(bool fromClimb = false)
     {
-        zap.velocity.y = 0.0f;
-        if (fromClimb)
-        {
-            zap.velocity.x = -FromClimbJumpSpeed;
-            zap.AddImpulse(new Vector2(0.0f, FromClimbJumpSideImpulse));
-        }
-        else
-        {
-            zap.velocity.x = -JumpSpeed;
-            zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
-        }
-        zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JumpLeft, fromClimb ? 1 : 0);
-
-        lastFrameHande = false;
+        jumpLeftRight(-1, fromClimb);
     }
 
     void jumpRight(bool fromClimb = false)
     {
+        jumpLeftRight(1, fromClimb);
+    }
+
+    void jumpLeftRight(int jumpDir, bool fromClimb)
+    {
         zap.velocity.y = 0.0f;
         if (fromClimb)
         {
-            zap.velocity.x = FromClimbJumpSpeed;
-            zap.AddImpulse(new Vector2(0.0f, FromClimbJumpSideImpulse));
+            zap.velocity.x = jumpDir * JumpFromClimbSpeed;
+            zap.AddImpulse(new Vector2(0.0f, JumpFromClimbSideImpulse));
         }
         else
         {
-            zap.velocity.x = JumpSpeed;
-            zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
+            zap.velocity.x = jumpDir * JumpWalkSpeed;
+            zap.AddImpulse(new Vector2(0.0f, JumpWalkImpulse));
         }
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JumpRight, fromClimb ? 1 : 0);
+        setAction(jumpDir == 1 ? Action.JumpWalkRight : Action.JumpWalkLeft, fromClimb ? 1 : 0);
 
         lastFrameHande = false;
     }
@@ -3315,7 +3270,7 @@ public class ZapControllerNormal : ZapController
     {
         zap.velocity.x = -JumpLongSpeed;
         zap.velocity.y = 0.0f;
-        zap.AddImpulse(new Vector2(0.0f, JumpLongImpulse));
+        zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
         setAction(Action.JumpLeftLong);
 
@@ -3326,7 +3281,7 @@ public class ZapControllerNormal : ZapController
     {
         zap.velocity.x = JumpLongSpeed;
         zap.velocity.y = 0.0f;
-        zap.AddImpulse(new Vector2(0.0f, JumpLongImpulse));
+        zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
         setAction(Action.JumpRightLong);
 
