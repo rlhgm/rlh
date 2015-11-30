@@ -14,8 +14,10 @@ public class ZapControllerNormal : ZapController
     public float CrouchSpeed = 1.8f;
     public float MountSpeed = 2.0f; // ile na sek.
     public float MountJumpDist = 10.0f; // następnie naciskasz spacje a on skacze
-    public float SpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
-    public float SlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
+    public float WalkSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
+    public float WalkSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
+    public float RunSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
+    public float RunSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float FlyUserControlParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float FlyUpUserControlParam = 9.0f; // ile przyspiesza na sekunde lecac
     public float FlySlowDownParam = 5.0f; // ile hamuje na sekunde lecac
@@ -40,18 +42,18 @@ public class ZapControllerNormal : ZapController
     public float RopeClimbSpeedUp = 1.0f;
     public float RopeClimbSpeedDown = 3.0f;
 
-    public float CLIMB_DURATION = 1.5f;
-    public float CLIMBDUR_PREPARE_TO_JUMP = 0.5f;
-    public float CLIMBDUR_JUMP_TO_CATCH = 0.2f; // jednostka w 0.2f
-    public float CLIMBDUR_CATCH = 0.5f;
+    public float ClimbDuration = 1.5f;
+    public float ClimbDurPrepareToJump = 0.5f;
+    public float ClimbDurJumpToCatch = 0.2f; // jednostka w 0.2f
+    public float ClimbDurCatch = 0.5f;
     /*public*/
-    float CLIMBDUR_CLIMB = 0.65f;
-    public float LANDING_HARD_DURATION = 0.3f;
+    float ClimbDurClimb = 0.65f;
+    public float LandingHardDuration = 0.3f;
 
-    public float TURN_LEFTRIGHT_DURATION = 0.2f;
-    public float MOUNT_ATTACK_DURATION = 0.5f;
+    public float TurnLefRrightDuration = 0.2f;
+    public float MountAttackDuration = 0.5f;
 
-    public float BIRD_HIT_DURATION = 0.33f;
+    public float BirdHitDuration = 0.33f;
 
     public AudioClip ropeCatchSound = null;
     public AudioClip ropeSwingSound = null;
@@ -163,7 +165,7 @@ public class ZapControllerNormal : ZapController
                 {
                     wantJumpAfter = true;
                 }
-                if (zap.currentActionTime >= TURN_LEFTRIGHT_DURATION)
+                if (zap.currentActionTime >= TurnLefRrightDuration)
                 {
                     zap.turnLeft();
                     turnLeftFinish();
@@ -175,7 +177,7 @@ public class ZapControllerNormal : ZapController
                 {
                     wantJumpAfter = true;
                 }
-                if (zap.currentActionTime >= TURN_LEFTRIGHT_DURATION)
+                if (zap.currentActionTime >= TurnLefRrightDuration)
                 {
                     zap.turnRight();
                     turnRightFinish();
@@ -2271,7 +2273,7 @@ public class ZapControllerNormal : ZapController
 
     int Action_MOUNT_BIRDHIT()
     {
-        if (zap.currentActionTime > BIRD_HIT_DURATION)
+        if (zap.currentActionTime > BirdHitDuration)
         {
             if (zap.canBeFuddleFromBird || lastActionParam == 1) // 1 oznacza ze bat to byl...
                 zap.FuddleFromBird = true;
@@ -2344,7 +2346,7 @@ public class ZapControllerNormal : ZapController
 
     int Action_MOUNT_ATTACK()
     {
-        if (zap.currentActionTime >= MOUNT_ATTACK_DURATION)
+        if (zap.currentActionTime >= MountAttackDuration)
         {
             zap.MountAttackLeftCollider.SetActive(false);
             zap.MountAttackRightCollider.SetActive(false);
@@ -2479,7 +2481,7 @@ public class ZapControllerNormal : ZapController
     }
     int Action_LANDING_HARD()
     {
-        if (zap.currentActionTime >= LANDING_HARD_DURATION)
+        if (zap.currentActionTime >= LandingHardDuration)
         {
             if (zap.beforeFallController == null)
             {
@@ -2497,7 +2499,7 @@ public class ZapControllerNormal : ZapController
 
     int Action_CLIMB_PULLDOWN()
     {
-        if (zap.currentActionTime >= CLIMBDUR_CLIMB)
+        if (zap.currentActionTime >= ClimbDurClimb)
         {
             zap.removeLastIgnoredCollision();
             setAction(Action.CLIMB_CATCH, 10);
@@ -2507,7 +2509,7 @@ public class ZapControllerNormal : ZapController
         }
         else
         {
-            float ratio = zap.currentActionTime / CLIMBDUR_CLIMB;
+            float ratio = zap.currentActionTime / ClimbDurClimb;
             transform.position = climbBeforePos + climbDistToClimb * ratio;
         }
 
@@ -2607,7 +2609,7 @@ public class ZapControllerNormal : ZapController
     int Action_CLIMB_CLIMB()
     {
 
-        if (zap.currentActionTime >= CLIMBDUR_CLIMB)
+        if (zap.currentActionTime >= ClimbDurClimb)
         {
             zap.removeLastIgnoredCollision();
 
@@ -2637,7 +2639,7 @@ public class ZapControllerNormal : ZapController
         }
         else
         {
-            float ratio = zap.currentActionTime / CLIMBDUR_CLIMB;
+            float ratio = zap.currentActionTime / ClimbDurClimb;
             transform.position = climbBeforePos + climbDistToClimb * ratio;
         }
 
@@ -3708,10 +3710,17 @@ public class ZapControllerNormal : ZapController
     bool checkSpeed(int dir)
     {
         float speedX = Mathf.Abs(zap.velocity.x);
+
         if (speedX < desiredSpeedX)
         { // trzeba przyspieszyc
 
-            float velocityDamp = SpeedUpParam * zap.getCurrentDeltaTime();
+            float speedupParam = 0f;
+            if (walking() != 0)
+                speedupParam = WalkSpeedUpParam;
+            else if ( running() != 0)
+                speedupParam = RunSpeedUpParam;
+
+            float velocityDamp = speedupParam * zap.getCurrentDeltaTime();
             speedX += velocityDamp;
             if (speedX > desiredSpeedX)
             {
@@ -3725,7 +3734,14 @@ public class ZapControllerNormal : ZapController
         }
         else if (speedX > desiredSpeedX)
         { // trzeba zwolnic
-            float velocityDamp = SlowDownParam * zap.getCurrentDeltaTime();
+            
+            float slowDownParam = 0f;
+            if (walking() != 0)
+                slowDownParam = WalkSlowDownParam;
+            else if (running() != 0)
+                slowDownParam = RunSlowDownParam;
+
+            float velocityDamp = slowDownParam * zap.getCurrentDeltaTime();
             speedX -= velocityDamp;
             if (speedX < desiredSpeedX)
             {
