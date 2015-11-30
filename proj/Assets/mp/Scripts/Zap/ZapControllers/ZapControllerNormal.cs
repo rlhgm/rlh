@@ -112,16 +112,16 @@ public class ZapControllerNormal : ZapController
 
         switch (action)
         {
-            case Action.IDLE:
+            case Action.Idle:
                 if (Action_IDLE() != 0)
                     return;
                 break;
 
-            case Action.LANDING_HARD:
+            case Action.LandingHard:
                 Action_LANDING_HARD();
                 break;
 
-            case Action.PREPARE_TO_JUMP:
+            case Action.PrepareToJump:
                 if (zap.currentActionTime >= 0.2f)
                 {
                     jump();
@@ -144,25 +144,25 @@ public class ZapControllerNormal : ZapController
                 Action_CLIMB_CLIMB();
                 break;
 
-            case Action.WALK_LEFT:
+            case Action.WalkLeft:
                 if (Action_WALK(-1) != 0)
                     return;
                 break;
-            case Action.RUN_LEFT:
+            case Action.RunLeft:
                 if (Action_RUN(-1) != 0)
                     return;
                 break;
 
-            case Action.WALK_RIGHT:
+            case Action.WalkRight:
                 if (Action_WALK(1) != 0)
                     return;
                 break;
-            case Action.RUN_RIGHT:
+            case Action.RunRight:
                 if (Action_RUN(1) != 0)
                     return;
                 break;
 
-            case Action.TURN_STAND_LEFT:
+            case Action.TurnStandLeft:
                 if (Input.GetKeyDown(zap.keyJump))
                 {
                     wantJumpAfter = true;
@@ -174,7 +174,7 @@ public class ZapControllerNormal : ZapController
                 }
                 break;
 
-            case Action.TURN_STAND_RIGHT:
+            case Action.TurnStandRight:
                 if (Input.GetKeyDown(zap.keyJump))
                 {
                     wantJumpAfter = true;
@@ -186,7 +186,7 @@ public class ZapControllerNormal : ZapController
                 }
                 break;
 
-            case Action.TURN_RUN_LEFT:
+            case Action.TurnRunLeft:
                 if (zap.currentActionTime >= 0.85f)
                 {
                     zap.turnLeft();
@@ -202,14 +202,14 @@ public class ZapControllerNormal : ZapController
                 }
                 else
                 {
-                    int res = Action_TURN_RUN(1);
+                    int res = ActionTurnRun(1);
                     if (res == 1)
                     {
                     }
                 }
                 break;
 
-            case Action.TURN_RUN_RIGHT:
+            case Action.TurnRunRight:
                 if (zap.currentActionTime >= 0.85f)
                 {
                     zap.turnRight();
@@ -225,38 +225,38 @@ public class ZapControllerNormal : ZapController
                 }
                 else
                 {
-                    int res = Action_TURN_RUN(-1);
+                    int res = ActionTurnRun(-1);
                     if (res == 1)
                     {
                     }
                 }
                 break;
 
-            case Action.CROUCH_IN:
+            case Action.CrouchIn:
                 ActionCrouchIn();
                 break;
 
-            case Action.GET_UP:
+            case Action.GetUp:
                 ActionGetUp();
                 break;
 
-            case Action.CROUCH_IDLE:
+            case Action.CrouchIdle:
                 if (ActionCrouchIdle() != 0)
                 {
                     return;
                 }
                 break;
 
-            case Action.CROUCH_LEFT:
-            case Action.CROUCH_LEFT_BACK:
+            case Action.CrouchLeft:
+            case Action.CrouchLeftBack:
                 if (Action_CROUCH_LEFTRIGHT(-1) != 0)
                 {
                     return;
                 }
                 break;
 
-            case Action.CROUCH_RIGHT:
-            case Action.CROUCH_RIGHT_BACK:
+            case Action.CrouchRight:
+            case Action.CrouchRightBack:
                 if (Action_CROUCH_LEFTRIGHT(1) != 0)
                 {
                     return;
@@ -320,7 +320,7 @@ public class ZapControllerNormal : ZapController
         {
             if (zap.canGetUp())
             {
-                setAction(Action.GET_UP);
+                setAction(Action.GetUp);
                 wantGetUp = false;
             }
         }
@@ -467,7 +467,7 @@ public class ZapControllerNormal : ZapController
                         if (zap.velocity.x < 0.0f) zap.velocity.x = 0.0f;
                     }
                 }
-                else if (isInAction(Action.JUMP))
+                else if (isInAction(Action.Jump))
                 {
                     if (Input.GetKey(zap.keyLeft))
                     {
@@ -592,7 +592,7 @@ public class ZapControllerNormal : ZapController
 
                         //if( zap.beforeFallController == null ){
                         zap.velocity.x = 0.0f;
-                        setAction(Action.LANDING_HARD);
+                        setAction(Action.LandingHard);
                         //}else{
                         //}
 
@@ -715,7 +715,7 @@ public class ZapControllerNormal : ZapController
                 if (zap.groundUnder == null)
                 {
                     zap.setState(Zap.State.IN_AIR);
-                    setAction(Action.JUMP);
+                    setAction(Action.Jump);
                     wantGetUp = false;
                 }
                 else if (zap.groundUnder)
@@ -803,8 +803,8 @@ public class ZapControllerNormal : ZapController
     {
         //base.activate ();
 
-        setAction(Action.UNDEF);
-        setAction(Action.IDLE);
+        setAction(Action.Undef);
+        setAction(Action.Idle);
         jumpFromMount = false;
         catchedClimbHandle = null;
         canPullUp = false;
@@ -819,7 +819,7 @@ public class ZapControllerNormal : ZapController
     }
     public void suddenlyInAir()
     {
-        setAction(Action.JUMP);
+        setAction(Action.Jump);
     }
 
     //	void SetImpulse(Vector2 imp) { impulse = imp; }
@@ -832,34 +832,33 @@ public class ZapControllerNormal : ZapController
 
     public enum Action
     {
-        UNDEF = 0,
-        IDLE,
-        WALK_LEFT,
-        WALK_RIGHT,
-        RUN_LEFT,
-        RUN_RIGHT,
-        TURN_STAND_LEFT,
-        TURN_STAND_RIGHT,
-        TURN_RUN_LEFT,
-        TURN_RUN_RIGHT,
-        //BREAK,
-        PREPARE_TO_JUMP,
-        JUMP,
-        JUMP_LEFT,
-        JUMP_LEFT_LONG,
-        JUMP_RIGHT,
-        JUMP_RIGHT_LONG,
-        CROUCH_IN,
-        GET_UP,
-        CROUCH_IDLE,
-        CROUCH_LEFT,
-        CROUCH_RIGHT,
-        CROUCH_LEFT_BACK,
-        CROUCH_RIGHT_BACK,
-        LANDING_HARD,
-        FALL,
-        STOP_WALK,
-        STOP_RUN,
+        Undef = 0,
+        Idle,
+        WalkLeft,
+        WalkRight,
+        RunLeft,
+        RunRight,
+        TurnStandLeft,
+        TurnStandRight,
+        TurnRunLeft,
+        TurnRunRight,
+        PrepareToJump,
+        Jump,
+        JumpLeft,
+        JumpLeftLong,
+        JumpRight,
+        JumpRightLong,
+        CrouchIn,
+        GetUp,
+        CrouchIdle,
+        CrouchLeft,
+        CrouchRight,
+        CrouchLeftBack,
+        CrouchRightBack,
+        LandingHard,
+        Fall,
+        //STOP_WALK,
+        //STOP_RUN,
         CLIMB_PREPARE_TO_JUMP,
         CLIMB_JUMP_TO_CATCH,
         CLIMB_CATCH,
@@ -884,7 +883,7 @@ public class ZapControllerNormal : ZapController
         PUSHBACK_RIGHT,
         PUSHBACKIN_LEFT,
         PUSHBACKIN_RIGHT,
-        DIE
+        Die
     };
 
     Action getAction()
@@ -918,12 +917,12 @@ public class ZapControllerNormal : ZapController
 
         switch (newAction)
         {
-            case Action.IDLE:
+            case Action.Idle:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_idle_R");
                 else zap.AnimatorBody.Play("Zap_idle_L");
                 break;
 
-            case Action.DIE:
+            case Action.Die:
                 Zap.DeathType dt = (Zap.DeathType)param;
                 string msgInfo = "";
 
@@ -984,50 +983,50 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
                 break;
 
-            case Action.WALK_LEFT:
+            case Action.WalkLeft:
                 zap.AnimatorBody.Play("Zap_walk_L");
                 break;
-            case Action.WALK_RIGHT:
+            case Action.WalkRight:
                 zap.AnimatorBody.Play("Zap_walk_R");
                 break;
 
-            case Action.RUN_LEFT:
+            case Action.RunLeft:
                 zap.AnimatorBody.Play("Zap_run_L");
                 break;
-            case Action.RUN_RIGHT:
+            case Action.RunRight:
                 zap.AnimatorBody.Play("Zap_run_R");
                 break;
 
-            case Action.TURN_STAND_LEFT:
+            case Action.TurnStandLeft:
                 zap.AnimatorBody.Play("Zap_walk_back_left");
                 wantJumpAfter = false;
                 break;
 
-            case Action.TURN_STAND_RIGHT:
+            case Action.TurnStandRight:
                 zap.AnimatorBody.Play("Zap_walk_back_right");
                 wantJumpAfter = false;
                 break;
 
-            case Action.TURN_RUN_LEFT:
+            case Action.TurnRunLeft:
                 zap.AnimatorBody.Play("Zap_runback_R");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
                     zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
-            case Action.TURN_RUN_RIGHT:
+            case Action.TurnRunRight:
                 zap.AnimatorBody.Play("Zap_runback_L");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
                     zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
-            case Action.PREPARE_TO_JUMP:
+            case Action.PrepareToJump:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_in_R");
                 else zap.AnimatorBody.Play("Zap_jump_in_L");
                 break;
 
-            case Action.JUMP:
+            case Action.Jump:
                 maxJumpSpeed = JumpLongSpeed;
                 if (param == 0)
                 {
@@ -1043,8 +1042,8 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
-            case Action.JUMP_LEFT:
-            case Action.JUMP_RIGHT:
+            case Action.JumpLeft:
+            case Action.JumpRight:
                 maxJumpSpeed = param == 1 ? FromClimbJumpSpeed : JumpSpeed;
 
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
@@ -1054,8 +1053,8 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
-            case Action.JUMP_LEFT_LONG:
-            case Action.JUMP_RIGHT_LONG:
+            case Action.JumpLeftLong:
+            case Action.JumpRightLong:
                 maxJumpSpeed = JumpLongSpeed;
 
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
@@ -1065,7 +1064,7 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
-            case Action.LANDING_HARD:
+            case Action.LandingHard:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_landing_hard_R");
                 else zap.AnimatorBody.Play("Zap_landing_hard_L");
 
@@ -1183,34 +1182,34 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.Play("Zap_climb_knife_attack");
                 break;
 
-            case Action.CROUCH_IN:
+            case Action.CrouchIn:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_crouch_in_R");
                 else zap.AnimatorBody.Play("Zap_crouch_in_L");
                 break;
 
-            case Action.GET_UP:
+            case Action.GetUp:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_getup_R");
                 else zap.AnimatorBody.Play("Zap_getup_L");
                 break;
 
-            case Action.CROUCH_IDLE:
+            case Action.CrouchIdle:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_crouch_move_R");
                 else zap.AnimatorBody.Play("Zap_crouch_move_L");
                 zap.AnimatorBody.speed = 0f;
                 break;
 
-            case Action.CROUCH_LEFT:
+            case Action.CrouchLeft:
                 zap.AnimatorBody.Play("Zap_crouch_move_L");
                 break;
-            case Action.CROUCH_RIGHT:
+            case Action.CrouchRight:
                 zap.AnimatorBody.Play("Zap_crouch_move_R");
                 break;
 
-            case Action.CROUCH_LEFT_BACK:
+            case Action.CrouchLeftBack:
                 zap.AnimatorBody.Play("Zap_crouch_move_back_R");
                 break;
 
-            case Action.CROUCH_RIGHT_BACK:
+            case Action.CrouchRightBack:
                 zap.AnimatorBody.Play("Zap_crouch_move_back_L");
                 break;
 
@@ -1352,7 +1351,7 @@ public class ZapControllerNormal : ZapController
             {
                 if (!crouching())
                 {
-                    setAction(Action.CROUCH_IN);
+                    setAction(Action.CrouchIn);
                     return 1;
                 }
             }
@@ -1377,11 +1376,11 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.ON_GROUND))
         {
-            if (crouching() || isInAction(Action.CROUCH_IN))
+            if (crouching() || isInAction(Action.CrouchIn))
             {
                 if (zap.canGetUp())
                 {
-                    setAction(Action.GET_UP);
+                    setAction(Action.GetUp);
                 }
                 else
                 {
@@ -1397,19 +1396,19 @@ public class ZapControllerNormal : ZapController
         switch (action)
         {
 
-            case Action.WALK_LEFT:
+            case Action.WalkLeft:
                 if (Input.GetKey(zap.keyLeft))
                 {
                     desiredSpeedX = RunSpeed;
-                    setAction(Action.RUN_LEFT);
+                    setAction(Action.RunLeft);
                 }
                 break;
 
-            case Action.WALK_RIGHT:
+            case Action.WalkRight:
                 if (Input.GetKey(zap.keyRight))
                 {
                     desiredSpeedX = RunSpeed;
-                    setAction(Action.RUN_RIGHT);
+                    setAction(Action.RunRight);
                 }
                 break;
         };
@@ -1423,11 +1422,11 @@ public class ZapControllerNormal : ZapController
         switch (action)
         {
 
-            case Action.RUN_LEFT:
+            case Action.RunLeft:
                 if (Input.GetKey(zap.keyLeft))
                 {
                     desiredSpeedX = WalkSpeed;
-                    setAction(Action.WALK_LEFT);
+                    setAction(Action.WalkLeft);
                 }
                 else
                 {
@@ -1435,11 +1434,11 @@ public class ZapControllerNormal : ZapController
                 }
                 break;
 
-            case Action.RUN_RIGHT:
+            case Action.RunRight:
                 if (Input.GetKey(zap.keyRight))
                 {
                     desiredSpeedX = WalkSpeed;
-                    setAction(Action.WALK_RIGHT);
+                    setAction(Action.WalkRight);
                 }
                 else
                 {
@@ -1453,7 +1452,7 @@ public class ZapControllerNormal : ZapController
 
     public override int keyLeftDown()
     {
-        if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
+        if ((isInAction(Action.Idle) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
 
             if (zap.dir() == Vector2.right)
@@ -1471,7 +1470,7 @@ public class ZapControllerNormal : ZapController
                     if (!obstacle2)
                     {
                         //setActionCrouchIdle();
-                        setAction(Action.CROUCH_LEFT);
+                        setAction(Action.CrouchLeft);
                         //resetActionAndState();
                         zap.velocity.x = -CrouchSpeed;
                         Action_CROUCH_LEFTRIGHT(-1);
@@ -1491,14 +1490,14 @@ public class ZapControllerNormal : ZapController
                 {
                     desiredSpeedX = RunSpeed;
                     speedLimiter(-1, desiredSpeedX + 1.0f);
-                    setAction(Action.RUN_LEFT);
+                    setAction(Action.RunLeft);
                     return 1;
                 }
                 else
                 {
                     desiredSpeedX = WalkSpeed;
                     speedLimiter(-1, desiredSpeedX + 1.0f);
-                    setAction(Action.WALK_LEFT);
+                    setAction(Action.WalkLeft);
                     return 1;
                 }
             }
@@ -1524,7 +1523,7 @@ public class ZapControllerNormal : ZapController
                 }
             }
         }
-        else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
+        else if (isInAction(Action.CrouchIdle) && isInState(Zap.State.ON_GROUND))
         {               
             if (zap.dir() == -Vector2.right)
             {
@@ -1539,7 +1538,7 @@ public class ZapControllerNormal : ZapController
                 //else
                 //{
                     desiredSpeedX = CrouchSpeed;
-                    setAction(Action.CROUCH_LEFT);
+                    setAction(Action.CrouchLeft);
                 //}
             }
             else
@@ -1554,7 +1553,7 @@ public class ZapControllerNormal : ZapController
                 else
                 {
                     desiredSpeedX = CrouchSpeed;
-                    setAction(Action.CROUCH_LEFT_BACK);
+                    setAction(Action.CrouchLeftBack);
                 }
             }
             return 1;
@@ -1564,7 +1563,7 @@ public class ZapControllerNormal : ZapController
 
     public override int keyRightDown()
     {
-        if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
+        if ((isInAction(Action.Idle) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
         {
             if (zap.dir() == -Vector2.right)
             {
@@ -1582,7 +1581,7 @@ public class ZapControllerNormal : ZapController
                     if (!obstacle2)
                     {
                         //setActionCrouchIdle();
-                        setAction(Action.CROUCH_RIGHT);
+                        setAction(Action.CrouchRight);
                         //resetActionAndState();
                         zap.velocity.x = CrouchSpeed;
                         Action_CROUCH_LEFTRIGHT(1);
@@ -1603,14 +1602,14 @@ public class ZapControllerNormal : ZapController
                 {
                     desiredSpeedX = RunSpeed;
                     speedLimiter(1, desiredSpeedX + 1.0f);
-                    setAction(Action.RUN_RIGHT);
+                    setAction(Action.RunRight);
                     return 1;
                 }
                 else
                 {
                     desiredSpeedX = WalkSpeed;
                     speedLimiter(1, desiredSpeedX + 1.0f);
-                    setAction(Action.WALK_RIGHT);
+                    setAction(Action.WalkRight);
                     return 1;
                 }
             }
@@ -1636,7 +1635,7 @@ public class ZapControllerNormal : ZapController
                 }
             }
         }
-        else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
+        else if (isInAction(Action.CrouchIdle) && isInState(Zap.State.ON_GROUND))
         {
             //if (zap.CheckRight(0.1f) >= 0.0f)
             //{
@@ -1654,7 +1653,7 @@ public class ZapControllerNormal : ZapController
             if (zap.dir() == Vector2.right)
             {
                 desiredSpeedX = CrouchSpeed;
-                setAction(Action.CROUCH_RIGHT);
+                setAction(Action.CrouchRight);
             }
             else
             {
@@ -1668,7 +1667,7 @@ public class ZapControllerNormal : ZapController
                 else
                 {
                     desiredSpeedX = CrouchSpeed;
-                    setAction(Action.CROUCH_RIGHT_BACK);
+                    setAction(Action.CrouchRightBack);
                 }
             }
             return 1;
@@ -1816,7 +1815,7 @@ public class ZapControllerNormal : ZapController
 
         switch (action)
         {
-            case Action.IDLE:
+            case Action.Idle:
                 if (isInState(Zap.State.ON_GROUND))
                 {
                     if (canJump())
@@ -1824,20 +1823,20 @@ public class ZapControllerNormal : ZapController
                 }
                 break;
 
-            case Action.WALK_LEFT:
+            case Action.WalkLeft:
                 if (canJump())
                     jumpLeft();
                 break;
-            case Action.WALK_RIGHT:
+            case Action.WalkRight:
                 if (canJump())
                     jumpRight();
                 break;
 
-            case Action.RUN_LEFT:
+            case Action.RunLeft:
                 if (canJump())
                     jumpLongLeft();
                 break;
-            case Action.RUN_RIGHT:
+            case Action.RunRight:
                 if (canJump())
                     jumpLongRight();
                 break;
@@ -1865,7 +1864,7 @@ public class ZapControllerNormal : ZapController
 
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
-                setAction(Action.JUMP);
+                setAction(Action.Jump);
                 zap.setState(Zap.State.IN_AIR);
 
                 break;
@@ -1925,7 +1924,7 @@ public class ZapControllerNormal : ZapController
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
         {
-            setAction(Action.IDLE);
+            setAction(Action.Idle);
             resetActionAndState();
             return 0;
         }
@@ -1974,7 +1973,7 @@ public class ZapControllerNormal : ZapController
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
         {
-            setAction(Action.IDLE);
+            setAction(Action.Idle);
             resetActionAndState();
             return 0;
         }
@@ -1992,7 +1991,7 @@ public class ZapControllerNormal : ZapController
                    (Input.GetKeyUp(zap.keyRight) || !Input.GetKey(zap.keyRight))
                    )
                 {
-                    setAction(Action.TURN_RUN_LEFT);
+                    setAction(Action.TurnRunLeft);
                 }
 
             }
@@ -2003,7 +2002,7 @@ public class ZapControllerNormal : ZapController
                    (Input.GetKeyUp(zap.keyLeft) || !Input.GetKey(zap.keyLeft))
                    )
                 {
-                    setAction(Action.TURN_RUN_RIGHT);
+                    setAction(Action.TurnRunRight);
                 }
             }
         }
@@ -2042,7 +2041,7 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
-    int Action_TURN_RUN(int dir)
+    int ActionTurnRun(int dir)
     {
 
         int retVal = 0;
@@ -2125,7 +2124,7 @@ public class ZapControllerNormal : ZapController
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
         {
-            setAction(Action.IDLE);
+            setAction(Action.Idle);
             resetActionAndState();
             return 0;
         }
@@ -2220,12 +2219,12 @@ public class ZapControllerNormal : ZapController
             //Debug.Log("obstacle -> " + distToObstacle);
             distToMove = distToObstacle;
             //setActionCrouchIdle();
-            if (dir == 1 && isInAction(Action.CROUCH_RIGHT_BACK))
+            if (dir == 1 && isInAction(Action.CrouchRightBack))
             {
                 //Debug.Log(action);
                 PushbackInStart(obstacle);
             }
-            else if (dir == -1 && isInAction(Action.CROUCH_LEFT_BACK))
+            else if (dir == -1 && isInAction(Action.CrouchLeftBack))
             {
                 //Debug.Log(action);
                 PushbackInStart(obstacle);
@@ -2310,7 +2309,7 @@ public class ZapControllerNormal : ZapController
 
             zap.velocity.x = 0.0f;
             zap.velocity.y = 0.0f;
-            setAction(Action.JUMP);
+            setAction(Action.Jump);
             zap.setState(Zap.State.IN_AIR);
         }
         return 0;
@@ -2359,7 +2358,7 @@ public class ZapControllerNormal : ZapController
                     zap.velocity.x = 0.0f;
                     zap.velocity.y = 0.0f;
                     zap.setState(Zap.State.ON_GROUND);
-                    setAction(Action.IDLE);
+                    setAction(Action.Idle);
                     transform.position = transform.position + distToMount;
                 }
             }
@@ -2515,7 +2514,7 @@ public class ZapControllerNormal : ZapController
         {
             if (zap.beforeFallController == null)
             {
-                setAction(Action.IDLE);
+                setAction(Action.Idle);
                 resetActionAndState();
             }
             else
@@ -2621,7 +2620,7 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
                 zap.setState(Zap.State.IN_AIR);
-                setAction(Action.JUMP);
+                setAction(Action.Jump);
                 lastCatchedClimbHandle = catchedClimbHandle;
                 catchedClimbHandle = null;
             }
@@ -2648,12 +2647,12 @@ public class ZapControllerNormal : ZapController
 
             if (zap.canGetUp())
             {
-                setAction(Action.IDLE);
+                setAction(Action.Idle);
                 resetActionAndState();
             }
             else
             {
-                setAction(Action.CROUCH_IDLE);
+                setAction(Action.CrouchIdle);
                 wantGetUp = !Input.GetKey(zap.keyDown);
 
                 if (Input.GetKey(zap.keyLeft))
@@ -3173,10 +3172,10 @@ public class ZapControllerNormal : ZapController
             switch (action)
             {
 
-                case Action.IDLE:
-                case Action.JUMP:
-                case Action.CROUCH_IN:
-                    setAction(Action.CROUCH_IDLE);
+                case Action.Idle:
+                case Action.Jump:
+                case Action.CrouchIn:
+                    setAction(Action.CrouchIdle);
                     if (Input.GetKey(zap.keyLeft))
                     {
                         keyLeftDown();
@@ -3192,53 +3191,53 @@ public class ZapControllerNormal : ZapController
                     }
                     break;
 
-                case Action.WALK_LEFT:
-                case Action.RUN_LEFT:
-                case Action.JUMP_LEFT:
-                case Action.JUMP_LEFT_LONG:
+                case Action.WalkLeft:
+                case Action.RunLeft:
+                case Action.JumpLeft:
+                case Action.JumpLeftLong:
                     if (Input.GetKey(zap.keyLeft))
                     {
                         zap.velocity.x = 0.0f;
                         desiredSpeedX = CrouchSpeed;
                         if (zap.dir() == -Vector2.right)
                         {
-                            setAction(Action.CROUCH_LEFT);
+                            setAction(Action.CrouchLeft);
                         }
                         else
                         {
-                            setAction(Action.CROUCH_LEFT_BACK);
+                            setAction(Action.CrouchLeftBack);
                         }
                     }
                     else
                     {
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
-                        setAction(Action.CROUCH_IDLE);
+                        setAction(Action.CrouchIdle);
                     }
                     break;
 
-                case Action.WALK_RIGHT:
-                case Action.RUN_RIGHT:
-                case Action.JUMP_RIGHT:
-                case Action.JUMP_RIGHT_LONG:
+                case Action.WalkRight:
+                case Action.RunRight:
+                case Action.JumpRight:
+                case Action.JumpRightLong:
                     if (Input.GetKey(zap.keyRight))
                     {
                         zap.velocity.x = 0.0f;
                         desiredSpeedX = CrouchSpeed;
                         if (zap.dir() == Vector2.right)
                         {
-                            setAction(Action.CROUCH_RIGHT);
+                            setAction(Action.CrouchRight);
                         }
                         else
                         {
-                            setAction(Action.CROUCH_RIGHT_BACK);
+                            setAction(Action.CrouchRightBack);
                         }
                     }
                     else
                     {
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
-                        setAction(Action.CROUCH_IDLE);
+                        setAction(Action.CrouchIdle);
                     }
                     break;
             }
@@ -3248,19 +3247,19 @@ public class ZapControllerNormal : ZapController
 
     void preparetojump()
     {
-        if (isNotInState(Zap.State.ON_GROUND) || isNotInAction(Action.IDLE))
+        if (isNotInState(Zap.State.ON_GROUND) || isNotInAction(Action.Idle))
             return;
 
         zap.velocity.x = 0.0f;
         zap.velocity.y = 0.0f;
-        setAction(Action.PREPARE_TO_JUMP);
+        setAction(Action.PrepareToJump);
     }
 
     void jump()
     {
         zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JUMP);
+        setAction(Action.Jump);
 
         lastFrameHande = false;
     }
@@ -3270,7 +3269,7 @@ public class ZapControllerNormal : ZapController
         //zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
         zap.AddImpulse(new Vector2(0.0f, FromClimbJumpImpulse));
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JUMP, 1);
+        setAction(Action.Jump, 1);
         lastFrameHande = false;
     }
 
@@ -3288,7 +3287,7 @@ public class ZapControllerNormal : ZapController
             zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
         }
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JUMP_LEFT, fromClimb ? 1 : 0);
+        setAction(Action.JumpLeft, fromClimb ? 1 : 0);
 
         lastFrameHande = false;
     }
@@ -3307,7 +3306,7 @@ public class ZapControllerNormal : ZapController
             zap.AddImpulse(new Vector2(0.0f, JumpImpulse));
         }
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JUMP_RIGHT, fromClimb ? 1 : 0);
+        setAction(Action.JumpRight, fromClimb ? 1 : 0);
 
         lastFrameHande = false;
     }
@@ -3318,7 +3317,7 @@ public class ZapControllerNormal : ZapController
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpLongImpulse));
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JUMP_LEFT_LONG);
+        setAction(Action.JumpLeftLong);
 
         lastFrameHande = false;
     }
@@ -3329,14 +3328,14 @@ public class ZapControllerNormal : ZapController
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpLongImpulse));
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JUMP_RIGHT_LONG);
+        setAction(Action.JumpRightLong);
 
         lastFrameHande = false;
     }
 
     void turnLeftStart()
     {
-        setAction(Action.TURN_STAND_LEFT);
+        setAction(Action.TurnStandLeft);
 
         if (Input.GetKeyDown(zap.keyJump) || (Input.GetKey(zap.keyJump) && canJumpAfter))
             wantJumpAfter = true;
@@ -3344,7 +3343,7 @@ public class ZapControllerNormal : ZapController
 
     void turnRightStart()
     {
-        setAction(Action.TURN_STAND_RIGHT);
+        setAction(Action.TurnStandRight);
 
         if (Input.GetKeyDown(zap.keyJump) || (Input.GetKey(zap.keyJump) && canJumpAfter))
             wantJumpAfter = true;
@@ -3352,7 +3351,7 @@ public class ZapControllerNormal : ZapController
 
     void turnLeftFinish()
     {
-        setAction(Action.IDLE);
+        setAction(Action.Idle);
 
         if (wantJumpAfter)
         {
@@ -3370,7 +3369,7 @@ public class ZapControllerNormal : ZapController
 
     void turnRightFinish()
     {
-        setAction(Action.IDLE);
+        setAction(Action.Idle);
 
         if (wantJumpAfter)
         {
@@ -3390,7 +3389,7 @@ public class ZapControllerNormal : ZapController
     void setActionIdle()
     {
         zap.velocity.x = 0.0f;
-        setAction(Action.IDLE);
+        setAction(Action.Idle);
     }
     void setActionRopeClimbIdle()
     {
@@ -3401,7 +3400,7 @@ public class ZapControllerNormal : ZapController
     void setActionCrouchIdle()
     {
         zap.velocity.x = 0.0f;
-        setAction(Action.CROUCH_IDLE);
+        setAction(Action.CrouchIdle);
     }
     void setActionMountIdle()
     {
@@ -3486,18 +3485,27 @@ public class ZapControllerNormal : ZapController
 
     int walking()
     {
-        if (isInAction(Action.WALK_RIGHT))
+        if (isInAction(Action.WalkRight))
             return 1;
-        if (isInAction(Action.WALK_LEFT))
+        if (isInAction(Action.WalkLeft))
             return -1;
         return 0;
     }
 
     int running()
     {
-        if (isInAction(Action.RUN_RIGHT))
+        if (isInAction(Action.RunRight))
             return 1;
-        if (isInAction(Action.RUN_LEFT))
+        if (isInAction(Action.RunLeft))
+            return -1;
+        return 0;
+    }
+
+    int TurningRun()
+    {
+        if (isInAction(Action.RunRight))
+            return 1;
+        if (isInAction(Action.RunLeft))
             return -1;
         return 0;
     }
@@ -3505,33 +3513,33 @@ public class ZapControllerNormal : ZapController
     bool moving(Vector2 dir)
     {
         if (dir == Vector2.right)
-            return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
+            return isInAction(Action.WalkRight) || isInAction(Action.RunRight);
         else
-            return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
+            return isInAction(Action.WalkLeft) || isInAction(Action.RunLeft);
     }
 
     bool moving(int dir)
     {
         if (dir == 1)
-            return isInAction(Action.WALK_RIGHT) || isInAction(Action.RUN_RIGHT);
+            return isInAction(Action.WalkRight) || isInAction(Action.RunRight);
         else
-            return isInAction(Action.WALK_LEFT) || isInAction(Action.RUN_LEFT);
+            return isInAction(Action.WalkLeft) || isInAction(Action.RunLeft);
     }
 
     bool jumping()
     {
-        return isInAction(Action.JUMP) || isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG) || isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
+        return isInAction(Action.Jump) || isInAction(Action.JumpLeft) || isInAction(Action.JumpLeftLong) || isInAction(Action.JumpRight) || isInAction(Action.JumpRightLong);
     }
 
     bool jumping(int jumpdir)
     {
         if (jumpdir > 0)
         {
-            return isInAction(Action.JUMP_RIGHT) || isInAction(Action.JUMP_RIGHT_LONG);
+            return isInAction(Action.JumpRight) || isInAction(Action.JumpRightLong);
         }
         else if (jumpdir < 0)
         {
-            return isInAction(Action.JUMP_LEFT) || isInAction(Action.JUMP_LEFT_LONG);
+            return isInAction(Action.JumpLeft) || isInAction(Action.JumpLeftLong);
         }
         return false;
     }
@@ -3555,9 +3563,9 @@ public class ZapControllerNormal : ZapController
 
     public override bool crouching()
     {
-        return isInAction(Action.CROUCH_IDLE) ||
-            isInAction(Action.CROUCH_LEFT) || isInAction(Action.CROUCH_LEFT_BACK) ||
-                isInAction(Action.CROUCH_RIGHT) || isInAction(Action.CROUCH_RIGHT_BACK);
+        return isInAction(Action.CrouchIdle) ||
+            isInAction(Action.CrouchLeft) || isInAction(Action.CrouchLeftBack) ||
+                isInAction(Action.CrouchRight) || isInAction(Action.CrouchRightBack);
     }
     
     public override void zapDie(Zap.DeathType deathType)
@@ -3568,7 +3576,7 @@ public class ZapControllerNormal : ZapController
             catchedRope = null;
             justJumpedRope = null;
         }
-        setAction(Action.DIE, (int)deathType);
+        setAction(Action.Die, (int)deathType);
     }
     public override void beforeReborn()
     {
@@ -3600,7 +3608,7 @@ public class ZapControllerNormal : ZapController
             {
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
-                setAction(Action.JUMP);
+                setAction(Action.Jump);
 
                 releaseRope();
 
@@ -3613,7 +3621,7 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = 0.0f;
                 zap.setState(Zap.State.IN_AIR);
-                setAction(Action.JUMP);
+                setAction(Action.Jump);
                 lastCatchedClimbHandle = catchedClimbHandle;
                 catchedClimbHandle = null;
                 zap.FuddleFromBird = true;
@@ -3906,7 +3914,7 @@ public class ZapControllerNormal : ZapController
             {
                 zap.velocity.x = 0f;
                 zap.velocity.y = 0f;
-                setAction(Action.JUMP);
+                setAction(Action.Jump);
             }
             else
             {
@@ -3933,7 +3941,7 @@ public class ZapControllerNormal : ZapController
 
     void getUp()
     {
-        setAction(Action.IDLE);
+        setAction(Action.Idle);
         resetActionAndState();
     }
 
@@ -4390,7 +4398,7 @@ public class ZapControllerNormal : ZapController
     GameObject canClimbPullDown()
     {
 
-        if (!isInState(Zap.State.ON_GROUND) || !(isInAction(Action.IDLE) || crouching()))
+        if (!isInState(Zap.State.ON_GROUND) || !(isInAction(Action.Idle) || crouching()))
             return null;
 
         // 1: sytuacja gdy zap jest swoim srodkiem nad tilem

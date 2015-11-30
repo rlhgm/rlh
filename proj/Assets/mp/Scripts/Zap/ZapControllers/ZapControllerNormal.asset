@@ -20,9 +20,9 @@ MonoBehaviour:
   MountSpeed: 2.5
   MountJumpDist: 10
   WalkSpeedUpParam: 2
-  WalkSlowDownParam: 5
+  WalkSlowDownParam: 20
   RunSpeedUpParam: 2
-  RunSlowDownParam: 5
+  RunSlowDownParam: 20
   CrouchSpeedUpParam: 10
   CrouchSlowDownParam: 20
   FlyUserControlParam: 8
