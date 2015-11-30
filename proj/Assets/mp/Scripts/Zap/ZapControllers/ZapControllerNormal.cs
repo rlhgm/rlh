@@ -5,7 +5,7 @@ using System.Collections;
 //[System.Serializable]
 public class ZapControllerNormal : ZapController
 {
-    float CurrentJumpMaxSpeed = 0;
+    //float CurrentJumpMaxSpeed = 0;
 
     public float WalkSpeed = 2.5f;
     public float RunSpeed = 5.7f;
@@ -3247,7 +3247,7 @@ public class ZapControllerNormal : ZapController
         }
         zap.setState(Zap.State.IN_AIR);
         setAction(jumpDir == 1 ? Action.JumpRight : Action.JumpLeft, fromClimb ? 1 : 0);
-        CurrentJumpMaxSpeed = JumpWalkSpeed;
+        //CurrentJumpMaxSpeed = JumpWalkSpeed;
 
         lastFrameHande = false;
     }
@@ -3275,7 +3275,7 @@ public class ZapControllerNormal : ZapController
         zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
         setAction(jumpDir == 1 ? Action.JumpRight : Action.JumpLeft);
-        CurrentJumpMaxSpeed = JumpRunMaxSpeed;
+        //CurrentJumpMaxSpeed = JumpRunMaxSpeed;
 
         lastFrameHande = false;
     }
