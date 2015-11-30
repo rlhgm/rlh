@@ -815,10 +815,15 @@ public class ZapControllerNormal : ZapController
         //JumpLeftLong,
         //JumpRight,
         //JumpRightLong,
+
         JumpWalkLeft,
         JumpWalkRight,
         JumpRunLeft,
         JumpRunRight,
+
+        //JumpLeft,
+        //JumpRight,
+
         CrouchIn,
         GetUp,
         CrouchIdle,
@@ -3239,15 +3244,15 @@ public class ZapControllerNormal : ZapController
 
     void jumpLeft(bool fromClimb = false)
     {
-        jumpLeftRight(-1, fromClimb);
+        JumpLeftRight(-1, fromClimb);
     }
 
     void jumpRight(bool fromClimb = false)
     {
-        jumpLeftRight(1, fromClimb);
+        JumpLeftRight(1, fromClimb);
     }
 
-    void jumpLeftRight(int jumpDir, bool fromClimb)
+    void JumpLeftRight(int jumpDir, bool fromClimb)
     {
         zap.velocity.y = 0.0f;
         if (fromClimb)
@@ -3268,22 +3273,21 @@ public class ZapControllerNormal : ZapController
 
     void jumpLongLeft()
     {
-        zap.velocity.x = -JumpLongSpeed;
-        zap.velocity.y = 0.0f;
-        zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
-        zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JumpLeftLong);
-
-        lastFrameHande = false;
+        JumpRunLeftRight(-1);
     }
 
     void jumpLongRight()
     {
-        zap.velocity.x = JumpLongSpeed;
+        JumpRunLeftRight(1);
+    }
+
+    void JumpRunLeftRight(int jumpDir)
+    {
+        zap.velocity.x = jumpDir * JumpRunMaxSpeed;
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
-        setAction(Action.JumpRightLong);
+        setAction(jumpDir == 1 ? Action.JumpRunRight : Action.JumpRunLeft);
 
         lastFrameHande = false;
     }
@@ -3483,18 +3487,19 @@ public class ZapControllerNormal : ZapController
 
     bool jumping()
     {
-        return isInAction(Action.Jump) || isInAction(Action.JumpLeft) || isInAction(Action.JumpLeftLong) || isInAction(Action.JumpRight) || isInAction(Action.JumpRightLong);
+        return isInAction(Action.Jump) || isInAction(Action.JumpWalkLeft) || isInAction(Action.JumpRunLeft) 
+            || isInAction(Action.JumpWalkRight) || isInAction(Action.JumpRunRight);
     }
 
     bool jumping(int jumpdir)
     {
         if (jumpdir > 0)
         {
-            return isInAction(Action.JumpRight) || isInAction(Action.JumpRightLong);
+            return isInAction(Action.JumpWalkRight) || isInAction(Action.JumpRunRight);
         }
         else if (jumpdir < 0)
         {
-            return isInAction(Action.JumpLeft) || isInAction(Action.JumpLeftLong);
+            return isInAction(Action.JumpWalkLeft) || isInAction(Action.JumpRunLeft);
         }
         return false;
     }
@@ -4235,7 +4240,7 @@ public class ZapControllerNormal : ZapController
         catchedRope = catchedRopeLink.rope;
         catchedRope.chooseDriver(catchedRopeLink.transform);
 
-        float forceRatio = Mathf.Abs(zap.velocity.x) / JumpLongSpeed;
+        float forceRatio = Mathf.Abs(zap.velocity.x) / JumpRunMaxSpeed;
         float force = RopeSwingForce * forceRatio;
 
         if (zap.velocity.x < 0f)

@@ -13,28 +13,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkSpeed: 3
   RunSpeed: 6
-  JumpSpeed: 3.79999995
-  JumpLongSpeed: 4.9000001
-  FromClimbJumpSpeed: 4
+  JumpWalkSpeed: 3.79999995
+  JumpWalkImpulse: 7
+  JumpRunMaxSpeed: 4.9000001
+  JumpRunImpulse: 7.1500001
+  JumpFromClimbSpeed: 5.5
+  JumpFromClimbImpulse: 5
+  JumpFromClimbSideImpulse: 5
   CrouchSpeed: 2.29999995
   MountSpeed: 2.5
   MountJumpDist: 10
   WalkSpeedUpParam: 2
   WalkSlowDownParam: 20
-  RunSpeedUpParam: 2
+  RunSpeedUpParam: 4
   RunSlowDownParam: 20
   CrouchSpeedUpParam: 10
   CrouchSlowDownParam: 20
-  FlyUserControlParam: 8
-  FlyUpUserControlParam: 9
-  FlySlowDownParam: 5
+  JumpLeftRightSlowDownParam: 8
+  JumpUpControlParam: 9
   PushMaxSpeed: 3
   PullMaxSpeed: 3
   PushbackMaxSpeed: 1
-  JumpImpulse: 7
-  JumpLongImpulse: 7.1500001
-  FromClimbJumpImpulse: 3.5
-  FromClimbJumpSideImpulse: 5.69999981
   GravityForce: -20
   MaxSpeedY: 15
   HardLandingHeight: 2
