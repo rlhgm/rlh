@@ -231,15 +231,15 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.CROUCH_IN:
-                Action_CROUCH_IN();
+                ActionCrouchIn();
                 break;
 
             case Action.GET_UP:
-                Action_GET_UP();
+                ActionGetUp();
                 break;
 
             case Action.CROUCH_IDLE:
-                if (Action_CROUCH_IDLE() != 0)
+                if (ActionCrouchIdle() != 0)
                 {
                     return;
                 }
@@ -718,6 +718,19 @@ public class ZapControllerNormal : ZapController
                 }
                 else if (zap.groundUnder)
                 {
+                    if (crouching())
+                    {
+                        Quaternion quat = gfx.rotation;
+                        quat.eulerAngles = new Vector3(0f, 0f, zap.GroundUnderAngle);
+                        gfx.rotation = quat;
+                    }
+                    else
+                    {
+                        Quaternion quat = gfx.rotation;
+                        quat.eulerAngles = new Vector3(0f, 0f, 0f);
+                        gfx.rotation = quat;
+                    }
+
                     if (distToGround != 0f)
                     {
                         transform.position = new Vector3(newPosX, oldPos.y + distToGround, 0.0f);
@@ -727,6 +740,12 @@ public class ZapControllerNormal : ZapController
                     {
                         zap.touchStone(zap.groundUnder);
                     }
+                }
+                else
+                {
+                    Quaternion quat = gfx.rotation;
+                    quat.eulerAngles = new Vector3(0f, 0f, 0f);
+                    gfx.rotation = quat;
                 }
                 break;
 
@@ -1761,11 +1780,11 @@ public class ZapControllerNormal : ZapController
         return true;
     }
 
-    float getGroundUnderAngle()
-    {
+    //float getGroundUnderAngle()
+    //{
 
-        return 0;
-    }
+    //    return 0;
+    //}
     // <0;-1> w lewo <0;1> w prawo 0 nie...
     float shouldSlideDown()
     {
@@ -2049,7 +2068,7 @@ public class ZapControllerNormal : ZapController
         return retVal;
     }
 
-    int Action_CROUCH_IN()
+    int ActionCrouchIn()
     {
         if (zap.currentActionTime >= CrouchInOutDuration)
         {
@@ -2058,7 +2077,7 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
-    int Action_GET_UP()
+    int ActionGetUp()
     {
         if (zap.currentActionTime >= CrouchInOutDuration)
         {
@@ -2068,7 +2087,7 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
-    int Action_CROUCH_IDLE()
+    int ActionCrouchIdle()
     {
         if (Input.GetMouseButtonDown(0))
         {

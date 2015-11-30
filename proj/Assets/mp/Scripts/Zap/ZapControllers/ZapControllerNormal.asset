@@ -19,8 +19,10 @@ MonoBehaviour:
   CrouchSpeed: 2.29999995
   MountSpeed: 2.5
   MountJumpDist: 10
-  SpeedUpParam: 10
-  SlowDownParam: 20
+  WalkSpeedUpParam: 10
+  WalkSlowDownParam: 20
+  RunSpeedUpParam: 10
+  RunSlowDownParam: 20
   FlyUserControlParam: 8
   FlyUpUserControlParam: 9
   FlySlowDownParam: 5
@@ -39,14 +41,14 @@ MonoBehaviour:
   RopeSwingForce: 4400
   RopeClimbSpeedUp: 1.5
   RopeClimbSpeedDown: 4
-  CLIMB_DURATION: 1
-  CLIMBDUR_PREPARE_TO_JUMP: .5
-  CLIMBDUR_JUMP_TO_CATCH: .200000003
-  CLIMBDUR_CATCH: .5
-  LANDING_HARD_DURATION: .300000012
-  TURN_LEFTRIGHT_DURATION: .0500000007
-  MOUNT_ATTACK_DURATION: .5
-  BIRD_HIT_DURATION: .330000013
+  ClimbDuration: 1.5
+  ClimbDurPrepareToJump: .5
+  ClimbDurJumpToCatch: .200000003
+  ClimbDurCatch: .5
+  LandingHardDuration: .300000012
+  TurnLefRrightDuration: .200000003
+  MountAttackDuration: .5
+  BirdHitDuration: .330000013
   ropeCatchSound: {fileID: 8300000, guid: c0b6a87efcf3ba945b03fb3ca4704761, type: 3}
   ropeSwingSound: {fileID: 8300000, guid: 954a68258b9d1fe478c1c32988a0a1e1, type: 3}
   mountCatchSound: {fileID: 0}

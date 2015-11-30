@@ -2112,62 +2112,72 @@ public class Zap : MonoBehaviour
         rayOrigin3.y += th;
         RaycastHit2D hit3 = Physics2D.Raycast(rayOrigin3, -Vector2.up, checkingDist, layerIdGroundAllMask);
 
-        //int closestSensor = 0;
-        RaycastHit2D closestHit = hit1;
+        ////int closestSensor = 0;
+        //RaycastHit2D closestHit = hit1;
 
-        if (hit2.collider != null)
-        {
-            if (closestHit.collider == null)
-            {
-                closestHit = hit2;
-            }
-            else
-            {
-                // if( hit2.distance < hit1.distance)
-            }
-        }
-
-
-        float dist1;
-        float dist2;
-        float dist3;
+        //if (hit2.collider != null)
+        //{
+        //    if (closestHit.collider == null)
+        //    {
+        //        closestHit = hit2;
+        //    }
+        //    else
+        //    {
+        //        // if( hit2.distance < hit1.distance)
+        //    }
+        //}
+        
+        //float dist1;
+        //float dist2;
+        //float dist3;
 
         if (hit1.collider != null)
         {
-            dist1 = rayOrigin1.y - hit1.point.y;
+            //dist1 = rayOrigin1.y - hit1.point.y;
             groundUnderFeet = hit1.collider.transform;
-            distToGround = dist1;
-            groundUnderAngle = Vector2.Angle(Vector2.up, hit.normal);
+            distToGround = hit1.distance; // dist1;
+            groundUnderAngle = Vector2.Angle(Vector2.up, hit1.normal);
             //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
         }
         if (hit2.collider != null)
         {
-            dist2 = rayOrigin2.y - hit2.point.y;
-            if (groundUnderFeet)
-            {
-                if (distToGround > dist2)
-                    distToGround = dist2;
-            }
-            else
+            //dist2 = rayOrigin2.y - hit2.point.y;
+            if (!groundUnderFeet || (distToGround > hit2.distance))
             {
                 groundUnderFeet = hit2.collider.transform;
-                distToGround = dist2;
-                //layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
+                distToGround = hit2.distance;
+                groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
             }
+            //}
+            //else
+            //{
+            //    groundUnderFeet = hit2.collider.transform;
+            //    distToGround = hit2.distance;
+            //    groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+            //    //layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
+            //}
         }
         if (hit3.collider != null)
         {
-            dist3 = rayOrigin3.y - hit3.point.y;
-            if (groundUnderFeet)
-            {
-                if (distToGround > dist3) distToGround = dist3;
-            }
-            else
+            if( !groundUnderFeet || (distToGround > hit3.distance))
             {
                 groundUnderFeet = hit3.collider.transform;
-                distToGround = dist3;
-                //layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
+                distToGround = hit3.distance;
+                groundUnderAngle = Vector2.Angle(Vector2.up, hit3.normal);
             }
+
+            //dist3 = rayOrigin3.y - hit3.point.y;
+            //if (groundUnderFeet)
+            //{
+            //    if (distToGround > dist3) distToGround = dist3;
+            //}
+            //else
+            //{
+            //    groundUnderFeet = hit3.collider.transform;
+            //    distToGround = dist3;
+            //    groundUnderAngle = Vector2.Angle(Vector2.up, hit3.normal);
+            //    //layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
+            //}
         }
 
         if (groundUnderFeet)
@@ -2313,6 +2323,10 @@ public class Zap : MonoBehaviour
         stateJustChanged = true;
 
         state = newState;
+
+        Quaternion quat = gfx.rotation;
+        quat.eulerAngles = new Vector3(0f, 0f, 0f);
+        gfx.rotation = quat;
 
         switch (state)
         {
@@ -2584,19 +2598,22 @@ public class Zap : MonoBehaviour
         }
     }
 
-    //public AudioSource MyAudio
-    //{
-    //    get
-    //    {
-    //        return myAudio;
-    //    }
+    public float GroundUnderAngle
+    {
+        get
+        {
+            return groundUnderAngle;
+        }
+    }
 
-    //    //set
-    //    //{
-    //    //    myAudio = value;
-    //    //}
-    //}
-
+    public Transform Gfx
+    {
+        get
+        {
+            return gfx;
+        }
+    }
+    
     [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]
@@ -2666,7 +2683,8 @@ public class Zap : MonoBehaviour
     RaycastHit2D hit2;
 
     public Transform groundUnder = null;
-    public float groundUnderAngle = 0f;
+    float groundUnderAngle = 0f;
+
 
     Collider2D lastIgnoredCollider = null;
 
