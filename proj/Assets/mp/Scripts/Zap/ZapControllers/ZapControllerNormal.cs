@@ -5,6 +5,7 @@ using System.Collections;
 //[System.Serializable]
 public class ZapControllerNormal : ZapController
 {
+    float CurrentJumpMaxSpeed = 0;
 
     public float WalkSpeed = 2.5f;
     public float RunSpeed = 5.7f;
@@ -195,7 +196,7 @@ public class ZapControllerNormal : ZapController
                     zap.turnLeft();
                     if (wantJumpAfter)
                     {
-                        jumpLeft();
+                        JumpWalkLeft();
                     }
                     else
                     {
@@ -218,7 +219,7 @@ public class ZapControllerNormal : ZapController
                     zap.turnRight();
                     if (wantJumpAfter)
                     {
-                        jumpRight();
+                        JumpWalkRight();
                     }
                     else
                     {
@@ -418,7 +419,7 @@ public class ZapControllerNormal : ZapController
 
                 zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
 
-                if (jumping(-1))
+                if (isInAction(Action.JumpLeft))
                 {
                     if (Input.GetKey(zap.keyRight))
                     {
@@ -426,7 +427,7 @@ public class ZapControllerNormal : ZapController
                         if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
                     }
                 }
-                else if (jumping(1))
+                else if (isInAction(Action.JumpRight))
                 {
                     if (Input.GetKey(zap.keyLeft))
                     {
@@ -811,19 +812,8 @@ public class ZapControllerNormal : ZapController
         TurnRunRight,
         PrepareToJump,
         Jump,
-        //JumpLeft,
-        //JumpLeftLong,
-        //JumpRight,
-        //JumpRightLong,
-
-        JumpWalkLeft,
-        JumpWalkRight,
-        JumpRunLeft,
-        JumpRunRight,
-
-        //JumpLeft,
-        //JumpRight,
-
+        JumpLeft,
+        JumpRight,
         CrouchIn,
         GetUp,
         CrouchIdle,
@@ -1015,24 +1005,15 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
-            case Action.JumpWalkLeft:
-            case Action.JumpWalkRight:
+            case Action.JumpLeft:
+            case Action.JumpRight:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
                 else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 
                 if (zap.jumpSounds.Length != 0)
                     zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
-
-            case Action.JumpRunLeft:
-            case Action.JumpRunRight:
-                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
-                else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
-
-                if (zap.jumpSounds.Length != 0)
-                    zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
-                break;
-
+                
             case Action.LandingHard:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_landing_hard_R");
                 else zap.AnimatorBody.Play("Zap_landing_hard_L");
@@ -1794,20 +1775,20 @@ public class ZapControllerNormal : ZapController
 
             case Action.WalkLeft:
                 if (canJump())
-                    jumpLeft();
+                    JumpWalkLeft();
                 break;
             case Action.WalkRight:
                 if (canJump())
-                    jumpRight();
+                    JumpWalkRight();
                 break;
 
             case Action.RunLeft:
                 if (canJump())
-                    jumpLongLeft();
+                    JumpRunLeft();
                 break;
             case Action.RunRight:
                 if (canJump())
-                    jumpLongRight();
+                    JumpRunRight();
                 break;
 
             case Action.MOUNT_IDLE:
@@ -1821,13 +1802,13 @@ public class ZapControllerNormal : ZapController
 
                 if (Input.GetKey(zap.keyLeft))
                 {
-                    jumpLeft();
+                    JumpWalkLeft();
                     return 0;
                 }
 
                 if (Input.GetKey(zap.keyRight))
                 {
-                    jumpRight();
+                    JumpWalkRight();
                     return 0;
                 }
 
@@ -1842,14 +1823,14 @@ public class ZapControllerNormal : ZapController
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
                 justJumpedMount = true;
-                jumpLeft();
+                JumpWalkLeft();
                 break;
 
             case Action.MOUNT_RIGHT:
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
                 justJumpedMount = true;
-                jumpRight();
+                JumpWalkRight();
                 break;
         };
 
@@ -2573,14 +2554,14 @@ public class ZapControllerNormal : ZapController
             if (zap.dir() == Vector2.right && Input.GetKey(zap.keyLeft))
             {
                 zap.turnLeft();
-                jumpLeft(true);
+                JumpWalkLeft(true);
                 catchedClimbHandle = null;
                 lastCatchedClimbHandle = null;
             }
             else if (Input.GetKey(zap.keyRight))
             {
                 zap.turnRight();
-                jumpRight(true);
+                JumpWalkRight(true);
                 catchedClimbHandle = null;
                 lastCatchedClimbHandle = null;
             }
@@ -3162,8 +3143,7 @@ public class ZapControllerNormal : ZapController
 
                 case Action.WalkLeft:
                 case Action.RunLeft:
-                case Action.JumpWalkLeft:
-                case Action.JumpRunLeft:
+                case Action.JumpLeft:
                     if (Input.GetKey(zap.keyLeft))
                     {
                         zap.velocity.x = 0.0f;
@@ -3187,8 +3167,7 @@ public class ZapControllerNormal : ZapController
 
                 case Action.WalkRight:
                 case Action.RunRight:
-                case Action.JumpWalkRight:
-                case Action.JumpRunRight:
+                case Action.JumpRight:
                     if (Input.GetKey(zap.keyRight))
                     {
                         zap.velocity.x = 0.0f;
@@ -3242,12 +3221,12 @@ public class ZapControllerNormal : ZapController
         lastFrameHande = false;
     }
 
-    void jumpLeft(bool fromClimb = false)
+    void JumpWalkLeft(bool fromClimb = false)
     {
         JumpLeftRight(-1, fromClimb);
     }
 
-    void jumpRight(bool fromClimb = false)
+    void JumpWalkRight(bool fromClimb = false)
     {
         JumpLeftRight(1, fromClimb);
     }
@@ -3266,17 +3245,18 @@ public class ZapControllerNormal : ZapController
             zap.AddImpulse(new Vector2(0.0f, JumpWalkImpulse));
         }
         zap.setState(Zap.State.IN_AIR);
-        setAction(jumpDir == 1 ? Action.JumpWalkRight : Action.JumpWalkLeft, fromClimb ? 1 : 0);
+        setAction(jumpDir == 1 ? Action.JumpRight : Action.JumpLeft, fromClimb ? 1 : 0);
+        CurrentJumpMaxSpeed = JumpWalkSpeed;
 
         lastFrameHande = false;
     }
 
-    void jumpLongLeft()
+    void JumpRunLeft()
     {
         JumpRunLeftRight(-1);
     }
 
-    void jumpLongRight()
+    void JumpRunRight()
     {
         JumpRunLeftRight(1);
     }
@@ -3287,7 +3267,8 @@ public class ZapControllerNormal : ZapController
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
-        setAction(jumpDir == 1 ? Action.JumpRunRight : Action.JumpRunLeft);
+        setAction(jumpDir == 1 ? Action.JumpRight : Action.JumpLeft);
+        CurrentJumpMaxSpeed = JumpRunMaxSpeed;
 
         lastFrameHande = false;
     }
@@ -3314,7 +3295,7 @@ public class ZapControllerNormal : ZapController
 
         if (wantJumpAfter)
         {
-            jumpLeft();
+            JumpWalkLeft();
 
             if (Input.GetKey(zap.keyJump))
                 canJumpAfter = false;
@@ -3332,7 +3313,7 @@ public class ZapControllerNormal : ZapController
 
         if (wantJumpAfter)
         {
-            jumpRight();
+            JumpWalkRight();
 
             if (Input.GetKey(zap.keyJump))
                 canJumpAfter = false;
@@ -3487,23 +3468,9 @@ public class ZapControllerNormal : ZapController
 
     bool jumping()
     {
-        return isInAction(Action.Jump) || isInAction(Action.JumpWalkLeft) || isInAction(Action.JumpRunLeft) 
-            || isInAction(Action.JumpWalkRight) || isInAction(Action.JumpRunRight);
+        return isInAction(Action.Jump) || isInAction(Action.JumpLeft) || isInAction(Action.JumpRight);
     }
-
-    bool jumping(int jumpdir)
-    {
-        if (jumpdir > 0)
-        {
-            return isInAction(Action.JumpWalkRight) || isInAction(Action.JumpRunRight);
-        }
-        else if (jumpdir < 0)
-        {
-            return isInAction(Action.JumpWalkLeft) || isInAction(Action.JumpRunLeft);
-        }
-        return false;
-    }
-
+    
     bool mounting()
     {
         return isInAction(Action.MOUNT_LEFT) || isInAction(Action.MOUNT_RIGHT)
@@ -3842,7 +3809,7 @@ public class ZapControllerNormal : ZapController
             if (Input.GetKey(zap.keyLeft) && (zap.canJumpBackFromRope || zapDir == -1) && !forceJumpOff)
             { //skacze w lewo
                 zap.turnLeft();
-                jumpLongLeft();
+                JumpRunLeft();
 
                 //if (ropeSpeed > 0f)
                 //{ // lina tez leci w lewo
@@ -3857,7 +3824,7 @@ public class ZapControllerNormal : ZapController
             else if (Input.GetKey(zap.keyRight) && (zap.canJumpBackFromRope || zapDir == 1) && !forceJumpOff)
             { //skacze w prawo
                 zap.turnRight();
-                jumpLongRight();
+                JumpRunRight();
                 //jumpRight();
 
                 //if (ropeSpeed < 0f)
