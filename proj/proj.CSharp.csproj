@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Assets\GGRayTest1.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
+    <Compile Include="Assets\NewZapTest.cs" />
     <Compile Include="Assets\mp\Scripts\Bird.cs" />
     <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
     <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
@@ -80,7 +79,6 @@
     <Compile Include="Assets\mp\Scripts\CameraResizer.cs" />
     <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
     <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
-    <Compile Include="Assets\mp\Scripts\Vector2Extension.cs" />
     <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
     <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
     <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
@@ -118,6 +116,7 @@
     <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
     <Compile Include="Assets\mp\Scripts\SwingAlpha.cs" />
     <Compile Include="Assets\mp\Scripts\Twitchable.cs" />
+    <Compile Include="Assets\mp\Scripts\Vector2Extension.cs" />
     <Compile Include="Assets\mp\Scripts\Water.cs" />
     <Compile Include="Assets\mp\Scripts\WeaponMenu.cs" />
     <Compile Include="Assets\mp\Scripts\WeaponMenuItem.cs" />
