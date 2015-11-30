@@ -25,6 +25,7 @@ public class ZapControllerNormal : ZapController
     public float WalkSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float RunSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
     public float RunSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
+    public float TurnRunSlowDownParam = 5.0f; // ile jednosek predkosci hamuje na sekunde
     public float CrouchSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
     public float CrouchSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float JumpLeftRightSlowDownParam = 8.0f; // ile przyspiesza na sekunde lecac
@@ -203,6 +204,17 @@ public class ZapControllerNormal : ZapController
                     {
                         setActionIdle();
                         resetActionAndState();
+                        if (moving(-1))
+                        {
+                            if (isInAction(Action.WalkLeft))
+                            {
+                                zap.velocity.x = Mathf.Max(-WalkSpeed, -beforTurnRunSpeed);
+                            }
+                            else if (isInAction(Action.RunLeft))
+                            {
+                                zap.velocity.x = Mathf.Max(-RunSpeed, -beforTurnRunSpeed);
+                            }
+                        }
                     }
                 }
                 else
@@ -226,6 +238,17 @@ public class ZapControllerNormal : ZapController
                     {
                         setActionIdle();
                         resetActionAndState();
+                        if (moving(1))
+                        {
+                            if (isInAction(Action.WalkRight))
+                            {
+                                zap.velocity.x = Mathf.Min(WalkSpeed, -beforTurnRunSpeed);
+                            }
+                            else if (isInAction(Action.RunRight))
+                            {
+                                zap.velocity.x = Mathf.Min(RunSpeed, -beforTurnRunSpeed);
+                            }
+                        }
                     }
                 }
                 else
@@ -973,6 +996,7 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.TurnRunLeft:
+                beforTurnRunSpeed = zap.velocity.x;
                 zap.AnimatorBody.Play("Zap_runback_R");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
@@ -980,6 +1004,7 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.TurnRunRight:
+                beforTurnRunSpeed = zap.velocity.x;
                 zap.AnimatorBody.Play("Zap_runback_L");
                 wantJumpAfter = false;
                 if (zap.turnRunSounds.Length != 0)
@@ -3450,9 +3475,9 @@ public class ZapControllerNormal : ZapController
 
     int TurningRun()
     {
-        if (isInAction(Action.RunRight))
+        if (isInAction(Action.TurnRunRight))
             return 1;
-        if (isInAction(Action.RunLeft))
+        if (isInAction(Action.TurnRunLeft))
             return -1;
         return 0;
     }
@@ -3693,6 +3718,8 @@ public class ZapControllerNormal : ZapController
                 speedUpParam = RunSpeedUpParam;
             else if (crouching())
                 speedUpParam = CrouchSpeedUpParam;
+            else if (TurningRun() != 0)
+                speedUpParam = 0f; // CrouchSpeedUpParam;
             else
                 Debug.LogError("checkSpeed");
 
@@ -3718,6 +3745,8 @@ public class ZapControllerNormal : ZapController
                 slowDownParam = RunSlowDownParam;
             else if( crouching() )
                 slowDownParam = CrouchSlowDownParam;
+            else if (TurningRun() != 0)
+                slowDownParam = TurnRunSlowDownParam;
             else
                 Debug.LogError("checkSpeed");
 
@@ -4429,6 +4458,7 @@ public class ZapControllerNormal : ZapController
     bool wantJumpAfter = false;
     bool canJumpAfter = true;
     float desiredSpeedX = 0.0f;
+    float beforTurnRunSpeed = 0f;
 
     Action action;
     public float CrouchInOutDuration = 0.2f;
