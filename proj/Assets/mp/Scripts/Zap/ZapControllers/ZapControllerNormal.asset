@@ -15,7 +15,7 @@ MonoBehaviour:
   RunSpeed: 6
   JumpWalkSpeed: 3.79999995
   JumpWalkImpulse: 7
-  JumpRunMaxSpeed: 4.9000001
+  JumpRunMaxSpeed: 8
   JumpRunImpulse: 7.1500001
   JumpFromClimbSpeed: 5.5
   JumpFromClimbImpulse: 5
