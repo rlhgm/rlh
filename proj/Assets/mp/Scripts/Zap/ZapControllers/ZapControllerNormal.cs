@@ -12,6 +12,7 @@ public class ZapControllerNormal : ZapController
     public float JumpWalkSpeed = 3.8f;
     public float JumpWalkImpulse = 7.0f;
     public float JumpRunMaxSpeed = 4.9f;
+    public float JumpRunMaxThreshold = 0.75f;
     public float JumpRunImpulse = 7.15f;
     public float JumpFromClimbSpeed = 5.5f;
     public float JumpFromClimbImpulse = 5.0f;
@@ -3263,7 +3264,13 @@ public class ZapControllerNormal : ZapController
 
     void JumpRunLeftRight(int jumpDir)
     {
-        zap.velocity.x = jumpDir * JumpRunMaxSpeed;
+        //zap.velocity.x = jumpDir * JumpRunMaxSpeed;
+        float runSpeedRatio = Mathf.Abs( zap.velocity.x / RunSpeed );
+        float jumpSpeedDiff = JumpRunMaxSpeed - JumpWalkSpeed;
+        //(1f / JumpRunMaxThreshold) +
+        float fromRunSpeedBonus = Mathf.Min(JumpRunMaxSpeed, (1f / JumpRunMaxThreshold) * runSpeedRatio * jumpSpeedDiff );
+
+        zap.velocity.x = jumpDir * (JumpWalkSpeed + fromRunSpeedBonus);
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
