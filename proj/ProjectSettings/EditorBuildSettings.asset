@@ -21,7 +21,5 @@ EditorBuildSettings:
     path: Assets/level4.unity
   - enabled: 0
     path: Assets/lvl1.unity
-  - enabled: 0
-    path: Assets/test3_rafalk.unity
   - enabled: 1
     path: Assets/world2_test.unity
