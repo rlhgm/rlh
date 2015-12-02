@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f5bc1531c17bf7e44970e0e532f732b3
-timeCreated: 1445637809
+timeCreated: 1448992239
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,10 @@ TextureImporter:
     21300010: Zap_walk_R_5
     21300012: Zap_walk_R_6
     21300014: Zap_walk_R_7
+    21300016: Zap_walk_R_8
+    21300018: Zap_walk_R_9
+    21300020: Zap_walk_R_10
+    21300022: Zap_walk_R_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -132,6 +136,46 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 448
+        y: 8
+        width: 64
+        height: 50
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_walk_R_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 8
+        width: 64
+        height: 50
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_walk_R_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 8
+        width: 64
+        height: 50
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_walk_R_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 8
+        width: 64
+        height: 50
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_walk_R_11
+      rect:
+        serializedVersion: 2
+        x: 704
         y: 8
         width: 64
         height: 50

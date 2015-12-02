@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f9b64a6379825994591d595ebff331ec
-timeCreated: 1445638351
+timeCreated: 1449012717
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,8 @@ TextureImporter:
     21300010: Zap_run_L_5
     21300012: Zap_run_L_6
     21300014: Zap_run_L_7
+    21300016: Zap_run_L_8
+    21300018: Zap_run_L_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -132,6 +134,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 448
+        y: 8
+        width: 64
+        height: 53
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_run_L_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 8
+        width: 64
+        height: 53
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_run_L_9
+      rect:
+        serializedVersion: 2
+        x: 576
         y: 8
         width: 64
         height: 53
