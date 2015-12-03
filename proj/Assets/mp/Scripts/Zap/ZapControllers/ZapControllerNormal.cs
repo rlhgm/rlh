@@ -28,6 +28,8 @@ public class ZapControllerNormal : ZapController
     public float TurnRunSlowDownParam = 5.0f; // ile jednosek predkosci hamuje na sekunde
     public float CrouchSpeedUpParam = 10.0f; // ile jednosek predkosci hamuje na sekund
     public float CrouchSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
+    public float JumpLeftRightSpeedUpParam = 8.0f; // ile przyspiesza na sekunde lecac
+    public float JumpLeftRightSpeedUpAfterCollideParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float JumpLeftRightSlowDownParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float JumpUpControlParam = 9.0f; // ile przyspiesza na sekunde lecac
     public bool JumpDirChangePossible = true;
@@ -462,6 +464,16 @@ public class ZapControllerNormal : ZapController
                             if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
                         }
                     }
+                    else if( Input.GetKey(zap.keyLeft) )
+                    {
+                        //public float JumpLeftRightSpeedUpParam = 8.0f; // ile przyspiesza na sekunde lecac
+                        //public float JumpLeftRightSpeedUpAfterCollideParam = 8.0f; // ile przyspiesza na sekunde lecac
+                        if (zap.velocity.x > jumpStartVelocity)
+                        {
+                            zap.velocity.x -= (JumpLeftRightSpeedUpParam * deltaTime);
+                            zap.velocity.x = Mathf.Max(zap.velocity.x, -JumpRunMaxSpeed);
+                        }
+                    }
                 }
                 else if (isInAction(Action.JumpRight))
                 {
@@ -471,6 +483,16 @@ public class ZapControllerNormal : ZapController
                         if (!JumpDirChangePossible)
                         {
                             if (zap.velocity.x < 0.0f) zap.velocity.x = 0.0f;
+                        }
+                    }
+                    else if (Input.GetKey(zap.keyRight))
+                    {
+                        //public float JumpLeftRightSpeedUpParam = 8.0f; // ile przyspiesza na sekunde lecac
+                        //public float JumpLeftRightSpeedUpAfterCollideParam = 8.0f; // ile przyspiesza na sekunde lecac
+                        if( zap.velocity.x < jumpStartVelocity )
+                        {
+                            zap.velocity.x += (JumpLeftRightSpeedUpParam * deltaTime);
+                            zap.velocity.x = Mathf.Min(zap.velocity.x, JumpRunMaxSpeed);
                         }
                     }
                 }
@@ -3275,6 +3297,8 @@ public class ZapControllerNormal : ZapController
         JumpLeftRight(1, fromClimb);
     }
 
+    float jumpStartVelocity = 0f;
+
     void JumpLeftRight(int jumpDir, bool fromClimb)
     {
         zap.velocity.y = 0.0f;
@@ -3288,6 +3312,7 @@ public class ZapControllerNormal : ZapController
             zap.velocity.x = jumpDir * JumpWalkSpeed;
             zap.AddImpulse(new Vector2(0.0f, JumpWalkImpulse));
         }
+        jumpStartVelocity = zap.velocity.x;
         zap.setState(Zap.State.IN_AIR);
         setAction(jumpDir == 1 ? Action.JumpRight : Action.JumpLeft, fromClimb ? 1 : 0);
         //CurrentJumpMaxSpeed = JumpWalkSpeed;
@@ -3314,6 +3339,7 @@ public class ZapControllerNormal : ZapController
         float fromRunSpeedBonus = Mathf.Min(JumpRunMaxSpeed, (1f / JumpRunMaxThreshold) * runSpeedRatio * jumpSpeedDiff );
 
         zap.velocity.x = jumpDir * (JumpWalkSpeed + fromRunSpeedBonus);
+        jumpStartVelocity = zap.velocity.x;
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
         zap.setState(Zap.State.IN_AIR);
