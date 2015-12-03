@@ -30,6 +30,7 @@ public class ZapControllerNormal : ZapController
     public float CrouchSlowDownParam = 20.0f; // ile jednosek predkosci hamuje na sekunde
     public float JumpLeftRightSlowDownParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float JumpUpControlParam = 9.0f; // ile przyspiesza na sekunde lecac
+    public bool JumpDirChangePossible = true;
     public float PushMaxSpeed = 2f;
     public float PullMaxSpeed = 2f;
     public float PushbackMaxSpeed = 1f;
@@ -456,7 +457,10 @@ public class ZapControllerNormal : ZapController
                     if (Input.GetKey(zap.keyRight))
                     {
                         zap.velocity.x += (JumpLeftRightSlowDownParam * deltaTime);
-                        if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
+                        if( !JumpDirChangePossible )
+                        {
+                            if (zap.velocity.x > 0.0f) zap.velocity.x = 0.0f;
+                        }
                     }
                 }
                 else if (isInAction(Action.JumpRight))
@@ -464,7 +468,10 @@ public class ZapControllerNormal : ZapController
                     if (Input.GetKey(zap.keyLeft))
                     {
                         zap.velocity.x -= (JumpLeftRightSlowDownParam * deltaTime);
-                        if (zap.velocity.x < 0.0f) zap.velocity.x = 0.0f;
+                        if (!JumpDirChangePossible)
+                        {
+                            if (zap.velocity.x < 0.0f) zap.velocity.x = 0.0f;
+                        }
                     }
                 }
                 else if (isInAction(Action.Jump))
@@ -481,15 +488,15 @@ public class ZapControllerNormal : ZapController
                         if (Mathf.Abs(zap.velocity.x) > JumpWalkSpeed)
                             zap.velocity.x = JumpWalkSpeed;
                     }
+                }
 
-                    if (zap.velocity.x > 0.0f)
-                    {
-                        zap.turnRight();
-                    }
-                    else if (zap.velocity.x < 0.0f)
-                    {
-                        zap.turnLeft();
-                    }
+                if (zap.velocity.x > 0.0f && zap.faceLeft())
+                {
+                    zap.turnRight();
+                }
+                else if (zap.velocity.x < 0.0f && zap.faceRight())
+                {
+                    zap.turnLeft();
                 }
 
                 Vector3 distToFall = new Vector3();

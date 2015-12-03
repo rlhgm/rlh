@@ -16,6 +16,7 @@ MonoBehaviour:
   JumpWalkSpeed: 3.79999995
   JumpWalkImpulse: 7
   JumpRunMaxSpeed: 8
+  JumpRunMaxThreshold: .75
   JumpRunImpulse: 7.1500001
   JumpFromClimbSpeed: 5.5
   JumpFromClimbImpulse: 5
@@ -27,10 +28,12 @@ MonoBehaviour:
   WalkSlowDownParam: 20
   RunSpeedUpParam: 4
   RunSlowDownParam: 20
+  TurnRunSlowDownParam: 5
   CrouchSpeedUpParam: 10
   CrouchSlowDownParam: 20
   JumpLeftRightSlowDownParam: 8
   JumpUpControlParam: 9
+  JumpDirChangePossible: 1
   PushMaxSpeed: 3
   PullMaxSpeed: 3
   PushbackMaxSpeed: 1
@@ -47,7 +50,9 @@ MonoBehaviour:
   ClimbDurJumpToCatch: .200000003
   ClimbDurCatch: .5
   LandingHardDuration: .300000012
-  TurnLefRrightDuration: .200000003
+  TurnWalkDuration: .200000003
+  TurnRunDuration: .529999971
+  TurnRunSlowDown: 1
   MountAttackDuration: .5
   BirdHitDuration: .330000013
   ropeCatchSound: {fileID: 8300000, guid: c0b6a87efcf3ba945b03fb3ca4704761, type: 3}
