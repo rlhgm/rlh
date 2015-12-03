@@ -60,6 +60,7 @@ public class ZapControllerNormal : ZapController
 
     public float TurnWalkDuration = 0.2f;
     public float TurnRunDuration = 0.53f;
+    public float TurnRunSlowDown = 1f;
     public float MountAttackDuration = 0.5f;
 
     public float BirdHitDuration = 0.33f;
@@ -210,10 +211,13 @@ public class ZapControllerNormal : ZapController
                             if (isInAction(Action.WalkLeft))
                             {
                                 zap.velocity.x = Mathf.Max(-WalkSpeed, -beforTurnRunSpeed);
+                                //zap.velocity.x += TurnRunSlowDown;
                             }
                             else if (isInAction(Action.RunLeft))
                             {
                                 zap.velocity.x = Mathf.Max(-RunSpeed, -beforTurnRunSpeed);
+                                zap.velocity.x += TurnRunSlowDown;
+                                zap.velocity.x = Mathf.Min(0f, zap.velocity.x);
                             }
                         }
                     }
@@ -244,10 +248,13 @@ public class ZapControllerNormal : ZapController
                             if (isInAction(Action.WalkRight))
                             {
                                 zap.velocity.x = Mathf.Min(WalkSpeed, -beforTurnRunSpeed);
+                                //zap.velocity.x -= TurnRunSlowDown;
                             }
                             else if (isInAction(Action.RunRight))
                             {
                                 zap.velocity.x = Mathf.Min(RunSpeed, -beforTurnRunSpeed);
+                                zap.velocity.x -= TurnRunSlowDown;
+                                zap.velocity.x = Mathf.Max(0f, zap.velocity.x);
                             }
                         }
                     }
