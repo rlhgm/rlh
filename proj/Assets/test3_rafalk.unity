@@ -9745,6 +9745,60 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
   m_PrefabInternal: {fileID: 557964365}
+--- !u!1001 &559354721
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1968783080}
+    m_Modifications:
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -112
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_RootOrder
+      value: 232
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108752, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_Name
+      value: tile_ground1_normal 49 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &559652700
 GameObject:
   m_ObjectHideFlags: 0
@@ -15273,6 +15327,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00ec497709d9f1841ae0fb138de32d7c, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &940798907 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+  m_PrefabInternal: {fileID: 559354721}
 --- !u!1001 &941607191
 Prefab:
   m_ObjectHideFlags: 0
@@ -19195,6 +19253,7 @@ GameObject:
   - 4: {fileID: 1124344883}
   - 212: {fileID: 1124344885}
   - 114: {fileID: 1124344884}
+  - 114: {fileID: 1124344886}
   m_Layer: 0
   m_Name: CameraCutSceneControlPoint
   m_TagString: Untagged
@@ -19252,6 +19311,17 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 299355da623b6ad44a75d9ec941605d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1124344886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1124344882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e9220c721501f4182d53dec023332c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1124648308
 Prefab:
   m_ObjectHideFlags: 0
@@ -25457,7 +25527,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -120
+      value: -113
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -33384,6 +33454,7 @@ Transform:
   - {fileID: 1525484236}
   - {fileID: 302799417}
   - {fileID: 323561808}
+  - {fileID: 940798907}
   m_Father: {fileID: 0}
   m_RootOrder: 12
 --- !u!1001 &1970228699
