@@ -28,9 +28,11 @@ MonoBehaviour:
   WalkSlowDownParam: 20
   RunSpeedUpParam: 4
   RunSlowDownParam: 20
-  TurnRunSlowDownParam: 5
+  TurnRunSlowDownParam: 100
   CrouchSpeedUpParam: 10
   CrouchSlowDownParam: 20
+  JumpLeftRightSpeedUpParam: 8
+  JumpLeftRightSpeedUpAfterCollideParam: 8
   JumpLeftRightSlowDownParam: 8
   JumpUpControlParam: 9
   JumpDirChangePossible: 1

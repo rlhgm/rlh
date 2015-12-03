@@ -2084,6 +2084,8 @@ public class ZapControllerNormal : ZapController
             wantJumpAfter = true;
         }
 
+        //Debug.Log(desiredSpeedX);
+
         bool speedReached = checkSpeed(dir);
         if (speedReached && desiredSpeedX == 0.0f)
         {
@@ -3768,6 +3770,7 @@ public class ZapControllerNormal : ZapController
     bool checkSpeed(int dir)
     {
         float speedX = Mathf.Abs(zap.velocity.x);
+        //Debug.Log("" + speedX);
 
         if (speedX < desiredSpeedX)
         { // trzeba przyspieszyc
@@ -3804,10 +3807,13 @@ public class ZapControllerNormal : ZapController
                 slowDownParam = WalkSlowDownParam;
             else if (running() != 0)
                 slowDownParam = RunSlowDownParam;
-            else if( crouching() )
+            else if (crouching())
                 slowDownParam = CrouchSlowDownParam;
             else if (TurningRun() != 0)
+            {
                 slowDownParam = TurnRunSlowDownParam;
+                Debug.Log(slowDownParam);
+            }
             else
                 Debug.LogError("checkSpeed");
 
@@ -3819,7 +3825,11 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.x = desiredSpeedX * dir;
                 return true;
             }
+
             zap.velocity.x = speedX * dir;
+
+            //Debug.Log("" + speedX);
+            //Debug.Log("++++++++++++++++++++++++++++++++++++++");
             return false;
         }
         return true;
