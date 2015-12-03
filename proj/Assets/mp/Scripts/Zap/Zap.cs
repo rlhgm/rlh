@@ -1470,27 +1470,7 @@ public class Zap : MonoBehaviour
         currentStateTime += deltaTime;
         currentActionTime += deltaTime;
 
-        if (!userJumpKeyPressed)
-        {
-            if (Input.GetKeyDown(keyJump))
-            {
-                timeFromJumpKeyPressed = 0.0f;
-                userJumpKeyPressed = true;
-            }
-        }
-        else
-        {
-            timeFromJumpKeyPressed += deltaTime;
-            if (timeFromJumpKeyPressed >= 0.06f)
-            {
-                timeFromJumpKeyPressed = 0.0f;
-                userJumpKeyPressed = false;
-                jumpKeyPressed = true;
-
-                currentController.keyJumpDown();
-            }
-        }
-
+        
         if (Input.GetKeyDown(keyUp))
         {
             currentController.keyUpDown();
@@ -1540,8 +1520,37 @@ public class Zap : MonoBehaviour
         {
             currentController.keyRunUp();
         }
+
+        if (!userJumpKeyPressed)
+        {
+            if (Input.GetKeyDown(keyJump))
+            {
+                if (Input.GetKey(keyLeft) || Input.GetKey(keyRight))
+                {
+                    print("niby biegne/ide");
+                    currentController.keyJumpDown();
+                }
+                else
+                {
+                    timeFromJumpKeyPressed = 0.0f;
+                    userJumpKeyPressed = true;
+                }
+            }
+        }
+        else
+        {
+            timeFromJumpKeyPressed += deltaTime;
+            if (timeFromJumpKeyPressed >= 0.06f)
+            {
+                timeFromJumpKeyPressed = 0.0f;
+                userJumpKeyPressed = false;
+                jumpKeyPressed = true;
+
+                currentController.keyJumpDown();
+            }
+        }
         
-        if( currentController != zapControllerGravityGun && zapControllerGravityGun == choosenController )
+        if ( currentController != zapControllerGravityGun && zapControllerGravityGun == choosenController )
         {
             zapControllerGravityGun.leftMouseNotPressed();
         }
