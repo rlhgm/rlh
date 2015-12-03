@@ -156,7 +156,7 @@ public class ZapControllerNormal : ZapController
                     return;
                 break;
             case Action.RunLeft:
-                if (Action_RUN(-1) != 0)
+                if (ActionRun(-1) != 0)
                     return;
                 break;
 
@@ -165,7 +165,7 @@ public class ZapControllerNormal : ZapController
                     return;
                 break;
             case Action.RunRight:
-                if (Action_RUN(1) != 0)
+                if (ActionRun(1) != 0)
                     return;
                 break;
 
@@ -980,9 +980,11 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.RunLeft:
+                zap.velocity.x = Mathf.Min(-WalkSpeed, zap.velocity.x);
                 zap.AnimatorBody.Play("Zap_run_L");
                 break;
             case Action.RunRight:
+                zap.velocity.x = Mathf.Max(WalkSpeed, zap.velocity.x);
                 zap.AnimatorBody.Play("Zap_run_R");
                 break;
 
@@ -1937,8 +1939,9 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
-    int Action_RUN(int dir)
+    int ActionRun(int dir)
     {
+        //Debug.Log(zap.velocity.x);
 
         if (Input.GetMouseButtonDown(0))
         {
