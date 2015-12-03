@@ -65,7 +65,7 @@ public class ZapControllerNormal : ZapController
     public float TurnRunDuration = 0.53f;
     public float TurnRunSlowDown = 1f;
     public float MountAttackDuration = 0.5f;
-
+    
     public float BirdHitDuration = 0.33f;
 
     public AudioClip ropeCatchSound = null;
@@ -132,12 +132,12 @@ public class ZapControllerNormal : ZapController
                 Action_LANDING_HARD();
                 break;
 
-            case Action.PrepareToJump:
-                if (zap.currentActionTime >= 0.2f)
-                {
-                    jump();
-                }
-                break;
+            //case Action.PrepareToJump:
+            //    if (zap.currentActionTime >= 0.2f)
+            //    {
+            //        jump();
+            //    }
+            //    break;
 
             case Action.CLIMB_PULLDOWN:
                 Action_CLIMB_PULLDOWN();
@@ -871,7 +871,7 @@ public class ZapControllerNormal : ZapController
         TurnStandRight,
         TurnRunLeft,
         TurnRunRight,
-        PrepareToJump,
+        //PrepareToJump,
         Jump,
         JumpLeft,
         JumpRight,
@@ -1050,10 +1050,10 @@ public class ZapControllerNormal : ZapController
                     zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
-            case Action.PrepareToJump:
-                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_in_R");
-                else zap.AnimatorBody.Play("Zap_jump_in_L");
-                break;
+            //case Action.PrepareToJump:
+            //    if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_in_R");
+            //    else zap.AnimatorBody.Play("Zap_jump_in_L");
+            //    break;
 
             case Action.Jump:
                 if (param == 0)
@@ -1834,7 +1834,24 @@ public class ZapControllerNormal : ZapController
                 if (isInState(Zap.State.ON_GROUND))
                 {
                     if (canJump())
-                        preparetojump();
+                    {
+                        //void preparetojump()
+                        //{
+                        if (isNotInState(Zap.State.ON_GROUND) || isNotInAction(Action.Idle))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            zap.velocity.x = 0.0f;
+                            zap.velocity.y = 0.0f;
+                            jump();
+                        }
+                        //    zap.velocity.x = 0.0f;
+                        //    zap.velocity.y = 0.0f;
+                        //    setAction(Action.PrepareToJump);
+                        //}
+                    }
                 }
                 break;
 
@@ -3259,15 +3276,15 @@ public class ZapControllerNormal : ZapController
         }
     }
 
-    void preparetojump()
-    {
-        if (isNotInState(Zap.State.ON_GROUND) || isNotInAction(Action.Idle))
-            return;
+    //void preparetojump()
+    //{
+    //    if (isNotInState(Zap.State.ON_GROUND) || isNotInAction(Action.Idle))
+    //        return;
 
-        zap.velocity.x = 0.0f;
-        zap.velocity.y = 0.0f;
-        setAction(Action.PrepareToJump);
-    }
+    //    zap.velocity.x = 0.0f;
+    //    zap.velocity.y = 0.0f;
+    //    setAction(Action.PrepareToJump);
+    //}
 
     void jump()
     {

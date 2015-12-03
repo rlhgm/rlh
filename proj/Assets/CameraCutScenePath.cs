@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraCutScenePath : MonoBehaviour {
+public class CameraCutScenePath : MonoBehaviour
+{
+    CameraCutSceneControlPoint first;
+    // Use this for initialization
+    void Start()
+    {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
