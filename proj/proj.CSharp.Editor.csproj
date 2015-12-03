@@ -122,7 +122,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\BezierCurveInspector.cs" />
+    <Compile Include="Assets\Editor\BezierSplineInspector.cs" />
     <Compile Include="Assets\Editor\GhostControllerNormalCreateAsset.cs" />
+    <Compile Include="Assets\Editor\LineInspector.cs" />
     <Compile Include="Assets\Editor\RLHEditor.cs" />
     <Compile Include="Assets\Editor\RLHOptionsWindow.cs" />
     <Compile Include="Assets\Editor\ScriptableObjectsUtility.cs" />

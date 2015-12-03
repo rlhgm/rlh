@@ -68,9 +68,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bezier.cs" />
+    <Compile Include="Assets\BezierControlPointMode.cs" />
+    <Compile Include="Assets\BezierCurve.cs" />
+    <Compile Include="Assets\BezierSpline.cs" />
+    <Compile Include="Assets\CameraCutSceneControlPoint.cs" />
+    <Compile Include="Assets\CameraCutScenePath.cs" />
     <Compile Include="Assets\GGRayTest1.cs" />
+    <Compile Include="Assets\Line.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
     <Compile Include="Assets\NewZapTest.cs" />
+    <Compile Include="Assets\SplineDecorator.cs" />
+    <Compile Include="Assets\SplineWalker.cs" />
+    <Compile Include="Assets\SplineWalkerMode.cs" />
     <Compile Include="Assets\mp\Scripts\Bird.cs" />
     <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
     <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />

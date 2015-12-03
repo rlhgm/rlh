@@ -1949,7 +1949,7 @@ public class ZapControllerNormal : ZapController
     int ActionRun(int dir)
     {
         //Debug.Log(zap.velocity.x);
-
+        Debug.DrawLine(transform.position, transform.position + new Vector3(1f, 5f, 0f));
         if (Input.GetMouseButtonDown(0))
         {
             int pullRes = zap.pullChoosenWeapon();
