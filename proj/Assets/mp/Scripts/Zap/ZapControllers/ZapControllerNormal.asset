@@ -11,30 +11,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2af7cdfa8f3434495b15874764b2e4, type: 3}
   m_Name: ZapControllerNormal
   m_EditorClassIdentifier: 
-  WalkSpeed: 3
-  RunSpeed: 6
+  WalkSpeed: 3.29999995
+  RunSpeed: 7.0999999
   JumpWalkSpeed: 3.79999995
-  JumpWalkImpulse: 7
-  JumpRunMaxSpeed: 8
-  JumpRunMaxThreshold: .75
-  JumpRunImpulse: 7.1500001
-  JumpFromClimbSpeed: 5.5
-  JumpFromClimbImpulse: 5
-  JumpFromClimbSideImpulse: 5
+  JumpWalkImpulse: 7.30000019
+  JumpRunMaxSpeed: 4.80000019
+  JumpRunMaxThreshold: .850000024
+  JumpRunImpulse: 7.30000019
+  JumpFromClimbSpeed: 4.69999981
+  JumpFromClimbImpulse: 3.0999999
+  JumpFromClimbSideImpulse: 4.80000019
   CrouchSpeed: 2.29999995
-  MountSpeed: 2.5
+  MountSpeed: 3.5
   MountJumpDist: 10
-  WalkSpeedUpParam: 2
+  WalkSpeedUpParam: 20
   WalkSlowDownParam: 20
-  RunSpeedUpParam: 4
+  RunSpeedUpParam: 3.5999999
   RunSlowDownParam: 20
-  TurnRunSlowDownParam: 100
+  TurnRunSlowDownParam: 10
   CrouchSpeedUpParam: 10
   CrouchSlowDownParam: 20
-  JumpLeftRightSpeedUpParam: 8
-  JumpLeftRightSpeedUpAfterCollideParam: 8
-  JumpLeftRightSlowDownParam: 8
-  JumpUpControlParam: 9
+  JumpLeftRightSpeedUpParam: 7
+  JumpLeftRightSpeedUpAfterCollideParam: 7
+  JumpLeftRightSlowDownParam: 7
+  JumpUpControlParam: 11
   JumpDirChangePossible: 1
   PushMaxSpeed: 3
   PullMaxSpeed: 3
@@ -52,8 +52,8 @@ MonoBehaviour:
   ClimbDurJumpToCatch: .200000003
   ClimbDurCatch: .5
   LandingHardDuration: .300000012
-  TurnWalkDuration: .200000003
-  TurnRunDuration: .529999971
+  TurnWalkDuration: 0
+  TurnRunDuration: .899999976
   TurnRunSlowDown: 1
   MountAttackDuration: .5
   BirdHitDuration: .330000013
