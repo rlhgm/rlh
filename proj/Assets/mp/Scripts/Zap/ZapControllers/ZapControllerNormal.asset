@@ -22,7 +22,7 @@ MonoBehaviour:
   JumpFromClimbImpulse: 3.0999999
   JumpFromClimbSideImpulse: 4.80000019
   CrouchSpeed: 2.29999995
-  MountSpeed: 3.5
+  MountSpeed: 2.70000005
   MountJumpDist: 10
   WalkSpeedUpParam: 20
   WalkSlowDownParam: 20
@@ -53,7 +53,7 @@ MonoBehaviour:
   ClimbDurCatch: .5
   LandingHardDuration: .300000012
   TurnWalkDuration: 0
-  TurnRunDuration: .899999976
+  TurnRunDuration: .699999988
   TurnRunSlowDown: 1
   MountAttackDuration: .5
   BirdHitDuration: .330000013
