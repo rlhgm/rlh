@@ -1936,8 +1936,8 @@ public class Zap : MonoBehaviour
             return null;
         }
 
-        distToObstacle = -1f;
-        return null;
+        //distToObstacle = -1f;
+        //return null;
 
         ////Vector2 rayOrigin = transform.position;
         ////rayOrigin.x -= (myHalfWidth + checkingDist);
@@ -2109,28 +2109,69 @@ public class Zap : MonoBehaviour
     {
         Vector2 rayOrigin = sensorDown2.position;
         rayOrigin.y += 0.5f;
-        hit = Physics2D.Raycast(rayOrigin, Vector2.right, checkingDist + 0.5f, layerIdGroundAllFullMask);
-        if (hit.collider != null)
+
+        if (!flying)
         {
-            float angle = Vector2.Angle(Vector2.up, hit.normal);
-            if (Mathf.Abs(angle) > 45.0f)
+            hit = Physics2D.Raycast(rayOrigin, Vector2.right, checkingDist + 0.5f, layerIdGroundAllFullMask);
+            if (hit.collider != null)
             {
-                distToObstacle = hit.distance + 0.5f;
-                return hit.transform;
+                float angle = Vector2.Angle(Vector2.up, hit.normal);
+                if (Mathf.Abs(angle) > 45.0f)
+                {
+                    distToObstacle = hit.distance - 0.5f;
+                    return hit.transform;
+                }
             }
-        }
-        else
-        {
+
             rayOrigin.x += (checkingDist + 0.5f);
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.395f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllFullMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
+                return hit.transform;
             }
-            return hit.transform;
+            distToObstacle = -1f;
+            return null;
         }
-        distToObstacle = -1f;
-        return null;
+        else
+        {
+            rayOrigin = sensorDown2.position;
+            rayOrigin.x += (checkingDist + 0.5f);
+            if (stateJustChanged) rayOrigin.y += 0.01f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.89f, layerIdGroundAllFullMask);
+            if (hit.collider)
+            {
+                distToObstacle = 0f;
+                return hit.transform;
+            }
+            distToObstacle = -1f;
+            return null;
+        }
+
+        //Vector2 rayOrigin = sensorDown2.position;
+        //rayOrigin.y += 0.5f;
+        //hit = Physics2D.Raycast(rayOrigin, Vector2.right, checkingDist + 0.5f, layerIdGroundAllFullMask);
+        //if (hit.collider != null)
+        //{
+        //    float angle = Vector2.Angle(Vector2.up, hit.normal);
+        //    if (Mathf.Abs(angle) > 45.0f)
+        //    {
+        //        distToObstacle = hit.distance + 0.5f;
+        //        return hit.transform;
+        //    }
+        //}
+        //else
+        //{
+        //    rayOrigin.x += (checkingDist + 0.5f);
+        //    hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.395f, layerIdGroundAllFullMask);
+        //    if (hit.collider)
+        //    {
+        //        distToObstacle = 0f;
+        //    }
+        //    return hit.transform;
+        //}
+        //distToObstacle = -1f;
+        //return null;
 
         //if (!stateJustChanged)
         //{
