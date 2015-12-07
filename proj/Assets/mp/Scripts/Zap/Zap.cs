@@ -1925,8 +1925,9 @@ public class Zap : MonoBehaviour
         {
             rayOrigin = sensorDown2.position;
             rayOrigin.x -= (checkingDist + 0.5f);
-            if( stateJustChanged ) rayOrigin.y += 0.01f;
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.89f, layerIdGroundAllFullMask);
+            //if( stateJustChanged )
+            rayOrigin.y += 0.5f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
@@ -2137,8 +2138,9 @@ public class Zap : MonoBehaviour
         {
             rayOrigin = sensorDown2.position;
             rayOrigin.x += (checkingDist + 0.5f);
-            if (stateJustChanged) rayOrigin.y += 0.01f;
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.89f, layerIdGroundAllFullMask);
+            //if (stateJustChanged) 
+            rayOrigin.y += 0.5f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
