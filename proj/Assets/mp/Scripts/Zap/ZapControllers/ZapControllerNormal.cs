@@ -375,6 +375,7 @@ public class ZapControllerNormal : ZapController
 
                 if (zap.jumpKeyPressed)
                 { //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
+                    Debug.Log("zap.jumpKeyPressed");
                     Vector3 fallDist = zap.startFallPos - transform.position;
                     if (!zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch))
                     {
