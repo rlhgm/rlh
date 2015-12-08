@@ -2368,6 +2368,7 @@ public class Zap : MonoBehaviour
     {
         Transform groundUnderFeet = null;
         groundUnderAngle = 0f;
+        distToGround = 100f;
 
         float th = 0.5f;
         float checkingDist = th + 0.1f;
@@ -2405,7 +2406,7 @@ public class Zap : MonoBehaviour
         //}
 
         //float dist1;
-        float dist2;
+        //float dist2;
         //float dist3;
 
         //if (hit1.collider != null)
@@ -2431,10 +2432,13 @@ public class Zap : MonoBehaviour
             
             if (hit2.collider != null)
             {
-                dist2 = rayOrigin2.y - hit2.point.y;
-                groundUnderFeet = hit2.collider.transform;
-                distToGround = hit2.distance; // dist1;
-                groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+                if (distToGround > hit2.distance)
+                {
+                    //dist2 = rayOrigin2.y - hit2.point.y;
+                    groundUnderFeet = hit2.collider.transform;
+                    distToGround = hit2.distance; // dist1;
+                    groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+                }
                 //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
 
                 ////dist2 = rayOrigin2.y - hit2.point.y;

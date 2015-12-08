@@ -2095,10 +2095,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 492138, guid: bbc60388b3e98af45abb88e2b3f27688, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 197856, guid: bbc60388b3e98af45abb88e2b3f27688, type: 2}
       propertyPath: m_Name
       value: tile_groundFar_normal (1)
