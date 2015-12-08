@@ -1900,7 +1900,7 @@ public class Zap : MonoBehaviour
 
         if (!flying)
         {
-            hit = Physics2D.Raycast(rayOrigin, Vector2.left, checkingDist + 0.5f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.left, checkingDist + 0.5f, layerIdGroundAllMask);
             if (hit.collider != null)
             {
                 float angle = Vector2.Angle(Vector2.up, hit.normal);
@@ -1912,7 +1912,7 @@ public class Zap : MonoBehaviour
             }
 
             rayOrigin.x -= (checkingDist + 0.5f);
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
@@ -1927,7 +1927,7 @@ public class Zap : MonoBehaviour
             rayOrigin.x -= (checkingDist + 0.5f);
             //if( stateJustChanged )
             rayOrigin.y += 0.5f;
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
@@ -2113,7 +2113,7 @@ public class Zap : MonoBehaviour
 
         if (!flying)
         {
-            hit = Physics2D.Raycast(rayOrigin, Vector2.right, checkingDist + 0.5f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.right, checkingDist + 0.5f, layerIdGroundAllMask);
             if (hit.collider != null)
             {
                 float angle = Vector2.Angle(Vector2.up, hit.normal);
@@ -2125,7 +2125,7 @@ public class Zap : MonoBehaviour
             }
 
             rayOrigin.x += (checkingDist + 0.5f);
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
@@ -2140,7 +2140,7 @@ public class Zap : MonoBehaviour
             rayOrigin.x += (checkingDist + 0.5f);
             //if (stateJustChanged) 
             rayOrigin.y += 0.5f;
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
@@ -2270,7 +2270,7 @@ public class Zap : MonoBehaviour
         Vector2 rayOrigin = sensorDown2.position;
         rayOrigin.x += 0.5f;
         rayOrigin.y += 0.5f;
-        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
         if (hit.collider)
         {
             Vector3 p = transform.position;
@@ -2287,7 +2287,7 @@ public class Zap : MonoBehaviour
             rayOrigin.y += 0.5f;
             //dist = 1.85;
         //}
-        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
         if (hit.collider)
         {
             Vector3 p = transform.position;
@@ -2306,46 +2306,62 @@ public class Zap : MonoBehaviour
     {
 
         //int layerIdMask = layerIdGroundAllMask;
-        Vector3 rayOrigin = sensorDown1.position;
+        ////Vector3 rayOrigin = sensorDown1.position;
         //RaycastHit2D hit = Physics2D.Raycast (rayOrigin, Vector2.right, myWidth, layerIdGroundPermeableMask);
         //if (hit.collider) {// jesetem wewnatrz wskakiwalnej platformy ... nie moge sie zatrzymac..
         //	layerIdMask = layerIdGroundMask;
         //}
 
-        rayOrigin = new Vector2(sensorDown1.position.x, sensorDown1.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
-        if (hit.collider != null)
+
+        Vector3 rayOrigin = sensorDown2.position;
+        RaycastHit2D[] _hits = Physics2D.RaycastAll(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        for (int i = 0; i < _hits.Length; ++i)
         {
-            //layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
-            //return Mathf.Abs(hit.point.y - sensorDown1.position.y);
-            return hit.distance;
-        }
-        else
-        {
-            rayOrigin = new Vector2(sensorDown2.position.x, sensorDown2.position.y);
-            hit = Physics2D.Raycast(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
-            if (hit.collider != null)
+            if (_hits[i].fraction == 0f) continue;
+
+            if (_hits[i].collider != null)
             {
                 //layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
                 //return Mathf.Abs(hit.point.y - sensorDown2.position.y);
-                return hit.distance;
-            }
-            else
-            {
-                rayOrigin = new Vector2(sensorDown3.position.x, sensorDown3.position.y);
-                hit = Physics2D.Raycast(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
-                if (hit.collider != null)
-                {
-                    //layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
-                    //return Mathf.Abs(hit.point.y - sensorDown3.position.y);
-                    return hit.distance;
-                }
-                else
-                {
-                    return -1.0f;
-                }
+                return _hits[i].distance;
             }
         }
+        return -1f;
+
+        //rayOrigin = new Vector2(sensorDown1.position.x, sensorDown1.position.y);
+        //RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        //if (hit.collider != null)
+        //{
+        //    //layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
+        //    //return Mathf.Abs(hit.point.y - sensorDown1.position.y);
+        //    return hit.distance;
+        //}
+        //else
+        //{
+        //    rayOrigin = new Vector2(sensorDown2.position.x, sensorDown2.position.y);
+        //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        //    if (hit.collider != null)
+        //    {
+        //        //layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
+        //        //return Mathf.Abs(hit.point.y - sensorDown2.position.y);
+        //        return hit.distance;
+        //    }
+        //    else
+        //    {
+        //        rayOrigin = new Vector2(sensorDown3.position.x, sensorDown3.position.y);
+        //        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        //        if (hit.collider != null)
+        //        {
+        //            //layerIdLastGroundTypeTouchedMask = 1 << hit.collider.transform.gameObject.layer;
+        //            //return Mathf.Abs(hit.point.y - sensorDown3.position.y);
+        //            return hit.distance;
+        //        }
+        //        else
+        //        {
+        //            return -1.0f;
+        //        }
+        //    }
+        //}
     }
 
     public void checkGround(ref float distToGround)
@@ -2353,25 +2369,25 @@ public class Zap : MonoBehaviour
         Transform groundUnderFeet = null;
         groundUnderAngle = 0f;
 
-        float th = 0.9f;
+        float th = 0.5f;
         float checkingDist = th + 0.1f;
         //if (fromFeet)
         //	checkingDist = 0.5f;
 
-        Vector2 rayOrigin1 = sensorDown1.position;
+        //Vector2 rayOrigin1 = sensorDown1.position;
         //if( !fromFeet )
-        rayOrigin1.y += th;
-        RaycastHit2D hit1 = Physics2D.Raycast(rayOrigin1, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        //rayOrigin1.y += th;
+        //RaycastHit2D hit1 = Physics2D.Raycast(rayOrigin1, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
 
         Vector2 rayOrigin2 = sensorDown2.position;
         //if( !fromFeet )
         rayOrigin2.y += th;
-        RaycastHit2D hit2 = Physics2D.Raycast(rayOrigin2, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        RaycastHit2D[] _hits2 = Physics2D.RaycastAll(rayOrigin2, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
 
-        Vector2 rayOrigin3 = sensorDown3.position;
+        //Vector2 rayOrigin3 = sensorDown3.position;
         //if( !fromFeet )
-        rayOrigin3.y += th;
-        RaycastHit2D hit3 = Physics2D.Raycast(rayOrigin3, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
+        //rayOrigin3.y += th;
+        //RaycastHit2D hit3 = Physics2D.Raycast(rayOrigin3, -Vector2.up, checkingDist, layerIdGroundAllFullMask);
 
         ////int closestSensor = 0;
         //RaycastHit2D closestHit = hit1;
@@ -2387,59 +2403,83 @@ public class Zap : MonoBehaviour
         //        // if( hit2.distance < hit1.distance)
         //    }
         //}
-        
+
         //float dist1;
-        //float dist2;
+        float dist2;
         //float dist3;
 
-        if (hit1.collider != null)
+        //if (hit1.collider != null)
+        //{
+        //    //dist1 = rayOrigin1.y - hit1.point.y;
+        //    groundUnderFeet = hit1.collider.transform;
+        //    distToGround = hit1.distance; // dist1;
+        //    groundUnderAngle = Vector2.Angle(Vector2.up, hit1.normal);
+        //    //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
+        //}
+        //if( _hits2.Length > 1)
+        //{
+        //    print("============================");
+        //}
+        for (int i = 0; i < _hits2.Length; ++i)
         {
-            //dist1 = rayOrigin1.y - hit1.point.y;
-            groundUnderFeet = hit1.collider.transform;
-            distToGround = hit1.distance; // dist1;
-            groundUnderAngle = Vector2.Angle(Vector2.up, hit1.normal);
-            //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
-        }
-        if (hit2.collider != null)
-        {
-            //dist2 = rayOrigin2.y - hit2.point.y;
-            if (!groundUnderFeet || (distToGround > hit2.distance))
-            {
-                groundUnderFeet = hit2.collider.transform;
-                distToGround = hit2.distance;
-                groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
-            }
-            //}
-            //else
-            //{
-            //    groundUnderFeet = hit2.collider.transform;
-            //    distToGround = hit2.distance;
-            //    groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
-            //    //layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
-            //}
-        }
-        if (hit3.collider != null)
-        {
-            if( !groundUnderFeet || (distToGround > hit3.distance))
-            {
-                groundUnderFeet = hit3.collider.transform;
-                distToGround = hit3.distance;
-                groundUnderAngle = Vector2.Angle(Vector2.up, hit3.normal);
-            }
+            hit2 = _hits2[i];
 
-            //dist3 = rayOrigin3.y - hit3.point.y;
-            //if (groundUnderFeet)
-            //{
-            //    if (distToGround > dist3) distToGround = dist3;
-            //}
-            //else
-            //{
-            //    groundUnderFeet = hit3.collider.transform;
-            //    distToGround = dist3;
-            //    groundUnderAngle = Vector2.Angle(Vector2.up, hit3.normal);
-            //    //layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
-            //}
+            if (hit2.fraction == 0f) continue;
+
+            //if (_hits2.Length > 1)
+            //    print(hit2.fraction);
+            
+            if (hit2.collider != null)
+            {
+                dist2 = rayOrigin2.y - hit2.point.y;
+                groundUnderFeet = hit2.collider.transform;
+                distToGround = hit2.distance; // dist1;
+                groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+                //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
+
+                ////dist2 = rayOrigin2.y - hit2.point.y;
+                //if (!groundUnderFeet || (distToGround > hit2.distance))
+                //{
+                //    groundUnderFeet = hit2.collider.transform;
+                //    distToGround = hit2.distance;
+                //    groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+                //}
+                ////}
+                ////else
+                ////{
+                ////    groundUnderFeet = hit2.collider.transform;
+                ////    distToGround = hit2.distance;
+                ////    groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+                ////    //layerIdLastGroundTypeTouchedMask = 1 << hit2.collider.transform.gameObject.layer;
+                ////}
+            }
         }
+        //if (_hits2.Length > 1)
+        //{
+        //    print("============================");
+        //}
+        //if (hit3.collider != null)
+        //{
+        //    if( !groundUnderFeet || (distToGround > hit3.distance))
+        //    {
+        //        groundUnderFeet = hit3.collider.transform;
+        //        distToGround = hit3.distance;
+        //        groundUnderAngle = Vector2.Angle(Vector2.up, hit3.normal);
+        //    }
+
+        //    //dist3 = rayOrigin3.y - hit3.point.y;
+        //    //if (groundUnderFeet)
+        //    //{
+        //    //    if (distToGround > dist3) distToGround = dist3;
+        //    //}
+        //    //else
+        //    //{
+        //    //    groundUnderFeet = hit3.collider.transform;
+        //    //    distToGround = dist3;
+        //    //    groundUnderAngle = Vector2.Angle(Vector2.up, hit3.normal);
+        //    //    //layerIdLastGroundTypeTouchedMask = 1 << hit3.collider.transform.gameObject.layer;
+        //    //}
+        //}
 
         if (groundUnderFeet)
         {
