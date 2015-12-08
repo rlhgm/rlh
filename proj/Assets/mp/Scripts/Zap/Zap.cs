@@ -2265,6 +2265,43 @@ public class Zap : MonoBehaviour
         //return null;
     }
 
+    void pushOutLeft(bool flying)
+    {
+        Vector2 rayOrigin = sensorDown2.position;
+        rayOrigin.x += 0.5f;
+        rayOrigin.y += 0.5f;
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
+        if (hit.collider)
+        {
+            Vector3 p = transform.position;
+            p.x -= 2f * CurrentDeltaTime;
+            transform.position = p;
+        }
+    }
+    void pushOutRight(bool flying)
+    {
+        Vector2 rayOrigin = sensorDown2.position;
+        rayOrigin.x -= 0.5f;
+        //if (flying)
+        //{ 
+            rayOrigin.y += 0.5f;
+            //dist = 1.85;
+        //}
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.85f, layerIdGroundAllFullMask);
+        if (hit.collider)
+        {
+            Vector3 p = transform.position;
+            p.x += 2f * CurrentDeltaTime;
+            transform.position = p;
+        }
+    }
+
+    public void pushOutFromObstacles(bool flying)
+    {
+        pushOutLeft(flying);
+        pushOutRight(flying);
+    }
+
     public float checkDown(float checkingDist)
     {
 

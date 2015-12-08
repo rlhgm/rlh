@@ -640,6 +640,8 @@ public class ZapControllerNormal : ZapController
                     }
                 }
 
+                zap.pushOutFromObstacles(true);
+
                 break;
 
             case Zap.State.DEAD:
@@ -787,6 +789,12 @@ public class ZapControllerNormal : ZapController
                     //zap.SetRotation(0f);
                     zap.SetGfxRotation(0f);
                 }
+
+                if (isInAction(Action.Idle))
+                {
+                    zap.pushOutFromObstacles(false);
+                }
+
                 break;
 
             case Zap.State.CLIMB_ROPE:
@@ -801,9 +809,8 @@ public class ZapControllerNormal : ZapController
 
                 break;
         };
-
+        
         zap.lastVelocity = zap.velocity;
-
     }
 
     public override void FUpdate(float fDeltaTime)
