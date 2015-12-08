@@ -35,6 +35,7 @@ MonoBehaviour:
   JumpLeftRightSpeedUpAfterCollideParam: 7
   JumpLeftRightSlowDownParam: 7
   JumpUpControlParam: 11
+  JumpRunMaxSpeedSlowDown: 9
   JumpDirChangePossible: 1
   PushMaxSpeed: 3
   PullMaxSpeed: 3

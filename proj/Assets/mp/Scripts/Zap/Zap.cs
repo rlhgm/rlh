@@ -1530,7 +1530,7 @@ public class Zap : MonoBehaviour
             {
                 if (Input.GetKey(keyLeft) || Input.GetKey(keyRight))
                 {
-                    print("niby biegne/ide");
+                    //print("niby biegne/ide");
                     currentController.keyJumpDown();
                 }
                 else

@@ -13,7 +13,7 @@ public class ZapControllerNormal : ZapController
     public float JumpWalkImpulse = 7.0f;
     public float JumpRunMaxSpeed = 4.9f;
     public float JumpRunMaxThreshold = 0.75f;
-    public float JumpRunImpulse = 7.15f;
+    public float JumpRunImpulse = 7.15f;    
     public float JumpFromClimbSpeed = 5.5f;
     public float JumpFromClimbImpulse = 5.0f;
     public float JumpFromClimbSideImpulse = 5.0f;
@@ -32,6 +32,7 @@ public class ZapControllerNormal : ZapController
     public float JumpLeftRightSpeedUpAfterCollideParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float JumpLeftRightSlowDownParam = 8.0f; // ile przyspiesza na sekunde lecac
     public float JumpUpControlParam = 9.0f; // ile przyspiesza na sekunde lecac
+    public float JumpRunMaxSpeedSlowDown = 9.0f;
     public bool JumpDirChangePossible = true;
     public float PushMaxSpeed = 2f;
     public float PullMaxSpeed = 2f;
@@ -453,6 +454,7 @@ public class ZapControllerNormal : ZapController
                 }
 
                 zap.AddImpulse(new Vector2(0.0f, GravityForce * deltaTime));
+                CurrentJumpRunMaxSpeed = Mathf.Max(0.0f, CurrentJumpRunMaxSpeed-(deltaTime * JumpRunMaxSpeedSlowDown));
 
                 if (isInAction(Action.JumpLeft))
                 {
@@ -471,9 +473,11 @@ public class ZapControllerNormal : ZapController
                         if (zap.velocity.x > jumpStartVelocity)
                         {
                             zap.velocity.x -= (JumpLeftRightSpeedUpParam * deltaTime);
-                            zap.velocity.x = Mathf.Max(zap.velocity.x, -JumpRunMaxSpeed);
+                            //zap.velocity.x = Mathf.Max(zap.velocity.x, -JumpRunMaxSpeed);
+                            //zap.velocity.x = Mathf.Max(zap.velocity.x, -CurrentJumpRunMaxSpeed);
                         }
                     }
+                    zap.velocity.x = Mathf.Max(zap.velocity.x, -CurrentJumpRunMaxSpeed);
                 }
                 else if (isInAction(Action.JumpRight))
                 {
@@ -492,9 +496,11 @@ public class ZapControllerNormal : ZapController
                         if( zap.velocity.x < jumpStartVelocity )
                         {
                             zap.velocity.x += (JumpLeftRightSpeedUpParam * deltaTime);
-                            zap.velocity.x = Mathf.Min(zap.velocity.x, JumpRunMaxSpeed);
+                            //zap.velocity.x = Mathf.Min(zap.velocity.x, JumpRunMaxSpeed);
+                            //zap.velocity.x = Mathf.Min(zap.velocity.x, CurrentJumpRunMaxSpeed);
                         }
                     }
+                    zap.velocity.x = Mathf.Min(zap.velocity.x, CurrentJumpRunMaxSpeed);
                 }
                 else if (isInAction(Action.Jump))
                 {
@@ -2942,7 +2948,7 @@ public class ZapControllerNormal : ZapController
     {
         if (zap.currentActionTime >= 0.09f/*PushbackInDuration*/)
         {
-            Debug.Log("ActionPushbackIn : " + zap.currentActionTime );
+            //Debug.Log("ActionPushbackIn : " + zap.currentActionTime );
             PushbackStart(pushPullObstacle);
         }
         return 0;
@@ -3068,7 +3074,7 @@ public class ZapControllerNormal : ZapController
 
     void PushbackInStart(Transform obstacle)
     {
-        Debug.Log("PushbackInStart : " + obstacle);
+        //Debug.Log("PushbackInStart : " + obstacle);
         zap.velocity.x = 0.0f;
         pushPullObstacle = obstacle;
         if (zap.faceRight())
@@ -3324,6 +3330,7 @@ public class ZapControllerNormal : ZapController
     }
 
     float jumpStartVelocity = 0f;
+    float CurrentJumpRunMaxSpeed = 0f;
 
     void JumpLeftRight(int jumpDir, bool fromClimb)
     {
@@ -3339,6 +3346,7 @@ public class ZapControllerNormal : ZapController
             zap.AddImpulse(new Vector2(0.0f, JumpWalkImpulse));
         }
         jumpStartVelocity = zap.velocity.x;
+        CurrentJumpRunMaxSpeed = JumpRunMaxSpeed;
         zap.setState(Zap.State.IN_AIR);
         setAction(jumpDir == 1 ? Action.JumpRight : Action.JumpLeft, fromClimb ? 1 : 0);
         //CurrentJumpMaxSpeed = JumpWalkSpeed;
@@ -3365,6 +3373,7 @@ public class ZapControllerNormal : ZapController
         float fromRunSpeedBonus = Mathf.Min(JumpRunMaxSpeed, (1f / JumpRunMaxThreshold) * runSpeedRatio * jumpSpeedDiff );
 
         zap.velocity.x = jumpDir * (JumpWalkSpeed + fromRunSpeedBonus);
+        CurrentJumpRunMaxSpeed = JumpRunMaxSpeed;
         jumpStartVelocity = zap.velocity.x;
         zap.velocity.y = 0.0f;
         zap.AddImpulse(new Vector2(0.0f, JumpRunImpulse));
@@ -3819,7 +3828,7 @@ public class ZapControllerNormal : ZapController
             else if (TurningRun() != 0)
             {
                 slowDownParam = TurnRunSlowDownParam;
-                Debug.Log(slowDownParam);
+                //Debug.Log(slowDownParam);
             }
             else
                 Debug.LogError("checkSpeed");
