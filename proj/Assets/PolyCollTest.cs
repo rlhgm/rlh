@@ -4,14 +4,39 @@ using System.Collections;
 public class PolyCollTest : MonoBehaviour
 {
     PolygonCollider2D coll;
+    Rigidbody2D body;
+    bool lastSleeping = false;
+
     Vector2[] normals;
+
     // Use this for initialization
     void Start()
     {
         coll = GetComponent<PolygonCollider2D>();
-        normals = new Vector2[coll.points.Length];
+        body = GetComponent<Rigidbody2D>();
 
-        //print("===================");
+        normals = new Vector2[coll.points.Length];
+        lastSleeping = false;
+
+        calculateNormals();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if( body )
+        {
+            bool currentSleeping = body.IsSleeping();
+
+            if( currentSleeping)
+            {
+                drawNormals();
+            }
+        }
+    }
+
+    void calculateNormals()
+    {
         int i = 0;
         for (; i < coll.points.Length - 1; ++i)
         {
@@ -21,8 +46,13 @@ public class PolyCollTest : MonoBehaviour
         addNormal(i, coll.points[i], coll.points[0]);
     }
 
-    // Update is called once per frame
-    void Update()
+    void addNormal(int index, Vector2 p1, Vector2 p2)
+    {
+        Vector2 diff = p2 - p1;
+        normals[index] = diff.Rotate(90).normalized * 0.25f;
+    }
+
+    void drawNormals()
     {
         int i = 0;
         for (; i < coll.points.Length - 1; ++i)
@@ -30,12 +60,6 @@ public class PolyCollTest : MonoBehaviour
             drawNormal(coll.points[i], coll.points[i + 1], i);
         }
         drawNormal(coll.points[i], coll.points[0], i);
-    }
-
-    void addNormal(int index, Vector2 p1, Vector2 p2)
-    {
-        Vector2 diff = p2 - p1;
-        normals[index] = diff.Rotate(90).normalized * 0.25f;
     }
 
     //Vector2 p1;
