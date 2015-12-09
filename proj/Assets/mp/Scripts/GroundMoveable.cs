@@ -121,12 +121,17 @@ public class GroundMoveable : MonoBehaviour
         float left = coll.offset.x - (coll.size.x * 0.5f);
         float right = coll.offset.x + (coll.size.x * 0.5f);
         
-        handles[0] = transform.TransformPoint(new Vector3(left, btm, 0f));
-        handles[1] = transform.TransformPoint(new Vector3(right, btm, 0f));
-        handles[2] = transform.TransformPoint(new Vector3(right, top, 0f));
-        handles[3] = transform.TransformPoint(new Vector3(left, top, 0f));
+        handles[0] = new Vector2(left, btm);
+        handles[1] = new Vector2(right, btm);
+        handles[2] = new Vector2(right, top);
+        handles[3] = new Vector2(left, top);
 
         isClockwise = PolygonIsClockwise(handles);
+
+        handles[0] = transform.TransformPoint(handles[0]);
+        handles[1] = transform.TransformPoint(handles[1]);
+        handles[2] = transform.TransformPoint(handles[2]);
+        handles[3] = transform.TransformPoint(handles[3]);
 
         int i = 0;
         for (; i < handles.Length - 1; ++i)
