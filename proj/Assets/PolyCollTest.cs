@@ -24,11 +24,11 @@ public class PolyCollTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( body )
+        //if( body )
         {
-            bool currentSleeping = body.IsSleeping();
+            //bool currentSleeping = body.IsSleeping();
 
-            if( currentSleeping)
+          //  if( currentSleeping)
             {
                 drawNormals();
             }
