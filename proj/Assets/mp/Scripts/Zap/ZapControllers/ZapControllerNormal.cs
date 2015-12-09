@@ -4044,6 +4044,7 @@ public class ZapControllerNormal : ZapController
                     climbBeforePos = transform.position;
                     climbAfterPos = newPos;
                     climbAfterPos2 = handlePos;
+                    climbAfterPos2.x += 0.1f;
                     climbDistToClimb = climbAfterPos - climbBeforePos;
                     climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
@@ -4095,6 +4096,7 @@ public class ZapControllerNormal : ZapController
                         climbBeforePos = transform.position;
                         climbAfterPos = newPos;
                         climbAfterPos2 = handlePos;
+                        climbAfterPos2.x += 0.1f;
                         climbDistToClimb = climbAfterPos - climbBeforePos;
                         climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
@@ -4162,6 +4164,7 @@ public class ZapControllerNormal : ZapController
                     climbBeforePos = transform.position;
                     climbAfterPos = newPos;
                     climbAfterPos2 = handlePos;
+                    climbAfterPos2.x -= 0.1f;
                     climbDistToClimb = climbAfterPos - climbBeforePos;
                     climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
@@ -4224,6 +4227,7 @@ public class ZapControllerNormal : ZapController
                         climbBeforePos = transform.position;
                         climbAfterPos = newPos;
                         climbAfterPos2 = handlePos;
+                        climbAfterPos2.x -= 0.1f;
                         climbDistToClimb = climbAfterPos - climbBeforePos;
                         climbToJumpDuration = climbDistToClimb.magnitude * _speed;
 
