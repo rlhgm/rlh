@@ -270,8 +270,25 @@ public class GroundMoveable : MonoBehaviour
         return (sum < 0) ? false : true;
     }
 
-    public bool handleToPullDownTouched(Vector2 zapDir, Vector3 worldTouch, ref Vector2 handle, float maxTilt = 5f, float maxDist = 0.25f)
+    public bool handleToPullDownTouched(Vector2 zapDir, Vector2 worldTouch, ref Vector2 handle, float maxDist = 0.25f)
     {
+
+        //if ((topRight - worldTouch).magnitude < maxDist)
+        //    //        {
+        //    //            handle = topRight;
+        //    //            return true;
+        //    //        }
+
+        for( int i = 0; i < handles.Length; ++i)
+        {
+            if (!handlesActive[i]) continue;
+            handle = handles[i];
+            if( (handle-worldTouch).magnitude < maxDist )
+            {
+                return true;
+            }
+        }
+
         return false;
 
         //float rot = transform.rotation.eulerAngles.z;

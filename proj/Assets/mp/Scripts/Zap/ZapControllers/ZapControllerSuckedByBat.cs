@@ -3643,7 +3643,7 @@ public class ZapControllerSuckedByBat : ZapController
             if (hit.collider)
             {
                 ro.x += 0.4f;
-                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle, zap.maxHandStoneTilt))
+                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     //Debug.Log(_handle);
                     // tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
@@ -4034,7 +4034,7 @@ public class ZapControllerSuckedByBat : ZapController
             if (gm)
             {
                 Vector2 _handle = new Vector2();
-                if (gm.handleToPullDownTouched(zap.dir(), transform.position, ref _handle, 5f, 0.51f))
+                if (gm.handleToPullDownTouched(zap.dir(), transform.position, ref _handle, 0.51f))
                 {
                     climbAfterPos2 = _handle;
                     return zap.groundUnder.gameObject;
