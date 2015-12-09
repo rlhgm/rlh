@@ -116,13 +116,25 @@ public class GroundMoveable : MonoBehaviour
 
     void UpdateWorldNormalsAndHandles(BoxCollider2D coll)
     {
-        //int i = 0;
-        //for (; i < coll.points.Length - 1; ++i)
-        //{
-        //    //print(coll.points[i]);
-        //    addNormal(i, coll.points[i], coll.points[i + 1]);
-        //}
-        //addNormal(i, coll.points[i], coll.points[0]);
+        float top = coll.offset.y + (coll.size.y * 0.5f);
+        float btm = coll.offset.y - (coll.size.y * 0.5f);
+        float left = coll.offset.x - (coll.size.x * 0.5f);
+        float right = coll.offset.x + (coll.size.x * 0.5f);
+        
+        handles[0] = transform.TransformPoint(new Vector3(left, btm, 0f));
+        handles[1] = transform.TransformPoint(new Vector3(right, btm, 0f));
+        handles[2] = transform.TransformPoint(new Vector3(right, top, 0f));
+        handles[3] = transform.TransformPoint(new Vector3(left, top, 0f));
+
+        isClockwise = PolygonIsClockwise(handles);
+
+        int i = 0;
+        for (; i < handles.Length - 1; ++i)
+        {
+            AddNormal2(i, handles[i], handles[i + 1]);
+        }
+        AddNormal2(i, handles[i], handles[0]);
+        UpdateHandlesActivated();
     }
 
     void UpdateHandlesActivated()
@@ -166,6 +178,17 @@ public class GroundMoveable : MonoBehaviour
 
         Vector2 diff = pn2 - pn1;
         normals[index] = diff.Rotate(isClockwise?90:-90).normalized * 0.25f;
+
+        //float wnAngle = Vector2.Angle(Vector2.up, normals[index]);
+        //handlesActive[index] = Mathf.Abs(wnAngle) < 45.0f;
+    }
+    void AddNormal2(int index, Vector2 p1, Vector2 p2)
+    {
+        //pn1 = transform.TransformPoint(p1);
+        //pn2 = transform.TransformPoint(p2);
+
+        Vector2 diff = p2 - p1;
+        normals[index] = diff.Rotate(isClockwise ? 90 : -90).normalized * 0.25f;
 
         //float wnAngle = Vector2.Angle(Vector2.up, normals[index]);
         //handlesActive[index] = Mathf.Abs(wnAngle) < 45.0f;
