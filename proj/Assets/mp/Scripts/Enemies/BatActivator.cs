@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BatActivator : MonoBehaviour
 {
-    public Bat[] bats;
+    //public Bat[] bats;
+    public List<Bat> bats;
     bool _zapIn = false;
 
     public bool ZapIn
@@ -36,6 +38,20 @@ public class BatActivator : MonoBehaviour
       //  print("BatActivator::OnTriggerEnter2D " + other.name);
         _zapIn = true;
         foreach( Bat bat in bats )
+        {
+            if (bat)
+            {
+                bat.ZapIsHere();
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (_zapIn) return;
+
+        _zapIn = true;
+        foreach (Bat bat in bats)
         {
             if (bat)
             {

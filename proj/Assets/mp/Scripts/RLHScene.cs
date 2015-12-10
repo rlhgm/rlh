@@ -12,6 +12,8 @@ public class RLHScene : MonoBehaviour
 
     private static RLHScene _scene = null;
 
+    public ZapVSTheHostsOfBats ZapVsBats = null;
+
     Zap zap = null;
     //Rat[] rats;
     List<Rat> rats = new List<Rat>(32);

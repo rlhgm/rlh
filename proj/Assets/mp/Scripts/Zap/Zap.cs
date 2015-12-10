@@ -496,6 +496,8 @@ public class Zap : MonoBehaviour
 
     public void die(DeathType deathType)
     {
+        RlhScene.ZapVsBats.ZapDead();
+
         if( suckedMeBat )
         {
             suckedMeBat.StopSuckZap();
@@ -539,6 +541,8 @@ public class Zap : MonoBehaviour
 
     public void reborn()
     {
+        RlhScene.ZapVsBats.ZapReborn();
+
         //Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
         //foreach (Parallaxed px in pxs)
         //{

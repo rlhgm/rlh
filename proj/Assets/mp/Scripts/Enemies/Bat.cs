@@ -38,6 +38,7 @@ public class Bat : Enemy //MonoBehaviour
 
     public override void Reset()
     {
+        
         //gameObject.(true);
         GetComponent<BoxCollider2D>().enabled = true;
         myGfx.gameObject.SetActive(true);
@@ -947,7 +948,9 @@ public class Bat : Enemy //MonoBehaviour
     {
         if (IsInState(State.Dead)) return;
 
-        print(name + " cutted");
+        RLHScene.Instance.ZapVsBats.BatDead(this);
+
+        //print(name + " cutted");
 
         if (cutParticles)
         {
