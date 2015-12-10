@@ -937,6 +937,7 @@ public class ZapControllerKnife : ZapController
         {
             if (Input.GetMouseButtonDown(0))
             {  //|| Input.GetMouseButtonDown(0)) {
+                //Time.timeScale = 0.5f;
                 setAction(Action.ATTACK1);
                 return true;
             }

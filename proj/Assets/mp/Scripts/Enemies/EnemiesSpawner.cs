@@ -19,13 +19,21 @@ public class EnemiesSpawner : MonoBehaviour
     Vector2 btmRight;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         findWorldVertices();
         spawnedEnemies = new List<Enemy>(MaxSpawned);
         ResetSpawTimer();
     }
+
+    //void Start()
+    //{
+    //    boxCollider = GetComponent<BoxCollider2D>();
+    //    findWorldVertices();
+    //    spawnedEnemies = new List<Enemy>(MaxSpawned);
+    //    ResetSpawTimer();
+    //}
 
     // Update is called once per frame
     void Update()
