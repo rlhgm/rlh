@@ -150,6 +150,10 @@ public class GroundMoveable : MonoBehaviour
         physic.velocity = resetVelocity;
         physic.angularVelocity = resetAngularVelocity;
         SetHanging(resetHanging);
+        if( GetComponent<CollapseableFootbridge>() )
+        {
+            GetComponent<CollapseableFootbridge>().enabled = true;
+        }
     }
 
     void CalculateFakeCenterOfMass(Vector2[] points)
