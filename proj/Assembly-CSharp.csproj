@@ -49,13 +49,7 @@
      <Compile Include="Assets\BezierControlPointMode.cs" />
      <Compile Include="Assets\BezierCurve.cs" />
      <Compile Include="Assets\BezierSpline.cs" />
-     <Compile Include="Assets\CameraCutSceneControlPoint.cs" />
-     <Compile Include="Assets\CameraCutScenePath.cs" />
-     <Compile Include="Assets\GGRayTest1.cs" />
-     <Compile Include="Assets\Line.cs" />
      <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-     <Compile Include="Assets\NewZapTest.cs" />
-     <Compile Include="Assets\PolyCollTest.cs" />
      <Compile Include="Assets\SplineDecorator.cs" />
      <Compile Include="Assets\SplineWalker.cs" />
      <Compile Include="Assets\SplineWalkerMode.cs" />
@@ -64,9 +58,12 @@
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiterActivator.cs" />
      <Compile Include="Assets\mp\Scripts\Camera2DFollow.cs" />
+     <Compile Include="Assets\mp\Scripts\CameraCutSceneControlPoint.cs" />
+     <Compile Include="Assets\mp\Scripts\CameraCutScenePath.cs" />
      <Compile Include="Assets\mp\Scripts\CameraResizer.cs" />
      <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
      <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
+     <Compile Include="Assets\mp\Scripts\CollapseableFootbridge.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
@@ -80,6 +77,7 @@
      <Compile Include="Assets\mp\Scripts\Enemies\EnemyRemain.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\Rat.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\RatsHole.cs" />
+     <Compile Include="Assets\mp\Scripts\GGRayTest1.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
@@ -87,11 +85,14 @@
      <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
      <Compile Include="Assets\mp\Scripts\IResetable.cs" />
      <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
+     <Compile Include="Assets\mp\Scripts\Line.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
+     <Compile Include="Assets\mp\Scripts\NewZapTest.cs" />
      <Compile Include="Assets\mp\Scripts\Panther.cs" />
      <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />
      <Compile Include="Assets\mp\Scripts\Pickable.cs" />
      <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
+     <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
      <Compile Include="Assets\mp\Scripts\RLHScene.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
@@ -118,9 +119,10 @@
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerKnife.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerNormal.cs" />
      <Compile Include="Assets\mp\Scripts\Zap\ZapControllers\ZapControllerSuckedByBat.cs" />
+     <Compile Include="Assets\mp\Scripts\ZapVSTheHostsOfBats.cs" />
+     <Compile Include="Assets\mp\Scripts\test.cs" />
      <Compile Include="Assets\mp\Scripts\zap_idle1_beh.cs" />
      <Compile Include="Assets\mp\Scripts\zapwalk_test_beh.cs" />
-     <Compile Include="Assets\test.cs" />
      <None Include="Assets\mp\mas\NewUnlitShader.shader" />
      <None Include="Assets\mp\mas\NewSurfaceShader.shader" />
      <None Include="Assets\mp\mas\DraggedStone.shader" />
@@ -129,17 +131,11 @@
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
      <None Include="Assets\mp\mas\DraggedStone2.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
