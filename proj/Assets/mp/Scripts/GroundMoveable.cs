@@ -24,6 +24,8 @@ public class GroundMoveable : MonoBehaviour
     //bool hanging = false;
     public float toBreakOffDist = 1f;
 
+    bool isCollapsableFootbridge = false;
+
     public bool IsHanging()
     {
         return physic.isKinematic;
@@ -85,9 +87,16 @@ public class GroundMoveable : MonoBehaviour
             Debug.LogError("GroundMoveable nie ma colidera");
         }
 
-        
+
         //lastSleeping = false;
 
+        isCollapsableFootbridge = GetComponent<CollapseableFootbridge>();
+        if( isCollapsableFootbridge && !IsHanging() )
+        {
+            Debug.LogError(name + " to ma byc kladka a nie jest kinetyczna. Przestawiam.");
+            //Debug.Break();
+            physic.isKinematic = true;
+        }
         SaveResets();
     }
 
@@ -236,6 +245,12 @@ public class GroundMoveable : MonoBehaviour
     Vector2 pn1;
     Vector2 pn2;
     Vector2 wn;
+
+    public bool IsCollapsableFootbridge
+    {
+        get { return isCollapsableFootbridge; }
+    }
+
     void AddNormal(int index, Vector2 p1, Vector2 p2)
     {
         pn1 = transform.TransformPoint(p1);
