@@ -8187,6 +8187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollapseDuration: .5
   CollapseOnJump: 1
+  IfJustCollapsedJumpEnabled: 1
 --- !u!4 &455151581 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
@@ -30596,8 +30597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36402515be7f2c48a3577fcacde98bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollapseDuration: .5
+  CollapseDuration: 2
   CollapseOnJump: 0
+  IfJustCollapsedJumpEnabled: 1
 --- !u!1001 &1734078543
 Prefab:
   m_ObjectHideFlags: 0
@@ -34615,6 +34617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollapseDuration: .5
   CollapseOnJump: 1
+  IfJustCollapsedJumpEnabled: 1
 --- !u!1001 &1957886284
 Prefab:
   m_ObjectHideFlags: 0

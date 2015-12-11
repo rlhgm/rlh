@@ -5,6 +5,7 @@ public class CollapseableFootbridge : MonoBehaviour
 {
     public float CollapseDuration = 1f;
     public bool CollapseOnJump = true;
+    public bool IfJustCollapsedJumpEnabled = true;
     float CollapseTime = 0f;
     bool collapsing = false;
     

@@ -802,12 +802,23 @@ public class Zap : MonoBehaviour
         if (!groundUnder) return false;
 
         CollapseableFootbridge cfb = groundUnder.GetComponent<CollapseableFootbridge>();
-        if (cfb && cfb.enabled && cfb.CollapseOnJump)
-        {
-            cfb.Collapse();
-            return false;
-        }
+        //if (cfb && cfb.enabled && cfb.CollapseOnJump)
+        //{
+        //    cfb.Collapse();
+        //    return false;
+        //}
+        //IfJustCollapsedJumpEnabled
 
+        if (cfb && cfb.enabled)
+        {
+            if (cfb.CollapseOnJump)
+            {
+                cfb.Collapse();
+                return cfb.IfJustCollapsedJumpEnabled;
+            }
+            return true;
+        }
+        
         return true;
     }
 
