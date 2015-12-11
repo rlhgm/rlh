@@ -4,6 +4,7 @@ using System.Collections;
 public class CollapseableFootbridge : MonoBehaviour
 {
     public float CollapseDuration = 1f;
+    public bool CollapseOnJump = true;
     float CollapseTime = 0f;
     bool collapsing = false;
     
@@ -32,7 +33,7 @@ public class CollapseableFootbridge : MonoBehaviour
         CollapseTime = 0f;
         collapsing = true;
     }
-    void Collapse()
+    public void Collapse()
     {
         CollapseTime = 0f;
         collapsing = false;
