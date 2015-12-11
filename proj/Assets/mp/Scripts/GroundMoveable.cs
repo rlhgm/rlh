@@ -7,6 +7,7 @@ public class GroundMoveable : MonoBehaviour
     float resetRotation;
     Vector2 resetVelocity;
     float resetAngularVelocity;
+    bool resetHanging;
 
     //BoxCollider2D boxCollider = null;
     Rigidbody2D physic = null;
@@ -30,6 +31,10 @@ public class GroundMoveable : MonoBehaviour
     {
         if (IsHanging()) return;
         physic.isKinematic = true;
+    }
+    void SetHanging(bool newHanging)
+    {
+        physic.isKinematic = newHanging;
     }
     public void BreakOff()
     {
@@ -122,6 +127,7 @@ public class GroundMoveable : MonoBehaviour
         resetRotation = physic.rotation; // transform.rotation;      
         resetVelocity = physic.velocity;
         resetAngularVelocity = physic.angularVelocity;
+        resetHanging = IsHanging();
     }
     public void Reset()
     {
@@ -129,6 +135,7 @@ public class GroundMoveable : MonoBehaviour
         physic.rotation = resetRotation;
         physic.velocity = resetVelocity;
         physic.angularVelocity = resetAngularVelocity;
+        SetHanging(resetHanging);
     }
 
     void UpdateWorldNormalsAndHandles(PolygonCollider2D coll)
