@@ -74,6 +74,7 @@
     <Compile Include="Assets\BezierSpline.cs" />
     <Compile Include="Assets\CameraCutSceneControlPoint.cs" />
     <Compile Include="Assets\CameraCutScenePath.cs" />
+    <Compile Include="Assets\Collapseable.cs" />
     <Compile Include="Assets\GGRayTest1.cs" />
     <Compile Include="Assets\Line.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
