@@ -152,7 +152,7 @@ public class GroundMoveable : MonoBehaviour
         SetHanging(resetHanging);
         if( GetComponent<CollapseableFootbridge>() )
         {
-            GetComponent<CollapseableFootbridge>().enabled = true;
+            GetComponent<CollapseableFootbridge>().Reset();
         }
     }
 

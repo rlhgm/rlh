@@ -39,4 +39,11 @@ public class CollapseableFootbridge : MonoBehaviour
         enabled = false;
         GetComponent<GroundMoveable>().BreakOff();
     }
+
+    public void Reset()
+    {
+        enabled = true;
+        CollapseTime = 0f;
+        collapsing = false;
+    }
 }
