@@ -30597,8 +30597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36402515be7f2c48a3577fcacde98bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollapseDuration: 2
-  CollapseOnJump: 0
+  CollapseDuration: .5
+  CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
 --- !u!1001 &1734078543
 Prefab:
