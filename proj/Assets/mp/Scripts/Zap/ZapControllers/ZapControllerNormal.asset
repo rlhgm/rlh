@@ -15,7 +15,7 @@ MonoBehaviour:
   RunSpeed: 7.0999999
   JumpWalkSpeed: 3.79999995
   JumpWalkImpulse: 7.30000019
-  JumpRunMaxSpeed: 4.80000019
+  JumpRunMaxSpeed: 5.5999999
   JumpRunMaxThreshold: .850000024
   JumpRunImpulse: 7.30000019
   JumpFromClimbSpeed: 4.69999981
@@ -35,7 +35,7 @@ MonoBehaviour:
   JumpLeftRightSpeedUpAfterCollideParam: 7
   JumpLeftRightSlowDownParam: 7
   JumpUpControlParam: 11
-  JumpRunMaxSpeedSlowDown: 0
+  JumpRunMaxSpeedSlowDown: .699999988
   JumpDirChangePossible: 1
   PushMaxSpeed: 3
   PullMaxSpeed: 3
