@@ -1953,7 +1953,15 @@ public class Zap : MonoBehaviour
             }
 
             rayOrigin.x -= (checkingDist + 0.5f);
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
+            ////if (!flying && (simulateCrouch || currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
+            ////{
+            ////    //return -1.0f;
+            ////    distToObstacle = -1f;
+            ////    return null;
+            ////}
+            float currHeight = 1.4f;
+            if (currentController.crouching()) currHeight = 0.25f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, currHeight, layerIdGroundAllMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
@@ -2166,7 +2174,15 @@ public class Zap : MonoBehaviour
             }
 
             rayOrigin.x += (checkingDist + 0.5f);
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.4f, layerIdGroundAllMask);
+            ////if (!flying && (simulateCrouch || currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging())))
+            ////{
+            ////    //return -1.0f;
+            ////    distToObstacle = -1f;
+            ////    return null;
+            ////}
+            float currHeight = 1.4f;
+            if (currentController.crouching()) currHeight = 0.25f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.up, currHeight, layerIdGroundAllMask);
             if (hit.collider)
             {
                 distToObstacle = 0f;
