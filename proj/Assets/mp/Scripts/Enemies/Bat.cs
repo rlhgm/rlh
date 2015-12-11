@@ -948,8 +948,10 @@ public class Bat : Enemy //MonoBehaviour
     {
         if (IsInState(State.Dead)) return;
 
-        RLHScene.Instance.ZapVsBats.BatDead(this);
-
+        if (RLHScene.Instance.ZapVsBats)
+        {
+            RLHScene.Instance.ZapVsBats.BatDead(this);
+        }
         //print(name + " cutted");
 
         if (cutParticles)
