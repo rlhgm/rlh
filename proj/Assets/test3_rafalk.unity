@@ -8515,7 +8515,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 49
+  m_RootOrder: 50
 --- !u!114 &475777032 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11482494, guid: 88d913c37e979274ca1f74b10451eddd,
@@ -11086,7 +11086,7 @@ Transform:
   m_Children:
   - {fileID: 387538174}
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 43
 --- !u!1001 &609635537
 Prefab:
   m_ObjectHideFlags: 0
@@ -29302,7 +29302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 68
+  m_RootOrder: 69
 --- !u!1001 &1657769543
 Prefab:
   m_ObjectHideFlags: 0
@@ -30597,7 +30597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollapseDuration: .5
-  CollapseOnJump: 1
+  CollapseOnJump: 0
 --- !u!1001 &1734078543
 Prefab:
   m_ObjectHideFlags: 0

@@ -13,6 +13,12 @@ public class CollapseableFootbridge : MonoBehaviour
     {
         CollapseTime = 0f;
         collapsing = false;
+        GroundMoveable gm = GetComponent<GroundMoveable>();
+        if (!gm)
+        {
+            Debug.LogError(name + " nie ma GroundMoveable!");
+            Debug.Break();
+        }
     }
 
     // Update is called once per frame

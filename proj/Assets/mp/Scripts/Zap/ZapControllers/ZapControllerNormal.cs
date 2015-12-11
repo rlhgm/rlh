@@ -1805,6 +1805,8 @@ public class ZapControllerNormal : ZapController
 
     bool canJump()
     {
+        if (!zap.TryJump()) return false;
+
         //if (zap.groundUnder == null) return false;
         //float groundUnderAngle = zap.groundUnder.eulerAngles.z % 90;
         ////float angle = Quaternion.Angle(transform.rotation, hit.collider.transform.rotation) % 90;

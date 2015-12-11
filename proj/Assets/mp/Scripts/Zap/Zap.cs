@@ -797,6 +797,20 @@ public class Zap : MonoBehaviour
         return false;
     }
 
+    public bool TryJump()
+    {
+        if (!groundUnder) return false;
+
+        CollapseableFootbridge cfb = groundUnder.GetComponent<CollapseableFootbridge>();
+        if (cfb && cfb.enabled && cfb.CollapseOnJump)
+        {
+            cfb.Collapse();
+            return false;
+        }
+
+        return true;
+    }
+
     public bool touchStone(Transform stone)
     {
         return touchStone(stone, transform.position);
@@ -807,7 +821,6 @@ public class Zap : MonoBehaviour
         //return false;
 
         //print(Physics2D.gravity);
-
         CollapseableFootbridge cfb = stone.GetComponent<CollapseableFootbridge>();
         if ( cfb)
         {
