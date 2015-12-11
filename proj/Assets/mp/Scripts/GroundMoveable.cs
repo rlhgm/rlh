@@ -19,6 +19,36 @@ public class GroundMoveable : MonoBehaviour
     bool lastSleeped = false;
     bool isClockwise = false;
 
+    //bool hanging = false;
+    public float toBreakOffDist = 1f;
+
+    public bool IsHanging()
+    {
+        return physic.isKinematic;
+    }
+    public void Hang()
+    {
+        if (IsHanging()) return;
+        physic.isKinematic = true;
+    }
+    public void BreakOff()
+    {
+        if (!IsHanging()) return;
+        physic.isKinematic = false;
+    }
+    public bool TryToBreakOff(Vector2 pullPoint)
+    {
+        if (IsHanging())
+        {
+            if ((pullPoint - physic.position).magnitude > toBreakOffDist)
+            {
+                BreakOff();
+                return true;
+            }
+        }
+        return false;
+    }
+
     void Awake()
     {
         physic = GetComponent<Rigidbody2D>();

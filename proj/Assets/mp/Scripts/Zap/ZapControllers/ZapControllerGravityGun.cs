@@ -33,6 +33,7 @@ public class ZapControllerGravityGun : ZapController
     public float CenterOnBeamSpeed = 10f;
 
     public Transform draggedStone = null;
+    GroundMoveable draggedStoneMoveable = null;
     public Transform lastFlashStone = null;
     
     Vector2 T;          // sila ciagu
@@ -113,6 +114,8 @@ public class ZapControllerGravityGun : ZapController
             return;
 
         draggedStone = null;
+        draggedStoneMoveable = null;
+
         shooting = true;
         beamMelting = false;
         beamMissed = false;
@@ -318,7 +321,7 @@ public class ZapControllerGravityGun : ZapController
     {
         zapTargeterPos = zap.Targeter.position;
 
-        if (draggedStone)
+        if (draggedStone && !draggedStoneMoveable.IsHanging())
         {
             if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) ||
                Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.X))
@@ -375,106 +378,106 @@ public class ZapControllerGravityGun : ZapController
 
             if (draggedStone)
             {
-                Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
-                if (rb)
+                if (!draggedStoneMoveable.IsHanging())
                 {
-                    bool tlc = true;
-
-                    Vector2 playerCenterPos = zap.transform.position;
-                    playerCenterPos.y += 1f;
-                    Vector2 stoneCenterPos = rb.worldCenterOfMass;
-                    if (!draggedStoneCentered)
+                    Rigidbody2D rb = draggedStone.GetComponent<Rigidbody2D>();
+                    if (rb)
                     {
-                        Vector2 toCenter = rb.centerOfMass - draggedStoneHitPos;
-                        float toCenterDist = toCenter.magnitude;
-                        float fromTimeShiftDist = fDeltaTime * CenterOnBeamSpeed;
-                        bool centerApprovedIfSuccess = false;
-                        Vector2 newDraggedStoneHitPos;
-                        if (fromTimeShiftDist > toCenterDist)
+                        bool tlc = true;
+
+                        Vector2 playerCenterPos = zap.transform.position;
+                        playerCenterPos.y += 1f;
+                        Vector2 stoneCenterPos = rb.worldCenterOfMass;
+                        if (!draggedStoneCentered)
                         {
-                            newDraggedStoneHitPos = rb.centerOfMass;
-                            fromTimeShiftDist = toCenterDist;
-                            centerApprovedIfSuccess = true;
-                        }
-                        else
-                        {
-                            newDraggedStoneHitPos = draggedStoneHitPos + (toCenter.normalized * fromTimeShiftDist);
-                        }
-                        
-                        Vector3 hitInWorld = draggedStone.TransformPoint(newDraggedStoneHitPos);
-                        
-                        if (maxDistance > Vector3.Distance(hitInWorld, zapTargeterPos))
-                        {
-                            hit = Physics2D.Linecast(zapTargeterPos, hitInWorld, zap.layerIdGroundAllMask);
-                            if (hit.collider)
+                            Vector2 toCenter = rb.centerOfMass - draggedStoneHitPos;
+                            float toCenterDist = toCenter.magnitude;
+                            float fromTimeShiftDist = fDeltaTime * CenterOnBeamSpeed;
+                            bool centerApprovedIfSuccess = false;
+                            Vector2 newDraggedStoneHitPos;
+                            if (fromTimeShiftDist > toCenterDist)
                             {
-                                if (hit.collider.transform == draggedStone)
+                                newDraggedStoneHitPos = rb.centerOfMass;
+                                fromTimeShiftDist = toCenterDist;
+                                centerApprovedIfSuccess = true;
+                            }
+                            else
+                            {
+                                newDraggedStoneHitPos = draggedStoneHitPos + (toCenter.normalized * fromTimeShiftDist);
+                            }
+
+                            Vector3 hitInWorld = draggedStone.TransformPoint(newDraggedStoneHitPos);
+
+                            if (maxDistance > Vector3.Distance(hitInWorld, zapTargeterPos))
+                            {
+                                hit = Physics2D.Linecast(zapTargeterPos, hitInWorld, zap.layerIdGroundAllMask);
+                                if (hit.collider)
                                 {
-                                    if (hit.distance < maxDistance)
+                                    if (hit.collider.transform == draggedStone)
                                     {
-                                        draggedStoneHitPos = newDraggedStoneHitPos;
-                                        tlc = false;        // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
-                                        if (centerApprovedIfSuccess)
-                                            draggedStoneCentered = true;
+                                        if (hit.distance < maxDistance)
+                                        {
+                                            draggedStoneHitPos = newDraggedStoneHitPos;
+                                            tlc = false;        // aby nie robic tego samego ponizej jezeli tu wynik byl pozytywny
+                                            if (centerApprovedIfSuccess)
+                                                draggedStoneCentered = true;
+                                        }
                                     }
                                 }
                             }
+
+                            stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
                         }
-                        
-                        stoneCenterPos = draggedStone.TransformPoint(draggedStoneHitPos);
-                    }
-                    
-                    //Vector2 diff = stoneCenterPos - playerCenterPos;
-                    //Vector2 F = new Vector2(0f, 0f);
 
-                    //float diffMagnitude = diff.magnitude;
-                    //Vector2 diff2 = tis - playerCenterPos;
-                    //float diffMagnitude2 = diff2.magnitude;
+                        T = (tis - stoneCenterPos);
+                        V = rb.velocity;
+                        Vector2 F = T - (inertiaFactor * V);
 
-                    T = (tis - stoneCenterPos);
-                    V = rb.velocity;
-                    Vector2 F = T - (inertiaFactor * V);
-                
-                    rb.AddForce(F, ForceMode2D.Impulse);
+                        rb.AddForce(F, ForceMode2D.Impulse);
 
-                    if (!canBeDragged(draggedStone, tis, tlc))
-                    {
-                        releaseStone();
-                    }
-                    else
-                    {
-                        if (draggedStone.childCount == 1)
+                        if (!canBeDragged(draggedStone, tis, tlc))
                         {
-                            SpriteRenderer sprRend = draggedStone.GetComponentInChildren<SpriteRenderer>();
-                            if (sprRend)
+                            releaseStone();
+                        }
+                        else
+                        {
+                            if (draggedStone.childCount == 1)
                             {
-                                //_speedX("speedX", Range(0, 0.3)) = 0
-                                //_speedY("speedY", Range(0, 0.3)) = 0
-                                float rbvx = Mathf.Abs(rb.velocity.x);
-                                float rbvy = Mathf.Abs(rb.velocity.y);
+                                SpriteRenderer sprRend = draggedStone.GetComponentInChildren<SpriteRenderer>();
+                                if (sprRend)
+                                {
+                                    //_speedX("speedX", Range(0, 0.3)) = 0
+                                    //_speedY("speedY", Range(0, 0.3)) = 0
+                                    float rbvx = Mathf.Abs(rb.velocity.x);
+                                    float rbvy = Mathf.Abs(rb.velocity.y);
 
-                                float _speedX = Mathf.Clamp((Mathf.Min(4.0f, rbvx) / 4.0f) * 0.2f, 0.0f, 0.2f);
-                                float _speedY = Mathf.Clamp((Mathf.Min(4.0f, rbvy) / 4.0f) * 0.2f, 0.0f, 0.2f);
+                                    float _speedX = Mathf.Clamp((Mathf.Min(4.0f, rbvx) / 4.0f) * 0.2f, 0.0f, 0.2f);
+                                    float _speedY = Mathf.Clamp((Mathf.Min(4.0f, rbvy) / 4.0f) * 0.2f, 0.0f, 0.2f);
 
-                                
-                                float _fav = Mathf.Abs(rb.angularVelocity / 180f) * 0.2f;
-                                _speedX += _fav;
-                                _speedY += _fav;
 
-                                sprRend.material.SetFloat("_speedX", _speedX);
-                                sprRend.material.SetFloat("_speedY", _speedY);
+                                    float _fav = Mathf.Abs(rb.angularVelocity / 180f) * 0.2f;
+                                    _speedX += _fav;
+                                    _speedY += _fav;
 
-                                sprRend.material.SetFloat("_rpx", draggedStoneHitPos.x);
-                                sprRend.material.SetFloat("_rpy", draggedStoneHitPos.y);
+                                    sprRend.material.SetFloat("_speedX", _speedX);
+                                    sprRend.material.SetFloat("_speedY", _speedY);
 
-                                draggedDuration += fDeltaTime;
-                                sprRend.material.SetFloat("_draggedDuration", draggedDuration);
-                                //Debug.Log(rbv + " " + _speedX + " " +_speedY);
+                                    sprRend.material.SetFloat("_rpx", draggedStoneHitPos.x);
+                                    sprRend.material.SetFloat("_rpy", draggedStoneHitPos.y);
 
-                                zap.MyAudioSourceLooped.pitch = _speedX + _speedY;
+                                    draggedDuration += fDeltaTime;
+                                    sprRend.material.SetFloat("_draggedDuration", draggedDuration);
+                                    //Debug.Log(rbv + " " + _speedX + " " +_speedY);
+
+                                    zap.MyAudioSourceLooped.pitch = _speedX + _speedY;
+                                }
                             }
                         }
                     }
+                }
+                else
+                {
+                    draggedStoneMoveable.TryToBreakOff(tis);
                 }
             }
         }
@@ -713,6 +716,8 @@ public class ZapControllerGravityGun : ZapController
                         zap.playSoundLooped(shootSound);
 
                         draggedStone = hit.collider.transform;
+                        draggedStoneMoveable = draggedStone.GetComponent<GroundMoveable>();
+
                         Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
                         tsrb.gravityScale = 0f;
                         flashStone2(draggedStone);
@@ -1552,6 +1557,7 @@ public class ZapControllerGravityGun : ZapController
             //Debug.Log ( "add dropped stone: " + tsrb );
             //droppedStones.Add( tsrb );
             draggedStone = null;
+            draggedStoneMoveable = null;
         }
     }
 
