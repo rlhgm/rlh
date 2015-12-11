@@ -808,9 +808,16 @@ public class Zap : MonoBehaviour
 
         //print(Physics2D.gravity);
 
+        CollapseableFootbridge cfb = stone.GetComponent<CollapseableFootbridge>();
+        if ( cfb)
+        {
+            cfb.StartCollapse();
+        }
+
         Rigidbody2D stoneBody = stone.GetComponent<Rigidbody2D>();
         if (!stoneBody)
             return false;
+        
 
         Vector2 touchedForce = new Vector2(0f, 0f);
         touchedForce.y = mass * Physics2D.gravity.y; //pushedForce; // + (velocity.y * mass);

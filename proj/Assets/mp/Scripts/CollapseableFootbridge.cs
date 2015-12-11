@@ -28,12 +28,15 @@ public class CollapseableFootbridge : MonoBehaviour
 
     public void StartCollapse()
     {
-        CollapseTime = 0;
+        if (collapsing) return;
+        CollapseTime = 0f;
         collapsing = true;
     }
     void Collapse()
     {
         CollapseTime = 0f;
         collapsing = false;
+        enabled = false;
+        GetComponent<GroundMoveable>().BreakOff();
     }
 }
