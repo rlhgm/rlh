@@ -46,6 +46,8 @@ public class GroundMoveable : MonoBehaviour
     }
     public bool TryToBreakOff(Vector2 pullPoint)
     {
+        if (isCollapsableFootbridge) return false;
+
         if (IsHanging())
         {
             //Debug.Log(pullPoint + " " + physic.fakeWorldCenterOfMass);
