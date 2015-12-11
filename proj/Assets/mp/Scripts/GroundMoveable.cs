@@ -8,6 +8,7 @@ public class GroundMoveable : MonoBehaviour
     Vector2 resetVelocity;
     float resetAngularVelocity;
     bool resetHanging;
+    Vector2 fakeWorldCenterOfMass;
 
     //BoxCollider2D boxCollider = null;
     Rigidbody2D physic = null;
@@ -45,9 +46,11 @@ public class GroundMoveable : MonoBehaviour
     {
         if (IsHanging())
         {
-            if ((pullPoint - physic.position).magnitude > toBreakOffDist)
+            //Debug.Log(pullPoint + " " + physic.fakeWorldCenterOfMass);
+            if ((pullPoint - fakeWorldCenterOfMass /*physic.worldCenterOfMass*/).magnitude > toBreakOffDist)
             {
                 BreakOff();
+                //Debug.Log(pullPoint + " " + physic.worldCenterOfMass);
                 return true;
             }
         }
@@ -67,7 +70,7 @@ public class GroundMoveable : MonoBehaviour
             handles = new Vector2[coll.points.Length];
             handlesActive = new bool[coll.points.Length];
             isClockwise = PolygonIsClockwise(coll.points);
-            UpdateWorldNormalsAndHandles(coll);
+            UpdateWorldNormalsAndHandles(coll,IsHanging());
         }
         else if(GetComponent<BoxCollider2D>())
         {
@@ -75,7 +78,7 @@ public class GroundMoveable : MonoBehaviour
             normals = new Vector2[4];
             handles = new Vector2[4];
             handlesActive = new bool[4];
-            UpdateWorldNormalsAndHandles(coll);
+            UpdateWorldNormalsAndHandles(coll,IsHanging());
         }
         else
         {
@@ -104,11 +107,11 @@ public class GroundMoveable : MonoBehaviour
             {
                 if (GetComponent<PolygonCollider2D>())
                 {
-                    UpdateWorldNormalsAndHandles(GetComponent<PolygonCollider2D>());
+                    UpdateWorldNormalsAndHandles(GetComponent<PolygonCollider2D>(),false);
                 }
                 else if (GetComponent<BoxCollider2D>())
                 {
-                    UpdateWorldNormalsAndHandles(GetComponent<BoxCollider2D>());
+                    UpdateWorldNormalsAndHandles(GetComponent<BoxCollider2D>(),false);
                 }
                 else
                 {
@@ -138,8 +141,23 @@ public class GroundMoveable : MonoBehaviour
         SetHanging(resetHanging);
     }
 
-    void UpdateWorldNormalsAndHandles(PolygonCollider2D coll)
+    void CalculateFakeCenterOfMass(Vector2[] points)
     {
+        Vector2 pointsSum = new Vector2();
+        for (int p = 0; p < points.Length; ++p)
+        {
+            pointsSum += points[p];
+        }
+        fakeWorldCenterOfMass = transform.TransformPoint(pointsSum / points.Length);
+    }
+
+    void UpdateWorldNormalsAndHandles(PolygonCollider2D coll, bool calculateFakeCenterOfMass)
+    {
+        if (calculateFakeCenterOfMass)
+        {
+            CalculateFakeCenterOfMass(coll.points);
+        }
+
         int i = 0;
         for (; i < coll.points.Length - 1; ++i)
         {
@@ -151,7 +169,7 @@ public class GroundMoveable : MonoBehaviour
         UpdateHandlesActivated();
     }
 
-    void UpdateWorldNormalsAndHandles(BoxCollider2D coll)
+    void UpdateWorldNormalsAndHandles(BoxCollider2D coll, bool calculateFakeCenterOfMass)
     {
         float top = coll.offset.y + (coll.size.y * 0.5f);
         float btm = coll.offset.y - (coll.size.y * 0.5f);
@@ -163,6 +181,11 @@ public class GroundMoveable : MonoBehaviour
         handles[2] = new Vector2(right, top);
         handles[3] = new Vector2(left, top);
 
+        if(calculateFakeCenterOfMass)
+        {
+            CalculateFakeCenterOfMass(handles);
+        }
+        
         isClockwise = PolygonIsClockwise(handles);
 
         handles[0] = transform.TransformPoint(handles[0]);
