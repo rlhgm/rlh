@@ -2182,6 +2182,9 @@ public class Zap : MonoBehaviour
             ////}
             float currHeight = 1.4f;
             if (currentController.crouching()) currHeight = 0.25f;
+            //if (simulateCrouch || currentController.crouching() || (currentController != zapControllerGravityGun && currentController.isDodging()))
+            //    currHeight = 0.25f;
+
             hit = Physics2D.Raycast(rayOrigin, Vector2.up, currHeight, layerIdGroundAllMask);
             if (hit.collider)
             {

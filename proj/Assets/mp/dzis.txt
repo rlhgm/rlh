@@ -13,3 +13,25 @@ deski rozwalalne GG - nie wiem
 nie zrobie:
 - interakcja szczurów z kamieniami/skrzynkami
 - Możliwość podłączenia liany do kamienia - generalnie liana jest nie do naprawienia - to rozpadanie się jej - SAMO PODŁACZENIE ZROBILEM
+
+
+
+Do milestone'a:
+
+TRUDNE/wolne:
+bujanie się na balustradzie
+
+ŁATWE/szybkie:
+wiązka GG
+przejazdy kamery
+żyrandole
+drugi plan
+poprawa walki ze szczurami
+łamiący się posąg
+
+JEST:
+naprawienie climbersów
+kamienie odrywalne od ściany
+zapadające się fizyki
+prefaby skrzynek rozwalalnych i nierozwalalnych
+obiekty do chodzenia góra/dół i lewo/prawo
