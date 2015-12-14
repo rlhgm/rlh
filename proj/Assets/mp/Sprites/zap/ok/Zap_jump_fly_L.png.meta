@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5ed44b23a05b00e4ea5e03aaa50ebc01
-timeCreated: 1441650695
+timeCreated: 1450012070
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,8 @@ TextureImporter:
     21300002: Zap_jump_fly_1
     21300004: Zap_jump_fly_L_0
     21300006: Zap_jump_fly_L_1
+    21300008: Zap_jump_fly_L_2
+    21300010: Zap_jump_fly_L_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -41,6 +43,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -67,6 +70,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
+        y: 3
+        width: 64
+        height: 54
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_jump_fly_L_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 3
+        width: 64
+        height: 54
+      alignment: 9
+      pivot: {x: .449999988, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zap_jump_fly_L_3
+      rect:
+        serializedVersion: 2
+        x: 192
         y: 3
         width: 64
         height: 54
