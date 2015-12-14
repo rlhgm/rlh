@@ -390,6 +390,7 @@ public class ZapControllerNormal : ZapController
                             }
                             else
                             {
+                                zap.climbingWallID = zap.layerIdMountMask;
                                 setActionMountIdle();
                                 return;
                             }
@@ -1344,6 +1345,7 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.y = MountSpeed;
                 setAction(Action.MOUNT_UP);
                 zap.setState(Zap.State.MOUNT);
+                zap.climbingWallID = zap.layerIdMountMask;
                 return 1;
             }
             if (tryCatchHandle(true))
@@ -1916,6 +1918,7 @@ public class ZapControllerNormal : ZapController
             case Action.MOUNT_UP:
             case Action.MOUNT_DOWN:
 
+                zap.climbingWallID = -1;
                 lastFrameHande = false;
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
@@ -1937,10 +1940,10 @@ public class ZapControllerNormal : ZapController
                 zap.velocity.y = 0.0f;
                 setAction(Action.Jump);
                 zap.setState(Zap.State.IN_AIR);
-
                 break;
 
             case Action.MOUNT_LEFT:
+                zap.climbingWallID = -1;
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
                 justJumpedMount = true;
@@ -1948,6 +1951,7 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.MOUNT_RIGHT:
+                zap.climbingWallID = -1;
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
                 justJumpedMount = true;

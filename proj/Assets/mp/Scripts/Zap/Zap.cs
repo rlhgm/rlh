@@ -121,6 +121,8 @@ public class Zap : MonoBehaviour
 
     void Awake()
     {
+        climbingWallID = -1;
+
         guiCanvas = FindObjectOfType<Canvas>();
 
         if (guiCanvas)
@@ -497,6 +499,8 @@ public class Zap : MonoBehaviour
 
     public void die(DeathType deathType)
     {
+        climbingWallID = -1;
+
         if (RlhScene.ZapVsBats)
         {
             RlhScene.ZapVsBats.ZapDead();
@@ -545,6 +549,8 @@ public class Zap : MonoBehaviour
 
     public void reborn()
     {
+        climbingWallID = -1;
+
         if (RlhScene.ZapVsBats)
         {
             RlhScene.ZapVsBats.ZapReborn();
