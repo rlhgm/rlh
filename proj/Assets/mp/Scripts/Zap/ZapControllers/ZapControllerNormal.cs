@@ -1424,11 +1424,11 @@ public class ZapControllerNormal : ZapController
         else if (zap.climbingWallID == zap.layerIdGroundFarMask)
         {
         }
-        else
-        {
-            Debug.LogError("zap.climbingWallID : " + zap.climbingWallID);
-            Debug.Break();
-        }
+        //else
+        //{
+        //    Debug.LogError("zap.climbingWallID : " + zap.climbingWallID);
+        //    Debug.Break();
+        //}
         
         return 0;
     }
@@ -2282,15 +2282,20 @@ public class ZapControllerNormal : ZapController
     {
         float actionRatio = Mathf.Min(zap.currentActionTime / PullUpDuration, 1f);
 
+        Vector3 posDiff = new Vector3();
+
         if (actionRatio >= 1f)
         {
+            posDiff.y += (zap.sensorLeft3.localPosition.y + 0.35f);
+            transform.position = actionChangedPos + posDiff;
+
             zap.setState(Zap.State.ON_GROUND);
             setAction(Action.Idle);
+            
             return 1;
         }
-
-        Vector3 posDiff = new Vector3();
-        posDiff.y += (actionRatio * 2.5f);
+        
+        posDiff.y += (actionRatio * zap.sensorLeft3.localPosition.y + 0.35f);
         transform.position = actionChangedPos + posDiff;
 
         return 0;
@@ -2299,38 +2304,22 @@ public class ZapControllerNormal : ZapController
     {
         float actionRatio = Mathf.Min(zap.currentActionTime / PullDownDuration, 1f);
 
+        Vector3 posDiff = new Vector3();
+
         if (actionRatio >= 1f)
         {
+            posDiff.y -= (zap.sensorLeft3.localPosition.y + 0.35f);
+            transform.position = actionChangedPos + posDiff;
+
             zap.climbingWallID = zap.layerIdGroundFarMask;
             setAction(Action.MOUNT_IDLE);
             Assert.IsTrue(zap.CheckHandle(zap.layerIdGroundFarMask));
             return 1;
         }
-
-    //    public bool CheckHandle(int layerID)
-    //{
-    //    Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
-    //    rayOrigin.y += 0.3f;
-    //    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
-
-    //    if (!hit.collider)
-    //        return false;
-
-    //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
-    //    if (!hit.collider)
-    //        return false;
-
-    //    rayOrigin.x += myWidth;
-    //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
-    //    return hit.collider;
-    //}
-
-        Vector3 posDiff = new Vector3();
+        
         posDiff.y -= (actionRatio * zap.sensorLeft3.localPosition.y + 0.35f);
         transform.position = actionChangedPos + posDiff;
-
         
-
         return 0;
     }
 
@@ -4058,11 +4047,31 @@ public class ZapControllerNormal : ZapController
 
     bool CanPullUp()
     {
+        Vector2 rayOrigin = zap.sensorLeft3.transform.position;
+        rayOrigin.y += 0.3f;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.9f, zap.layerIdGroundAllMask);
+        if (hit.collider) return false;
+
+        rayOrigin = zap.sensorRight3.transform.position;
+        rayOrigin.y += 0.3f;
+        hit = Physics2D.Raycast(rayOrigin, Vector2.up, 1.9f, zap.layerIdGroundAllMask);
+        if (hit.collider) return false;
+
         return true;
     }
 
     bool CanPullDown()
     {
+        Vector2 rayOrigin = transform.position;
+        rayOrigin.x -= zap.sensorLeft3.localPosition.x;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 1.9f, zap.layerIdGroundAllMask);
+        if (hit.collider) return false;
+
+        rayOrigin = transform.position;
+        rayOrigin.x -= zap.sensorRight3.localPosition.x;
+        hit = Physics2D.Raycast(rayOrigin, Vector2.down, 1.9f, zap.layerIdGroundAllMask);
+        if (hit.collider) return false;
+
         return true;
     }
 
