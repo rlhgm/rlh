@@ -395,16 +395,24 @@ public class ZapControllerNormal : ZapController
                                 return;
                             }
                         }
+                        else if (zap.CheckHandle(zap.layerIdGroundFarMask))
+                        {
+                            if (jumpFromMount)
+                            {
+                                if (!justJumpedMount)
+                                {
+                                }
+                            }
+                            else
+                            {
+                                zap.climbingWallID = zap.layerIdGroundFarMask;
+                                setActionMountIdle();
+                                return;
+                            }
+                        }
                         else
                         {
                             jumpFromMount = false;
-                        }
-
-                        if (zap.CheckHandle(zap.layerIdGroundFarMask))
-                        {
-                            zap.climbingWallID = zap.layerIdGroundFarMask;
-                            setActionMountIdle();
-                            return;
                         }
                     }
                 }
