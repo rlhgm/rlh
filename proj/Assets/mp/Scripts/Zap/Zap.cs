@@ -254,9 +254,10 @@ public class Zap : MonoBehaviour
         layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
         //layerIdGroundPermeableMask = 1 << LayerMask.NameToLayer("GroundPermeable");
         layerIdGroundMoveableMask = 1 << LayerMask.NameToLayer("GroundMoveable");
+        layerIdDraggedGroundMoveableMask = 1 << LayerMask.NameToLayer("DraggedGroundMoveable");
 
-        layerIdGroundAllMask = layerIdGroundMask | layerIdGroundMoveableMask; // | layerIdGroundFarMask;
-        layerIdGroundAllFullMask = layerIdGroundMask | layerIdGroundMoveableMask | layerIdGroundFarMask;
+        layerIdGroundAllMask = layerIdGroundMask | layerIdGroundMoveableMask | layerIdDraggedGroundMoveableMask; // | layerIdGroundFarMask;
+        layerIdGroundAllFullMask = layerIdGroundMask | layerIdGroundMoveableMask | layerIdDraggedGroundMoveableMask | layerIdGroundFarMask;
         //layerIdLastGroundTypeTouchedMask = layerIdGroundMask;
 
         layerIdGroundHandlesMask = 1 << LayerMask.NameToLayer("GroundHandles");
@@ -3050,6 +3051,8 @@ public class Zap : MonoBehaviour
     public int layerIdGroundFarMask;
     [HideInInspector]
     public int layerIdGroundMoveableMask;
+    [HideInInspector]
+    public int layerIdDraggedGroundMoveableMask;
     [HideInInspector]
     public int layerIdGroundAllMask;
     public int layerIdGroundAllFullMask;

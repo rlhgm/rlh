@@ -722,6 +722,10 @@ public class ZapControllerGravityGun : ZapController
                         tsrb.gravityScale = 0f;
                         flashStone2(draggedStone);
 
+                        //Physics2D.IgnoreCollision()
+
+                        draggedStone.gameObject.layer = LayerMask.NameToLayer("DraggedGroundMoveable"); //zap.layerIdDraggedGroundMoveableMask;
+
                         draggedStoneHitPos = draggedStone.InverseTransformPoint(hit.point);
                         draggedStoneCentered = false;
                     }
@@ -1556,6 +1560,9 @@ public class ZapControllerGravityGun : ZapController
 
             //Debug.Log ( "add dropped stone: " + tsrb );
             //droppedStones.Add( tsrb );
+
+            draggedStone.gameObject.layer = LayerMask.NameToLayer("GroundMoveable");  //zap.layerIdDraggedGroundMoveableMask;
+
             draggedStone = null;
             draggedStoneMoveable = null;
         }

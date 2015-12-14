@@ -55,12 +55,12 @@ TagManager:
   - Ropes
   - LA-GROUND
   - GroundMoveable
-  - Chains
+  - DraggedGroundMoveable
   - Enemies
   - ZapRigidBody
   - EnemyRemains
   - EnemiesColl
-  - 
+  - Chains
   - 
   m_SortingLayers:
   - name: Default
