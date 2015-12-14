@@ -2747,9 +2747,9 @@ public class Zap : MonoBehaviour
     [HideInInspector]
     public Transform sensorLeft2;
     [HideInInspector]
-    Transform sensorLeft3;
+    public Transform sensorLeft3;
     [HideInInspector]
-    Transform sensorRight1;
+    public Transform sensorRight1;
     [HideInInspector]
     public Transform sensorRight2;
     [HideInInspector]

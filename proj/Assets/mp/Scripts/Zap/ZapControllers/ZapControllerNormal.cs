@@ -70,6 +70,9 @@ public class ZapControllerNormal : ZapController
     
     public float BirdHitDuration = 0.33f;
 
+    public float PullUpDuration = 0.7f;
+    public float PullDownDuration = 0.7f;
+
     public AudioClip ropeCatchSound = null;
     public AudioClip ropeSwingSound = null;
     public AudioClip mountCatchSound = null;
@@ -325,6 +328,14 @@ public class ZapControllerNormal : ZapController
             case Action.MOUNT_ATTACK_LEFT:
             case Action.MOUNT_ATTACK_RIGHT:
                 Action_MOUNT_ATTACK();
+                break;
+
+            case Action.PullUp:
+                ActionPullUp();
+                break;
+
+            case Action.PullDown:
+                ActionPullDown();
                 break;
 
             case Action.ROPECLIMB_IDLE:
@@ -931,6 +942,9 @@ public class ZapControllerNormal : ZapController
         MOUNT_ATTACK_RIGHT,
         MOUNT_BIRDHIT,
 
+        PullUp,
+        PullDown,
+
         //HANG_IDLE,
         //HANG_LEFT,
         //HANG_RIGHT,
@@ -960,7 +974,8 @@ public class ZapControllerNormal : ZapController
     }
 
     int lastActionParam = 0;
-    
+    Vector3 actionChangedPos = new Vector3();
+
     bool setAction(Action newAction, int param = 0)
     {
         if (action == newAction)
@@ -978,7 +993,9 @@ public class ZapControllerNormal : ZapController
         zap.BatAttackRightCollider.SetActive(false);
 
         lastActionParam = param;
-        
+
+        actionChangedPos = transform.position;
+
         //Debug.Log(action);
 
         switch (newAction)
@@ -1238,6 +1255,14 @@ public class ZapControllerNormal : ZapController
                 zap.AnimatorBody.Play("Zap_climb_knife_attack");
                 break;
 
+            case Action.PullUp:
+                zap.AnimatorBody.Play("Zap_jump_climb_R");
+                break;
+
+            case Action.PullDown:
+                zap.AnimatorBody.Play("Zap_drop_R");
+                break;
+
             case Action.CrouchIn:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_crouch_in_R");
                 else zap.AnimatorBody.Play("Zap_crouch_in_L");
@@ -1330,18 +1355,33 @@ public class ZapControllerNormal : ZapController
 
     public override int keyUpDown()
     {
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) && zap.climbingWallID == zap.layerIdMountMask)
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) )
         {
             if (!mounting())
             {
-                Vector3 playerPos = transform.position;
-                playerPos.y += 0.1f;
-                if (zap.CheckClimbingWall(playerPos,zap.layerIdMountMask))
+                if (zap.climbingWallID == zap.layerIdMountMask)
                 {
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = MountSpeed;
-                    setAction(Action.MOUNT_UP);
-                    return 1;
+                    Vector3 playerPos = transform.position;
+                    playerPos.y += 0.1f;
+                    if (zap.CheckClimbingWall(playerPos, zap.layerIdMountMask))
+                    {
+                        zap.velocity.x = 0.0f;
+                        zap.velocity.y = MountSpeed;
+                        setAction(Action.MOUNT_UP);
+                        return 1;
+                    }
+                }
+                else if (zap.climbingWallID == zap.layerIdGroundFarMask)
+                {
+                    if (CanPullUp())
+                    {
+                        setAction(Action.PullUp);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("zap.climbingWallID : " + zap.climbingWallID);
+                    Debug.Break();
                 }
             }
         }
@@ -1366,36 +1406,60 @@ public class ZapControllerNormal : ZapController
 
     public override int keyUpUp()
     {
-        if (setMountIdle())
+        if (zap.climbingWallID == zap.layerIdMountMask)
         {
-            if (isInState(Zap.State.MOUNT))
+            if (setMountIdle())
             {
-                if (Input.GetKey(zap.keyLeft))
-                    keyLeftDown();
-                else if (Input.GetKey(zap.keyRight))
-                    keyRightDown();
-                else if (Input.GetKey(zap.keyDown))
-                    keyDownDown();
+                if (isInState(Zap.State.MOUNT))
+                {
+                    if (Input.GetKey(zap.keyLeft))
+                        keyLeftDown();
+                    else if (Input.GetKey(zap.keyRight))
+                        keyRightDown();
+                    else if (Input.GetKey(zap.keyDown))
+                        keyDownDown();
+                }
             }
         }
+        else if (zap.climbingWallID == zap.layerIdGroundFarMask)
+        {
+        }
+        else
+        {
+            Debug.LogError("zap.climbingWallID : " + zap.climbingWallID);
+            Debug.Break();
+        }
+        
         return 0;
     }
 
     public override int keyDownDown()
     {
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) && zap.climbingWallID == zap.layerIdMountMask)
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) )
         {
-            if (!mounting())
+            if (zap.climbingWallID == zap.layerIdMountMask)
             {
-                Vector3 playerPos = transform.position;
-                playerPos.y -= 0.1f;
-                if (zap.CheckClimbingWall(playerPos,zap.layerIdMountMask))
+                if (!mounting())
                 {
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = -MountSpeed;
-                    setAction(Action.MOUNT_DOWN);
-                    return 1;
+                    Vector3 playerPos = transform.position;
+                    playerPos.y -= 0.1f;
+                    if (zap.CheckClimbingWall(playerPos, zap.layerIdMountMask))
+                    {
+                        zap.velocity.x = 0.0f;
+                        zap.velocity.y = -MountSpeed;
+                        setAction(Action.MOUNT_DOWN);
+                        return 1;
+                    }
                 }
+            }
+            else if(zap.climbingWallID == zap.layerIdGroundFarMask)
+            {
+
+            }
+            else
+            {
+                Debug.LogError("zap.climbingWallID : " + zap.climbingWallID);
+                Debug.Break();
             }
         }
         else if (isInState(Zap.State.ON_GROUND))
@@ -1419,6 +1483,11 @@ public class ZapControllerNormal : ZapController
 
     public override int keyDownUp()
     {
+        if( isInAction(Action.PullDown))
+        {
+            return 0;
+        }
+
         if (setMountIdle())
         {
             if (isInState(Zap.State.MOUNT))
@@ -1877,6 +1946,18 @@ public class ZapControllerNormal : ZapController
         //Debug.Log ("ZapControllerNormal::keyJumpDown()");
         //jumpKeyPressed = true;
 
+        if (crouching())
+        {
+            if (CanPullDown())
+            {
+                zap.velocity.x = 0.0f;
+                zap.velocity.y = 0.0f;
+                zap.setState(Zap.State.MOUNT);
+                setAction(Action.PullDown);
+                return 0;
+            }
+        }
+
         switch (action)
         {
             case Action.Idle:
@@ -2194,6 +2275,62 @@ public class ZapControllerNormal : ZapController
         {
             tryStartClimbPullDown();
         }
+        return 0;
+    }
+
+    int ActionPullUp()
+    {
+        float actionRatio = Mathf.Min(zap.currentActionTime / PullUpDuration, 1f);
+
+        if (actionRatio >= 1f)
+        {
+            zap.setState(Zap.State.ON_GROUND);
+            setAction(Action.Idle);
+            return 1;
+        }
+
+        Vector3 posDiff = new Vector3();
+        posDiff.y += (actionRatio * 2.5f);
+        transform.position = actionChangedPos + posDiff;
+
+        return 0;
+    }
+    int ActionPullDown()
+    {
+        float actionRatio = Mathf.Min(zap.currentActionTime / PullDownDuration, 1f);
+
+        if (actionRatio >= 1f)
+        {
+            zap.climbingWallID = zap.layerIdGroundFarMask;
+            setAction(Action.MOUNT_IDLE);
+            Assert.IsTrue(zap.CheckHandle(zap.layerIdGroundFarMask));
+            return 1;
+        }
+
+    //    public bool CheckHandle(int layerID)
+    //{
+    //    Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
+    //    rayOrigin.y += 0.3f;
+    //    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
+
+    //    if (!hit.collider)
+    //        return false;
+
+    //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
+    //    if (!hit.collider)
+    //        return false;
+
+    //    rayOrigin.x += myWidth;
+    //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
+    //    return hit.collider;
+    //}
+
+        Vector3 posDiff = new Vector3();
+        posDiff.y -= (actionRatio * zap.sensorLeft3.localPosition.y + 0.35f);
+        transform.position = actionChangedPos + posDiff;
+
+        
+
         return 0;
     }
 
@@ -3917,6 +4054,16 @@ public class ZapControllerNormal : ZapController
         }
         //aa
         return false;
+    }
+
+    bool CanPullUp()
+    {
+        return true;
+    }
+
+    bool CanPullDown()
+    {
+        return true;
     }
 
     bool canRopeClimbUp()
