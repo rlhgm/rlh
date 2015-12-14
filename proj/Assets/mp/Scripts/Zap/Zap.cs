@@ -2622,7 +2622,7 @@ public class Zap : MonoBehaviour
             return false;
 
         rayOrigin.x += myWidth;
-        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
         return hit.collider;
     }
     
