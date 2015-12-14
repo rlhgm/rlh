@@ -984,7 +984,7 @@ public class Zap : MonoBehaviour
         }
 
         int lid = other.transform.gameObject.layer;
-        if (lid == LayerMask.NameToLayer("GroundMoveable"))
+        if (lid == LayerMask.NameToLayer("GroundMoveable") || lid == LayerMask.NameToLayer("DraggedGroundMoveable"))
         { // layerIdGroundMoveableMask) { // to jest kamien 
             if (hitByStone(other.transform))
             {
