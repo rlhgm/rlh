@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -2584,37 +2585,39 @@ public class Zap : MonoBehaviour
         return true;
     }
 
-    public bool checkMount()
+    public bool CheckHandle(int layerID)
     {
         Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
         rayOrigin.y += 0.3f;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerIdMountMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
 
         if (!hit.collider)
             return false;
 
-        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
         if (!hit.collider)
             return false;
 
         rayOrigin.x += myWidth;
-        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
         return hit.collider;
     }
 
-    public bool checkMount(Vector3 posToCheck)
+    public bool CheckClimbingWall(Vector3 posToCheck, int layerID)
     {
+        Assert.IsTrue(layerID > 0);
+        
         Vector3 sensorDiff = sensorLeft3.transform.position - transform.position; // transform.position;
 
         Vector2 rayOrigin = posToCheck + sensorDiff;//aaa
         rayOrigin.y += 0.3f;
 
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerIdMountMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
 
         if (!hit.collider)
             return false;
 
-        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerIdMountMask);
+        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
         if (!hit.collider)
             return false;
 
@@ -2622,10 +2625,7 @@ public class Zap : MonoBehaviour
         hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerIdMountMask);
         return hit.collider;
     }
-
-
-
-
+    
     public void SetImpulse(Vector2 imp) { impulse = imp; }
     public Vector2 GetImpulse() { return impulse; }
     public void AddImpulse(Vector3 imp) { impulse += imp; }
@@ -2643,6 +2643,7 @@ public class Zap : MonoBehaviour
         IN_AIR,
         CLIMB,
         MOUNT,
+        //HANG,
         CLIMB_ROPE,
         DEAD,
         OTHER
@@ -3050,7 +3051,8 @@ public class Zap : MonoBehaviour
     public int layerIdGroundHandlesMask;
     [HideInInspector]
     public int layerIdRopesMask;
-    int layerIdMountMask;
+    [HideInInspector]
+    public int layerIdMountMask;
 
     float climbDistFromWall;
     Vector2 climbDir;
@@ -3066,6 +3068,7 @@ public class Zap : MonoBehaviour
     RaycastHit2D hit2;
 
     public Transform groundUnder = null;
+    public int climbingWallID = -1;
     float groundUnderAngle = 0f;
 
 

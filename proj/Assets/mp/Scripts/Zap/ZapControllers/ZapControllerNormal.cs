@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using System.Collections;
 //using System; //This allows the IComparable Interface
 
@@ -379,7 +380,7 @@ public class ZapControllerNormal : ZapController
                     Vector3 fallDist = zap.startFallPos - transform.position;
                     if (!zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch))
                     {
-                        if (zap.checkMount())
+                        if (zap.CheckHandle(zap.layerIdMountMask))
                         {
                             if (jumpFromMount)
                             {
@@ -396,6 +397,13 @@ public class ZapControllerNormal : ZapController
                         else
                         {
                             jumpFromMount = false;
+                        }
+
+                        if (zap.CheckHandle(zap.layerIdGroundFarMask))
+                        {
+                            zap.climbingWallID = zap.layerIdGroundFarMask;
+                            setActionMountIdle();
+                            return;
                         }
                     }
                 }
@@ -913,6 +921,16 @@ public class ZapControllerNormal : ZapController
         MOUNT_ATTACK_LEFT,
         MOUNT_ATTACK_RIGHT,
         MOUNT_BIRDHIT,
+
+        //HANG_IDLE,
+        //HANG_LEFT,
+        //HANG_RIGHT,
+        //HANG_UP,
+        //HANG_DOWN,
+        //HANG_ATTACK_LEFT,
+        //HANG_ATTACK_RIGHT,
+        //HANG_BIRDHIT,
+
         ROPECLIMB_IDLE,
         ROPECLIMB_UP,
         ROPECLIMB_DOWN,
@@ -1303,13 +1321,13 @@ public class ZapControllerNormal : ZapController
 
     public override int keyUpDown()
     {
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) && zap.climbingWallID == zap.layerIdMountMask)
         {
             if (!mounting())
             {
                 Vector3 playerPos = transform.position;
                 playerPos.y += 0.1f;
-                if (zap.checkMount(playerPos))
+                if (zap.CheckClimbingWall(playerPos,zap.layerIdMountMask))
                 {
                     zap.velocity.x = 0.0f;
                     zap.velocity.y = MountSpeed;
@@ -1320,7 +1338,7 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.ON_GROUND))
         {
-            if (zap.checkMount())
+            if (zap.CheckHandle(zap.layerIdMountMask))
             {
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = MountSpeed;
@@ -1355,13 +1373,13 @@ public class ZapControllerNormal : ZapController
 
     public override int keyDownDown()
     {
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
+        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) && zap.climbingWallID == zap.layerIdMountMask)
         {
             if (!mounting())
             {
                 Vector3 playerPos = transform.position;
                 playerPos.y -= 0.1f;
-                if (zap.checkMount(playerPos))
+                if (zap.CheckClimbingWall(playerPos,zap.layerIdMountMask))
                 {
                     zap.velocity.x = 0.0f;
                     zap.velocity.y = -MountSpeed;
@@ -1543,7 +1561,12 @@ public class ZapControllerNormal : ZapController
                 Vector3 playerPos = transform.position;
                 playerPos.x -= 0.1f;
                 zap.turnLeft();
-                if (zap.checkMount(playerPos))
+                //&& zap.climbingWallID != zap.layerIdMountMask
+                //zap.climbingWallID
+
+                Assert.IsTrue(zap.climbingWallID > 0);
+
+                if (zap.CheckClimbingWall(playerPos, zap.climbingWallID))
                 {
                     zap.velocity.x = -MountSpeed;
                     zap.velocity.y = 0.0f;
@@ -1655,7 +1678,7 @@ public class ZapControllerNormal : ZapController
                 Vector3 playerPos = transform.position;
                 playerPos.x += 0.1f;
                 zap.turnRight();
-                if (zap.checkMount(playerPos))
+                if (zap.CheckClimbingWall(playerPos,zap.climbingWallID))
                 {
                     zap.velocity.x = MountSpeed;
                     zap.velocity.y = 0.0f;
@@ -2376,7 +2399,7 @@ public class ZapControllerNormal : ZapController
         Vector3 newPos3 = transform.position;
         Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
         newPos3 += distToMount;
-        if (zap.checkMount(newPos3))
+        if (zap.CheckClimbingWall(newPos3,zap.climbingWallID))
         {
             transform.position = newPos3;
         }
@@ -2415,7 +2438,7 @@ public class ZapControllerNormal : ZapController
             }
             else
             {
-                if (zap.checkMount(newPos3))
+                if (zap.CheckClimbingWall(newPos3,zap.climbingWallID))
                     transform.position = newPos3;
                 else
                     setMountIdle();
@@ -3476,6 +3499,14 @@ public class ZapControllerNormal : ZapController
         }
         return false;
     }
+    //void SetActionHangIdle()
+    //{
+    //    zap.velocity.x = 0.0f;
+    //    zap.velocity.y = 0.0f;
+    //    zap.setState(Zap.State.HANG);
+    //    setAction(Action.HANG_IDLE);
+    //    resetActionAndState();
+    //}
 
     void resetActionAndState()
     {

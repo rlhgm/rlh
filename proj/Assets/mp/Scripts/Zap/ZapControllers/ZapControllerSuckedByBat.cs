@@ -333,31 +333,31 @@ public class ZapControllerSuckedByBat : ZapController
 
             case Zap.State.IN_AIR:
 
-                if (zap.jumpKeyPressed)
-                { //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
-                    Vector3 fallDist = zap.startFallPos - transform.position;
-                    if (!zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch))
-                    {
-                        if (zap.checkMount())
-                        {
-                            if (jumpFromMount)
-                            {
-                                if (!justJumpedMount)
-                                {
-                                }
-                            }
-                            else
-                            {
-                                setActionMountIdle();
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            jumpFromMount = false;
-                        }
-                    }
-                }
+                //if (zap.jumpKeyPressed)
+                //{ //Input.GetKeyDown(zap.keyJump) || Input.GetKey(zap.keyJump) ){
+                //    Vector3 fallDist = zap.startFallPos - transform.position;
+                //    if (!zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch))
+                //    {
+                //        if (zap.CheckHandle())
+                //        {
+                //            if (jumpFromMount)
+                //            {
+                //                if (!justJumpedMount)
+                //                {
+                //                }
+                //            }
+                //            else
+                //            {
+                //                setActionMountIdle();
+                //                return;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            jumpFromMount = false;
+                //        }
+                //    }
+                //}
                 if (jumpFromMount && Input.GetKey(zap.keyJump))
                 {
                     Vector3 fallDist = zap.startFallPos - transform.position;
@@ -1277,96 +1277,16 @@ public class ZapControllerSuckedByBat : ZapController
     {
         //Debug.Log("ZapControllerSuckedByBat::keyUpDown()");
         return 0;
-
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
-        {
-            if (!mounting())
-            {
-                Vector3 playerPos = transform.position;
-                playerPos.y += 0.1f;
-                if (zap.checkMount(playerPos))
-                {
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = MountSpeed;
-                    setAction(Action.MOUNT_UP);
-                    return 1;
-                }
-            }
-        }
-        else if (isInState(Zap.State.ON_GROUND))
-        {
-            if (zap.checkMount())
-            {
-                zap.velocity.x = 0.0f;
-                zap.velocity.y = MountSpeed;
-                setAction(Action.MOUNT_UP);
-                zap.setState(Zap.State.MOUNT);
-                return 1;
-            }
-            if (tryCatchHandle(true))
-            {
-                return 1;
-            }
-        }
-        return 0;
     }
 
     public override int keyUpUp()
     {
         //Debug.Log("ZapControllerSuckedByBat::keyUpUp()");
         return 0;
-
-        if (setMountIdle())
-        {
-            if (isInState(Zap.State.MOUNT))
-            {
-                if (Input.GetKey(zap.keyLeft))
-                    keyLeftDown();
-                else if (Input.GetKey(zap.keyRight))
-                    keyRightDown();
-                else if (Input.GetKey(zap.keyDown))
-                    keyDownDown();
-            }
-        }
-        return 0;
     }
 
     public override int keyDownDown()
     {
-        
-        return 0;
-
-        if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
-        {
-            if (!mounting())
-            {
-                Vector3 playerPos = transform.position;
-                playerPos.y -= 0.1f;
-                if (zap.checkMount(playerPos))
-                {
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = -MountSpeed;
-                    setAction(Action.MOUNT_DOWN);
-                    return 1;
-                }
-            }
-        }
-        else if (isInState(Zap.State.ON_GROUND))
-        {
-            if (tryStartClimbPullDown())
-            {
-                return 1;
-            }
-            else
-            {
-                if (!crouching())
-                {
-                    setAction(Action.CROUCH_IN);
-                    return 1;
-                }
-            }
-        }
-
         return 0;
     }
 
@@ -1472,167 +1392,12 @@ public class ZapControllerSuckedByBat : ZapController
     {
         dirKeyPressed(-1);
         return 0;
-
-        if ((isInAction(Action.IDLE) || moving(-1) || jumping()) && isInState(Zap.State.ON_GROUND))
-        {
-
-            if (zap.dir() == Vector2.right)
-            {
-                turnLeftStart();
-                return 0;
-            }
-            else
-            {
-                float dto = -1;
-                Transform obstacle = zap.CheckLeft(0.1f, ref dto);
-                if (obstacle)
-                {
-                    PushStart(obstacle);
-                    return 0;
-                }
-            }
-
-            if (zap.dir() == -Vector2.right)
-            {
-                if (Input.GetKey(zap.keyRun))
-                {
-                    desiredSpeedX = RunSpeed;
-                    speedLimiter(-1, desiredSpeedX + 1.0f);
-                    setAction(Action.RUN_LEFT);
-                    return 1;
-                }
-                else
-                {
-                    desiredSpeedX = WalkSpeed;
-                    speedLimiter(-1, desiredSpeedX + 1.0f);
-                    setAction(Action.WALK_LEFT);
-                    return 1;
-                }
-            }
-            else
-            {
-                turnLeftStart();
-                return 1;
-            }
-        }
-        else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
-        {
-            if (!mounting())
-            {
-                Vector3 playerPos = transform.position;
-                playerPos.x -= 0.1f;
-                zap.turnLeft();
-                if (zap.checkMount(playerPos))
-                {
-                    zap.velocity.x = -MountSpeed;
-                    zap.velocity.y = 0.0f;
-                    setAction(Action.MOUNT_LEFT);
-                    return 1;
-                }
-            }
-        }
-        else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
-        {
-            if (zap.CheckLeft(0.1f) >= 0.0f)
-            {
-                return 0;
-            }
-            desiredSpeedX = CrouchSpeed;
-            if (zap.dir() == -Vector2.right)
-            {
-                setAction(Action.CROUCH_LEFT);
-            }
-            else
-            {
-                setAction(Action.CROUCH_LEFT_BACK);
-            }
-            return 1;
-        }
-        return 0;
     }
 
     public override int keyRightDown()
     {
         dirKeyPressed(1);
-        
         //Debug.Log("ZapControllerSuckedByBat::keyDownDown()");
-        return 0;
-
-        if ((isInAction(Action.IDLE) || moving(1) || jumping()) && isInState(Zap.State.ON_GROUND))
-        {
-            if (zap.dir() == -Vector2.right)
-            {
-                turnRightStart();
-                return 0;
-            }
-            else
-            {
-                //setAction(Action.PUSH_RIGHT);
-                float dto = -1;
-                Transform obstacle = zap.CheckRight(0.1f, ref dto);
-                if (obstacle)
-                {
-                    PushStart(obstacle);
-                    return 0;
-                }
-            }
-
-            if (zap.dir() == Vector2.right)
-            {
-                if (Input.GetKey(zap.keyRun))
-                {
-                    desiredSpeedX = RunSpeed;
-                    speedLimiter(1, desiredSpeedX + 1.0f);
-                    setAction(Action.RUN_RIGHT);
-                    return 1;
-                }
-                else
-                {
-                    desiredSpeedX = WalkSpeed;
-                    speedLimiter(1, desiredSpeedX + 1.0f);
-                    setAction(Action.WALK_RIGHT);
-                    return 1;
-                }
-            }
-            else
-            {
-                turnRightStart();
-                return 1;
-            }
-        }
-        else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
-        {
-            if (!mounting())
-            {
-                Vector3 playerPos = transform.position;
-                playerPos.x += 0.1f;
-                zap.turnRight();
-                if (zap.checkMount(playerPos))
-                {
-                    zap.velocity.x = MountSpeed;
-                    zap.velocity.y = 0.0f;
-                    setAction(Action.MOUNT_RIGHT);
-                    return 1;
-                }
-            }
-        }
-        else if (isInAction(Action.CROUCH_IDLE) && isInState(Zap.State.ON_GROUND))
-        {
-            if (zap.CheckRight(0.1f) >= 0.0f)
-            {
-                return 0;
-            }
-            desiredSpeedX = CrouchSpeed;
-            if (zap.dir() == Vector2.right)
-            {
-                setAction(Action.CROUCH_RIGHT);
-            }
-            else
-            {
-                setAction(Action.CROUCH_RIGHT_BACK);
-            }
-            return 1;
-        }
         return 0;
     }
 
@@ -2168,59 +1933,11 @@ public class ZapControllerSuckedByBat : ZapController
 
     int Action_MOUNTING()
     {
-        if (tryMountAttackStart())
-        {
-            return 0;
-        }
-
-        Vector3 newPos3 = transform.position;
-        Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
-        newPos3 += distToMount;
-        if (zap.checkMount(newPos3))
-        {
-            transform.position = newPos3;
-        }
-        else
-        {
-            setMountIdle();
-        }
         return 0;
     }
 
     int Action_MOUNTING_DOWN()
     {
-        if (tryMountAttackStart())
-        {
-            return 0;
-        }
-
-        Vector3 newPos3 = transform.position;
-        Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
-        newPos3 += distToMount;
-
-        if (distToMount.y < 0.0f)
-        { // schodzi
-            groundUnderFeet = zap.checkDown(Mathf.Abs(distToMount.y) + 0.01f);
-            if (groundUnderFeet >= 0.0f)
-            {
-                if (groundUnderFeet < Mathf.Abs(distToMount.y))
-                {
-                    distToMount.y = -groundUnderFeet;
-                    zap.velocity.x = 0.0f;
-                    zap.velocity.y = 0.0f;
-                    zap.setState(Zap.State.ON_GROUND);
-                    setAction(Action.IDLE);
-                    transform.position = transform.position + distToMount;
-                }
-            }
-            else
-            {
-                if (zap.checkMount(newPos3))
-                    transform.position = newPos3;
-                else
-                    setMountIdle();
-            }
-        }
         return 0;
     }
 

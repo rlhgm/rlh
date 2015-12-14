@@ -23,10 +23,10 @@ przejazdy kamery
 drugi plan
 poprawa walki ze szczurami
 łamiący się posąg
+prefaby skrzynek rozwalalnych i nierozwalalnych
+obiekty do chodzenia góra/dół i lewo/prawo
 
 JEST:
 naprawienie climbersów
 kamienie odrywalne od ściany
 zapadające się fizyki
-prefaby skrzynek rozwalalnych i nierozwalalnych
-obiekty do chodzenia góra/dół i lewo/prawo
