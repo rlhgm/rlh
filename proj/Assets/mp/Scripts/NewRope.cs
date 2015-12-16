@@ -351,11 +351,15 @@ public class NewRope : MonoBehaviour {
 			currentLink.GetComponent<Rigidbody2D> ().mass = linkMass;
 			//currentLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
 
-			if( currentLink.transform.childCount > 0 ) {
+			if( currentLink.transform.childCount > 0 )
+            {
 				Transform nextLink = currentLink.transform.GetChild(0);
-				//nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
-				nextLink.GetComponent<Rigidbody2D> ().mass = linkMass;
-				//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
+                if (nextLink.GetComponent<RopeLink>())
+                {
+                    //nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
+                    nextLink.GetComponent<Rigidbody2D>().mass = linkMass;
+                    //nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.0f;
+                }
 			}
 		}
 
@@ -366,10 +370,13 @@ public class NewRope : MonoBehaviour {
 		//newLink.GetComponent<Rigidbody2D> ().gravityScale = 1.5f;
 
 		if( currentLink.transform.childCount > 0 ) {
-			Transform nextLink = currentLink.transform.GetChild(0);
-			//nextLink.GetComponent<SpriteRenderer> ().color = Color.red;
-			nextLink.GetComponent<Rigidbody2D> ().mass = secondDriverLinkMass;
-			//nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.25f;
+            Transform nextLink = currentLink.transform.GetChild(0);
+            if (nextLink.GetComponent<RopeLink>())
+            {
+                //nextLink.GetComponent<SpriteRenderer> ().color = Color.red;
+                nextLink.GetComponent<Rigidbody2D>().mass = secondDriverLinkMass;
+                //nextLink.GetComponent<Rigidbody2D> ().gravityScale = 1.25f;
+            }
 		}
 
 		return true;
@@ -382,8 +389,11 @@ public class NewRope : MonoBehaviour {
 			
 			if( currentLink.transform.childCount > 0 ) {
 				Transform nextLink = currentLink.transform.GetChild(0);
-				//nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
-				nextLink.GetComponent<Rigidbody2D> ().mass = linkMass;
+                if (nextLink.GetComponent<RopeLink>())
+                {
+                    //nextLink.GetComponent<SpriteRenderer> ().color = Color.white;
+                    nextLink.GetComponent<Rigidbody2D>().mass = linkMass;
+                }
 			}
 		}
 		
