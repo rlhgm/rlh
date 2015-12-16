@@ -3332,11 +3332,12 @@ public class ZapControllerNormal : ZapController
 
                 if (_asdf && catchedRopeLink.transform.GetChild(0).transform.childCount > 0)
                 { // chyba ze to jest ostatnie ogniwo
-
+                    
                     RopeLink newCatchedRopeLink = catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
+
                     //HingeJoint2D catchedHingeJoint = catchedRopeLink.GetComponent<HingeJoint2D>();
                     //if( catchedHingeJoint.enabled ){
-                    if (catchedRope.chooseDriver(newCatchedRopeLink.transform))
+                    if (newCatchedRopeLink && catchedRope.chooseDriver(newCatchedRopeLink.transform))
                     {
                         catchedRopeLink = newCatchedRopeLink;
                         ropeLinkCatchOffset = newRopeLinkCatchOffset + 0.5f;
@@ -4094,7 +4095,8 @@ public class ZapControllerNormal : ZapController
 
                 if (catchedRopeLink.transform.GetChild(0).transform.childCount > 0)
                 { // chyba ze to jest ostatnie ogniwo
-                    return true;
+                    return catchedRopeLink.transform.GetChild(0).GetComponent<RopeLink>();
+                    //return true;
                 }
 
             }
