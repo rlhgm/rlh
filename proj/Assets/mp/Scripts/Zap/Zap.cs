@@ -2592,22 +2592,30 @@ public class Zap : MonoBehaviour
         return true;
     }
 
-    public bool CheckHandle(int layerID)
+    //public Transform CheckHandle2(int layerID)
+    //{
+    //    return CheckHandle(layerID);
+    //}
+
+    public Transform CheckHandle(int layerID)
     {
         Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
         rayOrigin.y += 0.3f;
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
 
         if (!hit.collider)
-            return false;
+            return null;
 
         hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
         if (!hit.collider)
-            return false;
+            return null;
 
         rayOrigin.x += myWidth;
         hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
-        return hit.collider;
+        if (hit.collider)
+            return hit.collider.transform;
+        else
+            return null;
     }
 
     public bool CheckClimbingWall(Vector3 posToCheck, int layerID)

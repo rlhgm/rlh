@@ -381,6 +381,24 @@ public class ZapControllerNormal : ZapController
         {
 
             case Zap.State.MOUNT:
+                if (handledMountMoveable)
+                {
+                    //handledMountMoveablePosition;
+                    //Vector2 rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
+                    //rayOrigin.y += 0.3f;
+
+                    //Vector3 zapHandpos = zap.transform.position;
+                    //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                    //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+
+                    //Debug.Log(handledMountMoveablePosition);
+
+                    Vector3 worldHandledMountMoveablePosition = handledMountMoveable.transform.TransformPoint(handledMountMoveablePosition);
+                    worldHandledMountMoveablePosition.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                    transform.position = worldHandledMountMoveablePosition;
+                }
+                //zap.climbingWallID = zap.layerIdMountMask;
+                //setActionMountIdle();
                 break;
 
             case Zap.State.IN_AIR:
@@ -391,7 +409,8 @@ public class ZapControllerNormal : ZapController
                     Vector3 fallDist = zap.startFallPos - transform.position;
                     if (!zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch))
                     {
-                        if (zap.CheckHandle(zap.layerIdMountMask))
+                        Transform handle = zap.CheckHandle(zap.layerIdMountMask);
+                        if (handle)
                         {
                             if (jumpFromMount)
                             {
@@ -401,6 +420,17 @@ public class ZapControllerNormal : ZapController
                             }
                             else
                             {
+                                handledMountMoveable = handle.GetComponent<MountMoveable>();
+                                if ( handledMountMoveable )
+                                {
+                                    //handledMountMoveablePosition;
+                                    //Vector2 rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
+                                    //rayOrigin.y += 0.3f;
+                                    Vector3 zapHandpos = zap.transform.position;
+                                    zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                                    handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+                                    //Debug.Log(handledMountMoveablePosition);
+                                }
                                 zap.climbingWallID = zap.layerIdMountMask;
                                 setActionMountIdle();
                                 return;
@@ -843,6 +873,10 @@ public class ZapControllerNormal : ZapController
                 //weaponText.rotation = quat;
 
                 break;
+
+            //case Zap.State.MOUNT:
+
+            //    break;
         };
         
         zap.lastVelocity = zap.velocity;
@@ -2539,7 +2573,13 @@ public class ZapControllerNormal : ZapController
         newPos3 += distToMount;
         if (zap.CheckClimbingWall(newPos3,zap.climbingWallID))
         {
+            //handledMountMoveablePosition += distToMount;
+
             transform.position = newPos3;
+
+            Vector3 zapHandpos = transform.position;
+            zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+            handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
         }
         else
         {
@@ -4754,6 +4794,8 @@ public class ZapControllerNormal : ZapController
     bool canJumpAfter = true;
     float desiredSpeedX = 0.0f;
     float beforTurnRunSpeed = 0f;
+    MountMoveable handledMountMoveable = null;
+    Vector3 handledMountMoveablePosition = new Vector3();
 
     Action action;
     public float CrouchInOutDuration = 0.2f;
