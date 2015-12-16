@@ -3,7 +3,10 @@ using System.Collections;
 
 public class MountMoveable : MonoBehaviour
 {
-
+    public bool MovingXEnabled = false;
+    public bool MovingYEnabled = false;
+    public bool MovingInLocal = false;
+    
     // Use this for initialization
     void Start()
     {
