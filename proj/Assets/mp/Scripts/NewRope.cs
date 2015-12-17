@@ -28,6 +28,9 @@ public class NewRope : MonoBehaviour {
 
     public int[] controlValues;
 
+    public bool Cutable = true;
+    public bool Catchable = true;
+
     void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
 		Destroy (spriteRenderer);

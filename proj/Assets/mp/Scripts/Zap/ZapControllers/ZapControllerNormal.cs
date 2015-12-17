@@ -4646,7 +4646,12 @@ public class ZapControllerNormal : ZapController
                 if (_canCatch)
                 {
                     catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
-
+                    if( !catchedRopeLink.rope.Catchable )
+                    {
+                        catchedRopeLink = null;
+                        lastHandlePos = zap.sensorHandleR2.position;
+                        return false;
+                    }
                     if (justJumpedRope == catchedRopeLink.rope)
                     {
                         catchedRopeLink = null;
@@ -4684,7 +4689,12 @@ public class ZapControllerNormal : ZapController
                 if (_canCatch)
                 {
                     catchedRopeLink = hit.collider.transform.GetComponent<RopeLink>();
-
+                    if (!catchedRopeLink.rope.Catchable)
+                    {
+                        catchedRopeLink = null;
+                        lastHandlePos = zap.sensorHandleR2.position;
+                        return false;
+                    }
                     if (justJumpedRope == catchedRopeLink.rope)
                     {
                         catchedRopeLink = null;
