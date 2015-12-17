@@ -394,6 +394,24 @@ public class ZapControllerNormal : ZapController
                     //Debug.Log(handledMountMoveablePosition);
 
                     Vector3 worldHandledMountMoveablePosition = handledMountMoveable.transform.TransformPoint(handledMountMoveablePosition);
+
+                    Vector3 _p1 = worldHandledMountMoveablePosition;
+                    _p1.x -= 0.1f;
+                    _p1.y -= 0.1f;
+                    Vector3 _p2 = worldHandledMountMoveablePosition;
+                    _p2.x += 0.1f;
+                    _p2.y += 0.1f;
+                    Debug.DrawLine(_p1, _p2, Color.red);
+
+                    _p1 = worldHandledMountMoveablePosition;
+                    _p1.x -= 0.1f;
+                    _p1.y += 0.1f;
+                    _p2 = worldHandledMountMoveablePosition;
+                    _p2.x += 0.1f;
+                    _p2.y -= 0.1f;
+                    Debug.DrawLine(_p1, _p2, Color.red);
+
+
                     worldHandledMountMoveablePosition.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
                     transform.position = worldHandledMountMoveablePosition;
                 }
@@ -1671,15 +1689,13 @@ public class ZapControllerNormal : ZapController
         {
             if (!mounting())
             {
-                Vector3 playerPos = transform.position;
-                playerPos.x -= 0.1f;
+                Vector3 newPos3 = new Vector3();
+                Vector3 distToMount = new Vector3(0f, 0f, 0f);
+                distToMount.x -= 0.1f;
                 zap.turnLeft();
-                //&& zap.climbingWallID != zap.layerIdMountMask
-                //zap.climbingWallID
-
                 Assert.IsTrue(zap.climbingWallID > 0);
 
-                if (zap.CheckClimbingWall(playerPos, zap.climbingWallID))
+                if (CanMountTo(distToMount, ref newPos3))
                 {
                     zap.velocity.x = -MountSpeed;
                     zap.velocity.y = 0.0f;
@@ -1687,6 +1703,25 @@ public class ZapControllerNormal : ZapController
                     return 1;
                 }
             }
+            
+            //if (!mounting())
+            //{
+            //    Vector3 playerPos = transform.position;
+            //    playerPos.x -= 0.1f;
+            //    zap.turnLeft();
+            //    //&& zap.climbingWallID != zap.layerIdMountMask
+            //    //zap.climbingWallID
+
+            //    Assert.IsTrue(zap.climbingWallID > 0);
+
+            //    if (zap.CheckClimbingWall(playerPos, zap.climbingWallID))
+            //    {
+            //        zap.velocity.x = -MountSpeed;
+            //        zap.velocity.y = 0.0f;
+            //        setAction(Action.MOUNT_LEFT);
+            //        return 1;
+            //    }
+            //}
         }
         else if (isInAction(Action.CrouchIdle) && isInState(Zap.State.ON_GROUND))
         {               
@@ -1786,45 +1821,33 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
+            //if (!mounting())
+            //{
+            //    Vector3 newPos3 = new Vector3();
+            //    Vector3 distToMount = new Vector3(0f, 0f, 0f);
+            //    distToMount.x -= 0.1f;
+            //    zap.turnLeft();
+            //    Assert.IsTrue(zap.climbingWallID > 0);
+
+            //    if (CanMountTo(distToMount, ref newPos3))
+            //    {
+            //        zap.velocity.x = MountSpeed;
+            //        zap.velocity.y = 0.0f;
+            //        setAction(Action.MOUNT_LEFT);
+            //        return 1;
+            //    }
+            //}
+
             if (!mounting())
             {
-                //Vector3 newPos3 = new Vector3();
-                //Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
-                //if (CanMountTo(distToMount, ref newPos3))
-                //{
-                //    transform.position = newPos3;
-
-                //    Vector3 zapHandpos = transform.position;
-                //    zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                //    handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
-                //}
-                //else
-                //{
-                //    setMountIdle();
-                //}
-
-                //Vector3 playerPos = transform.position;
-                //playerPos.x += 0.1f;
-                //zap.turnRight();
-                //if (zap.CheckClimbingWall(playerPos,zap.climbingWallID))
-                //{
-                //    zap.velocity.x = MountSpeed;
-                //    zap.velocity.y = 0.0f;
-                //    setAction(Action.MOUNT_RIGHT);
-                //    return 1;
-                //}
-
                 Vector3 newPos3 = new Vector3();
                 Vector3 distToMount = new Vector3(0f,0f,0f);
                 distToMount.x += 0.1f;
+                zap.turnRight();
+                Assert.IsTrue(zap.climbingWallID > 0);
+
                 if (CanMountTo(distToMount, ref newPos3))
                 {
-                    //transform.position = newPos3;
-
-                    //Vector3 zapHandpos = transform.position;
-                    //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                    //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
-
                     zap.velocity.x = MountSpeed;
                     zap.velocity.y = 0.0f;
                     setAction(Action.MOUNT_RIGHT);
@@ -2608,12 +2631,23 @@ public class ZapControllerNormal : ZapController
 
             if (handledMountMoveable.MovingInLocal)
             {
+                Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
+                pointToCheck += distToMount;
+                
+                bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
+                if (!res) return false;
+
+                newPos3 = transform.position;
+
                 Vector2 tmp = distToMount;
-                tmp = tmp.Rotate(handledMountMoveable.transform.rotation.z);
+                tmp = tmp.Rotate(handledMountMoveable.transform.eulerAngles.z);
                 distToMount.x = tmp.x;
                 distToMount.y = tmp.y;
+
+                newPos3 += distToMount;
+
+                return true;
             }
-           
         }
         else
         {
@@ -2624,20 +2658,12 @@ public class ZapControllerNormal : ZapController
         newPos3 += distToMount;
         if (zap.CheckClimbingWall(newPos3, zap.climbingWallID))
         {
-            //transform.position = newPos3;
-
-            //Vector3 zapHandpos = transform.position;
-            //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-            //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
             return true;
         }
         else
         {
-            //setMountIdle();
             return false;
         }
-
-        //return true;
     }
 
     int Action_MOUNTING()
@@ -2649,43 +2675,6 @@ public class ZapControllerNormal : ZapController
         
         if( handledMountMoveable )
         {
-            //if( zap.velocity.x != 0f && !handledMountMoveable.MovingXEnabled)
-            //{
-            //    setMountIdle();
-            //    return 0;
-            //}
-            //if (zap.velocity.y != 0f && !handledMountMoveable.MovingYEnabled)
-            //{
-            //    setMountIdle();
-            //    return 0;
-            //}
-
-
-            //Vector3 newPos3 = transform.position;
-            //Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
-            //if( handledMountMoveable.MovingInLocal)
-            //{
-            //    Vector2 tmp = distToMount;
-            //    tmp = tmp.Rotate(handledMountMoveable.transform.rotation.z);
-            //    distToMount.x = tmp.x;
-            //    distToMount.y = tmp.y;
-            //}
-            //newPos3 += distToMount;
-            //if (zap.CheckClimbingWall(newPos3, zap.climbingWallID))
-            //{
-            //    //handledMountMoveablePosition += distToMount;
-
-            //    transform.position = newPos3;
-
-            //    Vector3 zapHandpos = transform.position;
-            //    zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-            //    handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
-            //}
-            //else
-            //{
-            //    setMountIdle();
-            //}
-
             Vector3 newPos3 = new Vector3();
             Vector3 distToMount = zap.velocity * zap.getCurrentDeltaTime();
             if( CanMountTo(distToMount, ref newPos3) )

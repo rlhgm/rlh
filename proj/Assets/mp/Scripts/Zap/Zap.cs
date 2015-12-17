@@ -2620,7 +2620,7 @@ public class Zap : MonoBehaviour
 
     public bool CheckClimbingWall(Vector3 posToCheck, int layerID)
     {
-        print(posToCheck);
+        //print(posToCheck);
 
         Assert.IsTrue(layerID > 0);
         
@@ -2631,7 +2631,7 @@ public class Zap : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
 
-        print(rayOrigin);
+        //print(rayOrigin);
         
         if (!hit.collider)
             return false;
