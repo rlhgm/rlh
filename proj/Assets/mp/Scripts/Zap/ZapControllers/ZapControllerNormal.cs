@@ -38,12 +38,13 @@ public class ZapControllerNormal : ZapController
     public float PushMaxSpeed = 2f;
     public float PullMaxSpeed = 2f;
     public float PushbackMaxSpeed = 1f;
+    public float HmmPullForce = 1f;
 
     //public float PushbackInDuration = 0.09f;
 
-    
-    
-    
+
+
+
     public float GravityForce = -20.0f;
     public float MaxSpeedY = 15.0f;
 
@@ -414,6 +415,17 @@ public class ZapControllerNormal : ZapController
 
                     worldHandledMountMoveablePosition.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
                     transform.position = worldHandledMountMoveablePosition;
+
+                    Rigidbody2D hmmBody = handledMountMoveable.GetComponent<Rigidbody2D>();
+                    if (hmmBody)
+                    {
+                        hmmBody.AddForceAtPosition(new Vector2(0f, -HmmPullForce), worldHandledMountMoveablePosition);
+                    }
+                    else
+                    {
+                        Debug.LogError("handledMountMoveable nie ma body");
+                        Debug.Break();
+                    }
                 }
                 //zap.climbingWallID = zap.layerIdMountMask;
                 //setActionMountIdle();
@@ -2653,7 +2665,7 @@ public class ZapControllerNormal : ZapController
                 bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
                 if (!res)
                 {
-                    Debug.Log("LocalPointHandable - false");
+                    //Debug.Log("LocalPointHandable - false");
                     return false;
                 }
                 newPos3 = transform.position;
