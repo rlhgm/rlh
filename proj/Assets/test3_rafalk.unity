@@ -36367,8 +36367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66514a0b0e54e34288b0040e85d371b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovingXEnabled: 1
-  MovingYEnabled: 0
+  MovingXEnabled: 0
+  MovingYEnabled: 1
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
 --- !u!50 &1997014288

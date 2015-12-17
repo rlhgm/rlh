@@ -1409,15 +1409,46 @@ public class ZapControllerNormal : ZapController
     {
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) )
         {
+            //if (!mounting())
+            //{
+            //    Vector3 newPos3 = new Vector3();
+            //    Vector3 distToMount = new Vector3(0f, 0f, 0f);
+            //    distToMount.x += 0.1f;
+            //    zap.turnRight();
+            //    Assert.IsTrue(zap.climbingWallID > 0);
+
+            //    if (CanMountTo(distToMount, ref newPos3))
+            //    {
+            //        zap.velocity.x = MountSpeed;
+            //        zap.velocity.y = 0.0f;
+            //        setAction(Action.MOUNT_RIGHT);
+            //        return 1;
+            //    }
+            //}
+
             if (!mounting())
             {
                 if (zap.climbingWallID == zap.layerIdMountMask)
                 {
-                    Vector3 playerPos = transform.position;
-                    playerPos.y += 0.1f;
-                    if (zap.CheckClimbingWall(playerPos, zap.layerIdMountMask))
+                    //Vector3 playerPos = transform.position;
+                    //playerPos.y += 0.1f;
+                    //if (zap.CheckClimbingWall(playerPos, zap.layerIdMountMask))
+                    //{
+                    //    zap.velocity.x = 0.0f;
+                    //    zap.velocity.y = MountSpeed;
+                    //    setAction(Action.MOUNT_UP);
+                    //    return 1;
+                    //}
+
+                    Vector3 newPos3 = new Vector3();
+                    Vector3 distToMount = new Vector3(0f, 0f, 0f);
+                    distToMount.y += 0.1f;
+                    //zap.turnRight();
+                    //Assert.IsTrue(zap.climbingWallID > 0);
+
+                    if (CanMountTo(distToMount, ref newPos3))
                     {
-                        zap.velocity.x = 0.0f;
+                        zap.velocity.x = 0f;
                         zap.velocity.y = MountSpeed;
                         setAction(Action.MOUNT_UP);
                         return 1;
@@ -2633,7 +2664,9 @@ public class ZapControllerNormal : ZapController
             {
                 Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
                 pointToCheck += distToMount;
-                
+
+                Debug.Log(handledMountMoveablePosition + " " + pointToCheck + " " + distToMount );
+
                 bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
                 if (!res) return false;
 
