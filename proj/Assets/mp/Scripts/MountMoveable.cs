@@ -36,8 +36,23 @@ public class MountMoveable : MonoBehaviour
         //rlp.x = point.x * transform.localScale.x;
         //rlp.y = point.y * transform.localScale.y;
 
-        if (point.x < 0.3f || point.x > (mySize.x - 0.3f)) return false;
-        if (point.y > 0.0f || point.y < (-mySize.y)) return false;
+        if (MovingYEnabled)
+        {
+            if (point.x < 0.0f || point.x > (mySize.x)) return false;
+        }
+        else
+        {
+            if (point.x < 0.3f || point.x > (mySize.x - 0.3f)) return false;
+        }
+
+        if (MovingXEnabled)
+        {
+            if (point.y > 0.05f || point.y < (-mySize.y-0.05f)) return false;
+        }
+        else
+        {
+            if (point.y > 0.0f || point.y < (-mySize.y)) return false;
+        }
 
         return true;
     }
