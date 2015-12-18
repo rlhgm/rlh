@@ -94,7 +94,7 @@ GameObject:
   - 61: {fileID: 6134226}
   m_Layer: 13
   m_Name: handlePhysL
-  m_TagString: Untagged
+  m_TagString: CrumblingStairs
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - 61: {fileID: 6156824}
   m_Layer: 12
   m_Name: handle
-  m_TagString: Untagged
+  m_TagString: CrumblingStairs
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,7 +272,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 100796}
   m_Mass: 70
   m_LinearDrag: 0
-  m_AngularDrag: 3
+  m_AngularDrag: 4
   m_GravityScale: 1
   m_IsKinematic: 1
   m_Interpolate: 0

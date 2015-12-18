@@ -154,7 +154,7 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.CLIMB_CATCH:
-                Action_CLIMB_CATCH();
+                ActionClimbCatch();
                 break;
 
             case Action.CLIMB_CLIMB:
@@ -2988,8 +2988,40 @@ public class ZapControllerNormal : ZapController
         // dociaganie do punktu:
         if (zap.currentActionTime >= climbToJumpDuration)
         {
-            setAction(Action.CLIMB_CATCH, lastActionParam);
-            transform.position = climbAfterPos;
+            if (catchedClimbHandle.tag == "CrumblingStairs")
+            {
+                CrumblingStairs cs = catchedClimbHandle.transform.parent.parent.GetComponent<CrumblingStairs>();
+                if(!cs)
+                {
+                    Debug.LogError("Nie ma CrumblingStairs");
+                    Debug.Break();
+                }
+
+                handledMountMoveable = cs.Mount.GetComponent<MountMoveable>();
+                if (!handledMountMoveable)
+                {
+                    Debug.LogError("Nie ma CrumblingStairs handledMountMoveable");
+                    Debug.Break();
+                }
+
+                Vector3 newZapPos = cs.MountHandle.position;
+                newZapPos.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                zap.transform.position = newZapPos;
+                
+                Vector3 zapHandpos = zap.transform.position;
+                zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+                
+                zap.climbingWallID = zap.layerIdMountMask;
+                setActionMountIdle();
+                
+                cs.Crumble();
+            }
+            else
+            {
+                setAction(Action.CLIMB_CATCH, lastActionParam);
+                transform.position = climbAfterPos;
+            }
         }
         else
         {
@@ -3000,7 +3032,7 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
-    int Action_CLIMB_CATCH()
+    int ActionClimbCatch()
     {
         //if (zap.groundUnder)
         //{
