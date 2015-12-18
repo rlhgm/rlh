@@ -33,7 +33,7 @@ MonoBehaviour:
   draggedStone: {fileID: 0}
   lastFlashStone: {fileID: 0}
   inertiaFactor: .0900000036
-  maxDistance: 10
+  maxDistance: 50
   beginShootSound: {fileID: 8300000, guid: a5b9458529a693c4aaafadb4920021a9, type: 3}
   finishShootSound: {fileID: 8300000, guid: 68cd5b53aad9b554b9fa436333f42eeb, type: 3}
   shootSound: {fileID: 8300000, guid: 4ca3693e4b5a195418bc64aee7f2e490, type: 3}
