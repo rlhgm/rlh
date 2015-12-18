@@ -40,6 +40,7 @@ MonoBehaviour:
   PushMaxSpeed: 3
   PullMaxSpeed: 3
   PushbackMaxSpeed: 1
+  HmmPullForce: 1.5
   GravityForce: -20
   MaxSpeedY: 15
   HardLandingHeight: 2
@@ -58,6 +59,8 @@ MonoBehaviour:
   TurnRunSlowDown: 1
   MountAttackDuration: .5
   BirdHitDuration: .330000013
+  PullUpDuration: .699999988
+  PullDownDuration: .699999988
   ropeCatchSound: {fileID: 8300000, guid: c0b6a87efcf3ba945b03fb3ca4704761, type: 3}
   ropeSwingSound: {fileID: 8300000, guid: 954a68258b9d1fe478c1c32988a0a1e1, type: 3}
   mountCatchSound: {fileID: 0}
