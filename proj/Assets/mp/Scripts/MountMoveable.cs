@@ -40,7 +40,7 @@ public class MountMoveable : MonoBehaviour
 
     }
 
-    public bool TryToCollapse(float hangTime)
+    public bool TryToCollapse(float hangTime, Vector3 zapHandPos)
     {
         if (Collapsed) return false;
 
@@ -49,27 +49,27 @@ public class MountMoveable : MonoBehaviour
             ToCollapseTime -= hangTime;
             if (ToCollapseTime < 0f)
             {
-                Collapse();
+                Collapse(zapHandPos);
                 return true;
             }
         }
         return false;
     }
 
-    public void JumpedOut()
+    public void JumpedOut(Vector3 zapHandPos)
     {
         if (ResetOnJump) ToCollapseTime = CollapseDuration;
-        if (CollapseOnJump) Collapse();
+        if (CollapseOnJump) Collapse(zapHandPos);
     }
 
-    void Collapse()
+    void Collapse(Vector3 collapsePosition)
     {
         gameObject.SetActive(false);
         Collapsed = true;
 
         if (CollapseParticles)
         {
-            Object newParticleObject = Instantiate(CollapseParticles, transform.position, Quaternion.Euler(0, 0, 0));
+            Object newParticleObject = Instantiate(CollapseParticles, collapsePosition, Quaternion.Euler(0, 0, 0));
             Destroy(newParticleObject, 2.0f);
         }
     }

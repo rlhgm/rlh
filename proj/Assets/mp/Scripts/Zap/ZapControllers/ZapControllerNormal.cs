@@ -384,7 +384,11 @@ public class ZapControllerNormal : ZapController
             case Zap.State.MOUNT:
                 if (handledMountMoveable)
                 {
-                    if( handledMountMoveable.TryToCollapse(deltaTime))
+                    Vector3 handPos = zap.sensorLeft3.position; // + 0.3f;
+                    handPos.x += zap.getMyHalfWidth();
+                    handPos.y += 0.3f;
+
+                    if ( handledMountMoveable.TryToCollapse(deltaTime, handPos))
                     {
                         cs = null;
                         zap.velocity.x = 0.0f;
@@ -2063,6 +2067,16 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
+    void JumpOutMountMoveable()
+    {
+        Vector3 handPos = zap.sensorLeft3.position; // + 0.3f;
+        handPos.x += zap.getMyHalfWidth();
+        handPos.y += 0.3f;
+
+        handledMountMoveable.JumpedOut(handPos);
+        handledMountMoveable = null;
+    }
+
     public override int keyJumpDown()
     {
 
@@ -2131,8 +2145,13 @@ public class ZapControllerNormal : ZapController
             case Action.MountDown:
                 if( handledMountMoveable )
                 {
-                    handledMountMoveable.JumpedOut();
-                    handledMountMoveable = null;
+                    //Vector3 handPos = zap.sensorLeft3.position; // + 0.3f;
+                    //handPos.x += zap.getMyHalfWidth();
+                    //handPos.y += 0.3f;
+
+                    //handledMountMoveable.JumpedOut(handPos);
+                    //handledMountMoveable = null;
+                    JumpOutMountMoveable();
                 }
 
                 zap.climbingWallID = -1;
@@ -2168,8 +2187,14 @@ public class ZapControllerNormal : ZapController
             case Action.MountLeft:
                 if (handledMountMoveable)
                 {
-                    handledMountMoveable.JumpedOut();
-                    handledMountMoveable = null;
+                    //Vector3 handPos = zap.sensorLeft3.position; // + 0.3f;
+                    //handPos.x += zap.getMyHalfWidth();
+                    //handPos.y += 0.3f;
+
+                    //handledMountMoveable.JumpedOut(handPos);
+                    //handledMountMoveable = null;
+
+                    JumpOutMountMoveable();
                 }
                 zap.climbingWallID = -1;
                 mountJumpStartPos = transform.position;
@@ -2181,8 +2206,14 @@ public class ZapControllerNormal : ZapController
             case Action.MountRight:
                 if (handledMountMoveable)
                 {
-                    handledMountMoveable.JumpedOut();
-                    handledMountMoveable = null;
+                    //Vector3 handPos = zap.sensorLeft3.position; // + 0.3f;
+                    //handPos.x += zap.getMyHalfWidth();
+                    //handPos.y += 0.3f;
+
+                    //handledMountMoveable.JumpedOut(handPos);
+                    //handledMountMoveable = null;
+
+                    JumpOutMountMoveable();
                 }
                 zap.climbingWallID = -1;
                 mountJumpStartPos = transform.position;
