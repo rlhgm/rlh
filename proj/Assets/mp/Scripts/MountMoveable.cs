@@ -10,6 +10,10 @@ public class MountMoveable : MonoBehaviour
     public Vector2 mySize = new Vector2();
     BoxCollider2D myBoxCollider = null;
 
+    public float CollapseDuration = -1;
+    public float ToCollapseTime = -1;
+    public bool Collapsed = false;
+
     // Use this for initialization
     void Start()
     {
@@ -22,12 +26,30 @@ public class MountMoveable : MonoBehaviour
 
         mySize.x = myBoxCollider.size.x * transform.localScale.x;
         mySize.y = myBoxCollider.size.y * transform.localScale.y;
+
+        ToCollapseTime = CollapseDuration;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public bool TryToCollapse(float hangTime)
+    {
+        if (Collapsed) return false;
+
+        if (CollapseDuration > 0f)
+        {
+            ToCollapseTime -= hangTime;
+            if (ToCollapseTime < 0f)
+            {
+                Collapsed = true;
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool LocalPointHandable(Vector3 point)

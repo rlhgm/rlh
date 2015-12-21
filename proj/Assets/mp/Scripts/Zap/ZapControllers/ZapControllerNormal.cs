@@ -384,15 +384,18 @@ public class ZapControllerNormal : ZapController
             case Zap.State.MOUNT:
                 if (handledMountMoveable)
                 {
-                    //handledMountMoveablePosition;
-                    //Vector2 rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
-                    //rayOrigin.y += 0.3f;
+                    if( handledMountMoveable.TryToCollapse(deltaTime))
+                    {
+                        handledMountMoveable.gameObject.SetActive(false);
 
-                    //Vector3 zapHandpos = zap.transform.position;
-                    //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                    //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+                        cs = null;
+                        zap.velocity.x = 0.0f;
+                        zap.velocity.y = 0.0f;
+                        setAction(Action.Jump);
+                        zap.setState(Zap.State.IN_AIR);
 
-                    //Debug.Log(handledMountMoveablePosition);
+                        break;
+                    }
 
                     Vector3 worldHandledMountMoveablePosition = handledMountMoveable.transform.TransformPoint(handledMountMoveablePosition);
 
