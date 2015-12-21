@@ -2712,7 +2712,6 @@ public class Zap : MonoBehaviour
     }
     public bool setState(State newState)
     {
-
         if (state == newState)
             return false;
 
@@ -2727,6 +2726,11 @@ public class Zap : MonoBehaviour
 
         //SetRotation(0f);
         SetGfxRotation(0f);
+
+        //if( state != State.MOUNT)
+        //{
+        //    cs
+        //}
 
         switch (state)
         {

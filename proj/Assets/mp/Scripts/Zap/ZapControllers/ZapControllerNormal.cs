@@ -2127,6 +2127,11 @@ public class ZapControllerNormal : ZapController
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
                 justJumpedMount = true;
+                if( cs )
+                {
+                    cs.Crumble();
+                }
+                cs = null;
 
                 if (Input.GetKey(zap.keyLeft))
                 {
