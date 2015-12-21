@@ -11,6 +11,9 @@ public class MountMoveable : MonoBehaviour
     BoxCollider2D myBoxCollider = null;
 
     public float CollapseDuration = -1;
+    public bool CollapseOnJump = true;
+    public bool ResetOnJump = true;
+
     float ToCollapseTime = -1;
     bool Collapsed = false;
 
@@ -45,12 +48,23 @@ public class MountMoveable : MonoBehaviour
             ToCollapseTime -= hangTime;
             if (ToCollapseTime < 0f)
             {
-                gameObject.SetActive(false);
-                Collapsed = true;
+                Collapse();
                 return true;
             }
         }
         return false;
+    }
+
+    public void JumpedOut()
+    {
+        if (ResetOnJump) ToCollapseTime = CollapseDuration;
+        if (CollapseOnJump) Collapse();
+    }
+
+    void Collapse()
+    {
+        gameObject.SetActive(false);
+        Collapsed = true;
     }
 
     public bool LocalPointHandable(Vector3 point)

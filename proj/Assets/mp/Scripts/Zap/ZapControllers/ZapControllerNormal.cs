@@ -386,14 +386,12 @@ public class ZapControllerNormal : ZapController
                 {
                     if( handledMountMoveable.TryToCollapse(deltaTime))
                     {
-                        handledMountMoveable.gameObject.SetActive(false);
-
                         cs = null;
                         zap.velocity.x = 0.0f;
                         zap.velocity.y = 0.0f;
                         setAction(Action.Jump);
                         zap.setState(Zap.State.IN_AIR);
-
+                        handledMountMoveable = null;
                         break;
                     }
 
@@ -2131,6 +2129,11 @@ public class ZapControllerNormal : ZapController
             case Action.MountIdle:
             case Action.MountUp:
             case Action.MountDown:
+                if( handledMountMoveable )
+                {
+                    handledMountMoveable.JumpedOut();
+                    handledMountMoveable = null;
+                }
 
                 zap.climbingWallID = -1;
                 lastFrameHande = false;
@@ -2163,6 +2166,11 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.MountLeft:
+                if (handledMountMoveable)
+                {
+                    handledMountMoveable.JumpedOut();
+                    handledMountMoveable = null;
+                }
                 zap.climbingWallID = -1;
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
@@ -2171,6 +2179,11 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.MountRight:
+                if (handledMountMoveable)
+                {
+                    handledMountMoveable.JumpedOut();
+                    handledMountMoveable = null;
+                }
                 zap.climbingWallID = -1;
                 mountJumpStartPos = transform.position;
                 jumpFromMount = true;
