@@ -10,6 +10,11 @@ nie zrobie:
 - Możliwość podłączenia liany do kamienia - generalnie liana jest nie do naprawienia - to rozpadanie się jej - SAMO PODŁACZENIE ZROBILEM
 
 
+Teraz:
+1) Kładka
+2) Zarywającie sie climbersy + particle
+3) Łapanie sie brzuchem
+
 
 Do milestone'a:
 

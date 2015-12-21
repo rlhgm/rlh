@@ -2983,6 +2983,8 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
+    CrumblingStairs cs = null;
+
     int Action_CLIMB_JUMP_TO_CATCH()
     {
         // dociaganie do punktu:
@@ -2990,7 +2992,7 @@ public class ZapControllerNormal : ZapController
         {
             if (catchedClimbHandle.tag == "CrumblingStairs")
             {
-                CrumblingStairs cs = catchedClimbHandle.transform.parent.parent.GetComponent<CrumblingStairs>();
+                cs = catchedClimbHandle.transform.parent.parent.GetComponent<CrumblingStairs>();
                 if(!cs)
                 {
                     Debug.LogError("Nie ma CrumblingStairs");
