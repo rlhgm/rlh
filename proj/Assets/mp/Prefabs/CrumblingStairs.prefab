@@ -375,7 +375,7 @@ MonoBehaviour:
   - -15
   - -90
   MaxHangTime:
-  - 3
+  - 2
   - 3
 --- !u!114 &11445554
 MonoBehaviour:
@@ -393,6 +393,9 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: -1
+  CollapseOnJump: 1
+  ResetOnJump: 1
+  CollapseParticles: {fileID: 0}
 --- !u!212 &21210370
 SpriteRenderer:
   m_ObjectHideFlags: 1

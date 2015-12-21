@@ -14,6 +14,7 @@ public class CrumblingStairs : MonoBehaviour
 
     public float[] LimitSteps;
     public float[] MaxHangTime;
+    float currentHangTime = 0f;
 
     public Transform MountHandle
     {
@@ -89,7 +90,19 @@ public class CrumblingStairs : MonoBehaviour
         //    if (mountBody.sleepMode)
         //}
     }
-    
+
+    public bool TryToCrumble(float deltaTime)
+    {
+        if( MaxHangTime.Length > crumbled )
+        {
+            if((currentHangTime+=deltaTime) > MaxHangTime[crumbled-1] )
+            {
+                Crumble();
+            }
+        }
+        return false;
+    }
+
     public void Crumble()
     {
         ground.gameObject.SetActive(false);
@@ -106,6 +119,8 @@ public class CrumblingStairs : MonoBehaviour
             angleLimits.max = 360f;
             mountHinge.limits = angleLimits;
         }
+
+        currentHangTime = 0f;
 
         crumbled++;
     }

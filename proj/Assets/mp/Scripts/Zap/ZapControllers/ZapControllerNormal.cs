@@ -382,6 +382,12 @@ public class ZapControllerNormal : ZapController
         {
 
             case Zap.State.MOUNT:
+                if (cs)
+                {
+                    //Debug.Log("Crumble : keyUpDown");
+                    cs.TryToCrumble(deltaTime);
+                    //cs = null;
+                }
                 if (handledMountMoveable)
                 {
                     Vector3 handPos = zap.sensorLeft3.position; // + 0.3f;
