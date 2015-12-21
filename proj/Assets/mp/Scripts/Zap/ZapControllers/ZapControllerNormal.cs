@@ -1421,7 +1421,13 @@ public class ZapControllerNormal : ZapController
     {
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) )
         {
-            if (!mounting())
+            if (cs && cs.HaveNextCrumbled() && !zap.stateJustChanged)
+            {
+                //Debug.Log("Crumble : keyUpDown");
+                cs.Crumble();
+                //cs = null;
+            }
+            else if (!mounting())
             {
                 if (zap.climbingWallID == zap.layerIdMountMask)
                 {
@@ -1503,7 +1509,13 @@ public class ZapControllerNormal : ZapController
     {
         if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT) )
         {
-            if (zap.climbingWallID == zap.layerIdMountMask)
+            if (cs && cs.HaveNextCrumbled() && !zap.stateJustChanged)
+            {
+                //Debug.Log("Crumble : keyDownDown");
+                cs.Crumble();
+                //cs = null;
+            }
+            else if (zap.climbingWallID == zap.layerIdMountMask)
             {
                 if (!mounting())
                 {
@@ -1713,7 +1725,13 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
-            if (!mounting())
+            if (cs && cs.HaveNextCrumbled() && !zap.stateJustChanged)
+            {
+                //Debug.Log("Crumble : keyLeftDown");
+                cs.Crumble();
+                //cs = null;
+            }
+            else if (!mounting())
             {
                 Vector3 newPos3 = new Vector3();
                 Vector3 distToMount = new Vector3(0f, 0f, 0f);
@@ -1847,24 +1865,13 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.MOUNT) && isNotInAction(Action.MOUNT_BIRDHIT))
         {
-            //if (!mounting())
-            //{
-            //    Vector3 newPos3 = new Vector3();
-            //    Vector3 distToMount = new Vector3(0f, 0f, 0f);
-            //    distToMount.x -= 0.1f;
-            //    zap.turnLeft();
-            //    Assert.IsTrue(zap.climbingWallID > 0);
-
-            //    if (CanMountTo(distToMount, ref newPos3))
-            //    {
-            //        zap.velocity.x = MountSpeed;
-            //        zap.velocity.y = 0.0f;
-            //        setAction(Action.MOUNT_LEFT);
-            //        return 1;
-            //    }
-            //}
-
-            if (!mounting())
+            if (cs && cs.HaveNextCrumbled() && !zap.stateJustChanged )
+            {
+                //Debug.Log("Crumble : keyRightDown");
+                cs.Crumble();
+                //cs = null;
+            }
+            else if (!mounting())
             {
                 Vector3 newPos3 = new Vector3();
                 Vector3 distToMount = new Vector3(0f,0f,0f);
@@ -2129,9 +2136,10 @@ public class ZapControllerNormal : ZapController
                 justJumpedMount = true;
                 if( cs )
                 {
+                    //Debug.Log("Crumble : keyJumpDown");
                     cs.Crumble();
+                    cs = null;
                 }
-                cs = null;
 
                 if (Input.GetKey(zap.keyLeft))
                 {

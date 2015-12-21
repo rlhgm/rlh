@@ -110,6 +110,11 @@ public class CrumblingStairs : MonoBehaviour
         crumbled++;
     }
 
+    public bool HaveNextCrumbled()
+    {
+        return LimitSteps.Length > crumbled;
+    }
+
     public void Reset()
     {
 
