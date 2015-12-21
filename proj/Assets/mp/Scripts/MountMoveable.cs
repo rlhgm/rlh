@@ -11,8 +11,8 @@ public class MountMoveable : MonoBehaviour
     BoxCollider2D myBoxCollider = null;
 
     public float CollapseDuration = -1;
-    public float ToCollapseTime = -1;
-    public bool Collapsed = false;
+    float ToCollapseTime = -1;
+    bool Collapsed = false;
 
     // Use this for initialization
     void Start()
@@ -45,6 +45,7 @@ public class MountMoveable : MonoBehaviour
             ToCollapseTime -= hangTime;
             if (ToCollapseTime < 0f)
             {
+                gameObject.SetActive(false);
                 Collapsed = true;
                 return true;
             }
@@ -84,5 +85,12 @@ public class MountMoveable : MonoBehaviour
         rlp.x = point.x * transform.localScale.x;
         rlp.y = point.y * transform.localScale.y;
         return rlp;
+    }
+
+    public void Reset()
+    {
+        ToCollapseTime = CollapseDuration;
+        Collapsed = false;
+        gameObject.SetActive(true);
     }
 }

@@ -12708,8 +12708,6 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: -1
-  ToCollapseTime: -1
-  Collapsed: 0
 --- !u!50 &718134584
 Rigidbody2D:
   serializedVersion: 2
@@ -23479,8 +23477,6 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: -1
-  ToCollapseTime: -1
-  Collapsed: 0
 --- !u!50 &1260789932
 Rigidbody2D:
   serializedVersion: 2
@@ -27583,11 +27579,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -130
+      value: -134
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -30058,8 +30054,6 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: -1
-  ToCollapseTime: -1
-  Collapsed: 0
 --- !u!1001 &1621802952
 Prefab:
   m_ObjectHideFlags: 0
@@ -32004,8 +31998,6 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: -1
-  ToCollapseTime: -1
-  Collapsed: 0
 --- !u!50 &1753058179
 Rigidbody2D:
   serializedVersion: 2
@@ -36836,8 +36828,6 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: 1
-  ToCollapseTime: -1
-  Collapsed: 0
 --- !u!50 &1997014288
 Rigidbody2D:
   serializedVersion: 2
