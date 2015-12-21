@@ -193,9 +193,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100796}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -.707106829, w: .707106709}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children:
   - {fileID: 492896}
   m_Father: {fileID: 437062}
@@ -206,8 +206,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187528}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: .0455373414, w: .998962641}
+  m_LocalPosition: {x: -128.429993, y: .899999976, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 462048}
@@ -299,7 +299,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100796}
-  m_Mass: 70
+  m_Mass: 180
   m_LinearDrag: 0
   m_AngularDrag: 4
   m_GravityScale: 1
@@ -371,6 +371,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cae788036b0dcb45b7e8c628980672d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LimitSteps:
+  - -15
+  - -90
+  MaxHangTime:
+  - 3
+  - 3
 --- !u!114 &11445554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -386,6 +392,7 @@ MonoBehaviour:
   MovingYEnabled: 1
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
+  CollapseDuration: -1
 --- !u!212 &21210370
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -526,16 +533,16 @@ HingeJoint2D:
   serializedVersion: 3
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_Anchor: {x: 1, y: -.5}
-  m_ConnectedAnchor: {x: -122, y: .5}
+  m_Anchor: {x: .5, y: 0}
+  m_ConnectedAnchor: {x: -123.405243, y: .856974602}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: -90
+    m_UpperAngle: 360
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

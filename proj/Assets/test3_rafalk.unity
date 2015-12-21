@@ -27579,7 +27579,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -134
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -30111,14 +30111,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 208528338}
     m_Modifications:
-    - target: {fileID: 11426314, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: LimitSteps.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426314, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: MaxHangTime.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 437062, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
       propertyPath: m_LocalPosition.x
       value: -128.429993
@@ -30150,74 +30142,6 @@ Prefab:
     - target: {fileID: 437062, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
       propertyPath: m_RootOrder
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 428070, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 428070, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 428070, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -.707106829
-      objectReference: {fileID: 0}
-    - target: {fileID: 428070, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: .707106709
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_Anchor.x
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 428070, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 428070, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_Anchor.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_UseLimits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_AngleLimits.m_LowerAngle
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_AngleLimits.m_UpperAngle
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_ConnectedAnchor.x
-      value: -123.405243
-      objectReference: {fileID: 0}
-    - target: {fileID: 23385522, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: m_ConnectedAnchor.y
-      value: .856974602
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426314, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: LimitSteps.Array.data[0]
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426314, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: LimitSteps.Array.data[1]
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426314, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: MaxHangTime.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426314, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
-      propertyPath: MaxHangTime.Array.data[1]
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b3bdf4c6519aac4c930f42edbb5bfa1, type: 2}
@@ -36827,7 +36751,7 @@ MonoBehaviour:
   MovingYEnabled: 1
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
-  CollapseDuration: 1
+  CollapseDuration: 2
 --- !u!50 &1997014288
 Rigidbody2D:
   serializedVersion: 2
