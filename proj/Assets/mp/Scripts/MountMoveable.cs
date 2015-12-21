@@ -13,10 +13,11 @@ public class MountMoveable : MonoBehaviour
     public float CollapseDuration = -1;
     public bool CollapseOnJump = true;
     public bool ResetOnJump = true;
+    public GameObject CollapseParticles = null;
 
     float ToCollapseTime = -1;
     bool Collapsed = false;
-
+    
     // Use this for initialization
     void Start()
     {
@@ -65,6 +66,12 @@ public class MountMoveable : MonoBehaviour
     {
         gameObject.SetActive(false);
         Collapsed = true;
+
+        if (CollapseParticles)
+        {
+            Object newParticleObject = Instantiate(CollapseParticles, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(newParticleObject, 2.0f);
+        }
     }
 
     public bool LocalPointHandable(Vector3 point)
