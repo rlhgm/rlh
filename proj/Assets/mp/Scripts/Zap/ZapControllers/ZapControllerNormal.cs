@@ -977,9 +977,9 @@ public class ZapControllerNormal : ZapController
                         }
                         if (needRepos)
                         {
-                            Debug.Log(handledMountMoveablePosition.y);
+                            //Debug.Log(handledMountMoveablePosition.y);
                             handledMountMoveablePosition = newHandledMountMoveablePosition;
-                            Debug.Log(handledMountMoveablePosition.y);
+                            //Debug.Log(handledMountMoveablePosition.y);
                         }
                     }
 
