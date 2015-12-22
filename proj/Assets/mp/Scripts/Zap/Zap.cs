@@ -2605,7 +2605,13 @@ public class Zap : MonoBehaviour
 
         if (!hit.collider)
             return null;
-
+        else
+        {
+            if (hit.collider.GetComponent<MountMoveable>())
+            {
+                return hit.collider.transform;
+            }
+        }
         hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
         if (!hit.collider)
             return null;
