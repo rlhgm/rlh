@@ -217,6 +217,9 @@ public class Camera2DFollow : MonoBehaviour
 
     public void Shake(float duration, float amplitude)
     {
+        shaking = true;
+        shakeTime = 0;
+        shakeAmplitude = amplitude;
 
     }
 

@@ -405,38 +405,38 @@ public class ZapControllerNormal : ZapController
                         break;
                     }
 
-                    Vector3 worldHandledMountMoveablePosition = handledMountMoveable.transform.TransformPoint(handledMountMoveablePosition);
+                    //Vector3 worldHandledMountMoveablePosition = handledMountMoveable.transform.TransformPoint(handledMountMoveablePosition);
 
-                    Vector3 _p1 = worldHandledMountMoveablePosition;
-                    _p1.x -= 0.1f;
-                    _p1.y -= 0.1f;
-                    Vector3 _p2 = worldHandledMountMoveablePosition;
-                    _p2.x += 0.1f;
-                    _p2.y += 0.1f;
-                    Debug.DrawLine(_p1, _p2, Color.red);
+                    //Vector3 _p1 = worldHandledMountMoveablePosition;
+                    //_p1.x -= 0.1f;
+                    //_p1.y -= 0.1f;
+                    //Vector3 _p2 = worldHandledMountMoveablePosition;
+                    //_p2.x += 0.1f;
+                    //_p2.y += 0.1f;
+                    //Debug.DrawLine(_p1, _p2, Color.red);
 
-                    _p1 = worldHandledMountMoveablePosition;
-                    _p1.x -= 0.1f;
-                    _p1.y += 0.1f;
-                    _p2 = worldHandledMountMoveablePosition;
-                    _p2.x += 0.1f;
-                    _p2.y -= 0.1f;
-                    Debug.DrawLine(_p1, _p2, Color.red);
+                    //_p1 = worldHandledMountMoveablePosition;
+                    //_p1.x -= 0.1f;
+                    //_p1.y += 0.1f;
+                    //_p2 = worldHandledMountMoveablePosition;
+                    //_p2.x += 0.1f;
+                    //_p2.y -= 0.1f;
+                    //Debug.DrawLine(_p1, _p2, Color.red);
 
 
-                    worldHandledMountMoveablePosition.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                    transform.position = worldHandledMountMoveablePosition;
+                    //worldHandledMountMoveablePosition.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                    //transform.position = worldHandledMountMoveablePosition;
 
-                    Rigidbody2D hmmBody = handledMountMoveable.GetComponent<Rigidbody2D>();
-                    if (hmmBody)
-                    {
-                        hmmBody.AddForceAtPosition(new Vector2(0f, -HmmPullForce), worldHandledMountMoveablePosition);
-                    }
-                    else
-                    {
-                        Debug.LogError("handledMountMoveable nie ma body");
-                        Debug.Break();
-                    }
+                    //Rigidbody2D hmmBody = handledMountMoveable.GetComponent<Rigidbody2D>();
+                    //if (hmmBody)
+                    //{
+                    //    hmmBody.AddForceAtPosition(new Vector2(0f, -HmmPullForce), worldHandledMountMoveablePosition);
+                    //}
+                    //else
+                    //{
+                    //    Debug.LogError("handledMountMoveable nie ma body");
+                    //    Debug.Break();
+                    //}
                 }
                 //zap.climbingWallID = zap.layerIdMountMask;
                 //setActionMountIdle();
@@ -941,6 +941,83 @@ public class ZapControllerNormal : ZapController
             case Action.PUSHBACK_LEFT:
             case Action.PUSHBACK_RIGHT:
                 ActionPushback(fDeltaTime);
+                break;
+        }
+
+        switch (zap.getState())
+        {
+            case Zap.State.MOUNT:
+
+                if (handledMountMoveable)
+                {
+                    
+                    if( handledMountMoveable.MovingInLocal )
+                    {
+                        Vector3 newHandledMountMoveablePosition = handledMountMoveablePosition;
+                        bool needRepos = false;
+                        if ( handledMountMoveable.MovingXEnabled )
+                        {
+                            float desiredLocalY = -handledMountMoveable.mySize.y * 0.5f;
+                            float diffLocalY = desiredLocalY - handledMountMoveablePosition.y;
+                            if (Mathf.Abs(diffLocalY) > Mathf.Abs(handledMountMoveable.mySize.y / 4.0f))
+                            {
+                                needRepos = true;
+                                newHandledMountMoveablePosition.y += (diffLocalY * fDeltaTime * 2f);
+                            }
+                        }
+                        if (handledMountMoveable.MovingYEnabled)
+                        {
+                            float desiredLocalX = handledMountMoveable.mySize.x * 0.5f;
+                            float diffLocalX = desiredLocalX - handledMountMoveablePosition.x;
+                            if (Mathf.Abs(diffLocalX) > Mathf.Abs(handledMountMoveable.mySize.x / 4.0f))
+                            {
+                                needRepos = true;
+                                newHandledMountMoveablePosition.x += (diffLocalX * fDeltaTime * 2f);
+                            }
+                        }
+                        if (needRepos)
+                        {
+                            Debug.Log(handledMountMoveablePosition.y);
+                            handledMountMoveablePosition = newHandledMountMoveablePosition;
+                            Debug.Log(handledMountMoveablePosition.y);
+                        }
+                    }
+
+                    Vector3 worldHandledMountMoveablePosition = handledMountMoveable.transform.TransformPoint(handledMountMoveablePosition);
+
+                    //Debug.Log(worldHandledMountMoveablePosition.y);
+
+                    Vector3 _p1 = worldHandledMountMoveablePosition;
+                    _p1.x -= 0.1f;
+                    _p1.y -= 0.1f;
+                    Vector3 _p2 = worldHandledMountMoveablePosition;
+                    _p2.x += 0.1f;
+                    _p2.y += 0.1f;
+                    Debug.DrawLine(_p1, _p2, Color.red);
+
+                    _p1 = worldHandledMountMoveablePosition;
+                    _p1.x -= 0.1f;
+                    _p1.y += 0.1f;
+                    _p2 = worldHandledMountMoveablePosition;
+                    _p2.x += 0.1f;
+                    _p2.y -= 0.1f;
+                    Debug.DrawLine(_p1, _p2, Color.red);
+
+
+                    worldHandledMountMoveablePosition.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                    transform.position = worldHandledMountMoveablePosition;
+
+                    Rigidbody2D hmmBody = handledMountMoveable.GetComponent<Rigidbody2D>();
+                    if (hmmBody)
+                    {
+                        hmmBody.AddForceAtPosition(new Vector2(0f, -HmmPullForce), worldHandledMountMoveablePosition);
+                    }
+                    else
+                    {
+                        Debug.LogError("handledMountMoveable nie ma body");
+                        Debug.Break();
+                    }
+                }
                 break;
         }
     }

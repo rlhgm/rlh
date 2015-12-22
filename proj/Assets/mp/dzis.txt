@@ -41,7 +41,10 @@ nie zrobie:
 30) deski fizyczne rozwalane kamnieniem
 31) uchwyt z ktorego nie da sie nic zrobic bo spadamy od razu 190,-127.7
 32) bezkolizyjne platformy rozwalalne 190,-127.7
-
+33) jak lazi po klimersach to moze wejsc w fizyke a co gorsze przesuwa wszystko co nie jest kinetyczne
+34) interface
+35) particle i dzwiek jak kamienie w cos uderzaja
+36) 
 
 
 
