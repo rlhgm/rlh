@@ -214,6 +214,18 @@ public class Camera2DFollow : MonoBehaviour
     //    Update();
     //}
 
+
+    public void Shake(float duration, float amplitude)
+    {
+
+    }
+
+    bool shaking = false;
+    float shakeDuration = 0;
+    float shakeTime = 0;
+    float shakeMaxAmplitude = 0f;
+    float shakeAmplitude = 0;
+
     // Update is called once per frame
     private void Update()
     {

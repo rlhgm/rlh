@@ -6,32 +6,44 @@
 deski rozwalalne GG - nie wiem
 
 nie zrobie:
-- interakcja szczurów z kamieniami/skrzynkami
+- 
 - Możliwość podłączenia liany do kamienia - generalnie liana jest nie do naprawienia - to rozpadanie się jej - SAMO PODŁACZENIE ZROBILEM
 
 
-Teraz:
-1) Kładka
-2) Zarywającie sie climbersy + particle
-3) Łapanie sie brzuchem
+2) 
+3) Łapanie sie brzuchem (teraz)
+4) Po zeskoku z zyrandola ten ostatni znika (teraz)
+5) żyrandole - poprawić łapanie + to samo do climberów "jednokierunkowych" (teraz)
+6) muzyka + dzięki - nie wiem
+7) przykuc zapa (teraz)
+8) zap załania promienie (teraz)
+9) przejazdy kamery (jutro)
+10) particle na ciecie na cos nozem - przed wigilia
+11) wiązka GG (po niedzieli)
+12) drugi plan - kamienie kolidujace w momenicie puszczenia ich gravity gunem (po niedzieli)
+13) poprawa walki ze szczurami - nie dziala pod katem i w przykucu (jutro)
+14) łamiący się posąg - przed wigilią - spada na niego zyrandol 
+15) prefaby skrzynek rozwalalnych i nierozwalalnych - przed wigilia
+16) bezdomny nietoperz
+17) interakcja szczurów z kamieniami/skrzynkami - po sylwestrze
+18) shake kamery
+19) wlazenie na kamienie ktore maja bok docelowy pod katem
+20) nie blokowanie sie zapa na scianach - zostaje w pushu po puszczeniu strzalki od chodzenia
+21) blokowanie sie elementu ukladanki - kamienia ma miejscu docelowym (particle, dzwiek)
+22) https://www.youtube.com/watch?v=BvnwLLXHabg&feature=youtu.be&t=2m43s
+23) czas po spadku z platformy do odbicia sie z niczego
+24) zap nie łapie sie platform - 2.1 level
+25) katy czolgania sie pod katem
+26) normale niektorych kamieni sa obrocone
+27) nieskonczone przepasci - jak w geki yabie
+28) prowadzenie kamery - czasami po lewej, czasam po prawej, czasem na dole, a czasem na gorze
+29) ragdoll
+30) deski fizyczne rozwalane kamnieniem
+31) uchwyt z ktorego nie da sie nic zrobic bo spadamy od razu 190,-127.7
+32) bezkolizyjne platformy rozwalalne 190,-127.7
 
 
-Do milestone'a:
 
-TRUDNE/wolne:
-bujanie się na balustradzie
 
-ŁATWE/szybkie:
-wiązka GG
-przejazdy kamery
-żyrandole
-drugi plan
-poprawa walki ze szczurami
-łamiący się posąg
-prefaby skrzynek rozwalalnych i nierozwalalnych
-obiekty do chodzenia góra/dół i lewo/prawo
 
-JEST:
-naprawienie climbersów
-kamienie odrywalne od ściany
-zapadające się fizyki
+
