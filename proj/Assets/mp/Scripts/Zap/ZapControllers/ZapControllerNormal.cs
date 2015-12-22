@@ -1014,8 +1014,8 @@ public class ZapControllerNormal : ZapController
                     }
                     else
                     {
-                        Debug.LogError("handledMountMoveable nie ma body");
-                        Debug.Break();
+                        //Debug.LogError("handledMountMoveable nie ma body");
+                        //Debug.Break();
                     }
                 }
                 break;

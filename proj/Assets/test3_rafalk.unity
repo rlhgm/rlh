@@ -12927,22 +12927,6 @@ MonoBehaviour:
   CollapseOnJump: 0
   ResetOnJump: 0
   CollapseParticles: {fileID: 0}
---- !u!50 &718134584
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 718134581}
-  m_Mass: 3
-  m_LinearDrag: 0
-  m_AngularDrag: 1
-  m_GravityScale: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &720065899
 Prefab:
   m_ObjectHideFlags: 0
