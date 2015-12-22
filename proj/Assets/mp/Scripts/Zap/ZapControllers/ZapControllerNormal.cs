@@ -962,7 +962,7 @@ public class ZapControllerNormal : ZapController
                             if (Mathf.Abs(diffLocalY) > Mathf.Abs(handledMountMoveable.mySize.y / 4.0f))
                             {
                                 needRepos = true;
-                                newHandledMountMoveablePosition.y += (diffLocalY * fDeltaTime * 2f);
+                                newHandledMountMoveablePosition.y += (diffLocalY * 0.5f /*fDeltaTime * 6f*/);
                             }
                         }
                         if (handledMountMoveable.MovingYEnabled)
@@ -972,7 +972,7 @@ public class ZapControllerNormal : ZapController
                             if (Mathf.Abs(diffLocalX) > Mathf.Abs(handledMountMoveable.mySize.x / 4.0f))
                             {
                                 needRepos = true;
-                                newHandledMountMoveablePosition.x += (diffLocalX * fDeltaTime * 2f);
+                                newHandledMountMoveablePosition.x += (diffLocalX * 0.5f /*fDeltaTime * 6f*/);
                             }
                         }
                         if (needRepos)
