@@ -1,0 +1,37 @@
+﻿Assets/mp/Prefabs/Physic:
+
+===================================================================
+Chandelier: -żyrandol
+===================================================================
+Parametry:
+Żadnych specjalnych. 
+
+Ważne jest aby go podłączyc do jakieś liny na levelu; robi sie to identycznie jak podłącznie kamienia czyli przciagamy zyrandol do liny do pola AttachedStone (taka nazwa zostala).
+
+===================================================================
+CrumblingStairs: - zawalajace sie schody
+===================================================================
+Parametry:
+LimitSteps - ich liczba oznacza ile razy sie zawala schody i o jaki kat. Domyslnie jest 2: -15 i -90 czyli najpierw sie osuną o max. -15 stopni a poźniej o max. -90
+MaxHangTime - oznacza jak długo schody sie nie zawala w danym polozeniu bez proby gracza wspiecia sie na nie lub zeskoczenia z nich. 
+Po upłynieciu tego czasu schody same osuna sie do nastepnego stopnia LimitSteps
+
+Ważne jest aby w podobiekcie mount ustawic zawias na wlasciwe miejsce aby obracały się schody względem tego punktu. 
+Niestety nie da sie (chyba; da sie trudno) tego zrobic z automatu trzeba przestawic z palca
+
+===================================================================
+DirClimbers:
+===================================================================
+Parametry:
+MovingXEnabled - true oznacza ze poruszamy sie po nich w lewo/prawo (NIEZALEŻNIE OD KĄTA) 
+MovingYEnabled - true oznacza ze poruszamy sie po nich w góra/dół (NIEZALEŻNIE OD KĄTA)
+MovingInLocal - NIECH ZAWSZE BEDZIE TRUE (PÓKI CO NIE DOTYKAMY)
+CollapseDuration - licza mniejsza od zera oznacza, że climbersy nigdy sie nie zawala tzn. znikną. Liczba > 0 oznacza czas po jakim climbersy znikna a zap zacznie spadac. 
+Czas liczony jest tylko jak zap wisi na tym climbersie i kumuluje sie czyli : jak ustawisz 2 sek. to wystarczy, ze zap wskoczy na 1s i za drugim razem jak wskoczy to wystarczy aby
+wisial tylko 1s aby climbersy zniknely.
+CollapseOnJump - ture oznacza ze zawsze jak zap zeskoczy z tego climbersa to on zniknie
+ResetOnJump - true oznacza ze jak zap zeskoczy z tego climbersa to licznik CollapseDuration ustawi sie na max. wartosc czyli czas sie nie kumuluje.
+Tzn. jak jest ustawione CollapseDuration na 2 sek. to zap musi jednorazowo przebywac na tym klimbersie 2 sek. aby znikl jak zeskoczy to od nowa (od 2 sek.) licznik ruszy po ponownym wskoku
+CollapseParticles - przeciagamy obiekt particli z projektu ktore uruchomią się w momencie zniknięcia klimersow w miejscu gdzie zap ma łapy
+
+===================================================================
