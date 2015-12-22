@@ -11347,7 +11347,7 @@ Transform:
   m_LocalScale: {x: 1, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 25
 --- !u!4 &598959389 stripped
 Transform:
   m_PrefabParentObject: {fileID: 478980, guid: 8ce78a11cfa7fba40aef87e1e8560483, type: 2}
@@ -24268,7 +24268,7 @@ Transform:
   m_LocalScale: {x: -13.0441256, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 22
 --- !u!4 &1286709704 stripped
 Transform:
   m_PrefabParentObject: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
@@ -28182,11 +28182,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -135.449997
+      value: -121.449997
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.04999995
+      value: -9.94999981
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -30712,8 +30712,8 @@ MonoBehaviour:
   MovingInLocal: 1
   mySize: {x: 0, y: 0}
   CollapseDuration: -1
-  CollapseOnJump: 1
-  ResetOnJump: 1
+  CollapseOnJump: 0
+  ResetOnJump: 0
   CollapseParticles: {fileID: 0}
 --- !u!1001 &1621802952
 Prefab:
