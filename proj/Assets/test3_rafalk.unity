@@ -3497,7 +3497,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
@@ -23314,7 +23314,7 @@ Transform:
   m_LocalScale: {x: 4.51967573, y: .253180474, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 41
+  m_RootOrder: 42
 --- !u!114 &1229437014 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11423468, guid: d9a102e3aa8104e4bad8468e0cd590d0,
@@ -27776,11 +27776,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -185.389999
+      value: -185.490005
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 27.3299999
+      value: 23.7099991
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_LocalPosition.z
@@ -27804,7 +27804,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 156840, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_Name
@@ -28255,7 +28255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 68
+  m_RootOrder: 69
 --- !u!4 &1480886895 stripped
 Transform:
   m_PrefabParentObject: {fileID: 490556, guid: c7b5368a52841ce4aae622ee13b18037, type: 2}
@@ -29497,15 +29497,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 156840, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_Name
       value: DirClimbers (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
@@ -37686,7 +37682,7 @@ Transform:
   - {fileID: 758307679}
   - {fileID: 1556309416}
   m_Father: {fileID: 0}
-  m_RootOrder: 49
+  m_RootOrder: 50
 --- !u!1001 &1970228699
 Prefab:
   m_ObjectHideFlags: 0
