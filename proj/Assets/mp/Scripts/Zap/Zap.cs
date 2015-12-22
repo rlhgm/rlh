@@ -239,6 +239,14 @@ public class Zap : MonoBehaviour
         sensorHandleL2 = transform.Find("handlerL2").transform;
         sensorHandleR2 = transform.Find("handlerR2").transform;
 
+        handlerLeft = transform.Find("handlerLeft").transform;
+        handlerRight = transform.Find("handlerRight").transform;
+
+        BoxCollider2D hlcoll = handlerLeft.GetComponent<BoxCollider2D>();
+        handlerLeftSize = hlcoll.size;
+        BoxCollider2D hrcoll = handlerRight.GetComponent<BoxCollider2D>();
+        handlerRightSize = hrcoll.size;
+
         leftKnifeHitPointHigh1 = transform.Find("leftKnifeHitPointHigh1").transform;
         leftKnifeHitPointHigh2 = transform.Find("leftKnifeHitPointHigh2").transform;
         rightKnifeHitPointHigh1 = transform.Find("rightKnifeHitPointHigh1").transform;
@@ -2804,6 +2812,15 @@ public class Zap : MonoBehaviour
     public Transform sensorHandleL2;
     [HideInInspector]
     public Transform sensorHandleR2;
+
+    [HideInInspector]
+    public Transform handlerLeft;
+    [HideInInspector]
+    public Vector2 handlerLeftSize;
+    [HideInInspector]
+    public Transform handlerRight;
+    [HideInInspector]
+    public Vector2 handlerRightSize;
 
     [HideInInspector]
     public Transform leftKnifeHitPointHigh1;

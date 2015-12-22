@@ -4610,15 +4610,22 @@ public class ZapControllerNormal : ZapController
             RaycastHit2D hit;
             if (fromGround)
             {
-                hit = Physics2D.Raycast(zap.sensorHandleR2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
+                //hit = Physics2D.Raycast(zap.sensorHandleR2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
+                hit = Physics2D.BoxCast(zap.handlerRight.position,zap.handlerRightSize,0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
                 _speed = 0.2f;
             }
             else
             {
-                if (lastFrameHande)
-                    hit = Physics2D.Linecast(lastHandlePos, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
-                else
-                    hit = Physics2D.Linecast(zap.sensorHandleR2.position, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
+                //if (lastFrameHande)
+                //{
+                //    Debug.DrawLine(lastHandlePos, zap.sensorHandleR2.position);
+                //    Debug.Log("asdf");
+                //    hit = Physics2D.Linecast(lastHandlePos, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
+                //}
+                //else
+                //    hit = Physics2D.Linecast(zap.sensorHandleR2.position, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
+
+                hit = Physics2D.BoxCast(zap.handlerRight.position, zap.handlerRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
             }
             if (hit.collider != null)
             {
@@ -4729,15 +4736,18 @@ public class ZapControllerNormal : ZapController
             RaycastHit2D hit;
             if (fromGround)
             {
-                hit = Physics2D.Raycast(zap.sensorHandleL2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
+                //hit = Physics2D.Raycast(zap.sensorHandleL2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
+                hit = Physics2D.BoxCast(zap.handlerLeft.position, zap.handlerLeftSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
                 _speed = 0.2f;
             }
             else
             {
-                if (lastFrameHande)
-                    hit = Physics2D.Linecast(lastHandlePos, zap.sensorHandleL2.position, zap.layerIdGroundHandlesMask);
-                else
-                    hit = Physics2D.Linecast(zap.sensorHandleL2.position, zap.sensorHandleL2.position, zap.layerIdGroundHandlesMask);
+                //if (lastFrameHande)
+                //    hit = Physics2D.Linecast(lastHandlePos, zap.sensorHandleL2.position, zap.layerIdGroundHandlesMask);
+                //else
+                //    hit = Physics2D.Linecast(zap.sensorHandleL2.position, zap.sensorHandleL2.position, zap.layerIdGroundHandlesMask);
+
+                hit = Physics2D.BoxCast(zap.handlerLeft.position, zap.handlerLeftSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
             }
 
             if (hit.collider != null)
