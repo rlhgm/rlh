@@ -67,6 +67,7 @@
      <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPagePart.cs" />
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
+     <Compile Include="Assets\mp\Scripts\CrumblingStairs.cs" />
      <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\Bat.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\BatActivator.cs" />
@@ -86,6 +87,7 @@
      <Compile Include="Assets\mp\Scripts\IResetable.cs" />
      <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
      <Compile Include="Assets\mp\Scripts\Line.cs" />
+     <Compile Include="Assets\mp\Scripts\MountMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\NewZapTest.cs" />
      <Compile Include="Assets\mp\Scripts\Panther.cs" />
@@ -131,11 +133,17 @@
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
      <None Include="Assets\mp\mas\DraggedStone2.shader" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
