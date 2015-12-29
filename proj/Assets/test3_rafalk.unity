@@ -975,19 +975,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2015612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: orthographic size
-      value: 4.70833349
+      value: 6.94791698
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.48672569
+      value: 1.00749624
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.48672569
+      value: 1.00749624
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.48672569
+      value: 1.00749624
       objectReference: {fileID: 0}
     - target: {fileID: 8177612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_Enabled
@@ -23314,7 +23314,7 @@ Transform:
   m_LocalScale: {x: 4.51967573, y: .253180474, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 43
 --- !u!114 &1229437014 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11423468, guid: d9a102e3aa8104e4bad8468e0cd590d0,
@@ -25750,11 +25750,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -205.149994
+      value: -205
       objectReference: {fileID: 0}
     - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 28.4599991
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
       propertyPath: m_LocalPosition.z
@@ -28542,11 +28542,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -202.720001
+      value: -202
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 29.2399998
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
