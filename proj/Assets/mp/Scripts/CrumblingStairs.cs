@@ -133,7 +133,7 @@ public class CrumblingStairs : MonoBehaviour
 
         if( CamShakeTimes.Length > crumbled)
         {
-            RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
+            //RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
         }
 
         currentHangTime = 0f;

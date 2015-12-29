@@ -3142,6 +3142,8 @@ public class ZapControllerNormal : ZapController
                     Debug.Break();
                 }
 
+                RLHScene.Instance.CamController.ShakeImpulseStart(3f, 0.25f, 8f);
+
                 handledMountMoveable = cs.Mount.GetComponent<MountMoveable>();
                 if (!handledMountMoveable)
                 {
