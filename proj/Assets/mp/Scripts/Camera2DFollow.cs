@@ -34,13 +34,13 @@ public class Camera2DFollow : MonoBehaviour
     private void Start()
     {
         parallaxedObjects = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
-        
+
         Zap[] zappers = FindObjectsOfType(typeof(Zap)) as Zap[];
-        if( zappers.Length == 1)
+        if (zappers.Length == 1)
         {
             target = zappers[0];
         }
-        
+
         myCamera = GetComponent<Camera>();
 
         Transform tct = myCamera.transform.Find("TouchCamera");
@@ -64,7 +64,7 @@ public class Camera2DFollow : MonoBehaviour
         rlhScene = target.RlhScene;
 
         for (int i = 0; i < backgroundsNodes.Length; ++i)
-        {            
+        {
             if (backgroundsNodes[i] == null) continue;
             if (backgroundsBackgrounds[i] == null) continue;
 
@@ -72,37 +72,40 @@ public class Camera2DFollow : MonoBehaviour
 
             GameObject bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
             bckg.transform.parent = backgroundsNodes[i];
-            bckg.transform.localPosition = ( new Vector3(0f, 1f, 0f) );
-            
+            bckg.transform.localPosition = (new Vector3(0f, 1f, 0f));
+
 
             SpriteRenderer bckgSpriteRend = bckg.GetComponent<SpriteRenderer>();
-         
+
             Vector3 bckgItemSize = bckgSpriteRend.bounds.extents;
 
-            float bckgDist = -bckgItemSize.x * 2;            
-            while (bckgDist > -rlhScene.levelBounds.SceneSize.x * 0.5f - (bckgItemSize.x * 2) )
+            float bckgDist = -bckgItemSize.x * 2;
+            while (bckgDist > -rlhScene.levelBounds.SceneSize.x * 0.5f - (bckgItemSize.x * 2))
             {
                 bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
                 bckg.transform.parent = backgroundsNodes[i];
                 bckg.transform.localPosition = (new Vector3(bckgDist, 1f, 0f));
-                bckgDist -= bckgItemSize.x * 2; 
+                bckgDist -= bckgItemSize.x * 2;
             }
 
             bckgDist = bckgItemSize.x * 2;
-            while (bckgDist < rlhScene.levelBounds.SceneSize.x*0.5f + (bckgItemSize.x * 2))
+            while (bckgDist < rlhScene.levelBounds.SceneSize.x * 0.5f + (bckgItemSize.x * 2))
             {
                 //c = 1;
                 bckg = Instantiate<GameObject>(backgroundsBackgrounds[i]);
                 bckg.transform.parent = backgroundsNodes[i];
                 bckg.transform.localPosition = (new Vector3(bckgDist, 1f, 0f));
-                bckgDist += bckgItemSize.x * 2; 
+                bckgDist += bckgItemSize.x * 2;
             }
         }
     }
     
+
     public void ShakeImpulseStart(float duration, float amplitude, float speed)
     {
-        shaking = true;
+        shakingImpulse = true;
+        shakingPermanent = false;
+
         shakeDuration = duration;
         shakeTime = 0f;
         shakeMaxAmplitude.x = amplitude;
@@ -113,12 +116,45 @@ public class Camera2DFollow : MonoBehaviour
         shakeMaxSpeed.y = speed;
         shakeSpeed = shakeMaxSpeed;
     }
+    public void ShakeImpulseStop()
+    {
+        shakingImpulse = false;
+        shakingPermanent = false;
+    }
 
-    bool shaking = false;
+    public void ShakePremanentStart(float amplitude, float speed)
+    {
+        shakingPermanent = true;
+        shakingImpulse = false;
+
+        //shakeDuration = duration;
+        shakeTime = 0f;
+        shakeMaxAmplitude.x = amplitude;
+        shakeMaxAmplitude.y = amplitude;
+        shakeAmplitude = shakeMaxAmplitude;
+
+        shakeMaxSpeed.x = speed;
+        shakeMaxSpeed.y = speed;
+        shakeSpeed = shakeMaxSpeed;
+    }
+    public void ShakePermanentStop(float fadeTime)
+    {
+        shakingImpulse = false;
+        if (fadeTime <= 0f)
+        {
+            shakingPermanent = false;
+        }
+
+    }
+    
+    bool shakingImpulse = false;
+    bool shakingPermanent = false;
 
     float shakeDuration = 0f;
     float shakeTime = 0f;
     float shakeRatio = 0f;
+    float shakeFadeDuration = 0f;
+    float shakeFadeTime = 0f;
 
     Vector2 shakeMaxAmplitude = new Vector2(0.25f,0.25f);
     Vector2 shakeAmplitude = new Vector2(0f,0f);
@@ -128,12 +164,12 @@ public class Camera2DFollow : MonoBehaviour
 
     void applyShake(float dt)
     {
-        if (!shaking) return;
+        if (!shakingImpulse) return;
 
         shakeTime += dt;
         if (shakeTime > shakeDuration)
         {
-            shaking = false;
+            shakingImpulse = false;
         }
         shakeRatio = 1 - (shakeTime / shakeDuration);
 

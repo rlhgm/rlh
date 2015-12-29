@@ -565,6 +565,8 @@ public class Zap : MonoBehaviour
             RlhScene.ZapVsBats.ZapReborn();
         }
 
+        rlhScene.CamController.ShakeImpulseStop();
+
         //Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
         //foreach (Parallaxed px in pxs)
         //{
