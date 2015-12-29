@@ -1336,6 +1336,10 @@ public class Zap : MonoBehaviour
         {
             rlhScene.printShowInfoTriggersControlls();
         }
+        if( Input.GetKeyDown(KeyCode.T))
+        {
+            rlhScene.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
+        }
 
         if (lastTouchedCheckPointCandidate != null)
         {

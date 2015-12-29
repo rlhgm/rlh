@@ -100,20 +100,48 @@ public class Camera2DFollow : MonoBehaviour
         }
     }
     
-    public void ShakeImpulseStart(float duration, float amplitude)
+    public void ShakeImpulseStart(float duration, float amplitude, float speed)
     {
         shaking = true;
-        shakeTime = 0;
-        shakeAmplitude = amplitude;
+        shakeDuration = duration;
+        shakeTime = 0f;
+        shakeMaxAmplitude.x = amplitude;
+        shakeMaxAmplitude.y = amplitude;
+        shakeAmplitude = shakeMaxAmplitude;
+
+        shakeMaxSpeed.x = speed;
+        shakeMaxSpeed.y = speed;
+        shakeSpeed = shakeMaxSpeed;
     }
 
     bool shaking = false;
+
     float shakeDuration = 0f;
     float shakeTime = 0f;
+
     Vector2 shakeMaxAmplitude = new Vector2(0.25f,0.25f);
-    //Vector2 shakeMaxAmplitude = new Vector2(0.0f, 0.0f);
-    float shakeAmplitude = 0f;
+    Vector2 shakeAmplitude = new Vector2(0f,0f);
+
+    Vector2 shakeMaxSpeed = new Vector2(5f, 5f);
     Vector2 shakeSpeed = new Vector2(5f,5f);
+
+    void applyShake()
+    {
+        if (!shaking) return;
+
+        // fajny efekt 0.125 - 0.5 
+        shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
+        // fajny efekt nawet 8-10
+        shakeSpeed = new Vector2(8f, 8f);
+
+        Vector3 newPos = transform.position;
+        shakeTime += Time.deltaTime;
+        float sample = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+        newPos.x += sample;
+        sample = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+        newPos.y += sample;
+        transform.position = newPos;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -141,19 +169,8 @@ public class Camera2DFollow : MonoBehaviour
             transform.position = transform.position + posDiff;
         }
 
-        // fajny efekt 0.125 - 0.5 
-        shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
-        // fajny efekt nawet 8-10
-        shakeSpeed = new Vector2(8f, 8f);
-
-        newPos = transform.position;
-        shakeTime += Time.deltaTime;
-        float sample = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
-        newPos.x += sample;
-        sample = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
-        newPos.y += sample;
-        transform.position = newPos;
-
+        applyShake();
+        
         fitPosToSceneBounds();
 
         int numberOfBackgrounds = backgroundsNodes.Length;
@@ -319,4 +336,3 @@ public class Camera2DFollow : MonoBehaviour
         return stageCenter;
     }
 }
-//}

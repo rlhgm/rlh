@@ -18,6 +18,8 @@ public class RLHScene : MonoBehaviour
     //Rat[] rats;
     List<Rat> rats = new List<Rat>(32);
 
+    Camera2DFollow camController;
+    
     public static RLHScene Instance
     {
         // zakladam ze RLHScene::Awake  zawsze jest wolane jako pierwsze... (z ustawien projektu Unity)
@@ -27,6 +29,11 @@ public class RLHScene : MonoBehaviour
     public Zap Zap
     {
         get { return zap; }
+    }
+
+    public Camera2DFollow CamController
+    {
+        get { return camController; }
     }
 
     void Awake()
@@ -77,6 +84,17 @@ public class RLHScene : MonoBehaviour
         //print(ShowInfoTriggersControlls);
 
         ResetRats();
+
+        Camera2DFollow[] c2dfs = FindObjectsOfType(typeof(Camera2DFollow)) as Camera2DFollow[];
+        if (c2dfs.Length == 1)
+        {
+            camController = c2dfs[0];
+        }
+        else
+        {
+            Debug.LogError("RLHScene => nie moge znalezc Camera2DFollow");
+            Debug.Break();
+        }
     }
 
     public void RatBorn(Rat rat)
