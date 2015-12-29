@@ -565,7 +565,7 @@ public class Zap : MonoBehaviour
             RlhScene.ZapVsBats.ZapReborn();
         }
 
-        rlhScene.CamController.ShakeImpulseStop();
+        rlhScene.CamController.ShakeStop(-1f);
 
         //Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
         //foreach (Parallaxed px in pxs)
@@ -1341,6 +1341,18 @@ public class Zap : MonoBehaviour
         if( Input.GetKeyDown(KeyCode.T))
         {
             rlhScene.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            rlhScene.CamController.ShakePermanentStart(0.25f, 8f);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            rlhScene.CamController.ShakeStop(-1f);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            rlhScene.CamController.ShakeStop(2f);
         }
 
         if (lastTouchedCheckPointCandidate != null)

@@ -99,12 +99,69 @@ public class Camera2DFollow : MonoBehaviour
             }
         }
     }
-    
+    public enum ShakeStatus
+    {
+        NoShake,
+        ShakeImpulse,
+        ShakePermanent,
+        ShakeFadeIn,
+        ShakeFadeOut
+    }
+
+    //bool shakingImpulse = false;
+    //bool shakingPermanent = false;
+    ShakeStatus shakeStatus = ShakeStatus.NoShake;
+
+    float shakeDuration = 0f;
+    float shakeTime = 0f;
+    float shakeRatio = 0f;
+    float shakeFadeDuration = 0f;
+    float shakeFadeTime = 0f;
+
+    Vector2 shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
+    Vector2 shakeAmplitude = new Vector2(0f, 0f);
+
+    Vector2 shakeMaxSpeed = new Vector2(5f, 5f);
+    Vector2 shakeSpeed = new Vector2(5f, 5f);
+
+    float sample = 0f;
+
+    public Vector2 ShakeMaxAmplitude
+    {
+        get
+        {
+            return shakeMaxAmplitude;
+        }
+
+        set
+        {
+            shakeMaxAmplitude = value;
+        }
+    }
+
+    //public ShakeStatus ShakeStatus1
+    //{
+    //    get
+    //    {
+    //        return shakeStatus;
+    //    }
+    //}
+
+    public bool IsShaking()
+    {
+        return shakeStatus != ShakeStatus.NoShake;
+    }
+
+    public ShakeStatus GetShakeStatus()
+    {
+        return shakeStatus;
+    }
 
     public void ShakeImpulseStart(float duration, float amplitude, float speed)
     {
-        shakingImpulse = true;
-        shakingPermanent = false;
+        //shakingImpulse = true;
+        //shakingPermanent = false;
+        shakeStatus = ShakeStatus.ShakeImpulse;
 
         shakeDuration = duration;
         shakeTime = 0f;
@@ -116,16 +173,18 @@ public class Camera2DFollow : MonoBehaviour
         shakeMaxSpeed.y = speed;
         shakeSpeed = shakeMaxSpeed;
     }
-    public void ShakeImpulseStop()
-    {
-        shakingImpulse = false;
-        shakingPermanent = false;
-    }
+    //public void ShakeImpulseStop()
+    //{
+    //    //shakingImpulse = false;
+    //    //shakingPermanent = false;
+    //    shakeStatus = ShakeStatus.ShakeImpulse;
+    //}
 
-    public void ShakePremanentStart(float amplitude, float speed)
+    public void ShakePermanentStart(float amplitude, float speed)
     {
-        shakingPermanent = true;
-        shakingImpulse = false;
+        //shakingPermanent = true;
+        //shakingImpulse = false;
+        shakeStatus = ShakeStatus.ShakePermanent;
 
         //shakeDuration = duration;
         shakeTime = 0f;
@@ -137,54 +196,77 @@ public class Camera2DFollow : MonoBehaviour
         shakeMaxSpeed.y = speed;
         shakeSpeed = shakeMaxSpeed;
     }
-    public void ShakePermanentStop(float fadeTime)
+    public void ShakeStop(float fadeTime)
     {
-        shakingImpulse = false;
+        //shakingImpulse = false;
         if (fadeTime <= 0f)
         {
-            shakingPermanent = false;
+            //shakingPermanent = false;
+            shakeStatus = ShakeStatus.NoShake;
         }
+        else
+        {
+            //shakeStatus = ShakeStatus.ShakeFadeOut;
 
+            shakeStatus = ShakeStatus.ShakeImpulse;
+            shakeDuration = shakeTime+fadeTime;
+
+            //shakeTime = 0f;
+            //shakeMaxAmplitude.x = amplitude;
+            //shakeMaxAmplitude.y = amplitude;
+            //shakeAmplitude = shakeMaxAmplitude;
+
+            //shakeMaxSpeed.x = speed;
+            //shakeMaxSpeed.y = speed;
+            //shakeSpeed = shakeMaxSpeed;
+        }
     }
     
-    bool shakingImpulse = false;
-    bool shakingPermanent = false;
-
-    float shakeDuration = 0f;
-    float shakeTime = 0f;
-    float shakeRatio = 0f;
-    float shakeFadeDuration = 0f;
-    float shakeFadeTime = 0f;
-
-    Vector2 shakeMaxAmplitude = new Vector2(0.25f,0.25f);
-    Vector2 shakeAmplitude = new Vector2(0f,0f);
-
-    Vector2 shakeMaxSpeed = new Vector2(5f, 5f);
-    Vector2 shakeSpeed = new Vector2(5f,5f);
-
     void applyShake(float dt)
     {
-        if (!shakingImpulse) return;
-
         shakeTime += dt;
-        if (shakeTime > shakeDuration)
+        Vector3 newPos = transform.position;
+
+        switch ( shakeStatus )
         {
-            shakingImpulse = false;
+            case ShakeStatus.NoShake:
+                return;
+
+            case ShakeStatus.ShakeImpulse:
+                if (shakeTime > shakeDuration)
+                {
+                    shakeStatus = ShakeStatus.NoShake;
+                    return;
+                }
+                shakeRatio = 1 - (shakeTime / shakeDuration);
+
+                sample = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+                newPos.x += (sample * shakeRatio);
+                sample = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+                newPos.y += (sample * shakeRatio);
+                
+                break;
+
+            case ShakeStatus.ShakePermanent:
+                newPos.x += (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+                newPos.y += (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+                break;
+
+            case ShakeStatus.ShakeFadeIn:
+                break;
+
+            case ShakeStatus.ShakeFadeOut:
+                break;
         }
-        shakeRatio = 1 - (shakeTime / shakeDuration);
+
+        transform.position = newPos;
 
         // fajny efekt 0.125 - 0.5 
         //shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
         // fajny efekt nawet 8-10
         //shakeSpeed = new Vector2(8f, 8f);
 
-        Vector3 newPos = transform.position;
-        //shakeTime += Time.deltaTime;
-        float sample = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
-        newPos.x += (sample * shakeRatio);
-        sample = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
-        newPos.y += (sample * shakeRatio);
-        transform.position = newPos;
+
     }
 
     // Update is called once per frame
