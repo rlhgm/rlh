@@ -16,6 +16,11 @@ public class CrumblingStairs : MonoBehaviour
     public float[] MaxHangTime;
     float currentHangTime = 0f;
 
+    //rlhScene.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
+    public float[] CamShakeTimes;
+    public float[] CamShakeAmplitudes;
+    public float[] CamShakeSpeeds;
+     
     public Transform MountHandle
     {
         get { return mountHandle; }
@@ -80,6 +85,12 @@ public class CrumblingStairs : MonoBehaviour
         //    angleLimits.max = 360f;
         //    mountHinge.limits = angleLimits;
         //}
+
+        if (CamShakeTimes.Length != CamShakeAmplitudes.Length || CamShakeAmplitudes.Length != CamShakeSpeeds.Length)
+        {
+            Debug.LogError("CrumblingStairs : " + name + " nie zgadzaja sie liczby parametrow CamShake");
+            Debug.Break();
+        }
     }
 
     // Update is called once per frame
@@ -118,6 +129,11 @@ public class CrumblingStairs : MonoBehaviour
             angleLimits.min = LimitSteps[crumbled];
             angleLimits.max = 360f;
             mountHinge.limits = angleLimits;
+        }
+
+        if( CamShakeTimes.Length > crumbled)
+        {
+            RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
         }
 
         currentHangTime = 0f;

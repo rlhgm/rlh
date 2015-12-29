@@ -6696,6 +6696,18 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeTimes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeSpeeds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeAmplitudes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 493286, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
       propertyPath: m_LocalPosition.x
       value: -196.809998
@@ -6735,6 +6747,30 @@ Prefab:
     - target: {fileID: 23348962, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
       propertyPath: m_ConnectedAnchor.y
       value: 29.1269741
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeTimes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeAmplitudes.Array.data[0]
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeAmplitudes.Array.data[1]
+      value: .349999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeSpeeds.Array.data[0]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeSpeeds.Array.data[1]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: CamShakeTimes.Array.data[1]
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
