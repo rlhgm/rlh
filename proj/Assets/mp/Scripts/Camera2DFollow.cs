@@ -118,6 +118,7 @@ public class Camera2DFollow : MonoBehaviour
 
     float shakeDuration = 0f;
     float shakeTime = 0f;
+    float shakeRatio = 0f;
 
     Vector2 shakeMaxAmplitude = new Vector2(0.25f,0.25f);
     Vector2 shakeAmplitude = new Vector2(0f,0f);
@@ -125,21 +126,28 @@ public class Camera2DFollow : MonoBehaviour
     Vector2 shakeMaxSpeed = new Vector2(5f, 5f);
     Vector2 shakeSpeed = new Vector2(5f,5f);
 
-    void applyShake()
+    void applyShake(float dt)
     {
         if (!shaking) return;
 
+        shakeTime += dt;
+        if (shakeTime > shakeDuration)
+        {
+            shaking = false;
+        }
+        shakeRatio = 1 - (shakeTime / shakeDuration);
+
         // fajny efekt 0.125 - 0.5 
-        shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
+        //shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
         // fajny efekt nawet 8-10
-        shakeSpeed = new Vector2(8f, 8f);
+        //shakeSpeed = new Vector2(8f, 8f);
 
         Vector3 newPos = transform.position;
-        shakeTime += Time.deltaTime;
+        //shakeTime += Time.deltaTime;
         float sample = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
-        newPos.x += sample;
+        newPos.x += (sample * shakeRatio);
         sample = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
-        newPos.y += sample;
+        newPos.y += (sample * shakeRatio);
         transform.position = newPos;
     }
 
@@ -169,7 +177,7 @@ public class Camera2DFollow : MonoBehaviour
             transform.position = transform.position + posDiff;
         }
 
-        applyShake();
+        applyShake(Time.deltaTime);
         
         fitPosToSceneBounds();
 
