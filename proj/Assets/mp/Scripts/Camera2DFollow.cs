@@ -294,7 +294,7 @@ public class Camera2DFollow : MonoBehaviour
 
         Transform camTarget = target.getCameraTarget();
 
-        Vector3 newPos = new Vector3(camTarget.position.x, camTarget.position.y, transform.position.z);
+        Vector3 newPos = camTarget.position + target.CameraTargetOffset; //new Vector3(camTarget.position.x, camTarget.position.y, transform.position.z);
 
         if (target.isInState(Zap.State.CLIMB_ROPE))
         {
@@ -304,14 +304,31 @@ public class Camera2DFollow : MonoBehaviour
         Vector3 res = fitToStage(targetStage, newPos);
         Vector3 posDiff = res - transform.position;
 
-        if (target.isInState(Zap.State.CLIMB_ROPE))
+        //if (target.isInState(Zap.State.CLIMB_ROPE))
+        //{
+        //    transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, 0.1f);
+        //}
+        //else
+        //{
+        //    //transform.position = transform.position + posDiff;
+        //    transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, 0.05f);
+        //}
+
+        float _tt = 0.1f;
+        switch(target.getState())
         {
-            transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, 0.1f);
+            case Zap.State.CLIMB_ROPE:
+                _tt = 0.1f;
+                break;
+            case Zap.State.IN_AIR:
+                _tt = 0.25f;
+                break;
+            default:
+                _tt = 0.1f;
+                break;
+
         }
-        else
-        {
-            transform.position = transform.position + posDiff;
-        }
+        transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, _tt);
 
         applyShake(Time.deltaTime);
         

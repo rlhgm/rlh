@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraTargetOffseter : MonoBehaviour
 {
+    public Vector2 CameraOffset;
 
     // Use this for initialization
     void Start()
@@ -18,16 +19,18 @@ public class CameraTargetOffseter : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        print("CameraTargetOffseter::OnTriggerEnter2D");
+        //print("CameraTargetOffseter::OnTriggerEnter2D");
+        RLHScene.Instance.Zap.CameraTargetOffset = CameraOffset;
     }
 
     void OnTriggerExit2D()
     {
-        print("CameraTargetOffseter::OnTriggerExit2D");
+        //print("CameraTargetOffseter::OnTriggerExit2D");
+        RLHScene.Instance.Zap.CameraTargetOffset = new Vector3(0f, 0f, 0f);
     }
 
-    void OnTriggerStay2D()
-    {
-        print("CameraTargetOffseter::OnTriggerStay2D");
-    }
+    //void OnTriggerStay2D()
+    //{
+    //    print("CameraTargetOffseter::OnTriggerStay2D");
+    //}
 }

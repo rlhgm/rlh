@@ -266,7 +266,7 @@ public class Zap : MonoBehaviour
         rightKnifeHitPointLow2 = transform.Find("rightKnifeHitPointLow2").transform;
 
         cameraTarget = transform.Find("cameraTarget").transform;
-        cameraTargetBasePos = cameraTarget.localPosition;
+        //cameraTargetBasePos = cameraTarget.localPosition;
 
         layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
         layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
@@ -448,6 +448,7 @@ public class Zap : MonoBehaviour
     //{
     //    return myAudio;
     //}
+
     public Transform getCameraTarget()
     {
         return cameraTarget;
@@ -577,6 +578,7 @@ public class Zap : MonoBehaviour
 
         rlhScene.CamController.ShakeStop(-1f);
         RLHScene.Instance.CamController.StartFollow();
+        cameraTargetOffset = new Vector3(0f, 0f, 0f);
 
         //Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
         //foreach (Parallaxed px in pxs)
@@ -2882,7 +2884,7 @@ public class Zap : MonoBehaviour
     [HideInInspector]
     public Transform rightKnifeHitPointLow2;
 
-    Vector3 cameraTargetBasePos = new Vector3();
+    Vector3 cameraTargetOffset = new Vector3();
     Transform cameraTarget;
     Transform gfx;
     Transform gfxLegs;
@@ -3104,6 +3106,19 @@ public class Zap : MonoBehaviour
     public float CurrentStateTime
     {
         get { return currentStateTime; }
+    }
+
+    public Vector3 CameraTargetOffset
+    {
+        get
+        {
+            return cameraTargetOffset;
+        }
+
+        set
+        {
+            cameraTargetOffset = value;
+        }
     }
 
     [HideInInspector]
