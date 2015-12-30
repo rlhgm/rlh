@@ -1085,6 +1085,7 @@ public class ZapControllerNormal : ZapController
         CLIMB_CATCH,
         CLIMB_CLIMB,
         CLIMB_PULLDOWN,
+        ClimbBelly,
         MountIdle,
         MountLeft,
         MountRight,

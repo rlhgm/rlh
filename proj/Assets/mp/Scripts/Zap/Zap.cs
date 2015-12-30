@@ -247,6 +247,23 @@ public class Zap : MonoBehaviour
         BoxCollider2D hrcoll = handlerRight.GetComponent<BoxCollider2D>();
         handlerRightSize = hrcoll.size;
 
+        //[HideInInspector]
+        //public Transform handlerBellyLeft;
+        //[HideInInspector]
+        //public Vector2 handlerBellyLeftSize;
+        //[HideInInspector]
+        //public Transform handlerBellyRight;
+        //[HideInInspector]
+        //public Vector2 handlerBellyRightSize;
+
+        handlerBellyLeft = transform.Find("handlerBellyLeft").transform;
+        handlerBellyRight = transform.Find("handlerBellyRight").transform;
+
+        BoxCollider2D hblcoll = handlerBellyLeft.GetComponent<BoxCollider2D>();
+        handlerBellyLeftSize = hblcoll.size;
+        BoxCollider2D hbrcoll = handlerBellyRight.GetComponent<BoxCollider2D>();
+        handlerBellyRightSize = hbrcoll.size;
+
         leftKnifeHitPointHigh1 = transform.Find("leftKnifeHitPointHigh1").transform;
         leftKnifeHitPointHigh2 = transform.Find("leftKnifeHitPointHigh2").transform;
         rightKnifeHitPointHigh1 = transform.Find("rightKnifeHitPointHigh1").transform;
@@ -2839,6 +2856,15 @@ public class Zap : MonoBehaviour
     public Transform handlerRight;
     [HideInInspector]
     public Vector2 handlerRightSize;
+
+    [HideInInspector]
+    public Transform handlerBellyLeft;
+    [HideInInspector]
+    public Vector2 handlerBellyLeftSize;
+    [HideInInspector]
+    public Transform handlerBellyRight;
+    [HideInInspector]
+    public Vector2 handlerBellyRightSize;
 
     [HideInInspector]
     public Transform leftKnifeHitPointHigh1;
