@@ -61,6 +61,31 @@ public class GroundMoveable : MonoBehaviour
         return false;
     }
 
+    //void OnCollisionEnter2D(Collision collision)
+    //{
+    //    // Debug-draw all contact points and normals
+    //    foreach (ContactPoint contact in collision.contacts)
+    //    {
+    //        Debug.DrawRay(contact.point, contact.normal, Color.white);
+    //    }
+
+    //    // Play a sound if the colliding objects had a big impact.		
+    //    //if (collision.relativeVelocity.magnitude > 2)
+    //    //    audio.Play();
+    //}
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if (coll.gameObject.tag == "Enemy")
+        //    coll.gameObject.SendMessage("ApplyDamage", 10);
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+        }
+
+    }
+
     void Awake()
     {
         physic = GetComponent<Rigidbody2D>();
