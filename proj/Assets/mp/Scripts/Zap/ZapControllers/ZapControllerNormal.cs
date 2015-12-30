@@ -161,6 +161,10 @@ public class ZapControllerNormal : ZapController
                 Action_CLIMB_CLIMB();
                 break;
 
+            case Action.ClimbBelly:
+                ActionClimbBelly();
+                break;
+
             case Action.WalkLeft:
                 if (Action_WALK(-1) != 0)
                     return;
@@ -1341,6 +1345,12 @@ public class ZapControllerNormal : ZapController
                 zap.TrySetIgnoreCollisionWhit(catchedClimbHandle);
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_climb_R");
                 else zap.AnimatorBody.Play("Zap_jump_climb_L");
+                break;
+
+            case Action.ClimbBelly:
+                zap.TrySetIgnoreCollisionWhit(catchedClimbHandle);
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_jump_belly_climb_R");
+                else zap.AnimatorBody.Play("Zap_jump_belly_climb_L");
                 break;
 
             case Action.CLIMB_PULLDOWN:
@@ -3288,6 +3298,45 @@ public class ZapControllerNormal : ZapController
         catchedClimbHandle = null;
     }
 
+    int ActionClimbBelly()
+    {
+        if (zap.currentActionTime >= ClimbDurClimb)
+        {
+            zap.removeLastIgnoredCollision();
+
+            zap.setState(Zap.State.ON_GROUND);
+            transform.position = climbAfterPos2;
+
+            if (zap.canGetUp())
+            {
+                setAction(Action.Idle);
+                resetActionAndState();
+            }
+            else
+            {
+                setAction(Action.CrouchIdle);
+                wantGetUp = !Input.GetKey(zap.keyDown);
+
+                if (Input.GetKey(zap.keyLeft))
+                {
+                    keyLeftDown();
+                }
+                else if (Input.GetKey(zap.keyRight))
+                {
+                    keyRightDown();
+                }
+            }
+
+        }
+        else
+        {
+            float ratio = zap.currentActionTime / ClimbDurClimb;
+            transform.position = climbBeforePos + climbDistToClimb * ratio;
+        }
+
+        return 0;
+    }
+
     int Action_CLIMB_CLIMB()
     {
 
@@ -4640,31 +4689,53 @@ public class ZapControllerNormal : ZapController
         resetActionAndState();
     }
 
+    void StartPullUpFromBelly(Transform bellyHandle)
+    {
+        zap.velocity.x = 0.0f;
+        zap.velocity.y = 0.0f;
+
+        catchedClimbHandle = bellyHandle.gameObject;
+
+        //climbBeforePos = transform.position;
+        //climbAfterPos = newPos;
+        //climbAfterPos2 = handlePos;
+        //climbAfterPos2.x += 0.1f;
+        //climbDistToClimb = climbAfterPos - climbBeforePos;
+        //climbToJumpDuration = climbDistToClimb.magnitude * _speed;
+
+        zap.setState(Zap.State.CLIMB);
+        setAction(Action.ClimbBelly);
+        lastFrameHande = false;
+    }
+
     bool tryCatchHandle(bool fromGround = false)
     {
+        bool catchByBelly = false;
+
         if (zap.dir() == Vector2.right)
         {
             float _speed = 0.2f;
             RaycastHit2D hit;
             if (fromGround)
             {
-                //hit = Physics2D.Raycast(zap.sensorHandleR2.position, -Vector2.up, 0.5f, zap.layerIdGroundHandlesMask);
-                hit = Physics2D.BoxCast(zap.handlerRight.position,zap.handlerRightSize,0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
-                _speed = 0.2f;
+                hit = Physics2D.BoxCast(zap.handlerBellyRight.position, zap.handlerBellyRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
+                if (hit.collider)
+                {
+                    catchByBelly = true;
+                    StartPullUpFromBelly(hit.transform);
+                    return true;
+                }
+                else
+                {
+                    hit = Physics2D.BoxCast(zap.handlerRight.position, zap.handlerRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
+                    _speed = 0.2f;
+                }
             }
             else
             {
-                //if (lastFrameHande)
-                //{
-                //    Debug.DrawLine(lastHandlePos, zap.sensorHandleR2.position);
-                //    Debug.Log("asdf");
-                //    hit = Physics2D.Linecast(lastHandlePos, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
-                //}
-                //else
-                //    hit = Physics2D.Linecast(zap.sensorHandleR2.position, zap.sensorHandleR2.position, zap.layerIdGroundHandlesMask);
-
                 hit = Physics2D.BoxCast(zap.handlerRight.position, zap.handlerRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
             }
+
             if (hit.collider != null)
             {
                 // tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
