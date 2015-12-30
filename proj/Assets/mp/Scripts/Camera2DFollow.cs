@@ -25,7 +25,18 @@ public class Camera2DFollow : MonoBehaviour
     Parallaxed[] parallaxedObjects;
 
     RLHScene rlhScene = null;
+    bool onOff = true;
 
+    public void StartFollow()
+    {
+        onOff = true;
+    }
+
+    public void StopFollow()
+    {
+        onOff = false;
+    }
+    
     void Awake()
     {
     }
@@ -272,6 +283,13 @@ public class Camera2DFollow : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(!onOff)
+        {
+            applyShake(Time.deltaTime);
+            fitPosToSceneBounds();
+            return;
+        }
+
         targetStage = getTargetStage();
 
         Transform camTarget = target.getCameraTarget();

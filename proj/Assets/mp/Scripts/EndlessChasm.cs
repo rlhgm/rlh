@@ -13,5 +13,19 @@ public class EndlessChasm : MonoBehaviour {
 	
 	}
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        //print("EndlessChasm::OnTriggerEnter2D");
+        RLHScene.Instance.CamController.StopFollow();
+    }
 
+    //void OnTriggerExit2D()
+    //{
+    //    //print("EndlessChasm::OnTriggerExit2D");
+    //}
+
+    //void OnTriggerStay2D()
+    //{
+    //    //print("EndlessChasm::OnTriggerStay2D");
+    //}
 }

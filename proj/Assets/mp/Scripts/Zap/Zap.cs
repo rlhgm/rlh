@@ -575,6 +575,7 @@ public class Zap : MonoBehaviour
         }
 
         rlhScene.CamController.ShakeStop(-1f);
+        RLHScene.Instance.CamController.StartFollow();
 
         //Parallaxed[] pxs = FindObjectsOfType(typeof(Parallaxed)) as Parallaxed[];
         //foreach (Parallaxed px in pxs)
