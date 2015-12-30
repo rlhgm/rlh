@@ -93,6 +93,7 @@
     <Compile Include="Assets\mp\Scripts\CrumblingStairs.cs" />
     <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
     <Compile Include="Assets\mp\Scripts\DestroyablePlatform.cs" />
+    <Compile Include="Assets\mp\Scripts\EndlessChasm.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\Bat.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\BatActivator.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\CreepingAIController.cs" />
