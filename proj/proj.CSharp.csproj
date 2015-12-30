@@ -130,6 +130,7 @@
     <Compile Include="Assets\mp\Scripts\Snake.cs" />
     <Compile Include="Assets\mp\Scripts\SnakeCollider.cs" />
     <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\mp\Scripts\SpriteOpacityController.cs" />
     <Compile Include="Assets\mp\Scripts\SwingAlpha.cs" />
     <Compile Include="Assets\mp\Scripts\Twitchable.cs" />
     <Compile Include="Assets\mp\Scripts\Vector2Extension.cs" />
