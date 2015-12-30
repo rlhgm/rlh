@@ -32,7 +32,7 @@ aby nie bylo dzikiego przeskoku przy łapaniu sie climbersow trzeba zrobic tak z
 
 //nie obedzie sie bez tego
 15) prefaby skrzynek rozwalalnych i nierozwalalnych - przed wigilia
-25) katy czolgania sie pod katem
+25) katy czolgania sie pod katem - JEST
 9) przejazdy kamery (jutro)
 13) poprawa walki ze szczurami - nie dziala pod katem i w przykucu (jutro)
 

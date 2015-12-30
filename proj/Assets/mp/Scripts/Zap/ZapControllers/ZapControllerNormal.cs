@@ -861,22 +861,12 @@ public class ZapControllerNormal : ZapController
                 }
                 else if (zap.groundUnder)
                 {
-                    if (crouching())
+                    if (crouching() && !isInAction(Action.CrouchIdle))
                     {
-                        //Quaternion quat = gfx.rotation;
-                        //quat.eulerAngles = new Vector3(0f, 0f, zap.GroundUnderAngle);
-                        //gfx.rotation = quat;
-
-                        //zap.SetRotation(zap.GroundUnderAngle);
                         zap.SetGfxRotation(zap.GroundUnderAngle);
                     }
                     else
                     {
-                        //Quaternion quat = gfx.rotation;
-                        //quat.eulerAngles = new Vector3(0f, 0f, 0f);
-                        //gfx.rotation = quat;
-
-                        //zap.SetRotation(0f);
                         zap.SetGfxRotation(0f);
                     }
 
@@ -1437,8 +1427,11 @@ public class ZapControllerNormal : ZapController
                 break;
 
             case Action.CrouchIdle:
-                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_crouch_move_R");
-                else zap.AnimatorBody.Play("Zap_crouch_move_L");
+                //if (zap.faceRight()) zap.AnimatorBody.Play("Zap_crouch_move_R");
+                //else zap.AnimatorBody.Play("Zap_crouch_move_L");
+                //zap.AnimatorBody.speed = 0f;
+                if (zap.faceRight()) zap.AnimatorBody.Play("Zap_crouch_idle_R");
+                else zap.AnimatorBody.Play("Zap_crouch_idle_L");
                 zap.AnimatorBody.speed = 0f;
                 break;
 
