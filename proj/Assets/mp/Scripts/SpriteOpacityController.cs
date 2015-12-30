@@ -57,12 +57,15 @@ public class SpriteOpacityController : MonoBehaviour
 
         float zapLocalPosX = Mathf.Min(0.5f, Mathf.Abs(zapLocalPos.x));
         zapLocalPosX *= 2f;
+        float zlpxDiff = 1f - zapLocalPosX; //[0,1]
+        float newOpacity = 0f;
 
         for (int i = 0; i < numOfTargetSprites; ++i)
         {
             if(LinearFadeOuts[i])
             {
-
+                newOpacity = StartsOpacities[i] - zlpxDiff * (StartsOpacities[i]-TargetsOpacities[i]);
+                SetOpacity(sprites[i], newOpacity);
             }
             else
             {
