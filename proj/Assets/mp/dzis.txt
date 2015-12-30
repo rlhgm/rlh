@@ -38,7 +38,7 @@ aby nie bylo dzikiego przeskoku przy łapaniu sie climbersow trzeba zrobic tak z
 
 
 //priory graficzne
-7) przykuc zapa (teraz)
+7) przykuc zapa (teraz) - JEST
 29) ragdoll
 11) wiązka GG (po niedzieli)
 21) blokowanie sie elementu ukladanki - kamienia ma miejscu docelowym (particle, dzwiek)
