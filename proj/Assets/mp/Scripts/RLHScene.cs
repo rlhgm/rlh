@@ -19,7 +19,9 @@ public class RLHScene : MonoBehaviour
     List<Rat> rats = new List<Rat>(32);
 
     Camera2DFollow camController;
-    
+
+    int layerIdLAGROUNDMask;
+
     public static RLHScene Instance
     {
         // zakladam ze RLHScene::Awake  zawsze jest wolane jako pierwsze... (z ustawien projektu Unity)
@@ -36,12 +38,18 @@ public class RLHScene : MonoBehaviour
         get { return camController; }
     }
 
+    public int LayerIdLAGROUNDMask
+    {
+        get { return layerIdLAGROUNDMask; }
+    }
+
     void Awake()
     {
         _scene = this;
         transform.position = new Vector3(0f,0f,0f);
         Application.targetFrameRate = -10;
 
+        layerIdLAGROUNDMask = 1 << LayerMask.NameToLayer("LA-GROUND");
         layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
         layerIdGroundMoveableMask = 1 << LayerMask.NameToLayer("GroundMoveable");
         layerIdGroundAllMask = layerIdGroundMask | layerIdGroundMoveableMask;
@@ -56,6 +64,8 @@ public class RLHScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+       
+
         if (zap == null)
         {
             zap = FindObjectOfType<Zap>();
