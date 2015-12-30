@@ -3139,6 +3139,38 @@ public class ZapControllerNormal : ZapController
 
     CrumblingStairs cs = null;
 
+    void CatchCrumblingStairs()
+    {
+        cs = catchedClimbHandle.transform.parent.parent.GetComponent<CrumblingStairs>();
+        if (!cs)
+        {
+            Debug.LogError("Nie ma CrumblingStairs");
+            Debug.Break();
+        }
+
+        RLHScene.Instance.CamController.ShakeImpulseStart(3f, 0.25f, 8f);
+
+        handledMountMoveable = cs.Mount.GetComponent<MountMoveable>();
+        if (!handledMountMoveable)
+        {
+            Debug.LogError("Nie ma CrumblingStairs handledMountMoveable");
+            Debug.Break();
+        }
+
+        Vector3 newZapPos = cs.MountHandle.position;
+        newZapPos.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+        zap.transform.position = newZapPos;
+
+        Vector3 zapHandpos = zap.transform.position;
+        zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+        handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+
+        zap.climbingWallID = zap.layerIdMountMask;
+        setActionMountIdle();
+
+        cs.Crumble();
+    }
+
     int Action_CLIMB_JUMP_TO_CATCH()
     {
         // dociaganie do punktu:
@@ -3146,34 +3178,36 @@ public class ZapControllerNormal : ZapController
         {
             if (catchedClimbHandle.tag == "CrumblingStairs")
             {
-                cs = catchedClimbHandle.transform.parent.parent.GetComponent<CrumblingStairs>();
-                if(!cs)
-                {
-                    Debug.LogError("Nie ma CrumblingStairs");
-                    Debug.Break();
-                }
+                //cs = catchedClimbHandle.transform.parent.parent.GetComponent<CrumblingStairs>();
+                //if(!cs)
+                //{
+                //    Debug.LogError("Nie ma CrumblingStairs");
+                //    Debug.Break();
+                //}
 
-                RLHScene.Instance.CamController.ShakeImpulseStart(3f, 0.25f, 8f);
+                //RLHScene.Instance.CamController.ShakeImpulseStart(3f, 0.25f, 8f);
 
-                handledMountMoveable = cs.Mount.GetComponent<MountMoveable>();
-                if (!handledMountMoveable)
-                {
-                    Debug.LogError("Nie ma CrumblingStairs handledMountMoveable");
-                    Debug.Break();
-                }
+                //handledMountMoveable = cs.Mount.GetComponent<MountMoveable>();
+                //if (!handledMountMoveable)
+                //{
+                //    Debug.LogError("Nie ma CrumblingStairs handledMountMoveable");
+                //    Debug.Break();
+                //}
 
-                Vector3 newZapPos = cs.MountHandle.position;
-                newZapPos.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                zap.transform.position = newZapPos;
-                
-                Vector3 zapHandpos = zap.transform.position;
-                zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
-                
-                zap.climbingWallID = zap.layerIdMountMask;
-                setActionMountIdle();
-                
-                cs.Crumble();
+                //Vector3 newZapPos = cs.MountHandle.position;
+                //newZapPos.y -= (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                //zap.transform.position = newZapPos;
+
+                //Vector3 zapHandpos = zap.transform.position;
+                //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+
+                //zap.climbingWallID = zap.layerIdMountMask;
+                //setActionMountIdle();
+
+                //cs.Crumble();
+
+                CatchCrumblingStairs();
             }
             else
             {
@@ -4706,9 +4740,6 @@ public class ZapControllerNormal : ZapController
 
     void StartPullUpFromBelly1(Transform bellyHandler)
     {
-        //zap.velocity.x = 0.0f;
-        //zap.velocity.y = 0.0f;
-
         catchedClimbHandle = bellyHandler.gameObject;
 
         Vector3 handlePos = catchedClimbHandle.transform.position;
@@ -4720,32 +4751,23 @@ public class ZapControllerNormal : ZapController
         climbAfterPos2 = handlePos;
         climbAfterPos2.x += (zap.dir2() * 0.1f);
         climbDistToClimb = climbAfterPos2 - climbBeforePos;
-        
-        //zap.setState(Zap.State.CLIMB);
-        //setAction(Action.ClimbBelly);
-        //lastFrameHande = false;
     }
 
     void StartPullUpFromBelly2(/*Transform bellyHandler*/)
     {
-        zap.velocity.x = 0.0f;
-        zap.velocity.y = 0.0f;
+        if (catchedClimbHandle.tag == "CrumblingStairs")
+        {
+            CatchCrumblingStairs();
+        }
+        else
+        {
+            zap.velocity.x = 0.0f;
+            zap.velocity.y = 0.0f;
 
-        //catchedClimbHandle = bellyHandler.gameObject;
-
-        //Vector3 handlePos = catchedClimbHandle.transform.position;
-        //Vector3 newPos = new Vector3();
-        //newPos.x = handlePos.x - zap.getMyHalfWidth();// + 0.2f;
-        //newPos.y = handlePos.y - 1.75f; //myHeight;
-
-        //climbBeforePos = transform.position;
-        //climbAfterPos2 = handlePos;
-        //climbAfterPos2.x += (zap.dir2() * 0.1f);
-        //climbDistToClimb = climbAfterPos2 - climbBeforePos;
-        
-        zap.setState(Zap.State.CLIMB);
-        setAction(Action.ClimbBelly);
-        lastFrameHande = false;
+            zap.setState(Zap.State.CLIMB);
+            setAction(Action.ClimbBelly);
+            lastFrameHande = false;
+        }
     }
 
     bool tryCatchHandle(bool fromGround = false)
