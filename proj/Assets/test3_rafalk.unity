@@ -9227,7 +9227,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -644166221
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e6a49ba391ca72b40a30159277bfc41e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9350,7 +9350,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -644166221
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e6a49ba391ca72b40a30159277bfc41e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -22911,7 +22911,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -644166221
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e6a49ba391ca72b40a30159277bfc41e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -29748,7 +29748,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -179
+      value: -181
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
@@ -31776,6 +31776,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 99
       objectReference: {fileID: 0}
+    - target: {fileID: 11410602, guid: ac4bc5d5f5df0954e93330ab1fe903f6, type: 2}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 469121943}
+    - target: {fileID: 11410602, guid: ac4bc5d5f5df0954e93330ab1fe903f6, type: 2}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 1144701405}
+    - target: {fileID: 11410602, guid: ac4bc5d5f5df0954e93330ab1fe903f6, type: 2}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 467237342}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac4bc5d5f5df0954e93330ab1fe903f6, type: 2}
   m_IsPrefabParent: 0
