@@ -27,7 +27,7 @@ aby nie bylo dzikiego przeskoku przy łapaniu sie climbersow trzeba zrobic tak z
 
 //wazne do poprawienia odbioru gry
 23) czas po spadku z platformy do odbicia sie z niczego
-3) Łapanie sie brzuchem (teraz) - JEST
+3) Łapanie sie brzuchem (teraz) - JEST - ALE WLASNIE ODKRYLEM ZE NIE LAPIE SIE KAMIENI...
 
 //nie obedzie sie bez tego
 15) prefaby skrzynek rozwalalnych i nierozwalalnych - przed wigilia
@@ -61,6 +61,8 @@ aby nie bylo dzikiego przeskoku przy łapaniu sie climbersow trzeba zrobic tak z
 27) nieskonczone przepasci - jak w geki yabie - JEST
 28) prowadzenie kamery - czasami po lewej, czasam po prawej, czasem na dole, a czasem na gorze - JEST
 
+// ZADANIA OD CZARKA:
+40) Obsuwające sie climbersy
 
 
 
