@@ -5952,11 +5952,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 405624, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -171.309998
+      value: -162.759995
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 26.8199997
+      value: 25.2999992
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5988,7 +5988,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5084442, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11499092, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: toBreakOffDist
@@ -29952,7 +29952,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -132
+      value: -158
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
