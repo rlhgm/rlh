@@ -84,6 +84,7 @@
     <Compile Include="Assets\mp\Scripts\CameraCutSceneControlPoint.cs" />
     <Compile Include="Assets\mp\Scripts\CameraCutScenePath.cs" />
     <Compile Include="Assets\mp\Scripts\CameraResizer.cs" />
+    <Compile Include="Assets\mp\Scripts\CameraTargetOffseter.cs" />
     <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
     <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\mp\Scripts\CollapseableFootbridge.cs" />

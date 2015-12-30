@@ -266,6 +266,7 @@ public class Zap : MonoBehaviour
         rightKnifeHitPointLow2 = transform.Find("rightKnifeHitPointLow2").transform;
 
         cameraTarget = transform.Find("cameraTarget").transform;
+        cameraTargetBasePos = cameraTarget.localPosition;
 
         layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");
         layerIdGroundFarMask = 1 << LayerMask.NameToLayer("GroundFar");
@@ -2881,6 +2882,7 @@ public class Zap : MonoBehaviour
     [HideInInspector]
     public Transform rightKnifeHitPointLow2;
 
+    Vector3 cameraTargetBasePos = new Vector3();
     Transform cameraTarget;
     Transform gfx;
     Transform gfxLegs;
