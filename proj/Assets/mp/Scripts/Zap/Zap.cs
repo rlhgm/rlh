@@ -243,19 +243,11 @@ public class Zap : MonoBehaviour
         handlerRight = transform.Find("handlerRight").transform;
 
         BoxCollider2D hlcoll = handlerLeft.GetComponent<BoxCollider2D>();
+        //handlerLeftSize = hlcoll.size * hlcoll.transform.lossyScale;
         handlerLeftSize = hlcoll.size;
         BoxCollider2D hrcoll = handlerRight.GetComponent<BoxCollider2D>();
         handlerRightSize = hrcoll.size;
-
-        //[HideInInspector]
-        //public Transform handlerBellyLeft;
-        //[HideInInspector]
-        //public Vector2 handlerBellyLeftSize;
-        //[HideInInspector]
-        //public Transform handlerBellyRight;
-        //[HideInInspector]
-        //public Vector2 handlerBellyRightSize;
-
+        
         handlerBellyLeft = transform.Find("handlerBellyLeft").transform;
         handlerBellyRight = transform.Find("handlerBellyRight").transform;
 

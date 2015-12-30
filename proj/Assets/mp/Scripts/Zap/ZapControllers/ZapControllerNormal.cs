@@ -4696,12 +4696,17 @@ public class ZapControllerNormal : ZapController
 
         catchedClimbHandle = bellyHandle.gameObject;
 
-        //climbBeforePos = transform.position;
-        //climbAfterPos = newPos;
-        //climbAfterPos2 = handlePos;
-        //climbAfterPos2.x += 0.1f;
-        //climbDistToClimb = climbAfterPos - climbBeforePos;
-        //climbToJumpDuration = climbDistToClimb.magnitude * _speed;
+        Vector3 handlePos = catchedClimbHandle.transform.position;
+        Vector3 newPos = new Vector3();
+        newPos.x = handlePos.x - zap.getMyHalfWidth();// + 0.2f;
+        newPos.y = handlePos.y - 1.75f; //myHeight;
+
+        climbBeforePos = transform.position;
+        climbAfterPos = newPos;
+        climbAfterPos2 = handlePos;
+        climbAfterPos2.x += 0.1f;
+        climbDistToClimb = climbAfterPos - climbBeforePos;
+        climbToJumpDuration = climbDistToClimb.magnitude * 0.2f;
 
         zap.setState(Zap.State.CLIMB);
         setAction(Action.ClimbBelly);
@@ -4733,7 +4738,17 @@ public class ZapControllerNormal : ZapController
             }
             else
             {
-                hit = Physics2D.BoxCast(zap.handlerRight.position, zap.handlerRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
+                hit = Physics2D.BoxCast(zap.handlerBellyRight.position, zap.handlerBellyRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
+                if (hit.collider)
+                {
+                    catchByBelly = true;
+                    StartPullUpFromBelly(hit.transform);
+                    return true;
+                }
+                else
+                {
+                    hit = Physics2D.BoxCast(zap.handlerRight.position, zap.handlerRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundHandlesMask);
+                }
             }
 
             if (hit.collider != null)
