@@ -4702,11 +4702,11 @@ public class ZapControllerNormal : ZapController
         newPos.y = handlePos.y - 1.75f; //myHeight;
 
         climbBeforePos = transform.position;
-        climbAfterPos = newPos;
+        //climbAfterPos = newPos;
         climbAfterPos2 = handlePos;
         climbAfterPos2.x += 0.1f;
-        climbDistToClimb = climbAfterPos - climbBeforePos;
-        climbToJumpDuration = climbDistToClimb.magnitude * 0.2f;
+        climbDistToClimb = climbAfterPos2 - climbBeforePos;
+        //climbToJumpDuration = climbDistToClimb.magnitude * 0.2f;
 
         zap.setState(Zap.State.CLIMB);
         setAction(Action.ClimbBelly);
