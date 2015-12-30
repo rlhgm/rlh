@@ -3074,7 +3074,12 @@ public class Zap : MonoBehaviour
             return gfx;
         }
     }
-    
+
+    public float CurrentStateTime
+    {
+        get { return currentStateTime; }
+    }
+
     [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]
@@ -3099,10 +3104,11 @@ public class Zap : MonoBehaviour
         currentActionTime = 0f;
     }
     float currentStateTime = 0.0f;
-    public float getCurrentStateTime()
-    {
-        return currentStateTime;
-    }
+    //public float getCurrentStateTime()
+    //{
+    //    return currentStateTime;
+    //}
+
 
     float myWidth;
     float myHalfWidth;

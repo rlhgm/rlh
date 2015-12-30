@@ -116,6 +116,7 @@
     <Compile Include="Assets\mp\Scripts\Panther.cs" />
     <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />
     <Compile Include="Assets\mp\Scripts\Pickable.cs" />
+    <Compile Include="Assets\mp\Scripts\PlatformHandle.cs" />
     <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
     <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
     <Compile Include="Assets\mp\Scripts\RLHScene.cs" />

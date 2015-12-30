@@ -3196,6 +3196,12 @@ public class ZapControllerNormal : ZapController
         //Debug.Log(climbAfterPos2);
         zap.touchStone(catchedClimbHandle.transform, climbAfterPos2);
 
+        if( ShouldFallFromPlatform() )
+        {
+            FallFromPlatform();
+            return 0;
+        }
+
         if ((Input.GetKeyDown(zap.keyUp) || Input.GetKey(zap.keyUp))) // && canPullUp)
         {
             if (canClimbPullUp2())
@@ -3234,12 +3240,13 @@ public class ZapControllerNormal : ZapController
             }
             else if (Input.GetKey(zap.keyDown))
             {
-                zap.velocity.x = 0.0f;
-                zap.velocity.y = 0.0f;
-                zap.setState(Zap.State.IN_AIR);
-                setAction(Action.Jump);
-                lastCatchedClimbHandle = catchedClimbHandle;
-                catchedClimbHandle = null;
+                //zap.velocity.x = 0.0f;
+                //zap.velocity.y = 0.0f;
+                //zap.setState(Zap.State.IN_AIR);
+                //setAction(Action.Jump);
+                //lastCatchedClimbHandle = catchedClimbHandle;
+                //catchedClimbHandle = null;
+                FallFromPlatform();
             }
             else
             {
@@ -3250,6 +3257,34 @@ public class ZapControllerNormal : ZapController
         }
 
         return 0;
+    }
+
+    bool ShouldFallFromPlatform()
+    {
+        if (!catchedClimbHandle) return false;
+        PlatformHandle platformHandle = catchedClimbHandle.GetComponent<PlatformHandle>();
+        if (!platformHandle) return false;
+        if (!platformHandle.CantClimb) return false;
+
+        if (zap.CurrentStateTime > platformHandle.MaxHangTime) return true;
+
+        if (Input.anyKeyDown) return true;
+        return false;
+    }
+
+    //bool AnyKeyPressed()
+    //{
+    //    //return 
+    //}
+
+    void FallFromPlatform()
+    {
+        zap.velocity.x = 0.0f;
+        zap.velocity.y = 0.0f;
+        zap.setState(Zap.State.IN_AIR);
+        setAction(Action.Jump);
+        lastCatchedClimbHandle = catchedClimbHandle;
+        catchedClimbHandle = null;
     }
 
     int Action_CLIMB_CLIMB()
