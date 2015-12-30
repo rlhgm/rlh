@@ -298,7 +298,7 @@ public class ZapControllerNormal : ZapController
 
             case Action.CrouchLeft:
             case Action.CrouchLeftBack:
-                if (Action_CROUCH_LEFTRIGHT(-1) != 0)
+                if (ActionCrouchLeftRight(-1) != 0)
                 {
                     return;
                 }
@@ -306,7 +306,7 @@ public class ZapControllerNormal : ZapController
 
             case Action.CrouchRight:
             case Action.CrouchRightBack:
-                if (Action_CROUCH_LEFTRIGHT(1) != 0)
+                if (ActionCrouchLeftRight(1) != 0)
                 {
                     return;
                 }
@@ -1788,7 +1788,7 @@ public class ZapControllerNormal : ZapController
                         setAction(Action.CrouchLeft);
                         //resetActionAndState();
                         zap.velocity.x = -CrouchSpeed;
-                        Action_CROUCH_LEFTRIGHT(-1);
+                        ActionCrouchLeftRight(-1);
                         wantGetUp = true;
                     }
                     else
@@ -1927,7 +1927,7 @@ public class ZapControllerNormal : ZapController
                         setAction(Action.CrouchRight);
                         //resetActionAndState();
                         zap.velocity.x = CrouchSpeed;
-                        Action_CROUCH_LEFTRIGHT(1);
+                        ActionCrouchLeftRight(1);
                         wantGetUp = true;
                     }
                     else
@@ -2641,7 +2641,7 @@ public class ZapControllerNormal : ZapController
         return 0;
     }
 
-    int Action_CROUCH_LEFTRIGHT(int dir)
+    int ActionCrouchLeftRight(int dir)
     {
         if (Input.GetKey(zap.keyDown))
         {

@@ -2556,7 +2556,12 @@ public class Zap : MonoBehaviour
                     //dist2 = rayOrigin2.y - hit2.point.y;
                     groundUnderFeet = hit2.collider.transform;
                     distToGround = hit2.distance; // dist1;
+                    
                     groundUnderAngle = Vector2.Angle(Vector2.up, hit2.normal);
+                    //Vector3 cross = Vector3.Cross(Vector2.up, hit2.normal);
+
+                    //print(cross);
+                    if (Vector3.Cross(Vector2.up, hit2.normal).z < 0) groundUnderAngle *= -1f;
                 }
                 //layerIdLastGroundTypeTouchedMask = 1 << hit1.collider.transform.gameObject.layer;
 
