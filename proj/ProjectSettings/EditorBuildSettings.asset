@@ -25,5 +25,7 @@ EditorBuildSettings:
     path: Assets/world2_test.unity
   - enabled: 0
     path: Assets/zap_vs_the_hosts_of_bats.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/2.1.unity
+  - enabled: 1
+    path: Assets/2.1c.unity

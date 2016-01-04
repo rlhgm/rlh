@@ -61,6 +61,7 @@
      <Compile Include="Assets\mp\Scripts\CameraCutSceneControlPoint.cs" />
      <Compile Include="Assets\mp\Scripts\CameraCutScenePath.cs" />
      <Compile Include="Assets\mp\Scripts\CameraResizer.cs" />
+     <Compile Include="Assets\mp\Scripts\CameraTargetOffseter.cs" />
      <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
      <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
      <Compile Include="Assets\mp\Scripts\CollapseableFootbridge.cs" />
@@ -69,6 +70,8 @@
      <Compile Include="Assets\mp\Scripts\Crocodile.cs" />
      <Compile Include="Assets\mp\Scripts\CrumblingStairs.cs" />
      <Compile Include="Assets\mp\Scripts\CutableBush.cs" />
+     <Compile Include="Assets\mp\Scripts\DestroyablePlatform.cs" />
+     <Compile Include="Assets\mp\Scripts\EndlessChasm.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\Bat.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\BatActivator.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\CreepingAIController.cs" />
@@ -93,6 +96,7 @@
      <Compile Include="Assets\mp\Scripts\Panther.cs" />
      <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />
      <Compile Include="Assets\mp\Scripts\Pickable.cs" />
+     <Compile Include="Assets\mp\Scripts\PlatformHandle.cs" />
      <Compile Include="Assets\mp\Scripts\PlaySounds.cs" />
      <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
      <Compile Include="Assets\mp\Scripts\RLHScene.cs" />
@@ -105,6 +109,7 @@
      <Compile Include="Assets\mp\Scripts\Snake.cs" />
      <Compile Include="Assets\mp\Scripts\SnakeCollider.cs" />
      <Compile Include="Assets\mp\Scripts\SoundManager.cs" />
+     <Compile Include="Assets\mp\Scripts\SpriteOpacityController.cs" />
      <Compile Include="Assets\mp\Scripts\SwingAlpha.cs" />
      <Compile Include="Assets\mp\Scripts\Twitchable.cs" />
      <Compile Include="Assets\mp\Scripts\Vector2Extension.cs" />
@@ -134,11 +139,17 @@
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
      <None Include="Assets\mp\mas\DraggedStone2.shader" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
