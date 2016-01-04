@@ -41,6 +41,8 @@ public class Zap : MonoBehaviour
     public bool playSound(AudioClip clip, bool forceStart = true)
     {
         if (!clip || (myAudioSource.isPlaying && !forceStart)) return false;
+        //myAudioSource.pitch = Random.Range(0.5f, 1.5f);
+        //myAudioSource.volume = Random.Range(0.25f, 1.0f);
         myAudioSource.PlayOneShot(clip);
         return true;
     }

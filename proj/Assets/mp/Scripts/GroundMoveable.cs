@@ -43,6 +43,7 @@ public class GroundMoveable : MonoBehaviour
     {
         if (!IsHanging()) return;
         physic.isKinematic = false;
+        SoundPlayer.Play(gameObject,"oderwanie");
     }
     public bool TryToBreakOff(Vector2 pullPoint)
     {
@@ -93,21 +94,21 @@ public class GroundMoveable : MonoBehaviour
         //boxCollider = GetComponent<BoxCollider2D>();
 
         if (GetComponent<PolygonCollider2D>())
-        { 
+        {
             PolygonCollider2D coll = GetComponent<PolygonCollider2D>();
             normals = new Vector2[coll.points.Length];
             handles = new Vector2[coll.points.Length];
             handlesActive = new bool[coll.points.Length];
             isClockwise = PolygonIsClockwise(coll.points);
-            UpdateWorldNormalsAndHandles(coll,IsHanging());
+            UpdateWorldNormalsAndHandles(coll, IsHanging());
         }
-        else if(GetComponent<BoxCollider2D>())
+        else if (GetComponent<BoxCollider2D>())
         {
             BoxCollider2D coll = GetComponent<BoxCollider2D>();
             normals = new Vector2[4];
             handles = new Vector2[4];
             handlesActive = new bool[4];
-            UpdateWorldNormalsAndHandles(coll,IsHanging());
+            UpdateWorldNormalsAndHandles(coll, IsHanging());
         }
         else
         {
@@ -118,7 +119,7 @@ public class GroundMoveable : MonoBehaviour
         //lastSleeping = false;
 
         isCollapsableFootbridge = GetComponent<CollapseableFootbridge>();
-        if( isCollapsableFootbridge && !IsHanging() )
+        if (isCollapsableFootbridge && !IsHanging())
         {
             Debug.LogError(name + " to ma byc kladka a nie jest kinetyczna. Przestawiam.");
             //Debug.Break();
@@ -139,15 +140,15 @@ public class GroundMoveable : MonoBehaviour
     {
         if (physic.IsSleeping())
         {
-            if( !lastSleeped)
+            if (!lastSleeped)
             {
                 if (GetComponent<PolygonCollider2D>())
                 {
-                    UpdateWorldNormalsAndHandles(GetComponent<PolygonCollider2D>(),false);
+                    UpdateWorldNormalsAndHandles(GetComponent<PolygonCollider2D>(), false);
                 }
                 else if (GetComponent<BoxCollider2D>())
                 {
-                    UpdateWorldNormalsAndHandles(GetComponent<BoxCollider2D>(),false);
+                    UpdateWorldNormalsAndHandles(GetComponent<BoxCollider2D>(), false);
                 }
                 else
                 {
@@ -157,7 +158,7 @@ public class GroundMoveable : MonoBehaviour
             DrawEdgesAndNormals();
         }
 
-        lastSleeped = physic.IsSleeping();        
+        lastSleeped = physic.IsSleeping();
     }
 
     public void SaveResets()
@@ -175,7 +176,7 @@ public class GroundMoveable : MonoBehaviour
         physic.velocity = resetVelocity;
         physic.angularVelocity = resetAngularVelocity;
         SetHanging(resetHanging);
-        if( GetComponent<CollapseableFootbridge>() )
+        if (GetComponent<CollapseableFootbridge>())
         {
             GetComponent<CollapseableFootbridge>().Reset();
         }
@@ -201,7 +202,7 @@ public class GroundMoveable : MonoBehaviour
         int i = 0;
         for (; i < coll.points.Length - 1; ++i)
         {
-            handles[i] = transform.TransformPoint(coll.points[i]);            
+            handles[i] = transform.TransformPoint(coll.points[i]);
             AddNormal(i, coll.points[i], coll.points[i + 1]);
         }
         handles[i] = transform.TransformPoint(coll.points[i]);
@@ -215,17 +216,17 @@ public class GroundMoveable : MonoBehaviour
         float btm = coll.offset.y - (coll.size.y * 0.5f);
         float left = coll.offset.x - (coll.size.x * 0.5f);
         float right = coll.offset.x + (coll.size.x * 0.5f);
-        
+
         handles[0] = new Vector2(left, btm);
         handles[1] = new Vector2(right, btm);
         handles[2] = new Vector2(right, top);
         handles[3] = new Vector2(left, top);
 
-        if(calculateFakeCenterOfMass)
+        if (calculateFakeCenterOfMass)
         {
             CalculateFakeCenterOfMass(handles);
         }
-        
+
         isClockwise = PolygonIsClockwise(handles);
 
         handles[0] = transform.TransformPoint(handles[0]);
@@ -288,7 +289,7 @@ public class GroundMoveable : MonoBehaviour
         pn2 = transform.TransformPoint(p2);
 
         Vector2 diff = pn2 - pn1;
-        normals[index] = diff.Rotate(isClockwise?90:-90).normalized * 0.25f;
+        normals[index] = diff.Rotate(isClockwise ? 90 : -90).normalized * 0.25f;
 
         //float wnAngle = Vector2.Angle(Vector2.up, normals[index]);
         //handlesActive[index] = Mathf.Abs(wnAngle) < 45.0f;
@@ -314,7 +315,7 @@ public class GroundMoveable : MonoBehaviour
         }
         DrawEdgeAndNormal(handles[i], handles[0], i);
     }
-    
+
     void DrawEdgeAndNormal(Vector2 p1, Vector2 p2, int i)
     {
         pn1 = p1 + (p2 - p1) * 0.5f;
@@ -331,7 +332,7 @@ public class GroundMoveable : MonoBehaviour
             Debug.DrawLine(p1, p2, Color.blue);
         }
 
-        if( handlesActive[i])
+        if (handlesActive[i])
         {
             Debug.DrawLine(handles[i] + new Vector2(-0.1f, -0.1f), handles[i] + new Vector2(0.1f, 0.1f), Color.red);
             Debug.DrawLine(handles[i] + new Vector2(-0.1f, 0.1f), handles[i] + new Vector2(0.1f, -0.1f), Color.red);
@@ -390,11 +391,11 @@ public class GroundMoveable : MonoBehaviour
         //    //            return true;
         //    //        }
 
-        for( int i = 0; i < handles.Length; ++i)
+        for (int i = 0; i < handles.Length; ++i)
         {
             if (!handlesActive[i]) continue;
             handle = handles[i];
-            if( (handle-worldTouch).magnitude < maxDist )
+            if ((handle - worldTouch).magnitude < maxDist)
             {
                 return true;
             }
