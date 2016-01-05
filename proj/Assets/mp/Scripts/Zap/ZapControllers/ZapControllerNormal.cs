@@ -4763,6 +4763,65 @@ public class ZapControllerNormal : ZapController
         }
     }
 
+    void StartPullUpFromBelly3(Transform bellyHandler, Vector3 _handle)
+    {
+        //catchedClimbHandle = hit.collider.gameObject;
+
+        //Vector3 handlePos = _handle; //catchedClimbHandle.transform.position;
+        //Vector3 newPos = new Vector3();
+        //newPos.x = handlePos.x - zap.getMyHalfWidth();
+        //newPos.y = handlePos.y - 1.75f; //myHeight;
+
+        //zap.velocity.x = 0.0f;
+        //zap.velocity.y = 0.0f;
+
+        //climbBeforePos = transform.position;
+        //climbAfterPos = newPos;
+        //climbAfterPos2 = handlePos;
+        //climbAfterPos2.x += 0.1f;
+        //climbDistToClimb = climbAfterPos - climbBeforePos;
+        //climbToJumpDuration = climbDistToClimb.magnitude * _speed;
+
+        ////canPullUp = canClimbPullUp2();
+        ////if (canPullUp)
+        ////{
+        ////}
+
+        //zap.setState(Zap.State.CLIMB);
+        //setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
+        //lastFrameHande = false;
+        //return true;
+
+        catchedClimbHandle = bellyHandler.gameObject;
+
+        Vector3 handlePos = _handle;// catchedClimbHandle.transform.position;
+        Vector3 newPos = new Vector3();
+        newPos.x = handlePos.x - zap.getMyHalfWidth();// + 0.2f;
+        newPos.y = handlePos.y - 1.75f; //myHeight;
+
+        climbBeforePos = transform.position;
+        climbAfterPos2 = handlePos;
+        climbAfterPos2.x += (zap.dir2() * 0.1f);
+        climbDistToClimb = climbAfterPos2 - climbBeforePos;
+    }
+
+    void StartPullUpFromBelly4(/*Transform bellyHandler*/)
+    {
+        if (catchedClimbHandle.tag == "CrumblingStairs")
+        {
+            CatchCrumblingStairs();
+        }
+        else
+        {
+            zap.velocity.x = 0.0f;
+            zap.velocity.y = 0.0f;
+
+            zap.setState(Zap.State.CLIMB);
+            setAction(Action.ClimbBelly);
+            lastFrameHande = false;
+        }
+    }
+
     bool tryCatchHandle(bool fromGround = false)
     {
         //bool catchByBelly = false;
@@ -4864,11 +4923,11 @@ public class ZapControllerNormal : ZapController
             {
                 if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
-                    StartPullUpFromBelly1(hit.transform);
+                    StartPullUpFromBelly3(hit.transform,_handle);
                     _cpu = canClimbPullUp2();
                     if (_cpu)
                     {
-                        StartPullUpFromBelly2();
+                        StartPullUpFromBelly4();
                         return true;
                     }
                     else
@@ -5038,15 +5097,17 @@ public class ZapControllerNormal : ZapController
             {
                 if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
-
-                }
-
-                StartPullUpFromBelly1(hit.transform);
-                _cpu = canClimbPullUp2();
-                if (_cpu)
-                {
-                    StartPullUpFromBelly2();
-                    return true;
+                    StartPullUpFromBelly3(hit.transform,_handle);
+                    _cpu = canClimbPullUp2();
+                    if (_cpu)
+                    {
+                        StartPullUpFromBelly4();
+                        return true;
+                    }
+                    else
+                    {
+                        catchedClimbHandle = null;
+                    }
                 }
                 else
                 {
