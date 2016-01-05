@@ -41174,11 +41174,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 490556, guid: c7b5368a52841ce4aae622ee13b18037, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .0871557519
+      value: .224951074
       objectReference: {fileID: 0}
     - target: {fileID: 490556, guid: c7b5368a52841ce4aae622ee13b18037, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .99619472
+      value: .974370062
       objectReference: {fileID: 0}
     - target: {fileID: 490556, guid: c7b5368a52841ce4aae622ee13b18037, type: 2}
       propertyPath: m_RootOrder

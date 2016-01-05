@@ -74,6 +74,8 @@ public class ZapControllerNormal : ZapController
     public float PullUpDuration = 0.7f;
     public float PullDownDuration = 0.7f;
 
+    public float MaxPlatformAngle = 15f;
+
     public AudioClip ropeCatchSound = null;
     public AudioClip ropeSwingSound = null;
     public AudioClip mountCatchSound = null;
@@ -5363,7 +5365,7 @@ public class ZapControllerNormal : ZapController
         if (!catchedClimbHandle)
             return false;
 
-        float tgAlpha = Mathf.Tan(Mathf.Deg2Rad * 45.0f);
+        float tgAlpha = Mathf.Tan(Mathf.Deg2Rad * MaxPlatformAngle);
 
         Vector2 rayOrigin = climbAfterPos2; // catchedClimbHandle.transform.position;
         rayOrigin.y += tgAlpha * 0.5f; //  0.14f;
