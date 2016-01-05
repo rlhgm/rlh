@@ -38,6 +38,16 @@ public class Zap : MonoBehaviour
     AudioSource myAudioSource = null;
     AudioSource myAudioSourceLooped = null;
 
+    public void NewsFromAnimator(AnimationCallback.Type type, string message)
+    {
+        switch(type)
+        {
+            case AnimationCallback.Type.PlaySound:
+                print("NewsFromAnimator : " + type + " " + message);
+                break;
+        }
+    }
+
     public bool playSound(AudioClip clip, bool forceStart = true)
     {
         if (!clip || (myAudioSource.isPlaying && !forceStart)) return false;
@@ -226,6 +236,11 @@ public class Zap : MonoBehaviour
         for (int b = 0; b < pss.Length; ++b)
         {
             pss[b].zap = this;
+        }
+        AnimationCallback[] acs = animatorBody.GetBehaviours<AnimationCallback>();
+        for (int b = 0; b < acs.Length; ++b)
+        {
+            acs[b].zap = this;
         }
 
         sensorLeft1 = transform.Find("sensorLeft1").transform;
