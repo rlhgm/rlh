@@ -7,3 +7,8 @@ using System.Collections.Generic;
 //{
 //    public void IReset();
 //}
+
+interface IGResetable
+{
+    void GReset();
+}

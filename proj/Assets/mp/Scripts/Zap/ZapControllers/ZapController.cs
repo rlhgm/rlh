@@ -379,6 +379,13 @@ public class ZapController : ScriptableObject
                 //}
             }
 
+            IKnifeCutable otherKnifeCutable = coll.GetComponent<IKnifeCutable>();
+            if( otherKnifeCutable != null )
+            {
+                lastCuttedObjects.Add(coll.gameObject);
+                otherKnifeCutable.Cut();
+                continue;
+            }
         }
     }
 

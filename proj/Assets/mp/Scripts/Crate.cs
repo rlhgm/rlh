@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Crate : MonoBehaviour, IKnifeCutable
+public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
 {
     public bool Destroyable = true;
 
@@ -17,13 +17,25 @@ public class Crate : MonoBehaviour, IKnifeCutable
 
     public void Cut()
     {
-        if( !Destroyable )
-        {
+        print("Crate::Cut()");
 
+        if( Destroyable )
+        {
+            gameObject.SetActive(false);
         }
         else
         {
 
         }
+    }
+
+    public void GCacheResetData()
+    {
+
+    }
+
+    public void GReset()
+    {
+        gameObject.SetActive(true);
     }
 }
