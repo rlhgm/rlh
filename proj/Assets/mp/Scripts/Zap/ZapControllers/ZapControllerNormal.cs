@@ -4862,12 +4862,19 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.BoxCast(ro, zap.handlerBellyRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
-                StartPullUpFromBelly1(hit.transform);
-                _cpu = canClimbPullUp2();
-                if (_cpu)
+                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
-                    StartPullUpFromBelly2();
-                    return true;
+                    StartPullUpFromBelly1(hit.transform);
+                    _cpu = canClimbPullUp2();
+                    if (_cpu)
+                    {
+                        StartPullUpFromBelly2();
+                        return true;
+                    }
+                    else
+                    {
+                        catchedClimbHandle = null;
+                    }
                 }
                 else
                 {
@@ -5016,31 +5023,24 @@ public class ZapControllerNormal : ZapController
                     zap.setState(Zap.State.CLIMB);
                     setAction(Action.CLIMB_JUMP_TO_CATCH, fromGround ? 1 : 0);
                     lastFrameHande = false;
-
-                    //zap.velocity.x = 0.0f;
-                    //zap.velocity.y = 0.0f;
-
-                    //climbBeforePos = transform.position;
-                    //climbAfterPos = newPos;
-                    //climbDistToClimb = climbAfterPos - climbBeforePos;
-                    //climbToJumpDuration = climbDistToClimb.magnitude * _speed;
-
-                    //zap.setState(Zap.State.CLIMB);
-                    //setAction(Action.CLIMB_JUMP_TO_CATCH);
-                    //lastFrameHande = false;
-
+                    
                     return true;
                 }
             }
 
             // łapanie sie kamieni brzuchem
             Vector2 _handle = new Vector2();
-            Vector2 ro = zap.handlerBellyRight.position;
+            Vector2 ro = zap.handlerBellyLeft.position;
             ro.x -= 0.15f;
 
             hit = Physics2D.BoxCast(ro, zap.handlerBellyLeftSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
+                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                {
+
+                }
+
                 StartPullUpFromBelly1(hit.transform);
                 _cpu = canClimbPullUp2();
                 if (_cpu)
