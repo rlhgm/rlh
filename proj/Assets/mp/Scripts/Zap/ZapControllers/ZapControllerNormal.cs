@@ -5363,8 +5363,10 @@ public class ZapControllerNormal : ZapController
         if (!catchedClimbHandle)
             return false;
 
+        float tgAlpha = Mathf.Tan(Mathf.Deg2Rad * 45.0f);
+
         Vector2 rayOrigin = climbAfterPos2; // catchedClimbHandle.transform.position;
-        rayOrigin.y += 0.14f;
+        rayOrigin.y += tgAlpha * 0.5f; //  0.14f;
 
         //if (zap.dir() == Vector2.right) rayOrigin.x += 0.5f;
         //else rayOrigin.x -= 0.5f;
@@ -5374,9 +5376,10 @@ public class ZapControllerNormal : ZapController
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
         if (hit.collider) return false;
 
-        rayOrigin.x -= 0.5f;
+        rayOrigin.x -= zap.faceRight() ? 0.6f : 0.4f;
         hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
         if (hit.collider) return false;
+
 
         rayOrigin.x += 1.0f;
         hit = Physics2D.Raycast(rayOrigin, Vector2.up, 0.825f, zap.layerIdGroundAllMask);
