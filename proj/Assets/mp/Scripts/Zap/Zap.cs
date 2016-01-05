@@ -44,6 +44,7 @@ public class Zap : MonoBehaviour
         {
             case AnimationCallback.Type.PlaySound:
                 print("NewsFromAnimator : " + type + " " + message);
+                SoundPlayer.Play(gameObject, message + groundUnder.name);
                 break;
         }
     }

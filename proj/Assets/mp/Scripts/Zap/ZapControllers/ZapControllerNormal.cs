@@ -4932,7 +4932,9 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.BoxCast(ro, zap.handlerBellyRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
-                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                //if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                GroundMoveable _gm_ = hit.collider.GetComponent<GroundMoveable>();
+                if (_gm_ && _gm_.handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     StartPullUpFromBelly3(hit.transform,_handle);
                     _cpu = canClimbPullUp2();
@@ -4966,7 +4968,9 @@ public class ZapControllerNormal : ZapController
             if (hit.collider)
             {
                 ro.x += 0.4f;
-                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                //if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                GroundMoveable _gm_ = hit.collider.GetComponent<GroundMoveable>();
+                if (_gm_ && _gm_.handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     //Debug.Log(_handle);
                     // tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
@@ -5106,7 +5110,8 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.BoxCast(ro, zap.handlerBellyLeftSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundMoveableMask);
             if (hit.collider)
             {
-                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                GroundMoveable _gm_ = hit.collider.GetComponent<GroundMoveable>();
+                if (_gm_ && _gm_.handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     StartPullUpFromBelly3(hit.transform,_handle);
                     _cpu = canClimbPullUp2();
@@ -5140,7 +5145,9 @@ public class ZapControllerNormal : ZapController
             if (hit.collider)
             {
                 ro.x -= 0.4f;
-                if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                //if (hit.collider.GetComponent<GroundMoveable>().handleToPullDownTouched(zap.dir(), ro, ref _handle))
+                GroundMoveable _gm_ = hit.collider.GetComponent<GroundMoveable>();
+                if (_gm_ && _gm_.handleToPullDownTouched(zap.dir(), ro, ref _handle))
                 {
                     //Debug.Log(_handle);
                     // tu takie zabezpieczenie dodatkowe aby nie lapal sie od razu tego co ma pod reka
