@@ -975,19 +975,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2015612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: orthographic size
-      value: 4.70833349
+      value: 4.70138884
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.48672569
+      value: 1.48892176
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.48672569
+      value: 1.48892176
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.48672569
+      value: 1.48892176
       objectReference: {fileID: 0}
     - target: {fileID: 8177612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_Enabled
@@ -1529,6 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &60194676
 BoxCollider2D:
@@ -1932,64 +1933,6 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 299355da623b6ad44a75d9ec941605d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!1001 &64551582
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1600437583}
-    m_Modifications:
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -166.389999
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 28.0799999
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_RootOrder
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 453016, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453016, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 133872, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_Name
-      value: 1x1 (19)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5084442, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &65288134
 Prefab:
   m_ObjectHideFlags: 0
@@ -8747,6 +8690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &428812758
 BoxCollider2D:
@@ -9783,6 +9727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &479674443
 BoxCollider2D:
@@ -13108,7 +13053,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_RootOrder
-      value: 66
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_LocalScale.x
@@ -13134,6 +13079,11 @@ Prefab:
       propertyPath: toBreakOffDist
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11499092, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
+      propertyPath: soundsSets
+      value: 
+      objectReference: {fileID: 11400000, guid: fbe7e0cde145d134eb81fb2a83c3d30c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
   m_IsPrefabParent: 0
@@ -14835,6 +14785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &783281405
 BoxCollider2D:
@@ -16709,6 +16660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &858735003
 BoxCollider2D:
@@ -18342,10 +18294,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e26509290810bc3468044bb0a07521fc, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &943063942 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
-  m_PrefabInternal: {fileID: 64551582}
 --- !u!1001 &943850361
 Prefab:
   m_ObjectHideFlags: 0
@@ -19297,6 +19245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &982583212
 BoxCollider2D:
@@ -20858,6 +20807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1022861581
 BoxCollider2D:
@@ -21528,6 +21478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1072368212
 BoxCollider2D:
@@ -21742,6 +21693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1102587245
 BoxCollider2D:
@@ -23944,6 +23896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1190553573
 BoxCollider2D:
@@ -27987,6 +27940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1397109883
 BoxCollider2D:
@@ -28584,7 +28538,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_RootOrder
-      value: 68
+      value: 67
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_LocalScale.x
@@ -28905,7 +28859,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: m_RootOrder
-      value: 67
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 133872, guid: 49bff6ed08ef75f4e8c6e91bf0d636fd, type: 2}
       propertyPath: m_Name
@@ -30051,34 +30005,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 6122142, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: m_Size.y
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 489022, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -.400000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 489022, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 494494, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6176728, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: m_Size.y
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: jumpSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9526c3f17de4de642888d5b55ccc7206, type: 3}
-    - target: {fileID: 11447002, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
-      propertyPath: jumpSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 4cfec2b82d1e6ac4ca4c6c40cd93ec4c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
   m_IsPrefabParent: 0
@@ -31318,6 +31244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1571091459
 BoxCollider2D:
@@ -31826,7 +31753,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &1582761644
+--- !u!114 &1582761642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -31834,15 +31761,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1582761640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fbe698e50fbb684cb5907879a421a31, type: 3}
+  m_Script: {fileID: 11500000, guid: 0392fd7ced4b0154b98d3b7d709d94ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyTag: oderwanie
-  AudioClips:
-  - {fileID: 8300000, guid: 8b5cb264c6cf65944b4d2bfdedf9e3c8, type: 3}
-  - {fileID: 8300000, guid: c8988bc04c153904b94684b2f1ec29e3, type: 3}
-  MinMaxPitch: {x: 1, y: 1}
-  MinMaxVolume: {x: 1, y: 1}
+  soundsSets: {fileID: 11400000, guid: fbe7e0cde145d134eb81fb2a83c3d30c, type: 2}
 --- !u!4 &1586587593 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
@@ -32257,7 +32179,6 @@ Transform:
   - {fileID: 1608269066}
   - {fileID: 697605802}
   - {fileID: 518128865}
-  - {fileID: 943063942}
   - {fileID: 1512702377}
   - {fileID: 88242447}
   - {fileID: 1418974366}
@@ -35137,6 +35058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1774253065
 BoxCollider2D:
@@ -36507,6 +36429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &1823707872
 BoxCollider2D:
@@ -37390,6 +37313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!1001 &1859768633
 Prefab:
@@ -37631,7 +37555,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
       propertyPath: m_RootOrder
-      value: 69
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 453016, guid: 4b91b7022b2700d4fb695cf72e2e79b3, type: 2}
       propertyPath: m_LocalPosition.x
@@ -41008,6 +40932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!212 &2038571740
 SpriteRenderer:
@@ -41119,6 +41044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &2040630560
 BoxCollider2D:
@@ -42222,6 +42148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae19b762ac03b540842e04aead0fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsSets: {fileID: 0}
   toBreakOffDist: 1
 --- !u!61 &2098004499
 BoxCollider2D:

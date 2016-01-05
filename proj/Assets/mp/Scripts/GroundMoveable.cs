@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GroundMoveable : MonoBehaviour
 {
+    public SoundSets soundsSets;
+
     Vector2 resetPosition;
     float resetRotation;
     Vector2 resetVelocity;
