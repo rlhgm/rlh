@@ -476,6 +476,15 @@ public class ZapControllerNormal : ZapController
                                     Vector3 zapHandpos = zap.transform.position;
                                     zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
                                     handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+                                    //Vector3 _pointToCheck = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+                                    //bool res = handledMountMoveable.LocalPointHandable(_pointToCheck);
+                                    //if( res )
+                                    //{
+                                    //    //return hit.collider.transform;
+                                    //    zap.climbingWallID = zap.layerIdMountMask;
+                                    //    setActionMountIdle();
+                                    //    return;
+                                    //}
                                     //Debug.Log(handledMountMoveablePosition);
                                 }
                                 zap.climbingWallID = zap.layerIdMountMask;

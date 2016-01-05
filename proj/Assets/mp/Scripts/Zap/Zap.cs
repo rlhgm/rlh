@@ -2669,9 +2669,27 @@ public class Zap : MonoBehaviour
             return null;
         else
         {
-            if (hit.collider.GetComponent<MountMoveable>())
+            MountMoveable _mm = hit.collider.GetComponent<MountMoveable>();
+            if (_mm)
             {
-                return hit.collider.transform;
+                //Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
+                ////pointToCheck += distToMount;
+                //bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
+                ////if (!res)
+
+                //Vector3 zapHandpos = zap.transform.position;
+                //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+
+                Vector3 zapHandpos = transform.position;
+                zapHandpos.y += (sensorLeft3.transform.localPosition.y + 0.3f);
+                Vector3 _pointToCheck = _mm.transform.InverseTransformPoint(zapHandpos);
+                _pointToCheck = _mm.ConvertToPointSize(_pointToCheck);
+                bool res = _mm.LocalPointHandable(_pointToCheck);
+                if( res )
+                {
+                    return hit.collider.transform;
+                }
             }
         }
         hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
