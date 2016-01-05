@@ -311,6 +311,7 @@ public class Zap : MonoBehaviour
     }
 
     GroundMoveable[] allStones;
+    Crate[] allCrates;
 
     void Start()
     {
@@ -376,6 +377,17 @@ public class Zap : MonoBehaviour
         //print(allStones.Length);
 
         //zapControllerSuckByBat.resetSequenceKeys();
+
+        //IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
+        //foreach (IGResetable resetable in resetables)
+        //{
+        //    resetable.GCacheResetData();
+        //}
+        allCrates = FindObjectsOfType(typeof(Crate)) as Crate[];
+        foreach (Crate resetable in allCrates)
+        {
+            resetable.GCacheResetData();
+        }
     }
 
     public void chooseController(ZapController newController)
@@ -746,8 +758,13 @@ public class Zap : MonoBehaviour
             Destroy(bird.gameObject);
         }
 
-        IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
-        foreach (IGResetable resetable in resetables)
+        //IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
+        //foreach (IGResetable resetable in resetables)
+        //{
+        //    resetable.GReset();
+        //}
+        //Crate[] resetables = FindObjectsOfType(typeof(Crate)) as Crate[];
+        foreach (Crate resetable in allCrates)
         {
             resetable.GReset();
         }
@@ -1409,6 +1426,16 @@ public class Zap : MonoBehaviour
                 foreach (SmashStoneActivator smashStoneActivator in smashStoneActivators)
                 {
                     smashStoneActivator.checkPointReached();
+                }
+                //IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
+                //foreach (IGResetable resetable in resetables)
+                //{
+                //    resetable.GCacheResetData();
+                //}
+                //Crate[] resetables = FindObjectsOfType(typeof(Crate)) as Crate[];
+                foreach (Crate resetable in allCrates)
+                {
+                    resetable.GCacheResetData();
                 }
             }
         }

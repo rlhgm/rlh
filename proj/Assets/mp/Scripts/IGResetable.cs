@@ -8,7 +8,7 @@ using System.Collections.Generic;
 //    public void IReset();
 //}
 
-interface IGResetable
+public interface IGResetable
 {
     void GCacheResetData();
     void GReset();
