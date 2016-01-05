@@ -4854,9 +4854,29 @@ public class ZapControllerNormal : ZapController
                 }
             }
 
-
+            // łapanie sie kamieni brzuchem
             Vector2 _handle = new Vector2();
-            Vector2 ro = transform.position;
+            Vector2 ro = zap.handlerBellyRight.position;
+            ro.x += 0.15f;
+            
+            hit = Physics2D.BoxCast(ro, zap.handlerBellyRightSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundMoveableMask);
+            if (hit.collider)
+            {
+                StartPullUpFromBelly1(hit.transform);
+                _cpu = canClimbPullUp2();
+                if (_cpu)
+                {
+                    StartPullUpFromBelly2();
+                    return true;
+                }
+                else
+                {
+                    catchedClimbHandle = null;
+                }
+            }
+
+            _handle = new Vector2();
+            ro = transform.position;
             if (fromGround)
             {
                 ro.y += 2f;
@@ -5013,8 +5033,29 @@ public class ZapControllerNormal : ZapController
                 }
             }
 
+            // łapanie sie kamieni brzuchem
             Vector2 _handle = new Vector2();
-            Vector2 ro = transform.position;
+            Vector2 ro = zap.handlerBellyRight.position;
+            ro.x -= 0.15f;
+
+            hit = Physics2D.BoxCast(ro, zap.handlerBellyLeftSize, 0.0f, Vector2.left, 0.0f, zap.layerIdGroundMoveableMask);
+            if (hit.collider)
+            {
+                StartPullUpFromBelly1(hit.transform);
+                _cpu = canClimbPullUp2();
+                if (_cpu)
+                {
+                    StartPullUpFromBelly2();
+                    return true;
+                }
+                else
+                {
+                    catchedClimbHandle = null;
+                }
+            }
+
+            _handle = new Vector2();
+            ro = transform.position;
             if (fromGround)
             {
                 ro.y += 2f;
