@@ -745,6 +745,12 @@ public class Zap : MonoBehaviour
         {
             Destroy(bird.gameObject);
         }
+
+        IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
+        foreach (IGResetable resetable in resetables)
+        {
+            resetable.GReset();
+        }
     }
 
     public CheckPoint LastTouchedCheckPoint

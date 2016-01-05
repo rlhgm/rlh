@@ -8,6 +8,8 @@ public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
     // Use this for initialization
     void Start()
     {
+        //startPosition = transform.position;
+        //startRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -17,7 +19,7 @@ public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
 
     public void Cut()
     {
-        print("Crate::Cut()");
+        //print("Crate::Cut()");
 
         if( Destroyable )
         {
@@ -28,14 +30,22 @@ public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
 
         }
     }
+    
+    Vector3 startPosition;
+    Quaternion startRotation;
+    bool startActive;
 
     public void GCacheResetData()
     {
-
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        startActive = gameObject.activeSelf;
     }
 
     public void GReset()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(startActive);
+        transform.position = startPosition;
+        transform.rotation = startRotation;
     }
 }
