@@ -30,6 +30,7 @@ TagManager:
   - Bat
   - KillerPhysic2
   - CrumblingStairs
+  - CameraShaker
   layers:
   - Default
   - TransparentFX

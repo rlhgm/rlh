@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -86,6 +84,7 @@
     <Compile Include="Assets\mp\Scripts\CameraCutSceneControlPoint.cs" />
     <Compile Include="Assets\mp\Scripts\CameraCutScenePath.cs" />
     <Compile Include="Assets\mp\Scripts\CameraResizer.cs" />
+    <Compile Include="Assets\mp\Scripts\CameraShaker.cs" />
     <Compile Include="Assets\mp\Scripts\CameraTargetOffseter.cs" />
     <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
     <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
@@ -112,8 +111,8 @@
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
     <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
-    <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
     <Compile Include="Assets\mp\Scripts\IGResetable.cs" />
+    <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
     <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
     <Compile Include="Assets\mp\Scripts\Line.cs" />
     <Compile Include="Assets\mp\Scripts\MountMoveable.cs" />
