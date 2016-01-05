@@ -35,3 +35,13 @@ Tzn. jak jest ustawione CollapseDuration na 2 sek. to zap musi jednorazowo przeb
 CollapseParticles - przeciagamy obiekt particli z projektu ktore uruchomią się w momencie zniknięcia klimersow w miejscu gdzie zap ma łapy
 
 ===================================================================
+CameraShaker:
+===================================================================
+pushnąlem wlasnie Prefab: CameraShaker 
+- taki trigger ze jak zap w niego wejdzie to camera się trzesie dopóki w nim (trigerze) zap jest. 
+parametry:
+ - amplituda,
+ - predkosc i 
+ - fadeoutduration. to ostatnie oznacza jak długo po wyjściu z triggera cichną wstrząsy (wartość mniejsza od 0 oznacza ze natychmiast). 
+ Może się na cos przyda.
+
