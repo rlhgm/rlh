@@ -5316,7 +5316,9 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.Raycast(zap.sensorDown2.position, -Vector2.right, ClimbPullDownRange, zap.layerIdGroundHandlesMask);
             if (hit.collider)
             {
-                if (Physics2D.Raycast(hit.collider.gameObject.transform.position, -Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
+                Vector2 ro = hit.collider.gameObject.transform.position;
+                ro.x -= 0.1f;
+                if (Physics2D.Raycast(ro, -Vector2.right, 0.4f, zap.layerIdGroundMask).collider == null)
                 {
                     climbAfterPos2 = hit.collider.transform.position;
                     return hit.collider.gameObject;
@@ -5330,8 +5332,9 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.Raycast(zap.sensorDown2.position, Vector2.right, ClimbPullDownRange, zap.layerIdGroundHandlesMask);
             if (hit.collider)
             {
-
-                if (Physics2D.Raycast(hit.collider.gameObject.transform.position, Vector2.right, 0.5f, zap.layerIdGroundMask).collider == null)
+                Vector2 ro = hit.collider.gameObject.transform.position;
+                ro.x += 0.1f;
+                if (Physics2D.Raycast(ro, Vector2.right, 0.4f, zap.layerIdGroundMask).collider == null)
                 {
                     climbAfterPos2 = hit.collider.transform.position;
                     return hit.collider.gameObject;
