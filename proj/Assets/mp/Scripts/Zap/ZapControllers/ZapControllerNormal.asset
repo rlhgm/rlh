@@ -44,7 +44,7 @@ MonoBehaviour:
   GravityForce: -20
   MaxSpeedY: 15
   HardLandingHeight: 2
-  VeryHardLandingHeight: 6
+  VeryHardLandingHeight: 4.5
   MaxFallDistToCatch: 999
   RopeSwingForce: 4400
   RopeClimbSpeedUp: 1.5
