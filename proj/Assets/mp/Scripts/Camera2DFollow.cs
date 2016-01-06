@@ -58,14 +58,19 @@ public class Camera2DFollow : MonoBehaviour
                 currentCutSceneControlPoint = currentCutSceneControlPoint.next;
                 if (!currentCutSceneControlPoint)
                 {
+                    applyShake(Time.deltaTime);
+                    updateBackgrounds();
+                    updateParallaxeds();
+
                     return true;
                 }
             }
         }
 
+        applyShake(Time.deltaTime);
         updateBackgrounds();
         updateParallaxeds();
-
+        
         return false;
     } 
     bool MoveToNextControlPoint(ref float time)
