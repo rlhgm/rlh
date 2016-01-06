@@ -82,11 +82,13 @@ public class Camera2DFollow : MonoBehaviour
             float restTime = (time * tncpDist) / moveDist;
             time = restTime;
             transform.position = new Vector3(currentTargetPos.x, currentTargetPos.y, transform.position.z);
+            //print("cp osiagniety");
             return true;
         }
         else
         {
-            Vector2 _md = toNextCP* moveDist;
+            //print(time);
+            Vector2 _md = toNextCP.normalized * moveDist;
             Vector3 newPos = transform.position;
             newPos.x += _md.x;
             newPos.y += _md.y;

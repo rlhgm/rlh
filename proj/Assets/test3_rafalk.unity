@@ -975,19 +975,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2015612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: orthographic size
-      value: 6.01041651
+      value: 4.70833349
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.16464472
+      value: 1.48672569
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.16464472
+      value: 1.48672569
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.16464472
+      value: 1.48672569
       objectReference: {fileID: 0}
     - target: {fileID: 8177612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_Enabled
@@ -14106,6 +14106,60 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 442388, guid: 0954a134b8e6cef4ba73bcc458efcecf, type: 2}
   m_PrefabInternal: {fileID: 763046131}
+--- !u!1001 &735299153
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1834372296}
+    m_Modifications:
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -130.979996
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 22.7099991
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 108386, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: m_Name
+      value: CutSceneCameraPassingControlPoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497370, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: CameraSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &735299154 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 408194, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+  m_PrefabInternal: {fileID: 735299153}
 --- !u!1001 &740719177
 Prefab:
   m_ObjectHideFlags: 0
@@ -21611,6 +21665,12 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 469602, guid: ba714e6fedf1b484c9e7adb5d58f9805, type: 2}
   m_PrefabInternal: {fileID: 2045362639}
+--- !u!114 &1091483309 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11497370, guid: e675d5086d40a1a4aab5b07088e1ed9b,
+    type: 2}
+  m_PrefabInternal: {fileID: 735299153}
+  m_Script: {fileID: 11500000, guid: ff9bbfac8a704c147b7754a434541b52, type: 3}
 --- !u!1001 &1092102582
 Prefab:
   m_ObjectHideFlags: 0
@@ -34968,6 +35028,10 @@ Prefab:
       propertyPath: next
       value: 
       objectReference: {fileID: 2083000673}
+    - target: {fileID: 11497370, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: CameraSpeed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
   m_IsPrefabParent: 0
@@ -36641,6 +36705,7 @@ Transform:
   - {fileID: 1194779698}
   - {fileID: 533371479}
   - {fileID: 173439609}
+  - {fileID: 735299154}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &1838452731 stripped
@@ -41631,6 +41696,14 @@ Prefab:
       propertyPath: m_Name
       value: CutSceneCameraPassingControlPoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11497370, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: CameraSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497370, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
+      propertyPath: next
+      value: 
+      objectReference: {fileID: 1091483309}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e675d5086d40a1a4aab5b07088e1ed9b, type: 2}
   m_IsPrefabParent: 0
