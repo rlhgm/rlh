@@ -1,4 +1,47 @@
-﻿do jutra zrobie () :
+﻿9) przejazdy kamery (jutro)
+) show/hide physics podłączyć wszystkie obiekty
+) zapadajace sie schody robia pelny obrot jak zap zeskoczy z nich w max. polozeniu
+) climbersy na gridzie
+) restarty wszystkiego - schody, platformy, wrogowie itp
+) nietoperze od razu gina + ) walka kierunkowa + 13) poprawa walki ze szczurami - nie dziala pod katem i w przykucu (jutro)
+
+
+6) muzyka + dzięki //jak tylko bedziesz mial rozpiske jak to zrobic
+23) czas po spadku z platformy do odbicia sie z niczego
+
+14) łamiący się posąg - przed wigilią - spada na niego zyrandol
+32) bezkolizyjne platformy rozwalalne 190,-127.7
+30) deski fizyczne rozwalane kamnieniem - JEST ALE TEMAT DO ROZPYTANIA JESZCZE 
+29) ragdoll
+11) wiązka GG (po niedzieli)
+21) blokowanie sie elementu ukladanki - kamienia ma miejscu docelowym (particle, dzwiek)
+
+//mechanika, ale mniej wazna
+20) nie blokowanie sie zapa na scianach - zostaje w pushu po puszczeniu strzalki od chodzenia
+33) jak lazi po klimersach to moze wejsc w fizyke a co gorsze przesuwa wszystko co nie jest kinetyczne
+
+//polishe
+35) particle i dzwiek jak kamienie w cos uderzaja
+10) particle na ciecie na cos nozem - przed wigilia
+34) interface
+
+//nie do konca wazne
+17) interakcja szczurów z kamieniami/skrzynkami - po sylwestrze
+26) normale niektorych kamieni sa obrocone
+12) drugi plan - kamienie kolidujace w momenicie puszczenia ich gravity gunem (po niedzieli)
+16) bezdomny nietoperz
+22) https://www.youtube.com/watch?v=BvnwLLXHabg&feature=youtu.be&t=2m43s
+
+// ZADANIA OD CZARKA:
+40) Obsuwające sie climbersy
+) ratowanie zaklinowanych kamieni
+
+// (rafałk) i jeszcze z rozmów z Czarkiem
+) predkosc podazania kamery za zapem - 1) niezalezne od fps 2) jak zostanie przestawiony target camery to jest za szybko (dodac parametr)
+
+=============================================================================================================================================================================
+
+do jutra zrobie () :
 - prefab skrzynki - kamienie, których nie można rozwalić i złapać GG - powinno byc
 - killerphysics2 - zabija powyżej jakiejś szybkości - raczej nie zrobie
 - winda - napisy po naciśnięciu W w zależności od ilości kluczy - mocno uproszczone
@@ -123,3 +166,6 @@ aby nie bylo dzikiego przeskoku przy łapaniu sie climbersow trzeba zrobic tak z
 34) interface
 35) particle i dzwiek jak kamienie w cos uderzaja
 36) zyrandol po uruchomieniu drga a raczej lina na której wisi
+
+
+===============================================================================================================================================
