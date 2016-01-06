@@ -31,7 +31,8 @@ public class CutSceneCameraPassing : MonoBehaviour
         //print("CutSceneCameraPassing::OnTriggerEnter2D");
         //RLHScene.Instance.Zap.CameraTargetOffset = CameraOffset;
 
-        Vector3 startPosition = RLHScene.Instance.CamController.myCamera.transform.position;
+        //Vector3 startPosition = RLHScene.Instance.CamController.myCamera.transform.position;
+        RLHScene.Instance.CamController.StartCutScene(this);
     }
 
     //void OnTriggerExit2D()

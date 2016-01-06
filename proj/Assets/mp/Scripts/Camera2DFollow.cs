@@ -44,9 +44,47 @@ public class Camera2DFollow : MonoBehaviour
     bool UpdateCutScene()
     {
         if (!cutSceneController) return true;
+        float currentDT = Time.deltaTime;
+        //float _cdt = currentDT;
+
+        //while MoveToNextControlPoint(float time)
+        while (currentDT > 0f)
+        {
+            // takie klocki po to aby nie zatrzymywal sie na punkcie tylko plynnie przeszedl do nastepnego
+            //_cdt = MoveToNextControlPoint(ref currentDT);
+            //if( _cdt < 0f)
+            if (MoveToNextControlPoint(ref currentDT))
+            {
+                currentCutSceneControlPoint = currentCutSceneControlPoint.next;
+                if (!currentCutSceneControlPoint)
+                {
+                    return true;
+                }
+            }
+        }
+
+        updateBackgrounds();
+        updateParallaxeds();
 
         return false;
     } 
+    bool MoveToNextControlPoint(ref float time)
+    {
+        if (!currentCutSceneControlPoint) return true;
+
+        Vector2 toNextCP = currentCutSceneControlPoint.transform.position - transform.position;
+        float tncpDist = toNextCP.magnitude;
+
+        float moveDist = time * currentCutSceneControlPoint.CameraSpeed;
+        if (tncpDist < moveDist || Mathf.Abs(moveDist - tncpDist) < 0.1f)
+        {
+            float restTime = (time * tncpDist) / moveDist;
+            time = restTime;
+            return true;
+        }
+
+        return false;
+    }
 
     public void StartFollow()
     {
@@ -297,7 +335,10 @@ public class Camera2DFollow : MonoBehaviour
             {
                 StopCutScene();
             }
+
+            return;
         }
+
         if(!onOff)
         {
             applyShake(Time.deltaTime);
@@ -319,16 +360,6 @@ public class Camera2DFollow : MonoBehaviour
         Vector3 res = fitToStage(targetStage, newPos);
         Vector3 posDiff = res - transform.position;
 
-        //if (target.isInState(Zap.State.CLIMB_ROPE))
-        //{
-        //    transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, 0.1f);
-        //}
-        //else
-        //{
-        //    //transform.position = transform.position + posDiff;
-        //    transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, 0.05f);
-        //}
-
         float _tt = 0.1f;
         switch(target.getState())
         {
@@ -348,8 +379,12 @@ public class Camera2DFollow : MonoBehaviour
         applyShake(Time.deltaTime);
         
         fitPosToSceneBounds();
+        updateBackgrounds();
+        updateParallaxeds();
+    }
 
-        
+    void updateBackgrounds()
+    {
         int numberOfBackgrounds = backgroundsNodes.Length;
         Vector3 _cd = transform.position - rlhScene.levelBounds.Center3;
         for (int i = 0; i < numberOfBackgrounds; ++i)
@@ -359,7 +394,9 @@ public class Camera2DFollow : MonoBehaviour
             pos.y += backgroundsRatios[i].y * _cd.y;
             backgroundsNodes[i].position = pos;
         }
-
+    }
+    void updateParallaxeds()
+    {
         foreach (Parallaxed parallaxed in parallaxedObjects)
         {
             if (parallaxed.enabled)
