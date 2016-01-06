@@ -4,6 +4,10 @@ using System.Collections;
 public class CutSceneCameraPassingControlPoint : MonoBehaviour
 {
     public CutSceneCameraPassingControlPoint next = null;
+    public float CameraSpeed = 2f;
+    public bool EaseIn = false;
+    public bool EaseOut = false;
+    public float BreakDuration = -1f;
 
     // Use this for initialization
     void Start()

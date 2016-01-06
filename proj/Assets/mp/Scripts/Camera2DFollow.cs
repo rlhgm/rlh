@@ -22,10 +22,31 @@ public class Camera2DFollow : MonoBehaviour
 
     public Camera myCamera;
 
+    [HideInInspector]
+    public CutSceneCameraPassing cutSceneController = null;
+    CutSceneCameraPassingControlPoint currentCutSceneControlPoint = null;
+
     Parallaxed[] parallaxedObjects;
 
     RLHScene rlhScene = null;
     bool onOff = true;
+
+    public void StartCutScene(CutSceneCameraPassing csc)
+    {
+        cutSceneController = csc;
+        currentCutSceneControlPoint = cutSceneController.next;
+    }
+    public void StopCutScene()
+    {
+        cutSceneController = null;
+        currentCutSceneControlPoint = null;
+    }
+    bool UpdateCutScene()
+    {
+        if (!cutSceneController) return true;
+
+        return false;
+    } 
 
     public void StartFollow()
     {
@@ -109,6 +130,9 @@ public class Camera2DFollow : MonoBehaviour
                 bckgDist += bckgItemSize.x * 2;
             }
         }
+
+        RLHScene.RLHAssert(backgroundsNodes.Length == backgroundsRatios.Length, "numberOfBackgrounds != backgroundsRatios.GetLength ()");
+
     }
     public enum ShakeStatus
     {
@@ -149,15 +173,7 @@ public class Camera2DFollow : MonoBehaviour
             shakeMaxAmplitude = value;
         }
     }
-
-    //public ShakeStatus ShakeStatus1
-    //{
-    //    get
-    //    {
-    //        return shakeStatus;
-    //    }
-    //}
-
+    
     public bool IsShaking()
     {
         return shakeStatus != ShakeStatus.NoShake;
@@ -183,14 +199,7 @@ public class Camera2DFollow : MonoBehaviour
         shakeMaxSpeed.x = speed;
         shakeMaxSpeed.y = speed;
         shakeSpeed = shakeMaxSpeed;
-    }
-    //public void ShakeImpulseStop()
-    //{
-    //    //shakingImpulse = false;
-    //    //shakingPermanent = false;
-    //    shakeStatus = ShakeStatus.ShakeImpulse;
-    //}
-
+    }    
     public void ShakePermanentStart(float amplitude, float speed)
     {
         //shakingPermanent = true;
@@ -232,7 +241,6 @@ public class Camera2DFollow : MonoBehaviour
             //shakeSpeed = shakeMaxSpeed;
         }
     }
-    
     void applyShake(float dt)
     {
         shakeTime += dt;
@@ -283,6 +291,13 @@ public class Camera2DFollow : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if( cutSceneController )
+        {
+            if( UpdateCutScene() )
+            {
+                StopCutScene();
+            }
+        }
         if(!onOff)
         {
             applyShake(Time.deltaTime);
@@ -334,16 +349,9 @@ public class Camera2DFollow : MonoBehaviour
         
         fitPosToSceneBounds();
 
+        
         int numberOfBackgrounds = backgroundsNodes.Length;
-
-        if (numberOfBackgrounds != backgroundsRatios.Length)
-        {
-            print("numberOfBackgrounds != backgroundsRatios.GetLength ()");
-            return;
-        }
-
         Vector3 _cd = transform.position - rlhScene.levelBounds.Center3;
-
         for (int i = 0; i < numberOfBackgrounds; ++i)
         {
             Vector3 pos = rlhScene.levelBounds.Center3;

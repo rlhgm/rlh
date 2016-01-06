@@ -311,4 +311,12 @@ public class RLHScene : MonoBehaviour
     //    return -1f;
     //}
 
+    public static void RLHAssert(bool cond, string message)
+    {
+        if(!cond)
+        {
+            Debug.LogError(message);
+            Debug.Break();
+        }
+    }
 }
