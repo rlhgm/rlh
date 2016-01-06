@@ -72,6 +72,7 @@ public class Camera2DFollow : MonoBehaviour
     {
         if (!currentCutSceneControlPoint) return true;
 
+        Vector2 currentTargetPos = currentCutSceneControlPoint.transform.position;
         Vector2 toNextCP = currentCutSceneControlPoint.transform.position - transform.position;
         float tncpDist = toNextCP.magnitude;
 
@@ -80,7 +81,17 @@ public class Camera2DFollow : MonoBehaviour
         {
             float restTime = (time * tncpDist) / moveDist;
             time = restTime;
+            transform.position = new Vector3(currentTargetPos.x, currentTargetPos.y, transform.position.z);
             return true;
+        }
+        else
+        {
+            Vector2 _md = toNextCP* moveDist;
+            Vector3 newPos = transform.position;
+            newPos.x += _md.x;
+            newPos.y += _md.y;
+            transform.position = newPos;
+            time = -1;
         }
 
         return false;
