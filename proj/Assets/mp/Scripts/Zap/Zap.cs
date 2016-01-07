@@ -374,6 +374,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
     GroundMoveable[] allStones;
     Crate[] allCrates;
+    CutSceneCameraPassing[] allCameraPassings;
 
     void Start()
     {
@@ -450,6 +451,12 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         {
             resetable.GCacheResetData();
         }
+        allCameraPassings = FindObjectsOfType(typeof(CutSceneCameraPassing)) as CutSceneCameraPassing[];
+        foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
+        {
+            cameraPassing.GCacheResetData();
+        }
+
     }
 
     public void chooseController(ZapController newController)
@@ -829,6 +836,10 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         foreach (Crate resetable in allCrates)
         {
             resetable.GReset();
+        }
+        foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
+        {
+            cameraPassing.GReset();
         }
     }
 
@@ -1498,6 +1509,10 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
                 foreach (Crate resetable in allCrates)
                 {
                     resetable.GCacheResetData();
+                }
+                foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
+                {
+                    cameraPassing.GCacheResetData();
                 }
             }
         }
