@@ -117,11 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zap: {fileID: 0}
-  NormTimes:
-  - .5
-  Messages:
-  - hello world - biegne w prawo
-  Types: 00000000
+  callbacks: []
 --- !u!114 &11455708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,13 +192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zap: {fileID: 0}
-  NormTimes:
-  - .25
-  - .75
-  Messages:
-  - walk
-  - walk
-  Types: 0000000000000000
+  callbacks:
+  - NormTime: .25
+    Message: run
+    Type: 1
+  - NormTime: 0
+    Message: run
+    Type: 1
 --- !u!114 &11493824
 MonoBehaviour:
   m_ObjectHideFlags: 1

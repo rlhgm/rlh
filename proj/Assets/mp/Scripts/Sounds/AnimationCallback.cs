@@ -1,5 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System; //This allows the IComparable Interface
+using System.Collections.Generic;
+
+[Serializable]
+public struct AnimationCallbackData
+{
+    public float NormTime;
+    public string Message;
+    public AnimationCallback.Type Type;
+}
 
 public class AnimationCallback : StateMachineBehaviour
 {
@@ -28,20 +38,20 @@ public class AnimationCallback : StateMachineBehaviour
     //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
     //
     //}
+    
 
     public enum Type
     {
-        PlaySound
+        PlaySound,
+        PlaySoundSurface
     }
-
-
+    
     public Zap zap = null;
-    public float[] NormTimes;
-    //public AudioClip[] sounds;
-    public string[] Messages;
-    public Type[] Types;
-    //public AudioSource audio;
-
+    //public float[] NormTimes;
+    //public string[] Messages;
+    //public Type[] Types;
+    public AnimationCallbackData[] callbacks;
+    
     float lastNormTime = 0.0f;
     bool[] msgSended;
     bool settingsOK = false;
@@ -66,14 +76,15 @@ public class AnimationCallback : StateMachineBehaviour
 
         settingsOK = false;
 
-        if (NormTimes.Length == 0) return;
-        if (NormTimes.Length != Types.Length) return;
-        if (NormTimes.Length != Messages.Length) return;
+        if (callbacks.Length == 0) return;
+        //if (NormTimes.Length == 0) return;
+        //if (NormTimes.Length != Types.Length) return;
+        //if (NormTimes.Length != Messages.Length) return;
 
-        if (NormTimes.Length > 0)
+        if (callbacks.Length > 0)
         {
-            msgSended = new bool[NormTimes.Length];
-            for (int s = 0; s < NormTimes.Length; ++s)
+            msgSended = new bool[callbacks.Length];
+            for (int s = 0; s < callbacks.Length; ++s)
             {
                 msgSended[s] = false;
             }
@@ -91,14 +102,14 @@ public class AnimationCallback : StateMachineBehaviour
         float normTime = Mathf.Floor(stateInfo.normalizedTime);
         float animNormTime = stateInfo.normalizedTime - normTime;
 
-        for (int s = 0; s < NormTimes.Length; ++s)
+        for (int s = 0; s < callbacks.Length; ++s)
         {
             if (msgSended[s]) continue;
-
-            if (NormTimes[s] <= animNormTime)
+            AnimationCallbackData acd = callbacks[s];
+            if ( acd.NormTime <= animNormTime)
             { //gramy dzwiek
                 //zap.playSound(sounds[s]);
-                zap.NewsFromAnimator(Types[s],Messages[s]);
+                zap.NewsFromAnimator(acd.Type,acd.Message);
                 msgSended[s] = true;
             }
         }
