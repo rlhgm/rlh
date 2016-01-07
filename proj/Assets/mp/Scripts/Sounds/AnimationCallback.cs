@@ -109,7 +109,8 @@ public class AnimationCallback : StateMachineBehaviour
             if ( acd.NormTime <= animNormTime)
             { //gramy dzwiek
                 //zap.playSound(sounds[s]);
-                zap.NewsFromAnimator(acd.Type,acd.Message);
+                //zap.NewsFromAnimator(acd.Type,acd.Message);
+                zap.NewsFromAnimator(acd);
                 msgSended[s] = true;
             }
         }

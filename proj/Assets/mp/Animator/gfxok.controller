@@ -196,7 +196,7 @@ MonoBehaviour:
   - NormTime: .25
     Message: run
     Type: 1
-  - NormTime: 0
+  - NormTime: .75
     Message: run
     Type: 1
 --- !u!114 &11493824

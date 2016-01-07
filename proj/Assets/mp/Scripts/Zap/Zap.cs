@@ -38,6 +38,31 @@ public class Zap : MonoBehaviour
     AudioSource myAudioSource = null;
     AudioSource myAudioSourceLooped = null;
 
+    public void NewsFromAnimator(AnimationCallbackData acd)
+    {
+        switch (acd.Type)
+        {
+            case AnimationCallback.Type.PlaySound:
+                //print("NewsFromAnimator : " + acd.Type + " " + acd.Message);
+                SoundPlayer.Play(gameObject, acd.Message);
+                break;
+
+            case AnimationCallback.Type.PlaySoundSurface:
+                //print("NewsFromAnimator : " + acd.Type + " " + acd.Message);
+                Surface surface = groundUnder.GetComponent<Surface>();
+                if (surface)
+                {
+                    print(acd.Type + " " + acd.Message + "*" + surface.type);
+                    SoundPlayer.Play(gameObject, acd.Message + "*" +  surface.type);
+                }
+                else
+                {
+                    SoundPlayer.Play(gameObject, acd.Message);
+                }
+                break;
+        }
+    }
+
     public void NewsFromAnimator(AnimationCallback.Type type, string message)
     {
         switch(type)
