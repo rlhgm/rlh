@@ -349,6 +349,11 @@ public class Zap : MonoBehaviour
             rlhScene = rlhScenes[0];
         }
 
+        //SoundSets[] soundPlays = FindObjectsOfType(typeof(SoundSets)) as SoundSets[];
+        //foreach (SoundSets sp in soundPlays)
+        //{
+        //    sp.GenerateHashes();
+        //}
 
     }
 

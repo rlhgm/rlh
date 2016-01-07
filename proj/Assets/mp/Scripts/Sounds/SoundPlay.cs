@@ -21,7 +21,7 @@ public class SoundPlay : MonoBehaviour
             Debug.LogError("SoundPlay " + name + " z " + transform.parent.name + " nie ma AudioSource'a");
             Debug.Break();
         }
-
+        //if (soundsSets) soundsSets.GenerateHashes();
     }
 
     //// Update is called once per frame
@@ -44,18 +44,26 @@ public class SoundPlay : MonoBehaviour
 
     public bool Play(string SoundTag)
     {
-        return Play(Animator.StringToHash(SoundTag));
-    }
-
-    public bool Play(int SoundTagHash)
-    {
-        AudioClip ac = soundsSets.GetRandomAudioClip(SoundTagHash);
+        //return Play(Animator.StringToHash(SoundTag));
+        AudioClip ac = soundsSets.GetRandomAudioClip(SoundTag);
         if (ac)
         {
-            //audioSource.PlayOneShot(ac);
-            AudioSource.PlayClipAtPoint(ac,RLHScene.Instance.Zap.transform.position);
+            audioSource.PlayOneShot(ac);
+            //AudioSource.PlayClipAtPoint(ac, RLHScene.Instance.Zap.transform.position);
             return true;
         }
         return false;
     }
+
+    //public bool Play(int SoundTagHash)
+    //{
+    //    AudioClip ac = soundsSets.GetRandomAudioClip(SoundTagHash);
+    //    if (ac)
+    //    {
+    //        //audioSource.PlayOneShot(ac);
+    //        AudioSource.PlayClipAtPoint(ac,RLHScene.Instance.Zap.transform.position);
+    //        return true;
+    //    }
+    //    return false;
+    //}
 }

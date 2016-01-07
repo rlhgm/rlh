@@ -105,6 +105,14 @@ public class RLHScene : MonoBehaviour
             Debug.LogError("RLHScene => nie moge znalezc Camera2DFollow");
             Debug.Break();
         }
+
+        //SoundPlay[] soundPlays = FindObjectsOfType(typeof(SoundPlay)) as SoundPlay[];
+        //foreach (SoundPlay sp in soundPlays)
+        //{
+        //    sp.soundsSets.GenerateHashes();
+        //}
+
+
     }
 
     public void RatBorn(Rat rat)
