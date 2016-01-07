@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CutSceneCameraPassing : MonoBehaviour
+public class CutSceneCameraPassing : MonoBehaviour, IGResetable
 {
     public CutSceneCameraPassingControlPoint next = null;
 
     public bool OneTimeOnly = false;
     public bool PauseGame = false;
     public bool StopZap = false;
-    bool active = true;
+    //bool active = true;
 
     // Use this for initialization
     void Start()
@@ -33,6 +33,11 @@ public class CutSceneCameraPassing : MonoBehaviour
 
         //Vector3 startPosition = RLHScene.Instance.CamController.myCamera.transform.position;
         RLHScene.Instance.CamController.StartCutScene(this);
+
+        if (OneTimeOnly)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     //void OnTriggerExit2D()
@@ -45,4 +50,16 @@ public class CutSceneCameraPassing : MonoBehaviour
     //{
     //    print("CameraTargetOffseter::OnTriggerStay2D");
     //}
+
+    bool startActive;
+
+    public void GCacheResetData()
+    {
+        startActive = gameObject.activeSelf;
+    }
+
+    public void GReset()
+    {
+        gameObject.SetActive(startActive);
+    }
 }

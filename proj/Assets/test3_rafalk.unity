@@ -30350,11 +30350,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -148
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 30.3400002
+      value: 21.3400002
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -31239,22 +31239,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1553489904 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 108752, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
-  m_PrefabInternal: {fileID: 213164900}
---- !u!114 &1553489906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1553489904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0392fd7ced4b0154b98d3b7d709d94ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundsSets: {fileID: 11400000, guid: a7c378f757893a545af30244c72f5c43, type: 2}
 --- !u!4 &1556309416 stripped
 Transform:
   m_PrefabParentObject: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
