@@ -72,7 +72,6 @@
     <Compile Include="Assets\BezierControlPointMode.cs" />
     <Compile Include="Assets\BezierCurve.cs" />
     <Compile Include="Assets\BezierSpline.cs" />
-    <Compile Include="Assets\ImpactSounds.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
     <Compile Include="Assets\SplineDecorator.cs" />
     <Compile Include="Assets\SplineWalker.cs" />
@@ -113,9 +112,11 @@
     <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
+    <Compile Include="Assets\mp\Scripts\Ground.cs" />
     <Compile Include="Assets\mp\Scripts\GroundMoveable.cs" />
     <Compile Include="Assets\mp\Scripts\IGResetable.cs" />
     <Compile Include="Assets\mp\Scripts\IKnifeCutable.cs" />
+    <Compile Include="Assets\mp\Scripts\ImpactSounds.cs" />
     <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
     <Compile Include="Assets\mp\Scripts\Line.cs" />
     <Compile Include="Assets\mp\Scripts\MountMoveable.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Assets\mp\Scripts\Sounds\SoundPlayer.cs" />
     <Compile Include="Assets\mp\Scripts\Sounds\SoundSets.cs" />
     <Compile Include="Assets\mp\Scripts\SpriteOpacityController.cs" />
+    <Compile Include="Assets\mp\Scripts\Surface.cs" />
     <Compile Include="Assets\mp\Scripts\SwingAlpha.cs" />
     <Compile Include="Assets\mp\Scripts\Twitchable.cs" />
     <Compile Include="Assets\mp\Scripts\Vector2Extension.cs" />
