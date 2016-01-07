@@ -52,7 +52,8 @@ public class SoundPlay : MonoBehaviour
         AudioClip ac = soundsSets.GetRandomAudioClip(SoundTagHash);
         if (ac)
         {
-            audioSource.PlayOneShot(ac);
+            //audioSource.PlayOneShot(ac);
+            AudioSource.PlayClipAtPoint(ac,RLHScene.Instance.Zap.transform.position);
             return true;
         }
         return false;

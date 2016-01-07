@@ -43,6 +43,7 @@ public class Zap : MonoBehaviour
         switch(type)
         {
             case AnimationCallback.Type.PlaySound:
+
                 print("NewsFromAnimator : " + type + " " + message);
                 SoundPlayer.Play(gameObject, message + groundUnder.name);
                 break;

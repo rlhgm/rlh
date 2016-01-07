@@ -1,10 +1,15 @@
-﻿9) przejazdy kamery (jutro)
+﻿--------------------------------------------------------------------------------------------------------------------------------------------
+NAJBLIŻSZE 
+--------------------------------------------------------------------------------------------------------------------------------------------
+) predkosc podazania kamery za zapem - 1) niezalezne od fps 2) jak zostanie przestawiony target camery to jest za szybko (dodac parametr)
+9) przejazdy kamery (jutro) - stop zapa + only one time + pominiecie za pomoca spacji [press space to skip] + wyciszenie/zatrzymanie ewentualnego dzwieku przejazdu kamery
+) łapanie sie climberów przy malych fps'ach
 ) show/hide physics podłączyć wszystkie obiekty
 ) zapadajace sie schody robia pelny obrot jak zap zeskoczy z nich w max. polozeniu
 ) climbersy na gridzie
 ) restarty wszystkiego - schody, platformy, wrogowie itp
 ) nietoperze od razu gina + ) walka kierunkowa + 13) poprawa walki ze szczurami - nie dziala pod katem i w przykucu (jutro)
-
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 6) muzyka + dzięki //jak tylko bedziesz mial rozpiske jak to zrobic
 23) czas po spadku z platformy do odbicia sie z niczego
@@ -12,7 +17,6 @@
 14) łamiący się posąg - przed wigilią - spada na niego zyrandol
 32) bezkolizyjne platformy rozwalalne 190,-127.7
 30) deski fizyczne rozwalane kamnieniem - JEST ALE TEMAT DO ROZPYTANIA JESZCZE 
-29) ragdoll
 11) wiązka GG (po niedzieli)
 21) blokowanie sie elementu ukladanki - kamienia ma miejscu docelowym (particle, dzwiek)
 
@@ -33,13 +37,40 @@
 22) https://www.youtube.com/watch?v=BvnwLLXHabg&feature=youtu.be&t=2m43s
 
 // ZADANIA OD CZARKA:
-40) Obsuwające sie climbersy
 ) ratowanie zaklinowanych kamieni
 
 // (rafałk) i jeszcze z rozmów z Czarkiem
-) predkosc podazania kamery za zapem - 1) niezalezne od fps 2) jak zostanie przestawiony target camery to jest za szybko (dodac parametr)
 
 =============================================================================================================================================================================
+DODATKOWE RZECZY: - NIE DO NIEDZIELI
+
+29) ragdoll
+
+// ZADANIA OD CZARKA:
+40) Obsuwające sie climbersy
+
+// (rafałk) i jeszcze z rozmów z Czarkiem
+) jak kucne i przez ?2? sek nic nie robie to obnizyc kamere
+) cos co w klatce schodowej poprowadzi kamere srodkiem...
+
+=============================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 do jutra zrobie () :
 - prefab skrzynki - kamienie, których nie można rozwalić i złapać GG - powinno byc

@@ -47,7 +47,7 @@ public class RLHScene : MonoBehaviour
     {
         _scene = this;
         transform.position = new Vector3(0f,0f,0f);
-        Application.targetFrameRate = -10;
+        Application.targetFrameRate = -10; // -15; // -10;
 
         layerIdLAGROUNDMask = 1 << LayerMask.NameToLayer("LA-GROUND");
         layerIdGroundMask = 1 << LayerMask.NameToLayer("Ground");

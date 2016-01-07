@@ -383,16 +383,19 @@ public class Camera2DFollow : MonoBehaviour
         {
             case Zap.State.CLIMB_ROPE:
                 _tt = 0.1f;
+                transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, _tt);
                 break;
             case Zap.State.IN_AIR:
-                _tt = 0.25f;
+                //_tt = 0.25f;
+                transform.position = transform.position + posDiff;
                 break;
             default:
-                _tt = 0.1f;
+                //_tt = 0.1f;
+                transform.position = transform.position + posDiff;
                 break;
 
         }
-        transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, _tt);
+        //transform.position = Vector3.LerpUnclamped(transform.position, transform.position + posDiff, _tt);
 
         applyShake(Time.deltaTime);
         

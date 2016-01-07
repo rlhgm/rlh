@@ -197,10 +197,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zap: {fileID: 0}
   NormTimes:
-  - .5
+  - .25
+  - .75
   Messages:
-  - hello world - biegne w lewo
-  Types: 00000000
+  - walk
+  - walk
+  Types: 0000000000000000
 --- !u!114 &11493824
 MonoBehaviour:
   m_ObjectHideFlags: 1
