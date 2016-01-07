@@ -45,6 +45,84 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         if (paused) return;
 
         paused = true;
+
+        
+        if (Input.GetKey(keyUp))
+        {
+            currentController.keyUpUp();
+        }
+        if (Input.GetKey(keyDown))
+        {
+            currentController.keyDownUp();
+        }
+
+        if (Input.GetKey(keyJump))
+        {
+            jumpKeyPressed = false;
+            currentController.keyJumpUp();
+        }
+
+        //if (Input.GetKeyDown(keyLeft))
+        //{
+        //    currentController.keyLeftDown();
+        //}
+        //if (Input.GetKeyDown(keyRight))
+        //{
+        //    currentController.keyRightDown();
+        //}
+
+        if (Input.GetKey(keyLeft))
+        {
+            currentController.keyLeftUp();
+        }
+        if (Input.GetKey(keyRight))
+        {
+            currentController.keyRightUp();
+        }
+
+        //if (Input.GetKeyDown(keyRun))
+        //{
+        //    currentController.keyRunDown();
+        //}
+        //else 
+        if (Input.GetKey(keyRun))
+        {
+            currentController.keyRunUp();
+        }
+
+        //if (!userJumpKeyPressed)
+        //{
+        //    if (Input.GetKeyDown(keyJump))
+        //    {
+        //        if (Input.GetKey(keyLeft) || Input.GetKey(keyRight))
+        //        {
+        //            jumpKeyPressed = true;
+        //            currentController.keyJumpDown();
+        //        }
+        //        else
+        //        {
+        //            timeFromJumpKeyPressed = 0.0f;
+        //            userJumpKeyPressed = true;
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    timeFromJumpKeyPressed += deltaTime;
+        //    if (timeFromJumpKeyPressed >= 0.06f)
+        //    {
+        //        timeFromJumpKeyPressed = 0.0f;
+        //        userJumpKeyPressed = false;
+        //        jumpKeyPressed = true;
+
+        //        currentController.keyJumpDown();
+        //    }
+        //}
+
+        //if (currentController != zapControllerGravityGun && zapControllerGravityGun == choosenController)
+        //{
+        //    zapControllerGravityGun.leftMouseNotPressed();
+        //}
     }
     public void Unpause()
     {
@@ -1442,7 +1520,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
         if (GlobalUpdate(timeSinceLastFrame)) return;
 
-        if (!paused)
+        //if (!paused)
         {
             bool firstUpdateInFrame = true;
             while (timeSinceLastFrame > ConstantFrameTime)
@@ -1696,89 +1774,91 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         currentStateTime += deltaTime;
         currentActionTime += deltaTime;
 
-        
-        if (Input.GetKeyDown(keyUp))
+        if (!paused)
         {
-            currentController.keyUpDown();
-        }
-        if (Input.GetKeyUp(keyUp))
-        {
-            currentController.keyUpUp();
-        }
-        if (Input.GetKeyDown(keyDown))
-        {
-            currentController.keyDownDown();
-        }
-        if (Input.GetKeyUp(keyDown))
-        {
-            currentController.keyDownUp();
-        }
-
-        if (Input.GetKeyUp(keyJump))
-        {
-            jumpKeyPressed = false;
-            currentController.keyJumpUp();
-        }
-
-        if (Input.GetKeyDown(keyLeft))
-        {
-            currentController.keyLeftDown();
-        }
-        if (Input.GetKeyDown(keyRight))
-        {
-            currentController.keyRightDown();
-        }
-
-        if (Input.GetKeyUp(keyLeft))
-        {
-            currentController.keyLeftUp();
-        }
-        if (Input.GetKeyUp(keyRight))
-        {
-            currentController.keyRightUp();
-        }
-
-        if (Input.GetKeyDown(keyRun))
-        {
-            currentController.keyRunDown();
-        }
-        else if (Input.GetKeyUp(keyRun))
-        {
-            currentController.keyRunUp();
-        }
-
-        if (!userJumpKeyPressed)
-        {
-            if (Input.GetKeyDown(keyJump))
+            if (Input.GetKeyDown(keyUp))
             {
-                if (Input.GetKey(keyLeft) || Input.GetKey(keyRight))
+                currentController.keyUpDown();
+            }
+            if (Input.GetKeyUp(keyUp))
+            {
+                currentController.keyUpUp();
+            }
+            if (Input.GetKeyDown(keyDown))
+            {
+                currentController.keyDownDown();
+            }
+            if (Input.GetKeyUp(keyDown))
+            {
+                currentController.keyDownUp();
+            }
+
+            if (Input.GetKeyUp(keyJump))
+            {
+                jumpKeyPressed = false;
+                currentController.keyJumpUp();
+            }
+
+            if (Input.GetKeyDown(keyLeft))
+            {
+                currentController.keyLeftDown();
+            }
+            if (Input.GetKeyDown(keyRight))
+            {
+                currentController.keyRightDown();
+            }
+
+            if (Input.GetKeyUp(keyLeft))
+            {
+                currentController.keyLeftUp();
+            }
+            if (Input.GetKeyUp(keyRight))
+            {
+                currentController.keyRightUp();
+            }
+
+            if (Input.GetKeyDown(keyRun))
+            {
+                currentController.keyRunDown();
+            }
+            else if (Input.GetKeyUp(keyRun))
+            {
+                currentController.keyRunUp();
+            }
+
+            if (!userJumpKeyPressed)
+            {
+                if (Input.GetKeyDown(keyJump))
                 {
-                    jumpKeyPressed = true;
-                    currentController.keyJumpDown();
+                    if (Input.GetKey(keyLeft) || Input.GetKey(keyRight))
+                    {
+                        jumpKeyPressed = true;
+                        currentController.keyJumpDown();
+                    }
+                    else
+                    {
+                        timeFromJumpKeyPressed = 0.0f;
+                        userJumpKeyPressed = true;
+                    }
                 }
-                else
+            }
+            else
+            {
+                timeFromJumpKeyPressed += deltaTime;
+                if (timeFromJumpKeyPressed >= 0.06f)
                 {
                     timeFromJumpKeyPressed = 0.0f;
-                    userJumpKeyPressed = true;
+                    userJumpKeyPressed = false;
+                    jumpKeyPressed = true;
+
+                    currentController.keyJumpDown();
                 }
             }
-        }
-        else
-        {
-            timeFromJumpKeyPressed += deltaTime;
-            if (timeFromJumpKeyPressed >= 0.06f)
-            {
-                timeFromJumpKeyPressed = 0.0f;
-                userJumpKeyPressed = false;
-                jumpKeyPressed = true;
 
-                currentController.keyJumpDown();
+            if (currentController != zapControllerGravityGun && zapControllerGravityGun == choosenController)
+            {
+                zapControllerGravityGun.leftMouseNotPressed();
             }
-        }
-        
-        if ( currentController != zapControllerGravityGun && zapControllerGravityGun == choosenController )
-        {
-            zapControllerGravityGun.leftMouseNotPressed();
         }
 
         currentController.MUpdate(CurrentDeltaTime, firstUpdateInFrame);
