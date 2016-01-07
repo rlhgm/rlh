@@ -21,7 +21,7 @@ public class RLHScene : MonoBehaviour
     Camera2DFollow camController;
 
     int layerIdLAGROUNDMask;
-    
+
     public static RLHScene Instance
     {
         // zakladam ze RLHScene::Awake  zawsze jest wolane jako pierwsze... (z ustawien projektu Unity)
@@ -42,7 +42,18 @@ public class RLHScene : MonoBehaviour
     {
         get { return layerIdLAGROUNDMask; }
     }
-    
+
+    public void StartCutScene(CutSceneCameraPassing csc)
+    {
+        CamController.StartCutScene(csc);
+        if (csc.StopZap) zap.Pause();
+    }
+    public void StopCutScene(CutSceneCameraPassing csc)
+    {
+        if (csc.StopZap) zap.Unpause();
+        CamController.StopCutScene();
+    }
+
     void Awake()
     {
         _scene = this;

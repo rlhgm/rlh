@@ -38,6 +38,22 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     AudioSource myAudioSource = null;
     AudioSource myAudioSourceLooped = null;
 
+    bool paused = false;
+
+    public void Pause()
+    {
+        if (paused) return;
+
+        paused = true;
+    }
+    public void Unpause()
+    {
+        if (!paused) return;
+
+        paused = false;
+    }
+
+
     public void SetAnimatorCallbackTarget()
     {
         AnimationCallback[] acs = animatorBody.GetBehaviours<AnimationCallback>();
@@ -387,6 +403,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         //			zapControllerKnife.SetCtrlEnabled(
         //		}
 
+        paused = false;
+
         if (rlhScene.onlyKnife)
         {
             HaveKnife = true;
@@ -652,6 +670,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
     public void reborn()
     {
+        paused = false;
+
         climbingWallID = -1;
 
         if (RlhScene.ZapVsBats)
@@ -1422,15 +1442,18 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
         if (GlobalUpdate(timeSinceLastFrame)) return;
 
-        bool firstUpdateInFrame = true;
-        while (timeSinceLastFrame > ConstantFrameTime)
+        if (!paused)
         {
-            ZapUpdate(ConstantFrameTime, firstUpdateInFrame);
-            firstUpdateInFrame = false;
-            timeSinceLastFrame -= ConstantFrameTime;
-        }
+            bool firstUpdateInFrame = true;
+            while (timeSinceLastFrame > ConstantFrameTime)
+            {
+                ZapUpdate(ConstantFrameTime, firstUpdateInFrame);
+                firstUpdateInFrame = false;
+                timeSinceLastFrame -= ConstantFrameTime;
+            }
 
-        ZapUpdate(timeSinceLastFrame, firstUpdateInFrame);
+            ZapUpdate(timeSinceLastFrame, firstUpdateInFrame);
+        }
     }
 
     float GlobalResetDestTime = 0f;
@@ -3248,6 +3271,14 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         set
         {
             cameraTargetOffset = value;
+        }
+    }
+
+    public bool Paused
+    {
+        get
+        {
+            return paused;
         }
     }
 

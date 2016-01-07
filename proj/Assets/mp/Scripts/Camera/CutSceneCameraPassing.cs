@@ -32,7 +32,9 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
         //RLHScene.Instance.Zap.CameraTargetOffset = CameraOffset;
 
         //Vector3 startPosition = RLHScene.Instance.CamController.myCamera.transform.position;
-        RLHScene.Instance.CamController.StartCutScene(this);
+
+        //RLHScene.Instance.CamController.StartCutScene(this);
+        RLHScene.Instance.StartCutScene(this);
 
         if (OneTimeOnly)
         {

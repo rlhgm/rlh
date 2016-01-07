@@ -351,7 +351,7 @@ public class Camera2DFollow : MonoBehaviour
         {
             if( UpdateCutScene() )
             {
-                StopCutScene();
+                RLHScene.Instance.StopCutScene(cutSceneController);
             }
 
             return;
