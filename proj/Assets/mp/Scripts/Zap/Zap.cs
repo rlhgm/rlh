@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Zap : MonoBehaviour
+public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 {
     Canvas guiCanvas = null;
     [HideInInspector]
@@ -38,6 +38,15 @@ public class Zap : MonoBehaviour
     AudioSource myAudioSource = null;
     AudioSource myAudioSourceLooped = null;
 
+    public void SetAnimatorCallbackTarget()
+    {
+        AnimationCallback[] acs = animatorBody.GetBehaviours<AnimationCallback>();
+        for (int b = 0; b < acs.Length; ++b)
+        {
+            acs[b].callbackTarget = this;
+        }
+    }
+
     public void NewsFromAnimator(AnimationCallbackData acd)
     {
         switch (acd.Type)
@@ -53,7 +62,7 @@ public class Zap : MonoBehaviour
                 if (surface)
                 {
                     print(acd.Type + " " + acd.Message + "*" + surface.type);
-                    if( !SoundPlayer.Play(gameObject, acd.Message + "*" +  surface.type) )
+                    if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
                     {
                         print("PROBUJE odtworzyc : " + acd.Message);
                         SoundPlayer.Play(gameObject, acd.Message);
@@ -67,17 +76,17 @@ public class Zap : MonoBehaviour
         }
     }
 
-    public void NewsFromAnimator(AnimationCallback.Type type, string message)
-    {
-        switch(type)
-        {
-            case AnimationCallback.Type.PlaySound:
+    //public void NewsFromAnimator(AnimationCallback.Type type, string message)
+    //{
+    //    switch(type)
+    //    {
+    //        case AnimationCallback.Type.PlaySound:
 
-                print("NewsFromAnimator : " + type + " " + message);
-                SoundPlayer.Play(gameObject, message + groundUnder.name);
-                break;
-        }
-    }
+    //            print("NewsFromAnimator : " + type + " " + message);
+    //            SoundPlayer.Play(gameObject, message + groundUnder.name);
+    //            break;
+    //    }
+    //}
 
     public bool playSound(AudioClip clip, bool forceStart = true)
     {
@@ -268,11 +277,12 @@ public class Zap : MonoBehaviour
         {
             pss[b].zap = this;
         }
-        AnimationCallback[] acs = animatorBody.GetBehaviours<AnimationCallback>();
-        for (int b = 0; b < acs.Length; ++b)
-        {
-            acs[b].zap = this;
-        }
+        //AnimationCallback[] acs = animatorBody.GetBehaviours<AnimationCallback>();
+        //for (int b = 0; b < acs.Length; ++b)
+        //{
+        //    acs[b].callbackTarget = this;
+        //}
+        SetAnimatorCallbackTarget();
 
         sensorLeft1 = transform.Find("sensorLeft1").transform;
         sensorLeft2 = transform.Find("sensorLeft2").transform;
@@ -359,6 +369,7 @@ public class Zap : MonoBehaviour
         //    sp.GenerateHashes();
         //}
 
+        
     }
 
     GroundMoveable[] allStones;

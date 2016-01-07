@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rat : Enemy // MonoBehaviour//, IResetable
+public class Rat : Enemy, IAnimationCallbackReceiver // MonoBehaviour//, IResetable
 {
     public int ControlID = 0;
 
@@ -25,6 +25,44 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
     public float GravityForce = -20f;
     public float MaxSpeedY = 15.0f;
 
+    public void SetAnimatorCallbackTarget()
+    {
+        AnimationCallback[] acs = myAnimator.GetBehaviours<AnimationCallback>();
+        for (int b = 0; b < acs.Length; ++b)
+        {
+            acs[b].callbackTarget = this;
+        }
+    }
+
+    public void NewsFromAnimator(AnimationCallbackData acd)
+    {
+        switch (acd.Type)
+        {
+            case AnimationCallback.Type.PlaySound:
+                print("Rat::NewsFromAnimator : " + acd.Type + " " + acd.Message);
+                SoundPlayer.Play(gameObject, acd.Message);
+                break;
+
+            case AnimationCallback.Type.PlaySoundSurface:
+                print("Rat::NewsFromAnimator : " + acd.Type + " " + acd.Message);
+                //Surface surface = groundUnder.GetComponent<Surface>();
+                //if (surface)
+                //{
+                //    print(acd.Type + " " + acd.Message + "*" + surface.type);
+                //    if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
+                //    {
+                //        print("PROBUJE odtworzyc : " + acd.Message);
+                //        SoundPlayer.Play(gameObject, acd.Message);
+                //    }
+                //}
+                //else
+                //{
+                //    SoundPlayer.Play(gameObject, acd.Message);
+                //}
+                break;
+        }
+    }
+
     // Use this for initialization
     void Awake()
     {
@@ -37,6 +75,8 @@ public class Rat : Enemy // MonoBehaviour//, IResetable
         myCollider = GetComponent<BoxCollider2D>();
         mySize = myCollider.size;
         myHalfSize = mySize * 0.5f;
+
+        SetAnimatorCallbackTarget();
     }
 
     void OnEnable()

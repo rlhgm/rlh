@@ -45,8 +45,9 @@ public class AnimationCallback : StateMachineBehaviour
         PlaySound,
         PlaySoundSurface
     }
-    
-    public Zap zap = null;
+
+    //public Zap zap = null;
+    public IAnimationCallbackReceiver callbackTarget = null;
     //public float[] NormTimes;
     //public string[] Messages;
     //public Type[] Types;
@@ -110,7 +111,7 @@ public class AnimationCallback : StateMachineBehaviour
             { //gramy dzwiek
                 //zap.playSound(sounds[s]);
                 //zap.NewsFromAnimator(acd.Type,acd.Message);
-                zap.NewsFromAnimator(acd);
+                callbackTarget.NewsFromAnimator(acd);
                 msgSended[s] = true;
             }
         }
