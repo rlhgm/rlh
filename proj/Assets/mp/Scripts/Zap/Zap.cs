@@ -39,14 +39,20 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     AudioSource myAudioSourceLooped = null;
 
     bool paused = false;
-
+    float beforePauseAnimatorSpeed = 1f;
     public void Pause()
     {
         if (paused) return;
 
         paused = true;
+        beforePauseAnimatorSpeed = animatorBody.speed;
+        animatorBody.speed = 0f;
 
-        
+        if (Input.GetKey(keyRun))
+        {
+            currentController.keyRunUp();
+        }
+
         if (Input.GetKey(keyUp))
         {
             currentController.keyUpUp();
@@ -85,10 +91,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         //    currentController.keyRunDown();
         //}
         //else 
-        if (Input.GetKey(keyRun))
-        {
-            currentController.keyRunUp();
-        }
+        
 
         //if (!userJumpKeyPressed)
         //{
@@ -128,6 +131,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     {
         if (!paused) return;
 
+        animatorBody.speed = beforePauseAnimatorSpeed;
         paused = false;
     }
 
@@ -1520,7 +1524,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
         if (GlobalUpdate(timeSinceLastFrame)) return;
 
-        //if (!paused)
+        if (!paused)
         {
             bool firstUpdateInFrame = true;
             while (timeSinceLastFrame > ConstantFrameTime)
