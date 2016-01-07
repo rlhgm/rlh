@@ -53,7 +53,11 @@ public class Zap : MonoBehaviour
                 if (surface)
                 {
                     print(acd.Type + " " + acd.Message + "*" + surface.type);
-                    SoundPlayer.Play(gameObject, acd.Message + "*" +  surface.type);
+                    if( !SoundPlayer.Play(gameObject, acd.Message + "*" +  surface.type) )
+                    {
+                        print("PROBUJE odtworzyc : " + acd.Message);
+                        SoundPlayer.Play(gameObject, acd.Message);
+                    }
                 }
                 else
                 {
