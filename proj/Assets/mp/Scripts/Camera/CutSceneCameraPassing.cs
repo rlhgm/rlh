@@ -9,7 +9,8 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
     public bool PauseGame = false;
     public bool StopZap = false;
     //bool active = true;
-
+    public string skipText = "press to skip";
+    public float toSkipDuration = 1f;
     // Use this for initialization
     void Start()
     {

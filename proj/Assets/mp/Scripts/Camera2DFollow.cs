@@ -31,20 +31,38 @@ public class Camera2DFollow : MonoBehaviour
     RLHScene rlhScene = null;
     bool onOff = true;
 
+    float cutSceneTime = 0f;
+    bool cutSceneSkipEnabled = false;
+
     public void StartCutScene(CutSceneCameraPassing csc)
     {
         cutSceneController = csc;
         currentCutSceneControlPoint = cutSceneController.next;
+        cutSceneTime = 0f;
+        cutSceneSkipEnabled = false;
     }
     public void StopCutScene()
     {
         cutSceneController = null;
         currentCutSceneControlPoint = null;
+        cutSceneTime = 0f;
+        cutSceneSkipEnabled = false;
+        RLHScene.Instance.Zap.resetInfo();
     }
     bool UpdateCutScene()
     {
         if (!cutSceneController) return true;
         float currentDT = Time.deltaTime;
+        cutSceneTime += currentDT;
+        if( !cutSceneSkipEnabled )
+        {
+            if( cutSceneTime>= cutSceneController.toSkipDuration )
+            {
+                RLHScene.Instance.Zap.showInfo(cutSceneController.skipText,10000f);
+                cutSceneSkipEnabled = true;
+            }
+        }
+        
         //float _cdt = currentDT;
 
         //while MoveToNextControlPoint(float time)
@@ -349,7 +367,13 @@ public class Camera2DFollow : MonoBehaviour
     {
         if( cutSceneController )
         {
-            if( UpdateCutScene() )
+            if (cutSceneSkipEnabled && Input.GetKeyDown(KeyCode.Space))
+            {
+                RLHScene.Instance.StopCutScene(cutSceneController);
+                return;
+            }
+
+            if ( UpdateCutScene() )
             {
                 RLHScene.Instance.StopCutScene(cutSceneController);
             }
