@@ -45,7 +45,7 @@ MonoBehaviour:
   MaxSpeedY: 15
   HardLandingHeight: 2
   VeryHardLandingHeight: 4.5
-  MaxFallDistToCatch: 999
+  MaxFallDistToCatch: 6
   RopeSwingForce: 4400
   RopeClimbSpeedUp: 1.5
   RopeClimbSpeedDown: 4
@@ -61,6 +61,7 @@ MonoBehaviour:
   BirdHitDuration: .330000013
   PullUpDuration: .699999988
   PullDownDuration: .699999988
+  MaxPlatformAngle: 15
   ropeCatchSound: {fileID: 8300000, guid: c0b6a87efcf3ba945b03fb3ca4704761, type: 3}
   ropeSwingSound: {fileID: 8300000, guid: 954a68258b9d1fe478c1c32988a0a1e1, type: 3}
   mountCatchSound: {fileID: 0}
