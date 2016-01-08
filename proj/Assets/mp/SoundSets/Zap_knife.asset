@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a572fa5eaaa23e4099d7a9e25a228f8, type: 3}
+  m_Name: Zap_knife
+  m_EditorClassIdentifier: 
+  SndSet:
+  - SoundTag: knife_attack
+    clips:
+    - {fileID: 8300000, guid: f14b262a38ecaa547a3b5ecd75de0c93, type: 3}
+    - {fileID: 8300000, guid: 729236a9cc24ab348b7b77116f21024c, type: 3}
+    - {fileID: 8300000, guid: 449ed9a93745c0c4289f8444c201c27c, type: 3}
+  - SoundTag: knife_out
+    clips:
+    - {fileID: 8300000, guid: 9099323c90202ba4f9b95bbb468e2b7b, type: 3}
+  - SoundTag: knife_in
+    clips:
+    - {fileID: 8300000, guid: 3120d03fd1b556e4caddc26d5db51594, type: 3}

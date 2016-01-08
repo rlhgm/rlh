@@ -34,6 +34,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   stateIdleNum: 1
+--- !u!114 &11411784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: 0
+    Message: knife_attack
+    Type: 0
 --- !u!114 &11414186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -47,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   stateIdleNum: 2
---- !u!114 &11423102
+--- !u!114 &11415728
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -55,16 +70,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5463a2367ec591d4f952d7647a7001c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zap: {fileID: 0}
-  NormTimes:
-  - .25
-  - .75
-  sounds:
-  - {fileID: 8300000, guid: ae23fb3849674c5489136832eb77edfe, type: 3}
-  - {fileID: 8300000, guid: ae23fb3849674c5489136832eb77edfe, type: 3}
+  callbacks:
+  - NormTime: .25
+    Message: walk
+    Type: 1
+  - NormTime: .75
+    Message: walk
+    Type: 1
+--- !u!114 &11417118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: 0
+    Message: knife_attack
+    Type: 0
+--- !u!114 &11425534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: .25
+    Message: walk
+    Type: 1
+  - NormTime: .75
+    Message: walk
+    Type: 1
+--- !u!114 &11427474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: 0
+    Message: knife_out
+    Type: 0
 --- !u!114 &11429014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +141,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   stateIdleNum: 0
+--- !u!114 &11431944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: 0
+    Message: knife_in
+    Type: 0
+--- !u!114 &11436078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: .25
+    Message: walk
+    Type: 1
+  - NormTime: .75
+    Message: walk
+    Type: 1
 --- !u!114 &11445354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,10 +214,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   callbacks:
   - NormTime: .25
-    Message: dupa
+    Message: run
     Type: 1
   - NormTime: .75
-    Message: dupa2
+    Message: run
     Type: 1
 --- !u!114 &11455708
 MonoBehaviour:
@@ -136,6 +232,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   stateIdleNum: 0
+--- !u!114 &11456008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callbacks:
+  - NormTime: 0
+    Message: knife_attack
+    Type: 0
 --- !u!114 &11457636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,7 +314,7 @@ MonoBehaviour:
   - NormTime: .75
     Message: run
     Type: 1
---- !u!114 &11493824
+--- !u!114 &11478288
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -211,16 +322,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5463a2367ec591d4f952d7647a7001c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc1ba007318efd4ca6756e1830ea038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zap: {fileID: 0}
-  NormTimes:
-  - .25
-  - .75
-  sounds:
-  - {fileID: 8300000, guid: ae23fb3849674c5489136832eb77edfe, type: 3}
-  - {fileID: 8300000, guid: ae23fb3849674c5489136832eb77edfe, type: 3}
+  callbacks:
+  - NormTime: .25
+    Message: walk
+    Type: 1
+  - NormTime: .75
+    Message: walk
+    Type: 1
 --- !u!1102 &110200486
 AnimatorState:
   serializedVersion: 5
@@ -579,7 +690,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours:
-  - {fileID: 11423102}
+  - {fileID: 11436078}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -763,7 +874,8 @@ AnimatorState:
   m_Speed: 1.29999995
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11417118}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -832,7 +944,8 @@ AnimatorState:
   m_Speed: 1.79999995
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11411784}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -994,7 +1107,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours:
-  - {fileID: 11493824}
+  - {fileID: 11415728}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1316,7 +1429,8 @@ AnimatorState:
   m_Speed: 1.79999995
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11456008}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1362,7 +1476,8 @@ AnimatorState:
   m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11425534}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1711,7 +1826,8 @@ AnimatorState:
   m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11427474}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1780,7 +1896,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11431944}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2218,7 +2335,8 @@ AnimatorState:
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11478288}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
