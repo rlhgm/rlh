@@ -99,6 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f123fde1b5ab4e7488fa22a59aee60b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  next: {fileID: 0}
+  OneTimeOnly: 0
+  PauseGame: 0
+  StopZap: 0
+  skipText: press to skip
+  toSkipDuration: 1
 --- !u!212 &21229338
 SpriteRenderer:
   m_ObjectHideFlags: 1

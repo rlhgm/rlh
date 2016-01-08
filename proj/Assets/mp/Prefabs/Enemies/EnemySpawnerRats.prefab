@@ -40,9 +40,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96324d850a335a47b89d337d4325347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 11426584, guid: 61285364668affe4098748c946ae2077, type: 2}
-  SpawnDurationMinMax: {x: 2, y: 5}
+  EnemyPrefab: {fileID: 0}
+  SpawnIntervalMinMax: {x: 1, y: 5}
   MaxSpawned: 3
+  On: 1
 --- !u!212 &21205290
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 
 [ExecuteInEditMode]
 public class RLHOptionsWindow : EditorWindow{
@@ -15,20 +16,26 @@ public class RLHOptionsWindow : EditorWindow{
 	static string GroundHandleLRPrefabPath = "Assets/mp/Prefabs/tile_ground1_handleLR.prefab";
 	static string GroundMountPrefabPath = "Assets/mp/Prefabs/tile_mount.prefab";
 
-	static string CheckpointPrefabPath = "Assets/mp/Prefabs/CheckPoint.prefab";
-	static string KillerPhysicPrefabPath = "Assets/mp/Prefabs/KillerPhysic.prefab";
-	static string ShowInfoTriggerPrefabPath = "Assets/mp/Prefabs/ShowInfoTrigger.prefab";
+	//static string CheckpointPrefabPath = "Assets/mp/Prefabs/CheckPoint.prefab";
+	//static string KillerPhysicPrefabPath = "Assets/mp/Prefabs/KillerPhysic.prefab";
+	//static string ShowInfoTriggerPrefabPath = "Assets/mp/Prefabs/ShowInfoTrigger.prefab";
 
-    static string ShowInfoTriggerControllerPrefabPath = "Assets/mp/Prefabs/ShowInfoTriggerController.prefab";
-    static string SmashStoneActivatorPrefabPath = "Assets/mp/Prefabs/SmashStoneActivator.prefab";
+ //   static string ShowInfoTriggerControllerPrefabPath = "Assets/mp/Prefabs/ShowInfoTriggerController.prefab";
+ //   static string SmashStoneActivatorPrefabPath = "Assets/mp/Prefabs/SmashStoneActivator.prefab";
+
+ //   static string EndlessChasmPrefabPath = "Assets/mp/Prefabs/EndlessChasm.prefab";
 
     //public static float gravityGunInertiaFactor = GravityGun.inertiaFactor;
     //public static float gravityGunMaxDist = GravityGun.maxDistance;
+    //static string[] test;
 
-
+    static List<string> gfxwithphysics = new List<string>();
+    static List<string> gfxchild = new List<string>();
 
     [MenuItem ("Window/RLH Options")]
 	public static void  ShowWindow () {
+        //test.
+
 		EditorWindow.GetWindow(typeof(RLHOptionsWindow));
 		//Debug.Log( "show RLHOptionsWindow" );
 
@@ -43,7 +50,57 @@ public class RLHOptionsWindow : EditorWindow{
 		if (LevelArtGameObject != null) {
 			LevelArtVisibility = LevelArtGameObject.activeInHierarchy;
 		}
-	}
+
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(CheckpointPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(KillerPhysicPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerControllerPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(SmashStoneActivatorPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        ////static string EndlessChasmPrefabPath = "Assets/mp/Prefabs/EndlessChasm.prefab";
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(EndlessChasmPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //static string CheckpointPrefabPath = "Assets/mp/Prefabs/CheckPoint.prefab";
+        //static string KillerPhysicPrefabPath = "Assets/mp/Prefabs/KillerPhysic.prefab";
+        //static string ShowInfoTriggerPrefabPath = "Assets/mp/Prefabs/ShowInfoTrigger.prefab";
+
+        //static string ShowInfoTriggerControllerPrefabPath = "Assets/mp/Prefabs/ShowInfoTriggerController.prefab";
+        //static string SmashStoneActivatorPrefabPath = "Assets/mp/Prefabs/SmashStoneActivator.prefab";
+
+        //static string EndlessChasmPrefabPath = "Assets/mp/Prefabs/EndlessChasm.prefab";
+
+        gfxwithphysics.Add("Assets/mp/Prefabs/CheckPoint.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/KillerPhysic.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/ShowInfoTrigger.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/ShowInfoTriggerController.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/SmashStoneActivator.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/Enemies/CreepingAITrigger.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/Enemies/RatsHole.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/Enemies/EnemySpawnerBats.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/Enemies/EnemySpawnerRats.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/Camera/CutSceneCameraPassingControlPoint.prefab");
+        gfxwithphysics.Add("Assets/mp/Prefabs/CameraShaker.prefab");
+
+        gfxchild.Add("Assets/mp/Prefabs/EndlessChasm.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/CameraTargetOffseter.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/Camera/CutSceneCameraPassing.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/SpriteOpacityController.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/Physics/DirClimbers.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/Physics/Chandelier.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/Physics/DestroyablePlatform.prefab");
+        gfxchild.Add("Assets/mp/Prefabs/Grounds/Far/tile_groundFar_normal.prefab");
+        
+    }
 
 	void SceneGUI(SceneView sceneView)
 	{
@@ -146,20 +203,39 @@ public class RLHOptionsWindow : EditorWindow{
 		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(GroundMountPrefabPath);
 		prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
-		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(CheckpointPrefabPath);
-		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
-		prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(KillerPhysicPrefabPath);
-		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+        foreach (string prefabPath in gfxwithphysics)
+        {
+            Debug.Log(prefabPath);
+            prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+        }
 
-        prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
-        prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+        foreach (string prefabPath in gfxchild)
+        {
+            Debug.Log(prefabPath);
+            prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            prefabObject.transform.Find ("gfx").GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+        }
 
-        prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerControllerPrefabPath);
-		prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+        //      prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(CheckpointPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
 
-        prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(SmashStoneActivatorPrefabPath);
-        prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+        //prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(KillerPhysicPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+
+        //      prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerPrefabPath);
+        //      prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //      prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(ShowInfoTriggerControllerPrefabPath);
+        //prefabObject.GetComponent<SpriteRenderer> ().enabled = PhysicVisibility;
+
+        //      prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(SmashStoneActivatorPrefabPath);
+        //      prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
+
+        //      //static string EndlessChasmPrefabPath = "Assets/mp/Prefabs/EndlessChasm.prefab";
+        //      prefabObject = AssetDatabase.LoadAssetAtPath<GameObject>(EndlessChasmPrefabPath);
+        //      prefabObject.GetComponent<SpriteRenderer>().enabled = PhysicVisibility;
 
         //static string ShowInfoTriggerControllerPrefabPath = "Assets/mp/Prefabs/ShowInfoTriggerController.prefab";
         //static string SmashStoneActivatorPrefabPath = "Assets/mp/Prefabs/SmashStoneActivator.prefab";

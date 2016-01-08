@@ -40,6 +40,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9bbfac8a704c147b7754a434541b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  next: {fileID: 0}
+  CameraSpeed: 2
+  EaseIn: 0
+  EaseOut: 0
+  BreakDuration: -1
 --- !u!212 &21289056
 SpriteRenderer:
   m_ObjectHideFlags: 1
