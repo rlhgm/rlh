@@ -23,3 +23,9 @@ MonoBehaviour:
   - SoundTag: knife_in
     clips:
     - {fileID: 8300000, guid: 3120d03fd1b556e4caddc26d5db51594, type: 3}
+  - SoundTag: knife_kill
+    clips:
+    - {fileID: 8300000, guid: e30b95f97f2deda4790d3fcede0fc5cc, type: 3}
+  - SoundTag: knife_trick
+    clips:
+    - {fileID: 8300000, guid: b3954a8431507c745aa366ced6ccfbe0, type: 3}

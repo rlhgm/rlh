@@ -27,6 +27,9 @@ GameObject:
   - 114: {fileID: 11489140}
   - 114: {fileID: 11426584}
   - 50: {fileID: 5050582}
+  - 82: {fileID: 8286918}
+  - 114: {fileID: 11486528}
+  - 114: {fileID: 11476242}
   m_Layer: 26
   m_Name: Rat
   m_TagString: Untagged
@@ -82,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -84.5, y: 23, z: 0}
+  m_LocalPosition: {x: -151.600006, y: -75.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 405400}
@@ -118,6 +121,81 @@ BoxCollider2D:
   m_Offset: {x: 0, y: .25}
   serializedVersion: 2
   m_Size: {x: 1, y: .5}
+--- !u!82 &8286918
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129804}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a9299c376db429b4bbfd563425389ca4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 26.2467041
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: .19844988
+      value: .995703101
+      inSlope: -3.00496745
+      outSlope: -3.00496745
+      tangentMode: 0
+    - time: .360655755
+      value: .534160554
+      inSlope: -2.5062418
+      outSlope: -2.5062418
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: -1.03960907
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9599726
 Animator:
   serializedVersion: 3
@@ -150,6 +228,7 @@ MonoBehaviour:
   WalkSpeed: 2
   RunSpeed: 5
   JumpSpeed: 1
+  HoleWalkSpeed: 5
   FightModeDistance: 5
   IdleInDuration: .25
   IdleOutDuration: .25
@@ -162,6 +241,30 @@ MonoBehaviour:
   LandingDuration: .330000013
   GravityForce: -20
   MaxSpeedY: 15
+--- !u!114 &11476242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0392fd7ced4b0154b98d3b7d709d94ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundsSets: {fileID: 11400000, guid: 4aa20ee2f796de543aae117913856c85, type: 2}
+--- !u!114 &11486528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0392fd7ced4b0154b98d3b7d709d94ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundsSets: {fileID: 11400000, guid: 02e6ff050782bb843af1d050938d1fe4, type: 2}
 --- !u!114 &11489140
 MonoBehaviour:
   m_ObjectHideFlags: 1
