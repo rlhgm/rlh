@@ -549,12 +549,12 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         allCrates = FindObjectsOfType(typeof(Crate)) as Crate[];
         foreach (Crate resetable in allCrates)
         {
-            resetable.GCacheResetData();
+            resetable.GResetCacheResetData();
         }
         allCameraPassings = FindObjectsOfType(typeof(CutSceneCameraPassing)) as CutSceneCameraPassing[];
         foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
         {
-            cameraPassing.GCacheResetData();
+            cameraPassing.GResetCacheResetData();
         }
 
     }
@@ -1615,11 +1615,11 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
                 //Crate[] resetables = FindObjectsOfType(typeof(Crate)) as Crate[];
                 foreach (Crate resetable in allCrates)
                 {
-                    resetable.GCacheResetData();
+                    resetable.GResetCacheResetData();
                 }
                 foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
                 {
-                    cameraPassing.GCacheResetData();
+                    cameraPassing.GResetCacheResetData();
                 }
             }
         }

@@ -39,12 +39,12 @@ public class Rat : Enemy, IAnimationCallbackReceiver // MonoBehaviour//, IReseta
         switch (acd.Type)
         {
             case AnimationCallback.Type.PlaySound:
-                print("Rat::NewsFromAnimator : " + acd.Type + " " + acd.Message);
-                SoundPlayer.Play(gameObject, acd.Message);
+                //print("Rat::NewsFromAnimator : " + acd.Type + " " + acd.Message);
+                //SoundPlayer.Play(gameObject, acd.Message);
                 break;
 
             case AnimationCallback.Type.PlaySoundSurface:
-                print("Rat::NewsFromAnimator : " + acd.Type + " " + acd.Message);
+                //print("Rat::NewsFromAnimator : " + acd.Type + " " + acd.Message);
                 //Surface surface = groundUnder.GetComponent<Surface>();
                 //if (surface)
                 //{

@@ -56,6 +56,9 @@ public class RLHScene : MonoBehaviour
 
     void Awake()
     {
+        print("RLHScene::Awake()");
+        resetableObjects.Clear();
+
         _scene = this;
         transform.position = new Vector3(0f,0f,0f);
         Application.targetFrameRate = -10; // -15; // -10;
@@ -72,10 +75,45 @@ public class RLHScene : MonoBehaviour
         _scene = this;
     }
 
+    //game[] interfaces
+    List<IGResetable> resetableObjects = new List<IGResetable>();
+
+    public void addIGResetable(IGResetable newResetable)
+    {
+        print("addIGResetable " + resetableObjects.Count);
+        resetableObjects.Add(newResetable);
+    }
+
+    public void removeIGResetable(IGResetable removedResetable)
+    {
+        resetableObjects.Remove(removedResetable);
+    }
+
     // Use this for initialization
     void Start()
     {
-       
+        ////resetableObjects.Clear();
+        //print("RLHScene::Start()");
+        ////IGResetable[] interfaces = gameObject.GetInterfaces<IGResetable>();
+        //object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
+        //foreach (object o in obj)
+        //{
+        //    GameObject g = (GameObject)o;
+        //    //Debug.Log(g.name);
+        //    IGResetable[] interfaces = g.GetInterfaces<IGResetable>();
+        //    if (interfaces.Length > 0)
+        //    {
+        //        //print(g.name + " jest resetable");
+        //        foreach(IGResetable _r in interfaces)
+        //        {
+        //            //resetableObjects.Add(_r);
+        //            addIGResetable(_r);
+        //        }
+        //    }
+        //}
+
+        //resetableObjects.re
+        //interfaces[0].game
 
         if (zap == null)
         {

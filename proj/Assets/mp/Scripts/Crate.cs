@@ -8,6 +8,7 @@ public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
     // Use this for initialization
     void Start()
     {
+        GResetCreated();
         //startPosition = transform.position;
         //startRotation = transform.rotation;
     }
@@ -35,7 +36,12 @@ public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
     Quaternion startRotation;
     bool startActive;
 
-    public void GCacheResetData()
+    public void GResetCreated()
+    {
+        RLHScene.Instance.addIGResetable(this);
+    }
+
+    public void GResetCacheResetData()
     {
         startPosition = transform.position;
         startRotation = transform.rotation;

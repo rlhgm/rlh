@@ -19,6 +19,8 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
             Debug.LogError("CutSceneCameraPassing " + name + "nie ma ustawionego CutSceneCameraPassingControlPoint'a : next");
             Debug.Break();
         }
+
+        GResetCreated();
     }
 
     // Update is called once per frame
@@ -56,7 +58,12 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
 
     bool startActive;
 
-    public void GCacheResetData()
+    public void GResetCreated()
+    {
+        RLHScene.Instance.addIGResetable(this);
+    }
+
+    public void GResetCacheResetData()
     {
         startActive = gameObject.activeSelf;
     }

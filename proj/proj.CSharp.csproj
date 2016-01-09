@@ -75,6 +75,7 @@
     <Compile Include="Assets\BezierCurve.cs" />
     <Compile Include="Assets\BezierSpline.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
+    <Compile Include="Assets\mp\Scripts\GameObjectExtensions.cs" />
     <Compile Include="Assets\mp\Scripts\MonoBehaviourExtension.cs" />
     <Compile Include="Assets\SplineDecorator.cs" />
     <Compile Include="Assets\SplineWalker.cs" />
