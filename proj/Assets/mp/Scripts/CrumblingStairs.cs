@@ -34,7 +34,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
     Vector3 ToResetMountPosition;
     float ToResetMoutRotation;
     JointAngleLimits2D ToResetAngleLimits = new JointAngleLimits2D();
-    
+     
     public void GResetCacheResetData()
     {
         ToResetCrumbled = crumbled;
@@ -46,7 +46,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         ToResetMoutRotation = mountBody.rotation;
         ToResetAngleLimits.min = mountHinge.limits.min;
         ToResetAngleLimits.max = mountHinge.limits.max;
-
+        
         //angleLimits.min = LimitSteps[crumbled];
         //        angleLimits.max = 360f;
         //        mountHinge.limits = angleLimits;
@@ -54,6 +54,8 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
 
     public void GReset()
     {
+       // mountHinge.enabled = false;
+
         crumbled = ToResetCrumbled;
         currentHangTime = ToResetCurrentHangTime;
 
@@ -67,16 +69,21 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
        
         //mountHinge.limits.min = ToResetAngleLimits.min;
         mountHinge.useLimits = true;
+        
+
+        mountBody.position = ToResetMountPosition;
+        mountBody.rotation = ToResetMoutRotation;
+
         JointAngleLimits2D angleLimits = new JointAngleLimits2D();
         angleLimits.min = ToResetAngleLimits.min;
         angleLimits.max = ToResetAngleLimits.max;
         mountHinge.limits = angleLimits;
 
-        mountBody.position = ToResetMountPosition;
-        mountBody.rotation = ToResetMoutRotation;
-        
         //mount.gameObject.SetActive(!ToResetIsNoCrumbled);
         mountBody.isKinematic = ToResetIsNoCrumbled;
+        //mount.gameObject.SetActive(!ToResetIsNoCrumbled);
+
+        //mountHinge.enabled = true;
 
         if ( ToResetIsNoCrumbled )
         {
@@ -160,7 +167,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         //Rigidbody2D mountBody = mount.GetComponent<Rigidbody2D>();
         //mountBody.centerOfMass = new Vector2(0f, 0f);
 
-        mount.gameObject.SetActive(false);
+       // mount.gameObject.SetActive(false);
 
         //if( LimitSteps.Length > 0)
         //{
