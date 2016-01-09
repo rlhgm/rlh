@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,8 +73,6 @@
     <Compile Include="Assets\BezierCurve.cs" />
     <Compile Include="Assets\BezierSpline.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-    <Compile Include="Assets\mp\Scripts\GameObjectExtensions.cs" />
-    <Compile Include="Assets\mp\Scripts\MonoBehaviourExtension.cs" />
     <Compile Include="Assets\SplineDecorator.cs" />
     <Compile Include="Assets\SplineWalker.cs" />
     <Compile Include="Assets\SplineWalkerMode.cs" />
@@ -114,6 +110,7 @@
     <Compile Include="Assets\mp\Scripts\Enemies\Rat.cs" />
     <Compile Include="Assets\mp\Scripts\Enemies\RatsHole.cs" />
     <Compile Include="Assets\mp\Scripts\GGRayTest1.cs" />
+    <Compile Include="Assets\mp\Scripts\GameObjectExtensions.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
     <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
@@ -125,6 +122,7 @@
     <Compile Include="Assets\mp\Scripts\ImpactSounds.cs" />
     <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
     <Compile Include="Assets\mp\Scripts\Line.cs" />
+    <Compile Include="Assets\mp\Scripts\MonoBehaviourExtension.cs" />
     <Compile Include="Assets\mp\Scripts\MountMoveable.cs" />
     <Compile Include="Assets\mp\Scripts\NewRope.cs" />
     <Compile Include="Assets\mp\Scripts\NewZapTest.cs" />
@@ -148,6 +146,7 @@
     <Compile Include="Assets\mp\Scripts\Sounds\ISoundsSetsable.cs" />
     <Compile Include="Assets\mp\Scripts\Sounds\PlaySounds.cs" />
     <Compile Include="Assets\mp\Scripts\Sounds\SoundPlay.cs" />
+    <Compile Include="Assets\mp\Scripts\Sounds\SoundPlayTrigger.cs" />
     <Compile Include="Assets\mp\Scripts\Sounds\SoundPlayer.cs" />
     <Compile Include="Assets\mp\Scripts\Sounds\SoundSets.cs" />
     <Compile Include="Assets\mp\Scripts\SpriteOpacityController.cs" />
