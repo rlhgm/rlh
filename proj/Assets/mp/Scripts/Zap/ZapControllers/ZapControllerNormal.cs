@@ -115,6 +115,8 @@ public class ZapControllerNormal : ZapController
 
     float groundUnderFeet;
 
+    public GameObject landingHardParticles = null;
+    
     public override void MUpdate(float deltaTime, bool firstUpdate)
     {
         firstUpdateInFrame = firstUpdate;
@@ -739,6 +741,9 @@ public class ZapControllerNormal : ZapController
                     }
                     else if (fallDist.y >= HardLandingHeight)
                     {
+                        float _distToGround = 0.0f;
+                        zap.checkGround(ref _distToGround);
+                        //groundUnder = groundUnderFeet;
 
                         //if( zap.beforeFallController == null ){
                         zap.velocity.x = 0.0f;
@@ -1301,6 +1306,31 @@ public class ZapControllerNormal : ZapController
 
                 if (zap.landingSounds.Length != 0)
                     zap.playSound(zap.landingSounds[Random.Range(0, zap.landingSounds.Length)]);
+
+                Debug.Log(zap.groundUnder.gameObject.name);
+
+                //if( )
+                //Surface surface = zap.groundUnder.GetComponent<Surface>();
+                //if (surface)
+                //{
+                //    //print(acd.Type + " " + acd.Message + "*" + surface.type);
+                //    if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
+                //    {
+                //        //print("PROBUJE odtworzyc : " + acd.Message);
+                //        SoundPlayer.Play(gameObject, acd.Message);
+                //    }
+                //}
+                //else
+                //{
+                //    SoundPlayer.Play(gameObject, acd.Message);
+                //}
+
+                if (landingHardParticles)
+                {
+                    Object newParticleObject = Instantiate(landingHardParticles, transform.position, Quaternion.Euler(0, 0, 0));
+                    Destroy(newParticleObject, 2.0f);
+                }
+
                 break;
 
             case Action.CLIMB_PREPARE_TO_JUMP:
