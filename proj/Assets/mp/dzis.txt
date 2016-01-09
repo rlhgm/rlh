@@ -1,10 +1,30 @@
 ﻿--------------------------------------------------------------------------------------------------------------------------------------------
 NAJBLIŻSZE 
 --------------------------------------------------------------------------------------------------------------------------------------------
-) restarty wszystkiego - schody, platformy, wrogowie itp
+polish graficzy
+--------------------------------------------------------------------------------------------------------------------------------------------
+- trigger do otworzenia czegos z soundset'a - parametry identyfikator dzwieku + czy tylko raz + resetowalne
+- dzwiek smierci szuczura uruchamia sie w kolko 
+- dzwiek zapa belly (lapanie sie brzuech + wspinaczka) uruchamia sie dwa
+- dzwieki z animacji sie nie uruchamiaja jak jest malo fps'ów
+- wlaczyc na powrot dzwiek gravityguna
+- przejrzeć czemu sie nie resetuja rzeczy na 2.1c - ALE TYLKO U CZARKA
+- jak po czyms chodzimy co jest urywalne + schody jak złapiemy to 1) particle leca 2) dzwieki trzeszczenia 3) trzesienie sie gafiki delikatne
+- na zderzenie sie schodow ze sciana particle ze sciany + ew. kolejne drzazgi ze schodow
+- klatka schodowa pietro -1 triggerowane kamienie urywajace fragmenty schodow + pojawiajacy sie lightray
+- skrznka - podczas przepychania particle + dzwiek (zaleznie od predkosci) + dzwiek przesuwania skrzynki i dzwiek upadania skrzynki
+- jak jest cutscena to zap lazi i odtwarza dzwiek 
+- jak zap uderzy w ziemie particle niech leca (takie same pewnie jakby kamien uderzyl)
+- w momencie uderzenia kamienia w ziemie shake kamery zalezny od 1) odleglosci od zapa 2) energi = masa * predkosc kamienia
+- po ucieciu zyrandola kamera ma za nim podazyc... 
+- wyrywany kamien powinien sie trzac + particle
+- nietoperze z zyrandola po zlapaniu sie + musza odleciec na jakas odleglosc
+- potrojny (wielokotny) urywajacy sie chodnik
+--------------------------------------------------------------------------------------------------------------------------------------------
 ) łapanie sie climberów przy malych fps'ach
 ) climbersy na gridzie
 ) nietoperze od razu gina + ) walka kierunkowa + 13) poprawa walki ze szczurami - nie dziala pod katem i w przykucu (jutro)
+) nie podnosi drugiego komiksu (przynajmniej na 2.1)
 --------------------------------------------------------------------------------------------------------------------------------------------
 TROCHE DALSZE
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -16,6 +36,7 @@ DO TESTÓW
 9) przejazdy kamery (jutro) - stop zapa + only one time + pominiecie za pomoca spacji [press space to skip] + wyciszenie/zatrzymanie ewentualnego dzwieku przejazdu kamery
 ) show/hide physics podłączyć wszystkie obiekty
 ) predkosc podazania kamery za zapem - 1) niezalezne od fps 2) jak zostanie przestawiony target camery to jest za szybko (dodac parametr)
+) restarty wszystkiego - schody, platformy, wrogowie itp
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 

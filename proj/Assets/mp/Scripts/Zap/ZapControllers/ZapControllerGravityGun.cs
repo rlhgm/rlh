@@ -47,7 +47,9 @@ public class ZapControllerGravityGun : ZapController
     public AudioClip beginShootSound = null;
     public AudioClip finishShootSound = null;
     public AudioClip shootSound = null;
-    
+
+    bool soundsEnabled = true;
+
     public override void setZap(Zap playerController)
     {
         base.setZap(playerController);
@@ -122,15 +124,18 @@ public class ZapControllerGravityGun : ZapController
         shootingDuration = 0f;
         zap.GravityGunBeam.gameObject.SetActive(true);
 
-        //zap.playSound(beginShootSound);
+        if( soundsEnabled ) zap.playSound(beginShootSound);
     }
     
     void stopShoot()
     {
         if (shooting)
         {
-            //zap.playSound(finishShootSound);
-            //zap.stopSoundLooped(shootSound);
+            if (soundsEnabled)
+            {
+                zap.playSound(finishShootSound);
+                zap.stopSoundLooped(shootSound);
+            }
         }
 
         shooting = false;
@@ -713,7 +718,10 @@ public class ZapControllerGravityGun : ZapController
                     GroundMoveable newDraggedGroundMoveable = hit.collider.GetComponent<GroundMoveable>();
                     if (newDraggedGroundMoveable)
                     {
-                        //zap.playSoundLooped(shootSound);
+                        if (soundsEnabled)
+                        {
+                            zap.playSoundLooped(shootSound);
+                        }
 
                         draggedStone = hit.collider.transform;
                         draggedStoneMoveable = draggedStone.GetComponent<GroundMoveable>();
