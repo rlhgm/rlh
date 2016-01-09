@@ -3122,6 +3122,27 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     public Transform rightKnifeHitPointLow2;
 
     Vector3 cameraTargetOffset = new Vector3();
+    Vector3 startCameraTargetOffset = new Vector3();
+    CameraTargetOffseter camTargetOffseter = null;
+    float CamTargetToOffsetSpeed = 0;
+
+    public void CameraOffsetIn(CameraTargetOffseter cto)
+    {
+        camTargetOffseter = cto;
+    }
+    public void CameraOffsetOut(CameraTargetOffseter cto)
+    {
+        this.RLHAssert(camTargetOffseter, "nie bylem a wyszedlem");
+        this.RLHAssert(cto == camTargetOffseter, "wychodze z innego niz wszedlem. pewnie sie zazebiaja");
+        camTargetOffseter = null;
+    }
+    void UpdateCameraOffset()
+    {
+        if (!camTargetOffseter) return;
+
+        //Vector3 lastCamTargetOffset = 
+    } 
+
     Transform cameraTarget;
     Transform gfx;
     Transform gfxLegs;
@@ -3352,10 +3373,10 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             return cameraTargetOffset;
         }
 
-        set
-        {
-            cameraTargetOffset = value;
-        }
+        //set
+        //{
+        //    cameraTargetOffset = value;
+        //}
     }
 
     public bool Paused
@@ -3365,6 +3386,19 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             return paused;
         }
     }
+
+    //public CameraTargetOffseter CamTargetOffseter
+    //{
+    //    get
+    //    {
+    //        return camTargetOffseter;
+    //    }
+
+    //    set
+    //    {
+    //        camTargetOffseter = value;
+    //    }
+    //}
 
     [HideInInspector]
     public Vector3 velocity;
