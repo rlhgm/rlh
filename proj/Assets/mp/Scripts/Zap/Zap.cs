@@ -1625,7 +1625,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
                 //{
                 //    cameraPassing.GResetCacheResetData();
                 //}
-                rlhScene.ResetAllResetables();
+                rlhScene.CacheAllResetableDatas();
             }
         }
 
