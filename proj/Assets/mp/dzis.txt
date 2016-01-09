@@ -2,14 +2,22 @@
 NAJBLIŻSZE 
 --------------------------------------------------------------------------------------------------------------------------------------------
 ) predkosc podazania kamery za zapem - 1) niezalezne od fps 2) jak zostanie przestawiony target camery to jest za szybko (dodac parametr)
-9) przejazdy kamery (jutro) - stop zapa + only one time + pominiecie za pomoca spacji [press space to skip] + wyciszenie/zatrzymanie ewentualnego dzwieku przejazdu kamery
 ) łapanie sie climberów przy malych fps'ach
-) show/hide physics podłączyć wszystkie obiekty
-) zapadajace sie schody robia pelny obrot jak zap zeskoczy z nich w max. polozeniu
 ) climbersy na gridzie
 ) restarty wszystkiego - schody, platformy, wrogowie itp
 ) nietoperze od razu gina + ) walka kierunkowa + 13) poprawa walki ze szczurami - nie dziala pod katem i w przykucu (jutro)
 --------------------------------------------------------------------------------------------------------------------------------------------
+TROCHE DALSZE
+--------------------------------------------------------------------------------------------------------------------------------------------
+) zapadajace sie schody robia pelny obrot jak zap zeskoczy z nich w max. polozeniu
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+DO TESTÓW
+--------------------------------------------------------------------------------------------------------------------------------------------
+9) przejazdy kamery (jutro) - stop zapa + only one time + pominiecie za pomoca spacji [press space to skip] + wyciszenie/zatrzymanie ewentualnego dzwieku przejazdu kamery
+) show/hide physics podłączyć wszystkie obiekty
+--------------------------------------------------------------------------------------------------------------------------------------------
+
 
 6) muzyka + dzięki //jak tylko bedziesz mial rozpiske jak to zrobic
 23) czas po spadku z platformy do odbicia sie z niczego
