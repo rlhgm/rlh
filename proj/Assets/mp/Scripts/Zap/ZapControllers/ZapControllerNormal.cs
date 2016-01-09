@@ -754,6 +754,22 @@ public class ZapControllerNormal : ZapController
                     }
                     else
                     {
+                        float _distToGround = 0.0f;
+                        zap.checkGround(ref _distToGround);
+
+                        if (zap.groundUnder)
+                        {
+                            Surface surface = zap.groundUnder.GetComponent<Surface>();
+                            if (surface)
+                            {
+                                if (surface.ZapLandingParticles.ParticlePrefab != null)
+                                {
+                                    Object newParticleObject = Instantiate(surface.ZapLandingParticles.ParticlePrefab, transform.position, Quaternion.Euler(0, 0, 0));
+                                    Destroy(newParticleObject, surface.ZapLandingParticles.LifeTime);
+                                }
+                            }
+                        }
+
                         if (zap.beforeFallController == null)
                         {
                             resetActionAndState();

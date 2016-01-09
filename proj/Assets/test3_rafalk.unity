@@ -30700,10 +30700,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   ZapLandingParticles:
-    ParticlePrefab: {fileID: 0}
+    ParticlePrefab: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
     LifeTime: 2
   ZapLandingHardParticles:
-    ParticlePrefab: {fileID: 0}
+    ParticlePrefab: {fileID: 108184, guid: d2f5c7e04c61b904ebe2a5e3b0198eac, type: 2}
     LifeTime: 2
 --- !u!1 &1426353323
 GameObject:
