@@ -14,9 +14,13 @@ MonoBehaviour:
   SndSet:
   - SoundTag: run
     clips:
-    - {fileID: 8300000, guid: 8eb889223cfa6cd458179ced2d468ea2, type: 3}
-    - {fileID: 8300000, guid: 28aa395d64575064fafba531982aa751, type: 3}
-    - {fileID: 8300000, guid: 0d28141c79198894c8e11efbc3e3004c, type: 3}
+    - clip: {fileID: 8300000, guid: 8eb889223cfa6cd458179ced2d468ea2, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: 28aa395d64575064fafba531982aa751, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: 0d28141c79198894c8e11efbc3e3004c, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
   - SoundTag: die
     clips:
-    - {fileID: 8300000, guid: 19e1ccedd7361794ba6f962e5e196466, type: 3}
+    - clip: {fileID: 8300000, guid: 19e1ccedd7361794ba6f962e5e196466, type: 3}
+      VolumeMinMax: {x: 1, y: 1}

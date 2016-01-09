@@ -14,18 +14,25 @@ MonoBehaviour:
   SndSet:
   - SoundTag: knife_attack
     clips:
-    - {fileID: 8300000, guid: f14b262a38ecaa547a3b5ecd75de0c93, type: 3}
-    - {fileID: 8300000, guid: 729236a9cc24ab348b7b77116f21024c, type: 3}
-    - {fileID: 8300000, guid: 449ed9a93745c0c4289f8444c201c27c, type: 3}
+    - clip: {fileID: 8300000, guid: f14b262a38ecaa547a3b5ecd75de0c93, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: 729236a9cc24ab348b7b77116f21024c, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: 449ed9a93745c0c4289f8444c201c27c, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
   - SoundTag: knife_out
     clips:
-    - {fileID: 8300000, guid: 9099323c90202ba4f9b95bbb468e2b7b, type: 3}
+    - clip: {fileID: 8300000, guid: 9099323c90202ba4f9b95bbb468e2b7b, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
   - SoundTag: knife_in
     clips:
-    - {fileID: 8300000, guid: 3120d03fd1b556e4caddc26d5db51594, type: 3}
+    - clip: {fileID: 8300000, guid: 3120d03fd1b556e4caddc26d5db51594, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
   - SoundTag: knife_kill
     clips:
-    - {fileID: 8300000, guid: e30b95f97f2deda4790d3fcede0fc5cc, type: 3}
+    - clip: {fileID: 8300000, guid: e30b95f97f2deda4790d3fcede0fc5cc, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
   - SoundTag: knife_trick
     clips:
-    - {fileID: 8300000, guid: b3954a8431507c745aa366ced6ccfbe0, type: 3}
+    - clip: {fileID: 8300000, guid: b3954a8431507c745aa366ced6ccfbe0, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
