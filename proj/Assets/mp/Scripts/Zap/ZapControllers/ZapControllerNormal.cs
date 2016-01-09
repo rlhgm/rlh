@@ -1314,7 +1314,7 @@ public class ZapControllerNormal : ZapController
                     Surface surface = zap.groundUnder.GetComponent<Surface>();
                     if (surface)
                     {
-                        if( surface.ZapLandingHardParticles != null )
+                        if( surface.ZapLandingHardParticles.ParticlePrefab != null )
                         {
                             Object newParticleObject = Instantiate(surface.ZapLandingHardParticles.ParticlePrefab, transform.position, Quaternion.Euler(0, 0, 0));
                             Destroy(newParticleObject, surface.ZapLandingHardParticles.LifeTime);
