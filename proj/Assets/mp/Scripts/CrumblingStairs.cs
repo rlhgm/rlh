@@ -1,8 +1,68 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrumblingStairs : MonoBehaviour
+public class CrumblingStairs : MonoBehaviour, IGResetable
 {
+    //ground.gameObject.SetActive(false);
+    //    handle.gameObject.SetActive(false);
+    //    mount.gameObject.SetActive(true);
+
+    //    mountBody.isKinematic = false;
+
+    //    if (LimitSteps.Length > crumbled)
+    //    {
+    //        mountHinge.useLimits = true;
+    //        JointAngleLimits2D angleLimits = new JointAngleLimits2D();
+    //angleLimits.min = LimitSteps[crumbled];
+    //        angleLimits.max = 360f;
+    //        mountHinge.limits = angleLimits;
+    //    }
+
+    //    if( CamShakeTimes.Length > crumbled)
+    //    {
+    //        //RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
+    //    }
+
+    //    currentHangTime = 0f;
+
+    //    crumbled++;
+
+    int ToResetCrumbled = 0;
+    float ToResetCurrentHangTime = 0f;
+    bool ToResetIsNoCrumbled = true;
+     
+    public void GResetCacheResetData()
+    {
+        ToResetCrumbled = crumbled;
+        ToResetCurrentHangTime = currentHangTime;
+
+        ToResetIsNoCrumbled = mountBody.isKinematic;
+    }
+
+    public void GReset()
+    {
+        crumbled = ToResetCrumbled;
+        currentHangTime = ToResetCurrentHangTime;
+
+        //gameObject.SetActive(!ToResetCollapsed);
+        //Collapsed = ToResetCollapsed;
+        //ToCollapseTime = ToResetToCollapseTime;
+
+        ground.gameObject.SetActive(ToResetIsNoCrumbled);
+        handle.gameObject.SetActive(ToResetIsNoCrumbled);
+        mount.gameObject.SetActive(!ToResetIsNoCrumbled);
+        mountBody.isKinematic = ToResetIsNoCrumbled;
+
+        if ( ToResetIsNoCrumbled )
+        {
+            
+        }
+        else
+        {
+
+        }
+    }
+
     Transform ground = null;
     Transform handle = null;
     Transform mount = null;
@@ -33,7 +93,7 @@ public class CrumblingStairs : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
+    {        
         ground = transform.Find("ground");
         handle = transform.Find("handle");
         mount = transform.Find("mount");
