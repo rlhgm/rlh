@@ -80,7 +80,7 @@ public class RLHScene : MonoBehaviour
 
     public void AddIGResetable(IGResetable newResetable)
     {
-        print("addIGResetable " + resetableObjects.Count);
+        //print("addIGResetable " + resetableObjects.Count);
         resetableObjects.Add(newResetable);
     }
 
@@ -107,25 +107,26 @@ public class RLHScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ////resetableObjects.Clear();
-        //print("RLHScene::Start()");
-        ////IGResetable[] interfaces = gameObject.GetInterfaces<IGResetable>();
-        //object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
-        //foreach (object o in obj)
-        //{
-        //    GameObject g = (GameObject)o;
-        //    //Debug.Log(g.name);
-        //    IGResetable[] interfaces = g.GetInterfaces<IGResetable>();
-        //    if (interfaces.Length > 0)
-        //    {
-        //        //print(g.name + " jest resetable");
-        //        foreach(IGResetable _r in interfaces)
-        //        {
-        //            //resetableObjects.Add(_r);
-        //            addIGResetable(_r);
-        //        }
-        //    }
-        //}
+        //resetableObjects.Clear();
+        print("RLHScene::Start()");
+        //IGResetable[] interfaces = gameObject.GetInterfaces<IGResetable>();
+        object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
+        foreach (object o in obj)
+        {
+            GameObject g = (GameObject)o;
+            //Debug.Log(g.name);
+            IGResetable[] interfaces = g.GetInterfaces<IGResetable>();
+            if (interfaces.Length > 0)
+            {
+                //print(g.name + " jest resetable");
+                foreach (IGResetable _r in interfaces)
+                {
+                    //resetableObjects.Add(_r);
+                    AddIGResetable(_r);
+                }
+            }
+        }
+        print("RLHScene " + resetableObjects.Count);
 
         //resetableObjects.re
         //interfaces[0].game

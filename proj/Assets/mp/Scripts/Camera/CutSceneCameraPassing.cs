@@ -20,7 +20,7 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
             Debug.Break();
         }
 
-        GResetCreated();
+        //GResetCreated();
     }
 
     // Update is called once per frame
@@ -58,10 +58,10 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
 
     bool startActive;
 
-    public void GResetCreated()
-    {
-        RLHScene.Instance.AddIGResetable(this);
-    }
+    //public void GResetCreated()
+    //{
+    //    RLHScene.Instance.AddIGResetable(this);
+    //}
 
     public void GResetCacheResetData()
     {

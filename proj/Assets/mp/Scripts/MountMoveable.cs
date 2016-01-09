@@ -1,8 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MountMoveable : MonoBehaviour
+public class MountMoveable : MonoBehaviour, IGResetable
 {
+    //Vector3 startPosition;
+    //Quaternion startRotation;
+    //bool startActive;
+    float ToResetToCollapseTime = -1;
+    bool ToResetCollapsed = false;
+
+    //public void GResetCreated()
+    //{
+    //    RLHScene.Instance.AddIGResetable(this);
+    //}
+
+    public void GResetCacheResetData()
+    {
+        //startPosition = transform.position;
+        //startRotation = transform.rotation;
+        //startActive = gameObject.activeSelf;
+
+        ToResetToCollapseTime = ToCollapseTime;
+        ToResetCollapsed = Collapsed;
+    }
+
+    public void GReset()
+    {
+        //gameObject.SetActive(startActive);
+        //transform.position = startPosition;
+        //transform.rotation = startRotation;
+
+        gameObject.SetActive(!ToResetCollapsed);
+        Collapsed = ToResetCollapsed;
+        ToCollapseTime = ToResetToCollapseTime;
+    }
+
     public bool MovingXEnabled = false;
     public bool MovingYEnabled = false;
     public bool MovingInLocal = false;

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 public interface IGResetable
 {
-    void GResetCreated();
+    //void GResetCreated();
     void GResetCacheResetData();
     void GReset();
 }
