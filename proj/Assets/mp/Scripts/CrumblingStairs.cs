@@ -30,13 +30,26 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
     int ToResetCrumbled = 0;
     float ToResetCurrentHangTime = 0f;
     bool ToResetIsNoCrumbled = true;
-     
+
+    Vector3 ToResetMountPosition;
+    float ToResetMoutRotation;
+    JointAngleLimits2D ToResetAngleLimits = new JointAngleLimits2D();
+    
     public void GResetCacheResetData()
     {
         ToResetCrumbled = crumbled;
         ToResetCurrentHangTime = currentHangTime;
 
         ToResetIsNoCrumbled = mountBody.isKinematic;
+
+        ToResetMountPosition = mountBody.position;
+        ToResetMoutRotation = mountBody.rotation;
+        ToResetAngleLimits.min = mountHinge.limits.min;
+        ToResetAngleLimits.max = mountHinge.limits.max;
+
+        //angleLimits.min = LimitSteps[crumbled];
+        //        angleLimits.max = 360f;
+        //        mountHinge.limits = angleLimits;
     }
 
     public void GReset()
@@ -50,7 +63,19 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
 
         ground.gameObject.SetActive(ToResetIsNoCrumbled);
         handle.gameObject.SetActive(ToResetIsNoCrumbled);
-        mount.gameObject.SetActive(!ToResetIsNoCrumbled);
+
+       
+        //mountHinge.limits.min = ToResetAngleLimits.min;
+        mountHinge.useLimits = true;
+        JointAngleLimits2D angleLimits = new JointAngleLimits2D();
+        angleLimits.min = ToResetAngleLimits.min;
+        angleLimits.max = ToResetAngleLimits.max;
+        mountHinge.limits = angleLimits;
+
+        mountBody.position = ToResetMountPosition;
+        mountBody.rotation = ToResetMoutRotation;
+        
+        //mount.gameObject.SetActive(!ToResetIsNoCrumbled);
         mountBody.isKinematic = ToResetIsNoCrumbled;
 
         if ( ToResetIsNoCrumbled )
