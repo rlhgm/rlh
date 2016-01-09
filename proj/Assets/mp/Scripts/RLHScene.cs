@@ -78,15 +78,30 @@ public class RLHScene : MonoBehaviour
     //game[] interfaces
     List<IGResetable> resetableObjects = new List<IGResetable>();
 
-    public void addIGResetable(IGResetable newResetable)
+    public void AddIGResetable(IGResetable newResetable)
     {
         print("addIGResetable " + resetableObjects.Count);
         resetableObjects.Add(newResetable);
     }
 
-    public void removeIGResetable(IGResetable removedResetable)
+    public void RemoveIGResetable(IGResetable removedResetable)
     {
         resetableObjects.Remove(removedResetable);
+    }
+
+    public void CacheAllResetableDatas()
+    {
+        foreach(IGResetable resetable in resetableObjects)
+        {
+            resetable.GResetCacheResetData();
+        }
+    }
+    public void ResetAllResetables()
+    {
+        foreach (IGResetable resetable in resetableObjects)
+        {
+            resetable.GReset();
+        }
     }
 
     // Use this for initialization

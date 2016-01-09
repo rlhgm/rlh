@@ -38,7 +38,7 @@ public class Crate : MonoBehaviour, IKnifeCutable, IGResetable
 
     public void GResetCreated()
     {
-        RLHScene.Instance.addIGResetable(this);
+        RLHScene.Instance.AddIGResetable(this);
     }
 
     public void GResetCacheResetData()

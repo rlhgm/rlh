@@ -159,10 +159,10 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
                 Surface surface = groundUnder.GetComponent<Surface>();
                 if (surface)
                 {
-                    print(acd.Type + " " + acd.Message + "*" + surface.type);
+                    //print(acd.Type + " " + acd.Message + "*" + surface.type);
                     if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
                     {
-                        print("PROBUJE odtworzyc : " + acd.Message);
+                        //print("PROBUJE odtworzyc : " + acd.Message);
                         SoundPlayer.Play(gameObject, acd.Message);
                     }
                 }
@@ -546,17 +546,18 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         //{
         //    resetable.GCacheResetData();
         //}
-        allCrates = FindObjectsOfType(typeof(Crate)) as Crate[];
-        foreach (Crate resetable in allCrates)
-        {
-            resetable.GResetCacheResetData();
-        }
-        allCameraPassings = FindObjectsOfType(typeof(CutSceneCameraPassing)) as CutSceneCameraPassing[];
-        foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
-        {
-            cameraPassing.GResetCacheResetData();
-        }
 
+        //allCrates = FindObjectsOfType(typeof(Crate)) as Crate[];
+        //foreach (Crate resetable in allCrates)
+        //{
+        //    resetable.GResetCacheResetData();
+        //}
+        //allCameraPassings = FindObjectsOfType(typeof(CutSceneCameraPassing)) as CutSceneCameraPassing[];
+        //foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
+        //{
+        //    cameraPassing.GResetCacheResetData();
+        //}
+        rlhScene.CacheAllResetableDatas();
     }
 
     public void chooseController(ZapController newController)
@@ -934,15 +935,17 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         //{
         //    resetable.GReset();
         //}
+
         //Crate[] resetables = FindObjectsOfType(typeof(Crate)) as Crate[];
-        foreach (Crate resetable in allCrates)
-        {
-            resetable.GReset();
-        }
-        foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
-        {
-            cameraPassing.GReset();
-        }
+        //foreach (Crate resetable in allCrates)
+        //{
+        //    resetable.GReset();
+        //}
+        //foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
+        //{
+        //    cameraPassing.GReset();
+        //}
+        rlhScene.ResetAllResetables();
     }
 
     public CheckPoint LastTouchedCheckPoint
@@ -1612,15 +1615,17 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
                 //{
                 //    resetable.GCacheResetData();
                 //}
-                //Crate[] resetables = FindObjectsOfType(typeof(Crate)) as Crate[];
-                foreach (Crate resetable in allCrates)
-                {
-                    resetable.GResetCacheResetData();
-                }
-                foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
-                {
-                    cameraPassing.GResetCacheResetData();
-                }
+
+                ////Crate[] resetables = FindObjectsOfType(typeof(Crate)) as Crate[];
+                //foreach (Crate resetable in allCrates)
+                //{
+                //    resetable.GResetCacheResetData();
+                //}
+                //foreach (CutSceneCameraPassing cameraPassing in allCameraPassings)
+                //{
+                //    cameraPassing.GResetCacheResetData();
+                //}
+                rlhScene.ResetAllResetables();
             }
         }
 
