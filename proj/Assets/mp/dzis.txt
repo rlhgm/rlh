@@ -8,7 +8,6 @@ polish graficzy
 - dzwiek zapa belly (lapanie sie brzuech + wspinaczka) uruchamia sie dwa
 - dzwieki z animacji sie nie uruchamiaja jak jest malo fps'ów
 - wlaczyc na powrot dzwiek gravityguna
-- przejrzeć czemu sie nie resetuja rzeczy na 2.1c - ALE TYLKO U CZARKA
 - jak po czyms chodzimy co jest urywalne + schody jak złapiemy to 1) particle leca 2) dzwieki trzeszczenia 3) trzesienie sie gafiki delikatne
 - na zderzenie sie schodow ze sciana particle ze sciany + ew. kolejne drzazgi ze schodow
 - klatka schodowa pietro -1 triggerowane kamienie urywajace fragmenty schodow + pojawiajacy sie lightray
@@ -20,6 +19,11 @@ polish graficzy
 - wyrywany kamien powinien sie trzac + particle
 - nietoperze z zyrandola po zlapaniu sie + musza odleciec na jakas odleglosc
 - potrojny (wielokotny) urywajacy sie chodnik
+
+[17:25:43] Raf Kol: OTÓŻ ŹLE ZROBIŁEM TEN RLHOPTIONS BO ON TYLKO WYLACZA SPRITERENDERERA Z GFX'ÓW
+[17:26:00] Raf Kol: PRZEROBIE TO TAK ABY WLACZAL SIE CAŁY OBIEKT GFX
+
+- przejrzeć czemu sie nie resetuja rzeczy na 2.1c - ALE TYLKO U CZARKA - JEST
 --------------------------------------------------------------------------------------------------------------------------------------------
 ) łapanie sie climberów przy malych fps'ach
 ) climbersy na gridzie
