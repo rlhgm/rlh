@@ -4,6 +4,13 @@ using System; //This allows the IComparable Interface
 using System.Collections.Generic;
 
 [Serializable]
+public class AudioClipData
+{
+    public AudioClip clip = null;
+    public Vector2 VolumeMinMax = new Vector2(1f,1f);
+}
+
+[Serializable]
 public class SoundSet/* : ScriptableObject*/
 {
     //public SoundSet()
@@ -28,7 +35,8 @@ public class SoundSet/* : ScriptableObject*/
     //}
 
     public string SoundTag;
-    public AudioClip[] clips;
+    //public AudioClip[] clips;
+    public AudioClipData[] clips;
     //[HideInInspector]
     ///*public */int SoundTagHash;
 
@@ -95,7 +103,7 @@ public class SoundSets : ScriptableObject
     //    return GetRandomAudioClip(Animator.StringToHash(SndTag));
     //}
 
-    public AudioClip GetRandomAudioClip(string SndTag/*int SndTagHash*/)
+    public AudioClipData GetRandomAudioClip(string SndTag/*int SndTagHash*/)
     {
         int numberOfSndSets = SndSet.Length;
         for (int i = 0; i < numberOfSndSets; ++i)

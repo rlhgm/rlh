@@ -45,10 +45,10 @@ public class SoundPlay : MonoBehaviour
     public bool Play(string SoundTag)
     {
         //return Play(Animator.StringToHash(SoundTag));
-        AudioClip ac = soundsSets.GetRandomAudioClip(SoundTag);
-        if (ac)
+        AudioClipData acd = soundsSets.GetRandomAudioClip(SoundTag);
+        if (acd != null)
         {
-            audioSource.PlayOneShot(ac);
+            audioSource.PlayOneShot(acd.clip,Random.Range(acd.VolumeMinMax.x, acd.VolumeMinMax.y));
             //AudioSource.PlayClipAtPoint(ac, RLHScene.Instance.Zap.transform.position);
             return true;
         }
