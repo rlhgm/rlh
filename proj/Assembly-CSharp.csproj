@@ -87,6 +87,7 @@
      <Compile Include="Assets\mp\Scripts\Enemies\Rat.cs" />
      <Compile Include="Assets\mp\Scripts\Enemies\RatsHole.cs" />
      <Compile Include="Assets\mp\Scripts\GGRayTest1.cs" />
+     <Compile Include="Assets\mp\Scripts\GameObjectExtensions.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\Ghost.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostController.cs" />
      <Compile Include="Assets\mp\Scripts\Ghost\GhostControllers\GhostControllerByKeyTriggers.cs" />
@@ -98,6 +99,7 @@
      <Compile Include="Assets\mp\Scripts\ImpactSounds.cs" />
      <Compile Include="Assets\mp\Scripts\LevelBounds.cs" />
      <Compile Include="Assets\mp\Scripts\Line.cs" />
+     <Compile Include="Assets\mp\Scripts\MonoBehaviourExtension.cs" />
      <Compile Include="Assets\mp\Scripts\MountMoveable.cs" />
      <Compile Include="Assets\mp\Scripts\NewRope.cs" />
      <Compile Include="Assets\mp\Scripts\NewZapTest.cs" />
