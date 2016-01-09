@@ -1543,6 +1543,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
     bool GlobalUpdate(float deltaTime)
     {
+        UpdateCameraOffset();
+
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
@@ -3122,25 +3124,45 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     public Transform rightKnifeHitPointLow2;
 
     Vector3 cameraTargetOffset = new Vector3();
-    Vector3 startCameraTargetOffset = new Vector3();
-    CameraTargetOffseter camTargetOffseter = null;
-    float CamTargetToOffsetSpeed = 0;
+    Vector3 targetCameraTargetOffset = new Vector3();
+    //CameraTargetOffseter camTargetOffseter = null;
+    float camTargetToOffsetSpeed = 0f;
 
     public void CameraOffsetIn(CameraTargetOffseter cto)
     {
-        camTargetOffseter = cto;
+        //camTargetOffseter = cto;
+
+        targetCameraTargetOffset = cto.CameraOffset;
+        camTargetToOffsetSpeed = cto.ToOffsetSpeedInOut.x;
     }
     public void CameraOffsetOut(CameraTargetOffseter cto)
     {
-        this.RLHAssert(camTargetOffseter, "nie bylem a wyszedlem");
-        this.RLHAssert(cto == camTargetOffseter, "wychodze z innego niz wszedlem. pewnie sie zazebiaja");
-        camTargetOffseter = null;
+        //this.RLHAssert(camTargetOffseter, "nie bylem a wyszedlem");
+        //this.RLHAssert(cto == camTargetOffseter, "wychodze z innego niz wszedlem. pewnie sie zazebiaja");
+        //camTargetOffseter = null;
+
+        targetCameraTargetOffset = new Vector3(0f, 0f, 0f);
+        camTargetToOffsetSpeed = cto.ToOffsetSpeedInOut.y;
     }
     void UpdateCameraOffset()
     {
-        if (!camTargetOffseter) return;
+        if (camTargetToOffsetSpeed == 0f) return;
+        //if (!camTargetOffseter) return;
 
-        //Vector3 lastCamTargetOffset = 
+        Vector3 _lastCamTargetOffset = cameraTargetOffset;
+        Vector3 _distToMoveV = targetCameraTargetOffset - _lastCamTargetOffset;
+        float _distToMove = _distToMoveV.magnitude;
+
+        float _posMoveDist = Time.deltaTime * camTargetToOffsetSpeed;
+        if( _posMoveDist > _distToMove )
+        {
+            cameraTargetOffset = targetCameraTargetOffset;
+            camTargetToOffsetSpeed = 0f;
+        }
+        else
+        {
+            cameraTargetOffset += ( _distToMoveV.normalized * _posMoveDist );
+        }
     } 
 
     Transform cameraTarget;
