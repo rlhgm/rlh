@@ -4,18 +4,25 @@ using System.Collections;
 public class CameraTargetOffseter : MonoBehaviour
 {
     public Vector2 CameraOffset;
+    public float ToOffsetSpeed = 1f;
 
     // Use this for initialization
     void Start()
     {
-
+        //print(GetType());
+        //if(ToOffsetSpeed <= 0f)
+        //{
+        //    //Debug.LogError();
+        //    RLHScene.RLHAssert(ToOffsetSpeed > 0f, "CameraTargetOffseter");
+        //}
+        this.RLHAssert(ToOffsetSpeed > 0f, "ToOffsetSpeed musi byc wiekszy od 0");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
 
-    }
+    //}
 
     void OnTriggerEnter2D(Collider2D collider)
     {
