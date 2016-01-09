@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ac36bd47a762734f9e05cb88010821b
+guid: 0d9da911220a9264f874afb5ca31e74b
 timeCreated: 1437676498
 licenseType: Free
 TextureImporter:
@@ -37,6 +37,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
