@@ -19,9 +19,13 @@ MonoBehaviour:
   - SoundTag: belly
     clips:
     - clip: {fileID: 8300000, guid: cab8bc35164242c499807e4420eb0624, type: 3}
-      VolumeMinMax: {x: 1, y: 1}
+      VolumeMinMax: {x: .400000006, y: .400000006}
     - clip: {fileID: 8300000, guid: 0ec5ac5b943d5504b9a80663b4d0b94f, type: 3}
-      VolumeMinMax: {x: 1, y: 1}
+      VolumeMinMax: {x: .5, y: .5}
+    - clip: {fileID: 8300000, guid: 0ec5ac5b943d5504b9a80663b4d0b94f, type: 3}
+      VolumeMinMax: {x: .5, y: .5}
+    - clip: {fileID: 8300000, guid: 0ec5ac5b943d5504b9a80663b4d0b94f, type: 3}
+      VolumeMinMax: {x: .5, y: .5}
   - SoundTag: backpack
     clips:
     - clip: {fileID: 8300000, guid: 719d6daa740096c40b4c649e8c3cd153, type: 3}

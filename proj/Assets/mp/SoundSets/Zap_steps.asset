@@ -16,35 +16,41 @@ MonoBehaviour:
     clips:
     - clip: {fileID: 8300000, guid: a3e59b983c6dbe240b762c9488894158, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 1cd034a6f37918342b1d989dcd5b024a, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 84b784726b382024baa531d9a5abc8ca, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 6896d66d07228724fbc4059e1c04a7b0, type: 3}
       VolumeMinMax: {x: 1, y: 1}
   - SoundTag: run*Wood
     clips:
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: fb304312b8a8bc44dbe272f65d65124c, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: d54152c7f91b34340ac2f2baf7a1a973, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 224d475128985144e9b2ee2eb7609f31, type: 3}
       VolumeMinMax: {x: 1, y: 1}
   - SoundTag: walk
     clips:
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 1e1333f66a9d33b498dd4a53149cbf10, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: edc88073d3e89ab4c82f6771958b1d14, type: 3}
       VolumeMinMax: {x: 1, y: 1}
   - SoundTag: walk*Wood
     clips:
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: b80909e2e4bb32d47ab12a098a1da6a2, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: cc1e4a92bd9af1445b26026765969fdf, type: 3}
       VolumeMinMax: {x: 1, y: 1}
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 810cc9217f0123e4f904fe721c9aba26, type: 3}
       VolumeMinMax: {x: 1, y: 1}
   - SoundTag: crawl
     clips:
-    - clip: {fileID: 0}
+    - clip: {fileID: 8300000, guid: aa27b84bc6f8d754a925a1f25f1e1b82, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: aa27b84bc6f8d754a925a1f25f1e1b82, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: aa27b84bc6f8d754a925a1f25f1e1b82, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+    - clip: {fileID: 8300000, guid: 984239d82baf42e4fb51000617507d98, type: 3}
       VolumeMinMax: {x: 1, y: 1}
