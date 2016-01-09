@@ -115,7 +115,7 @@ public class ZapControllerNormal : ZapController
 
     float groundUnderFeet;
 
-    public GameObject landingHardParticles = null;
+    //public GameObject landingHardParticles = null;
     
     public override void MUpdate(float deltaTime, bool firstUpdate)
     {
@@ -1307,29 +1307,36 @@ public class ZapControllerNormal : ZapController
                 if (zap.landingSounds.Length != 0)
                     zap.playSound(zap.landingSounds[Random.Range(0, zap.landingSounds.Length)]);
 
-                Debug.Log(zap.groundUnder.gameObject.name);
+                //Debug.Log(zap.groundUnder.gameObject.name);
 
-                //if( )
-                //Surface surface = zap.groundUnder.GetComponent<Surface>();
-                //if (surface)
-                //{
-                //    //print(acd.Type + " " + acd.Message + "*" + surface.type);
-                //    if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
-                //    {
-                //        //print("PROBUJE odtworzyc : " + acd.Message);
-                //        SoundPlayer.Play(gameObject, acd.Message);
-                //    }
-                //}
-                //else
-                //{
-                //    SoundPlayer.Play(gameObject, acd.Message);
-                //}
-
-                if (landingHardParticles)
+                if (zap.groundUnder)
                 {
-                    Object newParticleObject = Instantiate(landingHardParticles, transform.position, Quaternion.Euler(0, 0, 0));
-                    Destroy(newParticleObject, 2.0f);
+                    Surface surface = zap.groundUnder.GetComponent<Surface>();
+                    if (surface)
+                    {
+                        if( surface.ZapLandingHardParticles != null )
+                        {
+                            Object newParticleObject = Instantiate(surface.ZapLandingHardParticles.ParticlePrefab, transform.position, Quaternion.Euler(0, 0, 0));
+                            Destroy(newParticleObject, surface.ZapLandingHardParticles.LifeTime);
+                        }
+                        ////print(acd.Type + " " + acd.Message + "*" + surface.type);
+                        //if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
+                        //{
+                        //    //print("PROBUJE odtworzyc : " + acd.Message);
+                        //    SoundPlayer.Play(gameObject, acd.Message);
+                        //}
+                    }
+                    //else
+                    //{
+                    //    //SoundPlayer.Play(gameObject, acd.Message);
+                    //}
                 }
+
+                //if (landingHardParticles)
+                //{
+                //    Object newParticleObject = Instantiate(landingHardParticles, transform.position, Quaternion.Euler(0, 0, 0));
+                //    Destroy(newParticleObject, 2.0f);
+                //}
 
                 break;
 

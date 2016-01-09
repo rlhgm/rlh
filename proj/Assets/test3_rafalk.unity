@@ -2877,6 +2877,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  ZapLandingParticles:
+    ParticlePrefab: {fileID: 141360, guid: 5304eea439929a34c87989ee9c3c7180, type: 2}
+    LifeTime: 2
+  ZapLandingHardParticles:
+    ParticlePrefab: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
+    LifeTime: 2
 --- !u!1001 &122162778
 Prefab:
   m_ObjectHideFlags: 0
@@ -25715,6 +25721,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1600437583}
   m_RootOrder: 8
+--- !u!1001 &1192824791
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1968783080}
+    m_Modifications:
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -153
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_RootOrder
+      value: 276
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108752, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_Name
+      value: tile_ground1_normal 49 (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1192824792 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+  m_PrefabInternal: {fileID: 1192824791}
 --- !u!1001 &1193141351
 Prefab:
   m_ObjectHideFlags: 0
@@ -30519,6 +30583,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  ZapLandingParticles:
+    ParticlePrefab: {fileID: 0}
+    LifeTime: 2
+  ZapLandingHardParticles:
+    ParticlePrefab: {fileID: 0}
+    LifeTime: 2
 --- !u!1 &1426353323
 GameObject:
   m_ObjectHideFlags: 0
@@ -31864,11 +31934,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -204.759995
+      value: -149.759995
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 30.8799992
+      value: 33.8800011
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -41803,6 +41873,7 @@ Transform:
   - {fileID: 1206931122}
   - {fileID: 2010399579}
   - {fileID: 1145672560}
+  - {fileID: 1192824792}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1001 &1970228699
@@ -42562,6 +42633,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+  ZapLandingParticles:
+    ParticlePrefab: {fileID: 0}
+    LifeTime: 2
+  ZapLandingHardParticles:
+    ParticlePrefab: {fileID: 0}
+    LifeTime: 2
 --- !u!1001 &2014494115
 Prefab:
   m_ObjectHideFlags: 0
