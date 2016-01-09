@@ -3149,8 +3149,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         if (camTargetToOffsetSpeed == 0f) return;
         //if (!camTargetOffseter) return;
 
-        Vector3 _lastCamTargetOffset = cameraTargetOffset;
-        Vector3 _distToMoveV = targetCameraTargetOffset - _lastCamTargetOffset;
+        //Vector3 _lastCamTargetOffset = cameraTargetOffset;
+        Vector3 _distToMoveV = targetCameraTargetOffset - cameraTargetOffset;
         float _distToMove = _distToMoveV.magnitude;
 
         float _posMoveDist = Time.deltaTime * camTargetToOffsetSpeed;

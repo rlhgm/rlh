@@ -5843,6 +5843,14 @@ Prefab:
       propertyPath: ToOffsetSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11421152, guid: c7014ca3d2e75784782ad17fa1bc2fa8, type: 2}
+      propertyPath: ToOffsetSpeedInOut.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11421152, guid: c7014ca3d2e75784782ad17fa1bc2fa8, type: 2}
+      propertyPath: ToOffsetSpeedInOut.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7014ca3d2e75784782ad17fa1bc2fa8, type: 2}
   m_IsPrefabParent: 0
