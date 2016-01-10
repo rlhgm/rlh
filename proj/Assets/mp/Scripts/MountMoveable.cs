@@ -47,6 +47,9 @@ public class MountMoveable : MonoBehaviour, IGResetable
     public bool ResetOnJump = true;
     public GameObject CollapseParticles = null;
 
+    public string SoundTagCatch = "";
+    public string SoundTagCollapse = "";
+
     float ToCollapseTime = -1;
     bool Collapsed = false;
     
@@ -98,6 +101,8 @@ public class MountMoveable : MonoBehaviour, IGResetable
     {
         gameObject.SetActive(false);
         Collapsed = true;
+
+        if (SoundTagCollapse != "") SoundPlayer.Play(gameObject, SoundTagCollapse, transform.position);
 
         if (CollapseParticles)
         {

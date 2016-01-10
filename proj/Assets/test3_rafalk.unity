@@ -17639,6 +17639,8 @@ MonoBehaviour:
   CollapseOnJump: 0
   ResetOnJump: 0
   CollapseParticles: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
+  SoundTagCatch: 
+  SoundTagCollapse: 
 --- !u!50 &884941945
 Rigidbody2D:
   serializedVersion: 2
@@ -27327,6 +27329,8 @@ MonoBehaviour:
   CollapseOnJump: 1
   ResetOnJump: 1
   CollapseParticles: {fileID: 0}
+  SoundTagCatch: 
+  SoundTagCollapse: 
 --- !u!50 &1260789932
 Rigidbody2D:
   serializedVersion: 2
@@ -32159,11 +32163,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -201.800003
+      value: -132.800003
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 27.8999996
+      value: 22.8999996
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -35003,6 +35007,19 @@ Prefab:
       propertyPath: CollapseDuration
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11406582, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
+      propertyPath: SoundTagCatch
+      value: test1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406582, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
+      propertyPath: SoundTagCollapse
+      value: test2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410764, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
+      propertyPath: soundsSets
+      value: 
+      objectReference: {fileID: 11400000, guid: 732954f1d41ce8c44b2ac32566b9d3b4,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
   m_IsPrefabParent: 0
@@ -37133,6 +37150,8 @@ MonoBehaviour:
   CollapseOnJump: 1
   ResetOnJump: 1
   CollapseParticles: {fileID: 0}
+  SoundTagCatch: 
+  SoundTagCollapse: 
 --- !u!50 &1753058179
 Rigidbody2D:
   serializedVersion: 2
@@ -42445,6 +42464,8 @@ MonoBehaviour:
   CollapseOnJump: 0
   ResetOnJump: 0
   CollapseParticles: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
+  SoundTagCatch: 
+  SoundTagCollapse: 
 --- !u!50 &1997014288
 Rigidbody2D:
   serializedVersion: 2

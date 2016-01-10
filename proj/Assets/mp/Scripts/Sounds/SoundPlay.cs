@@ -55,6 +55,20 @@ public class SoundPlay : MonoBehaviour
         return false;
     }
 
+    public bool Play(string SoundTag, Vector3 soundPosition)
+    {
+        //return Play(Animator.StringToHash(SoundTag));
+        AudioClipData acd = soundsSets.GetRandomAudioClip(SoundTag);
+        if (acd != null)
+        {
+            //audioSource.PlayOneShot(acd.clip, Random.Range(acd.VolumeMinMax.x, acd.VolumeMinMax.y));
+            AudioSource.PlayClipAtPoint(acd.clip, soundPosition, Random.Range(acd.VolumeMinMax.x, acd.VolumeMinMax.y));
+            //AudioSource.PlayClipAtPoint(ac, RLHScene.Instance.Zap.transform.position);
+            return true;
+        }
+        return false;
+    }
+
     //public bool Play(int SoundTagHash)
     //{
     //    AudioClip ac = soundsSets.GetRandomAudioClip(SoundTagHash);
