@@ -10,6 +10,7 @@ public class CollapseableFootbridge : MonoBehaviour
     bool collapsing = false;
 
     public string SoundTagEnter = "";
+    public string SoundTagCollapse = "";
 
     // Use this for initialization
     void Start()
@@ -49,6 +50,7 @@ public class CollapseableFootbridge : MonoBehaviour
         collapsing = false;
         enabled = false;
         GetComponent<GroundMoveable>().BreakOff();
+        if (SoundTagCollapse != "") SoundPlayer.Play(gameObject, SoundTagCollapse);
     }
 
     public void Reset()

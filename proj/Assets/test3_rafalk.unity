@@ -9233,6 +9233,7 @@ MonoBehaviour:
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
+  SoundTagCollapse: 
 --- !u!4 &453164523 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 751d4a2bc2b63c047a88e384d4fb8baa, type: 2}
@@ -25978,6 +25979,7 @@ MonoBehaviour:
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
+  SoundTagCollapse: 
 --- !u!1001 &1193311775
 Prefab:
   m_ObjectHideFlags: 0
@@ -29430,6 +29432,7 @@ MonoBehaviour:
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: knife_kill
+  SoundTagCollapse: knife_attack
 --- !u!82 &1364039636
 AudioSource:
   m_ObjectHideFlags: 0
@@ -36864,6 +36867,7 @@ MonoBehaviour:
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
+  SoundTagCollapse: 
 --- !u!1001 &1730850592
 Prefab:
   m_ObjectHideFlags: 0
@@ -36937,6 +36941,7 @@ MonoBehaviour:
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
+  SoundTagCollapse: 
 --- !u!1001 &1734078543
 Prefab:
   m_ObjectHideFlags: 0
@@ -41681,6 +41686,7 @@ MonoBehaviour:
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
+  SoundTagCollapse: 
 --- !u!4 &1954713591 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 751d4a2bc2b63c047a88e384d4fb8baa, type: 2}
