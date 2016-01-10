@@ -7035,6 +7035,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: SoundTagCrumble
+      value: test2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443632, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
+      propertyPath: SoundTagCatch
+      value: test1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a39b61070010804cad4c6c6bee6e732, type: 2}
   m_IsPrefabParent: 0

@@ -16,3 +16,7 @@ MonoBehaviour:
     clips:
     - clip: {fileID: 8300000, guid: 44cbc41cb4ea9b940872bd1b54d5cfbc, type: 3}
       VolumeMinMax: {x: 1, y: 1}
+  - SoundTag: test2
+    clips:
+    - clip: {fileID: 8300000, guid: 8b5cb264c6cf65944b4d2bfdedf9e3c8, type: 3}
+      VolumeMinMax: {x: 1, y: 1}

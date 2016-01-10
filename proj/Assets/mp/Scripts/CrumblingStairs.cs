@@ -26,7 +26,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
     //    currentHangTime = 0f;
 
     //    crumbled++;
-
+    
     int ToResetCrumbled = 0;
     float ToResetCurrentHangTime = 0f;
     bool ToResetIsNoCrumbled = true;
@@ -112,7 +112,10 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
     public float[] CamShakeTimes;
     public float[] CamShakeAmplitudes;
     public float[] CamShakeSpeeds;
-     
+
+    public string SoundTagCatch = "";
+    public string SoundTagCrumble = "";
+
     public Transform MountHandle
     {
         get { return mountHandle; }
@@ -231,6 +234,8 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         currentHangTime = 0f;
 
         crumbled++;
+
+        if( SoundTagCrumble != "" ) SoundPlayer.Play(gameObject, SoundTagCrumble);
     }
 
     public bool HaveNextCrumbled()
