@@ -9232,6 +9232,7 @@ MonoBehaviour:
   CollapseDuration: .5
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
+  SoundTagEnter: 
 --- !u!4 &453164523 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 751d4a2bc2b63c047a88e384d4fb8baa, type: 2}
@@ -25976,6 +25977,7 @@ MonoBehaviour:
   CollapseDuration: 1
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
+  SoundTagEnter: 
 --- !u!1001 &1193311775
 Prefab:
   m_ObjectHideFlags: 0
@@ -29427,6 +29429,89 @@ MonoBehaviour:
   CollapseDuration: 2
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
+  SoundTagEnter: knife_kill
+--- !u!82 &1364039636
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1364039634}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!114 &1364039637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1364039634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0392fd7ced4b0154b98d3b7d709d94ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundsSets: {fileID: 11400000, guid: 02e6ff050782bb843af1d050938d1fe4, type: 2}
 --- !u!4 &1364061032 stripped
 Transform:
   m_PrefabParentObject: {fileID: 442388, guid: 0954a134b8e6cef4ba73bcc458efcecf, type: 2}
@@ -29509,6 +29594,10 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
   m_PrefabInternal: {fileID: 1460696583}
+--- !u!4 &1377748119 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+  m_PrefabInternal: {fileID: 1867478493}
 --- !u!1001 &1382045092
 Prefab:
   m_ObjectHideFlags: 0
@@ -32059,11 +32148,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -143.759995
+      value: -131.800003
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 21.8799992
+      value: 23.8999996
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -36774,6 +36863,7 @@ MonoBehaviour:
   CollapseDuration: .5
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
+  SoundTagEnter: 
 --- !u!1001 &1730850592
 Prefab:
   m_ObjectHideFlags: 0
@@ -36846,6 +36936,7 @@ MonoBehaviour:
   CollapseDuration: 1
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
+  SoundTagEnter: 
 --- !u!1001 &1734078543
 Prefab:
   m_ObjectHideFlags: 0
@@ -39837,6 +39928,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxRatio: {x: 0, y: 0}
+--- !u!1001 &1867478493
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1968783080}
+    m_Modifications:
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -135
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_RootOrder
+      value: 279
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108752, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_Name
+      value: tile_ground1_normal 49 (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 499438, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ef75fe6508767234fb506d92e8b40539, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1868063275
 Prefab:
   m_ObjectHideFlags: 0
@@ -41535,6 +41680,7 @@ MonoBehaviour:
   CollapseDuration: .5
   CollapseOnJump: 1
   IfJustCollapsedJumpEnabled: 1
+  SoundTagEnter: 
 --- !u!4 &1954713591 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 751d4a2bc2b63c047a88e384d4fb8baa, type: 2}
@@ -42001,6 +42147,7 @@ Transform:
   - {fileID: 1192824792}
   - {fileID: 528941309}
   - {fileID: 1071032105}
+  - {fileID: 1377748119}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1001 &1970228699

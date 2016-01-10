@@ -8,7 +8,9 @@ public class CollapseableFootbridge : MonoBehaviour
     public bool IfJustCollapsedJumpEnabled = true;
     float CollapseTime = 0f;
     bool collapsing = false;
-    
+
+    public string SoundTagEnter = "";
+
     // Use this for initialization
     void Start()
     {
@@ -39,6 +41,7 @@ public class CollapseableFootbridge : MonoBehaviour
         if (collapsing) return;
         CollapseTime = 0f;
         collapsing = true;
+        if (SoundTagEnter != "") SoundPlayer.Play(gameObject, SoundTagEnter);
     }
     public void Collapse()
     {

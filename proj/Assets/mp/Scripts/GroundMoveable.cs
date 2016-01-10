@@ -82,7 +82,7 @@ public class GroundMoveable : MonoBehaviour
         //if (coll.gameObject.tag == "Enemy")
         //    coll.gameObject.SendMessage("ApplyDamage", 10);
 
-        print(collision.relativeVelocity + " " + collision.collider.gameObject.name);
+        //print(collision.relativeVelocity + " " + collision.collider.gameObject.name);
         //collision.contacts[0].
 
         foreach (ContactPoint2D contact in collision.contacts)
