@@ -11,6 +11,12 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
     //bool active = true;
     public string skipText = "press to skip";
     public float toSkipDuration = 1f;
+
+    public string SoundTagEnter = "";
+
+    bool spriteVisible = false;
+    SpriteRenderer spriteRenderer = null;
+
     // Use this for initialization
     void Start()
     {
@@ -19,6 +25,9 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
             Debug.LogError("CutSceneCameraPassing " + name + "nie ma ustawionego CutSceneCameraPassingControlPoint'a : next");
             Debug.Break();
         }
+
+        spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
+        spriteVisible = spriteRenderer.enabled;
 
         //GResetCreated();
     }
@@ -37,13 +46,23 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
         //Vector3 startPosition = RLHScene.Instance.CamController.myCamera.transform.position;
 
         //RLHScene.Instance.CamController.StartCutScene(this);
+
+        if (!currentActive) return;
+
         RLHScene.Instance.StartCutScene(this);
 
         if (OneTimeOnly)
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            currentActive = false;
+            if (spriteVisible) spriteRenderer.enabled = false;
         }
+
+        if( SoundTagEnter != "") SoundPlayer.Play(gameObject, SoundTagEnter);
     }
+
+    bool currentActive = true;
+    bool startActive;
 
     //void OnTriggerExit2D()
     //{
@@ -55,9 +74,7 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
     //{
     //    print("CameraTargetOffseter::OnTriggerStay2D");
     //}
-
-    bool startActive;
-
+    
     //public void GResetCreated()
     //{
     //    RLHScene.Instance.AddIGResetable(this);
@@ -65,11 +82,14 @@ public class CutSceneCameraPassing : MonoBehaviour, IGResetable
 
     public void GResetCacheResetData()
     {
-        startActive = gameObject.activeSelf;
+        //startActive = gameObject.activeSelf;
+        startActive = currentActive;// gameObject.activeSelf;
     }
 
     public void GReset()
     {
-        gameObject.SetActive(startActive);
+        //gameObject.SetActive(startActive);
+        currentActive = startActive;
+        if (spriteVisible) spriteRenderer.enabled = startActive;
     }
 }

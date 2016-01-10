@@ -5817,11 +5817,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 476782, guid: c7014ca3d2e75784782ad17fa1bc2fa8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -142
+      value: -127
       objectReference: {fileID: 0}
     - target: {fileID: 476782, guid: c7014ca3d2e75784782ad17fa1bc2fa8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 21.9300003
+      value: 28.9300003
       objectReference: {fileID: 0}
     - target: {fileID: 476782, guid: c7014ca3d2e75784782ad17fa1bc2fa8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7428,6 +7428,15 @@ Prefab:
       propertyPath: StopZap
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11470022, guid: 7815341d38cb4e145bc8b043c7fd8d7a, type: 2}
+      propertyPath: soundsSets
+      value: 
+      objectReference: {fileID: 11400000, guid: 02e6ff050782bb843af1d050938d1fe4,
+        type: 2}
+    - target: {fileID: 11415770, guid: 7815341d38cb4e145bc8b043c7fd8d7a, type: 2}
+      propertyPath: SoundTagEnter
+      value: knife_kill
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7815341d38cb4e145bc8b043c7fd8d7a, type: 2}
   m_IsPrefabParent: 0
@@ -8444,11 +8453,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -155.300003
+      value: -158.300003
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 405624, guid: 9246711a7e0458f49965e3676f14c11f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -32050,11 +32059,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -149.759995
+      value: -143.759995
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 33.8800011
+      value: 21.8799992
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -33765,7 +33774,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582761640}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}

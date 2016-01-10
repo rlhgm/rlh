@@ -23,17 +23,17 @@ public class SoundPlayTrigger : MonoBehaviour, IGResetable
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (currentActive)
+        if (!currentActive) return;
+
+        SoundPlayer.Play(gameObject, SoundToPlayTag);
+        if (OneTimeOnly)
         {
-            SoundPlayer.Play(gameObject, SoundToPlayTag);
-            if (OneTimeOnly)
-            {
-                currentActive = false;
-                //gameObject.SetActive(false);
-                if( spriteVisible ) GetComponent<SpriteRenderer>().enabled = false;
-            }
+            currentActive = false;
+            //gameObject.SetActive(false);
+            if (spriteVisible) GetComponent<SpriteRenderer>().enabled = false;
         }
     }
+
     bool currentActive = true;
     bool startActive;
 

@@ -11,7 +11,6 @@ polish graficzy
 - klatka schodowa pietro -1 triggerowane kamienie urywajace fragmenty schodow + pojawiajacy sie lightray
 - skrznka - podczas przepychania particle + dzwiek (zaleznie od predkosci) + dzwiek przesuwania skrzynki i dzwiek upadania skrzynki
 - jak jest cutscena to zap lazi i odtwarza dzwiek 
-- jak zap uderzy w ziemie particle niech leca (takie same pewnie jakby kamien uderzyl)
 - w momencie uderzenia kamienia w ziemie shake kamery zalezny od 1) odleglosci od zapa 2) energi = masa * predkosc kamienia
 - po ucieciu zyrandola kamera ma za nim podazyc... 
 - wyrywany kamien powinien sie trzac + particle
@@ -19,9 +18,10 @@ polish graficzy
 - potrojny (wielokotny) urywajacy sie chodnik
 
 ZROBIONE:
-- przejrzeć czemu sie nie resetuja rzeczy na 2.1c - ALE TYLKO U CZARKA - JEST
+- przejrzeć czemu sie nie resetuja rzeczy na 2.1c - ALE TYLKO U CZARKA
 - wlaczyc na powrot dzwiek gravityguna
 - trigger do otworzenia czegos z soundset'a - parametry identyfikator dzwieku + czy tylko raz + resetowalne
+- jak zap uderzy w ziemie particle niech leca (takie same pewnie jakby kamien uderzyl)
 --------------------------------------------------------------------------------------------------------------------------------------------
 ) łapanie sie climberów przy malych fps'ach
 ) climbersy na gridzie
