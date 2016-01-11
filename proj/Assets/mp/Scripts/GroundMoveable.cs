@@ -13,7 +13,7 @@ public class GroundMoveable : MonoBehaviour
     Vector2 fakeWorldCenterOfMass;
 
     //BoxCollider2D boxCollider = null;
-    Rigidbody2D physic = null;
+    public Rigidbody2D physic = null;
     //NewRope connectedRope;
 
     Vector2[] handles;
@@ -97,11 +97,67 @@ public class GroundMoveable : MonoBehaviour
 
         //collision.contacts[0].
 
-        if( RLHScene.Instance.AddCollision(gameObject, collision.gameObject) )
+        if (RLHScene.Instance.AddCollision(gameObject, collision.gameObject))
         {
-            print("kolizja " + gameObject.name + " z " + collision.gameObject.name);
-        }
+            //print("kolizja " + gameObject.name + " z " + collision.gameObject.name);
+            //print("kolizja " + physic.velocity + " z " + collision.rigidbody.);
+            //print(collision.relativeVelocity);
+            //collision.relativeVelocity
 
+            //      public static float KineticEnergy(Rigidbody rb)
+            //{
+            //    // mass in kg, velocity in meters per second, result is joules
+            //    return 0.5f * rb.mass * Mathf.Pow(rb.velocity.magnitude, 2);
+            //}
+
+            this.RLHAssert(collision.rigidbody != physic, "collision.rigidbody == physic");
+
+            float e1 = 0.5f * physic.mass * Mathf.Pow(lastVelocity.magnitude, 2);
+            float e2 = 0;
+            //Vector2 ocv = new Vector2();
+            //float _m = 0f;
+            //if (collision.rigidbody) {
+            //    e2 = 0.5f * collision.rigidbody.mass * Mathf.Pow(collision.rigidbody.velocity.magnitude, 2);
+            //    ocv = collision.rigidbody.velocity;
+            //    _m = collision.rigidbody.mass;
+            //}
+            //Vector2 ocv = new Vector2();
+            //float _m = 0f;
+            GroundMoveable _gm = collision.gameObject.GetComponent<GroundMoveable>();
+            if (_gm)
+            {
+                e2 = 0.5f * _gm.physic.mass * Mathf.Pow(_gm.physic.velocity.magnitude, 2);
+                //ocv = collision.rigidbody.velocity;
+                //_m = collision.rigidbody.mass;
+                if (e1 > e2)
+                {
+                    RLHScene.Instance.StonesImpact(physic.worldCenterOfMass, e1);
+                }
+                else
+                {
+                    RLHScene.Instance.StonesImpact(_gm.physic.worldCenterOfMass, e2);
+                }
+                return;
+            }
+
+            RLHScene.Instance.StonesImpact(physic.worldCenterOfMass, e1);
+            
+
+            //if( e1 > e2 )
+            //{
+            //    //RLHScene.Instance.StonesImpact(collision, Mathf.Max(e1, e2));
+            //}
+            //else
+            //{
+
+            //}
+            //RLHScene.Instance.StonesImpact(collision,Mathf.Max(e1,e2));
+
+            //print("kolizja " + gameObject.name + " z " + collision.gameObject.name);
+            //print("predkosci " + physic.velocity + " z " + ocv);
+            //print("energie " + e1 + "     i     " + e2);
+            //print(physic.mass + " " + _m);
+        }
     }
 
     void Awake()
@@ -152,10 +208,12 @@ public class GroundMoveable : MonoBehaviour
         //connectedRope 
     }
 
-    //void FixedUpdate()
-    //{
-    //    print("RLHScene::FixedUpdate() " + Time.time);
-    //}
+    public Vector2 lastVelocity = new Vector2();
+    void FixedUpdate()
+    {
+        //print("Grou::FixedUpdate() " + Time.time);
+        lastVelocity = physic.velocity;
+    }
 
     // Update is called once per frame
     void Update()

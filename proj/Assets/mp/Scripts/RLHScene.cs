@@ -60,7 +60,7 @@ public class RLHScene : MonoBehaviour
         resetableObjects.Clear();
 
         _scene = this;
-        transform.position = new Vector3(0f,0f,0f);
+        transform.position = new Vector3(0f, 0f, 0f);
         Application.targetFrameRate = -10; // -15; // -10;
 
         layerIdLAGROUNDMask = 1 << LayerMask.NameToLayer("LA-GROUND");
@@ -91,7 +91,7 @@ public class RLHScene : MonoBehaviour
 
     public void CacheAllResetableDatas()
     {
-        foreach(IGResetable resetable in resetableObjects)
+        foreach (IGResetable resetable in resetableObjects)
         {
             resetable.GResetCacheResetData();
         }
@@ -135,14 +135,14 @@ public class RLHScene : MonoBehaviour
         {
             zap = FindObjectOfType<Zap>();
             print("RLHScene::Start");
-            if( zap == null )
+            if (zap == null)
                 Debug.LogWarning("RLHScene::Zap == null");
         }
 
         ShowInfoTrigger[] sits = FindObjectsOfType(typeof(ShowInfoTrigger)) as ShowInfoTrigger[];
         foreach (ShowInfoTrigger sit in sits)
         {
-            for( int i = 0; i < sit.controlValues.Length; ++i )
+            for (int i = 0; i < sit.controlValues.Length; ++i)
             {
                 ShowInfoTriggersControlls[sit.controlValues[i]] = false;
             }
@@ -155,7 +155,7 @@ public class RLHScene : MonoBehaviour
                 ShowInfoTriggersControlls[rope.controlValues[i]] = false;
             }
         }
-        ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
+        ShowInfoTriggersControllsApproved = new Dictionary<int, bool>(ShowInfoTriggersControlls);
         //print(ShowInfoTriggersControlls);
 
         ResetRats();
@@ -204,7 +204,7 @@ public class RLHScene : MonoBehaviour
         //fr.Add()
         foundedRats.Clear();
 
-        foreach(Rat rat in rats )
+        foreach (Rat rat in rats)
         {
             if (rat)
             {
@@ -302,7 +302,7 @@ public class RLHScene : MonoBehaviour
     public bool HasCollision(GameObject o1, GameObject o2)
     {
         int numOfColls = collObjects.Count;
-        for( int i = 0; i < numOfColls; ++i)
+        for (int i = 0; i < numOfColls; ++i)
         {
             CollObjects co = collObjects[i];
             if (o1 == co.obj1)
@@ -318,14 +318,70 @@ public class RLHScene : MonoBehaviour
         return false;
     }
 
+    //if( Input.GetKeyDown(KeyCode.T))
+    //    {
+    //        rlhScene.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
+    //    }
+
+    //public float ShakeAmplitude = 0.25f;
+    //public float ShakeSpeed = 8f;
+    //public float ShakeFadeOutDuration = 0.5f;
+
+    public float MaxStoneImpactDist = 10f;
+    public float MaxStoneImpactEnergy = 4000f;
+
+    public void StonesImpact(Collision2D collision, float energy)
+    {
+        //print("StonesImpact : " + energy);
+        //zap.transform.position
+
+        //zap.transform.position
+    }
+    public void StonesImpact(Vector3 impactPosition, float energy)
+    {
+        //print("StonesImpact : " + energy);
+        //zap.transform.position
+
+        //print(energy);
+
+        Vector3 diff = zap.transform.position - impactPosition;
+        float _dm = diff.magnitude;
+        if (_dm > MaxStoneImpactDist) return;
+
+        float _e = Mathf.Min(MaxStoneImpactEnergy, energy);
+        _e -= diff.magnitude * 0.5f*(MaxStoneImpactEnergy / MaxStoneImpactDist);
+        print(energy + " " + _e);
+        if (_e < 300f) return;
+        float shAmp = 0.1f + (0.1f * (_e / MaxStoneImpactEnergy));
+        float shDur = 0.25f + (1f *(_e / MaxStoneImpactEnergy));
+
+        //if( camController.GetShakeStatus() == Camera2DFollow.ShakeStatus.NoShake)
+        //    camController.ShakeImpulseStart(2f, shAmp, 8f);
+        switch (camController.GetShakeStatus())
+        {
+            case Camera2DFollow.ShakeStatus.NoShake:
+            case Camera2DFollow.ShakeStatus.ShakeFadeOut:
+                camController.ShakeImpulseStart(shDur, shAmp, 8f);
+                break;
+
+            case Camera2DFollow.ShakeStatus.ShakeImpulse:
+                if( camController.ShakeMaxAmplitude.x < shAmp && camController.ShakeMaxAmplitude.y < shAmp )
+                {
+                    camController.ShakeImpulseStart(shDur, shAmp, 8f);
+                }
+                break;
+        }
+    }
+
+
     public void reset()
     {
-        ShowInfoTriggersControlls = new Dictionary<int, bool>( ShowInfoTriggersControllsApproved );
+        ShowInfoTriggersControlls = new Dictionary<int, bool>(ShowInfoTriggersControllsApproved);
     }
 
     public void checkPointReached()
     {
-        ShowInfoTriggersControllsApproved = new Dictionary<int, bool>( ShowInfoTriggersControlls );
+        ShowInfoTriggersControllsApproved = new Dictionary<int, bool>(ShowInfoTriggersControlls);
     }
 
 
@@ -358,7 +414,7 @@ public class RLHScene : MonoBehaviour
         return _hit.collider;
     }
 
-    
+
 
     //public float checkRight(float checkingDist, bool flying = false)
     //{
@@ -430,7 +486,7 @@ public class RLHScene : MonoBehaviour
 
     public static void RLHAssert(bool cond, string message)
     {
-        if(!cond)
+        if (!cond)
         {
             Debug.LogError(message);
             Debug.Break();
