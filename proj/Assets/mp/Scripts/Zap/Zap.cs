@@ -3113,22 +3113,22 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     [HideInInspector]
     public Vector2 handlerBellyRightSize;
 
-    [HideInInspector]
-    public Transform leftKnifeHitPointHigh1;
-    [HideInInspector]
-    public Transform leftKnifeHitPointHigh2;
-    [HideInInspector]
-    public Transform rightKnifeHitPointHigh1;
-    [HideInInspector]
-    public Transform rightKnifeHitPointHigh2;
-    [HideInInspector]
-    public Transform leftKnifeHitPointLow1;
-    [HideInInspector]
-    public Transform leftKnifeHitPointLow2;
-    [HideInInspector]
-    public Transform rightKnifeHitPointLow1;
-    [HideInInspector]
-    public Transform rightKnifeHitPointLow2;
+    //[HideInInspector]
+    //public Transform leftKnifeHitPointHigh1;
+    //[HideInInspector]
+    //public Transform leftKnifeHitPointHigh2;
+    //[HideInInspector]
+    //public Transform rightKnifeHitPointHigh1;
+    //[HideInInspector]
+    //public Transform rightKnifeHitPointHigh2;
+    //[HideInInspector]
+    //public Transform leftKnifeHitPointLow1;
+    //[HideInInspector]
+    //public Transform leftKnifeHitPointLow2;
+    //[HideInInspector]
+    //public Transform rightKnifeHitPointLow1;
+    //[HideInInspector]
+    //public Transform rightKnifeHitPointLow2;
 
     Vector3 cameraTargetOffset = new Vector3();
     Vector3 targetCameraTargetOffset = new Vector3();
