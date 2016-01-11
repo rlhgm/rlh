@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Name: ZapParticleSet
   m_EditorClassIdentifier: 
   ParticleDatas:
-  - ParticleTag: 
+  - ParticleTag: landing
     ParticlePrefab: {fileID: 0}
     LifeTime: 0
-  - ParticleTag: 
+  - ParticleTag: landing*Stone
     ParticlePrefab: {fileID: 0}
     LifeTime: 0
-  - ParticleTag: 
+  - ParticleTag: landing*Wood
     ParticlePrefab: {fileID: 0}
     LifeTime: 0
   - ParticleTag: 

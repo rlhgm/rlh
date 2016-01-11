@@ -762,15 +762,41 @@ public class ZapControllerNormal : ZapController
 
                         if (zap.groundUnder)
                         {
-                            Surface surface = zap.groundUnder.GetComponent<Surface>();
-                            if (surface)
+                            if (zap.particleSet)
                             {
-                                if (surface.ZapLandingParticles.ParticlePrefab != null)
+                                ParticleData _pd = null;
+                                Surface surface = zap.groundUnder.GetComponent<Surface>();
+                                if (surface)
                                 {
-                                    Object newParticleObject = Instantiate(surface.ZapLandingParticles.ParticlePrefab, transform.position, Quaternion.Euler(0, 0, 0));
-                                    Destroy(newParticleObject, surface.ZapLandingParticles.LifeTime);
+                                    _pd = zap.particleSet.GetParticleData("landing*" + surface.type);
+
+                                    ////print(acd.Type + " " + acd.Message + "*" + surface.type);
+                                    //if (!SoundPlayer.Play(gameObject, acd.Message + "*" + surface.type))
+                                    //{
+                                    //    //print("PROBUJE odtworzyc : " + acd.Message);
+                                    //    SoundPlayer.Play(gameObject, acd.Message);
+                                    //}
                                 }
+                                else
+                                {
+                                    //SoundPlayer.Play(gameObject, acd.Message);
+                                }
+
+                                //Surface surface = zap.groundUnder.GetComponent<Surface>();
+                                //if (surface)
+                                //{
+                                //}
                             }
+
+                            //Surface surface = zap.groundUnder.GetComponent<Surface>();
+                            //if (surface)
+                            //{
+                            //    if (surface.ZapLandingParticles.ParticlePrefab != null)
+                            //    {
+                            //        Object newParticleObject = Instantiate(surface.ZapLandingParticles.ParticlePrefab, transform.position, Quaternion.Euler(0, 0, 0));
+                            //        Destroy(newParticleObject, surface.ZapLandingParticles.LifeTime);
+                            //    }
+                            //}
                         }
 
                         if (zap.beforeFallController == null)

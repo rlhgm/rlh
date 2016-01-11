@@ -35,6 +35,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     public AudioClip ropeBreakOffSound = null;
     public AudioClip ropeCutSound = null;
 
+    public ParticleSet particleSet = null;
+
     AudioSource myAudioSource = null;
     AudioSource myAudioSourceLooped = null;
 

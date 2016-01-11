@@ -15,9 +15,7 @@ public class Surface : MonoBehaviour
     }
     
     public Type type = Type.Default;
-    //public GameObject ZapLandingParticles = null;
-    //public GameObject ZapLandingHardParticles = null;
-    public ParticleData ZapLandingParticles = null;
+    //public ParticleData ZapLandingParticles = null;
     public ParticleData ZapLandingHardParticles = null;
 
     // Use this for initialization
