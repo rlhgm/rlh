@@ -107,6 +107,8 @@ MonoBehaviour:
   CollapseOnJump: 0
   ResetOnJump: 0
   CollapseParticles: {fileID: 0}
+  SoundTagCatch: 
+  SoundTagCollapse: 
 --- !u!212 &21284010
 SpriteRenderer:
   m_ObjectHideFlags: 1

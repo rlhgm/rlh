@@ -1,11 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\CutableBush.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Particles\selfDestroy.js">
     <Files>
-      <File FileName="Assets\mp\Scripts\CutableBush.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\CameraTargetOffseter.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\RLHScene.cs" Line="1" Column="1" />
-      <File FileName="Assets\mp\Scripts\Zap\Zap.cs" Line="1" Column="1" />
+      <File FileName="Assets\Particles\selfDestroy.js" Line="7" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

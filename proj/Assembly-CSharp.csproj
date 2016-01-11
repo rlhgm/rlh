@@ -54,6 +54,7 @@
      <Compile Include="Assets\SplineWalker.cs" />
      <Compile Include="Assets\SplineWalkerMode.cs" />
      <Compile Include="Assets\mp\Scripts\AnimationCallbackReceiver.cs" />
+     <Compile Include="Assets\mp\Scripts\AutoDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\Bird.cs" />
      <Compile Include="Assets\mp\Scripts\BirdDestroyer.cs" />
      <Compile Include="Assets\mp\Scripts\BirdEmiter.cs" />
@@ -123,6 +124,7 @@
      <Compile Include="Assets\mp\Scripts\Sounds\ISoundsSetsable.cs" />
      <Compile Include="Assets\mp\Scripts\Sounds\PlaySounds.cs" />
      <Compile Include="Assets\mp\Scripts\Sounds\SoundPlay.cs" />
+     <Compile Include="Assets\mp\Scripts\Sounds\SoundPlayTrigger.cs" />
      <Compile Include="Assets\mp\Scripts\Sounds\SoundPlayer.cs" />
      <Compile Include="Assets\mp\Scripts\Sounds\SoundSets.cs" />
      <Compile Include="Assets\mp\Scripts\SpriteOpacityController.cs" />
@@ -156,17 +158,11 @@
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
      <None Include="Assets\mp\mas\DraggedStone2.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

@@ -177,6 +177,7 @@ MonoBehaviour:
   StopZap: 0
   skipText: press to skip
   toSkipDuration: 1
+  SoundTagEnter: 
 --- !u!114 &11470022
 MonoBehaviour:
   m_ObjectHideFlags: 1
