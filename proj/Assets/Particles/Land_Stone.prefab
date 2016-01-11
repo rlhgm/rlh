@@ -257,10 +257,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4281346080
+          rgba: 4284831818
         key1:
           serializedVersion: 2
-          rgba: 4284641647
+          rgba: 4287270798
         key2:
           serializedVersion: 2
           rgba: 0
@@ -348,7 +348,7 @@ ParticleSystem:
         rgba: 4282662972
       minMaxState: 1
     startSize:
-      scalar: .0900000036
+      scalar: .109999999
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -363,7 +363,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .777777731
+          value: .636363626
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -411,7 +411,7 @@ ParticleSystem:
     enabled: 1
     type: 4
     radius: .189819336
-    angle: 18.3500004
+    angle: 45
     length: 5
     boxX: 1
     boxY: 1
@@ -424,7 +424,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 200
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -478,7 +478,7 @@ ParticleSystem:
           outSlope: -2
           tangentMode: 0
         - time: 1
-          value: 0
+          value: .509803832
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -2262,7 +2262,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: EmissionModule.rate.scalar
-      value: 130
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
@@ -2274,7 +2274,7 @@ Prefab:
       objectReference: {fileID: 8300000, guid: 12699d4d9a8a53649ba6f6587a728e43, type: 3}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSize.scalar
-      value: .0900000036
+      value: .109999999
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -2286,11 +2286,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSize.minCurve.m_Curve.Array.data[0].value
-      value: .777777731
+      value: .636363626
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSize.maxCurve.m_Curve.Array.data[0].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShapeModule.angle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxGradient.key0.rgba
+      value: 4284831818
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxGradient.key1.rgba
+      value: 4287270798
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: .509803832
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

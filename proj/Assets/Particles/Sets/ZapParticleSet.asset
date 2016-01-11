@@ -13,20 +13,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParticleDatas:
   - ParticleTag: landing
-    ParticlePrefab: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
-    LifeTime: 2
+    ParticlePrefab: {fileID: 101206, guid: 9b9cb41a330bf784ca247cddf59469de, type: 2}
+    LifeTime: 4
   - ParticleTag: landing*Stone
-    ParticlePrefab: {fileID: 141360, guid: 5304eea439929a34c87989ee9c3c7180, type: 2}
-    LifeTime: 2
+    ParticlePrefab: {fileID: 101206, guid: 9b9cb41a330bf784ca247cddf59469de, type: 2}
+    LifeTime: 4
   - ParticleTag: landing*Wood
-    ParticlePrefab: {fileID: 108184, guid: d2f5c7e04c61b904ebe2a5e3b0198eac, type: 2}
-    LifeTime: 2
+    ParticlePrefab: {fileID: 101206, guid: fd2a38130b483f2438fc6381e4087d20, type: 2}
+    LifeTime: 4
   - ParticleTag: landingHard
-    ParticlePrefab: {fileID: 141360, guid: 786b6d0288c925d4cb5abfe6e2bcc833, type: 2}
-    LifeTime: 2
+    ParticlePrefab: {fileID: 101206, guid: 69589ea6b9f24794dab4bede6cb1ac84, type: 2}
+    LifeTime: 4
   - ParticleTag: landingHard*Wood
-    ParticlePrefab: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
-    LifeTime: 2
+    ParticlePrefab: {fileID: 101206, guid: f9688ed840b4dc5499d917a2aafa78c2, type: 2}
+    LifeTime: 4
   - ParticleTag: landingHard*Stone
-    ParticlePrefab: {fileID: 141360, guid: 786b6d0288c925d4cb5abfe6e2bcc833, type: 2}
-    LifeTime: 2
+    ParticlePrefab: {fileID: 101206, guid: 69589ea6b9f24794dab4bede6cb1ac84, type: 2}
+    LifeTime: 4
