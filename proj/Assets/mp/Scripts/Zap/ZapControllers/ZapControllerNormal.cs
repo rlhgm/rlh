@@ -2344,7 +2344,8 @@ public class ZapControllerNormal : ZapController
                 if( cs )
                 {
                     Debug.Log("Crumble : keyJumpDown");
-                    cs.ZapJumpOff();
+                    //cs.ZapJumpOff();
+                    cs.Crumble();
                     cs = null;
                 }
 

@@ -16,6 +16,8 @@ polish graficzy
 - nietoperze z zyrandola po zlapaniu sie + musza odleciec na jakas odleglosc
 - potrojny (wielokotny) urywajacy sie chodnik
 
+- destroyablePlatform psuje gre - jest tam wolane Destroy.... a nie powinno byc... bo robi sie pozniej reset tego
+
 ZROBIONE:
 - przejrzeć czemu sie nie resetuja rzeczy na 2.1c - ALE TYLKO U CZARKA
 - wlaczyc na powrot dzwiek gravityguna

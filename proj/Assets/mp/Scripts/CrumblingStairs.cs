@@ -211,29 +211,31 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
 
     public void ZapJumpOff()
     {
-        ground.gameObject.SetActive(false);
-        handle.gameObject.SetActive(false);
-        mount.gameObject.SetActive(true);
-        mountBody.isKinematic = false;
+        mountHinge.useLimits = false;
 
-        //if (LimitSteps.Length > crumbled)
-        {
-            mountHinge.useLimits = false;
-            //JointAngleLimits2D angleLimits = new JointAngleLimits2D();
-            //angleLimits.min = LimitSteps[crumbled];
-            //angleLimits.max = 360f;
-            //mountHinge.limits = angleLimits;
-        }
+        //ground.gameObject.SetActive(false);
+        //handle.gameObject.SetActive(false);
+        //mount.gameObject.SetActive(true);
+        //mountBody.isKinematic = false;
 
-        //if (CamShakeTimes.Length > crumbled)
+        ////if (LimitSteps.Length > crumbled)
         //{
-        //    //RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
+        //    mountHinge.useLimits = false;
+        //    //JointAngleLimits2D angleLimits = new JointAngleLimits2D();
+        //    //angleLimits.min = LimitSteps[crumbled];
+        //    //angleLimits.max = 360f;
+        //    //mountHinge.limits = angleLimits;
         //}
 
-        currentHangTime = 0f;
-        //crumbled++;
+        ////if (CamShakeTimes.Length > crumbled)
+        ////{
+        ////    //RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
+        ////}
 
-        //if (SoundTagCrumble != "") SoundPlayer.Play(gameObject, SoundTagCrumble);
+        //currentHangTime = 0f;
+        ////crumbled++;
+
+        ////if (SoundTagCrumble != "") SoundPlayer.Play(gameObject, SoundTagCrumble);
     }
 
     public void Crumble()
