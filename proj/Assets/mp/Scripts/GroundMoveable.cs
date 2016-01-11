@@ -239,6 +239,7 @@ public class GroundMoveable : MonoBehaviour
     }
     public void Reset()
     {
+        if (!physic) print(gameObject.name);
         physic.position = resetPosition;
         physic.rotation = resetRotation;
         physic.velocity = resetVelocity;

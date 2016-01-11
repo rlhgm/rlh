@@ -2343,8 +2343,8 @@ public class ZapControllerNormal : ZapController
                 justJumpedMount = true;
                 if( cs )
                 {
-                    //Debug.Log("Crumble : keyJumpDown");
-                    cs.Crumble();
+                    Debug.Log("Crumble : keyJumpDown");
+                    cs.ZapJumpOff();
                     cs = null;
                 }
 

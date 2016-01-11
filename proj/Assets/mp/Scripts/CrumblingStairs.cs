@@ -209,8 +209,37 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         return false;
     }
 
+    public void ZapJumpOff()
+    {
+        ground.gameObject.SetActive(false);
+        handle.gameObject.SetActive(false);
+        mount.gameObject.SetActive(true);
+        mountBody.isKinematic = false;
+
+        //if (LimitSteps.Length > crumbled)
+        {
+            mountHinge.useLimits = false;
+            //JointAngleLimits2D angleLimits = new JointAngleLimits2D();
+            //angleLimits.min = LimitSteps[crumbled];
+            //angleLimits.max = 360f;
+            //mountHinge.limits = angleLimits;
+        }
+
+        //if (CamShakeTimes.Length > crumbled)
+        //{
+        //    //RLHScene.Instance.CamController.ShakeImpulseStart(CamShakeTimes[crumbled], CamShakeAmplitudes[crumbled], CamShakeSpeeds[crumbled]);
+        //}
+
+        currentHangTime = 0f;
+        //crumbled++;
+
+        //if (SoundTagCrumble != "") SoundPlayer.Play(gameObject, SoundTagCrumble);
+    }
+
     public void Crumble()
     {
+        print("Crumble");
+
         ground.gameObject.SetActive(false);
         handle.gameObject.SetActive(false);
         mount.gameObject.SetActive(true);
@@ -243,8 +272,8 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         return LimitSteps.Length > crumbled;
     }
 
-    public void Reset()
-    {
+    //public void Reset()
+    //{
 
-    }
+    //}
 }
