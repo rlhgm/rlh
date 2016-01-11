@@ -4,14 +4,13 @@ NAJBLIŻSZE
 polish graficzy
 --------------------------------------------------------------------------------------------------------------------------------------------
 - dzwiek smierci szuczura uruchamia sie w kolko 
-- dzwiek zapa belly (lapanie sie brzuech + wspinaczka) uruchamia sie dwa
+- dzwiek zapa belly (lapanie sie brzuech + wspinaczka) uruchamia sie dwa razy
 - dzwieki z animacji sie nie uruchamiaja jak jest malo fps'ów
 - jak po czyms chodzimy co jest urywalne + schody jak złapiemy to 1) particle leca 2) dzwieki trzeszczenia 3) trzesienie sie gafiki delikatne
 - na zderzenie sie schodow ze sciana particle ze sciany + ew. kolejne drzazgi ze schodow
 - klatka schodowa pietro -1 triggerowane kamienie urywajace fragmenty schodow + pojawiajacy sie lightray
 - skrznka - podczas przepychania particle + dzwiek (zaleznie od predkosci) + dzwiek przesuwania skrzynki i dzwiek upadania skrzynki
 - jak jest cutscena to zap lazi i odtwarza dzwiek 
-- w momencie uderzenia kamienia w ziemie shake kamery zalezny od 1) odleglosci od zapa 2) energi = masa * predkosc kamienia
 - po ucieciu zyrandola kamera ma za nim podazyc... 
 - wyrywany kamien powinien sie trzac + particle
 - nietoperze z zyrandola po zlapaniu sie + musza odleciec na jakas odleglosc
@@ -22,6 +21,7 @@ ZROBIONE:
 - wlaczyc na powrot dzwiek gravityguna
 - trigger do otworzenia czegos z soundset'a - parametry identyfikator dzwieku + czy tylko raz + resetowalne
 - jak zap uderzy w ziemie particle niech leca (takie same pewnie jakby kamien uderzyl)
+- w momencie uderzenia kamienia w ziemie shake kamery zalezny od 1) odleglosci od zapa 2) energi = masa * predkosc kamienia
 --------------------------------------------------------------------------------------------------------------------------------------------
 ) łapanie sie climberów przy malych fps'ach
 ) climbersy na gridzie

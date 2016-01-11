@@ -77,6 +77,8 @@ public class GroundMoveable : MonoBehaviour
     //    //    audio.Play();
     //}
 
+    public ParticleSet particles = null;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //if (coll.gameObject.tag == "Enemy")
@@ -110,19 +112,20 @@ public class GroundMoveable : MonoBehaviour
             //    return 0.5f * rb.mass * Mathf.Pow(rb.velocity.magnitude, 2);
             //}
 
+            if (particles != null)
+            {
+                ParticleData _pd = particles.GetParticleData("impact");
+                for (int i = 0; i < collision.contacts.Length; ++i)
+                {
+                    ParticleInseter.Insert(_pd, collision.contacts[i].point);
+                }
+            }
+
             this.RLHAssert(collision.rigidbody != physic, "collision.rigidbody == physic");
 
             float e1 = 0.5f * physic.mass * Mathf.Pow(lastVelocity.magnitude, 2);
             float e2 = 0;
-            //Vector2 ocv = new Vector2();
-            //float _m = 0f;
-            //if (collision.rigidbody) {
-            //    e2 = 0.5f * collision.rigidbody.mass * Mathf.Pow(collision.rigidbody.velocity.magnitude, 2);
-            //    ocv = collision.rigidbody.velocity;
-            //    _m = collision.rigidbody.mass;
-            //}
-            //Vector2 ocv = new Vector2();
-            //float _m = 0f;
+           
             GroundMoveable _gm = collision.gameObject.GetComponent<GroundMoveable>();
             if (_gm)
             {
@@ -141,22 +144,7 @@ public class GroundMoveable : MonoBehaviour
             }
 
             RLHScene.Instance.StonesImpact(physic.worldCenterOfMass, e1);
-            
-
-            //if( e1 > e2 )
-            //{
-            //    //RLHScene.Instance.StonesImpact(collision, Mathf.Max(e1, e2));
-            //}
-            //else
-            //{
-
-            //}
-            //RLHScene.Instance.StonesImpact(collision,Mathf.Max(e1,e2));
-
-            //print("kolizja " + gameObject.name + " z " + collision.gameObject.name);
-            //print("predkosci " + physic.velocity + " z " + ocv);
-            //print("energie " + e1 + "     i     " + e2);
-            //print(physic.mass + " " + _m);
+        
         }
     }
 

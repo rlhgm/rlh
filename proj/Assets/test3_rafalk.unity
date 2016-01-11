@@ -1532,6 +1532,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &60194676
 BoxCollider2D:
@@ -8891,6 +8892,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &428812758
 BoxCollider2D:
@@ -9953,6 +9955,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &479674443
 BoxCollider2D:
@@ -15261,6 +15264,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &783281405
 BoxCollider2D:
@@ -17141,6 +17145,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &858735003
 BoxCollider2D:
@@ -17840,6 +17845,11 @@ Prefab:
       propertyPath: m_Name
       value: 3x3 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 11499092, guid: 3947d832e89d1574f841b7f0f37f174c, type: 2}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 11400000, guid: fb093033999ea184a9ec8ca352fc1456,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3947d832e89d1574f841b7f0f37f174c, type: 2}
   m_IsPrefabParent: 0
@@ -19920,6 +19930,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &982583212
 BoxCollider2D:
@@ -21488,6 +21499,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1022861581
 BoxCollider2D:
@@ -22277,6 +22289,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1072368212
 BoxCollider2D:
@@ -22566,6 +22579,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1102587245
 BoxCollider2D:
@@ -26006,6 +26020,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1190553573
 BoxCollider2D:
@@ -30237,6 +30252,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1397109883
 BoxCollider2D:
@@ -33617,6 +33633,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1571091459
 BoxCollider2D:
@@ -37757,6 +37774,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1774253065
 BoxCollider2D:
@@ -39188,6 +39206,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1823707872
 BoxCollider2D:
@@ -40056,6 +40075,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!1001 &1859768633
 Prefab:
@@ -43898,6 +43918,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!212 &2038571740
 SpriteRenderer:
@@ -44012,6 +44033,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &2040630560
 BoxCollider2D:
@@ -45131,6 +45153,7 @@ MonoBehaviour:
   soundsSets: {fileID: 0}
   physic: {fileID: 0}
   toBreakOffDist: 1
+  particles: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &2098004499
 BoxCollider2D:

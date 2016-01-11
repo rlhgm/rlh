@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2332602cc1630ae44a595b994b96a6b4, type: 3}
+  m_Name: Stone
+  m_EditorClassIdentifier: 
+  ParticleDatas:
+  - ParticleTag: impact
+    ParticlePrefab: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
+    LifeTime: 2
