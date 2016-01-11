@@ -3,15 +3,6 @@ using System.Collections;
 using System; //This allows the IComparable Interface
 using System.Collections.Generic;
 
-[Serializable]
-public class ParticlesData
-{
-    public GameObject ParticlePrefab = null;
-    public float LifeTime = 2f;
-    //public AudioClip clip = null;
-    //public Vector2 VolumeMinMax = new Vector2(1f, 1f);
-}
-
 public class Surface : MonoBehaviour
 {
     public enum Type
