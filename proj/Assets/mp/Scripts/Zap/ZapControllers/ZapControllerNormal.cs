@@ -5302,14 +5302,14 @@ public class ZapControllerNormal : ZapController
             hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
             if (!hit.collider)
             {
-                Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
+                //Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
 
                 hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
                 if (!hit.collider)
                 {
                     _lastZapSensorLeft3Pos.x += zap.myWidth;
                     rayOrigin.x += zap.myWidth;
-                    Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
+                    //Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
                     hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
                 }
             }
