@@ -247,8 +247,8 @@ public class ZapControllerKnife : ZapController
     }
     public override void deactivate()
     {
-        zap.BatAttackLeftCollider.SetActive(false);
-        zap.BatAttackRightCollider.SetActive(false);
+        zap.KnifeAttackLeftHighCollider.SetActive(false);
+        zap.KnifeAttackRightHighCollider.SetActive(false);
 
         base.deactivate();
     }
@@ -330,8 +330,8 @@ public class ZapControllerKnife : ZapController
         zap.AnimatorBody.speed = 1f;
         continueAttack = false;
 
-        zap.BatAttackLeftCollider.SetActive(false);
-        zap.BatAttackRightCollider.SetActive(false);
+        zap.KnifeAttackLeftHighCollider.SetActive(false);
+        zap.KnifeAttackRightHighCollider.SetActive(false);
         
         switch (newAction)
         {
@@ -359,8 +359,8 @@ public class ZapControllerKnife : ZapController
                 zap.AnimatorBody.Play("Zap_knife_attack_0", -1, 0f);
                 cutHigh();
 
-                if( zap.faceRight() ) zap.BatAttackRightCollider.SetActive(true);
-                else zap.BatAttackLeftCollider.SetActive(true);
+                if( zap.faceRight() ) zap.KnifeAttackRightHighCollider.SetActive(true);
+                else zap.KnifeAttackLeftHighCollider.SetActive(true);
 
                 break;
 
@@ -368,8 +368,8 @@ public class ZapControllerKnife : ZapController
                 zap.AnimatorBody.Play("Zap_knife_attack_1", -1, 0f);
                 cutHigh();
 
-                if (zap.faceRight()) zap.BatAttackRightCollider.SetActive(true);
-                else zap.BatAttackLeftCollider.SetActive(true);
+                if (zap.faceRight()) zap.KnifeAttackRightHighCollider.SetActive(true);
+                else zap.KnifeAttackLeftHighCollider.SetActive(true);
 
                 break;
 
@@ -1009,8 +1009,8 @@ public class ZapControllerKnife : ZapController
     {
         if (zap.currentActionTime > ATTACK_DURATION)
         {
-            zap.BatAttackRightCollider.SetActive(false);
-            zap.BatAttackLeftCollider.SetActive(false);
+            zap.KnifeAttackRightHighCollider.SetActive(false);
+            zap.KnifeAttackLeftHighCollider.SetActive(false);
 
             if (zap.choosenController != this )
             {

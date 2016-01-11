@@ -320,10 +320,15 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         mountAttackLeftCollider.SetActive(false);
         mountAttackRightCollider.SetActive(false);
 
-        batAttackLeftCollider = transform.Find("knifeAttackLeftHighCollider").gameObject;
-        batAttackRightCollider = transform.Find("knifeAttackRightHighCollider").gameObject;
-        batAttackLeftCollider.SetActive(false);
-        batAttackRightCollider.SetActive(false);
+        knifeAttackLeftHighCollider = transform.Find("knifeAttackLeftHighCollider").gameObject;
+        knifeAttackRightHighCollider = transform.Find("knifeAttackRightHighCollider").gameObject;
+        knifeAttackLeftHighCollider.SetActive(false);
+        knifeAttackRightHighCollider.SetActive(false);
+
+        knifeAttackLeftLowCollider = transform.Find("knifeAttackLeftLowCollider").gameObject;
+        knifeAttackRightLowCollider = transform.Find("knifeAttackRightLowCollider").gameObject;
+        knifeAttackLeftLowCollider.SetActive(false);
+        knifeAttackRightLowCollider.SetActive(false);
 
         targeter = transform.Find("targeter");
         gravityGunBeam = transform.Find("GravityGunBeam");
@@ -3223,20 +3228,39 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         }
     }
 
-    GameObject batAttackLeftCollider;
-    GameObject batAttackRightCollider;
-    public GameObject BatAttackLeftCollider
+    GameObject knifeAttackLeftHighCollider;
+    GameObject knifeAttackRightHighCollider;
+    GameObject knifeAttackLeftLowCollider;
+    GameObject knifeAttackRightLowCollider;
+
+    public GameObject KnifeAttackLeftHighCollider
     {
         get
         {
-            return batAttackLeftCollider;
+            return knifeAttackLeftHighCollider;
         }
     }
-    public GameObject BatAttackRightCollider
+    public GameObject KnifeAttackRightHighCollider
     {
         get
         {
-            return batAttackRightCollider;
+            return knifeAttackRightHighCollider;
+        }
+    }
+
+    public GameObject KnifeAttackLeftLowCollider
+    {
+        get
+        {
+            return knifeAttackLeftLowCollider;
+        }
+    }
+
+    public GameObject KnifeAttackRightLowCollider
+    {
+        get
+        {
+            return knifeAttackRightLowCollider;
         }
     }
 
@@ -3415,6 +3439,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             return paused;
         }
     }
+
+    
 
     //public CameraTargetOffseter CamTargetOffseter
     //{

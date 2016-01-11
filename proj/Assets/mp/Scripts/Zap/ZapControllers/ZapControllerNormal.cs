@@ -1179,8 +1179,8 @@ public class ZapControllerNormal : ZapController
 
         zap.MountAttackLeftCollider.SetActive(false);
         zap.MountAttackRightCollider.SetActive(false);
-        zap.BatAttackLeftCollider.SetActive(false);
-        zap.BatAttackRightCollider.SetActive(false);
+        zap.KnifeAttackLeftHighCollider.SetActive(false);
+        zap.KnifeAttackRightHighCollider.SetActive(false);
 
         lastActionParam = param;
 

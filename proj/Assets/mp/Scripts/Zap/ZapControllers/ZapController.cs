@@ -338,27 +338,27 @@ public class ZapController : ScriptableObject
                     continue;
                 }
             }
-            Bat cutBat = coll.GetComponent<Bat>();
-            if (cutBat)
-            {
-                if (!lastCuttedObjects.Contains(cutBat.gameObject))
-                {
-                    cutBat.cut();
-                    lastCuttedObjects.Add(cutBat.gameObject);
-                    continue;
-                }
-            }
+            //Bat cutBat = coll.GetComponent<Bat>();
+            //if (cutBat)
+            //{
+            //    if (!lastCuttedObjects.Contains(cutBat.gameObject))
+            //    {
+            //        cutBat.cut();
+            //        lastCuttedObjects.Add(cutBat.gameObject);
+            //        continue;
+            //    }
+            //}
 
-            Rat cutRat = coll.GetComponent<Rat>();
-            if (cutRat)
-            {
-                if (!lastCuttedObjects.Contains(cutRat.gameObject))
-                {
-                    cutRat.cut();
-                    lastCuttedObjects.Add(cutRat.gameObject);
-                    continue;
-                }
-            }
+            //Rat cutRat = coll.GetComponent<Rat>();
+            //if (cutRat)
+            //{
+            //    if (!lastCuttedObjects.Contains(cutRat.gameObject))
+            //    {
+            //        cutRat.cut();
+            //        lastCuttedObjects.Add(cutRat.gameObject);
+            //        continue;
+            //    }
+            //}
 
             if (coll.tag == "PantherHitRegion")
             {

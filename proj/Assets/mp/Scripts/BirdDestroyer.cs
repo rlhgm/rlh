@@ -54,6 +54,25 @@ public class BirdDestroyer : MonoBehaviour {
             //    Destroy(other.gameObject);
             //}
         }
+        Rat rat = other.gameObject.GetComponent<Rat>();
+        if (rat)
+        {
+            print("BirdDestroyer = > koliduje ze szczurem");
+            if (transform.parent)
+            {
+                if (transform.parent.tag == "Player")
+                {
+                    //Bat batToDestroy = other.GetComponent<Bat>();
+                    //batToDestroy.cut();
+                    rat.cut();
+                    return;
+                }
+            }
+            //else
+            //{
+            //    Destroy(other.gameObject);
+            //}
+        }
     }
 
 	void OnCollisionEnter2D(Collision2D coll) {
