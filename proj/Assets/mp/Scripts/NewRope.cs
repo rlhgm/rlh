@@ -31,6 +31,8 @@ public class NewRope : MonoBehaviour {
     public bool Cutable = true;
     public bool Catchable = true;
 
+    public RLHAction CutAction = null;
+
     void Awake(){
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer> ();
 		Destroy (spriteRenderer);
@@ -271,6 +273,12 @@ public class NewRope : MonoBehaviour {
             distJoint.enabled = false;
             //links[links.Length-1].con distJoint.connectedBody = attachedStone;
             attachedStone.transform.SetParent(null);
+
+            if( CutAction != null )
+            {
+                CutAction.Perform();
+            }
+            
             //attachedStone.transform.position = lastLink.transform.position + new Vector3(0f,-0.6f);
             //attachedStone.MovePosition(asp);
             //attachedStone

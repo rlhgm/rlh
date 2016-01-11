@@ -75,9 +75,8 @@
     <Compile Include="Assets\BezierCurve.cs" />
     <Compile Include="Assets\BezierSpline.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-    <Compile Include="Assets\mp\Scripts\Particles\ParticleInseter.cs" />
-    <Compile Include="Assets\mp\Scripts\Particles\ParticleData.cs" />
-    <Compile Include="Assets\mp\Scripts\Particles\ParticleSet.cs" />
+    <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CuttedChandelierRope.cs" />
+    <Compile Include="Assets\mp\Scripts\RLHActions\RLHAction.cs" />
     <Compile Include="Assets\SplineDecorator.cs" />
     <Compile Include="Assets\SplineWalker.cs" />
     <Compile Include="Assets\SplineWalkerMode.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Assets\mp\Scripts\CameraShaker.cs" />
     <Compile Include="Assets\mp\Scripts\CameraTargetOffseter.cs" />
     <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
+    <Compile Include="Assets\mp\Scripts\Chandelier.cs" />
     <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\mp\Scripts\CollapseableFootbridge.cs" />
     <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
@@ -134,6 +134,9 @@
     <Compile Include="Assets\mp\Scripts\NewZapTest.cs" />
     <Compile Include="Assets\mp\Scripts\Panther.cs" />
     <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />
+    <Compile Include="Assets\mp\Scripts\Particles\ParticleData.cs" />
+    <Compile Include="Assets\mp\Scripts\Particles\ParticleInseter.cs" />
+    <Compile Include="Assets\mp\Scripts\Particles\ParticleSet.cs" />
     <Compile Include="Assets\mp\Scripts\Pickable.cs" />
     <Compile Include="Assets\mp\Scripts\PlatformHandle.cs" />
     <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
