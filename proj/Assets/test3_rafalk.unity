@@ -975,19 +975,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2015612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: orthographic size
-      value: 6.53125
+      value: 4.70833349
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.07177031
+      value: 1.48672569
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.07177031
+      value: 1.48672569
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.07177031
+      value: 1.48672569
       objectReference: {fileID: 0}
     - target: {fileID: 8177612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_Enabled
@@ -2878,9 +2878,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   ZapLandingParticles:
+    ParticleTag: 
     ParticlePrefab: {fileID: 141360, guid: 5304eea439929a34c87989ee9c3c7180, type: 2}
     LifeTime: 2
   ZapLandingHardParticles:
+    ParticleTag: 
     ParticlePrefab: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
     LifeTime: 2
 --- !u!1001 &122162778
@@ -30825,9 +30827,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   ZapLandingParticles:
+    ParticleTag: 
     ParticlePrefab: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
     LifeTime: 2
   ZapLandingHardParticles:
+    ParticleTag: 
     ParticlePrefab: {fileID: 108184, guid: d2f5c7e04c61b904ebe2a5e3b0198eac, type: 2}
     LifeTime: 2
 --- !u!1 &1426353323
@@ -42955,9 +42959,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   ZapLandingParticles:
+    ParticleTag: 
     ParticlePrefab: {fileID: 0}
     LifeTime: 2
   ZapLandingHardParticles:
+    ParticleTag: 
     ParticlePrefab: {fileID: 0}
     LifeTime: 2
 --- !u!1001 &2014494115

@@ -4,10 +4,15 @@ using System; //This allows the IComparable Interface
 using System.Collections.Generic;
 
 [Serializable]
-public class ParticlesData
+public class ParticleData
 {
+    //ParticleData()
+    //{
+    //    LifeTime = -1;
+    //}
+
     public string ParticleTag;
     public GameObject ParticlePrefab = null;
-    public float LifeTime = 2f;
+    public float LifeTime = 0f;
 }
 
