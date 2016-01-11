@@ -16,3 +16,11 @@ MonoBehaviour:
     clips:
     - clip: {fileID: 8300000, guid: ca770fef2d9eb294693b8e1b55583d8e, type: 3}
       VolumeMinMax: {x: 3, y: 3}
+  - SoundTag: stairs_enter
+    clips:
+    - clip: {fileID: 8300000, guid: 40f5a2f19e52059478aa948d4e879853, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+  - SoundTag: stairs_fall
+    clips:
+    - clip: {fileID: 8300000, guid: 83c0c0ecdbbe7914e8534cca0622cdec, type: 3}
+      VolumeMinMax: {x: 1, y: 1}

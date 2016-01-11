@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Particles\selfDestroy.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\AutoDestroyer.cs">
     <Files>
-      <File FileName="Assets\Particles\selfDestroy.js" Line="7" Column="2" />
+      <File FileName="Assets\mp\Scripts\AutoDestroyer.cs" Line="12" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
