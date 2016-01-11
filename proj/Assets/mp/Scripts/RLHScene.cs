@@ -274,6 +274,11 @@ public class RLHScene : MonoBehaviour
     {
     }
 
+    void FixedUpdate()
+    {
+        //print("RLHScene::FixedUpdate() " + Time.time);
+    }
+
     public void reset()
     {
         ShowInfoTriggersControlls = new Dictionary<int, bool>( ShowInfoTriggersControllsApproved );

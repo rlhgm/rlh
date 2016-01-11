@@ -82,13 +82,18 @@ public class GroundMoveable : MonoBehaviour
         //if (coll.gameObject.tag == "Enemy")
         //    coll.gameObject.SendMessage("ApplyDamage", 10);
 
-        //print(collision.relativeVelocity + " " + collision.collider.gameObject.name);
+        //void FixedUpdate()
+        //{
+        //print("GroundMoveable::OnCollisionEnter2D() " + Time.time + " " + gameObject.name);
+        //}
+
+        //print(collision.collider.gameObject.name + " relVel: " + collision.relativeVelocity + " sleep: " + (physic.IsSleeping() ? "yes" : "no") + " " + physic.velocity );
         //collision.contacts[0].
 
-        foreach (ContactPoint2D contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-        }
+        //foreach (ContactPoint2D contact in collision.contacts)
+        //{
+        //    Debug.DrawRay(contact.point, contact.normal, Color.white);
+        //}
 
     }
 
@@ -139,6 +144,11 @@ public class GroundMoveable : MonoBehaviour
         lastSleeped = false;
         //connectedRope 
     }
+
+    //void FixedUpdate()
+    //{
+    //    print("RLHScene::FixedUpdate() " + Time.time);
+    //}
 
     // Update is called once per frame
     void Update()
