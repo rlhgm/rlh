@@ -320,6 +320,8 @@ public class Rat : Enemy, IAnimationCallbackReceiver // MonoBehaviour//, IReseta
 
     void OnTriggerStay2D(Collider2D other)
     {
+        //print("Rat::OnTriggerStay2D => " + other.name);
+
         //if (TryStartHoleTravel(other)) return;
 
         Zap zap = other.GetComponent<Zap>();
