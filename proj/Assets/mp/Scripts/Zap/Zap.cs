@@ -377,11 +377,11 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         }
 
 
-        PlaySounds[] pss = animatorBody.GetBehaviours<PlaySounds>();
-        for (int b = 0; b < pss.Length; ++b)
-        {
-            pss[b].zap = this;
-        }
+        //PlaySounds[] pss = animatorBody.GetBehaviours<PlaySounds>();
+        //for (int b = 0; b < pss.Length; ++b)
+        //{
+        //    pss[b].zap = this;
+        //}
         //AnimationCallback[] acs = animatorBody.GetBehaviours<AnimationCallback>();
         //for (int b = 0; b < acs.Length; ++b)
         //{
@@ -2890,50 +2890,50 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     //    return CheckHandle(layerID);
     //}
 
-    public Transform CheckHandle(int layerID)
-    {
-        Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
-        rayOrigin.y += 0.3f;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
+    //public Transform CheckHandle(int layerID)
+    //{
+    //    Vector2 rayOrigin = sensorLeft3.transform.position; // transform.position;
+    //    rayOrigin.y += 0.3f;
+    //    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, myWidth, layerID);
 
-        if (!hit.collider)
-            return null;
-        else
-        {
-            MountMoveable _mm = hit.collider.GetComponent<MountMoveable>();
-            if (_mm)
-            {
-                //Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
-                ////pointToCheck += distToMount;
-                //bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
-                ////if (!res)
+    //    if (!hit.collider)
+    //        return null;
+    //    else
+    //    {
+    //        MountMoveable _mm = hit.collider.GetComponent<MountMoveable>();
+    //        if (_mm)
+    //        {
+    //            //Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
+    //            ////pointToCheck += distToMount;
+    //            //bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
+    //            ////if (!res)
 
-                //Vector3 zapHandpos = zap.transform.position;
-                //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
-                //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+    //            //Vector3 zapHandpos = zap.transform.position;
+    //            //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+    //            //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
 
-                Vector3 zapHandpos = transform.position;
-                zapHandpos.y += (sensorLeft3.transform.localPosition.y + 0.3f);
-                Vector3 _pointToCheck = _mm.transform.InverseTransformPoint(zapHandpos);
-                _pointToCheck = _mm.ConvertToPointSize(_pointToCheck);
-                bool res = _mm.LocalPointHandable(_pointToCheck);
-                if( res )
-                {
-                    return hit.collider.transform;
-                }
-            }
-        }
-        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
-        if (!hit.collider)
-            return null;
+    //            Vector3 zapHandpos = transform.position;
+    //            zapHandpos.y += (sensorLeft3.transform.localPosition.y + 0.3f);
+    //            Vector3 _pointToCheck = _mm.transform.InverseTransformPoint(zapHandpos);
+    //            _pointToCheck = _mm.ConvertToPointSize(_pointToCheck);
+    //            bool res = _mm.LocalPointHandable(_pointToCheck);
+    //            if( res )
+    //            {
+    //                return hit.collider.transform;
+    //            }
+    //        }
+    //    }
+    //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
+    //    if (!hit.collider)
+    //        return null;
 
-        rayOrigin.x += myWidth;
-        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
-        if (hit.collider)
-            return hit.collider.transform;
-        else
-            return null;
-    }
+    //    rayOrigin.x += myWidth;
+    //    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
+    //    if (hit.collider)
+    //        return hit.collider.transform;
+    //    else
+    //        return null;
+    //}
 
     public bool CheckClimbingWall(Vector3 posToCheck, int layerID)
     {
@@ -3484,8 +3484,8 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     //    return currentStateTime;
     //}
 
-
-    float myWidth;
+    [HideInInspector]
+    public float myWidth;
     float myHalfWidth;
 
     public float getMyWidth()

@@ -458,7 +458,7 @@ public class ZapControllerNormal : ZapController
                     Vector3 fallDist = zap.startFallPos - transform.position;
                     if (!zap.FuddleFromBird && (fallDist.y < MaxFallDistToCatch))
                     {
-                        Transform handle = zap.CheckHandle(zap.layerIdMountMask);
+                        Transform handle = /*zap.*/CheckHandle(zap.layerIdMountMask);
                         if (handle)
                         {
                             if (jumpFromMount)
@@ -497,7 +497,7 @@ public class ZapControllerNormal : ZapController
                                 return;
                             }
                         }
-                        else if (zap.CheckHandle(zap.layerIdGroundFarMask))
+                        else if (/*zap.*/CheckHandle(zap.layerIdGroundFarMask))
                         {
                             if (jumpFromMount)
                             {
@@ -1646,7 +1646,7 @@ public class ZapControllerNormal : ZapController
         }
         else if (isInState(Zap.State.ON_GROUND))
         {
-            if (zap.CheckHandle(zap.layerIdMountMask))
+            if (/*zap.*/CheckHandle(zap.layerIdMountMask))
             {
                 zap.velocity.x = 0.0f;
                 zap.velocity.y = MountSpeed;
@@ -2671,7 +2671,7 @@ public class ZapControllerNormal : ZapController
 
             zap.climbingWallID = zap.layerIdGroundFarMask;
             setAction(Action.MountIdle);
-            Assert.IsTrue(zap.CheckHandle(zap.layerIdGroundFarMask));
+            Assert.IsTrue(/*zap.*/CheckHandle(zap.layerIdGroundFarMask));
             return 1;
         }
         
@@ -5278,6 +5278,103 @@ public class ZapControllerNormal : ZapController
 
             lastHandlePos = zap.sensorHandleL2.position;
             return false;
+        }
+    }
+
+    Vector3 _lastZapSensorLeft3Pos = new Vector3();
+
+    public Transform CheckHandle(int layerID)
+    {
+        RaycastHit2D hit;
+        Vector2 rayOrigin = zap.sensorLeft3.transform.position;
+
+        if ( lastFrameHande )
+        {
+            //zap.sensorHandleR2.position
+            //lastFrameHande;
+            //Vector2 rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
+            //                                                        //Vector2 rayOrigin = zap.sensorHandleR2.position.transform.position; // transform.position;
+            //rayOrigin.y += 0.3f;
+            //hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
+
+            //rayOrigin ;
+            rayOrigin.y += 0.3f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
+            if (!hit.collider)
+            {
+                Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
+
+                hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
+                if (!hit.collider)
+                {
+                    _lastZapSensorLeft3Pos.x += zap.myWidth;
+                    rayOrigin.x += zap.myWidth;
+                    Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
+                    hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
+                }
+            }
+        }
+        else
+        {
+            //zap.sensorHandleR2.position
+            //lastFrameHande;
+            //rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
+                                                                    //Vector2 rayOrigin = zap.sensorHandleR2.position.transform.position; // transform.position;
+            rayOrigin.y += 0.3f;
+            hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
+        }
+        
+
+        if (!hit.collider)
+        {
+            _lastZapSensorLeft3Pos = zap.sensorLeft3.transform.position;
+            return null;
+        }
+        else
+        {
+            MountMoveable _mm = hit.collider.GetComponent<MountMoveable>();
+            if (_mm)
+            {
+                Debug.Log("JEST MM");
+                //Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
+                ////pointToCheck += distToMount;
+                //bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
+                ////if (!res)
+
+                //Vector3 zapHandpos = zap.transform.position;
+                //zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                //handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
+
+                Vector3 zapHandpos = transform.position;
+                zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
+                Vector3 _pointToCheck = _mm.transform.InverseTransformPoint(zapHandpos);
+                _pointToCheck = _mm.ConvertToPointSize(_pointToCheck);
+                bool res = _mm.LocalPointHandable(_pointToCheck);
+                if (res)
+                {
+                    _lastZapSensorLeft3Pos = zap.sensorLeft3.transform.position;
+                    return hit.collider.transform;
+                }
+            }
+        }
+        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
+        if (!hit.collider)
+        {
+            _lastZapSensorLeft3Pos = zap.sensorLeft3.transform.position;
+            return null;
+        }
+
+        rayOrigin.x += zap.myWidth;
+        hit = Physics2D.Raycast(rayOrigin, -Vector2.up, 1f, layerID);
+        if (hit.collider)
+        {
+            _lastZapSensorLeft3Pos = zap.sensorLeft3.transform.position;
+            return hit.collider.transform;
+        }
+        else
+        {
+            _lastZapSensorLeft3Pos = zap.sensorLeft3.transform.position;
+            return null;
         }
     }
 

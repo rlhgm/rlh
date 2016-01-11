@@ -426,6 +426,9 @@ MonoBehaviour:
   zap: {fileID: 0}
   NormTimes: []
   sounds: []
+  lastNormTime: 0
+  played: []
+  settingsOK: 0
 --- !u!114 &11451274
 MonoBehaviour:
   m_ObjectHideFlags: 1
