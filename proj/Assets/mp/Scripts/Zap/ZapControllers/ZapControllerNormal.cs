@@ -776,6 +776,10 @@ public class ZapControllerNormal : ZapController
                                     //    //print("PROBUJE odtworzyc : " + acd.Message);
                                     //    SoundPlayer.Play(gameObject, acd.Message);
                                     //}
+                                    if (_pd != null)
+                                    {
+                                        ParticleInseter.Insert(_pd, transform.position);
+                                    }
                                 }
                                 else
                                 {

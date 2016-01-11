@@ -8,19 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dda5f7ef4bf3549b9070f70465ace9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2332602cc1630ae44a595b994b96a6b4, type: 3}
   m_Name: ZapParticleSet
   m_EditorClassIdentifier: 
   ParticleDatas:
   - ParticleTag: landing
-    ParticlePrefab: {fileID: 0}
-    LifeTime: 0
+    ParticlePrefab: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
+    LifeTime: 2
   - ParticleTag: landing*Stone
-    ParticlePrefab: {fileID: 0}
-    LifeTime: 0
+    ParticlePrefab: {fileID: 141360, guid: 5304eea439929a34c87989ee9c3c7180, type: 2}
+    LifeTime: 2
   - ParticleTag: landing*Wood
-    ParticlePrefab: {fileID: 0}
-    LifeTime: 0
-  - ParticleTag: 
-    ParticlePrefab: {fileID: 0}
-    LifeTime: 0
+    ParticlePrefab: {fileID: 108184, guid: d2f5c7e04c61b904ebe2a5e3b0198eac, type: 2}
+    LifeTime: 2

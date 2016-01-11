@@ -2877,10 +2877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  ZapLandingParticles:
-    ParticleTag: 
-    ParticlePrefab: {fileID: 141360, guid: 5304eea439929a34c87989ee9c3c7180, type: 2}
-    LifeTime: 2
   ZapLandingHardParticles:
     ParticleTag: 
     ParticlePrefab: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
@@ -30826,10 +30822,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  ZapLandingParticles:
-    ParticleTag: 
-    ParticlePrefab: {fileID: 141360, guid: 8db489258952bf94b9e2b7ddd62379ed, type: 2}
-    LifeTime: 2
   ZapLandingHardParticles:
     ParticleTag: 
     ParticlePrefab: {fileID: 108184, guid: d2f5c7e04c61b904ebe2a5e3b0198eac, type: 2}
@@ -43022,10 +43014,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  ZapLandingParticles:
-    ParticleTag: 
-    ParticlePrefab: {fileID: 0}
-    LifeTime: 2
   ZapLandingHardParticles:
     ParticleTag: 
     ParticlePrefab: {fileID: 0}
