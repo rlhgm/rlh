@@ -106,6 +106,9 @@
      <Compile Include="Assets\mp\Scripts\NewZapTest.cs" />
      <Compile Include="Assets\mp\Scripts\Panther.cs" />
      <Compile Include="Assets\mp\Scripts\Parallaxed.cs" />
+     <Compile Include="Assets\mp\Scripts\Particles\ParticleData.cs" />
+     <Compile Include="Assets\mp\Scripts\Particles\ParticleInseter.cs" />
+     <Compile Include="Assets\mp\Scripts\Particles\ParticleSet.cs" />
      <Compile Include="Assets\mp\Scripts\Pickable.cs" />
      <Compile Include="Assets\mp\Scripts\PlatformHandle.cs" />
      <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
@@ -158,11 +161,17 @@
      <None Include="Assets\mp\mas\WorldSpaceSlice.shader" />
      <None Include="Assets\Resources\Editor\CM Tools\TileMasterReadme.txt" />
      <None Include="Assets\mp\mas\DraggedStone2.shader" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
