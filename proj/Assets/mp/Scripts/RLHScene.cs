@@ -274,9 +274,48 @@ public class RLHScene : MonoBehaviour
     {
     }
 
+    class CollObjects
+    {
+        public CollObjects(GameObject o1, GameObject o2)
+        {
+            obj1 = o1;
+            obj2 = o2;
+        }
+        public GameObject obj1;
+        public GameObject obj2;
+    }
+
+    List<CollObjects> collObjects = new List<CollObjects>(30);
+
     void FixedUpdate()
     {
         //print("RLHScene::FixedUpdate() " + Time.time);
+        collObjects.Clear();
+    }
+    public bool AddCollision(GameObject o1, GameObject o2)
+    {
+        if (HasCollision(o1, o2)) return false;
+        collObjects.Add(new CollObjects(o1, o2));
+        return true;
+    }
+
+    public bool HasCollision(GameObject o1, GameObject o2)
+    {
+        int numOfColls = collObjects.Count;
+        for( int i = 0; i < numOfColls; ++i)
+        {
+            CollObjects co = collObjects[i];
+            if (o1 == co.obj1)
+            {
+                if (o2 == co.obj2) return true;
+            }
+            else if (o1 == co.obj2)
+            {
+                if (o2 == co.obj1) return true;
+            }
+        }
+
+        return false;
     }
 
     public void reset()

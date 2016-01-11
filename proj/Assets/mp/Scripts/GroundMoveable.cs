@@ -95,6 +95,13 @@ public class GroundMoveable : MonoBehaviour
         //    Debug.DrawRay(contact.point, contact.normal, Color.white);
         //}
 
+        //collision.contacts[0].
+
+        if( RLHScene.Instance.AddCollision(gameObject, collision.gameObject) )
+        {
+            print("kolizja " + gameObject.name + " z " + collision.gameObject.name);
+        }
+
     }
 
     void Awake()
