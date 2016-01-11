@@ -249,7 +249,8 @@ public class ZapControllerKnife : ZapController
     {
         zap.KnifeAttackLeftHighCollider.SetActive(false);
         zap.KnifeAttackRightHighCollider.SetActive(false);
-
+        zap.KnifeAttackLeftLowCollider.SetActive(false);
+        zap.KnifeAttackRightLowCollider.SetActive(false);
         base.deactivate();
     }
 
@@ -332,7 +333,9 @@ public class ZapControllerKnife : ZapController
 
         zap.KnifeAttackLeftHighCollider.SetActive(false);
         zap.KnifeAttackRightHighCollider.SetActive(false);
-        
+        zap.KnifeAttackLeftLowCollider.SetActive(false);
+        zap.KnifeAttackRightLowCollider.SetActive(false);
+
         switch (newAction)
         {
 
@@ -555,6 +558,9 @@ public class ZapControllerKnife : ZapController
                 }
                 cut(cutStartLow, cutEndLow);
 
+                if (zap.faceRight()) zap.KnifeAttackRightLowCollider.SetActive(true);
+                else zap.KnifeAttackLeftLowCollider.SetActive(true);
+                
                 break;
 
             case Action.CROUCH_LEFT:
@@ -1058,6 +1064,9 @@ public class ZapControllerKnife : ZapController
     {
         if (zap.currentActionTime > ATTACK_DURATION)
         {
+            zap.KnifeAttackRightLowCollider.SetActive(false);
+            zap.KnifeAttackLeftLowCollider.SetActive(false);
+
             setAction(Action.ATTACK_JUST_FINISHED);
             if (!checkStartCrouchAttack())
             {
