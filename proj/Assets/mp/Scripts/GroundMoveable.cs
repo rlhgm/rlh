@@ -51,7 +51,8 @@ public class GroundMoveable : MonoBehaviour
         physic.isKinematic = false;
         SoundPlayer.Play(gameObject,"oderwanie");
         if (gfx) gfx.transform.localPosition = gfxStaticPos;
-        if (OnBreakOffAction) OnBreakOffAction.Perform(); 
+        if (OnBreakOffAction) OnBreakOffAction.Perform();
+        RLHScene.Instance.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
     }
 
     //void ShakeUpdate()
