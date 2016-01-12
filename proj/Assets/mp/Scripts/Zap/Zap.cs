@@ -3426,10 +3426,10 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             return cameraTargetOffset;
         }
 
-        //set
-        //{
-        //    cameraTargetOffset = value;
-        //}
+        set
+        {
+            cameraTargetOffset = value;
+        }
     }
 
     public bool Paused

@@ -11,5 +11,5 @@ public abstract class RLHAction : MonoBehaviour
 
     protected abstract int PerformSpec();
 
-    bool performed = false;
+    protected bool performed = false;
 }
