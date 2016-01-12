@@ -30,6 +30,8 @@ public class GroundMoveable : MonoBehaviour
 
     bool isCollapsableFootbridge = false;
 
+    SpriteRenderer gfx = null;
+
     public bool IsHanging()
     {
         return physic.isKinematic;
@@ -50,6 +52,73 @@ public class GroundMoveable : MonoBehaviour
         SoundPlayer.Play(gameObject,"oderwanie");
         if (OnBreakOffAction) OnBreakOffAction.Perform(); 
     }
+
+    //void ShakeUpdate()
+    //{
+
+    //}
+
+    float shakeTime = 0f;
+    //Vector2 shakeMaxSpeed = new Vector2(5f, 5f);
+    Vector2 shakeSpeed = new Vector2(8f, 8f);
+    Vector2 shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
+    Vector2 shakeAmplitude = new Vector2(0f, 0f);
+
+    void applyShake(float dt)
+    {
+        if (!gfx) return;
+
+        shakeTime += dt;
+
+        Vector3 newPos = gfx.transform.position;
+
+        newPos.x += (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+        newPos.y += (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+
+        gfx.transform.position = newPos;
+
+        //switch (shakeStatus)
+        //{
+        //    case ShakeStatus.NoShake:
+        //        return;
+
+        //    case ShakeStatus.ShakeImpulse:
+        //        if (shakeTime > shakeDuration)
+        //        {
+        //            shakeStatus = ShakeStatus.NoShake;
+        //            return;
+        //        }
+        //        shakeRatio = 1 - (shakeTime / shakeDuration);
+
+        //        sample = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+        //        newPos.x += (sample * shakeRatio);
+        //        sample = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+        //        newPos.y += (sample * shakeRatio);
+
+        //        break;
+
+        //    case ShakeStatus.ShakePermanent:
+        //        newPos.x += (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+        //        newPos.y += (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+        //        break;
+
+        //    case ShakeStatus.ShakeFadeIn:
+        //        break;
+
+        //    case ShakeStatus.ShakeFadeOut:
+        //        break;
+        //}
+
+        transform.position = newPos;
+
+        // fajny efekt 0.125 - 0.5 
+        //shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
+        // fajny efekt nawet 8-10
+        //shakeSpeed = new Vector2(8f, 8f);
+
+
+    }
+
     public bool TryToBreakOff(Vector2 pullPoint)
     {
         if (isCollapsableFootbridge) return false;
@@ -156,6 +225,11 @@ public class GroundMoveable : MonoBehaviour
     void Awake()
     {
         physic = GetComponent<Rigidbody2D>();
+        Transform gfxTransform = transform.Find("gfx");
+        if( gfxTransform)
+        {
+            gfx = gfxTransform.GetComponent<SpriteRenderer>();
+        }
 
         //boxCollider = GetComponent<BoxCollider2D>();
 
