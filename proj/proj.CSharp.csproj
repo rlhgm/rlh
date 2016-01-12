@@ -75,6 +75,7 @@
     <Compile Include="Assets\BezierCurve.cs" />
     <Compile Include="Assets\BezierSpline.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
+    <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CrumblingStairsYeb.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CuttedChandelierRope.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\RLHAction.cs" />
     <Compile Include="Assets\SplineDecorator.cs" />

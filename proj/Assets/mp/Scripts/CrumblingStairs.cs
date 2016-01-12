@@ -30,6 +30,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
     int ToResetCrumbled = 0;
     float ToResetCurrentHangTime = 0f;
     bool ToResetIsNoCrumbled = true;
+    bool ToResetYebWas = false;
 
     Vector3 ToResetMountPosition;
     float ToResetMoutRotation;
@@ -46,6 +47,8 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         ToResetMoutRotation = mountBody.rotation;
         ToResetAngleLimits.min = mountHinge.limits.min;
         ToResetAngleLimits.max = mountHinge.limits.max;
+
+        ToResetYebWas = yebWas;
         
         //angleLimits.min = LimitSteps[crumbled];
         //        angleLimits.max = 360f;
@@ -84,6 +87,9 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         //mount.gameObject.SetActive(!ToResetIsNoCrumbled);
 
         //mountHinge.enabled = true;
+
+        yebWas = ToResetYebWas;
+        lastHingJointSpeed = 0f;
 
         if ( ToResetIsNoCrumbled )
         {
@@ -188,6 +194,16 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         }
     }
 
+    float lastHingJointSpeed = 0f;
+    bool yebWas = false;
+
+    public RLHAction YebAction = null;
+
+    void JustYEB()
+    {
+        if (YebAction != null) YebAction.Perform();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -195,6 +211,27 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         //{
         //    if (mountBody.sleepMode)
         //}
+
+        //print(mountHinge.jointSpeed);
+        if (!yebWas)
+        {
+            if (Mathf.Abs(mountHinge.jointSpeed) > 0.1f)
+            {
+                if (lastHingJointSpeed == 0f)
+                {
+                    lastHingJointSpeed = mountHinge.jointSpeed;
+                }
+                else
+                {
+                    float _tmp = lastHingJointSpeed * mountHinge.jointSpeed; // jezeli bylo + a jest - lub odwortnie
+                    if ( _tmp < 0f)
+                    {
+                        print("JEB JEB JEB");
+                        yebWas = true;
+                    }
+                }
+            }
+        }
     }
 
     public bool TryToCrumble(float deltaTime)

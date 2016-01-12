@@ -5335,7 +5335,7 @@ public class ZapControllerNormal : ZapController
             MountMoveable _mm = hit.collider.GetComponent<MountMoveable>();
             if (_mm)
             {
-                Debug.Log("JEST MM");
+                //Debug.Log("JEST MM");
                 //Vector3 pointToCheck = handledMountMoveable.ConvertToPointSize(handledMountMoveablePosition);
                 ////pointToCheck += distToMount;
                 //bool res = handledMountMoveable.LocalPointHandable(pointToCheck);
