@@ -12,17 +12,29 @@ public class CrumblingStairsYeb : RLHAction
     GameObject lightray1;
     GameObject lightray2;
 
+    bool resetLightRay1 = false;
+    bool resetLightRay2 = false;
+
     public override void SaveResets()
     {     
         stone1.GetComponent<GroundMoveable>().SaveResets();
         stone2.GetComponent<GroundMoveable>().SaveResets();
+
+        resetLightRay1 = lightray1.activeSelf;
+        resetLightRay2 = lightray2.activeSelf;
     }
 
     public override void Reset()
     {
+        performTime = 0f;
+        performed = false;
         stone1.GetComponent<GroundMoveable>().Reset();
         stone2.GetComponent<GroundMoveable>().Reset();
+        lightray1.SetActive(resetLightRay1);
+        lightray2.SetActive(resetLightRay2);
     }
+
+    float performTime = 0f;
 
     void Start()
     {
@@ -39,12 +51,18 @@ public class CrumblingStairsYeb : RLHAction
 
     void Update()
     {
-        //if (performed)
-        //{
-        //    Vector2 chandelierPosDiff = chandelier.transform.position - chandelierStartPos;
-        //    Vector3 cto = chandelierPosDiff;
-        //    RLHScene.Instance.Zap.CameraTargetOffset = cto;
-        //}
+        if (performed)
+        {
+            performTime += Time.deltaTime;
+            if( performTime > 4f )
+            {
+                stone1.SetActive(false);
+                stone2.SetActive(false);
+            }
+            //Vector2 chandelierPosDiff = chandelier.transform.position - chandelierStartPos;
+            //Vector3 cto = chandelierPosDiff;
+            //RLHScene.Instance.Zap.CameraTargetOffset = cto;
+        }
     }
 
     protected override int PerformSpec()
