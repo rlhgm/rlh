@@ -103,6 +103,8 @@ public class DestroyablePlatform : MonoBehaviour {
             orbv.y *= 0.25f;
             otherRB.velocity = orbv;
 
+            RLHScene.Instance.CamController.ShakeImpulseStart(1f, 0.25f, 8f);
+
             Rigidbody2D myBody = GetComponent<Rigidbody2D>();
             Debug.Assert(myBody);
 
