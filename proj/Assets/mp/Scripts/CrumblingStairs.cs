@@ -226,7 +226,12 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
                     float _tmp = lastHingJointSpeed * mountHinge.jointSpeed; // jezeli bylo + a jest - lub odwortnie
                     if ( _tmp < 0f)
                     {
-                        print("JEB JEB JEB");
+                        //print("JEB JEB JEB");
+                        CrumblingStairsYeb csy = GetComponent<CrumblingStairsYeb>();
+                        if (csy)
+                        {
+                            csy.Perform();
+                        }
                         yebWas = true;
                     }
                 }
