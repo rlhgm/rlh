@@ -58,24 +58,38 @@ public class GroundMoveable : MonoBehaviour
 
     //}
 
+    bool shaking = false;
     float shakeTime = 0f;
     //Vector2 shakeMaxSpeed = new Vector2(5f, 5f);
     Vector2 shakeSpeed = new Vector2(8f, 8f);
     Vector2 shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
     Vector2 shakeAmplitude = new Vector2(0f, 0f);
+    Vector3 gfxStaticPos = new Vector3();
+    Vector3 posOffset = new Vector3();
 
-    void applyShake(float dt)
+    public void ShakeStop()
+    {
+        gfx.transform.localPosition = gfxStaticPos;
+    }
+
+    //void Update()
+    //{
+    //    applyShake();
+    //}
+
+    void applyShake(/*float dt*/)
     {
         if (!gfx) return;
 
-        shakeTime += dt;
+        shakeTime += Time.deltaTime;
 
-        Vector3 newPos = gfx.transform.position;
+        //posOffset = new Vector3();
+        //print(newPos);
 
-        newPos.x += (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
-        newPos.y += (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+        posOffset.x = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
+        posOffset.y = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
 
-        gfx.transform.position = newPos;
+        gfx.transform.localPosition = gfxStaticPos + posOffset;
 
         //switch (shakeStatus)
         //{
@@ -109,7 +123,7 @@ public class GroundMoveable : MonoBehaviour
         //        break;
         //}
 
-        transform.position = newPos;
+        //transform.position = newPos;
 
         // fajny efekt 0.125 - 0.5 
         //shakeMaxAmplitude = new Vector2(0.25f, 0.25f);
@@ -125,6 +139,7 @@ public class GroundMoveable : MonoBehaviour
 
         if (IsHanging())
         {
+            applyShake();
             //Debug.Log(pullPoint + " " + physic.fakeWorldCenterOfMass);
             if ((pullPoint - fakeWorldCenterOfMass /*physic.worldCenterOfMass*/).magnitude > toBreakOffDist)
             {
@@ -229,6 +244,7 @@ public class GroundMoveable : MonoBehaviour
         if( gfxTransform)
         {
             gfx = gfxTransform.GetComponent<SpriteRenderer>();
+            gfxStaticPos = gfx.transform.localPosition;
         }
 
         //boxCollider = GetComponent<BoxCollider2D>();
@@ -285,6 +301,8 @@ public class GroundMoveable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //applyShake();
+
         if (physic.IsSleeping())
         {
             if (!lastSleeped)
