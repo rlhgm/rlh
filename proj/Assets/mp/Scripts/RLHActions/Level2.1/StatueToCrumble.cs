@@ -5,6 +5,7 @@ public class StatueToCrumble : MonoBehaviour
 {
     public Chandelier MyKiller = null;
     public GameObject chandelierCollider = null;
+    public GameObject crumbledGrounds = null;
 
     Animator myAnimator = null;
 
@@ -14,7 +15,10 @@ public class StatueToCrumble : MonoBehaviour
         myAnimator.speed = 0f;
         chandelierCollider = transform.Find("ChandelierCollider").gameObject;
         chandelierCollider.SetActive(false);
-	}
+
+        crumbledGrounds = transform.Find("CrumbledGrounds").gameObject;
+        crumbledGrounds.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,6 +31,7 @@ public class StatueToCrumble : MonoBehaviour
         {
             myAnimator.speed = 1f;
             chandelierCollider.SetActive(false);
+            crumbledGrounds.SetActive(true);
         }
     }
 }
