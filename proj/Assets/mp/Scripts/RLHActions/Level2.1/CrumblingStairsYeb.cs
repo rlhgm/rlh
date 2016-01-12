@@ -37,6 +37,16 @@ public class CrumblingStairsYeb : RLHAction
         lightray2.SetActive(false);
     }
 
+    void Update()
+    {
+        //if (performed)
+        //{
+        //    Vector2 chandelierPosDiff = chandelier.transform.position - chandelierStartPos;
+        //    Vector3 cto = chandelierPosDiff;
+        //    RLHScene.Instance.Zap.CameraTargetOffset = cto;
+        //}
+    }
+
     protected override int PerformSpec()
     {     
         RLHScene.Instance.CamController.ShakeImpulseStart(3f, 0.35f, 8f);

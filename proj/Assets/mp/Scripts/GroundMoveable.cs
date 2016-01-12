@@ -5,6 +5,7 @@ public class GroundMoveable : MonoBehaviour
 {
     public SoundSets soundsSets;
 
+    int resetLayer = 0;
     Vector2 resetPosition;
     float resetRotation;
     Vector2 resetVelocity;
@@ -232,6 +233,8 @@ public class GroundMoveable : MonoBehaviour
 
     public void SaveResets()
     {
+        //gameObject.layer = LayerMask.NameToLayer("LA-GROUND");
+        resetLayer = gameObject.layer;
         resetPosition = physic.position; // transform.position;
         resetRotation = physic.rotation; // transform.rotation;      
         resetVelocity = physic.velocity;
@@ -248,6 +251,7 @@ public class GroundMoveable : MonoBehaviour
         }
         gameObject.SetActive(resetActive);
 
+        gameObject.layer = resetLayer;
         physic.position = resetPosition;
         physic.rotation = resetRotation;
         physic.velocity = resetVelocity;
