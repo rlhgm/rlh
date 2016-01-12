@@ -4,6 +4,7 @@ using System.Collections;
 public class DigToLightRays : RLHAction
 {
     GameObject[] rays = new GameObject[3];
+    public Bat[] bats;
     //GameObject ray2;
     //GameObject ray3;
 
@@ -22,10 +23,17 @@ public class DigToLightRays : RLHAction
         {
             rays[i].SetActive(true);
         }
+        for(int i = 0; i < bats.Length; ++i)
+        {
+            Bat bat = bats[i];
+            bat.gameObject.SetActive(true);
+            bat.ZapIsHere(true);
+        }
         return 0;
     }
 
     bool[] resetActives = new bool[3];
+    bool[] batsActives;
 
     public override void SaveResets()
     {
@@ -33,12 +41,23 @@ public class DigToLightRays : RLHAction
         {
             resetActives[i] = rays[i].activeSelf;
         }
+        batsActives = new bool[bats.Length];
+        for (int i = 0; i < bats.Length; ++i)
+        {
+            Bat bat = bats[i];
+            batsActives[i] = bat.gameObject.activeSelf;
+        }
     }
     public override void Reset()
     {
         for (int i = 0; i < 3; ++i)
         {
             rays[i].SetActive(resetActives[i]);
+        }
+        for (int i = 0; i < batsActives.Length; ++i)
+        {
+            Bat bat = bats[i];
+            bat.gameObject.SetActive(batsActives[i]);
         }
     }
 

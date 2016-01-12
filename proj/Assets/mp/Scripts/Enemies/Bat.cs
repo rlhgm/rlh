@@ -349,16 +349,29 @@ public class Bat : Enemy //MonoBehaviour
         }
     }
 
-    public void ZapIsHere()
+    public void ZapIsHere(bool forceWakeUp = false)
     {
         //print(name + " zapIsHere()");
         searchBed = false;
         bedFound = false;
+        if (forceWakeUp)
+        {
+            SetState(State.Sleep);
+        }
+
         if (IsInState(State.Sleep))
         {
             //else if (param == 1) // krotka drzemka aby nie wszyskie wystartoway razem
             //{
-            snoozeDuration = Random.Range(0f, 1f);
+            if (!forceWakeUp)
+            {
+                snoozeDuration = Random.Range(0f, 1f);
+            }
+            else
+            {
+                snoozeDuration = Random.Range(2f, 5.51f);
+                //Update();
+            }
             currentStateTime = 0f;
             //    print(name + " snoozeDuration " + snoozeDuration);
             //}
