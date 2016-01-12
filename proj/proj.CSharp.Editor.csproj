@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,6 +54,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -70,6 +71,9 @@
     </Reference>
     <Reference Include="UnityEditor.Networking">
       <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
@@ -128,10 +132,10 @@
     <Compile Include="Assets\Editor\BezierSplineInspector.cs" />
     <Compile Include="Assets\Editor\GhostControllerNormalCreateAsset.cs" />
     <Compile Include="Assets\Editor\LineInspector.cs" />
+    <Compile Include="Assets\Editor\ParticleSetCreateAsset.cs" />
     <Compile Include="Assets\Editor\RLHEditor.cs" />
     <Compile Include="Assets\Editor\RLHOptionsWindow.cs" />
     <Compile Include="Assets\Editor\ScriptableObjectsUtility.cs" />
-    <Compile Include="Assets\Editor\ParticleSetCreateAsset.cs" />
     <Compile Include="Assets\Editor\Sounds\SoundSetsCreateAsset.cs" />
     <Compile Include="Assets\Editor\ZapControllerGravityGunCreateAsset.cs" />
     <Compile Include="Assets\Editor\ZapControllerKnifeCreateAsset.cs" />
