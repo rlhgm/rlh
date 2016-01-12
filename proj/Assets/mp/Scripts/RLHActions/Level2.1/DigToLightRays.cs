@@ -8,6 +8,23 @@ public class DigToLightRays : RLHAction
     //GameObject ray2;
     //GameObject ray3;
 
+    public override int SomethingHappens(string message)
+    {
+        if( message == "zaptouchstone")
+        {
+            print("DigToLightRays => " + message);
+            for (int i = 0; i < bats.Length; ++i)
+            {
+                if (i % 2 == 0) continue; 
+                Bat bat = bats[i];
+                bat.gameObject.SetActive(true);
+                bat.ZapIsHere(true);
+            }
+            return 1;
+        }
+        return 0;
+    }
+
     void Start()
     {
         rays[0] = transform.Find("ray1").gameObject;

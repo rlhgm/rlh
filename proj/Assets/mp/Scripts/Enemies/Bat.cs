@@ -354,7 +354,7 @@ public class Bat : Enemy //MonoBehaviour
         //print(name + " zapIsHere()");
         searchBed = false;
         bedFound = false;
-        if (forceWakeUp)
+        if (IsInState(State.Undef) && forceWakeUp)
         {
             SetState(State.Sleep);
         }
@@ -369,7 +369,7 @@ public class Bat : Enemy //MonoBehaviour
             }
             else
             {
-                snoozeDuration = Random.Range(2f, 5.51f);
+                snoozeDuration = Random.Range(0.11f, 2.51f);
                 //Update();
             }
             currentStateTime = 0f;

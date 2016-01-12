@@ -9,6 +9,11 @@ public abstract class RLHAction : MonoBehaviour
         return PerformSpec();        
     }
 
+    public virtual int SomethingHappens(string message)
+    {
+        return 0;
+    }
+
     protected abstract int PerformSpec();
 
     protected bool performed = false;

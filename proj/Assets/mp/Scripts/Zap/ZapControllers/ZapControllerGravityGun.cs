@@ -725,7 +725,14 @@ public class ZapControllerGravityGun : ZapController
 
                         draggedStone = hit.collider.transform;
                         draggedStoneMoveable = draggedStone.GetComponent<GroundMoveable>();
-
+                        if( draggedStoneMoveable )
+                        {
+                            //public override int SomethingHappens(string message)
+                            if( draggedStoneMoveable.OnBreakOffAction)
+                            {
+                                draggedStoneMoveable.OnBreakOffAction.SomethingHappens("zaptouchstone");
+                            }
+                        }
                         Rigidbody2D tsrb = draggedStone.GetComponent<Rigidbody2D>();
                         tsrb.gravityScale = 0f;
                         flashStone2(draggedStone);
