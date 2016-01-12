@@ -50,6 +50,7 @@ public class GroundMoveable : MonoBehaviour
         if (!IsHanging()) return;
         physic.isKinematic = false;
         SoundPlayer.Play(gameObject,"oderwanie");
+        if (gfx) gfx.transform.localPosition = gfxStaticPos;
         if (OnBreakOffAction) OnBreakOffAction.Perform(); 
     }
 
@@ -77,7 +78,7 @@ public class GroundMoveable : MonoBehaviour
     //    applyShake();
     //}
 
-    void applyShake(/*float dt*/)
+    void applyShake(float toBreakRatio /*float dt*/)
     {
         if (!gfx) return;
 
@@ -85,9 +86,11 @@ public class GroundMoveable : MonoBehaviour
 
         //posOffset = new Vector3();
         //print(newPos);
+        shakeAmplitude.x = toBreakRatio * shakeMaxAmplitude.x;
+        shakeAmplitude.y = toBreakRatio * shakeMaxAmplitude.y;
 
-        posOffset.x = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeMaxAmplitude.x;
-        posOffset.y = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeMaxAmplitude.y;
+        posOffset.x = (Mathf.PerlinNoise(shakeTime * shakeSpeed.x, 0f) - 0.5f) * shakeAmplitude.x;
+        posOffset.y = (Mathf.PerlinNoise(0f, shakeTime * shakeSpeed.y) - 0.5f) * shakeAmplitude.y;
 
         gfx.transform.localPosition = gfxStaticPos + posOffset;
 
@@ -139,9 +142,14 @@ public class GroundMoveable : MonoBehaviour
 
         if (IsHanging())
         {
-            applyShake();
+            float fromCenterDist = (pullPoint - fakeWorldCenterOfMass).magnitude;
+            float toBreakRatio = Mathf.Min(1f, fromCenterDist / toBreakOffDist);
+
+            applyShake(toBreakRatio);
+
             //Debug.Log(pullPoint + " " + physic.fakeWorldCenterOfMass);
-            if ((pullPoint - fakeWorldCenterOfMass /*physic.worldCenterOfMass*/).magnitude > toBreakOffDist)
+            //if ((pullPoint - fakeWorldCenterOfMass /*physic.worldCenterOfMass*/).magnitude > toBreakOffDist)
+            if (toBreakRatio >= 1f)
             {
                 BreakOff();
                 //Debug.Log(pullPoint + " " + physic.worldCenterOfMass);

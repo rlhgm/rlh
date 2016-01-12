@@ -1572,6 +1572,10 @@ public class ZapControllerGravityGun : ZapController
             draggedStone.gameObject.layer = LayerMask.NameToLayer("GroundMoveable");  //zap.layerIdDraggedGroundMoveableMask;
 
             draggedStone = null;
+            if( draggedStoneMoveable )
+            {
+                draggedStoneMoveable.ShakeStop();
+            }
             draggedStoneMoveable = null;
         }
     }
