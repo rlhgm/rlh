@@ -11,7 +11,12 @@ public class CuttedChandelierRope : RLHAction
 
     void Awake()
     {
-        SaveResets();
+        
+    }
+
+    void Start()
+    {
+        
     }
 
     public override void SaveResets()

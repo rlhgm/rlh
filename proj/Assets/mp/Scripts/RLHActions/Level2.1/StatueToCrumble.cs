@@ -10,14 +10,23 @@ public class StatueToCrumble : MonoBehaviour
     Animator myAnimator = null;
 
     bool resetCrumbledGroundsActive = false;
-    
+    bool resetChandelierColliderActive = false;
+
     public void CacheResetData()
     {
         resetCrumbledGroundsActive = crumbledGrounds.activeSelf;
+        resetChandelierColliderActive = chandelierCollider.activeSelf;
     }
     public void Reset()
     {
         crumbledGrounds.SetActive(resetCrumbledGroundsActive);
+        chandelierCollider.SetActive(resetChandelierColliderActive);
+
+        if( resetCrumbledGroundsActive == false) // pomnik jeszcze nie przewrocony
+        {
+            myAnimator.Play("idle");
+            myAnimator.speed = 0f;
+        }
     }
 
 	// Use this for initialization
@@ -29,6 +38,8 @@ public class StatueToCrumble : MonoBehaviour
 
         crumbledGrounds = transform.Find("CrumbledGrounds").gameObject;
         crumbledGrounds.SetActive(false);
+
+        CacheResetData();
     }
 	
 	// Update is called once per frame
@@ -40,7 +51,10 @@ public class StatueToCrumble : MonoBehaviour
     {
         if( chandelier == MyKiller)
         {
+            myAnimator.Play("crumble");
             myAnimator.speed = 1f;
+
+            //myAnimator.speed = 1f;
             chandelierCollider.SetActive(false);
             crumbledGrounds.SetActive(true);
         }
