@@ -71,7 +71,10 @@ public class GroundMoveable : MonoBehaviour
 
     public void ShakeStop()
     {
-        gfx.transform.localPosition = gfxStaticPos;
+        if (gfx)
+        {
+            gfx.transform.localPosition = gfxStaticPos;
+        }
     }
 
     //void Update()
