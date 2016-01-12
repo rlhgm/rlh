@@ -23,6 +23,10 @@ public class StatueToCrumble : MonoBehaviour
 
     public void HitByChandelier(Chandelier chandelier)
     {
-
+        if( chandelier == MyKiller)
+        {
+            myAnimator.speed = 1f;
+            chandelierCollider.SetActive(false);
+        }
     }
 }

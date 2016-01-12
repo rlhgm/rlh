@@ -5,6 +5,7 @@ public class CuttedChandelierRope : RLHAction
 {
     public Chandelier chandelier = null;
     public CutSceneCameraPassing CameraPassing = null;
+    public StatueToCrumble statueToCrumble = null;
 
     Vector3 chandelierStartPos = new Vector3();
 
@@ -19,6 +20,10 @@ public class CuttedChandelierRope : RLHAction
         if (CameraPassing)
         {
             CameraPassing.gameObject.SetActive(true);
+        }
+        if( statueToCrumble )
+        {
+            statueToCrumble.chandelierCollider.SetActive(true);
         }
 
         return 0;
