@@ -937,6 +937,12 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             Destroy(bird.gameObject);
         }
 
+        CuttedChandelierRope[] actions = FindObjectsOfType(typeof(CuttedChandelierRope)) as CuttedChandelierRope[];
+        foreach (CuttedChandelierRope act in actions)
+        {
+            act.Reset();
+        }
+
         //IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
         //foreach (IGResetable resetable in resetables)
         //{
@@ -1632,6 +1638,13 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
                 //{
                 //    cameraPassing.GResetCacheResetData();
                 //}
+
+                CuttedChandelierRope[] actions = FindObjectsOfType(typeof(CuttedChandelierRope)) as CuttedChandelierRope[];
+                foreach (CuttedChandelierRope act in actions)
+                {
+                    act.SaveResets();
+                }
+
                 rlhScene.CacheAllResetableDatas();
             }
         }

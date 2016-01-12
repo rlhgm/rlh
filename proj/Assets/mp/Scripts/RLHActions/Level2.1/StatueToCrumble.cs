@@ -9,6 +9,17 @@ public class StatueToCrumble : MonoBehaviour
 
     Animator myAnimator = null;
 
+    bool resetCrumbledGroundsActive = false;
+    
+    public void CacheResetData()
+    {
+        resetCrumbledGroundsActive = crumbledGrounds.activeSelf;
+    }
+    public void Reset()
+    {
+        crumbledGrounds.SetActive(resetCrumbledGroundsActive);
+    }
+
 	// Use this for initialization
 	void Start () {
         myAnimator = GetComponent<Animator>();
