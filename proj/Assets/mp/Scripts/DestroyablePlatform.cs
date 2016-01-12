@@ -98,6 +98,11 @@ public class DestroyablePlatform : MonoBehaviour {
         {
             //DestroyByCollision();
 
+            Rigidbody2D otherRB = otherCollider.transform.GetComponent<Rigidbody2D>();
+            Vector2 orbv = otherRB.velocity;
+            orbv.y *= 0.25f;
+            otherRB.velocity = orbv;
+
             Rigidbody2D myBody = GetComponent<Rigidbody2D>();
             Debug.Assert(myBody);
 
