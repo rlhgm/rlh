@@ -943,6 +943,12 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             act.Reset();
         }
 
+        DigToLightRays[] actionsDigs = FindObjectsOfType(typeof(DigToLightRays)) as DigToLightRays[];
+        foreach (DigToLightRays act in actionsDigs)
+        {
+            act.Reset();
+        }
+
         //IGResetable[] resetables = FindObjectsOfType(typeof(IGResetable)) as IGResetable[];
         //foreach (IGResetable resetable in resetables)
         //{
@@ -1641,6 +1647,12 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
 
                 CuttedChandelierRope[] actions = FindObjectsOfType(typeof(CuttedChandelierRope)) as CuttedChandelierRope[];
                 foreach (CuttedChandelierRope act in actions)
+                {
+                    act.SaveResets();
+                }
+
+                DigToLightRays[] actionsDigs = FindObjectsOfType(typeof(DigToLightRays)) as DigToLightRays[];
+                foreach (DigToLightRays act in actionsDigs)
                 {
                     act.SaveResets();
                 }

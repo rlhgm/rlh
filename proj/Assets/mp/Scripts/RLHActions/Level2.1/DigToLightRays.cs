@@ -12,6 +12,8 @@ public class DigToLightRays : RLHAction
         rays[0] = transform.Find("ray1").gameObject;
         rays[1] = transform.Find("ray2").gameObject;
         rays[2] = transform.Find("ray3").gameObject;
+
+        SaveResets();
     }
 
     protected override int PerformSpec()

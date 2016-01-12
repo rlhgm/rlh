@@ -48,6 +48,7 @@ public class GroundMoveable : MonoBehaviour
         if (!IsHanging()) return;
         physic.isKinematic = false;
         SoundPlayer.Play(gameObject,"oderwanie");
+        if (OnBreakOffAction) OnBreakOffAction.Perform(); 
     }
     public bool TryToBreakOff(Vector2 pullPoint)
     {
