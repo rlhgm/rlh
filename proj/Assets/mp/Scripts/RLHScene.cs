@@ -350,7 +350,7 @@ public class RLHScene : MonoBehaviour
 
         float _e = Mathf.Min(MaxStoneImpactEnergy, energy);
         _e -= diff.magnitude * 0.5f*(MaxStoneImpactEnergy / MaxStoneImpactDist);
-        print(energy + " " + _e);
+        //print(energy + " " + _e);
         if (_e < 300f) return;
         float shAmp = 0.1f + (0.1f * (_e / MaxStoneImpactEnergy));
         float shDur = 0.25f + (1f *(_e / MaxStoneImpactEnergy));

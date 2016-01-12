@@ -49,7 +49,9 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         ToResetAngleLimits.max = mountHinge.limits.max;
 
         ToResetYebWas = yebWas;
-        
+
+        if (YebAction) YebAction.SaveResets();
+
         //angleLimits.min = LimitSteps[crumbled];
         //        angleLimits.max = 360f;
         //        mountHinge.limits = angleLimits;
@@ -99,6 +101,8 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
         {
 
         }
+
+        if (YebAction) YebAction.Reset();
     }
 
     Transform ground = null;
@@ -203,7 +207,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
     {
         if (YebAction != null) YebAction.Perform();
     }
-
+    
     // Update is called once per frame
     void Update()
     {

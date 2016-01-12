@@ -9,11 +9,23 @@ public class DestroyablePlatform : MonoBehaviour {
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    bool toDisable = false;
+    float toDisableTime = 0f;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if( toDisable )
+        {
+            if( (toDisableTime-=Time.deltaTime) < 0f )
+            {
+                toDisableTime = 0f;
+                toDisable = false;
+                gameObject.SetActive(false);
+            }
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -53,7 +65,9 @@ public class DestroyablePlatform : MonoBehaviour {
 
             gameObject.layer = LayerMask.NameToLayer("LA-GROUND");// RLHScene.Instance.LayerIdLAGROUNDMask;
 
-            Destroy(gameObject, 2f);
+            //Destroy(gameObject, 2f);
+            toDisable = true;
+            toDisableTime = 2f;
         }
 
     }
@@ -95,7 +109,9 @@ public class DestroyablePlatform : MonoBehaviour {
 
             gameObject.layer = LayerMask.NameToLayer("LA-GROUND");// RLHScene.Instance.LayerIdLAGROUNDMask;
 
-            Destroy(gameObject, 2f);
+            //Destroy(gameObject, 2f);
+            toDisable = true;
+            toDisableTime = 2f;
         }
 
     }

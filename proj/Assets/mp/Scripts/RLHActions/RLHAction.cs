@@ -12,4 +12,12 @@ public abstract class RLHAction : MonoBehaviour
     protected abstract int PerformSpec();
 
     protected bool performed = false;
+
+    public virtual void SaveResets()
+    {
+    }
+    public virtual void Reset()
+    {
+
+    }
 }

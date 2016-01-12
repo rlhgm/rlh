@@ -5288,33 +5288,33 @@ public class ZapControllerNormal : ZapController
         RaycastHit2D hit;
         Vector2 rayOrigin = zap.sensorLeft3.transform.position;
 
-        if ( lastFrameHande )
-        {
-            //zap.sensorHandleR2.position
-            //lastFrameHande;
-            //Vector2 rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
-            //                                                        //Vector2 rayOrigin = zap.sensorHandleR2.position.transform.position; // transform.position;
-            //rayOrigin.y += 0.3f;
-            //hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
+        //if ( lastFrameHande )
+        //{
+        //    //zap.sensorHandleR2.position
+        //    //lastFrameHande;
+        //    //Vector2 rayOrigin = zap.sensorLeft3.transform.position; // transform.position;
+        //    //                                                        //Vector2 rayOrigin = zap.sensorHandleR2.position.transform.position; // transform.position;
+        //    //rayOrigin.y += 0.3f;
+        //    //hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
 
-            //rayOrigin ;
-            rayOrigin.y += 0.3f;
-            hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
-            if (!hit.collider)
-            {
-                //Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
+        //    //rayOrigin ;
+        //    rayOrigin.y += 0.3f;
+        //    hit = Physics2D.Raycast(rayOrigin, Vector2.right, zap.myWidth, layerID);
+        //    if (!hit.collider)
+        //    {
+        //        //Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
 
-                hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
-                if (!hit.collider)
-                {
-                    _lastZapSensorLeft3Pos.x += zap.myWidth;
-                    rayOrigin.x += zap.myWidth;
-                    //Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
-                    hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
-                }
-            }
-        }
-        else
+        //        hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
+        //        if (!hit.collider)
+        //        {
+        //            _lastZapSensorLeft3Pos.x += zap.myWidth;
+        //            rayOrigin.x += zap.myWidth;
+        //            //Debug.DrawLine(_lastZapSensorLeft3Pos, rayOrigin);
+        //            hit = Physics2D.Linecast(_lastZapSensorLeft3Pos, rayOrigin, layerID);
+        //        }
+        //    }
+        //}
+        //else
         {
             //zap.sensorHandleR2.position
             //lastFrameHande;

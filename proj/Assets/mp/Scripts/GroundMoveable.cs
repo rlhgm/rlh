@@ -11,6 +11,7 @@ public class GroundMoveable : MonoBehaviour
     float resetAngularVelocity;
     bool resetHanging;
     Vector2 fakeWorldCenterOfMass;
+    bool resetActive;
 
     //BoxCollider2D boxCollider = null;
     public Rigidbody2D physic = null;
@@ -182,7 +183,7 @@ public class GroundMoveable : MonoBehaviour
         isCollapsableFootbridge = GetComponent<CollapseableFootbridge>();
         if (isCollapsableFootbridge && !IsHanging())
         {
-            Debug.LogError(name + " to ma byc kladka a nie jest kinetyczna. Przestawiam.");
+            Debug.LogError(name + " to ma byc kladka a nie jest kinematyczna. Przestawiam.");
             //Debug.Break();
             physic.isKinematic = true;
         }
@@ -236,6 +237,7 @@ public class GroundMoveable : MonoBehaviour
         resetVelocity = physic.velocity;
         resetAngularVelocity = physic.angularVelocity;
         resetHanging = IsHanging();
+        resetActive = gameObject.activeSelf;
     }
     public void Reset()
     {
@@ -244,6 +246,8 @@ public class GroundMoveable : MonoBehaviour
             print(gameObject.name);
             return;
         }
+        gameObject.SetActive(resetActive);
+
         physic.position = resetPosition;
         physic.rotation = resetRotation;
         physic.velocity = resetVelocity;
@@ -253,6 +257,7 @@ public class GroundMoveable : MonoBehaviour
         {
             GetComponent<CollapseableFootbridge>().Reset();
         }
+        
     }
 
     void CalculateFakeCenterOfMass(Vector2[] points)
