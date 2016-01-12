@@ -81,6 +81,8 @@ public class GroundMoveable : MonoBehaviour
 
     public ParticleSet particles = null;
 
+    public RLHAction OnBreakOffAction = null;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //if (coll.gameObject.tag == "Enemy")
