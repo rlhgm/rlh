@@ -68,6 +68,7 @@
      <Compile Include="Assets\mp\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\mp\Scripts\CameraTargetOffseter.cs" />
      <Compile Include="Assets\mp\Scripts\ChainLink.cs" />
+     <Compile Include="Assets\mp\Scripts\Chandelier.cs" />
      <Compile Include="Assets\mp\Scripts\CheckPoint.cs" />
      <Compile Include="Assets\mp\Scripts\CollapseableFootbridge.cs" />
      <Compile Include="Assets\mp\Scripts\ComicPage.cs" />
@@ -112,6 +113,9 @@
      <Compile Include="Assets\mp\Scripts\Pickable.cs" />
      <Compile Include="Assets\mp\Scripts\PlatformHandle.cs" />
      <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
+     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CrumblingStairsYeb.cs" />
+     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CuttedChandelierRope.cs" />
+     <Compile Include="Assets\mp\Scripts\RLHActions\RLHAction.cs" />
      <Compile Include="Assets\mp\Scripts\RLHScene.cs" />
      <Compile Include="Assets\mp\Scripts\Rope.cs" />
      <Compile Include="Assets\mp\Scripts\RopeLink.cs" />
