@@ -3,7 +3,16 @@ using System.Collections;
 
 public class GroundMoveable : MonoBehaviour
 {
-    public SoundSets soundsSets;
+    //public SoundSets soundsSets;
+    public string SoundTagBreakOff = "";
+
+    //public GameObject TryToBreakOffParticles = null;
+    //public GameObject BreakOffPartices = null;
+    public ParticleSet particles = null;
+
+    public string ParticleTagImpact = "";
+    public string ParticleTryTagBreakOff = "";
+    public string ParticleTagBreakOff = "";
 
     int resetLayer = 0;
     Vector2 resetPosition;
@@ -31,7 +40,7 @@ public class GroundMoveable : MonoBehaviour
     bool isCollapsableFootbridge = false;
 
     SpriteRenderer gfx = null;
-
+    
     public bool IsHanging()
     {
         return physic.isKinematic;
@@ -49,10 +58,12 @@ public class GroundMoveable : MonoBehaviour
     {
         if (!IsHanging()) return;
         physic.isKinematic = false;
-        SoundPlayer.Play(gameObject,"oderwanie");
+        if(SoundTagBreakOff != "") SoundPlayer.Play(gameObject,SoundTagBreakOff);
         if (gfx) gfx.transform.localPosition = gfxStaticPos;
         if (OnBreakOffAction) OnBreakOffAction.Perform();
         RLHScene.Instance.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
+
+
     }
 
     //void ShakeUpdate()
@@ -176,7 +187,7 @@ public class GroundMoveable : MonoBehaviour
     //    //    audio.Play();
     //}
 
-    public ParticleSet particles = null;
+    //public ParticleSet particles = null;
 
     public RLHAction OnBreakOffAction = null;
 
@@ -213,9 +224,9 @@ public class GroundMoveable : MonoBehaviour
             //    return 0.5f * rb.mass * Mathf.Pow(rb.velocity.magnitude, 2);
             //}
 
-            if (particles != null)
+            if (particles != null && ParticleTagImpact != "")
             {
-                ParticleData _pd = particles.GetParticleData("impact");
+                ParticleData _pd = particles.GetParticleData(ParticleTagImpact);
                 for (int i = 0; i < collision.contacts.Length; ++i)
                 {
                     ParticleInseter.Insert(_pd, collision.contacts[i].point);
