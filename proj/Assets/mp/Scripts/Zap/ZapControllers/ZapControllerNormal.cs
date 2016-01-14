@@ -728,7 +728,7 @@ public class ZapControllerNormal : ZapController
 
                 if (justLanding)
                 {
-                    zap.playSound(zap.landingSound);
+                    //zap.playSound(zap.landingSound);
 
                     zap.FuddleFromBird = false;
 
@@ -1254,8 +1254,8 @@ public class ZapControllerNormal : ZapController
 
                 zap.showInfo(msgInfo, -1);
 
-                if (zap.dieSounds.Length != 0)
-                    zap.playSound(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
+                //if (zap.dieSounds.Length != 0)
+                //    zap.playSound(zap.dieSounds[Random.Range(0, zap.dieSounds.Length)]);
                 break;
 
             case Action.WalkLeft:
@@ -1288,16 +1288,16 @@ public class ZapControllerNormal : ZapController
                 beforTurnRunSpeed = zap.velocity.x;
                 zap.AnimatorBody.Play("Zap_runback_R");
                 wantJumpAfter = false;
-                if (zap.turnRunSounds.Length != 0)
-                    zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
+                //if (zap.turnRunSounds.Length != 0)
+                //    zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
             case Action.TurnRunRight:
                 beforTurnRunSpeed = zap.velocity.x;
                 zap.AnimatorBody.Play("Zap_runback_L");
                 wantJumpAfter = false;
-                if (zap.turnRunSounds.Length != 0)
-                    zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
+                //if (zap.turnRunSounds.Length != 0)
+                //    zap.playSound(zap.turnRunSounds[Random.Range(0, zap.turnRunSounds.Length)]);
                 break;
 
             //case Action.PrepareToJump:
@@ -1316,8 +1316,8 @@ public class ZapControllerNormal : ZapController
                     if (zap.faceRight()) zap.AnimatorBody.Play("zap_rocks_climb_R");
                     else zap.AnimatorBody.Play("zap_rocks_climb_L");
                 }
-                if (zap.jumpSounds.Length != 0)
-                    zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
+                //if (zap.jumpSounds.Length != 0)
+                //    zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
 
             case Action.JumpLeft:
@@ -1325,16 +1325,16 @@ public class ZapControllerNormal : ZapController
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_run_jump_fly_R");
                 else zap.AnimatorBody.Play("Zap_run_jump_fly_L");
 
-                if (zap.jumpSounds.Length != 0)
-                    zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
+                //if (zap.jumpSounds.Length != 0)
+                //    zap.playSound(zap.jumpSounds[Random.Range(0, zap.jumpSounds.Length)]);
                 break;
                 
             case Action.LandingHard:
                 if (zap.faceRight()) zap.AnimatorBody.Play("Zap_landing_hard_R");
                 else zap.AnimatorBody.Play("Zap_landing_hard_L");
 
-                if (zap.landingSounds.Length != 0)
-                    zap.playSound(zap.landingSounds[Random.Range(0, zap.landingSounds.Length)]);
+                //if (zap.landingSounds.Length != 0)
+                //    zap.playSound(zap.landingSounds[Random.Range(0, zap.landingSounds.Length)]);
 
                 //Debug.Log(zap.groundUnder.gameObject.name);
 
@@ -1421,8 +1421,8 @@ public class ZapControllerNormal : ZapController
                     zap.AnimatorBody.speed = 0.0f;
                 }
 
-                if (zap.catchSounds.Length != 0)
-                    zap.playSound(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)]);
+                //if (zap.catchSounds.Length != 0)
+                //    zap.playSound(zap.catchSounds[Random.Range(0, zap.catchSounds.Length)]);
                 break;
             case Action.CLIMB_CLIMB:
                 //Debug.Log(catchedClimbHandle);

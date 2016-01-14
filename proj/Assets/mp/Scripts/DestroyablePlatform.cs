@@ -7,6 +7,7 @@ public class DestroyablePlatform : MonoBehaviour {
 
     public ParticleSet particles = null;
     public string SoundTagDestroy;
+    public string ParticleTagDestroy;
     // Use this for initialization
     void Start () {
 	
@@ -122,9 +123,9 @@ public class DestroyablePlatform : MonoBehaviour {
             toDisable = true;
             toDisableTime = 2f;
 
-            if (particles != null)
+            if (particles != null && ParticleTagDestroy != "")
             {
-                ParticleData _pd = particles.GetParticleData("destroy");
+                ParticleData _pd = particles.GetParticleData(ParticleTagDestroy);
                 Vector3 particlePos = transform.position;
                 Rigidbody2D _rb = GetComponent<Rigidbody2D>();
                 if (_rb)

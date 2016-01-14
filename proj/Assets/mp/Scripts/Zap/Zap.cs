@@ -23,15 +23,17 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
     //public Transform respawnPoint;
     Vector3 startPoint = new Vector3();
 
-    public AudioClip[] jumpSounds;
-    public AudioClip[] landingSounds;
-    public AudioClip[] turnRunSounds;
-    public AudioClip[] catchSounds;
-    public AudioClip[] dieSounds;
-
-    public AudioClip landingSound;
     //public AudioClip ropeCatchSound;
 
+
+    //public AudioClip[] jumpSounds;
+    //public AudioClip[] landingSounds;
+    //public AudioClip[] turnRunSounds;
+    //public AudioClip[] catchSounds;
+    //public AudioClip[] dieSounds;
+
+    //public AudioClip landingSound;
+    
     public AudioClip ropeBreakOffSound = null;
     public AudioClip ropeCutSound = null;
 
