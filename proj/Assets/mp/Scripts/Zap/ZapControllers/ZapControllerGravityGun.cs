@@ -727,6 +727,7 @@ public class ZapControllerGravityGun : ZapController
                         draggedStoneMoveable = draggedStone.GetComponent<GroundMoveable>();
                         if( draggedStoneMoveable )
                         {
+                            draggedStoneMoveable.GGDragStart();
                             //public override int SomethingHappens(string message)
                             if( draggedStoneMoveable.OnBreakOffAction)
                             {
@@ -1581,6 +1582,7 @@ public class ZapControllerGravityGun : ZapController
             draggedStone = null;
             if( draggedStoneMoveable )
             {
+                draggedStoneMoveable.GGDragStop();
                 draggedStoneMoveable.ShakeStop();
             }
             draggedStoneMoveable = null;

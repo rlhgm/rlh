@@ -75,12 +75,44 @@ public class GroundMoveable : MonoBehaviour
             }
             ParticleInseter.Insert(_pd, particlePos, transform.rotation);
         }
+
+        if (ParticleTryBreakOff)
+        {
+            Destroy(ParticleTryBreakOff);
+            ParticleTryBreakOff = null;
+        }
     }
 
     //void ShakeUpdate()
     //{
 
     //}
+
+    Object ParticleTryBreakOff;
+
+    public void GGDragStart()
+    {
+        if (particles && ParticleTagTryBreakOff != null)
+        {
+            ParticleData _pd = particles.GetParticleData(ParticleTagTryBreakOff);
+            Vector3 particlePos = transform.position;
+            Rigidbody2D _rb = GetComponent<Rigidbody2D>();
+            if (_rb)
+            {
+                particlePos = _rb.worldCenterOfMass;
+            }
+            ParticleTryBreakOff = ParticleInseter.Insert(_pd, particlePos, transform.rotation, false);
+        }
+    }
+
+    public void GGDragStop()
+    {
+        if( ParticleTryBreakOff)
+        {
+            Destroy(ParticleTryBreakOff);
+            ParticleTryBreakOff = null;
+        }
+    }
 
     bool shaking = false;
     float shakeTime = 0f;
