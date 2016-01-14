@@ -27,7 +27,7 @@ public static class ParticleInseter
     {
         Object newParticleObject = GameObject.Instantiate(particleData.ParticlePrefab, position, Quaternion.Euler(0f, 0f, 0f));
         GameObject.Destroy(newParticleObject, particleData.LifeTime);
-        return newParticleObject
+        return newParticleObject;
         //return false;
         //SoundPlay[] soundPlays = obj.GetComponents<SoundPlay>();
         ////int SoundTagHash = Animator.StringToHash(SoundTag);

@@ -4,7 +4,7 @@ using System.Collections;
 public class GroundMoveable : MonoBehaviour
 {
     //public SoundSets soundsSets;
-    public string SoundTagTagImpact = ""
+    public string SoundTagTagImpact = "";
     public string SoundTagBreakOff = "";
 
     //public GameObject TryToBreakOffParticles = null;
@@ -12,7 +12,7 @@ public class GroundMoveable : MonoBehaviour
     public ParticleSet particles = null;
 
     public string ParticleTagImpact = "";
-    public string ParticleTryTagBreakOff = "";
+    public string ParticleTagTryBreakOff = "";
     public string ParticleTagBreakOff = "";
 
     int resetLayer = 0;
