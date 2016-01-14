@@ -479,8 +479,8 @@ public class ZapControllerNormal : ZapController
                                     zapHandpos.y += (zap.sensorLeft3.transform.localPosition.y + 0.3f);
                                     handledMountMoveablePosition = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
 
-                                    if (handledMountMoveable.SoundTagCatch != "") SoundPlayer.Play(handledMountMoveable.gameObject, handledMountMoveable.SoundTagCatch, transform.position);
-
+                                    handledMountMoveable.Catched();
+                                    
                                     //Vector3 _pointToCheck = handledMountMoveable.transform.InverseTransformPoint(zapHandpos);
                                     //bool res = handledMountMoveable.LocalPointHandable(_pointToCheck);
                                     //if( res )

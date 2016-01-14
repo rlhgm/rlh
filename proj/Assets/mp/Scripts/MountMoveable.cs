@@ -45,7 +45,10 @@ public class MountMoveable : MonoBehaviour, IGResetable
     public float CollapseDuration = -1;
     public bool CollapseOnJump = true;
     public bool ResetOnJump = true;
-    public GameObject CollapseParticles = null;
+    //public GameObject CollapseParticles = null;
+    public ParticleSet particles = null;
+    public string ParticleTagCatch = "";
+    public string ParticleTagCollapse = "";
 
     public string SoundTagCatch = "";
     public string SoundTagCollapse = "";
@@ -74,7 +77,25 @@ public class MountMoveable : MonoBehaviour, IGResetable
     {
 
     }
-
+    public void Catched()
+    {
+        if (SoundTagCatch != "")
+        {
+            SoundPlayer.Play(gameObject, SoundTagCatch, transform.position);
+        }
+        
+        if (particles && ParticleTagCollapse != null)
+        {
+            ParticleData _pd = particles.GetParticleData(ParticleTagCollapse);
+            Vector3 particlePos = transform.position;
+            Rigidbody2D _rb = GetComponent<Rigidbody2D>();
+            if (_rb)
+            {
+                particlePos = _rb.worldCenterOfMass;
+            }
+            ParticleInseter.Insert(_pd, particlePos, transform.rotation);
+        }
+    }
     public bool TryToCollapse(float hangTime, Vector3 zapHandPos)
     {
         if (Collapsed) return false;
@@ -104,10 +125,16 @@ public class MountMoveable : MonoBehaviour, IGResetable
 
         if (SoundTagCollapse != "") SoundPlayer.Play(gameObject, SoundTagCollapse, transform.position);
 
-        if (CollapseParticles)
+        if (particles &&  ParticleTagCollapse != null)
         {
-            Object newParticleObject = Instantiate(CollapseParticles, collapsePosition, Quaternion.Euler(0, 0, 0));
-            Destroy(newParticleObject, 2.0f);
+            ParticleData _pd = particles.GetParticleData(ParticleTagCollapse);
+            Vector3 particlePos = transform.position;
+            Rigidbody2D _rb = GetComponent<Rigidbody2D>();
+            if (_rb)
+            {
+                particlePos = _rb.worldCenterOfMass;
+            }
+            ParticleInseter.Insert(_pd, particlePos, transform.rotation);
         }
     }
 
