@@ -27,3 +27,9 @@ MonoBehaviour:
   - ParticleTag: catch
     ParticlePrefab: {fileID: 157390, guid: 3d7f9e8dff4b6e24d845bbdd21366433, type: 2}
     LifeTime: 2
+  - ParticleTag: trybreafoff
+    ParticlePrefab: {fileID: 101206, guid: 81d12948ccdc1e843aacadb359e86931, type: 2}
+    LifeTime: 2
+  - ParticleTag: breakoff
+    ParticlePrefab: {fileID: 157390, guid: 3d7f9e8dff4b6e24d845bbdd21366433, type: 2}
+    LifeTime: 2
