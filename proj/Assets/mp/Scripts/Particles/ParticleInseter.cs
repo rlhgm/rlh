@@ -14,10 +14,17 @@ public static class ParticleInseter
     //    Debug.LogError("SoundPlayer : " + obj.name + " nie moze odegrac : " + SoundTag);
     //    return false;
     //}
+    //= Quaternion.Euler(0f, 0f, 0f)
+
+    public static void Insert(ParticleData particleData, Vector3 position, Quaternion rotation)
+    {
+        Object newParticleObject = GameObject.Instantiate(particleData.ParticlePrefab, position, rotation);
+        GameObject.Destroy(newParticleObject, particleData.LifeTime);
+    }
 
     public static void Insert(ParticleData particleData, Vector3 position)
     {
-        Object newParticleObject = GameObject.Instantiate(particleData.ParticlePrefab, position, Quaternion.Euler(0, 0, 0));
+        Object newParticleObject = GameObject.Instantiate(particleData.ParticlePrefab, position, Quaternion.Euler(0f, 0f, 0f));
         GameObject.Destroy(newParticleObject, particleData.LifeTime);
 
         //return false;

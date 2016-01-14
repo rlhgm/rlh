@@ -5,8 +5,10 @@ public class DestroyablePlatform : MonoBehaviour {
 
     public float DestroyEnergy = 10f;
 
-	// Use this for initialization
-	void Start () {
+    public ParticleSet particles = null;
+    public string SoundTagDestroy;
+    // Use this for initialization
+    void Start () {
 	
 	}
 
@@ -119,9 +121,25 @@ public class DestroyablePlatform : MonoBehaviour {
             //Destroy(gameObject, 2f);
             toDisable = true;
             toDisableTime = 2f;
+
+            if (particles != null)
+            {
+                ParticleData _pd = particles.GetParticleData("destroy");
+                Vector3 particlePos = transform.position;
+                Rigidbody2D _rb = GetComponent<Rigidbody2D>();
+                if (_rb)
+                { 
+                    particlePos = _rb.worldCenterOfMass;
+                }
+                ParticleInseter.Insert(_pd, particlePos,transform.rotation);
+            }
+
+            if (SoundTagDestroy != "") SoundPlayer.Play(gameObject, SoundTagDestroy);
         }
 
     }
+
+
     void DestroyByCollision()
     {
         
