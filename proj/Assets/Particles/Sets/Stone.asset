@@ -15,3 +15,9 @@ MonoBehaviour:
   - ParticleTag: impact
     ParticlePrefab: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
     LifeTime: 2
+  - ParticleTag: collapse
+    ParticlePrefab: {fileID: 101206, guid: 69589ea6b9f24794dab4bede6cb1ac84, type: 2}
+    LifeTime: 2
+  - ParticleTag: enter
+    ParticlePrefab: {fileID: 101206, guid: 81d12948ccdc1e843aacadb359e86931, type: 2}
+    LifeTime: 2

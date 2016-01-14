@@ -12,6 +12,8 @@ public class CollapseableFootbridge : MonoBehaviour
     public string SoundTagEnter = "";
     public string SoundTagCollapse = "";
 
+    public ParticleSet particles = null;
+
     // Use this for initialization
     void Start()
     {
@@ -43,6 +45,8 @@ public class CollapseableFootbridge : MonoBehaviour
         CollapseTime = 0f;
         collapsing = true;
         if (SoundTagEnter != "") SoundPlayer.Play(gameObject, SoundTagEnter);
+
+        
     }
     public void Collapse()
     {
@@ -51,6 +55,18 @@ public class CollapseableFootbridge : MonoBehaviour
         enabled = false;
         GetComponent<GroundMoveable>().BreakOff();
         if (SoundTagCollapse != "") SoundPlayer.Play(gameObject, SoundTagCollapse);
+
+        if (particles != null)
+        {
+            ParticleData _pd = particles.GetParticleData("collapse");
+            //for (int i = 0; i < collision.contacts.Length; ++i)
+            //{
+            Vector3 particlePos = transform.position;
+            Rigidbody2D _rb = GetComponent<Rigidbody2D>();
+            if (_rb) particlePos = _rb.worldCenterOfMass;
+            ParticleInseter.Insert(_pd, particlePos);
+            //}
+        }
     }
 
     public void Reset()

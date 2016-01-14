@@ -981,19 +981,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2015612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: orthographic size
-      value: 4.70833349
+      value: 5.20833349
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.48672569
+      value: 1.34399998
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.48672569
+      value: 1.34399998
       objectReference: {fileID: 0}
     - target: {fileID: 468964, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.48672569
+      value: 1.34399998
       objectReference: {fileID: 0}
     - target: {fileID: 8177612, guid: a6eb89d011bf57f478fe181c98535e92, type: 2}
       propertyPath: m_Enabled
@@ -1569,6 +1569,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &60194676
 BoxCollider2D:
@@ -8944,6 +8945,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &428812758
 BoxCollider2D:
@@ -9355,6 +9357,7 @@ MonoBehaviour:
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
   SoundTagCollapse: 
+  particles: {fileID: 0}
 --- !u!4 &453164523 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 751d4a2bc2b63c047a88e384d4fb8baa, type: 2}
@@ -10007,6 +10010,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &479674443
 BoxCollider2D:
@@ -15570,6 +15574,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &783281405
 BoxCollider2D:
@@ -17466,6 +17471,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &858735003
 BoxCollider2D:
@@ -20251,6 +20257,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &982583212
 BoxCollider2D:
@@ -21820,6 +21827,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1022861581
 BoxCollider2D:
@@ -22610,6 +22618,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1072368212
 BoxCollider2D:
@@ -22900,6 +22909,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1102587245
 BoxCollider2D:
@@ -23636,7 +23646,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 27
 --- !u!1 &1118749857
 GameObject:
   m_ObjectHideFlags: 0
@@ -26414,6 +26424,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1190553573
 BoxCollider2D:
@@ -26614,6 +26625,7 @@ MonoBehaviour:
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
   SoundTagCollapse: 
+  particles: {fileID: 0}
 --- !u!1001 &1193311775
 Prefab:
   m_ObjectHideFlags: 0
@@ -30069,6 +30081,7 @@ MonoBehaviour:
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: knife_kill
   SoundTagCollapse: knife_attack
+  particles: {fileID: 11400000, guid: fb093033999ea184a9ec8ca352fc1456, type: 2}
 --- !u!82 &1364039636
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30813,6 +30826,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1397109883
 BoxCollider2D:
@@ -32945,11 +32959,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -201.100006
+      value: -133.020004
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 28.5
+      value: 23.7999992
       objectReference: {fileID: 0}
     - target: {fileID: 411340, guid: abe70773a2a43bc4ca99a64072e3f805, type: 2}
       propertyPath: m_LocalPosition.z
@@ -34219,6 +34233,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1571091459
 BoxCollider2D:
@@ -35742,11 +35757,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -128
+      value: -131.440002
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 25.7000008
+      value: 26.0499992
       objectReference: {fileID: 0}
     - target: {fileID: 434584, guid: dc6d50d845480b64a9eaae85837f7186, type: 2}
       propertyPath: m_LocalPosition.z
@@ -37712,6 +37727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chandelier: {fileID: 787487496}
   CameraPassing: {fileID: 12719340}
+  statueToCrumble: {fileID: 0}
 --- !u!1001 &1713603620
 Prefab:
   m_ObjectHideFlags: 0
@@ -38045,6 +38061,7 @@ MonoBehaviour:
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
   SoundTagCollapse: 
+  particles: {fileID: 0}
 --- !u!1001 &1730850592
 Prefab:
   m_ObjectHideFlags: 0
@@ -38119,6 +38136,7 @@ MonoBehaviour:
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
   SoundTagCollapse: 
+  particles: {fileID: 0}
 --- !u!1001 &1734078543
 Prefab:
   m_ObjectHideFlags: 0
@@ -38662,6 +38680,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1774253065
 BoxCollider2D:
@@ -40094,6 +40113,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &1823707872
 BoxCollider2D:
@@ -41020,6 +41040,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!1001 &1859768633
 Prefab:
@@ -42989,6 +43010,7 @@ MonoBehaviour:
   IfJustCollapsedJumpEnabled: 1
   SoundTagEnter: 
   SoundTagCollapse: 
+  particles: {fileID: 0}
 --- !u!4 &1954713591 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405624, guid: 751d4a2bc2b63c047a88e384d4fb8baa, type: 2}
@@ -44976,6 +44998,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!212 &2038571740
 SpriteRenderer:
@@ -45091,6 +45114,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &2040630560
 BoxCollider2D:
@@ -46215,6 +46239,7 @@ MonoBehaviour:
   physic: {fileID: 0}
   toBreakOffDist: 1
   particles: {fileID: 0}
+  OnBreakOffAction: {fileID: 0}
   lastVelocity: {x: 0, y: 0}
 --- !u!61 &2098004499
 BoxCollider2D:
