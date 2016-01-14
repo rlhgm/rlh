@@ -4,6 +4,7 @@ using System.Collections;
 public class GroundMoveable : MonoBehaviour
 {
     //public SoundSets soundsSets;
+    public string SoundTagTagImpact = ""
     public string SoundTagBreakOff = "";
 
     //public GameObject TryToBreakOffParticles = null;
@@ -247,10 +248,12 @@ public class GroundMoveable : MonoBehaviour
                 if (e1 > e2)
                 {
                     RLHScene.Instance.StonesImpact(physic.worldCenterOfMass, e1);
+                    SoundPlayer.Play(gameObject, SoundTagTagImpact);
                 }
                 else
                 {
                     RLHScene.Instance.StonesImpact(_gm.physic.worldCenterOfMass, e2);
+                    SoundPlayer.Play(_gm.gameObject, SoundTagTagImpact);
                 }
                 return;
             }
