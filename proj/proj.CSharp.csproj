@@ -75,7 +75,6 @@
     <Compile Include="Assets\BezierCurve.cs" />
     <Compile Include="Assets\BezierSpline.cs" />
     <Compile Include="Assets\Materials\PixelPerfectScale.cs" />
-    <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\DigToLightRays.cs" />
     <Compile Include="Assets\SplineDecorator.cs" />
     <Compile Include="Assets\SplineWalker.cs" />
     <Compile Include="Assets\SplineWalkerMode.cs" />
@@ -139,9 +138,11 @@
     <Compile Include="Assets\mp\Scripts\Pickable.cs" />
     <Compile Include="Assets\mp\Scripts\PlatformHandle.cs" />
     <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
+    <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CrumblingStairsYebCutScene.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\ChandelierCollider.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CrumblingStairsYeb.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CuttedChandelierRope.cs" />
+    <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\DigToLightRays.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\StatueToCrumble.cs" />
     <Compile Include="Assets\mp\Scripts\RLHActions\RLHAction.cs" />
     <Compile Include="Assets\mp\Scripts\RLHScene.cs" />

@@ -125,6 +125,7 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
 
     public string SoundTagCatch = "";
     public string SoundTagCrumble = "";
+    public string SoundTagYeb = "";
 
     public Transform MountHandle
     {
@@ -231,6 +232,8 @@ public class CrumblingStairs : MonoBehaviour, IGResetable
                     if ( _tmp < 0f)
                     {
                         //print("JEB JEB JEB");
+                        if (SoundTagYeb != null) SoundPlayer.Play(gameObject, SoundTagYeb);
+
                         CrumblingStairsYeb csy = GetComponent<CrumblingStairsYeb>();
                         if (csy)
                         {

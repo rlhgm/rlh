@@ -24,3 +24,11 @@ MonoBehaviour:
     clips:
     - clip: {fileID: 8300000, guid: 6aa00b557d726d54b87560d9d701d02b, type: 3}
       VolumeMinMax: {x: 1, y: 1}
+  - SoundTag: stairs_yeb
+    clips:
+    - clip: {fileID: 8300000, guid: f741634dfb92de74b924654ad18a658a, type: 3}
+      VolumeMinMax: {x: 1, y: 1}
+  - SoundTag: crumblingstairsyeb
+    clips:
+    - clip: {fileID: 8300000, guid: 7bdc4c0a7461bff418c91d4a3a683466, type: 3}
+      VolumeMinMax: {x: 1, y: 1}

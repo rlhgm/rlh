@@ -66,7 +66,16 @@ public class CrumblingStairsYeb : RLHAction
     }
 
     protected override int PerformSpec()
-    {     
+    {
+        if (CrumblingStairsYebObjects)
+        {
+            CrumblingStairsYebCutScene _action = CrumblingStairsYebObjects.GetComponent<CrumblingStairsYebCutScene>();
+            if (_action)
+            {
+                if (_action.SoundTagStart != null) SoundPlayer.Play(CrumblingStairsYebObjects.gameObject, _action.SoundTagStart);
+            }
+        }
+
         RLHScene.Instance.CamController.ShakeImpulseStart(3f, 0.35f, 8f);
         //stone1.SetActive(true);
         //stone2.SetActive(true);
