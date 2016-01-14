@@ -259,7 +259,7 @@ public class GroundMoveable : MonoBehaviour
             }
 
             RLHScene.Instance.StonesImpact(physic.worldCenterOfMass, e1);
-        
+            SoundPlayer.Play(gameObject, SoundTagTagImpact);
         }
     }
 
