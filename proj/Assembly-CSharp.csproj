@@ -115,6 +115,7 @@
      <Compile Include="Assets\mp\Scripts\PolyCollTest.cs" />
      <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\ChandelierCollider.cs" />
      <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CrumblingStairsYeb.cs" />
+     <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CrumblingStairsYebCutScene.cs" />
      <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\CuttedChandelierRope.cs" />
      <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\DigToLightRays.cs" />
      <Compile Include="Assets\mp\Scripts\RLHActions\Level2.1\StatueToCrumble.cs" />
