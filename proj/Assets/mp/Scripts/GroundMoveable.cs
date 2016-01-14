@@ -64,7 +64,17 @@ public class GroundMoveable : MonoBehaviour
         if (OnBreakOffAction) OnBreakOffAction.Perform();
         RLHScene.Instance.CamController.ShakeImpulseStart(2f, 0.25f, 8f);
 
-
+        if (particles && ParticleTagBreakOff != null)
+        {
+            ParticleData _pd = particles.GetParticleData(ParticleTagBreakOff);
+            Vector3 particlePos = transform.position;
+            Rigidbody2D _rb = GetComponent<Rigidbody2D>();
+            if (_rb)
+            {
+                particlePos = _rb.worldCenterOfMass;
+            }
+            ParticleInseter.Insert(_pd, particlePos, transform.rotation);
+        }
     }
 
     //void ShakeUpdate()
