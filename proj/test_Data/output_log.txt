@@ -4,7 +4,7 @@ Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
     Renderer: NVIDIA GeForce GTX 750 Ti (ID=0x1380)
     Vendor:   NVIDIA
-    VRAM:     1993 MB
+    VRAM:     1992 MB
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.dll (this message is harmless)
 Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.dll into Unity Child Domain
@@ -17,7 +17,2548 @@ Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.UI.dll into 
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.037 seconds
-desktop: 1080x1920 60Hz; virtual: 3000x1920 at -1920,0
+- Completed reload, in  0.038 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\ja\Projekty\rlh\proj\test_Data\Managed\System.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1496)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1649)
+
+Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Zap).
+ 
+(Filename:  Line: 525)
+
+Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Zap).
+ 
+(Filename:  Line: 525)
+
+tile_ground1_normal 37 (311) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (299) particle 7 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (306) particle2 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (227) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (244) particle 4 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (261) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (302) particle 8 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (303) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (308) particle3 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (313) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (316) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (310) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (246) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (312) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (303) particle 11 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (301) particle 10 to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+tile_ground1_normal 37 (317) to ma byc kladka a nie jest kinematyczna. Przestawiam.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+RLHScene::Awake()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+RLHScene::Start()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+RLHScene 17
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+RLHScene::Start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (5) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 2cdc -> priority: 1 
+  Thread -> id: 1be0 -> priority: 1 
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (5) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Wood
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (5) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 3x3 (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+BirdDestroyer = > koliduje ze szczurem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+BirdDestroyer = > koliduje ze szczurem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Crumble
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Crumble
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone1 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone1 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone1 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone1 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone1 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone1 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone2 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+ActionMountingDown => setMountIdle()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Crumble : keyJumpDown
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Crumble
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : tile_ground1_normal 37 (244) particle 4 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : tile_ground1_normal 37 (244) particle 4 nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (2) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone (1) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : stone nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+BirdDestroyer = > koliduje ze szczurem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (5) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (6) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (5) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (5) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : 1x1 2 (7) nie moze odegrac : 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackLeftHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackRightHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackLeftHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackLeftHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : crawl*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+BirdDestroyer = > koliduje ze szczurem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackLeftHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackLeftHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+ArgumentException: The thing you want to instantiate is null.
+  at UnityEngine.Object.CheckNullArgument (System.Object arg, System.String message) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original, Vector3 position, Quaternion rotation) [0x00000] in <filename unknown>:0 
+  at ParticleInseter.Insert (.ParticleData particleData, Vector3 position, Quaternion rotation, Boolean autoDestroyed) [0x00000] in <filename unknown>:0 
+  at GroundMoveable.GGDragStart () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.trackCursor (Action act, Boolean shoot) [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.Action_IDLE () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.MUpdate (Single deltaTime, Boolean firstUpdate) [0x00000] in <filename unknown>:0 
+  at Zap.ZapUpdate (Single deltaTime, Boolean firstUpdateInFrame) [0x00000] in <filename unknown>:0 
+  at Zap.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackRightHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackRightHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+ArgumentException: The thing you want to instantiate is null.
+  at UnityEngine.Object.CheckNullArgument (System.Object arg, System.String message) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original, Vector3 position, Quaternion rotation) [0x00000] in <filename unknown>:0 
+  at ParticleInseter.Insert (.ParticleData particleData, Vector3 position, Quaternion rotation, Boolean autoDestroyed) [0x00000] in <filename unknown>:0 
+  at GroundMoveable.GGDragStart () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.trackCursor (Action act, Boolean shoot) [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.Action_IDLE () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.MUpdate (Single deltaTime, Boolean firstUpdate) [0x00000] in <filename unknown>:0 
+  at Zap.ZapUpdate (Single deltaTime, Boolean firstUpdateInFrame) [0x00000] in <filename unknown>:0 
+  at Zap.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackRightHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackRightHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+ArgumentException: The thing you want to instantiate is null.
+  at UnityEngine.Object.CheckNullArgument (System.Object arg, System.String message) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original, Vector3 position, Quaternion rotation) [0x00000] in <filename unknown>:0 
+  at ParticleInseter.Insert (.ParticleData particleData, Vector3 position, Quaternion rotation, Boolean autoDestroyed) [0x00000] in <filename unknown>:0 
+  at GroundMoveable.GGDragStart () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.trackCursor (Action act, Boolean shoot) [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.Action_IDLE () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.MUpdate (Single deltaTime, Boolean firstUpdate) [0x00000] in <filename unknown>:0 
+  at Zap.ZapUpdate (Single deltaTime, Boolean firstUpdateInFrame) [0x00000] in <filename unknown>:0 
+  at Zap.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackRightHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+knifeAttackLeftHighCollider BirdDestroyer = > koliduje z nietoperzem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+LineRenderer.SetPosition index out of bounds!
+ 
+(Filename:  Line: 62)
+
+ArgumentException: The thing you want to instantiate is null.
+  at UnityEngine.Object.CheckNullArgument (System.Object arg, System.String message) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original, Vector3 position, Quaternion rotation) [0x00000] in <filename unknown>:0 
+  at ParticleInseter.Insert (.ParticleData particleData, Vector3 position, Quaternion rotation, Boolean autoDestroyed) [0x00000] in <filename unknown>:0 
+  at GroundMoveable.GGDragStart () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.trackCursor (Action act, Boolean shoot) [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.Action_IDLE () [0x00000] in <filename unknown>:0 
+  at ZapControllerGravityGun.MUpdate (Single deltaTime, Boolean firstUpdate) [0x00000] in <filename unknown>:0 
+  at Zap.ZapUpdate (Single deltaTime, Boolean firstUpdateInFrame) [0x00000] in <filename unknown>:0 
+  at Zap.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : run*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+SoundPlayer : Zap nie moze odegrac : walk*Stone
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
