@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParticleDatas:
   - ParticleTag: impact
-    ParticlePrefab: {fileID: 141360, guid: 7ab343aa4fffcb14ab252e72680edc4e, type: 2}
+    ParticlePrefab: {fileID: 101206, guid: 69589ea6b9f24794dab4bede6cb1ac84, type: 2}
     LifeTime: 2
   - ParticleTag: collapse
     ParticlePrefab: {fileID: 101206, guid: 69589ea6b9f24794dab4bede6cb1ac84, type: 2}
@@ -28,7 +28,7 @@ MonoBehaviour:
     ParticlePrefab: {fileID: 157390, guid: 3d7f9e8dff4b6e24d845bbdd21366433, type: 2}
     LifeTime: 2
   - ParticleTag: trytobreakoff
-    ParticlePrefab: {fileID: 198780, guid: 33a90b1e24e1435478e2ea82e06400b8, type: 2}
+    ParticlePrefab: {fileID: 0}
     LifeTime: 2
   - ParticleTag: breakoff
     ParticlePrefab: {fileID: 157390, guid: 3d7f9e8dff4b6e24d845bbdd21366433, type: 2}

@@ -30,5 +30,5 @@ MonoBehaviour:
       VolumeMinMax: {x: 1, y: 1}
   - SoundTag: impact
     clips:
-    - clip: {fileID: 8300000, guid: 84b784726b382024baa531d9a5abc8ca, type: 3}
+    - clip: {fileID: 8300000, guid: 46cc3ea44c806fa4397259530d3ece1a, type: 3}
       VolumeMinMax: {x: 1, y: 1}
