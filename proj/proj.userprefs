@@ -1,8 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\Scripts\AutoDestroyer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mp\mas\DraggedStonex.shader">
     <Files>
-      <File FileName="Assets\mp\Scripts\AutoDestroyer.cs" Line="12" Column="6" />
+      <File FileName="Assets\switchScript.js" Line="7" Column="26" />
+      <File FileName="Assets\objectEnabler.js" Line="1" Column="1" />
+      <File FileName="Assets\interfacePosition.js" Line="1" Column="1" />
+      <File FileName="Assets\textAppear.js" Line="1" Column="1" />
+      <File FileName="Assets\childText.js" Line="1" Column="1" />
+      <File FileName="Assets\mp\Scripts\Sounds\AnimationCallback.cs" Line="114" Column="1" />
+      <File FileName="Assets\mp\mas\DraggedStonex.shader" Line="157" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

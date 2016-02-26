@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Rat : Enemy, IAnimationCallbackReceiver // MonoBehaviour//, IResetable
 {
+	AudioSource audio;
+
     public int ControlID = 0;
 
     public float WalkSpeed = 2f;
@@ -100,6 +102,8 @@ public class Rat : Enemy, IAnimationCallbackReceiver // MonoBehaviour//, IReseta
 
     void Start()
     {
+		audio = GetComponent<AudioSource>();
+
         startPos = transform.position;
 
         SetMode(Mode.Normal);
@@ -214,6 +218,7 @@ public class Rat : Enemy, IAnimationCallbackReceiver // MonoBehaviour//, IReseta
 
             case Action.Die:
                 ActionDie();
+				audio.Stop();
                 break;            
         }
 

@@ -64,10 +64,13 @@ TagManager:
   - EnemyRemains
   - EnemiesColl
   - Chains
-  - 
+  - CheckDrop
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: podmalowka
+    uniqueID: 2511167241
     locked: 0
   - name: Default
     uniqueID: 3363470833
@@ -131,4 +134,7 @@ TagManager:
     locked: 0
   - name: WaterFront
     uniqueID: 3650801075
+    locked: 0
+  - name: Overlay
+    uniqueID: 2878468203
     locked: 0

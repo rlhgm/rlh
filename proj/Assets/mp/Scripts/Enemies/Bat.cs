@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bat : Enemy //MonoBehaviour
 {
+	AudioSource audio;
     BatActivator activator;
 
     Vector3 homePos;
@@ -83,6 +84,7 @@ public class Bat : Enemy //MonoBehaviour
         //SetState(State.Fly);
         //SetAction(Action.Fly);
 
+		audio = GetComponent<AudioSource>();
         homePos = transform.position;
         lastPos = transform.position;
         //print("Bat -> Start -> " + homePos);
@@ -840,6 +842,7 @@ public class Bat : Enemy //MonoBehaviour
 
             case State.Dead:
                 //gameObject.SetActive(false);
+				audio.Stop();
                 GetComponent<BoxCollider2D>().enabled = false;
                 myGfx.gameObject.SetActive(false);
                 break;
