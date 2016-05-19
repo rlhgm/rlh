@@ -347,11 +347,11 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
             shadowRightSR = shadowRight.GetComponent<SpriteRenderer>();
         }
 
-        zap_idle1_beh[] behs = animatorBody.GetBehaviours<zap_idle1_beh>();
-        for (int b = 0; b < behs.Length; ++b)
-        {
-            behs[b].playerController = this;
-        }
+        //zap_idle1_beh[] behs = animatorBody.GetBehaviours<zap_idle1_beh>();
+        //for (int b = 0; b < behs.Length; ++b)
+        //{
+        //    behs[b].playerController = this;
+        //}
 
         AudioSource[] audios = GetComponents<AudioSource>();
         if (audios.Length == 2)
@@ -389,7 +389,7 @@ public class Zap : MonoBehaviour, IAnimationCallbackReceiver
         //{
         //    acs[b].callbackTarget = this;
         //}
-        SetAnimatorCallbackTarget();
+        //SetAnimatorCallbackTarget();
 
         sensorLeft1 = transform.Find("sensorLeft1").transform;
         sensorLeft2 = transform.Find("sensorLeft2").transform;
